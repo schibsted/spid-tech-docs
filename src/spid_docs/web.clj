@@ -1,5 +1,6 @@
 (ns spid-docs.web
   (:require [clojure.pprint :refer [pprint]]
+            [clojure.string :as str]
             [hiccup.page :refer [html5]]
             [optimus.assets :as assets]
             [optimus.export]
@@ -8,9 +9,9 @@
             [optimus.prime :as optimus]
             [optimus.strategies :refer [serve-live-assets]]
             [ring.middleware.content-type :refer [wrap-content-type]]
+            [ring.util.codec :refer [percent-encode]]
             [spid-docs.core :as spid]
-            [stasis.core :as stasis]
-            [clojure.string :as str]))
+            [stasis.core :as stasis]))
 
 (defn page [request title body]
   (html5
