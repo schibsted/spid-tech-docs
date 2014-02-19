@@ -46,7 +46,6 @@ in later.
 ```php
 <?php // createSession.php
 header("Location: /");
-?>
 ```
 
 ## Send the user to the SPiD login page
@@ -69,6 +68,7 @@ the SPiD login page.
 #### Build login URL
 
 ```php
+<?php
 $createSessionURL = $ourBaseURL . "/createSession.php";
 $spidAuthorizeURL = $spidBaseURL . "/oauth/authorize" .
   "?client_id=" . $clientID .
@@ -90,6 +90,7 @@ client to communicate with the SPiD API on behalf of the user.
 #### Create an API client
 
 ```php
+<?php
 // The SPiD SDK for PHP needs a few more config variables:
 $spidClientConfig = array(
     VGS_Client::CLIENT_ID          => $clientID,
@@ -118,6 +119,7 @@ on to the client. You'll need it later.
 #### Fetch user information and create session
 
 ```php
+<?php
 $user = $client->api('/me');
 
 session_start();
