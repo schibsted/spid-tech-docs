@@ -1,10 +1,8 @@
 (ns spid-docs.web
   (:require [clojure.pprint :refer [pprint]]
             [clojure.string :as str]
-            [hiccup.page :refer [html5]]
             [optimus.assets :as assets]
             [optimus.export]
-            [optimus.link :as link]
             [optimus.optimizations :as optimizations]
             [optimus.prime :as optimus]
             [optimus.strategies :refer [serve-live-assets]]
@@ -12,17 +10,8 @@
             [ring.util.codec :refer [percent-encode]]
             [spid-docs.articles :as articles]
             [spid-docs.core :as spid]
+            [spid-docs.layout :as layout]
             [stasis.core :as stasis]))
-
-(defn page [request title body]
-  (html5
-   [:head
-    [:meta {:charset "utf-8"}]
-    [:title (str title " | SPiD API Documentation")]
-    [:link {:rel "stylesheet" :type "text/css" :href (link/file-path request "/styles/spid.css")}]]
-   [:body
-    [:h1 "SPiD API endpoints documentation"]
-    body]))
 
 (defn get-assets []
   (assets/load-assets "public" [#"/styles/.*\.css"]))
@@ -34,17 +23,19 @@
   (str "/endpoints" (endpoint-url endpoint)))
 
 (defn list-enpoints [context endpoints]
-  (page
+  (layout/page
    context
    "Available endpoints"
-   [:ul (map #(vector :li (list
-                           [:a {:href (endpoint-path %)}
-                            (list [:code (:url %)] " - " (:name %))]
-                           [:br]
-                           (:description %))) (:data endpoints))]))
+   (list
+    [:h1 "SPiD API endpoints documentation"]
+    [:ul (map #(vector :li (list
+                            [:a {:href (endpoint-path %)}
+                             (list [:code (:url %)] " - " (:name %))]
+                            [:br]
+                            (:description %))) (:data endpoints))])))
 
 (defn render-page [endpoint context]
-  (page
+  (layout/page
    context
    "Endpoint"
    (list [:h1 (endpoint-url endpoint)]
