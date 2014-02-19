@@ -10,6 +10,7 @@
             [optimus.strategies :refer [serve-live-assets]]
             [ring.middleware.content-type :refer [wrap-content-type]]
             [ring.util.codec :refer [percent-encode]]
+            [spid-docs.articles :as articles]
             [spid-docs.core :as spid]
             [stasis.core :as stasis]))
 
@@ -63,7 +64,8 @@
 
 (defn get-pages [endpoints]
   (merge {"/" #(list-enpoints % endpoints)}
-         (get-endpoint-pages endpoints)))
+         (get-endpoint-pages endpoints)
+         (articles/create-pages)))
 
 (def get-pages-with-endpoints (partial get-pages (spid/get-endpoints)))
 (def optimize optimizations/all)
