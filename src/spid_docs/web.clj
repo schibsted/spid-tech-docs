@@ -5,24 +5,15 @@
             [optimus.prime :as optimus]
             [optimus.strategies :refer [serve-live-assets]]
             [ring.middleware.content-type :refer [wrap-content-type]]
-            [spid-docs.articles :as articles]
-            [spid-docs.endpoints :as endpoints]
-            [spid-docs.core :as spid]
-            [spid-docs.frontpage :as frontpage]
+            [spid-docs.content :as content]
             [stasis.core :as stasis]))
 
 (defn get-assets []
   (assets/load-assets "public" [#"/styles/.*\.css"]))
 
-(defn get-pages [endpoints]
-  (merge {"/" (partial frontpage/create-page endpoints)}
-         (endpoints/create-pages endpoints)
-         (articles/create-pages)))
-
-(def get-pages-with-endpoints (partial get-pages (spid/get-endpoints)))
 (def optimize optimizations/all)
 
-(def app (-> (stasis/serve-pages get-pages-with-endpoints)
+(def app (-> (stasis/serve-pages content/get-pages)
              (optimus/wrap get-assets optimize serve-live-assets)
              wrap-content-type))
 
@@ -32,4 +23,4 @@
   (let [assets (optimize (get-assets) {})]
     (stasis/empty-directory! export-dir)
     (optimus.export/save-assets assets export-dir)
-    (stasis/export-pages (get-pages-with-endpoints) export-dir {:optimus-assets assets})))
+    (stasis/export-pages (content/get-pages) export-dir {:optimus-assets assets})))
