@@ -1,26 +1,18 @@
 (ns spid-docs.web
-  (:require [clojure.pprint :refer [pprint]]
-            [clojure.string :as str]
-            [optimus.assets :as assets]
+  (:require [optimus.assets :as assets]
             [optimus.export]
             [optimus.optimizations :as optimizations]
             [optimus.prime :as optimus]
             [optimus.strategies :refer [serve-live-assets]]
             [ring.middleware.content-type :refer [wrap-content-type]]
-            [ring.util.codec :refer [percent-encode]]
             [spid-docs.articles :as articles]
+            [spid-docs.endpoints :as endpoints]
             [spid-docs.core :as spid]
             [spid-docs.layout :as layout]
             [stasis.core :as stasis]))
 
 (defn get-assets []
   (assets/load-assets "public" [#"/styles/.*\.css"]))
-
-(defn endpoint-url [endpoint]
-  (str "/" (:path endpoint)))
-
-(defn endpoint-path [endpoint]
-  (str "/endpoints" (endpoint-url endpoint)))
 
 (defn list-enpoints [context endpoints]
   (layout/page
@@ -29,49 +21,14 @@
    (list
     [:h1 "SPiD API endpoints documentation"]
     [:ul (map #(vector :li (list
-                            [:a {:href (endpoint-path %)}
+                            [:a {:href (endpoints/endpoint-path %)}
                              (list [:code (:url %)] " - " (:name %))]
                             [:br]
                             (:description %))) (:data endpoints))])))
 
-(defn format-name [format]
-  (cond
-   (= "json" format) "JSON"
-   (= "jsonp" format) "JSON-P"))
-
-(defn- render-params [heading params]
-  (if (seq params)
-    (list [:h3 heading]
-          [:ul (map #(vector :li %) params)])))
-
-(defn- render-http-methods [methods]
-  (mapcat #(list [:h2 (:name %)]
-                 (render-params "Required params" (:required %))
-                 (render-params "Optional params" (:optional %))) (vals methods)))
-
-(defn render-page [endpoint context]
-  (layout/page
-   context
-   "Endpoint"
-   (list [:h1 (endpoint-url endpoint)]
-         [:p (:description endpoint)]
-         [:table
-          [:tr [:th "Requires authentication"] [:td "?"]]
-          [:tr [:th "Supported access token types"] [:td "?"]]
-          [:tr [:th "Supported response format"] [:td (str/join ", " (map format-name (:valid_output_formats endpoint)))]]
-          [:tr [:th "Supported filters"] [:td "?"]]
-          [:tr [:th "Default filters"] [:td "?"]]
-          [:tr [:th "Successful return"] [:td "?"]]]
-         (render-http-methods (:httpMethods endpoint))
-         [:pre (with-out-str (clojure.pprint/pprint endpoint))])))
-
-(defn get-endpoint-pages [endpoints]
-  (into {} (map (juxt endpoint-path
-                      #(partial render-page %)) (:data endpoints))))
-
 (defn get-pages [endpoints]
   (merge {"/" #(list-enpoints % endpoints)}
-         (get-endpoint-pages endpoints)
+         (endpoints/create-pages endpoints)
          (articles/create-pages)))
 
 (def get-pages-with-endpoints (partial get-pages (spid/get-endpoints)))
