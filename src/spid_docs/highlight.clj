@@ -4,8 +4,8 @@
 
 (defn- extract-code [highlighted]
   (-> highlighted
-      (java.io.StringReader.)
-      (html-resource)
+      java.io.StringReader.
+      html-resource
       (select [:pre])
       first
       :content))
