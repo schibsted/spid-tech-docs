@@ -1,0 +1,3 @@
+[submodule "resources/public/styles/pygments-css"]
+	path = resources/public/styles/pygments-css
+	url = https://github.com/richleland/pygments-css.git
