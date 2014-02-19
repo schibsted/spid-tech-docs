@@ -8,26 +8,14 @@
             [spid-docs.articles :as articles]
             [spid-docs.endpoints :as endpoints]
             [spid-docs.core :as spid]
-            [spid-docs.layout :as layout]
+            [spid-docs.frontpage :as frontpage]
             [stasis.core :as stasis]))
 
 (defn get-assets []
   (assets/load-assets "public" [#"/styles/.*\.css"]))
 
-(defn list-enpoints [context endpoints]
-  (layout/page
-   context
-   "Available endpoints"
-   (list
-    [:h1 "SPiD API endpoints documentation"]
-    [:ul (map #(vector :li (list
-                            [:a {:href (endpoints/endpoint-path %)}
-                             (list [:code (:url %)] " - " (:name %))]
-                            [:br]
-                            (:description %))) (:data endpoints))])))
-
 (defn get-pages [endpoints]
-  (merge {"/" #(list-enpoints % endpoints)}
+  (merge {"/" (partial frontpage/create-page endpoints)}
          (endpoints/create-pages endpoints)
          (articles/create-pages)))
 
