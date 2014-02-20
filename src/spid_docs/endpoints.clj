@@ -28,7 +28,7 @@
   {:title (endpoint-url endpoint)
    :body (list [:h1 (endpoint-url endpoint)]
                [:p (:description endpoint)]
-               [:table
+               [:table.boxed.zebra
                 [:tr [:th "Requires authentication"] [:td "?"]]
                 [:tr [:th "Supported access token types"] [:td "?"]]
                 [:tr [:th "Supported response format"] [:td (str/join ", " (map format-name (:valid_output_formats endpoint)))]]

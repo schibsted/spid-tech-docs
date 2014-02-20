@@ -1,7 +1,5 @@
 @import url("pygments-css/borland.css");
 
-body {font-size: 1.2em; line-height: 1.5; margin: 0 40px;}
-
 body {
     background: #045c89;
     background: -moz-linear-gradient(top, #1c7bab 0%, #045c89 300px, #045c89 100%);
@@ -10,6 +8,9 @@ body {
     background: -o-linear-gradient(top, #1c7bab 0%,#045c89 300px,#045c89 100%);
     background: -ms-linear-gradient(top, #1c7bab 0%,#045c89 300px,#045c89 100%);
     background: linear-gradient(to bottom, #1c7bab 0%,#045c89 300px,#045c89 100%);
+    font: 16px Helvetica, arial, freesans, clean, sans-serif;
+    line-height: 1.5;
+    margin: 0 40px;
 }
 
 li {margin: 0 0 0.5em;}
@@ -19,3 +20,23 @@ li {margin: 0 0 0.5em;}
 #logo img {height: 50px;}
 
 .codehilite {background: #f8f8f8; border: 1px solid #ddd; border-radius: 3px; padding: 10px; font-size: 0.9em;}
+
+table {
+    cellspacing: 0;
+    border-collapse: collapse;
+}
+
+td, th {
+    text-align: left;
+    padding: 3px 6px;
+}
+
+.boxed td,
+.boxed th {
+    border: 1px solid #aaa;
+}
+
+.zebra tr:nth-child(2n+1) th,
+.zebra tr:nth-child(2n+1) td {
+    background: #f0f0f0;
+}
