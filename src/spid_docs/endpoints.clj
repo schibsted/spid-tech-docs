@@ -24,22 +24,19 @@
 (defn endpoint-path [endpoint]
   (str "/endpoints" (endpoint-url endpoint)))
 
-(defn- render-page [endpoint context]
-  (layout/page
-   context
-   "Endpoint"
-   (list [:h1 (endpoint-url endpoint)]
-         [:p (:description endpoint)]
-         [:table
-          [:tr [:th "Requires authentication"] [:td "?"]]
-          [:tr [:th "Supported access token types"] [:td "?"]]
-          [:tr [:th "Supported response format"] [:td (str/join ", " (map format-name (:valid_output_formats endpoint)))]]
-          [:tr [:th "Supported filters"] [:td "?"]]
-          [:tr [:th "Default filters"] [:td "?"]]
-          [:tr [:th "Successful return"] [:td "?"]]]
-         (render-http-methods (:httpMethods endpoint))
-         [:pre (with-out-str (pprint endpoint))])))
+(defn- render-page [endpoint]
+  {:title (endpoint-url endpoint)
+   :body (list [:h1 (endpoint-url endpoint)]
+               [:p (:description endpoint)]
+               [:table
+                [:tr [:th "Requires authentication"] [:td "?"]]
+                [:tr [:th "Supported access token types"] [:td "?"]]
+                [:tr [:th "Supported response format"] [:td (str/join ", " (map format-name (:valid_output_formats endpoint)))]]
+                [:tr [:th "Supported filters"] [:td "?"]]
+                [:tr [:th "Default filters"] [:td "?"]]
+                [:tr [:th "Successful return"] [:td "?"]]]
+               (render-http-methods (:httpMethods endpoint))
+               [:pre (with-out-str (pprint endpoint))])})
 
 (defn create-pages [endpoints]
-  (into {} (map (juxt endpoint-path
-                      #(partial render-page %)) (:data endpoints))))
+  (into {} (map (juxt endpoint-path #(partial render-page %)) (:data endpoints))))

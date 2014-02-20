@@ -6,6 +6,7 @@
             [optimus.strategies :refer [serve-live-assets]]
             [ring.middleware.content-type :refer [wrap-content-type]]
             [spid-docs.content :as content]
+            [spid-docs.layout :as layout]
             [stasis.core :as stasis]))
 
 (defn get-assets []
@@ -13,7 +14,15 @@
 
 (def optimize optimizations/all)
 
-(def app (-> (stasis/serve-pages content/get-pages)
+(defn prepare-pages [pages]
+  (zipmap (keys pages)
+          (map #(fn [request] (layout/create-page request (%))) (vals pages))))
+
+(defn get-pages []
+  (-> (content/get-pages)
+      (prepare-pages)))
+
+(def app (-> (stasis/serve-pages get-pages)
              (optimus/wrap get-assets optimize serve-live-assets)
              wrap-content-type))
 

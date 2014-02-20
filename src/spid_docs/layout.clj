@@ -2,7 +2,7 @@
   (:require [hiccup.page :refer [html5]]
             [optimus.link :as link]))
 
-(defn page [request title body]
+(defn create-page [request {:keys [title body]}]
   (html5
    [:head
     [:meta {:charset "utf-8"}]
