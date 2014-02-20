@@ -1,5 +1,6 @@
 (ns spid-docs.content
-  (:require [clojure.string :as str]
+  (:require [clojure.java.io :as io]
+            [clojure.string :as str]
             [spid-docs.core :as spid]
             [spid-sdk-clojure.core :refer [create-client GET]]
             [stasis.core :as stasis]))
@@ -34,8 +35,14 @@
         (str/replace #"(^-)|(-$)" "")
         (str ".edn"))))
 
-(defn cultivate-endpoints [endpoints]
-  )
+(defn cultivate-endpoint [endpoint]
+  (let [endpoint-resource (-> endpoint :path endpoint-path-to-filename)]
+    (if (->> endpoint-resource
+             (str "resources/endpoints/")
+             (io/as-file)
+             .exists)
+      (merge (load-edn (str "endpoints/" endpoint-resource)) endpoint)
+      endpoint)))
 
 (defn load-content []
   {:endpoints (get-endpoints)

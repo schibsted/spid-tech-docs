@@ -1,6 +1,7 @@
 (ns spid-docs.endpoints
   (:require [clojure.pprint :refer [pprint]]
             [clojure.string :as str]
+            [spid-docs.content :as content]
             [spid-docs.layout :as layout]))
 
 (defn- render-params [heading params]
@@ -8,10 +9,12 @@
     (list [:h3 heading]
           [:ul (map #(vector :li %) params)])))
 
-(defn- render-http-methods [methods]
-  (mapcat #(list [:h2 (:name %)]
-                 (render-params "Required params" (:required %))
-                 (render-params "Optional params" (:optional %))) (vals methods)))
+(defn- render-http-methods [endpoint]
+  (let [methods (:httpMethods endpoint)
+        url (endpoint-url endpoint)]
+    (mapcat #(list [:h2 (:name %) " " url]
+                   (render-params "Required params" (:required %))
+                   (render-params "Optional params" (:optional %))) (vals methods))))
 
 (defn- format-name [format]
   (cond
@@ -26,17 +29,27 @@
 
 (defn render-page [endpoint]
   {:title (endpoint-url endpoint)
-   :body (list [:h1 (endpoint-url endpoint)]
+   :body (list [:h1 (:name endpoint)]
                [:p (:description endpoint)]
                [:table.boxed.zebra
-                [:tr [:th "Requires authentication"] [:td "?"]]
-                [:tr [:th "Supported access token types"] [:td "?"]]
-                [:tr [:th "Supported response format"] [:td (str/join ", " (map format-name (:valid_output_formats endpoint)))]]
-                [:tr [:th "Supported filters"] [:td "?"]]
-                [:tr [:th "Default filters"] [:td "?"]]
-                [:tr [:th "Successful return"] [:td "?"]]]
-               (render-http-methods (:httpMethods endpoint))
+                [:tr [:th "Requires authentication"] [:td (if (:auth-required endpoint) "Yes" "No")]]
+                (if-let [token-types (:access-token-types endpoint)]
+                  [:tr
+                   [:th "Supported access token types"]
+                   [:td token-types]])
+                [:tr
+                 [:th "Supported response format"]
+                 [:td (str/join ", " (map format-name (:valid_output_formats endpoint)))]]
+                (let [filters (:filters endpoint)]
+                  [:tr
+                   [:th (str "Supported filter" (if (= (count filters) 1) "" "s"))]
+                   [:td (if (seq filters) (str/join ", " filters) "None")]])
+                (if-let [filter (:default-filters endpoint)]
+                  [:tr [:th "Default filters"] [:td filter]])
+                [:tr [:th "Successful return"] [:td "200"]]]
+               (render-http-methods endpoint)
                [:pre (with-out-str (pprint endpoint))])})
 
 (defn create-pages [endpoints]
-  (into {} (map (juxt endpoint-path #(partial render-page %)) (:data endpoints))))
+  (into {} (map (juxt endpoint-path #(partial render-page (content/cultivate-endpoint %)))
+                (:data endpoints))))
