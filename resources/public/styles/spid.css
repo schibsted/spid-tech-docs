@@ -17,3 +17,5 @@ li {margin: 0 0 0.5em;}
 #body {background: #fff; border-radius: 10px; padding: 10px 40px;}
 #logo {margin: 10px 0 5px 10px;}
 #logo img {height: 50px;}
+
+.codehilite {background: #f8f8f8; border: 1px solid #ddd; border-radius: 3px; padding: 10px; font-size: 0.9em;}
