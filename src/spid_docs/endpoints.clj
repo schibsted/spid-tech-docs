@@ -34,7 +34,7 @@
 (defn endpoint-path [endpoint]
   (str "/endpoints" (endpoint-url endpoint)))
 
-(defn- render-page [endpoint]
+(defn render-page [endpoint]
   {:title (endpoint-url endpoint)
    :body (list [:h1 (endpoint-url endpoint)]
                [:p (:description endpoint)]
