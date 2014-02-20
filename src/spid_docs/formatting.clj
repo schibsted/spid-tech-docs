@@ -3,7 +3,7 @@
             [me.raynes.cegdown :as md]))
 
 (def pegdown-options ;; https://github.com/sirthias/pegdown
-  [:autolinks :fenced-code-blocks :strikethrough :quotes :smarts])
+  [:autolinks :fenced-code-blocks :strikethrough])
 
 (defn to-html [s]
   (md/to-html s pegdown-options))
