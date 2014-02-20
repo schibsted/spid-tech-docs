@@ -8,6 +8,7 @@
 (defn get-pages []
   (let [endpoints (spid/get-endpoints)
         articles (stasis/slurp-directory "resources/articles" #"\.md$")]
-    (merge {"/" (partial frontpage/create-page endpoints)}
-           (endpoints/create-pages endpoints)
-           (articles/create-pages articles))))
+    (stasis/merge-page-sources
+     {:general-pages {"/" (partial frontpage/create-page endpoints)}
+      :endpoints (endpoints/create-pages endpoints)
+      :articles (articles/create-pages articles)})))
