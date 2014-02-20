@@ -9,3 +9,6 @@
    {:general-pages {"/" (partial frontpage/create-page (:endpoints content))}
     :endpoints (endpoints/create-pages (:endpoints content))
     :articles (articles/create-pages (:articles content))}))
+
+(defn get-exports [content]
+  (articles/create-confluence-exports (:articles content)))

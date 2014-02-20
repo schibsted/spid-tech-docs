@@ -21,9 +21,11 @@
           (map #(fn [request] (layout/create-page request (%))) (vals pages))))
 
 (defn get-pages []
-  (-> (content/load-content)
-      (pages/get-pages)
-      (prepare-pages)))
+  (let [content (content/load-content)]
+    (stasis/merge-page-sources
+     {:web-pages (-> (pages/get-pages content)
+                     (prepare-pages))
+      :exports (pages/get-exports content)})))
 
 (def app (-> (stasis/serve-pages get-pages)
              (optimus/wrap get-assets optimize serve-live-assets)
