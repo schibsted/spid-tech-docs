@@ -1,7 +1,19 @@
 @import url("pygments-css/borland.css");
 
-li {
-    font-size: 1.2em;
-    line-height: 1.5;
-    margin: 0 0 0.5em;
+body {font-size: 1.2em; line-height: 1.5; margin: 0 40px;}
+
+body {
+    background: #045c89;
+    background: -moz-linear-gradient(top, #1c7bab 0%, #045c89 300px, #045c89 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#1c7bab), color-stop(300px,#045c89), color-stop(100%,#045c89));
+    background: -webkit-linear-gradient(top,  #1c7bab 0%,#045c89 300px,#045c89 100%);
+    background: -o-linear-gradient(top, #1c7bab 0%,#045c89 300px,#045c89 100%);
+    background: -ms-linear-gradient(top, #1c7bab 0%,#045c89 300px,#045c89 100%);
+    background: linear-gradient(to bottom, #1c7bab 0%,#045c89 300px,#045c89 100%);
 }
+
+li {margin: 0 0 0.5em;}
+
+#body {background: #fff; border-radius: 10px; padding: 10px 40px;}
+#logo {margin: 10px 0 5px 10px;}
+#logo img {height: 50px;}

@@ -8,4 +8,7 @@
     [:meta {:charset "utf-8"}]
     [:title (str title " | SPiD API Documentation")]
     [:link {:rel "stylesheet" :type "text/css" :href (link/file-path request "/styles/spid.css")}]]
-   [:body body]))
+   [:body
+    [:div#main
+     [:div#logo [:img {:src (link/file-path request "/images/spid.png")}]]
+     [:div#body body]]]))
