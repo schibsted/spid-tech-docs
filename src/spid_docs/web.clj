@@ -7,6 +7,7 @@
             [ring.middleware.content-type :refer [wrap-content-type]]
             [spid-docs.content :as content]
             [spid-docs.layout :as layout]
+            [spid-docs.pages :as pages]
             [stasis.core :as stasis]))
 
 (defn get-assets []
@@ -20,7 +21,8 @@
           (map #(fn [request] (layout/create-page request (%))) (vals pages))))
 
 (defn get-pages []
-  (-> (content/get-pages)
+  (-> (content/load-content)
+      (pages/get-pages)
       (prepare-pages)))
 
 (def app (-> (stasis/serve-pages get-pages)
