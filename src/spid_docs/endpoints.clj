@@ -18,6 +18,16 @@
    (= "json" format) "JSON"
    (= "jsonp" format) "JSON-P"))
 
+(defn path-to-filename [path]
+  ;; The error endpoint is not really an endpoint, and is the only one
+  ;; with an asterisk. Special case it.
+  (if (= "api/2/*" path)
+    "not-found.edn"
+    (-> path
+        (str/replace #"[/{}]+" "-")
+        (str/replace #"(^-)|(-$)" "")
+        (str ".edn"))))
+
 (defn endpoint-url [endpoint]
   (str "/" (:path endpoint)))
 
