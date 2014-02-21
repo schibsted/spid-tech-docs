@@ -1,0 +1,11 @@
+;; Types used across many endpoints. Many types are defined inline for the
+;; endpoints where they are used. If a type is used in more than one endpoint,
+;; this is the place to define it, to enable cross-linking.
+
+;; Types that don't have descriptions will not be linked. This is used for basic
+;; types like strings and numbers.
+
+[{:id :string}
+ {:id :integer}
+ {:id :datetime
+  :description "An ISO-8601 formatted date. The specific format used by the API is YYYY-MM-DD"}]

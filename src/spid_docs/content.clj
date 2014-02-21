@@ -46,4 +46,5 @@
 
 (defn load-content []
   {:endpoints (get-endpoints)
-   :articles (stasis/slurp-directory "resources/articles" #"\.md$")})
+   :articles (stasis/slurp-directory "resources/articles" #"\.md$")
+   :types (load-edn "types.edn")})
