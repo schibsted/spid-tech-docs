@@ -1,10 +1,13 @@
 (ns spid-docs.web
-  (:require [optimus.assets :as assets]
+  (:require [clojure.string :as str]
+            [hiccup.core :as hiccup]
+            [optimus.assets :as assets]
             [optimus.export]
             [optimus.optimizations :as optimizations]
             [optimus.prime :as optimus]
             [optimus.strategies :refer [serve-live-assets]]
             [ring.middleware.content-type :refer [wrap-content-type]]
+            [spid-docs.confluence :as confluence]
             [spid-docs.content :as content]
             [spid-docs.highlight :refer [highlight-code-blocks]]
             [spid-docs.layout :as layout]
@@ -17,6 +20,19 @@
 
 (def optimize optimizations/all)
 
+(defn to-confluence-url [[url _]]
+  (-> url
+      (str/replace #"/$" "")
+      (str ".csf.txt")))
+
+(defn create-confluence-export [[_ get-page] _]
+  (-> (get-page) :body hiccup/html confluence/to-storage-format))
+
+(defn export-to-confluence [pages]
+  (->> pages
+       (map (juxt to-confluence-url #(partial create-confluence-export %)))
+       (into {})))
+
 (defn prepare-page [get-page request]
   (->> (get-page)
        (layout/create-page request)
@@ -27,11 +43,9 @@
           (map #(partial prepare-page %) (vals pages))))
 
 (defn get-pages []
-  (let [content (content/load-content)]
-    (stasis/merge-page-sources
-     {:web-pages (-> (pages/get-pages content)
-                     (prepare-pages))
-      :exports (pages/get-exports content)})))
+  (let [pages (pages/get-pages (content/load-content))]
+    (merge (prepare-pages pages)
+           (export-to-confluence pages))))
 
 (def app (-> (stasis/serve-pages get-pages)
              (optimus/wrap get-assets optimize serve-live-assets)
