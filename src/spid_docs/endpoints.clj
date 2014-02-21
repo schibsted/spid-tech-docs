@@ -24,10 +24,7 @@
                    (render-params "Required params" (:required %))
                    (render-params "Optional params" (:optional %))) (vals methods))))
 
-(defn- format-name [format]
-  (cond
-   (= "json" format) "JSON"
-   (= "jsonp" format) "JSON-P"))
+(def format-names {"json" "JSON" "jsonp" "JSON-P"})
 
 (defn- render-key-properties [endpoint]
   [:table.boxed.zebra
@@ -38,7 +35,7 @@
       [:td token-types]])
    [:tr
     [:th "Supported response format"]
-    [:td (str/join ", " (map format-name (:valid_output_formats endpoint)))]]
+    [:td (str/join ", " (map format-names (:valid_output_formats endpoint)))]]
    (let [filters (:filters endpoint)]
      [:tr
       [:th (str "Supported filter" (if (= (count filters) 1) "" "s"))]
