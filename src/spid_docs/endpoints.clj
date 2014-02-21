@@ -1,6 +1,7 @@
 (ns spid-docs.endpoints
   (:require [clojure.pprint :refer [pprint]]
             [clojure.string :as str]
+            [spid-docs.concepts :refer [concept-path]]
             [spid-docs.content :as content]
             [spid-docs.formatting :refer [to-html line-to-html]]
             [spid-docs.layout :as layout]
@@ -12,17 +13,26 @@
 (defn endpoint-path [endpoint]
   (str "/endpoints" (endpoint-url endpoint)))
 
-(defn- render-params [heading params]
-  (if (seq params)
-    (list [:h3 heading]
-          [:ul (map #(vector :li %) params)])))
+(defn- render-params-group [[param-def params] param-docs]
+  (if param-def
+    (list [:dt (str/join ", " params)]
+          [:dd [:a {:href (concept-path param-def)} (str "See " (name param-def))]])
+    (map #(list [:dt %]
+                [:dd (line-to-html (param-docs %))]) params)))
 
-(defn- render-http-methods [endpoint]
+(defn- render-params [heading params param-defs param-docs]
+  (clojure.pprint/pprint params)
+  (if-let [grouped-params (sort-by first (group-by param-defs params))]
+    (list [:h3 heading]
+          [:dl (map #(render-params-group % param-docs) grouped-params)])))
+
+(defn- render-http-methods [endpoint parameters]
   (let [methods (:httpMethods endpoint)
-        url (endpoint-url endpoint)]
+        url (endpoint-url endpoint)
+        param-docs (:parameters endpoint)]
     (mapcat #(list [:h2 (:name %) " " url]
-                   (render-params "Required params" (:required %))
-                   (render-params "Optional params" (:optional %))) (vals methods))))
+                   (render-params "Required params" (:required %) parameters param-docs)
+                   (render-params "Optional params" (:optional %) parameters param-docs)) (vals methods))))
 
 (def format-names {"json" "JSON" "jsonp" "JSON-P"})
 
@@ -83,15 +93,16 @@
           (render-object % types)
           (render-string %)) (:types endpoint)))
 
-(defn render-page [endpoint types]
+(defn render-page [endpoint types parameters]
   {:title (endpoint-url endpoint)
    :body (list [:h1 (:name endpoint)]
                [:p (:description endpoint)]
                (render-key-properties endpoint)
-               (render-http-methods endpoint)
+               (render-http-methods endpoint parameters)
                (render-type-defs endpoint types)
                [:pre (with-out-str (pprint endpoint))])})
 
-(defn create-pages [endpoints types]
-  (into {} (map (juxt endpoint-path #(partial render-page (content/cultivate-endpoint %) types))
+(defn create-pages [endpoints types parameters]
+  (into {} (map (juxt endpoint-path
+                      #(partial render-page (content/cultivate-endpoint %) types parameters))
                 (:data endpoints))))

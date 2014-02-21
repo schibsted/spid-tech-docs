@@ -1,6 +1,6 @@
-{:limit :pagination
- :offset :pagination
- :since :pagination
- :until :pagination
- :filters :filters
- :fields :selection}
+{"limit" :pagination
+ "offset" :pagination
+ "since" :pagination
+ "until" :pagination
+ "filters" :filters
+ "fields" :selection}

@@ -48,4 +48,5 @@
   {:endpoints (get-endpoints)
    :articles (stasis/slurp-directory "resources/articles" #"\.md$")
    :concepts (stasis/slurp-directory "resources/concepts" #"\.md$")
+   :params (load-edn "parameters.edn")
    :types (load-edn "types.edn")})
