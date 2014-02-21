@@ -41,12 +41,20 @@ create the user's local session with the given code.
 Let's just set up a basic handler for this now, and we can fill it
 in later.
 
-#### Set up a handler to create the session
-
+#### :tabs Set up a handler to create the session
+##### :tab PHP
 ```php
 <?php // createSession.php
 header("Location: /");
 ```
+##### :tab Java
+```java
+@RequestMapping("/create-session")
+String createSession(@RequestParam String code) {
+    return "redirect:/";
+}
+```
+#### :/tabs
 
 ## Send the user to the SPiD login page
 
