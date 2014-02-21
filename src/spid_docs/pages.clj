@@ -8,7 +8,7 @@
 (defn get-pages [content]
   (stasis/merge-page-sources
    {:general-pages {"/" (partial frontpage/create-page (:endpoints content))}
-    :endpoints (endpoints/create-pages (:endpoints content))
+    :endpoints (endpoints/create-pages (:endpoints content) (:types content))
     :articles (articles/create-pages (:articles content))
     :types (types/create-pages (:types content))}))
 

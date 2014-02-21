@@ -3,7 +3,8 @@
             [clojure.string :as str]
             [spid-docs.content :as content]
             [spid-docs.formatting :refer [to-html line-to-html]]
-            [spid-docs.layout :as layout]))
+            [spid-docs.layout :as layout]
+            [spid-docs.types :refer [type-path]]))
 
 (defn endpoint-url [endpoint]
   (str "/" (:path endpoint)))
@@ -52,38 +53,48 @@
    (keyword? desc) (name desc)
    :else (line-to-html desc)))
 
-(defn- render-type [id type-name description key-order fields]
-  (list [:h2 {:id (name id)} type-name]
-        (to-html description)
-        [:table.boxed.zebra
-         [:tr (map #(vector :th (str/capitalize (name %))) key-order)]
-         (map (fn [field]
-                [:tr
-                 [:th ((first key-order) field)]
-                 (map #(vector :td (render-field-description (% field)))
-                      (rest key-order))])
-              fields)]))
+(defn- render-type [type types]
+  (if-let [type-def (first (filter #(= type (:id %)) types))]
+    (if (:description type-def)
+      [:a {:href (type-path type-def)} (name type)]
+      (name type))
+    [:a {:href (str "#" (name type))} (name type)]))
 
-(defn- render-object [{:keys [id name description fields]}]
-  (render-type id name description [:field :type :description] fields))
+(defn- render-type-header [id type-name description]
+  (list [:h2 {:id (name id)} type-name]
+        (to-html description)))
+
+(defn- render-object [{:keys [id name description fields]} types]
+  (list (render-type-header id name description)
+        [:table.boxed.zebra
+         [:tr [:th "Field"] [:th "Type"] [:th "Description"]]
+         (map #(vector :tr
+                       [:th (:field %)]
+                       [:td (render-type (:type %) types)]
+                       [:td (line-to-html (:description %))]) fields)]))
 
 (defn- render-string [{:keys [id name description values]}]
-  (render-type id name description [:value :description] values))
+  (list (render-type-header id name description)
+        [:table.boxed.zebra
+         [:tr [:th "Value"] [:th "Description"]]
+         (map #(vector :tr
+                       [:th (:value %)]
+                       [:td (line-to-html (:description %))]) values)]))
 
-(defn- render-types [endpoint]
+(defn- render-type-defs [endpoint types]
   (map #(if (= (:type %) :object)
-          (render-object %)
+          (render-object % types)
           (render-string %)) (:types endpoint)))
 
-(defn render-page [endpoint]
+(defn render-page [endpoint types]
   {:title (endpoint-url endpoint)
    :body (list [:h1 (:name endpoint)]
                [:p (:description endpoint)]
                (render-key-properties endpoint)
                (render-http-methods endpoint)
-               (render-types endpoint)
+               (render-type-defs endpoint types)
                [:pre (with-out-str (pprint endpoint))])})
 
-(defn create-pages [endpoints]
-  (into {} (map (juxt endpoint-path #(partial render-page (content/cultivate-endpoint %)))
+(defn create-pages [endpoints types]
+  (into {} (map (juxt endpoint-path #(partial render-page (content/cultivate-endpoint %) types))
                 (:data endpoints))))
