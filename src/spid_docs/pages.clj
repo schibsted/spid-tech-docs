@@ -1,5 +1,6 @@
 (ns spid-docs.pages
   (:require [spid-docs.articles :as articles]
+            [spid-docs.concepts :as concepts]
             [spid-docs.endpoints :as endpoints]
             [spid-docs.frontpage :as frontpage]
             [spid-docs.types :as types]
@@ -10,4 +11,5 @@
    {:general-pages {"/" (partial frontpage/create-page (:endpoints content))}
     :endpoints (endpoints/create-pages (:endpoints content) (:types content))
     :articles (articles/create-pages (:articles content))
+    :concepts (concepts/create-pages (:concepts content))
     :types (types/create-pages (:types content))}))

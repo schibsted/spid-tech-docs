@@ -10,7 +10,8 @@
                  [clygments "0.1.1"]
                  [me.raynes/cegdown "0.1.1"]
                  [spid-sdk-clojure "0.1.0"]
-                 [commons-lang "2.5"]]
+                 [commons-lang "2.5"]
+                 [fs "1.3.3"]]
   :ring {:handler spid-docs.web/app}
   :aliases {"build-site" ["run" "-m" "spid-docs.web/export"]}
   :profiles {:dev {:plugins [[lein-ring "0.8.10"]]
