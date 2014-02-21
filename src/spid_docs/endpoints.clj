@@ -2,7 +2,14 @@
   (:require [clojure.pprint :refer [pprint]]
             [clojure.string :as str]
             [spid-docs.content :as content]
+            [spid-docs.formatting :refer [to-html line-to-html]]
             [spid-docs.layout :as layout]))
+
+(defn endpoint-url [endpoint]
+  (str "/" (:path endpoint)))
+
+(defn endpoint-path [endpoint]
+  (str "/endpoints" (endpoint-url endpoint)))
 
 (defn- render-params [heading params]
   (if (seq params)
@@ -39,37 +46,34 @@
      [:tr [:th "Default filters"] [:td filter]])
    [:tr [:th "Successful return"] [:td "200"]]])
 
-(defn- render-object [type]
-  (list [:h2 (:name type)]
-        (if-let [description (:description type)] [:p description])
-        [:table.boxed.zebra
-         [:tr [:th "Field"] [:th "Type"] [:th "Description"]]
-         (map #(vector :tr
-                       [:th (:field %)]
-                       [:td (name (:type %))]
-                       [:td (:description %)])
-              (:fields type))]))
+(defn- render-field-description [desc]
+  (cond
+   (nil? desc) ""
+   (keyword? desc) (name desc)
+   :else (line-to-html desc)))
 
-(defn- render-string [type]
-  (list [:h2 {:id (name (:id type))} (:name type)]
-        (if-let [description (:description type)] [:p description])
+(defn- render-type [id type-name description key-order fields]
+  (list [:h2 {:id (name id)} type-name]
+        (to-html description)
         [:table.boxed.zebra
-         [:tr [:th "Value"] [:th "Description"]]
-         (map #(vector :tr
-                       [:th (:value %)]
-                       [:td (:description %)])
-              (:values type))]))
+         [:tr (map #(vector :th (str/capitalize (name %))) key-order)]
+         (map (fn [field]
+                [:tr
+                 [:th ((first key-order) field)]
+                 (map #(vector :td (render-field-description (% field)))
+                      (rest key-order))])
+              fields)]))
+
+(defn- render-object [{:keys [id name description fields]}]
+  (render-type id name description [:field :type :description] fields))
+
+(defn- render-string [{:keys [id name description values]}]
+  (render-type id name description [:value :description] values))
 
 (defn- render-types [endpoint]
   (map #(if (= (:type %) :object)
           (render-object %)
           (render-string %)) (:types endpoint)))
-
-(defn endpoint-url [endpoint]
-  (str "/" (:path endpoint)))
-
-(defn endpoint-path [endpoint]
-  (str "/endpoints" (endpoint-url endpoint)))
 
 (defn render-page [endpoint]
   {:title (endpoint-url endpoint)
