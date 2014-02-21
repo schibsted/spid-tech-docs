@@ -1,6 +1,5 @@
 (ns spid-docs.endpoints
-  (:require [clojure.pprint :refer [pprint]]
-            [clojure.string :as str]
+  (:require [clojure.string :as str]
             [spid-docs.concepts :refer [concept-path]]
             [spid-docs.content :as content]
             [spid-docs.formatting :refer [to-html line-to-html]]
@@ -21,7 +20,6 @@
                 [:dd (line-to-html (param-docs %))]) params)))
 
 (defn- render-params [heading params param-defs param-docs]
-  (clojure.pprint/pprint params)
   (if-let [grouped-params (sort-by first (group-by param-defs params))]
     (list [:h3 heading]
           [:dl (map #(render-params-group % param-docs) grouped-params)])))
