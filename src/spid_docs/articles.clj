@@ -1,15 +1,14 @@
 (ns spid-docs.articles
   (:require [clojure.string :as str]
             [spid-docs.confluence :as confluence]
-            [spid-docs.formatting :refer [to-html]]
-            [spid-docs.highlight :refer [highlight-code-blocks]]))
+            [spid-docs.formatting :refer [to-html]]))
 
 (defn- to-page-url [[path _]]
   (str/replace path #"\.md$" "/"))
 
 (defn- create-post [[_ markdown]]
   {:title ""
-   :body (->> markdown to-html highlight-code-blocks)})
+   :body (to-html markdown)})
 
 (defn create-pages [articles]
   (->> articles
@@ -20,7 +19,7 @@
   (str/replace (str "/confluence" path) #"\.md$" ".txt"))
 
 (defn- create-export [[_ markdown]]
-  (confluence/to-storage-format markdown))
+  (-> markdown to-html confluence/to-storage-format))
 
 (defn create-confluence-exports [articles]
   (->> articles

@@ -4,9 +4,6 @@
             [net.cgrand.enlive-html :refer [sniptest html-resource select has]])
   (:import [org.apache.commons.lang StringEscapeUtils]))
 
-(def pegdown-options ;; https://github.com/sirthias/pegdown
-  [:autolinks :fenced-code-blocks :strikethrough])
-
 (defn- replace-local-anchors [node]
   (if (-> node :attrs :href (.startsWith "#"))
     {:tag :ac:link
@@ -44,8 +41,7 @@
                       "]]>"))))
 
 (defn to-storage-format [s]
-  (-> (md/to-html s pegdown-options)
-      (sniptest
+  (-> (sniptest s
        [:a] replace-local-anchors
        [:pre] replace-code-snippets)
       (fix-cdata-escapings)))

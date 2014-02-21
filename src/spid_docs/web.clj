@@ -6,6 +6,7 @@
             [optimus.strategies :refer [serve-live-assets]]
             [ring.middleware.content-type :refer [wrap-content-type]]
             [spid-docs.content :as content]
+            [spid-docs.highlight :refer [highlight-code-blocks]]
             [spid-docs.layout :as layout]
             [spid-docs.pages :as pages]
             [stasis.core :as stasis]))
@@ -16,9 +17,14 @@
 
 (def optimize optimizations/all)
 
+(defn prepare-page [get-page request]
+  (->> (get-page)
+       (layout/create-page request)
+       (highlight-code-blocks)))
+
 (defn prepare-pages [pages]
   (zipmap (keys pages)
-          (map #(fn [request] (layout/create-page request (%))) (vals pages))))
+          (map #(partial prepare-page %) (vals pages))))
 
 (defn get-pages []
   (let [content (content/load-content)]
