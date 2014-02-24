@@ -1,5 +1,6 @@
 (ns spid-docs.endpoints
-  (:require [clojure.string :as str]
+  (:require [clojure.pprint :refer [pprint]]
+            [clojure.string :as str]
             [spid-docs.concepts :refer [concept-path]]
             [spid-docs.content :as content]
             [spid-docs.formatting :refer [to-html line-to-html]]
