@@ -1,6 +1,7 @@
 (ns spid-docs.web
   (:require [clojure.string :as str]
             [hiccup.core :as hiccup]
+            [net.cgrand.enlive-html :refer [sniptest]]
             [optimus.assets :as assets]
             [optimus.export]
             [optimus.optimizations :as optimizations]
@@ -35,10 +36,14 @@
        (map (juxt to-confluence-url #(partial create-confluence-export %)))
        (into {})))
 
+(defn- add-header-anchors [html]
+  (sniptest html [:h2] #(assoc-in % [:attrs :id] (-> % :content first))))
+
 (defn prepare-page [get-page request]
   (->> (get-page)
        (layout/create-page request)
-       (highlight-code-blocks)))
+       (highlight-code-blocks)
+       (add-header-anchors)))
 
 (defn prepare-pages [pages]
   (zipmap (keys pages)
