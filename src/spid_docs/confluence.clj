@@ -19,16 +19,24 @@
        (= (-> node :content count) 1)
        (= (-> node :content first :tag) :code)))
 
+(def supported-languages
+  #{"actionscript3" "applescript" "bash" "c#" "cpp" "css" "coldfusion" "delphi"
+    "diff" "erl" "groovy" "xml" "java" "jfx" "js" "php" "perl" "text"
+    "powershell" "py" "ruby" "sql" "sass" "scala" "vb"})
+
 (defn- replace-code-snippets [node]
   (if (code-snippet? node)
-    {:tag :ac:structured-macro
-     :attrs {:ac:name "code"}
-     :content [{:tag :ac:parameter
-                :attrs {:ac:name "language"}
-                :content [(-> node :content first :attrs :class)]}
-               {:tag :ac:plain-text-body
-                :content [{:tag :CDATA
-                           :content (-> node :content first :content)}]}]}
+    (let [language (-> node :content first :attrs :class)
+          content (-> node :content first :content)]
+      {:tag :ac:structured-macro
+       :attrs {:ac:name "code"}
+       :content [(when (supported-languages language)
+                   {:tag :ac:parameter
+                    :attrs {:ac:name "language"}
+                    :content [language]})
+                 {:tag :ac:plain-text-body
+                  :content [{:tag :CDATA
+                             :content content}]}]})
     node))
 
 (defn- create-tab [[header div]]
@@ -61,7 +69,7 @@
 
 (defn to-storage-format [s]
   (-> (sniptest s
-       [:a] replace-local-anchors
-       [:pre] replace-code-snippets
-       [:div.tabs] replace-tabs)
+                [:a] replace-local-anchors
+                [:pre] replace-code-snippets
+                [:div.tabs] replace-tabs)
       (fix-cdata-escapings)))

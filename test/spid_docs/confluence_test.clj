@@ -14,6 +14,11 @@
 (fact (to-storage-format (to-html "```php\n<?php echo 1; ?>\n```"))
       => "<ac:structured-macro ac:name=\"code\"><ac:parameter ac:name=\"language\">php</ac:parameter><ac:plain-text-body><![CDATA[<?php echo 1; ?>\n]]></ac:plain-text-body></ac:structured-macro>")
 
+(fact
+ "Unsupported languages are skipped to avoid confusing Confluence."
+ (to-storage-format (to-html "```clj\n(+ 1 2 3)\n```"))
+      => "<ac:structured-macro ac:name=\"code\"><ac:plain-text-body><![CDATA[(+ 1 2 3)\n]]></ac:plain-text-body></ac:structured-macro>")
+
 (fact (to-storage-format
        (str "<div class=\"tabs\">"
               "<h3 class=\"tab\">One</h3>"
