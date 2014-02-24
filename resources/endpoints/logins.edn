@@ -3,6 +3,7 @@
  :filters ["merchant"]
  :parameters {"ip" "Show only login attempts from this IP address"
               "status" "Filter by successful (`true`) or failed (`false`) logins"}
+ :http-methods {"GET" {:returns :login}}
  :types [{:id :login
           :name "Login attempt object"
           :description "This object contains details about a login attempt"
