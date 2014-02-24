@@ -26,7 +26,7 @@
          {:id :login-type
           :name "Login type"
           :description "A string describing the type of login attempt. The default value is `\"normal\"`."
-          :type :string
+          :type :enum
           :values [{:value "normal" :description "Login with credentials (email and password)"}
                    {:value "auto" :description "Automatic login caused by a 'remember me' cookie"}
                    {:value "api" :description "Login via the login API (used in native apps)"}]}]}

@@ -72,18 +72,20 @@
    (render-default-filters (:default_filters endpoint))
    (render-return-status "200")])
 
-(defn- render-type [type types]
-  (if-let [type-def (first (filter #(= type (:id %)) types))]
+(defn- render-type [type-id types]
+  (if-let [type-def (type-id types)]
     (if (:description type-def)
-      [:a {:href (type-path type-def)} (name type)]
-      (name type))
-    [:a {:href (str "#" (name type))} (name type)]))
+      [:a {:href (type-path type-def)} (name type-id)]
+      (name type-id))
+    [:a {:href (str "#" (name type-id))} (name type-id)]))
 
 (defn- render-type-header [id type-name description]
   (list [:h2 {:id (name id)} type-name]
         (to-html description)))
 
-(defn- render-object [{:keys [id name description fields]} types]
+(defmulti render-type-def :type)
+
+(defmethod render-type-def :object [{:keys [id name description fields]} types]
   (list (render-type-header id name description)
         [:table.boxed.zebra
          [:tr [:th "Field"] [:th "Type"] [:th "Description"]]
@@ -92,7 +94,7 @@
                        [:td (render-type (:type %) types)]
                        [:td (line-to-html (:description %))]) fields)]))
 
-(defn- render-string [{:keys [id name description values]}]
+(defmethod render-type-def :enum [{:keys [id name description values]} _]
   (list (render-type-header id name description)
         [:table.boxed.zebra
          [:tr [:th "Value"] [:th "Description"]]
@@ -100,10 +102,20 @@
                        [:th (:value %)]
                        [:td (line-to-html (:description %))]) values)]))
 
-(defn- render-type-defs [endpoint types]
-  (map #(if (= (:type %) :object)
-          (render-object % types)
-          (render-string %)) (:types endpoint)))
+(defn- mapify-types [endpoint types]
+  (let [mapify (juxt :id identity)]
+    (-> {}
+        (into (map mapify types))
+        (into (map mapify (:types endpoint))))))
+
+(defn- get-pertinent-type-defs [endpoint types]
+  (map #(% types) (into #{}
+                        (concat (map :returns (-> endpoint :http-methods vals))
+                                (map :id (:types endpoint))))))
+
+(defn- render-pertinent-type-defs [endpoint types]
+  (map #(render-type-def % types)
+       (get-pertinent-type-defs endpoint types)))
 
 (defn render-page [endpoint types parameters]
   {:title (endpoint-url endpoint)
@@ -111,7 +123,7 @@
                [:p (:description endpoint)]
                (render-key-properties endpoint)
                (render-http-methods endpoint parameters)
-               (render-type-defs endpoint types)
+               (render-pertinent-type-defs endpoint (mapify-types endpoint types))
                [:pre (with-out-str (pprint endpoint))])})
 
 (defn create-pages [endpoints types parameters]
