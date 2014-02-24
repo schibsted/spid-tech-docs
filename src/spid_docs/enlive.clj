@@ -6,7 +6,7 @@
 (defn parse [data]
   (cond
    (string? data) (enlive/html-snippet data)
-   (map? data) (enlive/html-snippet (hiccup/html data))))
+   (or (list? data) (vector? data)) (enlive/html-snippet (hiccup/html data))))
 
 (defn transform [tree selector fn]
   "TODO: Make this a macro that accepts any number of forms.
