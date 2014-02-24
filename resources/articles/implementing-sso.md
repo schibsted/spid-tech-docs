@@ -47,7 +47,7 @@ in later.
 <?php // createSession.php
 header("Location: /");
 ```
-##### :tab Java
+##### :tab Java (Spring MVC)
 ```java
 @RequestMapping("/create-session")
 String createSession(@RequestParam String code) {
@@ -73,8 +73,8 @@ The domain also has to match the predefined URI that you have
 registered with SPiD. Only predefined redirect URIs are accepted by
 the SPiD login page.
 
-#### Build login URL
-
+#### :tabs Build login URL
+##### :tab PHP
 ```php
 <?php
 $createSessionURL = $ourBaseURL . "/createSession.php";
@@ -83,6 +83,20 @@ $spidAuthorizeURL = $spidBaseURL . "/oauth/authorize" .
   "&response_type=code" .
   "&redirect_uri=" . $createSessionURL;
 ```
+##### :tab Java
+```java
+private String getSPIDAuthorizeURL() {
+    return spidBaseUrl + "/oauth/authorize" +
+        "?client_id=" + clientID +
+        "&response_type=code" +
+        "&redirect_uri=" + getCreateSessionURL();
+}
+
+private String getCreateSessionURL() {
+    return ourBaseUrl + "/create-session";
+}
+```
+#### :/tabs
 
 The login URL can be served directly to your end users for logging in. As
 SPiD supports *remember me* type functionality there is no need for
@@ -95,8 +109,8 @@ back to your application via the redirect URI you provided. The
 redirect will come with a code. Using this code, you can create a
 client to communicate with the SPiD API on behalf of the user.
 
-#### Create an API client
-
+#### :tabs Create an API client
+##### :tab PHP
 ```php
 <?php
 // The SPiD SDK for PHP needs a few more config variables:
@@ -117,6 +131,17 @@ $client = new VGS_Client($spidClientConfig);
 $session = $client->getSession(); // this rudely fetches the code from the request itself
 $client->setAccessToken($session['access_token']); // have to help the client remember the access token
 ```
+##### :tab Java
+```java
+private SPPClient createUserClient(String code) throws SPPClientException {
+    ClientCredentials cred = new ClientCredentials(clientID, clientSecret, getCreateSessionURL());
+    return new UserClientBuilder(cred)
+        .withUserAuthorizationCode(code)
+        .withBaseUrl(spidBaseUrl)
+        .build();
+}
+```
+#### :/tabs
 
 ## Fetch user information and create a session
 
@@ -124,8 +149,8 @@ Use the API client you just created to fetch basic user information,
 and create a local session with it. You should also make sure to hang
 on to the client. You'll need it later.
 
-#### Fetch user information and create session
-
+#### :tabs Fetch user information and create session
+##### :tab PHP
 ```php
 <?php
 $user = $client->api('/me');
@@ -136,6 +161,20 @@ $_SESSION['user'] = $user;
 
 header("Location: /");
 ```
+##### :tab Java (Spring MVC)
+```java
+@RequestMapping("/create-session")
+String createSession(@RequestParam String code, HttpServletRequest request)
+    throws SPPClientException, SPPClientResponseException, SPPClientRefreshTokenException {
+    SPPClient client = createUserClient(code);
+    JSONObject user = client.GET("/me").getJSONObject();
+    HttpSession session = request.getSession();
+    session.setAttribute("user", user);
+    session.setAttribute("client", client);
+    return "redirect:/";
+}
+```
+#### :/tabs
 
 ## Log user out
 
@@ -153,8 +192,8 @@ In addition to the user's access token, you pass along another
 redirect URI, so that the user is sent back to your site after
 logging out of SPiD.
 
-#### Log user out
-
+#### :tabs Log user out
+##### :tab PHP
 ```php
 <?php // logout.php
 require_once('./config.php');
@@ -175,6 +214,24 @@ if ($client) {
 }
 ?>
 ```
+##### :tab Java (Spring MVC)
+```java
+@RequestMapping("/logout")
+String logOutUser(HttpServletRequest request) {
+    HttpSession session = request.getSession();
+    SPPClient client = (SPPClient) session.getAttribute("client");
+    session.removeAttribute("client");
+    session.removeAttribute("user");
+    return "redirect:" + getSPIDLogoutURL(client);
+}
+
+private String getSPIDLogoutURL(SPPClient client) {
+    return spidBaseUrl + "/logout" +
+        "?redirect_uri=" + ourBaseUrl +
+        "&oauth_token=" + client.getOauthCredentials().getAccessToken();
+}
+```
+#### :/tabs
 
 ## Working examples
 
