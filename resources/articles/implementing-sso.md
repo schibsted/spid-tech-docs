@@ -5,7 +5,7 @@ application via SPiD, and you can access the SPiD API on their
 behalf.
 
 **NB!** This guide presupposes that you have gone throught the
-[Getting Started](/getting-started) guide, in particular that you have
+[Getting Started](/getting-started-server) guide, in particular that you have
 downloaded and installed the appropriate SDK for your platform.
 
 ## Overview
@@ -47,7 +47,7 @@ in later.
 <?php // createSession.php
 header("Location: /");
 ```
-##### :tab Java (Spring MVC)
+##### :tab Java
 ```java
 @RequestMapping("/create-session")
 String createSession(@RequestParam String code) {
@@ -161,7 +161,7 @@ $_SESSION['user'] = $user;
 
 header("Location: /");
 ```
-##### :tab Java (Spring MVC)
+##### :tab Java
 ```java
 @RequestMapping("/create-session")
 String createSession(@RequestParam String code, HttpServletRequest request)
@@ -214,7 +214,7 @@ if ($client) {
 }
 ?>
 ```
-##### :tab Java (Spring MVC)
+##### :tab Java
 ```java
 @RequestMapping("/logout")
 String logOutUser(HttpServletRequest request) {

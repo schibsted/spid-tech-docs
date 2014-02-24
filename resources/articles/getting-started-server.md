@@ -22,8 +22,9 @@ who you share it with. The examples below are meant to illustrate the basics of
 using the API, they are *not* examples of production code. For more complete
 examples, see the example use-cases.
 
-### Downloading the Java SDK
+### :tabs Downloading the SDK
 
+#### :tab Java
 Download the Java SDK by cloning the GitHub repository:
 
 ```sh
@@ -40,7 +41,7 @@ cd sdk-java
 mvn install
 ```
 
-### Downloading the PHP SDK
+#### :tab PHP
 
 Download the PHP SDK by cloning the GitHub repository:
 
@@ -59,7 +60,7 @@ add the files to your project folder, or include it like this:
 set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/sdk");
 ```
 
-### Downloading the Android SDK
+#### :tab Android
 
 In order to use the Android SPiD SDK, you must fist install the
 [Android SDK](http://developer.android.com/sdk/index.html). Run the Android SDK
@@ -125,7 +126,7 @@ mvn android:deploy
 This will install the app on the emulator. When it finishes you have
 successfully set up the SDK for development. Great success!
 
-### Downloading the Clojure SDK
+#### :tab Clojure
 
 Eventually, the Clojure SDK will be available from Clojars. However, as the Java
 SDK still is not yet available on a central nexus, you need to build both on
@@ -162,7 +163,7 @@ Finally, use it in your `project.clj`:
 [spid-sdk-clojure "0.1.0"]
 ```
 
-### Downloading the JavaScript SDK
+#### :tab JavaScript
 
 Download the JavaScript SDK by downloading the
 [latest version from GitHub](https://github.com/schibsted/sdk-js/tree/master/dist).
@@ -170,13 +171,17 @@ Note that both the unminified and minified versions bundle the JSON2.js script.
 If you do not need it, download the source code and build it yourself. Refer to
 the [JS SDK docs](https://github.com/schibsted/sdk-js) for how to do this.
 
+### :/tabs
+
 ## Interacting with the API
 
 Now that you have installed an SDK, you will use it to make first contact with
 the SPiD API. Don't worry, it will be quick and painless. When you've got
 everything set up, you might want to continue with configuring single sign-on.
 
-### Using cURL
+### :tabs Getting all endpoints
+
+#### :tab cURL
 
 Using [cURL](http://curl.haxx.se/dlwiz/) to interact with the API is a good way
 to gain insight into how it works at the networking level. It is also the most
@@ -214,7 +219,7 @@ nicely formatted JSON document this way:
 curl https://stage.payment.schibsted.no/api/2/endpoints?oauth_token=68d602d1a3d3cc1b2805cdeb53fb5207d273a7ec | python -m json.tool
 ```
 
-### Using the Java SDK
+#### :tab Java
 
 The following is a minimal example of using the Java SDK. It fetches the
 /endpoints endpoint, which returns a description of all available endpoints.
@@ -276,7 +281,7 @@ SPPClient client = new ServerClientBuilder(credentials).withBaseUrl(SPP_BASE_URL
 JSONObject result = client.GET("/endpoints").getJSONObject();
 ```
 
-### Using the PHP SDK
+#### :tab PHP
 
 The following is a minimal example of using the PHP SDK. It fetches the
 /endpoints endpoint, which returns a description of all available endpoints.
@@ -312,7 +317,7 @@ php getting-started.php client-id secret sign-secret
 This will print the JSON-decoded response from the server, which shows all
 available endpoints along with details on how to interact with them.
 
-### Using the Clojure SDK
+#### :tab Clojure
 
 The following is a minimal example of using the Clojure SDK. It fetches the
 /endpoints endpoint, which returns a description of all available endpoints.
@@ -337,7 +342,7 @@ lein run client-id secret
 This will pretty-print the JSON-decoded response from the server, which shows
 all available endpoints along with details on how to interact with them.
 
-### Using the Android SDK
+#### :tab Android
 
 To use the SPiD Android SDK you must first make the library available to your
 application. Add the SPiD SDK as a dependency to your pom.xml:
@@ -423,7 +428,7 @@ In practice, it is likely that you will start by logging in the user and then
 interacting with the API on their behalf. You will learn how to do this from the
 Single Sign-On guide.
 
-### Using the JavaScript SDK
+#### :tab JavaScript
 
 The JavaScript SDK is different from the other SDKs in that it only provides
 information about the user's authentication/authoriation status. It is not a
@@ -463,3 +468,5 @@ the production server.
 
 The example can be run from the example directory by loading index.html in your
 browser. The file will reveal your own login status.
+
+### :/tabs
