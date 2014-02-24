@@ -74,28 +74,13 @@ registered with SPiD. Only predefined redirect URIs are accepted by
 the SPiD login page.
 
 #### :tabs Build login URL
-##### :tab PHP
-```php
-<?php
-$createSessionURL = $ourBaseURL . "/createSession.php";
-$spidAuthorizeURL = $spidBaseURL . "/oauth/authorize" .
-  "?client_id=" . $clientID .
-  "&response_type=code" .
-  "&redirect_uri=" . $createSessionURL;
-```
-##### :tab Java
-```java
-private String getSPIDAuthorizeURL() {
-    return spidBaseUrl + "/oauth/authorize" +
-        "?client_id=" + clientID +
-        "&response_type=code" +
-        "&redirect_uri=" + getCreateSessionURL();
-}
 
-private String getCreateSessionURL() {
-    return ourBaseUrl + "/create-session";
-}
-```
+##### :tab PHP
+:example-code php /sso/index.php "Build login URL"
+
+##### :tab Java
+:example-code java /sso/src/main/java/SingleSignOnController.java "Build login URL"
+
 #### :/tabs
 
 The login URL can be served directly to your end users for logging in. As

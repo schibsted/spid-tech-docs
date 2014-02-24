@@ -5,7 +5,7 @@ actual values.
 
 ## Submodules
 
-The Pygments themes are included as a Git submodule:
+The example repo and Pygments themes are included as a Git submodule:
 
 ```sh
 git submodule update --init
