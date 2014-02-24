@@ -42,17 +42,17 @@ Let's just set up a basic handler for this now, and we can fill it
 in later.
 
 #### :tabs Set up a handler to create the session
-##### :tab PHP
-```php
-<?php // createSession.php
-header("Location: /");
-```
 ##### :tab Java
 ```java
 @RequestMapping("/create-session")
 String createSession(@RequestParam String code) {
     return "redirect:/";
 }
+```
+##### :tab PHP
+```php
+<?php // createSession.php
+header("Location: /");
 ```
 #### :/tabs
 
@@ -75,13 +75,13 @@ the SPiD login page.
 
 #### :tabs Build login URL
 
-##### :tab PHP
-
-:example-code php /sso/index.php "Build login URL"
-
 ##### :tab Java
 
 :example-code java /sso/src/main/java/SingleSignOnController.java "Build login URL"
+
+##### :tab PHP
+
+:example-code php /sso/index.php "Build login URL"
 
 #### :/tabs
 
@@ -97,6 +97,11 @@ redirect will come with a code. Using this code, you can create a
 client to communicate with the SPiD API on behalf of the user.
 
 #### :tabs Create an API client
+
+##### :tab Java
+
+:example-code java /sso/src/main/java/SingleSignOnController.java "Create user client"
+
 ##### :tab PHP
 
 The SPiD SDK for PHP needs a few config variables:
@@ -107,10 +112,6 @@ Create the client with the config:
 
 :example-code php /sso/createSession.php "Create user client"
 
-##### :tab Java
-
-:example-code java /sso/src/main/java/SingleSignOnController.java "Create user client"
-
 #### :/tabs
 
 ## Fetch user information and create a session
@@ -120,13 +121,14 @@ and create a local session with it. You should also make sure to hang
 on to the client. You'll need it later.
 
 #### :tabs Fetch user information and create session
-##### :tab PHP
-
-:example-code php /sso/createSession.php "Fetch user information and add to session"
 
 ##### :tab Java
 
 :example-code java /sso/src/main/java/SingleSignOnController.java "Fetch user information and add to session"
+
+##### :tab PHP
+
+:example-code php /sso/createSession.php "Fetch user information and add to session"
 
 #### :/tabs
 
@@ -147,13 +149,14 @@ redirect URI, so that the user is sent back to your site after
 logging out of SPiD.
 
 #### :tabs Log user out
-##### :tab PHP
-
-:example-code php /sso/logout.php "Log user out"
 
 ##### :tab Java
 
 :example-code java /sso/src/main/java/SingleSignOnController.java "Log user out"
+
+##### :tab PHP
+
+:example-code php /sso/logout.php "Log user out"
 
 #### :/tabs
 

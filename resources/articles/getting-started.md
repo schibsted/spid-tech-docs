@@ -60,6 +60,43 @@ add the files to your project folder, or include it like this:
 set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/sdk");
 ```
 
+#### :tab Clojure
+
+Eventually, the Clojure SDK will be available from Clojars. However, as the Java
+SDK still is not yet available on a central nexus, you need to build both on
+your own for now.
+
+Download and install the Java SDK:
+
+```sh
+git clone https://github.com/schibsted/sdk-java.git
+cd sdk-java
+mvn install
+```
+
+Download the Clojure SDK by cloning it from GitHub:
+
+```sh
+git clone https://github.com/schibsted/sdk-spid-clojure.git
+```
+
+If you do not have Git installed, you can also download a
+[zip file](https://github.com/schibsted/sdk-spid-clojure/archive/master.zip).
+
+Install (you will need to have [Leiningen](http://leiningen.org/) installed for
+this)
+
+```sh
+cd sdk-spid-clojure
+lein intall
+```
+
+Finally, use it in your `project.clj`:
+
+```clojure
+[spid-sdk-clojure "0.1.0"]
+```
+
 #### :tab Android
 
 In order to use the Android SPiD SDK, you must fist install the
@@ -126,43 +163,6 @@ mvn android:deploy
 This will install the app on the emulator. When it finishes you have
 successfully set up the SDK for development. Great success!
 
-#### :tab Clojure
-
-Eventually, the Clojure SDK will be available from Clojars. However, as the Java
-SDK still is not yet available on a central nexus, you need to build both on
-your own for now.
-
-Download and install the Java SDK:
-
-```sh
-git clone https://github.com/schibsted/sdk-java.git
-cd sdk-java
-mvn install
-```
-
-Download the Clojure SDK by cloning it from GitHub:
-
-```sh
-git clone https://github.com/schibsted/sdk-spid-clojure.git
-```
-
-If you do not have Git installed, you can also download a
-[zip file](https://github.com/schibsted/sdk-spid-clojure/archive/master.zip).
-
-Install (you will need to have [Leiningen](http://leiningen.org/) installed for
-this)
-
-```sh
-cd sdk-spid-clojure
-lein intall
-```
-
-Finally, use it in your `project.clj`:
-
-```clojure
-[spid-sdk-clojure "0.1.0"]
-```
-
 #### :tab JavaScript
 
 Download the JavaScript SDK by downloading the
@@ -180,44 +180,6 @@ the SPiD API. Don't worry, it will be quick and painless. When you've got
 everything set up, you might want to continue with configuring single sign-on.
 
 ### :tabs Getting all endpoints
-
-#### :tab cURL
-
-Using [cURL](http://curl.haxx.se/dlwiz/) to interact with the API is a good way
-to gain insight into how it works at the networking level. It is also the most
-direct way to ensure your credentials are correct as there are fewer layers of
-abstraction that might fail/be used wrongly.
-
-Start by requesting an OAuth token:
-
-```sh
-curl -X -d "client_id=CLIENT-ID&client_secret=SECRET&grant_type=client_credentials" https://stage.payment.schibsted.no/oauth/token
-```
-
-If all goes well, you should get a response like this back:
-
-```js
-{ "access_token": "68d602d1a3d3cc1b2805cdeb53fb5207d273a7ec",
-  "expires_in": 604800,
-  "scope": null,
-  "user_id": false,
-  "is_admin": false,
-  "refresh_token": "95ab17a1f78339b7a01b88c748677ed522474e16",
-  "server_time": 1392194793 }
-```
-
-Using the provided `access_token`, you may now browse the API endpoints:
-
-```sh
-curl https://stage.payment.schibsted.no/api/2/endpoints?oauth_token=68d602d1a3d3cc1b2805cdeb53fb5207d273a7ec
-```
-
-If you have Python installed (most *nixes, including OSX, does), you can grab a
-nicely formatted JSON document this way:
-
-```sh
-curl https://stage.payment.schibsted.no/api/2/endpoints?oauth_token=68d602d1a3d3cc1b2805cdeb53fb5207d273a7ec | python -m json.tool
-```
 
 #### :tab Java
 
@@ -468,5 +430,43 @@ the production server.
 
 The example can be run from the example directory by loading index.html in your
 browser. The file will reveal your own login status.
+
+#### :tab cURL
+
+Using [cURL](http://curl.haxx.se/dlwiz/) to interact with the API is a good way
+to gain insight into how it works at the networking level. It is also the most
+direct way to ensure your credentials are correct as there are fewer layers of
+abstraction that might fail/be used wrongly.
+
+Start by requesting an OAuth token:
+
+```sh
+curl -X -d "client_id=CLIENT-ID&client_secret=SECRET&grant_type=client_credentials" https://stage.payment.schibsted.no/oauth/token
+```
+
+If all goes well, you should get a response like this back:
+
+```js
+{ "access_token": "68d602d1a3d3cc1b2805cdeb53fb5207d273a7ec",
+  "expires_in": 604800,
+  "scope": null,
+  "user_id": false,
+  "is_admin": false,
+  "refresh_token": "95ab17a1f78339b7a01b88c748677ed522474e16",
+  "server_time": 1392194793 }
+```
+
+Using the provided `access_token`, you may now browse the API endpoints:
+
+```sh
+curl https://stage.payment.schibsted.no/api/2/endpoints?oauth_token=68d602d1a3d3cc1b2805cdeb53fb5207d273a7ec
+```
+
+If you have Python installed (most *nixes, including OSX, does), you can grab a
+nicely formatted JSON document this way:
+
+```sh
+curl https://stage.payment.schibsted.no/api/2/endpoints?oauth_token=68d602d1a3d3cc1b2805cdeb53fb5207d273a7ec | python -m json.tool
+```
 
 ### :/tabs
