@@ -6,10 +6,10 @@
  "It extracts examples based on language specific delimiters."
  (create-example :php "/sso/index.php" "Example" "
 abc
-/// Example
+/** Example */
 def
 ghi
-///
+/**/
 jkl
 ") => "<?php // index.php
 def
