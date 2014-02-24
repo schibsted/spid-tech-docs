@@ -17,7 +17,8 @@
 
 (defn get-assets []
   (concat
-   (assets/load-bundle "public" "app.js" [#"/scripts/.*\.js"])
+   (assets/load-bundle "public" "app.js" [#"/scripts/lib/.*\.js"
+                                          #"/scripts/.*\.js"])
    (assets/load-assets "public" [#"/styles/.*\.css"
                                  #"/images/.*\.png"])))
 

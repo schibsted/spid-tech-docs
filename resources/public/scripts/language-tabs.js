@@ -1,13 +1,15 @@
-/*global cull */
+/*global cull, bane */
 
 (function () {
   var c = cull;
+
+  var eventHub = bane.createEventEmitter();
 
   function insertAfter(newElement, referenceElement) {
     referenceElement.parentNode.insertBefore(newElement, referenceElement.nextSibling);
   }
 
-  function setupTabs(tabs) {
+  function setupTabContent(tabs) {
     var container = document.createElement("div");
     var selectedTab;
 
@@ -20,7 +22,9 @@
 
     c.doall(function (node) {
       if (node.className === "tab") {
-        node.onclick = selectTab.bind(null, node);
+        eventHub.on("language:" + node.innerHTML, function () {
+          selectTab(node);
+        });
       }
     }, tabs.childNodes);
 
@@ -29,6 +33,13 @@
     insertAfter(container, tabs);
   }
 
-  c.doall(setupTabs, document.querySelectorAll("div.tabs"));
+  function setupTab(tab) {
+    tab.onclick = function () {
+      eventHub.emit("language:" + tab.innerHTML);
+    };
+  }
+
+  c.doall(setupTab, document.querySelectorAll(".tab"));
+  c.doall(setupTabContent, document.querySelectorAll("div.tabs"));
 
 }());
