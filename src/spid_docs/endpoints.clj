@@ -15,15 +15,17 @@
 
 (defn- render-params-group [[param-def params] param-docs]
   (if param-def
-    (list [:dt (str/join ", " params)]
-          [:dd [:a {:href (concept-path param-def)} (str "See " (name param-def))]])
-    (map #(list [:dt %]
-                [:dd (line-to-html (param-docs %))]) params)))
+    [:tr
+     [:th (str/join ", " params)]
+     [:td [:a {:href (concept-path param-def)} (str "See " (name param-def))]]]
+    (map #(vector :tr
+                  [:th %]
+                  [:td (line-to-html (param-docs %))]) params)))
 
 (defn- render-params [heading params param-defs param-docs]
   (if-let [grouped-params (sort-by first (group-by param-defs params))]
     (list [:h3 heading]
-          [:dl (map #(render-params-group % param-docs) grouped-params)])))
+          [:table.boxed.zebra (map #(render-params-group % param-docs) grouped-params)])))
 
 (defn- render-http-methods [endpoint parameters]
   (let [methods (:httpMethods endpoint)
@@ -35,29 +37,40 @@
 
 (def format-names {"json" "JSON" "jsonp" "JSON-P"})
 
+(defn- render-authentication [auth-required]
+  [:tr [:th "Requires authentication"] [:td (if auth-required "Yes" "No")]])
+
+(defn- render-token-types [token-types]
+  (if token-types
+    [:tr
+     [:th "Supported access token types"]
+     [:td token-types]]))
+
+(defn- render-output-formats [formats]
+  [:tr
+   [:th "Supported response format"]
+   [:td (str/join ", " (map format-names formats))]])
+
+(defn- render-filters [filters]
+  [:tr
+   [:th (str "Supported filter" (if (= (count filters) 1) "" "s"))]
+   [:td (if (seq filters) (str/join ", " filters) "None")]])
+
+(defn- render-default-filters [default-filters]
+  (if default-filters
+    [:tr [:th "Default filters"] [:td default-filters]]))
+
+(defn- render-return-status [status]
+  [:tr [:th "Successful return"] [:td status]])
+
 (defn- render-key-properties [endpoint]
   [:table.boxed.zebra
-   [:tr [:th "Requires authentication"] [:td (if (:auth-required endpoint) "Yes" "No")]]
-   (if-let [token-types (:access-token-types endpoint)]
-     [:tr
-      [:th "Supported access token types"]
-      [:td token-types]])
-   [:tr
-    [:th "Supported response format"]
-    [:td (str/join ", " (map format-names (:valid_output_formats endpoint)))]]
-   (let [filters (:filters endpoint)]
-     [:tr
-      [:th (str "Supported filter" (if (= (count filters) 1) "" "s"))]
-      [:td (if (seq filters) (str/join ", " filters) "None")]])
-   (if-let [filter (:default-filters endpoint)]
-     [:tr [:th "Default filters"] [:td filter]])
-   [:tr [:th "Successful return"] [:td "200"]]])
-
-(defn- render-field-description [desc]
-  (cond
-   (nil? desc) ""
-   (keyword? desc) (name desc)
-   :else (line-to-html desc)))
+   (render-authentication (:auth-required endpoint))
+   (render-token-types (:access-token-types endpoint))
+   (render-output-formats (:valid_output_formats endpoint))
+   (render-filters (:filters endpoint))
+   (render-default-filters (:default_filters endpoint))
+   (render-return-status "200")])
 
 (defn- render-type [type types]
   (if-let [type-def (first (filter #(= type (:id %)) types))]
