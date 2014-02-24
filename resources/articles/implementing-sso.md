@@ -42,18 +42,34 @@ Let's just set up a basic handler for this now, and we can fill it
 in later.
 
 #### :tabs Set up a handler to create the session
+
 ##### :tab Java
+
 ```java
 @RequestMapping("/create-session")
 String createSession(@RequestParam String code) {
     return "redirect:/";
 }
 ```
+
 ##### :tab PHP
+
 ```php
 <?php // createSession.php
 header("Location: /");
 ```
+
+##### :tab Clojure
+
+```clj
+(defn create-session [code]
+  {:status 302
+   :headers {"Location" "/"}})
+
+(defroutes routes
+  (GET "/create-session" [code] (create-session code)))
+```
+
 #### :/tabs
 
 ## Send the user to the SPiD login page
@@ -82,6 +98,10 @@ the SPiD login page.
 ##### :tab PHP
 
 :example-code php /sso/index.php "Build login URL"
+
+##### :tab Clojure
+
+:example-code clj /sso/src/spid_clojure_sso_example/core.clj "Build login URL"
 
 #### :/tabs
 
@@ -112,6 +132,10 @@ Create the client with the config:
 
 :example-code php /sso/createSession.php "Create user client"
 
+##### :tab Clojure
+
+:example-code clj /sso/src/spid_clojure_sso_example/core.clj "Create user client"
+
 #### :/tabs
 
 ## Fetch user information and create a session
@@ -129,6 +153,10 @@ on to the client. You'll need it later.
 ##### :tab PHP
 
 :example-code php /sso/createSession.php "Fetch user information and add to session"
+
+##### :tab Clojure
+
+:example-code clj /sso/src/spid_clojure_sso_example/core.clj "Fetch user information and add to session"
 
 #### :/tabs
 
@@ -157,6 +185,16 @@ logging out of SPiD.
 ##### :tab PHP
 
 :example-code php /sso/logout.php "Log user out"
+
+##### :tab Clojure
+
+:example-code clj /sso/src/spid_clojure_sso_example/core.clj "Log user out"
+
+```clj
+(defroutes routes
+  ;; ...
+  (GET "/logout" request (log-user-out request)))
+```
 
 #### :/tabs
 

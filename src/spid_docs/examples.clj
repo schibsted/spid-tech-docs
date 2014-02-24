@@ -55,5 +55,9 @@
   (warn-missing-example path title
                         (find-example (format "/** %s */" title) "/**/" code)))
 
+(defmethod create-example :clj [_ path title code]
+  (warn-missing-example path title
+                        (find-example (format ";;; %s" title) ";;;" code)))
+
 (defn read-example [lang title path]
   (create-example lang path title (slurp (io/resource (str examples-dir (name lang) path)))))
