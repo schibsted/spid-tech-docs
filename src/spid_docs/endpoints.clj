@@ -30,7 +30,7 @@
 (defn- render-http-methods [endpoint parameters]
   (let [methods (:httpMethods endpoint)
         url (endpoint-url endpoint)
-        param-docs (:parameters endpoint)]
+        param-docs (:parameters endpoint {})]
     (mapcat #(list [:h2 (:name %) " " url]
                    (render-params "Required params" (:required %) parameters param-docs)
                    (render-params "Optional params" (:optional %) parameters param-docs)) (vals methods))))
