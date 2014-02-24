@@ -76,9 +76,11 @@ the SPiD login page.
 #### :tabs Build login URL
 
 ##### :tab PHP
+
 :example-code php /sso/index.php "Build login URL"
 
 ##### :tab Java
+
 :example-code java /sso/src/main/java/SingleSignOnController.java "Build login URL"
 
 #### :/tabs
@@ -96,36 +98,19 @@ client to communicate with the SPiD API on behalf of the user.
 
 #### :tabs Create an API client
 ##### :tab PHP
-```php
-<?php
-// The SPiD SDK for PHP needs a few more config variables:
-$spidClientConfig = array(
-    VGS_Client::CLIENT_ID          => $clientID,
-    VGS_Client::CLIENT_SECRET      => $clientSecret,
-    VGS_Client::CLIENT_SIGN_SECRET => $clientSignSecret,
-    VGS_Client::STAGING_DOMAIN     => "stage.payment.schibsted.no",
-    VGS_Client::HTTPS              => true,
-    VGS_Client::REDIRECT_URI       => $createSessionURL,
-    VGS_Client::COOKIE             => false,
-    VGS_Client::API_VERSION        => 2,
-    VGS_Client::PRODUCTION         => false
-);
 
-$client = new VGS_Client($spidClientConfig);
+The SPiD SDK for PHP needs a few config variables:
 
-$session = $client->getSession(); // this rudely fetches the code from the request itself
-$client->setAccessToken($session['access_token']); // have to help the client remember the access token
-```
+:example-code php /sso/config.php.sample "SDK variables"
+
+Create the client with the config:
+
+:example-code php /sso/createSession.php "Create user client"
+
 ##### :tab Java
-```java
-private SPPClient createUserClient(String code) throws SPPClientException {
-    ClientCredentials cred = new ClientCredentials(clientID, clientSecret, getCreateSessionURL());
-    return new UserClientBuilder(cred)
-        .withUserAuthorizationCode(code)
-        .withBaseUrl(spidBaseUrl)
-        .build();
-}
-```
+
+:example-code java /sso/src/main/java/SingleSignOnController.java "Create user client"
+
 #### :/tabs
 
 ## Fetch user information and create a session
@@ -136,29 +121,13 @@ on to the client. You'll need it later.
 
 #### :tabs Fetch user information and create session
 ##### :tab PHP
-```php
-<?php
-$user = $client->api('/me');
 
-session_start();
-$_SESSION['client'] = $client;
-$_SESSION['user'] = $user;
+:example-code php /sso/createSession.php "Fetch user information and add to session"
 
-header("Location: /");
-```
 ##### :tab Java
-```java
-@RequestMapping("/create-session")
-String createSession(@RequestParam String code, HttpServletRequest request)
-    throws SPPClientException, SPPClientResponseException, SPPClientRefreshTokenException {
-    SPPClient client = createUserClient(code);
-    JSONObject user = client.GET("/me").getJSONObject();
-    HttpSession session = request.getSession();
-    session.setAttribute("user", user);
-    session.setAttribute("client", client);
-    return "redirect:/";
-}
-```
+
+:example-code java /sso/src/main/java/SingleSignOnController.java "Fetch user information and add to session"
+
 #### :/tabs
 
 ## Log user out
@@ -179,43 +148,13 @@ logging out of SPiD.
 
 #### :tabs Log user out
 ##### :tab PHP
-```php
-<?php // logout.php
-require_once('./config.php');
 
-session_start();
+:example-code php /sso/logout.php "Log user out"
 
-$client = isset($_SESSION['client']) ? $_SESSION['client'] : false;
-
-if ($client) {
-  unset($_SESSION['client']);
-  unset($_SESSION['user']);
-
-  $spidLogoutURL = $spidBaseURL . "/logout" .
-    "?redirect_uri=" . $ourBaseURL .
-    "&oauth_token=" . $client->getAccessToken();
-
-  header("Location: " . $spidLogoutURL);
-}
-?>
-```
 ##### :tab Java
-```java
-@RequestMapping("/logout")
-String logOutUser(HttpServletRequest request) {
-    HttpSession session = request.getSession();
-    SPPClient client = (SPPClient) session.getAttribute("client");
-    session.removeAttribute("client");
-    session.removeAttribute("user");
-    return "redirect:" + getSPIDLogoutURL(client);
-}
 
-private String getSPIDLogoutURL(SPPClient client) {
-    return spidBaseUrl + "/logout" +
-        "?redirect_uri=" + ourBaseUrl +
-        "&oauth_token=" + client.getOauthCredentials().getAccessToken();
-}
-```
+:example-code java /sso/src/main/java/SingleSignOnController.java "Log user out"
+
 #### :/tabs
 
 ## Working examples

@@ -4,6 +4,11 @@
 
 (def examples-dir "example-repo/examples/")
 
+(defn- min*
+  "Like min, but takes a list - and 0 elements is okay."
+  [vals]
+  (when (seq vals) (apply min vals)))
+
 (defn- subs*
   "Like subs, but safe - ie, doesn't barf on too short."
   [s len]
@@ -15,7 +20,7 @@
   (->> lines
        (remove #(empty? %))
        (map #(count (re-find #"^ +" %)))
-       (apply min)))
+       (min*)))
 
 (defn- chop-off-common-whitespace [lines]
   (let [superflous-spaces (fewest-preceding-spaces lines)]
@@ -44,7 +49,7 @@
 (defmethod create-example :php [_ path title code]
   (str "<?php // " (strip-example-dir path) "\n"
        (warn-missing-example path title
-                           (find-example (format "/// %s" title) "///" code))))
+                           (find-example (format "/** %s */" title) "/**/" code))))
 
 (defmethod create-example :java [_ path title code]
   (warn-missing-example path title
