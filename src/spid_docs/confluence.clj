@@ -30,6 +30,24 @@
                            :content (-> node :content first :content)}]}]}
     node))
 
+(defn- create-tab [[header div]]
+  {:tag :ac:structured-macro
+   :attrs {:ac:name "auitabspage"}
+   :content [{:tag :ac:parameter
+              :attrs {:ac:name "title"}
+              :content [(->> header :content (apply str))]}
+             {:tag :ac:rich-text-body
+              :content (:content div)}]})
+
+(defn- replace-tabs [node]
+  {:tag :ac:structured-macro
+   :attrs {:ac:name "auitabs"}
+   :content [{:tag :ac:parameter
+              :attrs {:ac:name "direction"}
+              :content ["horizontal"]}
+             {:tag :ac:rich-text-body
+              :content (map create-tab (->> node :content (partition 2)))}]})
+
 (defn- fix-cdata-escapings
   "Enlive doesn't support emitting proper CDATA.
    Fixing escaping with regexen like a pro. Like a pro!"
@@ -43,5 +61,6 @@
 (defn to-storage-format [s]
   (-> (sniptest s
        [:a] replace-local-anchors
-       [:pre] replace-code-snippets)
+       [:pre] replace-code-snippets
+       [:div.tabs] replace-tabs)
       (fix-cdata-escapings)))
