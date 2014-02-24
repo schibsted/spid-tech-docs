@@ -94,6 +94,17 @@
                        [:td (render-type (:type %) types)]
                        [:td (line-to-html (:description %))]) fields)]))
 
+(defmethod render-type-def :object-with-availability [{:keys [id name description fields]} types]
+  (list (render-type-header
+         id name (str description "\n\nThe availability column indicates if the field always contains a valid non-empty value."))
+        [:table.boxed.zebra
+         [:tr [:th "Field"] [:th "Type"] [:th "Description"] [:th "Always available"]]
+         (map #(vector :tr
+                       [:th (:field %)]
+                       [:td (render-type (:type %) types)]
+                       [:td (line-to-html (:description %))]
+                       [:td (if (:always-available %) [:span.check])]) fields)]))
+
 (defmethod render-type-def :enum [{:keys [id name description values]} _]
   (list (render-type-header id name description)
         [:table.boxed.zebra
