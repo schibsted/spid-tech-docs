@@ -1,6 +1,6 @@
 (ns spid-docs.concepts
   (:require [fs.core :as fs]
-            [net.cgrand.enlive-html :as enlive]
+            [spid-docs.enlive :as enlive]
             [spid-docs.formatting :as formatting]))
 
 (defn concept-path [concept]
@@ -15,7 +15,7 @@
 
 (defn- create-concept [concept]
   (let [body (formatting/to-html concept)]
-    {:title (->> body (formatting/select [:h1]) first :content (apply str))
+    {:title (->> body (enlive/parse) (enlive/select [:h1]) first :content (apply str))
      :body body}))
 
 (defn create-pages [concepts]
