@@ -40,3 +40,10 @@ td, th {
 .zebra tr:nth-child(2n+1) td {
     background: #f0f0f0;
 }
+
+.js .tab-content {display: none;}
+.js .tab {float: left; padding: 5px 10px; margin: 0 0 0 5px; border: 1px solid #ccc; border-radius: 5px 5px 0 0; background: #fff; color: #777; cursor: pointer;}
+.js .tab:hover {color: #000;}
+.js .tabs {overflow: hidden;}
+.js .tab.active {border-bottom: 1px solid #fff; color: #000; cursor: auto;}
+.js .tabs-content {border-top: 1px solid #ccc; margin-top: -1px;}

@@ -15,8 +15,10 @@
             [stasis.core :as stasis]))
 
 (defn get-assets []
-  (assets/load-assets "public" [#"/styles/.*\.css"
-                                #"/images/.*\.png"]))
+  (concat
+   (assets/load-bundle "public" "app.js" [#"/scripts/.*\.js"])
+   (assets/load-assets "public" [#"/styles/.*\.css"
+                                 #"/images/.*\.png"])))
 
 (def optimize optimizations/all)
 
