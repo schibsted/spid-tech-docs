@@ -1,13 +1,14 @@
 (ns spid-docs.confluence
   (:require [clojure.string :as str]
             [me.raynes.cegdown :as md]
-            [net.cgrand.enlive-html :refer [sniptest html-resource select has]])
+            [net.cgrand.enlive-html :refer [sniptest html-resource select has]]
+            [ring.util.codec :refer [url-decode]])
   (:import [org.apache.commons.lang StringEscapeUtils]))
 
 (defn- replace-local-anchors [node]
   (if (-> node :attrs :href (.startsWith "#"))
     {:tag :ac:link
-     :attrs {:ac:anchor "Working examples"}
+     :attrs {:ac:anchor (-> node :attrs :href (subs 1) url-decode)}
      :content [{:tag :ac:plain-text-link-body
                 :content [{:tag :CDATA
                            :content (:content node)}]}]}
