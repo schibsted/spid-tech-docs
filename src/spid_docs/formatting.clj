@@ -1,7 +1,7 @@
 (ns spid-docs.formatting
   (:require [clojure.string :as str]
             [hiccup.core :as hiccup]
-            [net.cgrand.enlive-html :as enlive]))
+            [net.cgrand.enlive-html :as enlive]
             [me.raynes.cegdown :as md]))
 
 (def pegdown-options ;; https://github.com/sirthias/pegdown
