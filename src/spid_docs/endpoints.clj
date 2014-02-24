@@ -1,7 +1,7 @@
 (ns spid-docs.endpoints
   (:require [clojure.pprint :refer [pprint]]
             [clojure.string :as str]
-            [net.cgrand.enlive-html :as enlive]
+            [spid-docs.enlive :as enlive]
             [spid-docs.concepts :refer [concept-path]]
             [spid-docs.content :as content]
             [spid-docs.formatting :refer [to-html line-to-html]]
@@ -124,9 +124,21 @@
                         (concat (map :returns (-> endpoint :http-methods vals))
                                 (map :id (:types endpoint))))))
 
+(defn redirect-type-links [inline-types]
+  (fn [node]
+    (let [matches (re-find #"^/types/(.*)" (get-in node [:attrs :href]))
+          type-ids (map :id inline-types)
+          id (keyword (second matches))]
+      (if (and id (some #(= id %) type-ids))
+        (assoc-in node [:attrs :href] (str "#" (name id)))
+        node))))
+
 (defn- render-pertinent-type-defs [endpoint types]
-  (enlive/sniptest (enlive/html [:h1 "Yup"]) [:h1] #(list %))
-  (map #(render-type-def % types) (get-pertinent-type-defs endpoint types)))
+  (let [pertinent-types (get-pertinent-type-defs endpoint types)
+        rendered (map #(render-type-def % types) pertinent-types)]
+    (-> (map #(render-type-def % types) pertinent-types)
+         (enlive/parse)
+         (enlive/transform [:a] (redirect-type-links pertinent-types)))))
 
 (defn render-page [endpoint types parameters]
   {:title (endpoint-url endpoint)

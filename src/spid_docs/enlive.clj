@@ -4,9 +4,9 @@
   (:import java.io.StringReader))
 
 (defn parse [data]
-  (cond
-   (string? data) (enlive/html-snippet data)
-   (or (list? data) (vector? data)) (enlive/html-snippet (hiccup/html data))))
+  (if (string? data)
+    (enlive/html-snippet data)
+    (enlive/html-snippet (hiccup/html data))))
 
 (defn transform [tree selector fn]
   "TODO: Make this a macro that accepts any number of forms.
