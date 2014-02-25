@@ -34,7 +34,7 @@
 (defn process-sample-response [response]
   {:sample-response
    {:status (:code response)
-    :response (with-out-str (json/pprint (->> response :data process-data)))}})
+    :response (with-out-str (json/pprint (->> response :data process-data) :escape-slash false))}})
 
 (defn generate-sample-response [endpoint]
   (let [response (api/GET endpoint)

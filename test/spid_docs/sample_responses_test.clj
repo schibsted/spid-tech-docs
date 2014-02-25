@@ -19,7 +19,7 @@
         (:ip data) => "127.0.0.1"))
 
 (fact "It processes sample response"
-      (-> {:code "201" :data {:clientId "666"}}
+      (-> {:code "201" :data {:clientId "666" :url "http://vg.no"}}
           process-sample-response ) => {:sample-response
                                         {:status "201"
-                                         :response "{\"clientId\":\"[Your client ID]\"}\n"}})
+                                         :response "{\"clientId\":\"[Your client ID]\", \"url\":\"http://vg.no\"}\n"}})
