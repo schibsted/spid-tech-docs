@@ -8,6 +8,7 @@ the native/facebook login for mobile apps. The
 [/user/{id/userId}](/endpoints/user-id-userid) endpoint should be used for those
 cases."
  :access-token-type "user"
+ :http-methods {"GET" {:returns :user}}
  :filters []
  :parameters {}
  :types []}

@@ -107,7 +107,7 @@
                        [:th (:field %)]
                        [:td (render-type (:type %) types)]
                        [:td (line-to-html (:description %))]
-                       [:td (if (:always-available %) [:span.check])]) fields)]))
+                       [:td (if (:always-available %) [:span.check "✓"])]) fields)]))
 
 (defmethod render-type-def :enum [{:keys [id name description values]} _]
   (list (render-type-header id name description)

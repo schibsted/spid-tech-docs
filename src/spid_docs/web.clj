@@ -15,6 +15,15 @@
             [spid-docs.pages :as pages]
             [stasis.core :as stasis]))
 
+(defn wrap-content-type-utf-8 [handler]
+  (fn [request]
+    (when-let [response (handler request)]
+      (if (.contains (get-in response [:headers "Content-Type"]) ";")
+        response
+        (if (string? (:body response))
+          (update-in response [:headers "Content-Type"] #(str % "; charset=utf-8"))
+          response)))))
+
 (defn get-assets []
   (concat
    (assets/load-bundle "public" "app.js" [#"/scripts/lib/.*\.js"
@@ -57,7 +66,8 @@
 
 (def app (-> (stasis/serve-pages get-pages)
              (optimus/wrap get-assets optimize serve-live-assets)
-             wrap-content-type))
+             wrap-content-type
+             wrap-content-type-utf-8))
 
 (def export-dir "./dist")
 
