@@ -71,7 +71,12 @@
    (render-output-formats (:valid_output_formats endpoint))
    (render-filters (:filters endpoint))
    (render-default-filters (:default_filters endpoint))
-   (render-return-status "200")])
+   (render-return-status (get-in endpoint [:sample-response :status] "200"))])
+
+(defn- render-sample-response [endpoint]
+  (if-let [response (get-in endpoint [:sample-response :response])]
+    (list [:h2 "Sample response"]
+          [:pre [:code.js response]])))
 
 (defn- render-type [type-id types]
   (let [type-def (type-id types)]
@@ -146,6 +151,7 @@
                [:p (:description endpoint)]
                (render-key-properties endpoint)
                (render-http-methods endpoint parameters)
+               (render-sample-response endpoint)
                (render-pertinent-type-defs endpoint (mapify-types endpoint types))
                [:pre (with-out-str (pprint endpoint))])})
 
