@@ -1,6 +1,5 @@
 (ns spid-docs.endpoints
-  (:require [clojure.pprint :refer [pprint]]
-            [clojure.string :as str]
+  (:require [clojure.string :as str]
             [spid-docs.enlive :as enlive]
             [spid-docs.concepts :refer [concept-path]]
             [spid-docs.content :as content]
@@ -152,8 +151,7 @@
                (render-key-properties endpoint)
                (render-http-methods endpoint parameters)
                (render-sample-response endpoint)
-               (render-pertinent-type-defs endpoint (mapify-types endpoint types))
-               [:pre (with-out-str (pprint endpoint))])})
+               (render-pertinent-type-defs endpoint (mapify-types endpoint types)))})
 
 (defn create-pages [endpoints types parameters]
   (into {} (map (juxt endpoint-path
