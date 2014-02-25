@@ -19,26 +19,19 @@ some custom fields. `userId` is an integer and represents the unique user ID.
 `phoneNumber` fields will always contain the primary used for both if available.
 The corresponding *Verified fields are the date of the last time those were
 verified."
-  :fields [{:field :displayName :type :string :always-available true}
-           {:field :name :type :collection}
-           {:field :published :type :string :always-available true}
-           {:field :updated :type :string :always-available true}
-           {:field :status :type :user-status :always-available true}
+  :fields [{:field :status :type :user-status :always-available true}
            {:field :url :type :string}
-           {:field :preferredUsername :type :string}
-           {:field :locale :type :string :always-available true}
-           {:field :utcOffset :type :string}
            {:field :lastLoggedIn :type :string :always-available true}
-           {:field :lastAuthenticated :type :string :always-available true}
            {:field :imported :type :string}
            {:field :migrated :type :string}
-           {:field :addresses :type :collection}
+           {:field :addresses :type [:address]}
            {:field :accounts :type :collection}
            {:field :emails :type :collection :always-available true}
            {:field :phoneNumbers :type :collection}
            {:field :currentLocation :type :collection}
            {:field :tracking :type :boolean}
-           {:field :birthday :type :string :description "Date of birth in YYYY-MM-DD format. Year will be 0000 if not provided. Defaults to 0000-00-00." :always-available true}
+           {:field :lastAuthenticated :type :string :description "The last time the user authenticated with their password" :always-available true}
+           {:field :locale :type :string :description "The locale used by the user. Locales follow ISO Language and country codes respectively, joined by an underscore." :always-available true}
            {:field :userId :type :integer :description "Unique user id. Custom extension." :always-available true}
            {:field :photo :type :string :description "URL to a photo of the user (GIF/JPG/PNG)"}
            {:field :verified :type :string :description "Date when user last verified data (email, phone number)"}
@@ -46,12 +39,34 @@ verified."
            {:field :emailVerified :type :string :description "Date when the email was last verified"}
            {:field :phoneNumber :type :string :description "Primary phone number"}
            {:field :phoneNumberVerified :type :string :description "Date when the phone number was last verified"}
-           {:field :gender :type :string :description "One of undisclosed, female, male. Default is undisclosed" :always-available true}
-           {:field :id :type :string :description "Legacy `uuid`. Don't use." :always-available true}]}
+           {:field :gender :type :string :description "One of undisclosed, female, male. Default is undisclosed. [Portable contacts](http://portablecontacts.net/draft-spec.html#anchor16)" :always-available true}
+           {:field :birthday :type :string :description "Date of birth in YYYY-MM-DD format. Year will be 0000 if not provided. Defaults to 0000-00-00. [Portable contacts](http://portablecontacts.net/draft-spec.html#anchor16)" :always-available true}
+           {:field :id :type :string :description "Legacy `uuid`. Don't use. [Portable contacts](http://portablecontacts.net/draft-spec.html#anchor16)" :always-available true}
+           {:field :userId :type :integer :description "Unique user id. Custom extension." :always-available true}
+           {:field :photo :type :string :description "URL to a photo of the user (GIF/JPG/PNG)"}
+           {:field :verified :type :string :description "Date when user last verified data (email, phone number)"}
+           {:field :email :type :string :description "Primary email" :always-available true}
+           {:field :emailVerified :type :string :description "Date when the email was last verified"}
+           {:field :phoneNumber :type :string :description "Primary phone number"}
+           {:field :phoneNumberVerified :type :string :description "Date when the phone number was last verified"}]}
  {:id :user-status
   :name "User status"
+  :type :enum
   :values [{:value "-3" :description "Deleted"}
            {:value "-2" :description "Blocked from using the service"}
            {:value "-1" :description "Inactive/disabled account"}
            {:value "0" :description "Unverified"}
-           {:value "1" :description "Verified email/phone/etc"}]}]
+           {:value "1" :description "Verified email/phone/etc"}]}
+ {:id :address
+  :name "Address"
+  :type :object
+  :fields [{:field :formatted :type :string :description "Full address, formatted for display"}
+           {:field :streetAddress :type :string :description "Full street address component. May include house number, street name, PO BOX, and multi-line extended street address information."}
+           {:field :postalCode :type :string :description "Zip code."}
+           {:field :country :type :string :description "Country name."}
+           {:field :locality :type :string :description "City or locality"}
+           {:field :region :type :string :description "State or region"}
+           {:field :latitude :type :string :description "Latitude geo location"}
+           {:field :longitude :type :string :description "Longitude geo location"}
+           {:field :altitude :type :string :description "Altitude geo location"}
+           {:field :type :type :string :description "Address type, home, shipping, invoice, etc"}]}]

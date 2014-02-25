@@ -79,11 +79,17 @@
     (list [:h2 "Sample response"]
           [:pre [:code.js response]])))
 
+(defn- format-type-name [type]
+  (if (keyword? type)
+    (name type)
+    (str "[" (name (first type)) "...]")))
+
 (defn- render-type [type-id types]
-  (let [type-def (type-id types)]
+  (let [id (if (keyword? type-id) type-id (first type-id))
+        type-def (id types)]
     (if (:description type-def)
-      [:a {:href (type-path type-def)} (name type-id)]
-      (name type-id))))
+      [:a {:href (type-path type-def)} (format-type-name type-id)]
+      (format-type-name type-id))))
 
 (defn- render-type-header [id type-name description]
   (list [:h2 {:id (name id)} type-name]
