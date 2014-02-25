@@ -7,6 +7,7 @@ A session is only created when the user logs in through the web – not through
 the native/facebook login for mobile apps. The
 [/user/{id/userId}](/endpoints/user-id-userid) endpoint should be used for those
 cases."
+ :access-token-type "user"
  :filters []
  :parameters {}
  :types []}

@@ -40,11 +40,11 @@
 (defn- render-authentication [auth-required]
   [:tr [:th "Requires authentication"] [:td (if auth-required "Yes" "No")]])
 
-(defn- render-token-types [token-types]
-  (if token-types
+(defn- render-token-type [token-type]
+  (if token-type
     [:tr
-     [:th "Supported access token types"]
-     [:td token-types]]))
+     [:th "Supported access token type"]
+     [:td token-type]]))
 
 (defn- render-output-formats [formats]
   [:tr
@@ -66,7 +66,7 @@
 (defn- render-key-properties [endpoint]
   [:table.boxed.zebra
    (render-authentication (:auth-required endpoint))
-   (render-token-types (:access-token-types endpoint))
+   (render-token-type (:access-token-type endpoint))
    (render-output-formats (:valid_output_formats endpoint))
    (render-filters (:filters endpoint))
    (render-default-filters (:default_filters endpoint))
@@ -147,7 +147,7 @@
 (defn render-page [endpoint types parameters]
   {:title (endpoint-url endpoint)
    :body (list [:h1 (:name endpoint)]
-               [:p (:description endpoint)]
+               (to-html (:description endpoint))
                (render-key-properties endpoint)
                (render-http-methods endpoint parameters)
                (render-sample-response endpoint)
