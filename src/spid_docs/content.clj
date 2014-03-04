@@ -37,4 +37,5 @@
    :articles (stasis/slurp-directory "resources/articles" #"\.md$")
    :concepts (stasis/slurp-directory "resources/concepts" #"\.md$")
    :params (spid/load-edn "parameters.edn")
-   :types (spid/load-edn "types.edn")})
+   :types (spid/load-edn "types.edn")
+   :apis (spid/load-edn "apis.edn")})
