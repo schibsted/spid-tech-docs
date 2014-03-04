@@ -1,12 +1,10 @@
 {:auth-required true
  :description "This endpoint returns the currently logged in user's object. It
-requires an active user session and a matching oauth token corresponding to this
-user.
+requires an active user session and a matching corresponding oauth token.
 
 A session is only created when the user logs in through the web – not through
-the native/facebook login for mobile apps. The
-[/user/{id/userId}](/endpoints/user-id-userid) endpoint should be used for those
-cases."
+the native/Facebook login for mobile apps. Use the
+[/user/{id/userId}](/endpoints/user-id-userid) endpoint for those cases."
  :access-token-type "user"
  :http-methods {"GET" {:returns :user}}
  :filters []
