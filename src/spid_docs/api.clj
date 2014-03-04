@@ -24,7 +24,6 @@
 (def access-token (atom nil))
 
 (defn request-login-token [config]
-  (clojure.pprint/pprint "GET token")
   (-> (spid-url config "/oauth/token")
       (http/post {:form-params {:client_id (:client-id config)
                                 :client_secret (:client-secret config)
