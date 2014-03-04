@@ -15,6 +15,7 @@ body {
 
 li {margin: 0 0 0.5em;}
 
+#main {max-width: 1100px; margin: 0 auto 40px;}
 #body {background: #fff; border-radius: 10px; padding: 10px 40px;}
 #logo {margin: 10px 0 5px 10px;}
 #logo img {height: 50px;}
