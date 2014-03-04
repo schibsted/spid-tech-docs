@@ -1,10 +1,11 @@
 (ns spid-docs.api
-  (:require [spid-docs.content :as content]
-            [spid-docs.core :as spid]
+  (:require [spid-docs.core :as spid]
             [spid-sdk-clojure.core :as sdk]))
 
-(def get-client (memoize #(let [cred (spid/load-edn "credentials.edn")]
-                            (sdk/create-client (:client-id cred) (:client-secret cred)))))
+(def config (memoize #(spid/load-edn "config.edn")))
+
+(def get-client (memoize #(let [conf (config)]
+                            (sdk/create-client (:client-id conf) (:client-secret conf)))))
 
 (defn GET [path]
   (sdk/GET (get-client) path))

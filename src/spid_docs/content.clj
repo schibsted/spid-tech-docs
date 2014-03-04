@@ -1,14 +1,9 @@
 (ns spid-docs.content
   (:require [clojure.java.io :as io]
             [clojure.string :as str]
+            [spid-docs.api :as api]
             [spid-docs.core :as spid]
-            [spid-sdk-clojure.core :refer [create-client GET]]
             [stasis.core :as stasis]))
-
-(defn- get-endpoints-from-api []
-  (let [cred (spid/load-edn "credentials.edn")
-        client (create-client (:client-id cred) (:client-secret cred))]
-    (GET client "/endpoints")))
 
 (defn- get-endpoints-from-disk []
   (spid/load-edn "cached-endpoints.edn"))

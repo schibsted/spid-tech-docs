@@ -1,6 +1,6 @@
 # SPiD generated docs
 
-Copy resources/credentials.default.edn to resources/credentials.edn and add
+Copy resources/config.default.edn to resources/config.edn and add
 actual values.
 
 ## Submodules
