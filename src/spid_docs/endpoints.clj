@@ -2,7 +2,6 @@
   (:require [clojure.string :as str]
             [spid-docs.enlive :as enlive]
             [spid-docs.concepts :refer [concept-path]]
-            [spid-docs.content :as content]
             [spid-docs.formatting :refer [to-html line-to-html]]
             [spid-docs.layout :as layout]
             [spid-docs.types :refer [type-path]]))
@@ -162,6 +161,6 @@
                (render-pertinent-type-defs endpoint (mapify-types endpoint types)))})
 
 (defn create-pages [endpoints types parameters]
-  (into {} (map (juxt endpoint-path
-                      #(partial render-page (content/cultivate-endpoint %) types parameters))
-                (:data endpoints))))
+  (->> endpoints
+       (map (juxt endpoint-path #(partial render-page % types parameters)))
+       (into {})))

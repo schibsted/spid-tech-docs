@@ -1,28 +1,16 @@
 (ns spid-docs.frontpage
   (:require [clojure.java.io :as io]
             [clojure.string :as str]
+            [spid-docs.apis :as apis]
             [spid-docs.layout :as layout]))
 
 (def cols 3)
 
-(defn- id-to-name [kw]
-  (->> (-> (str kw)
-           (subs 1)
-           (str/split #"-"))
-       (map str/capitalize)
-       (str/join " ")))
-
-(defn render-api [[title description]]
-  (list
-   [:dt [:a {:href (str "/apis/" (subs (str title) 1))} (str (id-to-name title) " API")]]
-   [:dd description]))
-
-(defn render-service-apis [num service]
+(defn render-service-apis [num [path service]]
   [:div {:class (if (= (inc num) cols) "lastUnit" "unit s1of3")}
    [:div.item
-    [:h3 (id-to-name (first service))]
-    [:dl.api-listing
-     (map render-api (second service))]]])
+    [:h3 [:a {:href (apis/api-index-url path)} (apis/get-name path)]]
+    [:p "APIs: " (str/join ", " (map #(apis/get-name (first %)) service))]]])
 
 (defn create-page [apis]
   {:title "SPiD API Documentation"

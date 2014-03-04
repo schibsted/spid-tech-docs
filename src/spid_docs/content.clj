@@ -33,7 +33,7 @@
            (maybe-load-file (str "sample-responses/" endpoint-resource)))))
 
 (defn load-content []
-  {:endpoints (get-endpoints)
+  {:endpoints (map cultivate-endpoint (:data (get-endpoints)))
    :articles (stasis/slurp-directory "resources/articles" #"\.md$")
    :concepts (stasis/slurp-directory "resources/concepts" #"\.md$")
    :params (spid/load-edn "parameters.edn")
