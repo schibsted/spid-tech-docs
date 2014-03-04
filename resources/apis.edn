@@ -1,0 +1,21 @@
+{:identity-management {:login "Retrieve login information"
+                       :user "Create, modify and list user-specifc data"
+                       :email "Check email availability"}
+ :payment {:product "Create, modify and list products"
+           :subscription "Create, modify and list subscriptions"
+           :bundle "Create and modify bundle items"
+           :digital-contents "List digital contents"
+           :payment "Retrieve payment agreements and transactions status (deprecated)"
+           :direct-payment "Perform direct payments (server-to-server) on an user's SPiD account"
+           :order "Retrieve orders and corresponding items and transactions"
+           :campaign "Create, update and list campaigns"
+           :voucher "Create, update, list and handout vouchers"
+           :paylink "Create, update, and list PayLinks"}
+ :data-storage {:soda "Attach or retrieve specific data to any object (Example: add application specific data as height/weight to a user)"
+                :data-objects "Attach or retrieve specific data to user (Example: add application specific data as height/weight to a user)"}
+ :reports-analytics {:report-database "Retrieve client-specific data for local processing"
+                     :key-performance-indicator "Retrieve client-specific KPI data"}
+ :additional {:inject-token "Import tokens and list token names for clients"
+              :authorization "Authorization extensions for clients"
+              :utility "Utilities to list features, versions and object description"
+              :traits "Adds, deletes or updates the currently saved traits for a specified user"}}

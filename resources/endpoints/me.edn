@@ -1,4 +1,5 @@
-{:auth-required true
+{:categorization [[:identity-management :user]]
+ :auth-required true
  :description "This endpoint returns the currently logged in user's object. It
 requires an active user session and a matching corresponding oauth token.
 
