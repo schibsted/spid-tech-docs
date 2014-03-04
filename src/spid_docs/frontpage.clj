@@ -7,7 +7,7 @@
   {:title "SPiD API Documentation"
    :body (list [:h1 "SPiD API Documentation"]
                (slurp (io/resource "frontpage.html"))
-               [:div {:className "group api-reference"}
+               [:div {:class "group api-reference" :id "api-reference"}
                 [:h2 "API reference"]
                 [:p "Just looking for some specific information? Here's an extensive list of all the API endpoints."]
                 [:ul (map #(vector :li (list

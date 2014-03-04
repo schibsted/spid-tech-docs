@@ -54,7 +54,9 @@ td, th {
 .unit {float:left;}
 .s1of3 {width: 33.33333%;}
 
-.item {border-right: 1px solid #ccc; margin-right: 20px; padding-right: 10px;}
+.item {border-right: 1px solid #eee; margin-right: 20px; padding-right: 10px;}
 .lastUnit .item {margin-right: 0; border-right: none; padding-right: 0;}
 .item.todo {opacity: 0.5;}
 .item.todo a {color: #555;}
+
+.group h2 {border-bottom: 1px solid #ccc;}
