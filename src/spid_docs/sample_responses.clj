@@ -1,11 +1,9 @@
 (ns spid-docs.sample-responses
-  (:require [clj-http.client :as http]
-            [clojure.data.json :as json]
+  (:require [clojure.data.json :as json]
             [clojure.set :refer [rename-keys]]
-            [clojure.string :as str]
             [spid-docs.api :as api]
-            [spid-docs.content :refer [endpoint-path-to-filename]]
-            [spid-docs.enlive :as enlive]))
+            [spid-docs.content :refer [endpoint-path-to-filename]])
+  (:import java.util.Date))
 
 (defn- update-existing [m & forms]
   (if (-> forms count (mod 2) (= 0) not)
@@ -40,36 +38,26 @@
    {:status (:code response)
     :response (with-out-str (json/pprint (->> response :data process-data) :escape-slash false))}})
 
-(defn generate-sample-response [endpoint]
-  (let [response (api/GET endpoint)
-        filename (str "resources/sample-responses/" (endpoint-path-to-filename endpoint))
+(defn- generate-sample-response-from-response [endpoint response]
+  (let [filename (str "resources/sample-responses/" (endpoint-path-to-filename endpoint))
         sample (process-sample-response response)]
     (spit filename sample)
     sample))
 
-(defn form-params [inputs]
-  (->> inputs
-       (map :attrs)
-       (filter :name)
-       (map #(vector (:name %) (:value %)))
-       (into {})))
+(defmulti generate-sample-response identity)
 
-(defn login-params [config inputs]
-  (merge (form-params inputs)
-         (-> (:demo-user config)
-             (rename-keys {:email "identifier" :password "password"}))))
+(defn- json-parse-data [response]
+  (assoc response :data (:data (json/read-json (:data response)))))
 
-(defn login-url [config]
-  (str (:spid-base-url config) "/auth/login"
-       "?client_id=" (:client-id config)
-       "&response_type=code"
-       "&redirect_uri=http://localhost"))
+(defn- demo-user-sample [endpoint]
+  (-> (api/config)
+      (api/get-login-token)
+      (api/user-get (str "/" endpoint))
+      (rename-keys {:body :data :status :code})
+      (json-parse-data)))
 
-(defn login [config]
-  (->> (login-url config)
-       (http/get)
-       :body
-       (enlive/parse)
-       (enlive/select [:input])
-       (login-params config)
-       (http/post (login-url config))))
+(defmethod generate-sample-response "me" [endpoint]
+  (generate-sample-response-from-response endpoint (demo-user-sample endpoint)))
+
+(defmethod generate-sample-response :default [endpoint]
+  (generate-sample-response-from-response endpoint (api/GET endpoint)))
