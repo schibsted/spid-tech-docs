@@ -1,13 +1,17 @@
 (ns spid-docs.frontpage
-  (:require [spid-docs.layout :as layout]
-            [spid-docs.endpoints :as endpoints]))
+  (:require [clojure.java.io :as io]
+            [spid-docs.endpoints :as endpoints]
+            [spid-docs.layout :as layout]))
 
 (defn create-page [endpoints]
-  {:title "Available endpoints"
-   :body (list
-          [:h1 "SPiD API endpoints documentation"]
-          [:ul (map #(vector :li (list
-                                  [:a {:href (endpoints/endpoint-path %)}
-                                   (list [:code (:url %)] " - " (:name %))]
-                                  [:br]
-                                  (:description %))) (:data endpoints))])})
+  {:title "SPiD API Documentation"
+   :body (list [:h1 "SPiD API Documentation"]
+               (slurp (io/resource "frontpage.html"))
+               [:div {:className "group api-reference"}
+                [:h2 "API reference"]
+                [:p "Just looking for some specific information? Here's an extensive list of all the API endpoints."]
+                [:ul (map #(vector :li (list
+                                        [:a {:href (endpoints/endpoint-path %)}
+                                         (list [:code (:url %)] " - " (:name %))]
+                                        [:br]
+                                        (:description %))) (:data endpoints))]])})
