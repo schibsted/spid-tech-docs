@@ -1,7 +1,11 @@
 (ns spid-docs.sample-responses
-  (:require [clojure.data.json :as json]
+  (:require [clj-http.client :as http]
+            [clojure.data.json :as json]
+            [clojure.set :refer [rename-keys]]
+            [clojure.string :as str]
             [spid-docs.api :as api]
-            [spid-docs.content :refer [endpoint-path-to-filename]]))
+            [spid-docs.content :refer [endpoint-path-to-filename]]
+            [spid-docs.enlive :as enlive]))
 
 (defn- update-existing [m & forms]
   (if (-> forms count (mod 2) (= 0) not)
@@ -42,3 +46,30 @@
         sample (process-sample-response response)]
     (spit filename sample)
     sample))
+
+(defn form-params [inputs]
+  (->> inputs
+       (map :attrs)
+       (filter :name)
+       (map #(vector (:name %) (:value %)))
+       (into {})))
+
+(defn login-params [config inputs]
+  (merge (form-params inputs)
+         (-> (:demo-user config)
+             (rename-keys {:email "identifier" :password "password"}))))
+
+(defn login-url [config]
+  (str (:spid-base-url config) "/auth/login"
+       "?client_id=" (:client-id config)
+       "&response_type=code"
+       "&redirect_uri=http://localhost"))
+
+(defn login [config]
+  (->> (login-url config)
+       (http/get)
+       :body
+       (enlive/parse)
+       (enlive/select [:input])
+       (login-params config)
+       (http/post (login-url config))))
