@@ -1,0 +1,7 @@
+.line,
+.lastUnit {overflow:hidden; *overflow:visible; *zoom:1;}
+.unit {float:left;}
+.s1of3 {width: 33.33333%;}
+
+.item {border-right: 1px solid #eee; margin-right: 20px; padding-right: 10px;}
+.lastUnit .item {margin-right: 0; border-right: none; padding-right: 0;}

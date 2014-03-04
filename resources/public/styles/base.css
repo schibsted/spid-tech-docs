@@ -10,13 +10,14 @@ body {
     background: linear-gradient(to bottom, #1c7bab 0%,#045c89 300px,#045c89 100%);
     font: 16px Helvetica, arial, freesans, clean, sans-serif;
     line-height: 1.5;
-    margin: 0 40px;
+    margin: 0 10px;
+    -webkit-text-size-adjust: 100%;
 }
 
 li {margin: 0 0 0.5em;}
 
-#main {max-width: 1100px; margin: 0 auto 40px;}
-#body {background: #fff; border-radius: 10px; padding: 10px 40px;}
+#main {max-width: 1100px; margin: 0 auto 40px; overflow: hidden;}
+#body {background: #fff; border-radius: 10px; padding: 10px;}
 #logo {margin: 10px 0 5px 10px;}
 #logo img {height: 50px;}
 
@@ -50,13 +51,6 @@ td, th {
 .js .tabs-content {border-top: 1px solid #ccc; margin-top: -1px;}
 
 .bd,
-.line,
-.lastUnit {overflow:hidden; *overflow:visible; *zoom:1;}
-.unit {float:left;}
-.s1of3 {width: 33.33333%;}
-
-.item {border-right: 1px solid #eee; margin-right: 20px; padding-right: 10px;}
-.lastUnit .item {margin-right: 0; border-right: none; padding-right: 0;}
 .item.todo {opacity: 0.5;}
 .item.todo a {color: #555;}
 
