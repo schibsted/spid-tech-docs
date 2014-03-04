@@ -32,7 +32,7 @@
         url (endpoint-url endpoint)
         param-docs (:parameters endpoint {})]
     (mapcat #(list [:h2 (:name %) " " url]
-                   (let [return-type (get-in endpoint [:http-methods (:name %) :returns])]
+                   (if-let [return-type (get-in endpoint [:http-methods (:name %) :returns])]
                      [:p "Returns " [:a {:href (str "#" (name return-type))} return-type]])
                    (render-params "Required params" (:required %) parameters param-docs)
                    (render-params "Optional params" (:optional %) parameters param-docs)) (vals methods))))
@@ -149,8 +149,8 @@
   (let [pertinent-types (get-pertinent-type-defs endpoint types)
         rendered (map #(render-type-def % types) pertinent-types)]
     (-> (map #(render-type-def % types) pertinent-types)
-         (enlive/parse)
-         (enlive/transform [:a] (redirect-type-links pertinent-types)))))
+        (enlive/parse)
+        (enlive/transform [:a] (redirect-type-links pertinent-types)))))
 
 (defn render-page [endpoint types parameters]
   {:title (endpoint-url endpoint)
