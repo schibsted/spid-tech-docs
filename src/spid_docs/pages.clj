@@ -14,4 +14,4 @@
     :articles (articles/create-pages (:articles content))
     :concepts (concepts/create-pages (:concepts content))
     :types (types/create-pages (:types content))
-    :apis (apis/create-pages (:apis content) (:endpoints content))}))
+    :apis (apis/create-pages (:apis content))}))

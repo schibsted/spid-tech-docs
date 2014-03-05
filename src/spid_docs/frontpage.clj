@@ -6,11 +6,11 @@
 
 (def cols 3)
 
-(defn render-service-apis [num [path service]]
+(defn render-service-apis [num service]
   [:div {:class (if (= (inc num) cols) "lastUnit" "unit s1of3")}
    [:div.item
-    [:h3 [:a {:href (apis/api-index-url path)} (apis/get-name path)]]
-    [:p "APIs: " (str/join ", " (map #(apis/get-name (first %)) service))]]])
+    [:h3 [:a {:href (apis/api-index-url service)} (:title service)]]
+    [:p "APIs: " (str/join ", " (map #(apis/get-name (:id %)) (:apis service)))]]])
 
 (defn create-page [apis]
   {:title "SPiD API Documentation"

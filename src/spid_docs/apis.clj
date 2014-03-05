@@ -9,34 +9,22 @@
        (map str/capitalize)
        (str/join " ")))
 
-(defn api-index-url [id]
-  (str "/apis/" (subs (str id) 1)))
+(defn api-index-url [service]
+  (str "/apis/" (subs (str (:id service)) 1)))
 
-(defn- to-page-url [[path _]]
-  (api-index-url path))
-
-(defn belongs-to [service-id api-id]
-  (fn [endpoint]
-    (->> endpoint
-         :categorization
-         (some #(= [service-id api-id] %)))))
-
-(defn- render-api [api-id description endpoints]
-  (list [:h2 (get-name api-id)]
-        [:p description]
+(defn- render-api [api]
+  (list [:h2 (get-name (:id api))]
+        [:p (:description api)]
         [:ul (map #(vector :li
                            [:a {:href (ep/endpoint-path %)}
-                            (str "/" (:path %))]) endpoints)]))
+                            (str "/" (:path %))]) (:endpoints api))]))
 
-(defn- get-endpoints [endpoints service-id api-id]
-  (filter (belongs-to service-id api-id) endpoints))
+(defn- create-index [service]
+  {:title (get-name (:id service))
+   :body (list [:h1 (:title service)]
+               (map render-api (:apis service)))})
 
-(defn- create-index [[path apis] endpoints]
-  {:title (get-name path)
-   :body (list [:h1 (get-name path)]
-               (map #(render-api (first %) (second %) (get-endpoints endpoints path (first %))) apis))})
-
-(defn create-pages [services endpoints]
+(defn create-pages [services]
   (->> services
-       (map (juxt to-page-url #(partial create-index % endpoints)))
+       (map (juxt api-index-url #(partial create-index %)))
        (into {})))

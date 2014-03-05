@@ -17,4 +17,4 @@
      :concepts (stasis/slurp-directory "resources/concepts" #"\.md$")
      :params (spid/load-edn "parameters.edn")
      :types (spid/load-edn "types.edn")
-     :apis (spid/load-edn "apis.edn")}))
+     :apis (ca/cultivate-apis (spid/load-edn "apis.edn") endpoints)}))
