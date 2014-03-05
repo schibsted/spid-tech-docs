@@ -1,1 +1,8 @@
-{:categorization [[:identity-management :user]]}
+{:categorization [[:identity-management :user]]
+ :description "Get Varnish SP_ID value to put in varnish cookie. Mainly used for Hybrid Apps."
+ :http-methods {"GET" {:returns :varnish-id}}
+ :types [{:id :varnish-id
+          :name "Varnish ID"
+          :description ""
+          :type :object
+          :fields [{:field :sp_id :type :string}]}]}
