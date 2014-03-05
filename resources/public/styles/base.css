@@ -19,6 +19,8 @@ li {margin: 0 0 0.5em;}
 
 h2 {border-bottom: 1px solid #ccc;}
 
+img {border: none;}
+
 #main {max-width: 1100px; min-height: 400px; margin: 0 auto 40px; overflow: hidden;}
 #body {background: #fff; border-radius: 10px; padding: 10px;}
 #logo {margin: 10px 0 5px 10px;}
