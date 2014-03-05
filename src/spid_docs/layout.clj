@@ -14,6 +14,6 @@
    [:body
     [:script "document.body.className = 'js';"]
     [:div#main
-     [:div#logo [:img {:src (link/file-path request "/images/spid.png")}]]
+     [:div#logo [:a {:href "/"} [:img {:src (link/file-path request "/images/spid.png")}]]]
      [:div#body body]]
     (optimus.hiccup/link-to-js-bundles request ["app.js"])]))
