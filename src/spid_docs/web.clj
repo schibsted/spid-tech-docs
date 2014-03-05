@@ -33,20 +33,32 @@
 
 (def optimize optimizations/all)
 
-(defn to-confluence-url [[url _]]
+(defn to-confluence-url [type [url _]]
   (if (= url "/")
-    "/index.csf.txt"
+    (str "/index.csf." type)
     (-> url
         (str/replace #"/$" "")
-        (str ".csf.txt"))))
+        (str ".csf." type))))
 
 (defn create-confluence-export [pages [_ get-page] _]
   (-> (get-page) :body hiccup/html (confluence/to-storage-format pages) :body))
 
+(defn create-confluence-export-html [pages [_ get-page] _]
+  (let [page (-> (get-page) :body hiccup/html (confluence/to-storage-format pages))]
+    (hiccup/html
+     [:link {:rel "stylesheet" :type "text/css" :href "/styles/export.css"}]
+     [:input {:type "text" :value (:title page)}]
+     [:textarea (:body page)]
+     [:script {:src "/scripts/export.js"}])))
+
 (defn export-to-confluence [pages]
-  (->> pages
-       (map (juxt to-confluence-url #(partial create-confluence-export pages %)))
-       (into {})))
+  (stasis/merge-page-sources
+   {:txt (->> pages
+              (map (juxt (partial to-confluence-url "txt") #(partial create-confluence-export pages %)))
+              (into {}))
+    :html (->> pages
+               (map (juxt (partial to-confluence-url "html") #(partial create-confluence-export-html pages %)))
+               (into {}))}))
 
 (defn- add-header-anchors [html]
   (sniptest html [:h2] #(assoc-in % [:attrs :id] (-> % :content first))))
