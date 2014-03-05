@@ -1,7 +1,8 @@
 (ns spid-docs.confluence
   (:require [clojure.string :as str]
             [me.raynes.cegdown :as md]
-            [net.cgrand.enlive-html :refer [sniptest html-resource select has]]
+            [net.cgrand.enlive-html :refer [sniptest html-resource select has] :as enlive]
+            [spid-docs.enlive :refer [parse]]
             [ring.util.codec :refer [url-decode]])
   (:import [org.apache.commons.lang StringEscapeUtils]))
 
@@ -88,5 +89,31 @@
                 [:a] replace-local-anchors
                 [:pre] replace-code-snippets
                 [:div.tabs] replace-tabs
-                [:div.line] replace-lines)
+                [:div.line] replace-lines
+                [:div] enlive/unwrap)
       (fix-cdata-escapings)))
+
+(defn- only [xs]
+  (if (next xs)
+    (throw (Exception. "Expected only one h1 in document."))
+    (first xs)))
+
+(defn- extract-title [html]
+  (->> (select (parse html) [:h1]) only :content (apply str)))
+
+(defn- drop-node [node])
+
+(defn- change-tag [type node]
+  (assoc node :tag type))
+
+(defn- upgrade-headers-skip-title [html]
+  (-> (sniptest html
+                [:h1] drop-node
+                [:h2] (partial change-tag :h1)
+                [:h3] (partial change-tag :h2)
+                [:h4] (partial change-tag :h3)
+                [:h5] (partial change-tag :h4))))
+
+(defn upgrade-headers [html]
+  {:title (extract-title html)
+   :body (upgrade-headers-skip-title html)})

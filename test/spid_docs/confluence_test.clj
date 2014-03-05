@@ -53,3 +53,8 @@
                   "<ac:layout-cell>3</ac:layout-cell>"
                 "</ac:layout-section>"
               "</ac:layout>"))
+
+(fact (upgrade-headers
+       "<h1>The title</h1><h2>First section</h2><h3>Second section</h3>")
+      => {:title "The title"
+          :body "<h1>First section</h1><h2>Second section</h2>"})

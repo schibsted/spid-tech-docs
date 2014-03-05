@@ -41,7 +41,7 @@
         (str ".csf.txt"))))
 
 (defn create-confluence-export [[_ get-page] _]
-  (-> (get-page) :body hiccup/html confluence/to-storage-format))
+  (-> (get-page) :body hiccup/html confluence/to-storage-format confluence/upgrade-headers :body))
 
 (defn export-to-confluence [pages]
   (->> pages
