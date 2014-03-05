@@ -34,9 +34,11 @@
 (def optimize optimizations/all)
 
 (defn to-confluence-url [[url _]]
-  (-> url
-      (str/replace #"/$" "")
-      (str ".csf.txt")))
+  (if (= url "/")
+    "/index.csf.txt"
+    (-> url
+        (str/replace #"/$" "")
+        (str ".csf.txt"))))
 
 (defn create-confluence-export [[_ get-page] _]
   (-> (get-page) :body hiccup/html confluence/to-storage-format))

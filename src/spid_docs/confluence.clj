@@ -57,6 +57,22 @@
              {:tag :ac:rich-text-body
               :content (map create-tab (->> node :content (partition 2)))}]})
 
+(defn- create-section [{:keys [content]}]
+  (when content
+    {:tag :ac:layout-cell
+     :content content}))
+
+(defn- replace-lines [node]
+  (let [sections (keep create-section (:content node))]
+    {:tag :ac:layout
+     :content [ {:tag :ac:layout-section
+                 :attrs {:ac:type (case (count sections)
+                                    1 "single"
+                                    2 "two_equal"
+                                    3 "three_equal"
+                                    (throw (Exception. (str "Unsupported number of sections: " (count sections)))))}
+                 :content sections}]}))
+
 (defn- fix-cdata-escapings
   "Enlive doesn't support emitting proper CDATA.
    Fixing escaping with regexen like a pro. Like a pro!"
@@ -71,5 +87,6 @@
   (-> (sniptest s
                 [:a] replace-local-anchors
                 [:pre] replace-code-snippets
-                [:div.tabs] replace-tabs)
+                [:div.tabs] replace-tabs
+                [:div.line] replace-lines)
       (fix-cdata-escapings)))

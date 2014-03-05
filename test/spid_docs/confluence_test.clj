@@ -39,3 +39,17 @@
                   "</ac:structured-macro>"
                 "</ac:rich-text-body>"
               "</ac:structured-macro>"))
+
+(fact (to-storage-format
+       (str "<div class=\"line\">"
+              "<div class=\"unit s1of3\">1</div>"
+              "<div class=\"unit s1of3\">2</div>"
+              "<div class=\"lastUnit\">3</div>"
+            "</div>"))
+      => (str "<ac:layout>"
+                "<ac:layout-section ac:type=\"three_equal\">"
+                  "<ac:layout-cell>1</ac:layout-cell>"
+                  "<ac:layout-cell>2</ac:layout-cell>"
+                  "<ac:layout-cell>3</ac:layout-cell>"
+                "</ac:layout-section>"
+              "</ac:layout>"))
