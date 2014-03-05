@@ -16,6 +16,8 @@ body {
 
 li {margin: 0 0 0.5em;}
 
+h2 {border-bottom: 1px solid #ccc;}
+
 #main {max-width: 1100px; margin: 0 auto 40px; overflow: hidden;}
 #body {background: #fff; border-radius: 10px; padding: 10px;}
 #logo {margin: 10px 0 5px 10px;}
@@ -58,5 +60,3 @@ dd {
 .bd,
 .item.todo {opacity: 0.5;}
 .item.todo a {color: #555;}
-
-.group h2 {border-bottom: 1px solid #ccc;}
