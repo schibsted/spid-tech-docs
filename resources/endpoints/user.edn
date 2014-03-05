@@ -1,1 +1,11 @@
-{:categorization [[:identity-management :user]]}
+{:categorization [[:identity-management :user]]
+ :description "To create a user, make a POST request with valid user data to this endpoint.
+
+ Email is a unique value in SPiD. As long as the email being posted is new to
+ the system, and the posted user is unique, a new user will be created. If no
+ password is provided, one will be generated and emailed to the user.
+ User-provided passwords are never broadcasted."
+ :auth-required true
+ :access-token-type "server"
+ :http-methods {"POST" {:returns :user}}
+ :parameters {}}
