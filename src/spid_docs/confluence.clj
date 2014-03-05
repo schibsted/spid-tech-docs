@@ -97,6 +97,9 @@
                       (StringEscapeUtils/unescapeHtml contents)
                       "]]>"))))
 
+(defn- replace-checkmarks [html]
+  (str/replace html #"✓" "Yes"))
+
 (defn- only [xs]
   (if (next xs)
     (throw (Exception. "Expected only one h1 in document."))
@@ -139,4 +142,5 @@
                           [:h4] (partial change-tag :h3)
                           [:h5] (partial change-tag :h4))
                 (fix-cdata-escapings)
-                (wrap-in-layout))}))
+                (wrap-in-layout)
+                (replace-checkmarks))}))

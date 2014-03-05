@@ -70,3 +70,7 @@
        "<h1>The title</h1><h2>First section</h2><h3>Second section</h3>")
       => {:title "The title"
           :body "<br /><h1>First section</h1><h2>Second section</h2>"})
+
+(fact (:body (to-storage-format
+              "Replaces these: ✓. ✓, ✓, ✓."))
+      => "Replaces these: Yes. Yes, Yes, Yes.")
