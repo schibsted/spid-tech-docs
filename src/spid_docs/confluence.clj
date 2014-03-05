@@ -110,6 +110,19 @@
 (defn- change-tag [type node]
   (assoc node :tag type))
 
+(defn- replace-with-h1 [node]
+  [{:tag :br}
+   (change-tag :h1 node)])
+
+(defn- wrap-in-layout [s]
+  (if (.contains s "<ac:layout>")
+    (str "<ac:layout><ac:layout-section ac:type=\"single\"><ac:layout-cell>"
+         (-> s
+             (str/replace #"<ac:layout>" "</ac:layout-cell></ac:layout-section>")
+             (str/replace #"</ac:layout>" "<ac:layout-section ac:type=\"single\"><ac:layout-cell>"))
+         "</ac:layout-cell></ac:layout-section></ac:layout>")
+    s))
+
 (defn to-storage-format
   ([s] (to-storage-format s {}))
   ([s pages]
@@ -121,8 +134,9 @@
                           [:div.line] replace-lines
                           [:div] enlive/unwrap
                           [:h1] drop-node
-                          [:h2] (partial change-tag :h1)
+                          [:h2] replace-with-h1
                           [:h3] (partial change-tag :h2)
                           [:h4] (partial change-tag :h3)
                           [:h5] (partial change-tag :h4))
-                (fix-cdata-escapings))}))
+                (fix-cdata-escapings)
+                (wrap-in-layout))}))

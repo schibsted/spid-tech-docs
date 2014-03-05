@@ -45,20 +45,28 @@
               "</ac:structured-macro>"))
 
 (fact (:body (to-storage-format
-              (str "<div class=\"line\">"
+              (str "<p>Before</p>"
+                   "<div class=\"line\">"
                      "<div class=\"unit s1of3\">1</div>"
                      "<div class=\"unit s1of3\">2</div>"
                      "<div class=\"lastUnit\">3</div>"
-                   "</div>")))
+                   "</div>"
+                   "<p>After</p>")))
       => (str "<ac:layout>"
+                "<ac:layout-section ac:type=\"single\"><ac:layout-cell>"
+                  "<p>Before</p>"
+                "</ac:layout-cell></ac:layout-section>"
                 "<ac:layout-section ac:type=\"three_equal\">"
                   "<ac:layout-cell>1</ac:layout-cell>"
                   "<ac:layout-cell>2</ac:layout-cell>"
                   "<ac:layout-cell>3</ac:layout-cell>"
                 "</ac:layout-section>"
+                "<ac:layout-section ac:type=\"single\"><ac:layout-cell>"
+                  "<p>After</p>"
+                "</ac:layout-cell></ac:layout-section>"
               "</ac:layout>"))
 
 (fact (to-storage-format
        "<h1>The title</h1><h2>First section</h2><h3>Second section</h3>")
       => {:title "The title"
-          :body "<h1>First section</h1><h2>Second section</h2>"})
+          :body "<br /><h1>First section</h1><h2>Second section</h2>"})
