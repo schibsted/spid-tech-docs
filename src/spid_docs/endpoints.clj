@@ -32,7 +32,7 @@
         param-docs (:parameters endpoint {})]
     (mapcat #(list [:h2 (:name %) " " url]
                    (if-let [return-type (get-in endpoint [:http-methods (:name %) :returns])]
-                     [:p "Returns " [:a {:href (str "#" (name return-type))} return-type]])
+                     [:p "Returns " [:a {:href (str "#" (str/capitalize (name return-type)))} return-type]])
                    (render-params "Required params" (:required %) parameters param-docs)
                    (render-params "Optional params" (:optional %) parameters param-docs)) (vals methods))))
 
