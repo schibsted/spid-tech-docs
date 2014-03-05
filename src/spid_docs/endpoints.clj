@@ -152,7 +152,7 @@
         (enlive/transform [:a] (redirect-type-links pertinent-types)))))
 
 (defn render-page [endpoint types parameters]
-  {:title (endpoint-url endpoint)
+  {:title (:name endpoint)
    :body (list [:h1 (:name endpoint)]
                (to-html (:description endpoint))
                (render-key-properties endpoint)
