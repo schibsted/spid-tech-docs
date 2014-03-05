@@ -1,5 +1,6 @@
 (ns spid-docs.articles
   (:require [clojure.string :as str]
+            [spid-docs.enlive :as enlive]
             [spid-docs.examples :refer [read-example]]
             [spid-docs.formatting :refer [to-rich-html]]))
 
@@ -14,8 +15,9 @@
                       "\n```\n"))))
 
 (defn- create-post [[_ markdown]]
-  {:title ""
-   :body (-> markdown insert-examples to-rich-html)})
+  (let [body (-> markdown insert-examples to-rich-html)]
+    {:title (->> body (enlive/parse) (enlive/select [:h1]) first :content (apply str))
+     :body body}))
 
 (defn create-pages [articles]
   (->> articles

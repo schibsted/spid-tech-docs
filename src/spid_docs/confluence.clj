@@ -6,14 +6,27 @@
             [ring.util.codec :refer [url-decode]])
   (:import [org.apache.commons.lang StringEscapeUtils]))
 
-(defn- replace-local-anchors [node]
-  (if (-> node :attrs :href (.startsWith "#"))
-    {:tag :ac:link
-     :attrs {:ac:anchor (-> node :attrs :href (subs 1) url-decode)}
-     :content [{:tag :ac:plain-text-link-body
-                :content [{:tag :CDATA
-                           :content (:content node)}]}]}
-    node))
+(defn- load-page [href pages]
+  (if-let [get-page (pages href)]
+    (get-page)
+    (throw (Exception. (str "Can't link to unknown page " href)))))
+
+(defn- replace-local-anchors [pages node]
+  (let [href (-> node :attrs :href)]
+    (cond
+     (.startsWith href "#") {:tag :ac:link
+                             :attrs {:ac:anchor (-> node :attrs :href (subs 1) url-decode)}
+                             :content [{:tag :ac:plain-text-link-body
+                                        :content [{:tag :CDATA
+                                                   :content (:content node)}]}]}
+
+     (.startsWith href "/") {:tag :ac:link
+                             :content [{:tag :ri:page
+                                        :attrs {:ri:content-title (:title (load-page href pages))}}
+                                       {:tag :ac:plain-text-link-body
+                                        :content [{:tag :CDATA
+                                                   :content (:content node)}]}]}
+     :else node)))
 
 (defn- code-snippet? [node]
   (and (= (-> node :tag) :pre)
@@ -84,15 +97,6 @@
                       (StringEscapeUtils/unescapeHtml contents)
                       "]]>"))))
 
-(defn to-storage-format [s]
-  (-> (sniptest s
-                [:a] replace-local-anchors
-                [:pre] replace-code-snippets
-                [:div.tabs] replace-tabs
-                [:div.line] replace-lines
-                [:div] enlive/unwrap)
-      (fix-cdata-escapings)))
-
 (defn- only [xs]
   (if (next xs)
     (throw (Exception. "Expected only one h1 in document."))
@@ -106,14 +110,19 @@
 (defn- change-tag [type node]
   (assoc node :tag type))
 
-(defn- upgrade-headers-skip-title [html]
-  (-> (sniptest html
-                [:h1] drop-node
-                [:h2] (partial change-tag :h1)
-                [:h3] (partial change-tag :h2)
-                [:h4] (partial change-tag :h3)
-                [:h5] (partial change-tag :h4))))
-
-(defn upgrade-headers [html]
-  {:title (extract-title html)
-   :body (upgrade-headers-skip-title html)})
+(defn to-storage-format
+  ([s] (to-storage-format s {}))
+  ([s pages]
+     {:title (extract-title s)
+      :body (-> (sniptest s
+                          [:a] #(replace-local-anchors pages %)
+                          [:pre] replace-code-snippets
+                          [:div.tabs] replace-tabs
+                          [:div.line] replace-lines
+                          [:div] enlive/unwrap
+                          [:h1] drop-node
+                          [:h2] (partial change-tag :h1)
+                          [:h3] (partial change-tag :h2)
+                          [:h4] (partial change-tag :h3)
+                          [:h5] (partial change-tag :h4))
+                (fix-cdata-escapings))}))

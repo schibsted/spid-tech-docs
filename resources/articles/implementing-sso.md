@@ -5,7 +5,7 @@ application via SPiD, and you can access the SPiD API on their
 behalf.
 
 **NB!** This guide presupposes that you have gone throught the
-[Getting Started](/getting-started) guide, in particular that you have
+[Getting Started](/getting-started/) guide, in particular that you have
 downloaded and installed the appropriate SDK for your platform.
 
 ## Overview

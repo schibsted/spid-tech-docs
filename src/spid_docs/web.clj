@@ -40,12 +40,12 @@
         (str/replace #"/$" "")
         (str ".csf.txt"))))
 
-(defn create-confluence-export [[_ get-page] _]
-  (-> (get-page) :body hiccup/html confluence/to-storage-format confluence/upgrade-headers :body))
+(defn create-confluence-export [pages [_ get-page] _]
+  (-> (get-page) :body hiccup/html (confluence/to-storage-format pages) :body))
 
 (defn export-to-confluence [pages]
   (->> pages
-       (map (juxt to-confluence-url #(partial create-confluence-export %)))
+       (map (juxt to-confluence-url #(partial create-confluence-export pages %)))
        (into {})))
 
 (defn- add-header-anchors [html]
