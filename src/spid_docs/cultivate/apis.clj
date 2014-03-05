@@ -15,3 +15,32 @@
 
 (defn cultivate-apis [apis endpoints]
   (map #(cultivate-service % endpoints) apis))
+
+(defn endpoint-count [api]
+  (->> (:apis api)
+       (mapcat :endpoints)
+       count))
+
+(defn by-endpoint-count [a b]
+  (> (endpoint-count a) (endpoint-count b)))
+
+(defn- shortest-index [col count-column]
+  (loop [idx -1
+         shortest (inc (apply max (map count-column col)))
+         i 0]
+    (if (< i (count col))
+      (if (< (count-column (nth col i)) shortest)
+        (recur i (count-column (nth col i)) (inc i))
+        (recur idx shortest (inc i)))
+      idx)))
+
+(defn- endpoints-in-column [col]
+  (reduce + (map endpoint-count col)))
+
+(defn columnize [apis cols]
+  (loop [columns (mapv (fn [_] []) (range cols))
+         sorted-apis (sort by-endpoint-count apis)]
+    (if (seq sorted-apis)
+      (recur (update-in columns [(shortest-index columns endpoints-in-column)] #(conj % (first sorted-apis)))
+             (rest sorted-apis))
+      columns)))

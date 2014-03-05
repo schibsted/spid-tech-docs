@@ -2,21 +2,37 @@
   (:require [clojure.java.io :as io]
             [clojure.string :as str]
             [spid-docs.apis :as apis]
+            [spid-docs.cultivate.apis :as a]
+            [spid-docs.endpoints :as ep]
             [spid-docs.layout :as layout]))
 
-(def cols 3)
+(defn render-api [api]
+  (list
+   [:h4 (apis/get-name (:id api))]
+   [:ul
+    (map #(vector :li [:a {:href (ep/endpoint-path %)}
+                       (str "/" (:path %))])
+         (:endpoints api))]))
 
-(defn render-service-apis [num service]
-  [:div {:class (if (= (inc num) cols) "lastUnit" "unit s1of3")}
+(defn render-service [service]
+  (list
+   [:h3 (:title service)]
+   (map render-api (:apis service))))
+
+(defn render-api-column [num services total-columns]
+  [:div {:class (if (= (inc num) total-columns) "lastUnit" "unit s1of3")}
    [:div.item
-    [:h3 [:a {:href (apis/api-index-url service)} (:title service)]]
-    [:p "APIs: " (str/join ", " (map #(apis/get-name (:id %)) (:apis service)))]]])
+    (map render-service services)]])
 
 (defn create-page [apis]
   {:title "SPiD API Documentation"
    :body (list [:h1 "SPiD API Documentation"]
                (slurp (io/resource "frontpage.html"))
-               [:h2 "API reference"]
-               [:p "Looking for API details? Here you will find extensive reference documentation of all API endpoints."]
-               (map #(vector :div.line (map-indexed render-service-apis %))
-                    (partition cols cols [] apis)))})
+               [:div {:class "group api-reference" :id "api-reference"}
+                [:h2 "API reference"]
+                [:p "Looking for API details? Here you will find extensive reference documentation of all API endpoints."]
+                [:div.line
+                 (let [cols 3]
+                   (map-indexed #(render-api-column %1 %2 cols)
+                                (a/columnize apis cols)))]])})
+

@@ -23,3 +23,34 @@
              first
              :apis
              (map #(map :id (:endpoints %))))) => '((:1 :5) (:2 :6)))
+
+(fact "Sorts services by endpoint count"
+      (let [apis [{:id :payment
+                   :title "Payment"
+                   :apis [{:id :product :description "Create, modify and list products" :endpoints [{}]}
+                          {:id :blabla :description "Placeholder" :endpoints [{}]}
+                          {:id :subscription :description "Create, modify and list subscriptions" :endpoints [{}]}]}
+                  {:id :identity-management
+                   :title "Identity Management"
+                   :apis [{:id :login :description "Retrieve login information"
+                           :endpoints [{} {}]}
+                          {:id :user :description "Create, modify and list user-specifc data"
+                           :endpoints [{} {} {}]}]}]]
+        (->> (sort by-endpoint-count apis)
+             (map :id)) => '(:payment :identity-management)))
+
+(fact "Columnizes services"
+      (let [apis [{:id :payment
+                   :title "Payment"
+                   :apis [{:id :product :description "Create, modify and list products" :endpoints [{}]}
+                          {:id :blabla :description "Placeholder" :endpoints [{}]}
+                          {:id :subscription :description "Create, modify and list subscriptions" :endpoints [{}]}]}
+                  {:id :identity-management
+                   :title "Identity Management"
+                   :apis [{:id :login :description "Retrieve login information"
+                           :endpoints [{} {}]}
+                          {:id :user :description "Create, modify and list user-specifc data"
+                           :endpoints [{} {} {}]}]}]
+            columns (columnize apis 2)]
+        (count columns) => 2
+        (:id (get-in columns [0 0])) => :payment))
