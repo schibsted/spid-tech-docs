@@ -7,17 +7,14 @@
             [spid-docs.layout :as layout]))
 
 (defn render-api [api]
-  (list
-   [:h4 (apis/get-name (:id api))]
-   [:ul
-    (map #(vector :li [:a {:href (ep/endpoint-path %)}
-                       (str "/" (:path %))])
-         (:endpoints api))]))
+  (map #(vector :li [:a {:href (ep/endpoint-path %)}
+                     (str "/" (:path %))])
+       (:endpoints api)))
 
 (defn render-service [service]
   (list
    [:h3 (:title service)]
-   (map render-api (:apis service))))
+   [:ul (mapcat render-api (:apis service))]))
 
 (defn render-api-column [num services total-columns]
   [:div {:class (if (= (inc num) total-columns) "lastUnit" "unit s1of3")}
@@ -35,4 +32,3 @@
                  (let [cols 3]
                    (map-indexed #(render-api-column %1 %2 cols)
                                 (a/columnize apis cols)))]])})
-
