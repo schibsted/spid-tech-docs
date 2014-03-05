@@ -36,10 +36,20 @@
   function setupTab(tab) {
     tab.onclick = function () {
       eventHub.emit("language:" + tab.innerHTML);
+      document.cookie = "lang=" + tab.innerHTML;
     };
   }
 
   c.doall(setupTab, document.querySelectorAll(".tab"));
   c.doall(setupTabContent, document.querySelectorAll("div.tabs"));
+
+  function cookieValue(key) {
+    return document.cookie.replace(new RegExp("(?:(?:^|.*;\s*)" + key + "\s*\=\s*([^;]*).*$)|^.*$"), "$1");
+  }
+
+  if (cookieValue("lang")) {
+    eventHub.emit("language:" + cookieValue("lang"));
+  }
+
 
 }());
