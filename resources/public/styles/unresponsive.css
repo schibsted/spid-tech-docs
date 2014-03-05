@@ -1,0 +1,7 @@
+@import "base.css";
+@import "480up.css";
+@import "720up.css";
+@import "840up.css";
+@import "960up.css";
+
+#main {width: 1100px;}

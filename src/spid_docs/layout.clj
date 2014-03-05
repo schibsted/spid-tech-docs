@@ -3,6 +3,12 @@
             [optimus.link :as link]
             [optimus.hiccup]))
 
+(defn- serve-to-media-query-capable-browsers [tag]
+  (list "<!--[if (gt IE 8) | (IEMobile)]><!-->" tag "<!--<![endif]-->"))
+
+(defn- serve-to-media-query-clueless-browsers [tag]
+  (list "<!--[if (lte IE 8) & (!IEMobile)]>" tag "<![endif]-->"))
+
 (defn create-page [request {:keys [title body]}]
   (html5
    [:head
@@ -10,7 +16,10 @@
     [:meta {:name "viewport"
             :content "width=device-width, initial-scale=1.0"}]
     [:title (str title " | SPiD API Documentation")]
-    [:link {:rel "stylesheet" :type "text/css" :href (link/file-path request "/styles/responsive.css")}]]
+    (serve-to-media-query-capable-browsers
+     [:link {:rel "stylesheet" :href (link/file-path request "/styles/responsive.css")}])
+    (serve-to-media-query-clueless-browsers
+     [:link {:rel "stylesheet" :href (link/file-path request "/styles/unresponsive.css")}])]
    [:body
     [:script "document.body.className = 'js';"]
     [:div#main
