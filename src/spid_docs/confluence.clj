@@ -1,5 +1,6 @@
 (ns spid-docs.confluence
   (:require [clojure.string :as str]
+            [hiccup.core :as hiccup]
             [me.raynes.cegdown :as md]
             [net.cgrand.enlive-html :refer [sniptest html-resource select has] :as enlive]
             [spid-docs.enlive :refer [parse]]
@@ -126,6 +127,13 @@
          "</ac:layout-cell></ac:layout-section></ac:layout>")
     s))
 
+(defn to-confluence-url [type [url _]]
+  (if (= url "/")
+    (str "/index.csf." type)
+    (-> url
+        (str/replace #"/$" "")
+        (str ".csf." type))))
+
 (defn to-storage-format
   ([s] (to-storage-format s {}))
   ([s pages]
@@ -144,3 +152,14 @@
                 (fix-cdata-escapings)
                 (wrap-in-layout)
                 (replace-checkmarks))}))
+
+(defn create-confluence-export [pages [_ get-page] _]
+  (-> (get-page) :body hiccup/html (to-storage-format pages) :body))
+
+(defn create-confluence-export-html [pages [_ get-page] _]
+  (let [page (-> (get-page) :body hiccup/html (to-storage-format pages))]
+    (hiccup/html
+     [:link {:rel "stylesheet" :type "text/css" :href "/styles/export.css"}]
+     [:input {:type "text" :value (:title page)}]
+     [:textarea (:body page)]
+     [:script {:src "/scripts/export.js"}])))

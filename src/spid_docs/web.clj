@@ -1,6 +1,8 @@
 (ns spid-docs.web
+  "The web namespace defines the basic wiring of the site and post-processing of
+   pages for cross-cutting concerns such as injecting optimized asset paths. The
+   export function also lives here."
   (:require [clojure.string :as str]
-            [hiccup.core :as hiccup]
             [net.cgrand.enlive-html :refer [sniptest]]
             [optimus.assets :as assets]
             [optimus.export]
@@ -8,14 +10,18 @@
             [optimus.prime :as optimus]
             [optimus.strategies :refer [serve-live-assets]]
             [ring.middleware.content-type :refer [wrap-content-type]]
-            [spid-docs.confluence :as confluence]
+            [spid-docs.confluence :refer [create-confluence-export create-confluence-export-html to-confluence-url]]
             [spid-docs.content :as content]
             [spid-docs.highlight :refer [highlight-code-blocks]]
             [spid-docs.layout :as layout]
             [spid-docs.pages :as pages]
             [stasis.core :as stasis]))
 
-(defn wrap-content-type-utf-8 [handler]
+(defn wrap-content-type-utf-8
+  "This function works around the fact that Ring simply chooses the default JVM
+  encoding for the response encoding. This is not desirable, we always want to
+  send UTF-8."
+  [handler]
   (fn [request]
     (when-let [response (handler request)]
       (if (.contains (get-in response [:headers "Content-Type"]) ";")
@@ -30,25 +36,30 @@
                                           #"/scripts/.*\.js"])
    (assets/load-assets "public" [#".*"])))
 
-(def optimize optimizations/all)
+(def optimize
+  "Compress and concatenate CSS and JS as much as possible"
+  optimizations/all)
 
-(defn to-confluence-url [type [url _]]
-  (if (= url "/")
-    (str "/index.csf." type)
-    (-> url
-        (str/replace #"/$" "")
-        (str ".csf." type))))
+(defn- add-header-anchors
+  "Every h2 gets an id that corresponds to the text inside it. This enables
+   users to link to every h2 in the whole site."
+  [html]
+  (sniptest html [:h2] #(assoc-in % [:attrs :id] (-> % :content first))))
 
-(defn create-confluence-export [pages [_ get-page] _]
-  (-> (get-page) :body hiccup/html (confluence/to-storage-format pages) :body))
+(defn prepare-page
+  "Fetch the page and convert its {:title ... :body ...} map into a web page
+   and process the generated markup."
+  [get-page request]
+  (->> (get-page)
+       (layout/create-page request)
+       (highlight-code-blocks)
+       (add-header-anchors)))
 
-(defn create-confluence-export-html [pages [_ get-page] _]
-  (let [page (-> (get-page) :body hiccup/html (confluence/to-storage-format pages))]
-    (hiccup/html
-     [:link {:rel "stylesheet" :type "text/css" :href "/styles/export.css"}]
-     [:input {:type "text" :value (:title page)}]
-     [:textarea (:body page)]
-     [:script {:src "/scripts/export.js"}])))
+(defn prepare-pages
+  "Wrap all page functions in a call to prepare-page"
+  [pages]
+  (zipmap (keys pages)
+          (map #(partial prepare-page %) (vals pages))))
 
 (defn export-to-confluence [pages]
   (stasis/merge-page-sources
@@ -59,28 +70,18 @@
                (map (juxt (partial to-confluence-url "html") #(partial create-confluence-export-html pages %)))
                (into {}))}))
 
-(defn- add-header-anchors [html]
-  (sniptest html [:h2] #(assoc-in % [:attrs :id] (-> % :content first))))
-
-(defn prepare-page [get-page request]
-  (->> (get-page)
-       (layout/create-page request)
-       (highlight-code-blocks)
-       (add-header-anchors)))
-
-(defn prepare-pages [pages]
-  (zipmap (keys pages)
-          (map #(partial prepare-page %) (vals pages))))
-
 (defn get-pages []
   (let [pages (pages/get-pages (content/load-content))]
     (merge (prepare-pages pages)
            (export-to-confluence pages))))
 
-(def app (-> (stasis/serve-pages get-pages)
-             (optimus/wrap get-assets optimize serve-live-assets)
-             wrap-content-type
-             wrap-content-type-utf-8))
+(def app
+  "app is the function we pass to Ring. It will be called with a request map
+   for every request."
+  (-> (stasis/serve-pages get-pages)
+      (optimus/wrap get-assets optimize serve-live-assets)
+      wrap-content-type
+      wrap-content-type-utf-8))
 
 (def export-dir "./dist")
 
