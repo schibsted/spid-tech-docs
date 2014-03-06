@@ -15,7 +15,7 @@
   (if param-def
     [:tr
      [:th (str/join ", " params)]
-     [:td [:a {:href (str "/concepts/" (name param-def))} (str "See " (name param-def))]]]
+     [:td [:a {:href (str "/concepts/" (name param-def) "/")} (str "See " (name param-def))]]]
     (map #(vector :tr
                   [:th %]
                   [:td (line-to-html (param-docs %))]) params)))
