@@ -1,7 +1,6 @@
 (ns spid-docs.endpoints
   (:require [clojure.string :as str]
             [spid-docs.enlive :as enlive]
-            [spid-docs.concepts :refer [concept-path]]
             [spid-docs.formatting :refer [to-html line-to-html]]
             [spid-docs.layout :as layout]
             [spid-docs.types :refer [type-path]]))
@@ -16,7 +15,7 @@
   (if param-def
     [:tr
      [:th (str/join ", " params)]
-     [:td [:a {:href (concept-path param-def)} (str "See " (name param-def))]]]
+     [:td [:a {:href (str "/concepts/" (name param-def))} (str "See " (name param-def))]]]
     (map #(vector :tr
                   [:th %]
                   [:td (line-to-html (param-docs %))]) params)))

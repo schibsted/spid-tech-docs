@@ -1,1 +1,3 @@
-{:categorization [[:payment-services :product]]}
+{:categorization [[:payment-services :product]]
+ :auth-required true
+ :access-token-type "user (GET-only)/server"}
