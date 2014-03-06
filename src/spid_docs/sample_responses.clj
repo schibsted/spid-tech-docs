@@ -1,7 +1,7 @@
 (ns spid-docs.sample-responses
   (:require [clojure.data.json :as json]
             [clojure.set :refer [rename-keys]]
-            [spid-docs.api :as api]
+            [spid-docs.api-client :as api]
             [spid-docs.cultivate.endpoints :refer [endpoint-path-to-filename]])
   (:import java.util.Date))
 

@@ -1,4 +1,4 @@
-(ns spid-docs.api
+(ns spid-docs.api-client
   "Functions for working with the SPiD API. The SPiD API is used by the
    documentation to get sample responses etc."
   (:require [clj-http.client :as http]

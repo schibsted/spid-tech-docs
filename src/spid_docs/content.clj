@@ -7,7 +7,7 @@
 (defn- get-endpoints-from-disk []
   (spid/load-edn "cached-endpoints.edn"))
 
-;(def get-endpoints spid-docs.api/get-endpoints)
+;(def get-endpoints spid-docs.api-client/get-endpoints)
 (def get-endpoints get-endpoints-from-disk)
 
 (defn load-content []
