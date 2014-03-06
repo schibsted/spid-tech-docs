@@ -14,12 +14,16 @@
                       (read-example (keyword lang) title path)
                       "\n```\n"))))
 
-(defn- create-post [[_ markdown]]
+(defn- create-page [[_ markdown]]
   (let [body (-> markdown insert-examples to-rich-html)]
     {:title (->> body (enlive/parse) (enlive/select [:h1]) first :content (apply str))
      :body body}))
 
-(defn create-pages [articles]
+(defn create-pages
+  "Given a map of markdown files (path => content), generate a map of url =>
+  page function. When called, the page function will return markdown rendered as
+  HTML with interpolated examples."
+  [articles]
   (->> articles
-       (map (juxt to-page-url #(partial create-post %)))
+       (map (juxt to-page-url #(partial create-page %)))
        (into {})))

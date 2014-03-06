@@ -3,7 +3,7 @@
   (:require [clojure.string :as str]
             [spid-docs.endpoints :as ep]))
 
-(defn api-url
+(defn to-api-url
   "Takes a 'service', i.e., the top-level API categorization unit (Identity
    management, payment, etc) and returns its URL."
   [service]
@@ -26,5 +26,5 @@
   generate a map of url => page function."
   [services]
   (->> services
-       (map (juxt api-url #(partial create-page %)))
+       (map (juxt to-api-url #(partial create-page %)))
        (into {})))
