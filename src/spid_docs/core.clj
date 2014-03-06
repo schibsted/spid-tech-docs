@@ -1,7 +1,14 @@
 (ns spid-docs.core
-  (:require [clojure.string :as str]))
+  "Various utilities used across many namespaces"
+  (:require [clojure.java.io :as io]
+            [clojure.string :as str]))
 
-(defn load-edn [file]
+(defn load-edn
+  "Read an edn file from resources. The path should be relative to the resources
+  directory, e.g. (load-end 'config.edn') to read resources/config.edn"
+  [file]
+  (if (nil? (io/resource file))
+    (throw (Exception. (str "Unable to load " file ", no such file resources/" file))))
   (let [content (slurp (clojure.java.io/resource file))
         forms (try
                 (read-string (str "[" (str/trim content) "]"))
