@@ -37,7 +37,7 @@
                           {:id :user :description "Create, modify and list user-specifc data"
                            :endpoints [{} {} {}]}]}]]
         (->> (sort by-endpoint-count apis)
-             (map :id)) => '(:payment :identity-management)))
+             (map :id)) => '(:identity-management :payment)))
 
 (fact "Columnizes services"
       (let [apis [{:id :payment
@@ -53,4 +53,4 @@
                            :endpoints [{} {} {}]}]}]
             columns (columnize apis 2)]
         (count columns) => 2
-        (:id (get-in columns [0 0])) => :payment))
+        (:id (get-in columns [0 0])) => :identity-management))
