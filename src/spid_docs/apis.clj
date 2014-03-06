@@ -1,30 +1,30 @@
 (ns spid-docs.apis
+  "Functions to work with API categorization levels."
   (:require [clojure.string :as str]
             [spid-docs.endpoints :as ep]))
 
-(defn get-name [kw]
-  (->> (-> (str kw)
-           (subs 1)
-           (str/split #"-"))
-       (map str/capitalize)
-       (str/join " ")))
-
-(defn api-index-url [service]
+(defn api-url
+  "Takes a 'service', i.e., the top-level API categorization unit (Identity
+   management, payment, etc) and returns its URL."
+  [service]
   (str "/apis/" (subs (str (:id service)) 1)))
 
 (defn- render-api [api]
-  (list [:h2 (get-name (:id api))]
+  (list [:h2 (:title api)]
         [:p (:description api)]
         [:ul (map #(vector :li
                            [:a {:href (ep/endpoint-path %)}
                             (str "/" (:path %))]) (:endpoints api))]))
 
-(defn- create-index [service]
-  {:title (get-name (:id service))
+(defn- create-page [service]
+  {:title (:title service)
    :body (list [:h1 (:title service)]
                (map render-api (:apis service)))})
 
-(defn create-pages [services]
+(defn create-pages
+  "Given a list of services (typically those found in resources/apis.edn),
+  generate a map of url => page function."
+  [services]
   (->> services
-       (map (juxt api-index-url #(partial create-index %)))
+       (map (juxt api-url #(partial create-page %)))
        (into {})))
