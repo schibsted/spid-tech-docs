@@ -1,15 +1,19 @@
-(ns spid-docs.endpoints
+(ns spid-docs.pages.endpoint-pages
   (:require [clojure.string :as str]
             [spid-docs.enlive :as enlive]
             [spid-docs.formatting :refer [to-html line-to-html]]
             [spid-docs.layout :as layout]
-            [spid-docs.types :refer [type-path]]))
+            [spid-docs.pages.type-pages :refer [type-path]]))
 
-(defn endpoint-url [endpoint]
+(defn- endpoint-api-path
+  "Given an endpoint, return the relative path in the SPiD API."
+  [endpoint]
   (str "/" (:path endpoint)))
 
-(defn endpoint-path [endpoint]
-  (str "/endpoints" (endpoint-url endpoint)))
+(defn endpoint-url
+  "Given an endpoint, return the URL to the page in the documentation app."
+  [endpoint]
+  (str "/endpoints" (endpoint-api-path endpoint)))
 
 (defn- render-params-group [[param-def params] param-docs]
   (if param-def
@@ -27,7 +31,7 @@
 
 (defn- render-http-methods [endpoint parameters]
   (let [methods (:httpMethods endpoint)
-        url (endpoint-url endpoint)
+        url (endpoint-api-path endpoint)
         param-docs (:parameters endpoint {})]
     (mapcat #(list [:h2 (:name %) " " url]
                    (if-let [return-type (get-in endpoint [:http-methods (:name %) :returns])]
@@ -134,7 +138,7 @@
                         (concat (map :returns (-> endpoint :http-methods vals))
                                 (map :id (:types endpoint))))))
 
-(defn redirect-type-links [inline-types]
+(defn- redirect-type-links [inline-types]
   (fn [node]
     (let [matches (re-find #"^/types/(.*)" (get-in node [:attrs :href]))
           type-ids (map :id inline-types)
@@ -150,7 +154,7 @@
         (enlive/parse)
         (enlive/transform [:a] (redirect-type-links pertinent-types)))))
 
-(defn render-page [endpoint types parameters]
+(defn create-page [endpoint types parameters]
   {:title (:name endpoint)
    :body (list [:h1 (:name endpoint)]
                (to-html (:description endpoint))
@@ -161,5 +165,5 @@
 
 (defn create-pages [endpoints types parameters]
   (->> endpoints
-       (map (juxt endpoint-path #(partial render-page % types parameters)))
+       (map (juxt endpoint-url #(partial create-page % types parameters)))
        (into {})))

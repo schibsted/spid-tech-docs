@@ -1,5 +1,5 @@
-(ns spid-docs.types-test
-  (:require [spid-docs.types :refer :all]
+(ns spid-docs.pages.types-pages-test
+  (:require [spid-docs.pages.type-pages :refer :all]
             [midje.sweet :refer :all]))
 
 (fact "It generates type paths only for types with descriptions"

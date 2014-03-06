@@ -1,10 +1,11 @@
-(ns spid-docs.articles
+(ns spid-docs.pages.article-pages
   (:require [clojure.string :as str]
             [spid-docs.enlive :as enlive]
             [spid-docs.examples :refer [read-example]]
             [spid-docs.formatting :refer [to-rich-html]]))
 
-(defn- to-page-url [[path _]]
+
+(defn article-url [path]
   (str/replace path #"\.md$" "/"))
 
 (defn- insert-examples [markdown]
@@ -14,7 +15,7 @@
                       (read-example (keyword lang) title path)
                       "\n```\n"))))
 
-(defn- create-page [[_ markdown]]
+(defn create-page [[_ markdown]]
   (let [body (-> markdown insert-examples to-rich-html)]
     {:title (->> body (enlive/parse) (enlive/select [:h1]) first :content (apply str))
      :body body}))
@@ -25,5 +26,5 @@
   HTML with interpolated examples."
   [articles]
   (->> articles
-       (map (juxt to-page-url #(partial create-page %)))
+       (map (juxt #(article-url (first %)) #(partial create-page %)))
        (into {})))

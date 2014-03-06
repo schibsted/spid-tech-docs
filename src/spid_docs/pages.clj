@@ -1,9 +1,9 @@
 (ns spid-docs.pages
-  (:require [spid-docs.apis :as apis]
-            [spid-docs.articles :as articles]
-            [spid-docs.endpoints :as endpoints]
-            [spid-docs.frontpage :as frontpage]
-            [spid-docs.types :as types]
+  (:require [spid-docs.pages.api-pages :as apis]
+            [spid-docs.pages.article-pages :as articles]
+            [spid-docs.pages.endpoint-pages :as endpoints]
+            [spid-docs.pages.frontpage :as frontpage]
+            [spid-docs.pages.type-pages :as types]
             [stasis.core :as stasis]))
 
 (defn get-pages [content]

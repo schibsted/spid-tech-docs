@@ -1,22 +1,22 @@
-(ns spid-docs.frontpage
+(ns spid-docs.pages.frontpage
   (:require [clojure.java.io :as io]
             [clojure.string :as str]
-            [spid-docs.apis :as apis]
+            [spid-docs.pages.api-pages :as apis]
             [spid-docs.cultivate.apis :as a]
-            [spid-docs.endpoints :as ep]
+            [spid-docs.pages.endpoint-pages :as ep]
             [spid-docs.layout :as layout]))
 
-(defn render-api [api]
-  (map #(vector :li [:a {:href (ep/endpoint-path %)}
+(defn- render-api [api]
+  (map #(vector :li [:a {:href (ep/endpoint-url %)}
                      (str "/" (:path %))])
        (:endpoints api)))
 
-(defn render-service [service]
+(defn- render-service [service]
   (list
    [:h3 (:title service)]
    [:ul (mapcat render-api (:apis service))]))
 
-(defn render-api-column [num services total-columns]
+(defn- render-api-column [num services total-columns]
   [:div {:class (if (= (inc num) total-columns) "lastUnit" "unit s1of3")}
    [:div.item
     (map render-service services)]])
