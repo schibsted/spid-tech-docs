@@ -1,4 +1,6 @@
 (ns spid-docs.api
+  "Functions for working with the SPiD API. The SPiD API is used by the
+   documentation to get sample responses etc."
   (:require [clj-http.client :as http]
             [clojure.data.json :as json]
             [spid-docs.core :as spid]
@@ -15,15 +17,22 @@
 (defn get-endpoints []
   (GET "/endpoints"))
 
-(defn spid-url [config path]
+(defn spid-url
+  "Given config (typically from config.edn) and a relative path, like /logins,
+   return a full path to the SPiD endpoint"
+  [config path]
   (str (:spid-base-url config) path))
 
-(defn user-get [config path]
+(defn user-get
+  "Given config (typically from config.edn) extended with an access
+  token (typically from get-login-token), make a request to the specified
+  relative path on behalf of the logged in user."
+  [config path]
   (http/get (spid-url config (str "/api/2" path "?oauth_token=" (:access-token config)))))
 
 (def access-token (atom nil))
 
-(defn request-login-token [config]
+(defn- request-login-token [config]
   (-> (spid-url config "/oauth/token")
       (http/post {:form-params {:client_id (:client-id config)
                                 :client_secret (:client-secret config)
@@ -34,7 +43,12 @@
       :body
       json/read-json))
 
-(defn get-login-token [config]
+(defn get-login-token
+  "Request an access token on behalf of the demo user, as specified in
+  config.edn. Returns a config map extended with the access token. This function
+  can safely be called frequently with the value it returns, as this will help
+  it cache the access token for the 10 minutes the API allows it to be cached."
+  [config]
   (let [now (.getTime (java.util.Date.))]
     (->> (if (or (nil? @access-token)
                  (> now (:expires @access-token)))
