@@ -1,11 +1,16 @@
 (ns spid-docs.examples
+  "Functions to facilitate extracting code examples from the example repo."
   (:require [clojure.java.io :as io]
             [clojure.string :as str]
             [spid-docs.homeless :refer [chop-off-common-whitespace]]))
 
-(def examples-dir "example-repo/examples/")
+(def examples-dir
+  "Examples directory, relative to resources/"
+  "example-repo/examples/")
 
-(defn- find-example [start-delim end-delim code]
+(defn- find-example
+  "Finds a code example in the provided code with the given delimiters."
+  [start-delim end-delim code]
   (->> (str/split code #"\n")
        (drop-while #(not= start-delim (str/trim %)))
        (drop 1)
@@ -13,17 +18,24 @@
        (chop-off-common-whitespace)
        (str/join "\n")))
 
-(defn- strip-example-dir [path]
+(defn- strip-example-dir
+  "Returns the relative path to a file inside the example directory"
+  [path]
   (->> (str/split path #"/")
        (drop 2)
        (str/join "/")))
 
-(defn- with-missing-example-warning [path title example]
+(defn- with-missing-example-warning
+  "Makes sure a warning is thrown when trying to refer a missing code example."
+  [path title example]
   (if (seq example)
     example
     (throw (Exception. (format "No example '%s' found in %s" title path)))))
 
-(defmulti create-example (fn [lang path title code] lang))
+(defmulti create-example
+  "Render code example. Will throw an exception if trying to render a code
+   example that does not exist"
+  (fn [lang path title code] lang))
 
 (defmethod create-example :php [_ path title code]
   (str "<?php // " (strip-example-dir path) "\n"
