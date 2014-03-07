@@ -9,7 +9,6 @@
             [optimus.prime :as optimus]
             [optimus.strategies :refer [serve-live-assets]]
             [ring.middleware.content-type :refer [wrap-content-type]]
-            [spid-docs.confluence :refer [create-confluence-export create-confluence-export-html to-confluence-url]]
             [spid-docs.content :as content]
             [spid-docs.highlight :refer [highlight-code-blocks]]
             [spid-docs.homeless :refer [wrap-utf-8]]
@@ -46,24 +45,10 @@
   (zipmap (keys pages)
           (map #(partial prepare-page %) (vals pages))))
 
-(defn export-to-confluence [pages]
-  "Create some meta-pages to export a page to confluence.
-
-   The Confluence Storage Format for eg. /getting-started/ is
-   served raw on /getting-started.csf.txt - and with some
-   quality-of-life improvements on /getting-started.csf.html"
-  (stasis/merge-page-sources
-   {:txt (->> pages
-              (map (juxt (partial to-confluence-url "txt") #(partial create-confluence-export pages %)))
-              (into {}))
-    :html (->> pages
-               (map (juxt (partial to-confluence-url "html") #(partial create-confluence-export-html pages %)))
-               (into {}))}))
-
 (defn get-pages []
-  (let [pages (pages/get-pages (content/load-content))]
-    (merge (prepare-pages pages)
-           (export-to-confluence pages))))
+  (-> (content/load-content)
+      pages/get-pages
+      prepare-pages))
 
 (def app
   "This is the function we pass to Ring. It will be called with a
