@@ -1,4 +1,5 @@
 (ns spid-docs.layout
+  "Create full web pages as HTML from page maps."
   (:require [hiccup.page :refer [html5]]
             [optimus.hiccup]
             [optimus.link :as link]))
@@ -9,7 +10,11 @@
 (defn- serve-to-media-query-clueless-browsers [tag]
   (list "<!--[if (lte IE 8) & (!IEMobile)]>" tag "<![endif]-->"))
 
-(defn layout-page [request {:keys [title body]}]
+(defn layout-page
+  "Takes a request and a map with keys title and body (known as 'a page'), and
+   returns a full HTML page. The title from the page map is used in the page's
+   title tag."
+  [request {:keys [title body]}]
   (html5
    [:head
     [:meta {:charset "utf-8"}]
