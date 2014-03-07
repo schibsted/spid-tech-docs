@@ -5,9 +5,8 @@
 (fact
  "All pages respond with 200 OK"
 
- (let [urls (keys (get-pages))]
-   (doseq [url urls]
+ (doseq [url (keys (get-pages))]
+   (let [status (:status (app {:uri url}))]
      ;; This weird comparison is made in order for Midje to show us
-     ;; *which* URL fails. The (facts ... (fact ...)) forms were not
-     ;; helpful with this case.
-     (str url " "(-> (app {:uri url}) :status)) => (str url " " 200))))
+     ;; *which* URL fails.
+     [url status] => [url 200])))
