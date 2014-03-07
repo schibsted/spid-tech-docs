@@ -1,7 +1,7 @@
 (ns spid-docs.highlight
   "Use Pygments to highlight code examples."
-  (:require [net.cgrand.enlive-html :refer [sniptest html-resource select]]
-            [clygments.core :as pygments]))
+  (:require [clygments.core :as pygments]
+            [net.cgrand.enlive-html :refer [sniptest html-resource select]]))
 
 (defn- extract-code [highlighted]
   "Pulls out just the highlighted code, removing needless fluff and

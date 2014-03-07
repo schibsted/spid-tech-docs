@@ -2,7 +2,6 @@
   (:require [clojure.string :as str]
             [spid-docs.enlive :as enlive]
             [spid-docs.formatting :refer [to-html line-to-html]]
-            [spid-docs.layout :as layout]
             [spid-docs.pages.type-pages :refer [type-path]]))
 
 (defn- endpoint-api-path

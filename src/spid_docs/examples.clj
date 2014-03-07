@@ -1,7 +1,7 @@
 (ns spid-docs.examples
   (:require [clojure.java.io :as io]
             [clojure.string :as str]
-            [spid-docs.homeless :refer [min* subs* chop-off-common-whitespace]]))
+            [spid-docs.homeless :refer [chop-off-common-whitespace]]))
 
 (def examples-dir "example-repo/examples/")
 

@@ -1,10 +1,7 @@
 (ns spid-docs.pages.frontpage
   (:require [clojure.java.io :as io]
-            [clojure.string :as str]
-            [spid-docs.pages.api-pages :as apis]
             [spid-docs.cultivate.apis :as a]
-            [spid-docs.pages.endpoint-pages :as ep]
-            [spid-docs.layout :as layout]))
+            [spid-docs.pages.endpoint-pages :as ep]))
 
 (defn- render-api [api]
   (map #(vector :li [:a {:href (ep/endpoint-url %)}

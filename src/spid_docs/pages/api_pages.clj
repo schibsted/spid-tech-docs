@@ -1,7 +1,6 @@
 (ns spid-docs.pages.api-pages
   "Functions to work with API categorization levels."
-  (:require [clojure.string :as str]
-            [spid-docs.pages.endpoint-pages :as ep]))
+  (:require [spid-docs.pages.endpoint-pages :as ep]))
 
 (defn api-url
   "Takes a 'service', i.e., the top-level API categorization unit (Identity

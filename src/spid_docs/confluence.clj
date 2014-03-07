@@ -1,10 +1,9 @@
 (ns spid-docs.confluence
   (:require [clojure.string :as str]
             [hiccup.core :as hiccup]
-            [me.raynes.cegdown :as md]
-            [net.cgrand.enlive-html :refer [sniptest html-resource select has] :as enlive]
-            [spid-docs.enlive :refer [parse]]
-            [ring.util.codec :refer [url-decode]])
+            [net.cgrand.enlive-html :as enlive :refer [sniptest select]]
+            [ring.util.codec :refer [url-decode]]
+            [spid-docs.enlive :refer [parse]])
   (:import [org.apache.commons.lang StringEscapeUtils]))
 
 (defn- load-page [href pages]

@@ -1,7 +1,7 @@
 (ns spid-docs.layout
   (:require [hiccup.page :refer [html5]]
-            [optimus.link :as link]
-            [optimus.hiccup]))
+            [optimus.hiccup]
+            [optimus.link :as link]))
 
 (defn- serve-to-media-query-capable-browsers [tag]
   (list "<!--[if (gt IE 8) | (IEMobile)]><!-->" tag "<!--<![endif]-->"))
