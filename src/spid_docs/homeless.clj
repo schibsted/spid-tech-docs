@@ -13,3 +13,30 @@
         (if (string? (:body response))
           (update-in response [:headers "Content-Type"] #(str % "; charset=utf-8"))
           response)))))
+
+
+(defn min*
+  "Like min, but takes a list - and 0 elements is okay."
+  [vals]
+  (when (seq vals) (apply min vals)))
+
+(defn subs*
+  "Like subs, but safe - ie, doesn't barf on too short."
+  [s len]
+  (if (> (count s) len)
+    (subs s len)
+    s))
+
+(defn fewest-preceding-spaces [lines]
+  "Find the lowest number of spaces that all lines have as a common
+   prefix. Except, don't count empty lines."
+  (->> lines
+       (remove #(empty? %))
+       (map #(count (re-find #"^ +" %)))
+       (min*)))
+
+(defn chop-off-common-whitespace [lines]
+  "Given a block of code, if all lines are indented, this removes the
+   preceeding whitespace that is common to all lines."
+  (let [superflous-spaces (fewest-preceding-spaces lines)]
+    (map #(subs* % superflous-spaces) lines)))

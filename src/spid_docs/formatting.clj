@@ -7,7 +7,8 @@
   [:autolinks :fenced-code-blocks :strikethrough])
 
 (defn- tease-tabs-out-of-html
-  "Warning! Regexp ahead."
+  "Finds information about the :tab headers at a given level in a block of html.
+   Warning! Regexp ahead."
   [html header level]
   (as-> html <>
         (str/split <> (re-pattern (str "<h" level ">:tab ")))
@@ -34,13 +35,18 @@
                           create-tabs)))))
 
 (defn to-html [s]
+  "Transforms markdown into HTML."
   (if s (md/to-html s pegdown-options) ""))
 
 (defn to-rich-html [s]
+  "Transforms markdown into HTML, but also does SPiD-specific transformations."
   (-> (to-html s)
       (transform-tabs)))
 
 (defn line-to-html [s]
+  "Like to-html, but strips away the paragraph. Useful when you want
+   to allow markdown for strong, emphasis or linking - but use the
+   contents inline."
   (let [html (to-html s)]
     (if (re-find #"<p>" html)
       (subs html 3 (- (count html) 4)) "")))
