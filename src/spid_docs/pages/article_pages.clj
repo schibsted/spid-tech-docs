@@ -20,11 +20,10 @@
     {:title (->> body (enlive/parse) (enlive/select [:h1]) first :content (apply str))
      :body body}))
 
-(defn create-pages
+(defn create-pages [articles]
   "Given a map of markdown files (path => content), generate a map of url =>
   page function. When called, the page function will return markdown rendered as
   HTML with interpolated examples."
-  [articles]
   (->> articles
        (map (juxt #(article-url (first %)) #(partial create-page %)))
        (into {})))

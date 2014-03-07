@@ -6,10 +6,9 @@
 (def pegdown-options ;; https://github.com/sirthias/pegdown
   [:autolinks :fenced-code-blocks :strikethrough])
 
-(defn- tease-tabs-out-of-html
+(defn- tease-tabs-out-of-html [html header level]
   "Finds information about the :tab headers at a given level in a block of html.
    Warning! Regexp ahead."
-  [html header level]
   (as-> html <>
         (str/split <> (re-pattern (str "<h" level ">:tab ")))
         (drop 1 <>)

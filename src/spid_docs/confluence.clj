@@ -87,10 +87,9 @@
                                     (throw (Exception. (str "Unsupported number of sections: " (count sections)))))}
                  :content sections}]}))
 
-(defn- fix-cdata-escapings
+(defn- fix-cdata-escapings [html]
   "Enlive doesn't support emitting proper CDATA.
    Fixing escaping with regexen like a pro. Like a pro!"
-  [html]
   (str/replace html #"(?s)<CDATA>(.*?)</CDATA>"
                (fn [[_ contents]]
                  (str "<![CDATA["

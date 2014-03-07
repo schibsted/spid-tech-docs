@@ -1,11 +1,10 @@
 (ns spid-docs.homeless
   "Where functions that have nowhere to live huddle together around a fire.")
 
-(defn wrap-utf-8
+(defn wrap-utf-8 [handler]
   "This function works around the fact that Ring simply chooses the default JVM
   encoding for the response encoding. This is not desirable, we always want to
   send UTF-8."
-  [handler]
   (fn [request]
     (when-let [response (handler request)]
       (if (.contains (get-in response [:headers "Content-Type"]) ";")
@@ -15,14 +14,12 @@
           response)))))
 
 
-(defn min*
+(defn min* [vals]
   "Like min, but takes a list - and 0 elements is okay."
-  [vals]
   (when (seq vals) (apply min vals)))
 
-(defn subs*
+(defn subs* [s len]
   "Like subs, but safe - ie, doesn't barf on too short."
-  [s len]
   (if (> (count s) len)
     (subs s len)
     s))
