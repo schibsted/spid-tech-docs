@@ -1,7 +1,7 @@
 (ns spid-docs.pages.endpoint-pages
   (:require [clojure.string :as str]
             [spid-docs.enlive :as enlive]
-            [spid-docs.formatting :refer [to-html line-to-html]]
+            [spid-docs.pimp.markdown :as markdown]
             [spid-docs.pages.type-pages :refer [type-path]]))
 
 (defn- endpoint-api-path
@@ -21,7 +21,7 @@
      [:td [:a {:href (str "/concepts/" (name param-def) "/")} (str "See " (name param-def))]]]
     (map #(vector :tr
                   [:th %]
-                  [:td (line-to-html (param-docs %))]) params)))
+                  [:td (markdown/inline-parse (param-docs %))]) params)))
 
 (defn- render-params [heading params param-defs param-docs]
   (if-let [grouped-params (sort-by first (group-by param-defs params))]
@@ -94,7 +94,7 @@
 
 (defn- render-type-header [id type-name description]
   (list [:h2 {:id (name id)} type-name]
-        (to-html description)))
+        (markdown/parse description)))
 
 (defmulti render-type-def :type)
 
@@ -105,7 +105,7 @@
          (map #(vector :tr
                        [:th (:field %)]
                        [:td (render-type (:type %) types)]
-                       [:td (line-to-html (:description %))]) fields)]))
+                       [:td (markdown/inline-parse (:description %))]) fields)]))
 
 (defmethod render-type-def :object-with-availability [{:keys [id name description fields]} types]
   (list (render-type-header
@@ -115,7 +115,7 @@
          (map #(vector :tr
                        [:th (:field %)]
                        [:td (render-type (:type %) types)]
-                       [:td (line-to-html (:description %))]
+                       [:td (markdown/inline-parse (:description %))]
                        [:td (if (:always-available %) [:span.check "✓"])]) fields)]))
 
 (defmethod render-type-def :enum [{:keys [id name description values]} _]
@@ -124,7 +124,7 @@
          [:tr [:th "Value"] [:th "Description"]]
          (map #(vector :tr
                        [:th (:value %)]
-                       [:td (line-to-html (:description %))]) values)]))
+                       [:td (markdown/inline-parse (:description %))]) values)]))
 
 (defn- mapify-types [endpoint types]
   (let [mapify (juxt :id identity)]
@@ -156,7 +156,7 @@
 (defn create-page [endpoint types parameters]
   {:title (:name endpoint)
    :body (list [:h1 (:name endpoint)]
-               (to-html (:description endpoint))
+               (markdown/parse (:description endpoint))
                (render-key-properties endpoint)
                (render-http-methods endpoint parameters)
                (render-sample-response endpoint)

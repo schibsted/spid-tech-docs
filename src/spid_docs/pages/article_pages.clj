@@ -1,8 +1,8 @@
 (ns spid-docs.pages.article-pages
   (:require [clojure.string :as str]
             [spid-docs.enlive :as enlive]
-            [spid-docs.examples :refer [read-example]]
-            [spid-docs.formatting :refer [to-rich-html]]))
+            [spid-docs.pimp.examples :refer [read-example]]
+            [spid-docs.pimp.markdown :as markdown]))
 
 
 (defn article-url [path]
@@ -16,7 +16,7 @@
                       "\n```\n"))))
 
 (defn create-page [[_ markdown]]
-  (let [body (-> markdown insert-examples to-rich-html)]
+  (let [body (-> markdown insert-examples markdown/parse)]
     {:title (->> body (enlive/parse) (enlive/select [:h1]) first :content (apply str))
      :body body}))
 

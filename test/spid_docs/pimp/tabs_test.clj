@@ -1,22 +1,16 @@
-(ns spid-docs.formatting-test
-  (:require [spid-docs.formatting :refer :all]
-            [midje.sweet :refer :all]))
-
-(fact "It gracefully formats markdown"
-      (to-html "### Hey") => "<h3>Hey</h3>"
-      (to-html nil) => "")
-
-(fact "It formats 'inline' markdown"
-      (line-to-html "Hey *there*") => "Hey <em>there</em>")
+(ns spid-docs.pimp.tabs-test
+  (:require [midje.sweet :refer :all]
+            [spid-docs.pimp.markdown :as markdown]
+            [spid-docs.pimp.tabs :refer :all]))
 
 (fact "It understands :tabs"
-      (to-rich-html "
+      (transform-tabs (markdown/parse "
 ## :tabs My tabs
 ### :tab One
 Hello
 ### :tab Two
 Hi there
-## :/tabs")
+## :/tabs"))
 
       => (str "<h2>My tabs</h2>"
               "<div class=\"tabs\">"

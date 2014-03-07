@@ -1,5 +1,5 @@
 (ns spid-docs.pages.type-pages
-  (:require [spid-docs.formatting :refer [to-html]]))
+  (:require [spid-docs.pimp.markdown :as markdown]))
 
 (defn type-path
   "Given a type (typically one entry from the vector in resources/types.end),
@@ -10,7 +10,7 @@
 
 (defn create-page [type]
   {:body (list [:h1 (name (:id type))]
-               (to-html (:description type)))})
+               (markdown/parse (:description type)))})
 
 (defn create-pages
   "Takes a list of types (typically those defined in resources/types.edn) and

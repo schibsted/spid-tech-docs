@@ -9,7 +9,7 @@
 (defn- serve-to-media-query-clueless-browsers [tag]
   (list "<!--[if (lte IE 8) & (!IEMobile)]>" tag "<![endif]-->"))
 
-(defn create-page [request {:keys [title body]}]
+(defn layout-page [request {:keys [title body]}]
   (html5
    [:head
     [:meta {:charset "utf-8"}]

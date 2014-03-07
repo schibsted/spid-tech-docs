@@ -1,4 +1,4 @@
-(ns spid-docs.examples
+(ns spid-docs.pimp.examples
   "Functions to facilitate extracting code examples from the example repo."
   (:require [clojure.java.io :as io]
             [clojure.string :as str]

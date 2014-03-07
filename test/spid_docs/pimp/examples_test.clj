@@ -1,5 +1,5 @@
-(ns spid-docs.examples-test
-  (:require [spid-docs.examples :refer :all]
+(ns spid-docs.pimp.examples-test
+  (:require [spid-docs.pimp.examples :refer :all]
             [midje.sweet :refer :all]))
 
 (fact

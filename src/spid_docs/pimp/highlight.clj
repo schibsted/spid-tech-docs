@@ -1,4 +1,4 @@
-(ns spid-docs.highlight
+(ns spid-docs.pimp.highlight
   "Use Pygments to highlight code examples."
   (:require [clygments.core :as pygments]
             [net.cgrand.enlive-html :refer [sniptest html-resource select]]))

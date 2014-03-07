@@ -11,7 +11,7 @@
             [spid-docs.content :as content]
             [spid-docs.homeless :refer [wrap-utf-8]]
             [spid-docs.pages :as pages]
-            [spid-docs.prepare-pages :refer [prepare-pages]]
+            [spid-docs.pimp :refer [prepare-pages]]
             [spid-docs.validate :refer [validate-raw-content]]
             [stasis.core :as stasis]))
 
