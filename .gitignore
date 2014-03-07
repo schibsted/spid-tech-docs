@@ -9,3 +9,4 @@ pom.xml.asc
 /.nrepl-port
 dist
 resources/config.edn
+doc

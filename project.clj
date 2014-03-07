@@ -16,7 +16,8 @@
                  [clj-http "0.9.0"]]
   :ring {:handler spid-docs.web/app}
   :aliases {"build-site" ["run" "-m" "spid-docs.web/export"]}
-  :profiles {:dev {:plugins [[lein-ring "0.8.10"]]
+  :profiles {:dev {:plugins [[lein-ring "0.8.10"]
+                             [codox "0.6.7"]]
                    :source-paths ["dev"]
                    :test-paths ^:replace []}
              :test {:dependencies [[midje "1.6.0"]]
