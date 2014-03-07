@@ -8,7 +8,9 @@
             [stasis.core :as stasis]))
 
 (defn get-pages [content]
-  "Returns a map of pages for Stasis to serve"
+  "Returns a map of all pages. The pages are mostly functions that when called
+   return page maps. These will eventually be post-processed and turned into HTML
+   pages that Stasis will serve/export to disk."
   (stasis/merge-page-sources
    {:general-pages {"/" (partial frontpage/create-page (:apis content))}
     :endpoints (endpoints/create-pages (:endpoints content) (:types content) (:params content))
