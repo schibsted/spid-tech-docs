@@ -13,6 +13,9 @@
           (update-in response [:headers "Content-Type"] #(str % "; charset=utf-8"))
           response)))))
 
+(defn update-vals [m f]
+  "Returns a new map with `f` applied to all values in `m`."
+  (into {} (for [[k v] m] [k (f v)])))
 
 (defn min* [vals]
   "Like min, but takes a list - and 0 elements is okay."

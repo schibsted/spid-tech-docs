@@ -11,7 +11,7 @@
             [ring.middleware.content-type :refer [wrap-content-type]]
             [spid-docs.content :as content]
             [spid-docs.highlight :refer [highlight-code-blocks]]
-            [spid-docs.homeless :refer [wrap-utf-8]]
+            [spid-docs.homeless :refer [wrap-utf-8 update-vals]]
             [spid-docs.layout :as layout]
             [spid-docs.pages :as pages]
             [stasis.core :as stasis]))
@@ -42,8 +42,7 @@
 
 (defn prepare-pages [pages]
   "Takes a page map, and wraps all its page functions in a call to prepare-page."
-  (zipmap (keys pages)
-          (map #(partial prepare-page %) (vals pages))))
+  (update-vals pages #(partial prepare-page %)))
 
 (defn get-pages []
   (-> (content/load-content)

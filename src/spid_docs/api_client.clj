@@ -18,7 +18,7 @@
   (GET "/endpoints"))
 
 (defn spid-url [config path]
-"Given config (typically from config.edn) and a relative path, like /logins,
+  "Given config (typically from config.edn) and a relative path, like /logins,
    return a full path to the SPiD endpoint"
   (str (:spid-base-url config) path))
 
