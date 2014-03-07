@@ -2,18 +2,16 @@
   "The web namespace defines the basic wiring of the site and post-processing of
    pages for cross-cutting concerns such as injecting optimized asset paths. The
    export function also lives here."
-  (:require [net.cgrand.enlive-html :refer [sniptest]]
-            [optimus.assets :as assets]
+  (:require [optimus.assets :as assets]
             [optimus.export]
             [optimus.optimizations :as optimizations]
             [optimus.prime :as optimus]
             [optimus.strategies :refer [serve-live-assets]]
             [ring.middleware.content-type :refer [wrap-content-type]]
             [spid-docs.content :as content]
-            [spid-docs.highlight :refer [highlight-code-blocks]]
-            [spid-docs.homeless :refer [wrap-utf-8 update-vals]]
-            [spid-docs.layout :as layout]
+            [spid-docs.homeless :refer [wrap-utf-8]]
             [spid-docs.pages :as pages]
+            [spid-docs.prepare-pages :refer [prepare-pages]]
             [spid-docs.validate :refer [validate-raw-content]]
             [stasis.core :as stasis]))
 
@@ -28,26 +26,6 @@
 (def optimize
   "Compress and concatenate CSS and JS as much as possible"
   optimizations/all)
-
-(defn- add-header-anchors
-  "Every h2 gets an id that corresponds to the text inside it. This enables
-   users to link to every h2 in the whole site."
-  [html]
-  (sniptest html [:h2] #(assoc-in % [:attrs :id] (-> % :content first))))
-
-(defn prepare-page
-  "Fetch the page and convert its {:title ... :body ...} map into a web page
-   and process the generated markup."
-  [get-page request]
-  (->> (get-page)
-       (layout/create-page request)
-       (highlight-code-blocks)
-       (add-header-anchors)))
-
-(defn prepare-pages
-  "Takes a page map, and wraps all its page functions in a call to prepare-page."
-  [pages]
-  (update-vals pages #(partial prepare-page %)))
 
 (defn get-pages []
   (-> (content/load-content)
