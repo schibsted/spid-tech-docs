@@ -1,12 +1,12 @@
 (ns spid-docs.validate
-  (:require [schema.core :refer [optional-key validate either Str Keyword Num pred both]]))
+  (:require [schema.core :refer [optional-key validate either Str Keyword]]))
 
 (def HttpMethod
   {:name Str
    :required [Str]
    :optional [Str]})
 
-(def RawEndpoint
+(def Endpoint
   {:path Str
    :valid_output_formats [Str]
    :method Str
@@ -41,7 +41,7 @@
            :description Str}]})
 
 (defn validate-raw-content [raw-content]
-  (validate {:endpoints [RawEndpoint]
+  (validate {:endpoints [Endpoint]
              :articles {Str Str}
              :concepts {Str Str}
              :params {Str Keyword}
