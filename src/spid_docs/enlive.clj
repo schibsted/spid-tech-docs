@@ -20,5 +20,8 @@
   [tree & forms]
   `(enlive/sniptest* (if (string? ~tree) (parse ~tree) ~tree) (enlive/transformation ~@forms)))
 
-(defn select [selector tree]
+(defn select
+  "Given an enlive data structure and an enlive selector, return the matching
+  nodes"
+  [selector tree]
   (enlive/select tree selector))
