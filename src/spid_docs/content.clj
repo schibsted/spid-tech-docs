@@ -4,17 +4,16 @@
             [spid-docs.cultivate.endpoints :as ce]
             [stasis.core :as stasis]))
 
-(defn- get-endpoints-from-disk []
-  (spid/load-edn "cached-endpoints.edn"))
-
-;(def get-endpoints spid-docs.api-client/get-endpoints)
-(def get-endpoints get-endpoints-from-disk)
-
 (defn load-content []
-  (let [endpoints (map ce/cultivate-endpoint (:data (get-endpoints)))]
-    {:endpoints endpoints
-     :articles (stasis/slurp-directory "resources/articles" #"\.md$")
-     :concepts (stasis/slurp-directory "resources/concepts" #"\.md$")
-     :params (spid/load-edn "parameters.edn")
-     :types (spid/load-edn "types.edn")
-     :apis (ca/cultivate-apis (spid/load-edn "apis.edn") endpoints)}))
+  {:endpoints (:data (spid/load-edn "cached-endpoints.edn"))
+   :articles (stasis/slurp-directory "resources/articles" #"\.md$")
+   :concepts (stasis/slurp-directory "resources/concepts" #"\.md$")
+   :params (spid/load-edn "parameters.edn")
+   :types (spid/load-edn "types.edn")
+   :apis (spid/load-edn "apis.edn")})
+
+(defn cultivate-content [raw-content]
+  (let [endpoints (map ce/cultivate-endpoint (:endpoints raw-content))]
+    (assoc raw-content
+      :endpoints endpoints
+      :apis (ca/cultivate-apis (:apis raw-content) endpoints))))

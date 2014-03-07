@@ -50,6 +50,7 @@
 
 (defn get-pages []
   (-> (content/load-content)
+      content/cultivate-content
       pages/get-pages
       prepare-pages))
 
