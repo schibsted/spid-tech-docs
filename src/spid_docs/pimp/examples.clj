@@ -2,7 +2,7 @@
   "Functions to facilitate extracting code examples from the example repo."
   (:require [clojure.java.io :as io]
             [clojure.string :as str]
-            [spid-docs.homeless :refer [chop-off-common-whitespace]]))
+            [spid-docs.homeless :refer [unindent]]))
 
 (def examples-dir
   "Examples directory, relative to resources/"
@@ -15,7 +15,7 @@
        (drop-while #(not= start-delim (str/trim %)))
        (drop 1)
        (take-while #(not= end-delim (str/trim %)))
-       (chop-off-common-whitespace)
+       (unindent)
        (str/join "\n")))
 
 (defn- strip-example-dir
