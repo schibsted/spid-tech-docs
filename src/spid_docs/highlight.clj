@@ -3,9 +3,10 @@
   (:require [clygments.core :as pygments]
             [net.cgrand.enlive-html :refer [sniptest html-resource select]]))
 
-(defn- extract-code [highlighted]
+(defn- extract-code
   "Pulls out just the highlighted code, removing needless fluff and
    stuff from the Pygments treatment."
+  [highlighted]
   (-> highlighted
       java.io.StringReader.
       html-resource
@@ -13,9 +14,10 @@
       first
       :content))
 
-(defn highlight [node]
+(defn highlight
   "Extracts code from the node contents, and highlights it according
    to the given language (extracted from the node's class name)."
+  [node]
   (let [code (->> node :content (apply str))
         lang (->> node :attrs :class keyword)]
     {:tag :code
@@ -23,8 +25,9 @@
                   (pygments/highlight lang :html)
                   (extract-code))}))
 
-(defn highlight-code-blocks [markup]
+(defn highlight-code-blocks
   "Finds all <pre> with <code> in them and highlights with Pygments."
+  [markup]
   (sniptest markup
             [:pre :code] highlight
             [:pre] #(assoc-in % [:attrs :class] "codehilite"))) ;; fixme: this matches too many <pre>'s

@@ -4,12 +4,14 @@
             [spid-docs.formatting :refer [to-html line-to-html]]
             [spid-docs.pages.type-pages :refer [type-path]]))
 
-(defn- endpoint-api-path [endpoint]
+(defn- endpoint-api-path
   "Given an endpoint, return the relative path in the SPiD API."
+  [endpoint]
   (str "/" (:path endpoint)))
 
-(defn endpoint-url [endpoint]
+(defn endpoint-url
   "Given an endpoint, return the URL to the page in the documentation app."
+  [endpoint]
   (str "/endpoints" (endpoint-api-path endpoint)))
 
 (defn- render-params-group [[param-def params] param-docs]

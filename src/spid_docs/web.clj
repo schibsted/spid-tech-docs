@@ -16,8 +16,9 @@
             [spid-docs.pages :as pages]
             [stasis.core :as stasis]))
 
-(defn get-assets []
+(defn get-assets
   "List all scripts, stylesheets and images that we're serving."
+  []
   (concat
    (assets/load-bundle "public" "app.js" [#"/scripts/lib/.*\.js"
                                           #"/scripts/.*\.js"])
@@ -27,21 +28,24 @@
   "Compress and concatenate CSS and JS as much as possible"
   optimizations/all)
 
-(defn- add-header-anchors [html]
+(defn- add-header-anchors
   "Every h2 gets an id that corresponds to the text inside it. This enables
    users to link to every h2 in the whole site."
+  [html]
   (sniptest html [:h2] #(assoc-in % [:attrs :id] (-> % :content first))))
 
-(defn prepare-page [get-page request]
+(defn prepare-page
   "Fetch the page and convert its {:title ... :body ...} map into a web page
    and process the generated markup."
+  [get-page request]
   (->> (get-page)
        (layout/create-page request)
        (highlight-code-blocks)
        (add-header-anchors)))
 
-(defn prepare-pages [pages]
+(defn prepare-pages
   "Takes a page map, and wraps all its page functions in a call to prepare-page."
+  [pages]
   (update-vals pages #(partial prepare-page %)))
 
 (defn get-pages []
@@ -59,8 +63,9 @@
 
 (def export-dir "./dist")
 
-(defn export []
+(defn export
   "Export the entire site as flat files to the export-dir."
+  []
   (let [assets (optimize (get-assets) {})]
     (stasis/empty-directory! export-dir)
     (optimus.export/save-assets assets export-dir)

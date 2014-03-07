@@ -17,15 +17,17 @@
 (defn get-endpoints []
   (GET "/endpoints"))
 
-(defn spid-url [config path]
+(defn spid-url
   "Given config (typically from config.edn) and a relative path, like /logins,
    return a full path to the SPiD endpoint"
+  [config path]
   (str (:spid-base-url config) path))
 
-(defn user-get [config path]
+(defn user-get
   "Given config (typically from config.edn) extended with an access
   token (typically from get-login-token), make a request to the specified
   relative path on behalf of the logged in user."
+  [config path]
   (http/get (spid-url config (str "/api/2" path "?oauth_token=" (:access-token config)))))
 
 (def access-token (atom nil))
@@ -41,11 +43,12 @@
       :body
       json/read-json))
 
-(defn get-login-token [config]
+(defn get-login-token
   "Request an access token on behalf of the demo user, as specified in
   config.edn. Returns a config map extended with the access token. This function
   can safely be called frequently with the value it returns, as this will help
   it cache the access token for the 10 minutes the API allows it to be cached."
+  [config]
   (let [now (.getTime (java.util.Date.))]
     (->> (if (or (nil? @access-token)
                  (> now (:expires @access-token)))
