@@ -66,7 +66,7 @@
   (assoc response :data (:data (json/read-json (:data response)))))
 
 (defn- demo-user-sample [endpoint]
-  (-> (api/config)
+  (-> (api/get-config)
       (api/get-login-token)
       (api/user-get (str "/" endpoint))
       (rename-keys {:body :data :status :code})

@@ -6,9 +6,9 @@
             [spid-docs.core :as spid]
             [spid-sdk-clojure.core :as sdk]))
 
-(def config (memoize #(spid/load-edn "config.edn")))
+(def get-config (memoize #(spid/load-edn "config.edn")))
 
-(def get-client (memoize #(let [conf (config)]
+(def get-client (memoize #(let [conf (get-config)]
                             (sdk/create-client (:client-id conf) (:client-secret conf)))))
 
 (defn GET [path]
