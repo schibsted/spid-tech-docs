@@ -46,3 +46,28 @@
   [lines]
   (let [superflous-spaces (find-common-indent-column lines)]
     (map #(subs* % superflous-spaces) lines)))
+
+(defn update-existing
+  "Given a map m and pairs of 'selector' and function, update the map only if
+   the selector describes existing entries. Selectors are vectors like the ones
+   accepted by Clojure's update-in and get-in, e.g. [:some :key] to update 42
+   in {:some {:key 42}}. The function will be called with the existing value,
+   and its return value will replace it in the new map that is returned.
+
+   An example is due:
+
+   (update-existing {:name {:first \"Christian\" :last \"Johansen\"}}
+                    [:name :first] (fn [firstname] (capitalize firstname))
+                    [:name :middle] (fn [middlename] (.toLowerCase middle)))
+   ;;=> {:name {:first \"CHRISTIAN\" :last \"Johansen\"}}
+
+   As you can see, there's no middle name because none existed."
+  [m & forms]
+  (if (-> forms count (mod 2) (= 0) not)
+    (throw (Exception. "update-if needs an even number of forms")))
+  (->> forms
+       (partition 2)
+       (reduce (fn [memo [path val]]
+                 (if-let [curr (get-in memo path)]
+                   (assoc-in memo path (if (fn? val) (val curr) val))
+                   memo)) m)))

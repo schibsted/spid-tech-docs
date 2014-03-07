@@ -1,19 +1,12 @@
 (ns spid-docs.sample-responses
+  "Tools to generate sample responses for all documentet endpoints. Atually uses
+   the API to ensure that sample responses reflect the API."
   (:require [clojure.data.json :as json]
             [clojure.set :refer [rename-keys]]
             [spid-docs.api-client :as api]
-            [spid-docs.cultivate.endpoints :refer [endpoint-path-to-filename]])
+            [spid-docs.cultivate.endpoints :refer [endpoint-path-to-filename]]
+            [spid-docs.homeless :refer [update-existing]])
   (:import java.util.Date))
-
-(defn- update-existing [m & forms]
-  (if (-> forms count (mod 2) (= 0) not)
-    (throw (Exception. "update-if needs an even number of forms")))
-  (->> forms
-       (partition 2)
-       (reduce (fn [memo [path val]]
-                 (if-let [curr (get-in memo path)]
-                   (assoc-in memo path (if (fn? val) (val curr) val))
-                   memo)) m)))
 
 (def scramble-numbers #(map rand-int (range (count %))))
 
