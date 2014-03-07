@@ -14,6 +14,7 @@
             [spid-docs.homeless :refer [wrap-utf-8 update-vals]]
             [spid-docs.layout :as layout]
             [spid-docs.pages :as pages]
+            [spid-docs.validate :refer [validate-raw-content]]
             [stasis.core :as stasis]))
 
 (defn get-assets
@@ -50,6 +51,7 @@
 
 (defn get-pages []
   (-> (content/load-content)
+      validate-raw-content
       content/cultivate-content
       pages/get-pages
       prepare-pages))

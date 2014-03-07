@@ -12,6 +12,7 @@
                  [spid-sdk-clojure "0.1.0"]
                  [commons-lang "2.5"]
                  [ring/ring-codec "1.0.0"]
+                 [prismatic/schema "0.2.0"]
                  [fs "1.3.3"]
                  [clj-http "0.9.0"]]
   :ring {:handler spid-docs.web/app}

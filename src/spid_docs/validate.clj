@@ -1,0 +1,50 @@
+(ns spid-docs.validate
+  (:require [schema.core :refer [optional-key validate either Str Keyword Num pred both]]))
+
+(def HttpMethod
+  {:name Str
+   :required [Str]
+   :optional [Str]})
+
+(def RawEndpoint
+  {:path Str
+   :valid_output_formats [Str]
+   :method Str
+   :name Str
+   (optional-key :alias) {:id Str}
+   :httpMethods {(optional-key :GET) HttpMethod
+                 (optional-key :POST) HttpMethod
+                 (optional-key :DELETE) HttpMethod}
+   :url Str
+   :pathParameters [Str]
+   :controller Str
+   :default_output_format Str
+   :description Str})
+
+(def Type
+  {:id Keyword
+   (optional-key :description) Str
+   (optional-key :name) Str
+   (optional-key :type) Keyword
+   (optional-key :fields) [{:field Keyword
+                            :type (either Keyword [Keyword])
+                            (optional-key :description) Str
+                            (optional-key :always-available) Boolean}]
+   (optional-key :values) [{:value Str
+                            :description Str}]})
+
+(def APICategory
+  {:id Keyword
+   :title Str
+   :apis [{:id Keyword
+           :title Str
+           :description Str}]})
+
+(defn validate-raw-content [raw-content]
+  (validate {:endpoints [RawEndpoint]
+             :articles {Str Str}
+             :concepts {Str Str}
+             :params {Str Keyword}
+             :types [Type]
+             :apis [APICategory]}
+            raw-content))
