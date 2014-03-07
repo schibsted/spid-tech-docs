@@ -1,30 +1,28 @@
 # SPiD API Documentation
 
 The SPiD API Documentation is a Clojure app that pulls information from the API
-itself and entangles it with examples and meta-data stored in this repository.
+itself and merges it with examples and meta-data stored in this repository.
 The site can be browsed/developed live through an embedded Jetty instance, or
-exported.
+exported to static files.
 
 ## Up and running
-
-To test all the available features, you will need to put your API credentials in
-resources/config.edn. Copy resources/config.default.edn and replace the
-placeholders. Basic browsing should work fine, as there is a local cached copy
-of the endpoint descriptions in the repo.
 
 1. **Verify Java version**
   Run `java -version` and verify that it is version 1.7 something. If not,
   [download from Oracle]("http://docs.oracle.com/javase/7/docs/webnotes/install/index.html").
 
 2. **Install Leiningen**
-   Install [Leiningen](https://github.com/technomancy/leiningen#leiningen). If
-   you use homebrew:
+   If you use homebrew:
 
    ```sh
    brew update && brew install leiningen
    ```
 
-3. Install the git submodules
+   Otherwise follow the instructions in the
+   [Leiningen](https://github.com/technomancy/leiningen#leiningen)
+   readme.
+
+3. **Fetch the git submodules**
    The example code as well as syntax highlighting themes are pulled in as
    submodules.
 
@@ -39,6 +37,11 @@ of the endpoint descriptions in the repo.
 
    That should pop up a browser with the SPiD API documentation.
 
+There is a local cached copy of the endpoint descriptions in the repo.
+However, to use all available features, you will need to put your API
+credentials in resources/config.edn. Copy resources/config.default.edn
+and replace the placeholders.
+
 ## Exporting the site
 
 If you want a static export of the site, `cd` into the root of the project, then
@@ -49,8 +52,9 @@ lein build-site
 ```
 
 The resulting site in `./dist` is ready for use and can be `scp`-ed directly to
-a server. Note that currently, it will not work well from local disk because it
-uses absolute URLs, so front-end assets won't load, and links will not work.
+a server. Note that it doesn't work well served from `file://` because it
+uses absolute URLs. Just use `python -m SimpleHTTPServer` in the directory to
+set up a local web server for it.
 
 ## Writing documentation
 
@@ -69,7 +73,7 @@ Documentation is stored in two main formats:
    vectors (arrays in JSON), maps (objects in JSON), sets, keywords (used for
    "special strings", like keys in maps, ids, etc) and more.
 
-All documentation lives in the resources/ directory.
+All documentation lives in the `resources/` directory.
 
 ### resources/public
 
@@ -80,15 +84,16 @@ create new pages, look into creating an article instead of dumping a file here.
 ### resources/articles
 
 .md files in this directory will be available as web pages with a URL
-corresponding to the filename. resources/articles/getting-started.md is turned
-into the page /getting-started/.
+corresponding to the filename. `resources/articles/getting-started.md` is turned
+into the page `/getting-started/`.
 
-These markdown files support a few custom extensions.
+These markdown files support a few custom extensions: tabs and example
+code. Details below.
 
 #### Tabs
 
 To create tabbed content, add a header starting with the string `:tabs`. Then
-add individual tabs in headers starting with the string `:tab`. End the tabbed
+add individual tabs in sub-headers starting with the string `:tab`. End the tabbed
 section with a header of the same level as you started and the text `/:tabs`. An
 example visualizes how this works:
 
@@ -106,8 +111,9 @@ Something about Java in here
 ## /:tabs
 ```
 
-Note that you may use any heading level you like, but the opening `:tabs` and
-closing `/:tabs` must be in the same heading level.
+Note that the sub-headings must be one level below the tabs heading,
+and that the opening `:tabs` and closing `/:tabs` must be in the same
+heading level.
 
 #### Example code
 
@@ -151,7 +157,7 @@ for those who clone it directly.
 
 These are edn files that describe additional meta-data about endpoints. We're
 hoping that many of these files will eventually be made redundant by having the
-/endpoints endpoint include more details about each endpoint.
+`/endpoints` endpoint include more details about each endpoint.
 
 ### resources/sample-responses
 
@@ -193,9 +199,9 @@ use of the Clojure SDK:
 
 #### resources/parameters.edn
 
-This file maps parameters used across multiple endpoints to a cross-cutting API
-"concept", e.g. a page available at /concepts/<concept>, e.g.
-/concepts/pagination
+This file maps parameters used across multiple endpoints to a
+cross-cutting API concept (like pagination or sorting). There are
+available at /concepts/<concept>, e.g. /concepts/pagination
 
 #### resources/types.edn
 
