@@ -139,7 +139,7 @@ String createSession(@RequestParam String code, HttpServletRequest request) thro
     return "redirect:/";
 }
 /**/
-´´´
+```
 
 Start with a comment `/** ... */` and end the example with `/**/`. Then refer to
 this example in the markdown page with the path to this file and the leading
