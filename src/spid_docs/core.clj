@@ -5,7 +5,7 @@
 
 (defn load-edn
   "Read an edn file from resources. The path should be relative to the resources
-  directory, e.g. (load-end 'config.edn') to read resources/config.edn"
+  directory, e.g. (load-edn 'config.edn') to read resources/config.edn"
   [file]
   (if (nil? (io/resource file))
     (throw (Exception. (str "Unable to load " file ", no such file resources/" file))))
