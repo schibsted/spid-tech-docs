@@ -36,7 +36,7 @@
    prefix. Except, don't count empty lines."
   [lines]
   (->> lines
-       (remove #(empty? %))
+       (remove empty?)
        (map #(count (re-find #"^ +" %)))
        (min*)))
 
