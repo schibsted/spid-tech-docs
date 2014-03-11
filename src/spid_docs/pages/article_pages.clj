@@ -18,7 +18,7 @@
 (defn create-page [[_ markdown]]
   (let [body (-> markdown insert-examples markdown/parse)]
     {:title (->> body (enlive/parse) (enlive/select [:h1]) first :content (apply str))
-     :body body}))
+     :body [:div.wrap body]}))
 
 (defn create-pages
   "Given a map of markdown files (path => content), generate a map of url =>

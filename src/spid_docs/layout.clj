@@ -14,7 +14,7 @@
   "Takes a request and a map with keys title and body (known as 'a page'), and
    returns a full HTML page. The title from the page map is used in the page's
    title tag."
-  [request {:keys [title body]}]
+  [request {:keys [title body split-page?]}]
   (html5
    [:head
     [:meta {:charset "utf-8"}]
@@ -29,5 +29,6 @@
     [:script "document.body.className = 'js';"]
     [:div#main
      [:div#logo [:a {:href "/"} [:img {:src (link/file-path request "/images/spid.png")}]]]
-     [:div#body body]]
+     [:div#body (when split-page? {:class "split"})
+      [:div.bd body]]]
     (optimus.hiccup/link-to-js-bundles request ["app.js"])]))

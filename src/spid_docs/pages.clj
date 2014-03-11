@@ -1,6 +1,7 @@
 (ns spid-docs.pages
   "Collects all kinds of pages from various sources"
-  (:require [spid-docs.pages.api-pages :as apis]
+  (:require [clojure.java.io :as io]
+            [spid-docs.pages.api-pages :as apis]
             [spid-docs.pages.article-pages :as articles]
             [spid-docs.pages.endpoint-pages :as endpoints]
             [spid-docs.pages.frontpage :as frontpage]
@@ -12,7 +13,9 @@
    return page maps. These will eventually be post-processed and turned into HTML
    pages that Stasis will serve/export to disk."
   (stasis/merge-page-sources
-   {:general-pages {"/" (partial frontpage/create-page (:apis content))}
+   {:general-pages {"/" (partial frontpage/create-page (:apis content))
+                    "/endpoint-mockup/" (fn [] {:body (slurp (io/resource "endpoint-mockup.html"))
+                                                :split-page? true})}
     :endpoints (endpoints/create-pages (:endpoints content) (:types content) (:params content))
     :articles (articles/create-pages (:articles content))
     :types (types/create-pages (:types content))

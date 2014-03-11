@@ -17,8 +17,9 @@
 
 (defn create-page [service]
   {:title (:title service)
-   :body (list [:h1 (:title service)]
-               (map render-api (:apis service)))})
+   :body [:div.wrap
+          [:h1 (:title service)]
+          (map render-api (:apis service))]})
 
 (defn create-pages
   "Given a list of services (typically those found in resources/apis.edn),

@@ -1,5 +1,9 @@
+@import "reset.css";
 @import "base.css";
 @import "480up.css" screen and (min-width: 480px);
 @import "720up.css" screen and (min-width: 720px);
-@import "840up.css" screen and (min-width: 840px);
 @import "960up.css" screen and (min-width: 960px);
+@import "1200up.css" screen and (min-width: 1200px);
+@import "1400up.css" screen and (min-width: 1400px);
+@import "pygments-css/github.css";
+@import "space.css";

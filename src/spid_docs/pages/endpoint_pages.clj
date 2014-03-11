@@ -155,12 +155,13 @@
 
 (defn create-page [endpoint types parameters]
   {:title (:name endpoint)
-   :body (list [:h1 (:name endpoint)]
-               (markdown/parse (:description endpoint))
-               (render-key-properties endpoint)
-               (render-http-methods endpoint parameters)
-               (render-sample-response endpoint)
-               (render-pertinent-type-defs endpoint (mapify-types endpoint types)))})
+   :body [:div.wrap
+          [:h1 (:name endpoint)]
+          (markdown/parse (:description endpoint))
+          (render-key-properties endpoint)
+          (render-http-methods endpoint parameters)
+          (render-sample-response endpoint)
+          (render-pertinent-type-defs endpoint (mapify-types endpoint types))]})
 
 (defn create-pages [endpoints types parameters]
   (->> endpoints

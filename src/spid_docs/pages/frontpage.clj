@@ -20,12 +20,13 @@
 
 (defn create-page [apis]
   {:title "SPiD API Documentation"
-   :body (list [:h1 "SPiD API Documentation"]
-               (slurp (io/resource "frontpage.html"))
-               [:div {:class "group api-reference" :id "api-reference"}
-                [:h2 "API reference"]
-                [:p "Looking for API details? Here you will find extensive reference documentation of all API endpoints."]
-                [:div.line
-                 (let [cols 3]
-                   (map-indexed #(render-api-column %1 %2 cols)
-                                (a/columnize apis cols)))]])})
+   :body [:div.wrap
+          [:h1 "SPiD API Documentation"]
+          (slurp (io/resource "frontpage.html"))
+          [:div {:class "group" :id "api-reference"}
+           [:h2 "API reference"]
+           [:p "Looking for API details? Here you will find extensive reference documentation of all API endpoints."]
+           [:div.line
+            (let [cols 3]
+              (map-indexed #(render-api-column %1 %2 cols)
+                           (a/columnize apis cols)))]]]})

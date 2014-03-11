@@ -1,65 +1,81 @@
-@import url("pygments-css/borland.css");
-
 body {
-    background: #045c89;
-    background: #045c89 -webkit-gradient(linear, left top, left bottom, color-stop(0%,#1c7bab), color-stop(300px,#045c89));
-    background: #045c89 -webkit-linear-gradient(top,       #1c7bab 0%, #045c89 300px);
-    background: #045c89    -moz-linear-gradient(top,       #1c7bab 0%, #045c89 300px);
-    background: #045c89     -ms-linear-gradient(top,       #1c7bab 0%, #045c89 300px);
-    background: #045c89      -o-linear-gradient(top,       #1c7bab 0%, #045c89 300px);
-    background: #045c89         linear-gradient(to bottom, #1c7bab 0%, #045c89 300px);
+    color: #333; font: 16px Helvetica, arial, freesans, clean, sans-serif; line-height: 1.5; margin: 0 10px; -webkit-text-size-adjust: 100%;
+    background: -webkit-linear-gradient(top,       #1c7bab 0%, #045c89 300px);
+    background:    -moz-linear-gradient(top,       #1c7bab 0%, #045c89 300px);
+    background:     -ms-linear-gradient(top,       #1c7bab 0%, #045c89 300px);
+    background:      -o-linear-gradient(top,       #1c7bab 0%, #045c89 300px);
+    background:         linear-gradient(to bottom, #1c7bab 0%, #045c89 300px);
     background-repeat: repeat-x;
-    font: 16px Helvetica, arial, freesans, clean, sans-serif;
-    line-height: 1.5;
-    margin: 0 10px;
-    -webkit-text-size-adjust: 100%;
+    background-color: #045c89;
 }
 
-li {margin: 0 0 0.5em;}
+h1, h2, h3, h4, h5 {color: #111; font-weight: bold;}
+h1 {font-size: 32px;}
+h2 {font-size: 22px; border-bottom: 1px solid #ccc;}
+h3 {font-size: 20px;}
 
-h2 {border-bottom: 1px solid #ccc;}
+.mod, .tabs, pre, h1, h2, h3, h4, h5, p, ul, ol, hr, table {margin: 15px 0;}
+.wrap {margin: 0 15px;}
 
-img {border: none;}
+th,
+strong {font-weight: bold;}
+em {font-style: italic;}
+ul {margin-left: 30px}
+ol {margin-left: 35px}
+ul li {list-style-type: disc;}
+ol li {list-style-type: decimal;}
+li {margin-bottom: 0.5em;}
+code {font-family: monospace;}
 
-#main {max-width: 1100px; min-height: 400px; margin: 0 auto 40px; overflow: hidden;}
-#body {background: #fff; border-radius: 10px; padding: 10px;}
-#logo {margin: 10px 0 5px 10px;}
-#logo img {height: 50px;}
+pre {overflow: hidden;}
 
-.codehilite {background: #f8f8f8; border: 1px solid #ddd; border-radius: 3px; padding: 10px; font-size: 0.9em;}
-
-table {
-    cellspacing: 0;
-    border-collapse: collapse;
-}
-
-td, th {
-    text-align: left;
-    padding: 3px 6px;
-}
-
-dd {
-    padding: 0;
-    margin: 0 0 6px;
-}
-
-.boxed td,
-.boxed th {
-    border: 1px solid #aaa;
-}
-
-.zebra tr:nth-child(2n+1) th,
-.zebra tr:nth-child(2n+1) td {
-    background: #f0f0f0;
-}
-
-.js .tab-content {display: none;}
-.js .tab {float: left; padding: 5px 10px; margin: 0 0 0 5px; border: 1px solid #ccc; border-radius: 5px 5px 0 0; background: #fff; color: #777; cursor: pointer;}
-.js .tab:hover {color: #000;}
-.js .tabs {overflow: hidden;}
-.js .tab.active {border-bottom: 1px solid #fff; color: #000; cursor: auto;}
-.js .tabs-content {border-top: 1px solid #ccc; margin-top: -1px;}
+img {display: block; border: none; max-width: 100%; -ms-interpolation-mode: bicubic;}
 
 .bd,
+.line,
+.lastUnit {overflow:hidden; *overflow:visible; *zoom:1;}
+
+.nowrap {white-space: nowrap;}
+
+.check {color: #339966;}
+
+#main {max-width: 1400px; min-height: 400px; margin: 0 auto 40px; overflow: hidden;}
+#body {background: #fdfdfd; border-radius: 10px; padding-bottom: 20px;}
+#logo {margin: 10px;}
+#logo img {height: 50px;}
+
+.inline-code,
+.codehilite {background: #f8f8f8; border: 1px solid #ddd; border-radius: 3px; padding: 10px; font-size: 0.9em;}
+
+.inline-code {padding: 3px 8px;}
+
+td,
+th {vertical-align: top; text-align: left;}
+th {padding-right: 10px;}
+
+.boxed td,
+.boxed th {border: 1px solid #ddd;}
+
+.zebra tr:nth-child(2n+1) th,
+.zebra tr:nth-child(2n+1) td {background: #f0f0f0;}
+
+.sectioned th,
+.sectioned td {border-bottom: 1px solid #ddd;}
+.sectioned tr:last-child td,
+.sectioned tr:last-child th {border-bottom: none;}
+
+.js .tab-content {display: none;}
+.js .tab {float: left; padding: 5px 10px; margin: 0 0 0 5px; border: 1px solid #ddd; border-radius: 5px 5px 0 0; background: #fff; color: #777; cursor: pointer; font-weight: normal;}
+.js .tab:hover {color: #000;}
+.js .tabs {overflow: hidden; margin-bottom: 0;}
+.js .tab.active {border-bottom: 1px solid #fff; color: #000; cursor: auto;}
+.js .tabs-content {border-top: 1px solid #ddd; margin-top: -1px;}
+
 .item.todo {opacity: 0.5;}
 .item.todo a {color: #555;}
+
+.small {font-size: 13px;}
+.faded {color: #888;}
+
+.separator {border-top: 1px solid #bbb; border-bottom: 2px solid #eee; margin: 30px 0 20px;}
+.category {float: right; font-weight: normal;}

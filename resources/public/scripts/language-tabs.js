@@ -1,13 +1,9 @@
-/*global cull, bane */
+/*global cull, bane, dom */
 
 (function () {
   var c = cull;
 
   var eventHub = bane.createEventEmitter();
-
-  function insertAfter(newElement, referenceElement) {
-    referenceElement.parentNode.insertBefore(newElement, referenceElement.nextSibling);
-  }
 
   function setupTabContent(tabs) {
     var container = document.createElement("div");
@@ -16,7 +12,7 @@
     function selectTab(tab) {
       if (selectedTab) { selectedTab.className = "tab"; }
       tab.className = "tab active";
-      container.innerHTML = tab.nextSibling.innerHTML;
+      container.innerHTML = dom.nextSibling(tab).innerHTML;
       selectedTab = tab;
     }
 
@@ -29,8 +25,8 @@
     }, tabs.childNodes);
 
     container.className = "tabs-content";
-    selectTab(tabs.childNodes[0]);
-    insertAfter(container, tabs);
+    selectTab(dom.firstChild(tabs));
+    dom.insertAfter(container, tabs);
   }
 
   function setupTab(tab) {
