@@ -1,1 +1,8 @@
-{:categorization [[:payment-services :product]]}
+{:categorization [[:payment-services :product]]
+ :description "Create a new product template" ;; Finnes også i /endpoints
+ :auth-required true
+ :access-token-type "server"
+ :http-methods {"GET" {:returns :product}}
+ :parameters {"param" "desc"}
+ :filters ["merchant"]
+ :types []}
