@@ -9,6 +9,18 @@ body {
     background-color: #045c89;
 }
 
+#head {
+    color: #fff; font-size: 14px; margin: 0 -40px; padding: 9px;
+    background: -webkit-linear-gradient(top,       #1c7bab 0%, #18658f 100%);
+    background:    -moz-linear-gradient(top,       #1c7bab 0%, #18658f 100%);
+    background:     -ms-linear-gradient(top,       #1c7bab 0%, #18658f 100%);
+    background:      -o-linear-gradient(top,       #1c7bab 0%, #18658f 100%);
+    background:         linear-gradient(to bottom, #1c7bab 0%, #18658f 100%);
+}
+
+#head a {color: #fff; text-decoration: none; }
+#head a:hover {text-decoration: underline; }
+
 h1, h2, h3, h4, h5 {color: #111; font-weight: bold;}
 h1 {font-size: 32px;}
 h2 {font-size: 22px; border-bottom: 1px solid #ccc;}
@@ -39,7 +51,9 @@ img {display: block; border: none; max-width: 100%; -ms-interpolation-mode: bicu
 
 .check {color: #339966;}
 
-#main {max-width: 1400px; min-height: 400px; margin: 0 auto 40px; overflow: hidden;}
+.center {max-width: 1400px; margin: 0 auto;}
+
+#main {min-height: 400px; overflow: hidden; margin-bottom: 40px;}
 #body {background: #fdfdfd; border-radius: 10px; padding-bottom: 20px;}
 #logo {margin: 10px;}
 #logo img {height: 50px;}

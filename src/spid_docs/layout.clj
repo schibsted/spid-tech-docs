@@ -27,8 +27,13 @@
      [:link {:rel "stylesheet" :href (link/file-path request "/styles/unresponsive.css")}])]
    [:body
     [:script "document.body.className = 'js';"]
+    [:div#head
+     [:div.center.pll
+      [:a {:href "#"} "SPiD Documentation"] " > "
+      [:a {:href "/"} "API"]]]
     [:div#main
-     [:div#logo [:a {:href "/"} [:img {:src (link/file-path request "/images/spid.png")}]]]
-     [:div#body (when split-page? {:class "split"})
-      [:div.bd body]]]
+     [:div.center
+      [:div#logo [:a {:href "/"} [:img {:src (link/file-path request "/images/spid.png")}]]]
+      [:div#body (when split-page? {:class "split"})
+       [:div.bd body]]]]
     (optimus.hiccup/link-to-js-bundles request ["app.js"])]))
