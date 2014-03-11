@@ -1,2 +1,5 @@
 body {margin: 0 20px;}
 .wrap {margin: 0 20px;}
+
+.inline-code,
+.codehilite {font-size: 13px;}

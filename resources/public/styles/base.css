@@ -45,7 +45,7 @@ img {display: block; border: none; max-width: 100%; -ms-interpolation-mode: bicu
 #logo img {height: 50px;}
 
 .inline-code,
-.codehilite {background: #f8f8f8; border: 1px solid #ddd; border-radius: 3px; padding: 10px; font-size: 0.9em;}
+.codehilite {background: #f8f8f8; border: 1px solid #ddd; border-radius: 3px; padding: 10px; font-size: 11px;}
 
 .inline-code {padding: 3px 8px;}
 
