@@ -1,6 +1,8 @@
 (ns spid-docs.sample-responses
   "Tools to generate sample responses for all documentet endpoints. Atually uses
-   the API to ensure that sample responses reflect the API."
+   the API to ensure that sample responses reflect the API, and then runs the
+   result through a series of functions that anonymizes and scrambles
+   potentially sensitive data."
   (:require [clojure.data.json :as json]
             [clojure.set :refer [rename-keys]]
             [spid-docs.api-client :as api]
@@ -10,7 +12,9 @@
 
 (def scramble-numbers #(map rand-int (range (count %))))
 
-(defn mask-address [num address]
+(defn mask-address
+  "Anonymize addresses "
+  [num address]
   (assoc address
     :streetNumber (str (inc num))
     :postalCode "0123"
