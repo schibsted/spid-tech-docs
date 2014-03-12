@@ -11,5 +11,6 @@
                                  {:id :datetime
                                   :description "ISO-8601"}
                                  {:id :integer}])]
-        ((pages "/types/datetime")) => {:body (list [:h1 "datetime"]
-                                                    "<p>ISO-8601</p>")}))
+        ((pages "/types/datetime")) => {:body [:div.wrap
+                                               [:h1 "datetime"]
+                                               "<p>ISO-8601</p>"]}))
