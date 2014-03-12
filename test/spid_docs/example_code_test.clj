@@ -3,25 +3,39 @@
             [midje.sweet :refer :all]))
 
 (fact
- (let [examples (create-example-code
-                 {:method "POST"
-                  :required ["email"]
-                  :optional ["displayName"
-                             "name"
-                             "birthday"
-                             "preferredUsername"]
-                  :path "user"
-                  :url "/api/2/user"
-                  :pathParameters []
-                  :access_token_types ["server"]})]
+ (let [get-example (create-example-code
+                    {:path "status",
+                     :method "GET",
+                     :required [],
+                     :optional [],
+                     :url "/api/2/status",
+                     :pathParameters []
+                     :access_token_types []})
+       post-example (create-example-code
+                     {:method "POST"
+                      :required ["email"]
+                      :optional ["displayName"
+                                 "name"
+                                 "birthday"
+                                 "preferredUsername"]
+                      :path "user"
+                      :url "/api/2/user"
+                      :pathParameters []
+                      :access_token_types ["server"]})]
 
-   (-> examples :curl :minimal)
+   (-> get-example :curl :minimal)
+   => "curl https://payment.schibsted.no/api/2/status"
+
+   (-> get-example :curl :maximal)
+   => nil
+
+   (-> post-example :curl :minimal)
    => "curl https://payment.schibsted.no/api/2/user \\
    -X POST \\
    -d \"oauth_token=[access token]\" \\
    -d \"email=user@example.com\""
 
-   (-> examples :curl :maximal)
+   (-> post-example :curl :maximal)
    => "curl https://payment.schibsted.no/api/2/user \\
    -X POST \\
    -d \"oauth_token=[access token]\" \\
@@ -31,14 +45,21 @@
    -d \"birthday=1977-01-31\" \\
    -d \"preferredUsername=johnd\""
 
-   (-> examples :clojure :minimal)
+   (-> get-example :clojure :minimal)
+   => "(ns example
+  (:require [spid-sdk-clojure.core :as sdk]))
+
+(-> (sdk/create-client \"[client-id]\" \"[secret]\")
+  (sdk/GET \"/status\"))"
+
+   (-> post-example :clojure :minimal)
    => "(ns example
   (:require [spid-sdk-clojure.core :as sdk]))
 
 (-> (sdk/create-client \"[client-id]\" \"[secret]\")
   (sdk/POST \"/user\" {\"email\" \"user@example.com\"}))"
 
-   (-> examples :clojure :maximal)
+   (-> post-example :clojure :maximal)
    => "(ns example
   (:require [spid-sdk-clojure.core :as sdk]))
 

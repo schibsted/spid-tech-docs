@@ -15,20 +15,22 @@
          (map (fn [param] (str " \\\n   -d \"" param "=" (examples param) "\"")) params)))
 
 (defn- clojure-example-code [endpoint params]
-  (let [sdk-invocation (str "  (sdk/" (:method endpoint) " \"/" (:path endpoint) "\" {")
+  (let [sdk-invocation (str "  (sdk/" (:method endpoint) " \"/" (:path endpoint) "\"" (when (seq params) " {"))
         param-map-indentation (apply str (repeat (count sdk-invocation) " "))]
     (str "(ns example
   (:require [spid-sdk-clojure.core :as sdk]))
 
 (-> (sdk/create-client \"[client-id]\" \"[secret]\")
-" sdk-invocation
-(str/join (str "\n" param-map-indentation) (map #(str "\"" % "\" \"" (examples %) "\"") params))
-"}))")))
+" sdk-invocation (when (seq params)
+                   (str
+                    (str/join (str "\n" param-map-indentation) (map #(str "\"" % "\" \"" (examples %) "\"") params))
+                    "}"))
+"))")))
 
 (defn create-example-code [endpoint]
   (let [req-params (:required endpoint)
         all-params (concat req-params (:optional endpoint))]
     {:curl {:minimal (curl-example-code endpoint req-params)
-            :maximal (curl-example-code endpoint all-params)}
+            :maximal (when (seq all-params) (curl-example-code endpoint all-params))}
      :clojure {:minimal (clojure-example-code endpoint req-params)
-               :maximal (clojure-example-code endpoint all-params)}}))
+               :maximal (when (seq all-params) (clojure-example-code endpoint all-params))}}))
