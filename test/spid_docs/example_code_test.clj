@@ -4,11 +4,11 @@
 
 (fact
  (let [get-example (create-example-code
-                    {:path "status",
-                     :method "GET",
-                     :required [],
-                     :optional [],
-                     :url "/api/2/status",
+                    {:method "GET"
+                     :required []
+                     :optional []
+                     :path "status"
+                     :url "/api/2/status"
                      :pathParameters []
                      :access_token_types []})
        post-example (create-example-code
@@ -21,13 +21,25 @@
                       :path "user"
                       :url "/api/2/user"
                       :pathParameters []
-                      :access_token_types ["server"]})]
+                      :access_token_types ["server"]})
+       param-example (create-example-code
+                      {:method "GET"
+                       :required []
+                       :optional ["property" "locale"]
+                       :path "describe/{object}"
+                       :url "/api/2/describe/{object}"
+                       :pathParameters ["object"]
+                       :access_token_types ["server"]})]
 
    (-> get-example :curl :minimal)
    => "curl https://payment.schibsted.no/api/2/status"
 
    (-> get-example :curl :maximal)
    => nil
+
+   (-> param-example :curl :minimal)
+   => "curl https://payment.schibsted.no/api/2/describe/User \\
+   -d \"oauth_token=[access token]\""
 
    (-> post-example :curl :minimal)
    => "curl https://payment.schibsted.no/api/2/user \\
@@ -51,6 +63,13 @@
 
 (-> (sdk/create-client \"[client-id]\" \"[secret]\")
   (sdk/GET \"/status\"))"
+
+   (-> param-example :clojure :minimal)
+   => "(ns example
+  (:require [spid-sdk-clojure.core :as sdk]))
+
+(-> (sdk/create-client \"[client-id]\" \"[secret]\")
+  (sdk/GET \"/describe/User\"))"
 
    (-> post-example :clojure :minimal)
    => "(ns example
