@@ -69,4 +69,23 @@ verified."
            {:field :latitude :type :string :description "Latitude geo location"}
            {:field :longitude :type :string :description "Longitude geo location"}
            {:field :altitude :type :string :description "Altitude geo location"}
-           {:field :type :type :string :description "Address type, home, shipping, invoice, etc"}]}]
+           {:field :type :type :string :description "Address type, home, shipping, invoice, etc"}]}
+ {:id :login_attempt
+          :name "Login attempt object"
+          :description "This object contains details about a login attempt"
+          :type :object
+          :fields [{:field :id :type :string}
+                   {:field :clientid :type :string}
+                   {:field :merchantId :type :integer}
+                   {:field :email :type :string}
+                   {:field :userid :type :string}
+                   {:field :userAgent :type :string}
+                   {:field :created :type :datetime}
+                   {:field :type :type :login-type}
+                   {:field :ip :type :string :description "Originating IP address"}
+                   {:field :initalReferer :type :string :description "Referer from which the user came from"}
+                   {:field :referer :type :string :description "Referer from which the login attempt came from"}
+                   {:field :trackingRef :type :string :description "Client-provided unique visitor reference. Used for tracking"}
+                   {:field :trackingTag :type :string :description "Client-provided string. Used for custom order tracking"}
+                   {:field :status :type :string :description "`\"true\"` if login was successful, `\"false\"` if not"}
+                   {:field :hash :type :string :description "An md5 hash of email+ip+userAgent. Used to identify login attempt patterns"}]}]
