@@ -96,7 +96,7 @@
   (list [:h2 {:id (name id)} type-name]
         (markdown/parse description)))
 
-(defmulti render-type-def :type)
+(defmulti render-type-def (fn [type types] (:type type)))
 
 (defmethod render-type-def :object [{:keys [id name description fields]} types]
   (list (render-type-header id name description)
