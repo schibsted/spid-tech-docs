@@ -33,13 +33,13 @@
    => "curl https://payment.schibsted.no/api/2/user \\
    -X POST \\
    -d \"oauth_token=[access token]\" \\
-   -d \"email=user@example.com\""
+   -d \"email=johnd@example.com\""
 
    (-> post-example :curl :maximal)
    => "curl https://payment.schibsted.no/api/2/user \\
    -X POST \\
    -d \"oauth_token=[access token]\" \\
-   -d \"email=user@example.com\" \\
+   -d \"email=johnd@example.com\" \\
    -d \"displayName=John\" \\
    -d \"name=John Doe\" \\
    -d \"birthday=1977-01-31\" \\
@@ -57,14 +57,14 @@
   (:require [spid-sdk-clojure.core :as sdk]))
 
 (-> (sdk/create-client \"[client-id]\" \"[secret]\")
-  (sdk/POST \"/user\" {\"email\" \"user@example.com\"}))"
+  (sdk/POST \"/user\" {\"email\" \"johnd@example.com\"}))"
 
    (-> post-example :clojure :maximal)
    => "(ns example
   (:require [spid-sdk-clojure.core :as sdk]))
 
 (-> (sdk/create-client \"[client-id]\" \"[secret]\")
-  (sdk/POST \"/user\" {\"email\" \"user@example.com\"
+  (sdk/POST \"/user\" {\"email\" \"johnd@example.com\"
                      \"displayName\" \"John\"
                      \"name\" \"John Doe\"
                      \"birthday\" \"1977-01-31\"

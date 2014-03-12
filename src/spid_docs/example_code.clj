@@ -2,7 +2,7 @@
   (:require [clojure.string :as str]))
 
 (def examples
-  {"email" "user@example.com"
+  {"email" "johnd@example.com"
    "displayName" "John"
    "name" "John Doe"
    "birthday" "1977-01-31"
