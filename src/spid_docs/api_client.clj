@@ -28,7 +28,8 @@
   token (typically from get-login-token), make a request to the specified
   relative path on behalf of the logged in user."
   [config path]
-  (http/get (spid-url config (str "/api/2" path "?oauth_token=" (:access-token config)))))
+  (http/get (spid-url config (str "/api/2" path "?oauth_token=" (:access-token config)))
+            {:throw-exceptions false}))
 
 (def access-token (atom nil))
 
