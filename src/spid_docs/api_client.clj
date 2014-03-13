@@ -9,7 +9,7 @@
 (def get-config (memoize #(spid/load-edn "config.edn")))
 
 (def get-client (memoize #(let [conf (get-config)]
-                            (sdk/create-client (:client-id conf) (:client-secret conf)))))
+                            (sdk/create-server-client (:client-id conf) (:client-secret conf)))))
 
 (defn GET [path]
   (sdk/GET (get-client) path))

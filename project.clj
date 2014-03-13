@@ -9,7 +9,7 @@
                  [enlive "1.1.5"]
                  [clygments "0.1.1"]
                  [me.raynes/cegdown "0.1.1"]
-                 [spid-sdk-clojure "0.1.0"]
+                 [spid-sdk-clojure "0.2.0"]
                  [commons-lang "2.5"]
                  [ring/ring-codec "1.0.0"]
                  [prismatic/schema "0.2.0"]
