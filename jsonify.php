@@ -1,4 +1,9 @@
 <?php
+// Want to turn this into edn?
+//
+// (require 'clojure.data.json)
+// (spit "pretty-endpoints.edn" (with-out-str (clojure.pprint/pprint (clojure.data.json/read-str (slurp (io/resource "cached-endpoints.json")) :key-fn keyword))))
+
 require("routes.api.2.php");
 
 echo json_encode(array(
