@@ -41,30 +41,6 @@
    :description Str
    :default? Boolean})
 
-(def PrimitiveType
-  {:id Keyword
-   :name Str
-   :rendering :primitive
-   (optional-key :description) Str
-   :inline-type? Boolean}) ; if true, should be rendered inline on endpoint page
-
-(def ObjectType
-  (merge PrimitiveType
-         {:rendering (eq :object)
-          :fields [{:name Str
-                    :type (either Keyword [Keyword])
-                    (optional-key :description) Str
-                    (optional-key :always-available) Boolean}]}))
-
-(def EnumType
-  (merge PrimitiveType
-         {:rendering (eq :enum)
-          :values [{:value Str
-                    :description Str}]}))
-
-(def Type
-  (either ObjectType EnumType PrimitiveType))
-
 (def Response
   {:status Num
    :description Str
