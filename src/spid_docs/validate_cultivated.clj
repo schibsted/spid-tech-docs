@@ -68,7 +68,7 @@
 (def Response
   {:status Num
    :description Str
-   :type Type})
+   :type Keyword})
 
 (def Endpoint
   {:id Str
