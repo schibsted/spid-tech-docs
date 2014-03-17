@@ -28,7 +28,7 @@
 
 (def Parameter
   {:name Str
-   :aliases [Str]
+   (optional-key :aliases) [Str]
    :description Str
    :type (enum :path :query)
    :required? Boolean})
