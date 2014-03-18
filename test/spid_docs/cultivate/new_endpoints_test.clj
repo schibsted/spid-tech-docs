@@ -126,3 +126,13 @@
 (fact (-> (cs/endpoint :httpMethods {:GET (cs/http-method :access_token_types ["server" "user"])})
           cultivate-endpoint first :access-token-types)
       => #{:server :user})
+
+(fact
+ (-> (cs/endpoint :httpMethods {:GET (cs/http-method :access_token_types ["server"])})
+     cultivate-endpoint first :requires-authentication?)
+ => true
+
+  (-> (cs/endpoint :httpMethods {:GET (cs/http-method :access_token_types [])})
+     cultivate-endpoint first :requires-authentication?)
+ => false)
+

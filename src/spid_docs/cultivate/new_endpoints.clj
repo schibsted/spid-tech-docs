@@ -69,7 +69,8 @@
        :?filters (map (partial create-filter default_filters) filters)
        :response-formats (map keyword valid_output_formats)
        :default-response-format (keyword default_output_format)
-       :access-token-types (set (map keyword access_token_types))})))
+       :access-token-types (set (map keyword access_token_types))
+       :requires-authentication? (not (empty? access_token_types))})))
 
 (defn cultivate-endpoint [endpoint]
   (map (partial cultivate-endpoint-1 endpoint) (:httpMethods endpoint)))
