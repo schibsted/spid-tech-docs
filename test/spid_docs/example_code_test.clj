@@ -5,31 +5,28 @@
 (fact
  (let [get-example (create-example-code
                     {:method "GET"
-                     :required []
-                     :optional []
-                     :path "status"
-                     :url "/api/2/status"
-                     :pathParameters []
-                     :access_token_types []})
+                     :parameters []
+                     :path "/status"
+                     :api-path "/api/2/status"
+                     :access-token-types []})
        post-example (create-example-code
                      {:method "POST"
-                      :required ["email"]
-                      :optional ["displayName"
-                                 "name"
-                                 "birthday"
-                                 "preferredUsername"]
-                      :path "user"
-                      :url "/api/2/user"
-                      :pathParameters []
-                      :access_token_types ["server"]})
+                      :parameters [{:name "email" :required? true :type :query}
+                                   {:name "displayName" :required? false :type :query}
+                                   {:name "name" :required? false :type :query}
+                                   {:name "birthday" :required? false :type :query}
+                                   {:name "preferredUsername" :required? false :type :query}]
+                      :path "/user"
+                      :api-path "/api/2/user"
+                      :access-token-types ["server"]})
        param-example (create-example-code
                       {:method "GET"
-                       :required []
-                       :optional ["property" "locale"]
-                       :path "describe/{object}"
-                       :url "/api/2/describe/{object}"
-                       :pathParameters ["object"]
-                       :access_token_types ["server"]})]
+                       :parameters [{:name "property" :required? false :type :query}
+                                    {:name "locale" :required? false :type :query}
+                                    {:name "object" :required? true :type :path}]
+                       :path "/describe/{object}"
+                       :api-path "/api/2/describe/{object}"
+                       :access-token-types ["server"]})]
 
    (-> get-example :curl :minimal)
    => "curl https://payment.schibsted.no/api/2/status"
@@ -87,4 +84,5 @@
                      \"displayName\" \"John\"
                      \"name\" \"John Doe\"
                      \"birthday\" \"1977-01-31\"
-                     \"preferredUsername\" \"johnd\"}))"))
+                     \"preferredUsername\" \"johnd\"}))")
+ )
