@@ -25,18 +25,47 @@
  (-> (cs/endpoint :name "Create subscription") cultivate-endpoint first :name)
  => "Create subscription"
 
- (->> (cs/endpoint :name "Get or create subscription"
+ (->> (cs/endpoint :name "Get or create a product"
                    :httpMethods {:GET (cs/http-method)
                                  :POST (cs/http-method)})
       cultivate-endpoint (map (juxt :method :name)) set)
- => #{[:GET "Get subscription"]
-      [:POST "Create subscription"]}
+ => #{[:GET "Get a product"]
+      [:POST "Create a product"]}
 
- (->> (cs/endpoint :name "Create, get or delete subscription"
+ (->> (cs/endpoint :name "Create, get or delete an order"
                    :httpMethods {:GET (cs/http-method)
                                  :POST (cs/http-method)
                                  :DELETE (cs/http-method)})
       cultivate-endpoint (map (juxt :method :name)) set)
- => #{[:GET "Get subscription"]
-      [:POST "Create subscription"]
-      [:DELETE "Delete subscription"]})
+ => #{[:GET "Get an order"]
+      [:POST "Create an order"]
+      [:DELETE "Delete an order"]})
+
+(fact (-> (cs/endpoint :category ["Insight" "KPI API"]) cultivate-endpoint first :category)
+      => {:section "Insight" :api "KPI API"})
+
+(fact (-> (cs/endpoint :pathParameters ["id"]
+                       :parameter_descriptions {:id "The user ID"}
+                       :alias {:id "user_id"})
+          cultivate-endpoint first :parameters)
+      => [{:name "id"
+           :aliases ["user_id"]
+           :description "The user ID"
+           :type :path
+           :required? true}])
+
+(fact (-> (cs/endpoint :httpMethods {:GET (cs/http-method :required ["email"])}
+                       :parameter_descriptions {:email "The email"})
+          cultivate-endpoint first :parameters)
+      => [{:name "email"
+           :description "The email"
+           :type :query
+           :required? true}])
+
+(fact (-> (cs/endpoint :httpMethods {:POST (cs/http-method :optional ["name"])}
+                       :parameter_descriptions {:name "The name"})
+          cultivate-endpoint first :parameters)
+      => [{:name "name"
+           :description "The name"
+           :type :query
+           :required? false}])
