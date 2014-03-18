@@ -69,3 +69,13 @@
            :description "The name"
            :type :query
            :required? false}])
+
+(fact (-> (cs/endpoint :valid_output_formats ["json" "jsonp"])
+          cultivate-endpoint first :response-formats)
+      => [:json :jsonp])
+
+(fact (-> (cs/endpoint :default_output_format "json")
+          cultivate-endpoint first :default-response-format)
+      => :json)
+
+

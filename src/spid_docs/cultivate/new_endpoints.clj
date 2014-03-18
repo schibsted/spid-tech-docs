@@ -14,7 +14,7 @@
   (str/replace name #"(?i)^(?:(?:get|create|delete),? )+or (?:get|create|delete) " (str (verbs method) " ")))
 
 (defn- add-alias-to-param [param endpoint name]
-  (if-let [alias ((keyword name) (:alias endpoint))]
+  (if-let [alias ((keyword name) (:alias endpoint {}))]
     (assoc param :aliases [alias])
     param))
 
@@ -42,7 +42,9 @@
    :parameters (concat
                 (map (partial create-path-parameter endpoint) (:pathParameters endpoint))
                 (map (partial create-query-parameter endpoint true) (:required details))
-                (map (partial create-query-parameter endpoint false) (:optional details)))})
+                (map (partial create-query-parameter endpoint false) (:optional details)))
+   :response-formats (map keyword (:valid_output_formats endpoint))
+   :default-response-format (keyword (:default_output_format endpoint))})
 
 (defn cultivate-endpoint [endpoint]
   (map (partial cultivate-endpoint-1 endpoint) (:httpMethods endpoint)))
