@@ -1,6 +1,6 @@
 (ns spid-docs.example-code-test
-  (:require [spid-docs.example-code :refer :all]
-            [midje.sweet :refer :all]))
+  (:require [midje.sweet :refer :all]
+            [spid-docs.example-code :refer :all]))
 
 (fact
  (let [get-example (create-example-code
@@ -85,4 +85,14 @@
                      \"name\" \"John Doe\"
                      \"birthday\" \"1977-01-31\"
                      \"preferredUsername\" \"johnd\"}))")
- )
+
+ (fact "Does not render minimal and maximal when all parameters are required"
+       (->
+        (create-example-code
+         {:method "GET"
+          :parameters [{:name "id" :required? true :descripton "Ok" :type :query}]
+          :path "/status"
+          :api-path "/api/2/status"
+          :access-token-types []})
+        :clojure
+        :maximal) => nil))

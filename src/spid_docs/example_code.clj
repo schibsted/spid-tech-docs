@@ -1,5 +1,6 @@
 (ns spid-docs.example-code
-  (:require [clojure.string :as str]))
+  (:require [clojure.set :refer [difference]]
+            [clojure.string :as str]))
 
 (def examples
   {"email" "johnd@example.com"
@@ -31,8 +32,9 @@
 (defn create-example-code [endpoint]
   (let [params (:parameters endpoint)
         all-params (filter #(= (:type %) :query) params)
-        req-params (filter :required? all-params)]
+        req-params (filter :required? all-params)
+        optional-params (difference (set all-params) (set req-params))]
     {:curl {:minimal (curl-example-code endpoint req-params)
-            :maximal (when (seq all-params) (curl-example-code endpoint all-params))}
+            :maximal (when (seq optional-params) (curl-example-code endpoint all-params))}
      :clojure {:minimal (clojure-example-code endpoint req-params)
-               :maximal (when (seq all-params) (clojure-example-code endpoint all-params))}}))
+               :maximal (when (seq optional-params) (clojure-example-code endpoint all-params))}}))
