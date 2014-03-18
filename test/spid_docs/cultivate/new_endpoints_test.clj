@@ -122,3 +122,7 @@
 (fact (-> (cs/endpoint :default_output_format "json")
           cultivate-endpoint first :default-response-format)
       => :json)
+
+(fact (-> (cs/endpoint :httpMethods {:GET (cs/http-method :access_token_types ["server" "user"])})
+          cultivate-endpoint first :access-token-types)
+      => #{:server :user})

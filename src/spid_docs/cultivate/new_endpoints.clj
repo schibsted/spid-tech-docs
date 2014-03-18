@@ -47,7 +47,7 @@
 
 (defn- cultivate-endpoint-1 [endpoint [method details]]
   (let [{:keys [path name category pathParameters valid_output_formats default_output_format]} endpoint
-        {:keys [required optional default_filters filters]} details]
+        {:keys [required optional default_filters filters access_token_types]} details]
     (with-optional-keys
       {:id (-> path generate-id)
        :path (str "/" path)
@@ -68,7 +68,8 @@
                          (map (partial create-query-parameter {:parameter_descriptions pagination-params} false)))
        :?filters (map (partial create-filter default_filters) filters)
        :response-formats (map keyword valid_output_formats)
-       :default-response-format (keyword default_output_format)})))
+       :default-response-format (keyword default_output_format)
+       :access-token-types (set (map keyword access_token_types))})))
 
 (defn cultivate-endpoint [endpoint]
   (map (partial cultivate-endpoint-1 endpoint) (:httpMethods endpoint)))
