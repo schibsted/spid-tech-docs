@@ -19,14 +19,14 @@
     (assoc param :aliases [alias])
     param))
 
-(defn- create-path-parameter [endpoint name]
+(defn- create-path-parameter [name endpoint]
   (-> {:name name
        :description ((keyword name) (:parameter_descriptions endpoint))
        :type :path
        :required? true}
       (add-alias-to-param endpoint name)))
 
-(defn- create-query-parameter [endpoint required? name]
+(defn- create-query-parameter [name required? endpoint]
   (-> {:name name
        :description ((keyword name) (:parameter_descriptions endpoint))
        :type :query
@@ -40,10 +40,10 @@
 
 (def filter-descriptions {"merchant" "Show results for entire merchant, not just current client."})
 
-(defn create-filter [default filter]
+(defn create-filter [filter defaults]
   {:name filter
    :description (filter-descriptions filter)
-   :default? (.contains default filter)})
+   :default? (.contains defaults filter)})
 
 (defn create-response [response]
   (update-in response [:type] keyword))
@@ -63,16 +63,16 @@
        :category {:section (first category)
                   :api (second category)}
        :parameters (concat
-                    (map (partial create-path-parameter endpoint) pathParameters)
-                    (map (partial create-query-parameter endpoint true) required)
+                    (map #(create-path-parameter % endpoint) pathParameters)
+                    (map #(create-query-parameter % true endpoint) required)
                     (->> optional
                          (remove #{"filters"})
                          (remove (comp pagination-params keyword))
-                         (map (partial create-query-parameter endpoint false))))
+                         (map #(create-query-parameter % false endpoint))))
        :?pagination (->> optional
                          (filter (comp pagination-params keyword))
-                         (map (partial create-query-parameter {:parameter_descriptions pagination-params} false)))
-       :?filters (map (partial create-filter default_filters) filters)
+                         (map #(create-query-parameter % false {:parameter_descriptions pagination-params})))
+       :?filters (map #(create-filter % default_filters) filters)
        :response-formats (map keyword valid_output_formats)
        :default-response-format (keyword default_output_format)
        :access-token-types (set (map keyword access_token_types))
