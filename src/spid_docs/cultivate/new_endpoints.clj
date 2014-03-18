@@ -1,5 +1,6 @@
 (ns spid-docs.cultivate.new-endpoints
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [spid-docs.homeless :refer [with-optional-keys]]))
 
 (defn- generate-id [path]
   (-> path
@@ -38,24 +39,26 @@
                         :until  "Return only results up to and including this date."})
 
 (defn- cultivate-endpoint-1 [endpoint [method details]]
-  {:id (-> (:path endpoint) generate-id)
-   :path (str "/" (:path endpoint))
-   :api-path (str "/api/2/" (:path endpoint))
-   :method method
-   :name (fix-multimethod-name (:name endpoint) method)
-   :category {:section (first (:category endpoint))
-              :api (second (:category endpoint))}
-   :parameters (concat
-                (map (partial create-path-parameter endpoint) (:pathParameters endpoint))
-                (map (partial create-query-parameter endpoint true) (:required details))
-                (->> details :optional
-                     (remove (comp pagination-params keyword))
-                     (map (partial create-query-parameter endpoint false))))
-   :pagination (->> details :optional
-                    (filter (comp pagination-params keyword))
-                    (map (partial create-query-parameter {:parameter_descriptions pagination-params} false)))
-   :response-formats (map keyword (:valid_output_formats endpoint))
-   :default-response-format (keyword (:default_output_format endpoint))})
+  (with-optional-keys
+    {:id (-> (:path endpoint) generate-id)
+     :path (str "/" (:path endpoint))
+     :api-path (str "/api/2/" (:path endpoint))
+     :method method
+     :name (fix-multimethod-name (:name endpoint) method)
+     :category {:section (first (:category endpoint))
+                :api (second (:category endpoint))}
+     :parameters (concat
+                  (map (partial create-path-parameter endpoint) (:pathParameters endpoint))
+                  (map (partial create-query-parameter endpoint true) (:required details))
+                  (->> details :optional
+                       (remove #{"filters"})
+                       (remove (comp pagination-params keyword))
+                       (map (partial create-query-parameter endpoint false))))
+     :?pagination (->> details :optional
+                       (filter (comp pagination-params keyword))
+                       (map (partial create-query-parameter {:parameter_descriptions pagination-params} false)))
+     :response-formats (map keyword (:valid_output_formats endpoint))
+     :default-response-format (keyword (:default_output_format endpoint))}))
 
 (defn cultivate-endpoint [endpoint]
   (map (partial cultivate-endpoint-1 endpoint) (:httpMethods endpoint)))

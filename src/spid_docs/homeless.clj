@@ -71,3 +71,14 @@
                  (if-let [curr (get-in memo path)]
                    (assoc-in memo path (if (fn? val) (val curr) val))
                    memo)) m)))
+
+
+(defn- handle-optional-key [[k v]]
+  (if (.startsWith (name k) "?")
+    (when-not (or (nil? v)
+                  (and (coll? v) (empty? v)))
+      [(keyword (subs (name k) 1)) v])
+    [k v]))
+
+(defn with-optional-keys [m]
+  (into {} (keep handle-optional-key m)))
