@@ -52,7 +52,7 @@
   (<= 200 (:status response) 299))
 
 (defn- cultivate-endpoint-1 [endpoint [method details]]
-  (let [{:keys [path name category pathParameters valid_output_formats default_output_format]} endpoint
+  (let [{:keys [path name category pathParameters valid_output_formats default_output_format deprecated]} endpoint
         {:keys [required optional default_filters filters access_token_types responses]} details]
     (with-optional-keys
       {:id (-> path generate-id)
@@ -78,7 +78,8 @@
        :access-token-types (set (map keyword access_token_types))
        :requires-authentication? (not (empty? access_token_types))
        :responses {:success (create-response (first (filter success? responses)))
-                   :failure (map create-response (remove success? responses))}})))
+                   :failure (map create-response (remove success? responses))}
+       :?deprecated deprecated})))
 
 (defn cultivate-endpoint [endpoint]
   (map (partial cultivate-endpoint-1 endpoint) (:httpMethods endpoint)))

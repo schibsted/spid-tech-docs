@@ -156,3 +156,6 @@
                     {:status 500
                      :description "NO NO NO!"
                      :type :error}]})
+
+(fact (-> (cs/endpoint :deprecated "1.0") cultivate-endpoint first :deprecated) => "1.0")
+
