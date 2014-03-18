@@ -45,9 +45,15 @@
    :description (filter-descriptions filter)
    :default? (.contains default filter)})
 
+(defn create-response [response]
+  (update-in response [:type] keyword))
+
+(defn success? [response]
+  (<= 200 (:status response) 299))
+
 (defn- cultivate-endpoint-1 [endpoint [method details]]
   (let [{:keys [path name category pathParameters valid_output_formats default_output_format]} endpoint
-        {:keys [required optional default_filters filters access_token_types]} details]
+        {:keys [required optional default_filters filters access_token_types responses]} details]
     (with-optional-keys
       {:id (-> path generate-id)
        :path (str "/" path)
@@ -70,7 +76,9 @@
        :response-formats (map keyword valid_output_formats)
        :default-response-format (keyword default_output_format)
        :access-token-types (set (map keyword access_token_types))
-       :requires-authentication? (not (empty? access_token_types))})))
+       :requires-authentication? (not (empty? access_token_types))
+       :responses {:success (create-response (first (filter success? responses)))
+                   :failure (map create-response (remove success? responses))}})))
 
 (defn cultivate-endpoint [endpoint]
   (map (partial cultivate-endpoint-1 endpoint) (:httpMethods endpoint)))

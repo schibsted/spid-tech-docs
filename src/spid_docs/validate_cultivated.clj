@@ -44,7 +44,8 @@
 (def Response
   {:status Num
    :description Str
-   :type Keyword})
+   :type Keyword
+   (optional-key :sample) Str})
 
 (def Endpoint
   {:id Str
@@ -52,6 +53,7 @@
    :api-path Path
    :method (enum :GET :POST :DELETE)
    :name Str
+   :description Str
    :category APICategory
    :parameters [Parameter]
    :response-formats [ResponseFormat]

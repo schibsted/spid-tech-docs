@@ -132,7 +132,27 @@
      cultivate-endpoint first :requires-authentication?)
  => true
 
-  (-> (cs/endpoint :httpMethods {:GET (cs/http-method :access_token_types [])})
+ (-> (cs/endpoint :httpMethods {:GET (cs/http-method :access_token_types [])})
      cultivate-endpoint first :requires-authentication?)
  => false)
 
+(fact (-> (cs/endpoint :httpMethods
+                       {:GET (cs/http-method :responses [{:status 200
+                                                          :description "OK"
+                                                          :type "string"}
+                                                         {:status 422
+                                                          :description "NO!"
+                                                          :type "string"}
+                                                         {:status 500
+                                                          :description "NO NO NO!"
+                                                          :type "error"}])})
+          cultivate-endpoint first :responses)
+      => {:success {:status 200
+                    :description "OK"
+                    :type :string}
+          :failure [{:status 422
+                     :description "NO!"
+                     :type :string}
+                    {:status 500
+                     :description "NO NO NO!"
+                     :type :error}]})
