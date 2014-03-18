@@ -15,6 +15,7 @@
 (fact (-> (cs/endpoint :path "describe/{object}") cultivate-endpoint first :id) => "describe-object")
 
 (fact (-> (cs/endpoint :path "terms") cultivate-endpoint first :path) => "/terms")
+(fact (-> (cs/endpoint :path "terms") cultivate-endpoint first :api-path) => "/api/2/terms")
 
 (fact (-> (cs/endpoint :httpMethods {:GET (cs/http-method)}) cultivate-endpoint
           first :method) => :GET)

@@ -49,6 +49,7 @@
 (def Endpoint
   {:id Str
    :path Path
+   :api-path Path
    :method (enum :GET :POST :DELETE)
    :name Str
    :category APICategory

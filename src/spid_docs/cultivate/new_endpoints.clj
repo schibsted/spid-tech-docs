@@ -40,6 +40,7 @@
 (defn- cultivate-endpoint-1 [endpoint [method details]]
   {:id (-> (:path endpoint) generate-id)
    :path (str "/" (:path endpoint))
+   :api-path (str "/api/2/" (:path endpoint))
    :method method
    :name (fix-multimethod-name (:name endpoint) method)
    :category {:section (first (:category endpoint))
