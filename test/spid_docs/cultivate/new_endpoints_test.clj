@@ -70,6 +70,29 @@
            :type :query
            :required? false}])
 
+(fact
+ "Pagination parameters are treated specially, bundled together and
+  removed from the proper parameters list. This is so that readers of
+  the documentation can learn pagination once, and then not have to
+  sift through it for every endpoint."
+
+ (fact (let [endpoint (-> (cs/endpoint :httpMethods {:GET (cs/http-method :optional ["limit" "offset" "since" "until"])})
+                          cultivate-endpoint first)]
+
+         (:parameters endpoint) => []
+         (:pagination endpoint) => [{:name "limit"
+                                     :description "Return no more than this number of results."
+                                     :type :query, :required? false}
+                                    {:name "offset"
+                                     :description "Skip this many results."
+                                     :type :query, :required? false}
+                                    {:name "since"
+                                     :description "Return only results on or after this date."
+                                     :type :query, :required? false}
+                                    {:name "until"
+                                     :description "Return only results up to and including this date."
+                                     :type :query, :required? false}])))
+
 (fact (-> (cs/endpoint :valid_output_formats ["json" "jsonp"])
           cultivate-endpoint first :response-formats)
       => [:json :jsonp])
@@ -77,5 +100,3 @@
 (fact (-> (cs/endpoint :default_output_format "json")
           cultivate-endpoint first :default-response-format)
       => :json)
-
-

@@ -6,9 +6,9 @@
       (str/replace #"[^a-zA-Z]+" "-")
       (str/replace #"-$" "")))
 
-(def ^:private verbs {:GET "Get"
-                      :POST "Create"
-                      :DELETE "Delete"})
+(def verbs {:GET "Get"
+            :POST "Create"
+            :DELETE "Delete"})
 
 (defn- fix-multimethod-name [name method]
   (str/replace name #"(?i)^(?:(?:get|create|delete),? )+or (?:get|create|delete) " (str (verbs method) " ")))
@@ -32,6 +32,11 @@
        :required? required?}
       (add-alias-to-param endpoint name)))
 
+(def pagination-params {:limit  "Return no more than this number of results."
+                        :offset "Skip this many results."
+                        :since  "Return only results on or after this date."
+                        :until  "Return only results up to and including this date."})
+
 (defn- cultivate-endpoint-1 [endpoint [method details]]
   {:id (-> (:path endpoint) generate-id)
    :path (str "/" (:path endpoint))
@@ -42,7 +47,12 @@
    :parameters (concat
                 (map (partial create-path-parameter endpoint) (:pathParameters endpoint))
                 (map (partial create-query-parameter endpoint true) (:required details))
-                (map (partial create-query-parameter endpoint false) (:optional details)))
+                (->> details :optional
+                     (remove (comp pagination-params keyword))
+                     (map (partial create-query-parameter endpoint false))))
+   :pagination (->> details :optional
+                    (filter (comp pagination-params keyword))
+                    (map (partial create-query-parameter {:parameter_descriptions pagination-params} false)))
    :response-formats (map keyword (:valid_output_formats endpoint))
    :default-response-format (keyword (:default_output_format endpoint))})
 
