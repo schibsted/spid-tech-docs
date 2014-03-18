@@ -38,27 +38,37 @@
                         :since  "Return only results on or after this date."
                         :until  "Return only results up to and including this date."})
 
+(def filter-descriptions {"merchant" "Show results for entire merchant, not just current client."})
+
+(defn create-filter [default filter]
+  {:name filter
+   :description (filter-descriptions filter)
+   :default? (.contains default filter)})
+
 (defn- cultivate-endpoint-1 [endpoint [method details]]
-  (with-optional-keys
-    {:id (-> (:path endpoint) generate-id)
-     :path (str "/" (:path endpoint))
-     :api-path (str "/api/2/" (:path endpoint))
-     :method method
-     :name (fix-multimethod-name (:name endpoint) method)
-     :category {:section (first (:category endpoint))
-                :api (second (:category endpoint))}
-     :parameters (concat
-                  (map (partial create-path-parameter endpoint) (:pathParameters endpoint))
-                  (map (partial create-query-parameter endpoint true) (:required details))
-                  (->> details :optional
-                       (remove #{"filters"})
-                       (remove (comp pagination-params keyword))
-                       (map (partial create-query-parameter endpoint false))))
-     :?pagination (->> details :optional
-                       (filter (comp pagination-params keyword))
-                       (map (partial create-query-parameter {:parameter_descriptions pagination-params} false)))
-     :response-formats (map keyword (:valid_output_formats endpoint))
-     :default-response-format (keyword (:default_output_format endpoint))}))
+  (let [{:keys [path name category pathParameters valid_output_formats default_output_format]} endpoint
+        {:keys [required optional default_filters filters]} details]
+    (with-optional-keys
+      {:id (-> path generate-id)
+       :path (str "/" path)
+       :api-path (str "/api/2/" path)
+       :method method
+       :name (fix-multimethod-name name method)
+       :category {:section (first category)
+                  :api (second category)}
+       :parameters (concat
+                    (map (partial create-path-parameter endpoint) pathParameters)
+                    (map (partial create-query-parameter endpoint true) required)
+                    (->> optional
+                         (remove #{"filters"})
+                         (remove (comp pagination-params keyword))
+                         (map (partial create-query-parameter endpoint false))))
+       :?pagination (->> optional
+                         (filter (comp pagination-params keyword))
+                         (map (partial create-query-parameter {:parameter_descriptions pagination-params} false)))
+       :?filters (map (partial create-filter default_filters) filters)
+       :response-formats (map keyword valid_output_formats)
+       :default-response-format (keyword default_output_format)})))
 
 (defn cultivate-endpoint [endpoint]
   (map (partial cultivate-endpoint-1 endpoint) (:httpMethods endpoint)))

@@ -98,6 +98,23 @@
 
 (fact (-> (cs/endpoint) cultivate-endpoint first :pagination) => nil)
 
+(fact
+ "The filter parameter is also treated specially, since there is a
+  list of valid filters for a given endpoint. This too is removed from
+  the proper parameters list (if optional)."
+
+ (let [endpoint (-> (cs/endpoint :httpMethods {:GET (cs/http-method :optional ["filters"]
+                                                                    :filters ["merchant"]
+                                                                    :default_filters [])})
+                    cultivate-endpoint first)]
+
+   (:parameters endpoint) => []
+   (:filters endpoint) => [{:name "merchant"
+                            :description "Show results for entire merchant, not just current client."
+                            :default? false}]))
+
+(fact (-> (cs/endpoint) cultivate-endpoint first :filters) => nil)
+
 (fact (-> (cs/endpoint :valid_output_formats ["json" "jsonp"])
           cultivate-endpoint first :response-formats)
       => [:json :jsonp])
