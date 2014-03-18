@@ -21,5 +21,6 @@
                              [codox "0.6.7"]]
                    :source-paths ["dev"]
                    :test-paths ^:replace []}
-             :test {:dependencies [[midje "1.6.0"]]
+             :test {:dependencies [[midje "1.6.0"]
+                                   [hiccup-find "0.1.0"]]
                     :plugins [[lein-midje "3.1.3"]]}})

@@ -1,169 +1,133 @@
 (ns spid-docs.pages.endpoint-pages
   (:require [clojure.string :as str]
             [spid-docs.enlive :as enlive]
+            [spid-docs.example-code :refer [create-example-code]]
+            [spid-docs.pages.type-pages :refer [type-path]]
             [spid-docs.pimp.markdown :as markdown]
-            [spid-docs.pages.type-pages :refer [type-path]]))
+            [spid-docs.pimp.markdown :refer [inline-parse]]))
 
-(defn- endpoint-api-path
-  "Given an endpoint, return the relative path in the SPiD API."
-  [endpoint]
-  (str "/" (:path endpoint)))
+(def lang-names {:curl "cURL" :clojure "Clojure"})
+(def lang-classes {:curl "sh" :clojure "clj"})
 
 (defn endpoint-url
   "Given an endpoint, return the URL to the page in the documentation app."
   [endpoint]
-  (str "/endpoints" (endpoint-api-path endpoint)))
+  (str "/endpoints/" (:method endpoint) (:path endpoint)))
 
-(defn- render-params-group [[param-def params] param-docs]
-  (if param-def
-    [:tr
-     [:th (str/join ", " params)]
-     [:td [:a {:href (str "/concepts/" (name param-def) "/")} (str "See " (name param-def))]]]
-    (map #(vector :tr
-                  [:th %]
-                  [:td (markdown/inline-parse (param-docs %))]) params)))
+(defn render-category [endpoint]
+  [:a.mod.category.small.faded.mbn
+   {:href "#"}
+   (get-in endpoint [:category :section])])
 
-(defn- render-params [heading params param-defs param-docs]
-  (if-let [grouped-params (sort-by first (group-by param-defs params))]
-    (list [:h3 heading]
-          [:table.boxed.zebra (map #(render-params-group % param-docs) grouped-params)])))
+(defn render-title [endpoint]
+  [:h1.mbn (str (:method endpoint) " " (:path endpoint))])
 
-(defn- render-http-methods [endpoint parameters]
-  (let [methods (:httpMethods endpoint)
-        url (endpoint-api-path endpoint)
-        param-docs (:parameters endpoint {})]
-    (mapcat #(list [:h2 (:name %) " " url]
-                   (if-let [return-type (get-in endpoint [:http-methods (:name %) :returns])]
-                     [:p "Returns " [:a {:href (str "#" (str/capitalize (name return-type)))} return-type]])
-                   (render-params "Required params" (:required %) parameters param-docs)
-                   (render-params "Optional params" (:optional %) parameters param-docs)) (vals methods))))
+(defn render-authentication [endpoint]
+  (if (:requires-authentication? endpoint)
+    [:p.small.faded.mtn
+     "Requires authentication with "
+     [:strong (str/join " or " (:access-token-types endpoint))]
+     " access token."]))
 
-(def format-names {"json" "JSON" "jsonp" "JSON-P"})
+(defn render-description [endpoint]
+  [:p "Markdown-beskrivelse **her**"])
 
-(defn- render-authentication [auth-required]
-  [:tr [:th "Requires authentication"] [:td (if auth-required "Yes" "No")]])
+(defn render-request-synopsis [endpoint]
+  [:pre [:code.sh (str (:method endpoint) " " (:api-path endpoint))]])
 
-(defn- render-token-type [token-type]
-  (if token-type
-    [:tr
-     [:th "Supported access token type"]
-     [:td token-type]]))
+(defn- render-request-parameter [parameter]
+  [:tr.param
+   [:th [:h4.name (:name parameter)]]
+   [:td
+    [:h5.required (if (= (:type parameter) :path)
+                    "required path parameter"
+                    (if (:required? parameter) "required" "optional"))]
+    [:p.faded.desc (inline-parse (:description parameter))]]])
 
-(defn- render-output-formats [formats]
-  [:tr
-   [:th "Supported response format"]
-   [:td (str/join ", " (map format-names formats))]])
+(defn render-request-parameters [parameters]
+  [:table.sectioned
+   (map render-request-parameter (->> parameters
+                                      (sort-by :type)
+                                      (sort-by (comp not :required?))))])
 
-(defn- render-filters [filters]
-  [:tr
-   [:th (str "Supported filter" (if (= (count filters) 1) "" "s"))]
-   [:td (if (seq filters) (str/join ", " filters) "None")]])
+(defn- render-code [lang code]
+  [:pre [:code {:class lang} code]])
 
-(defn- render-default-filters [default-filters]
-  (if default-filters
-    [:tr [:th "Default filters"] [:td default-filters]]))
+(defn- render-request-example [[lang example]]
+  (list [:h5.tab (lang lang-names)]
+        [:div.tab-content
+         (if (nil? (:maximal example))
+           (render-code (lang lang-classes) (:minimal example))
+           (list [:h6.mtm "Minimal example"]
+                 (render-code (lang lang-classes) (:minimal example))
+                 [:h6.mtm "With all parameters"]
+                 (render-code (lang lang-classes) (:maximal example))))]))
 
-(defn- render-return-status [status]
-  [:tr [:th "Successful return"] [:td status]])
+(defn render-request-examples [endpoint]
+  (list
+   [:h2 "Example request"]
+   [:div.tabs
+    (map render-request-example (create-example-code endpoint))]))
 
-(defn- render-key-properties [endpoint]
-  [:table.boxed.zebra
-   (render-authentication (:auth-required endpoint))
-   (render-token-type (:access-token-type endpoint))
-   (render-output-formats (:valid_output_formats endpoint))
-   (render-filters (:filters endpoint))
-   (render-default-filters (:default_filters endpoint))
-   (render-return-status (get-in endpoint [:sample-response :status] "200"))])
+(defn render-request [endpoint]
+  [:div.section.request
+   [:div.main
+    [:div.wrap
+     [:h1.mbn "Request"]
+     (render-request-synopsis endpoint)
+     (render-request-parameters (:parameters endpoint))]]
+   [:div.aside
+     [:div.wrap
+      (render-request-examples endpoint)]]])
 
-(defn- render-sample-response [endpoint]
-  (if-let [response (get-in endpoint [:sample-response :response])]
-    (list [:h2 "Sample response"]
-          [:pre [:code.js response]])))
+(defn- render-response [endpoint]
+  [:div.section
+   [:div.main
+    [:div.wrap
+     [:h1.mbn "Response"]]]])
 
-(defn- format-type-name [type]
-  (if (keyword? type)
-    (name type)
-    (str "[" (name (first type)) "...]")))
+(defn create-page [endpoint]
+  {:split-page? true ;; Makes the layout render a grey right column
+   :title (str (:method endpoint) " " (:path endpoint))
+   :body (list [:div.section
+                [:div.main
+                 [:div.wrap
+                  (render-category endpoint)
+                  (render-title endpoint)
+                  (render-authentication endpoint)
+                  (render-description endpoint)]]]
+               [:div.separator]
+               (render-request endpoint)
+               [:div.separator]
+               (render-response endpoint))})
 
-(defn- render-type [type-id types]
-  (let [id (if (keyword? type-id) type-id (first type-id))
-        type-def (id types)]
-    (if (:description type-def)
-      [:a {:href (type-path type-def)} (format-type-name type-id)]
-      (format-type-name type-id))))
-
-(defn- render-type-header [id type-name description]
-  (list [:h2 {:id (name id)} type-name]
-        (markdown/parse description)))
-
-(defmulti render-type-def (fn [type types] (:type type)))
-
-(defmethod render-type-def :object [{:keys [id name description fields]} types]
-  (list (render-type-header id name description)
-        [:table.boxed.zebra
-         [:tr [:th "Field"] [:th "Type"] [:th "Description"]]
-         (map #(vector :tr
-                       [:th (:field %)]
-                       [:td (render-type (:type %) types)]
-                       [:td (markdown/inline-parse (:description %))]) fields)]))
-
-(defmethod render-type-def :object-with-availability [{:keys [id name description fields]} types]
-  (list (render-type-header
-         id name (str description "\n\nThe availability column indicates if the field always contains a valid non-empty value."))
-        [:table.boxed.zebra
-         [:tr [:th "Field"] [:th "Type"] [:th "Description"] [:th "Always available"]]
-         (map #(vector :tr
-                       [:th (:field %)]
-                       [:td (render-type (:type %) types)]
-                       [:td (markdown/inline-parse (:description %))]
-                       [:td (if (:always-available %) [:span.check "✓"])]) fields)]))
-
-(defmethod render-type-def :enum [{:keys [id name description values]} _]
-  (list (render-type-header id name description)
-        [:table.boxed.zebra
-         [:tr [:th "Value"] [:th "Description"]]
-         (map #(vector :tr
-                       [:th (:value %)]
-                       [:td (markdown/inline-parse (:description %))]) values)]))
-
-(defn- mapify-types [endpoint types]
-  (let [mapify (juxt :id identity)]
-    (-> {}
-        (into (map mapify types))
-        (into (map mapify (:types endpoint))))))
-
-(defn- get-pertinent-type-defs [endpoint types]
-  (map #(% types) (into #{}
-                        (concat (map :returns (-> endpoint :http-methods vals))
-                                (map :id (:types endpoint))))))
-
-(defn- redirect-type-links [inline-types]
-  (fn [node]
-    (let [matches (re-find #"^/types/(.*)" (get-in node [:attrs :href]))
-          type-ids (map :id inline-types)
-          id (keyword (second matches))]
-      (if (and id (some #(= id %) type-ids))
-        (assoc-in node [:attrs :href] (str "#" (name id)))
-        node))))
-
-(defn- render-pertinent-type-defs [endpoint types]
-  (let [pertinent-types (get-pertinent-type-defs endpoint types)
-        rendered (map #(render-type-def % types) pertinent-types)]
-    (-> (map #(render-type-def % types) pertinent-types)
-        (enlive/parse)
-        (enlive/transform [:a] (redirect-type-links pertinent-types)))))
-
-(defn create-page [endpoint types parameters]
-  {:title (:name endpoint)
-   :body [:div.wrap
-          [:h1 (:name endpoint)]
-          (markdown/parse (:description endpoint))
-          (render-key-properties endpoint)
-          (render-http-methods endpoint parameters)
-          (render-sample-response endpoint)
-          (render-pertinent-type-defs endpoint (mapify-types endpoint types))]})
-
-(defn create-pages [endpoints types parameters]
-  (->> endpoints
-       (map (juxt endpoint-url #(partial create-page % types parameters)))
+(defn create-pages [endpoints _ _]
+  (->> [{:id "user-id-userId-email-logins"
+         :path "/user/{email}/logins"
+         :api-path "/api/2/user/{email}/logins"
+         :method "GET"
+         :name "List logins"
+         :category {:section "Identity Management" :api "Login API"}
+         :parameters [{:name "ip"
+                       :description "Only show login attempts from this IP address"
+                       :type :query
+                       :required? false}
+                      {:name "status"
+                       :description "Only show successful (`true`) or failed (`false`) logins"
+                       :type :query
+                       :required? false}
+                      {:name "id/userId/email"
+                       :description "Only show successful (`true`) or failed (`false`) logins"
+                       :type :path
+                       :required? true}]
+         :response-formats ["json" "jsonp"]
+         :default-response-format "json"
+         :pagination ["limit" "since" "offset" "until"]
+         :filters ["merchant"]
+         :access-token-types ["server"]
+         :requires-authentication? true
+         :responses {:success {:status 200
+                               :description "A list of login attempt objects"
+                               :type [:login_attempt]}}}]
+       (map (juxt endpoint-url #(partial create-page %)))
        (into {})))
