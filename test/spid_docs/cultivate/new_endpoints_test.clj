@@ -11,14 +11,22 @@
  (-> (cs/endpoint :httpMethods {:GET (cs/http-method)
                                 :POST (cs/http-method)}) cultivate-endpoint count) => 2)
 
-(fact (-> (cs/endpoint :path "terms") cultivate-endpoint first :id) => "terms")
-(fact (-> (cs/endpoint :path "describe/{object}") cultivate-endpoint first :id) => "describe-object")
+(fact
+ "The path is used to generate a file system friendly identifier."
 
-(fact (-> (cs/endpoint :path "terms") cultivate-endpoint first :path) => "/terms")
-(fact (-> (cs/endpoint :path "terms") cultivate-endpoint first :api-path) => "/api/2/terms")
+ (-> (cs/endpoint :path "terms") cultivate-endpoint first :id) => "terms"
+ (-> (cs/endpoint :path "describe/{object}") cultivate-endpoint first :id) => "describe-object")
 
-(fact (-> (cs/endpoint :httpMethods {:GET (cs/http-method)}) cultivate-endpoint
-          first :method) => :GET)
+(fact
+ "All paths are prefixed with a slash."
+
+ (-> (cs/endpoint :path "terms") cultivate-endpoint first :path) => "/terms"
+ (-> (cs/endpoint :path "terms") cultivate-endpoint first :api-path) => "/api/2/terms")
+
+(fact
+ "We generate one endpoint for each http verb, so the method is straight on the endpoint."
+
+ (-> (cs/endpoint :httpMethods {:GET (cs/http-method)}) cultivate-endpoint first :method) => :GET)
 
 (fact
  "Names are cut apart and stiched together to fit the httpMethod."
@@ -42,34 +50,44 @@
       [:POST "Create an order"]
       [:DELETE "Delete an order"]})
 
-(fact (-> (cs/endpoint :category ["Insight" "KPI API"]) cultivate-endpoint first :category)
-      => {:section "Insight" :api "KPI API"})
+(fact
+ "Category is more pleasant to use if it the levels are named."
 
-(fact (-> (cs/endpoint :pathParameters ["id"]
-                       :parameter_descriptions {:id "The user ID"}
-                       :alias {:id "user_id"})
-          cultivate-endpoint first :parameters)
-      => [{:name "id"
-           :aliases ["user_id"]
-           :description "The user ID"
-           :type :path
-           :required? true}])
+ (-> (cs/endpoint :category ["Insight" "KPI API"]) cultivate-endpoint first :category)
+ => {:section "Insight" :api "KPI API"})
 
-(fact (-> (cs/endpoint :httpMethods {:GET (cs/http-method :required ["email"])}
-                       :parameter_descriptions {:email "The email"})
-          cultivate-endpoint first :parameters)
-      => [{:name "email"
-           :description "The email"
-           :type :query
-           :required? true}])
+(fact
+ "Path parameters are included in the general :parameters list.
+  They're all required."
 
-(fact (-> (cs/endpoint :httpMethods {:POST (cs/http-method :optional ["name"])}
-                       :parameter_descriptions {:name "The name"})
-          cultivate-endpoint first :parameters)
-      => [{:name "name"
-           :description "The name"
-           :type :query
-           :required? false}])
+ (-> (cs/endpoint :pathParameters ["id"]
+                  :parameter_descriptions {:id "The user ID"}
+                  :alias {:id "user_id"})
+     cultivate-endpoint first :parameters)
+ => [{:name "id"
+      :aliases ["user_id"]
+      :description "The user ID"
+      :type :path
+      :required? true}])
+
+(fact
+ "Query parameters are included in the general :parameters list too."
+
+ (-> (cs/endpoint :httpMethods {:GET (cs/http-method :required ["email"])}
+                  :parameter_descriptions {:email "The email"})
+     cultivate-endpoint first :parameters)
+ => [{:name "email"
+      :description "The email"
+      :type :query
+      :required? true}]
+
+ (-> (cs/endpoint :httpMethods {:POST (cs/http-method :optional ["name"])}
+                  :parameter_descriptions {:name "The name"})
+     cultivate-endpoint first :parameters)
+ => [{:name "name"
+      :description "The name"
+      :type :query
+      :required? false}])
 
 (fact
  "Pagination parameters are treated specially, bundled together and
@@ -96,7 +114,11 @@
                                :description "Return only results up to and including this date."
                                :type :query, :required? false}]))
 
-(fact (-> (cs/endpoint) cultivate-endpoint first :pagination) => nil)
+(fact
+ "If there are no pagination parameters, the :pagination key is
+  removed, instead of it pointing to an empty list."
+
+ (-> (cs/endpoint) cultivate-endpoint first :pagination) => nil)
 
 (fact
  "The filter parameter is also treated specially, since there is a
@@ -113,21 +135,41 @@
                             :description "Show results for entire merchant, not just current client."
                             :default? false}]))
 
-(fact (-> (cs/endpoint) cultivate-endpoint first :filters) => nil)
+(fact
+ "If there is no filter parameter, the :filters key is removed,
+  instead of it pointing to an empty list."
 
-(fact (-> (cs/endpoint :valid_output_formats ["json" "jsonp"])
-          cultivate-endpoint first :response-formats)
-      => [:json :jsonp])
-
-(fact (-> (cs/endpoint :default_output_format "json")
-          cultivate-endpoint first :default-response-format)
-      => :json)
-
-(fact (-> (cs/endpoint :httpMethods {:GET (cs/http-method :access_token_types ["server" "user"])})
-          cultivate-endpoint first :access-token-types)
-      => #{:server :user})
+ (-> (cs/endpoint) cultivate-endpoint first :filters) => nil)
 
 (fact
+ "We prefer response-formats over valid-output-formats since
+  'response' is more accurate than 'output', and there is no list of
+  'invalid' formats, so the validity is implicit."
+
+ (-> (cs/endpoint :valid_output_formats ["json" "jsonp"])
+     cultivate-endpoint first :response-formats)
+ => [:json :jsonp])
+
+(fact
+ "Likewise, there's a default-response-format instead of a
+  default-output-format."
+
+ (-> (cs/endpoint :default_output_format "json")
+     cultivate-endpoint first :default-response-format)
+ => :json)
+
+(fact
+ "We represent the access token types as a set of keys, instead of a
+  list, since the data isn't inherently ordered."
+
+ (-> (cs/endpoint :httpMethods {:GET (cs/http-method :access_token_types ["server" "user"])})
+     cultivate-endpoint first :access-token-types)
+ => #{:server :user})
+
+(fact
+ "Authentication is required if there is any access token types
+  listed."
+
  (-> (cs/endpoint :httpMethods {:GET (cs/http-method :access_token_types ["server"])})
      cultivate-endpoint first :requires-authentication?)
  => true
@@ -136,26 +178,28 @@
      cultivate-endpoint first :requires-authentication?)
  => false)
 
-(fact (-> (cs/endpoint :httpMethods
-                       {:GET (cs/http-method :responses [{:status 200
-                                                          :description "OK"
-                                                          :type "string"}
-                                                         {:status 422
-                                                          :description "NO!"
-                                                          :type "string"}
-                                                         {:status 500
-                                                          :description "NO NO NO!"
-                                                          :type "error"}])})
-          cultivate-endpoint first :responses)
-      => {:success {:status 200
-                    :description "OK"
-                    :type :string}
-          :failure [{:status 422
-                     :description "NO!"
-                     :type :string}
-                    {:status 500
-                     :description "NO NO NO!"
-                     :type :error}]})
+(fact
+ "Responses are sorted into :success and :failure."
+
+ (-> (cs/endpoint :httpMethods
+                  {:GET (cs/http-method :responses [{:status 200
+                                                     :description "OK"
+                                                     :type "string"}
+                                                    {:status 422
+                                                     :description "NO!"
+                                                     :type "string"}
+                                                    {:status 500
+                                                     :description "NO NO NO!"
+                                                     :type "error"}])})
+     cultivate-endpoint first :responses)
+ => {:success {:status 200
+               :description "OK"
+               :type :string}
+     :failure [{:status 422
+                :description "NO!"
+                :type :string}
+               {:status 500
+                :description "NO NO NO!"
+                :type :error}]})
 
 (fact (-> (cs/endpoint :deprecated "1.0") cultivate-endpoint first :deprecated) => "1.0")
-
