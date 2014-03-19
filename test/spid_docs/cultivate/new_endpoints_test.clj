@@ -4,6 +4,8 @@
             [spid-docs.cultivate.new-endpoints :refer :all]))
 
 (def raw-content
+  "Test data with relevant raw content when cultivating endpoint. Look
+   for these values in tests below."
   {:sample-responses {"terms-get/sample.json" "terms json"
                       "terms-get/sample.jsonp" "terms jsonp"}
    :endpoint-descriptions {"terms-get.md" "terms desc"}
@@ -13,73 +15,75 @@
                              :until  "until desc"}
    :filter-descriptions {:merchant "merchant desc"}})
 
-(defn cultivate [endpoint]
-  (cultivate-endpoint endpoint raw-content))
+(defn cultivate
+  "Helper function to create and cultivate endpoints."
+  [& {:as m}]
+  (cultivate-endpoint (cs/endpoint m) raw-content))
 
 (fact
  "Number of returned endpoints depends on the given http methods."
 
- (-> (cs/endpoint :httpMethods {}) cultivate count) => 0
- (-> (cs/endpoint :httpMethods {:GET (cs/http-method)}) cultivate count) => 1
- (-> (cs/endpoint :httpMethods {:GET (cs/http-method)
-                                :POST (cs/http-method)}) cultivate count) => 2)
+ (-> (cultivate :httpMethods {}) count) => 0
+ (-> (cultivate :httpMethods {:GET (cs/http-method)}) count) => 1
+ (-> (cultivate :httpMethods {:GET (cs/http-method)
+                              :POST (cs/http-method)}) count) => 2)
 
 (fact
  "The path and method is used to generate a friendly identifier. This
   is used to look up information about the endpoint in other sources."
 
- (-> (cs/endpoint :path "terms"
-                  :httpMethods {:GET (cs/http-method)})
-     cultivate first :id)
+ (-> (cultivate :path "terms"
+                :httpMethods {:GET (cs/http-method)})
+     first :id)
  => :terms-get
 
- (-> (cs/endpoint :path "subscription"
-                  :httpMethods {:POST (cs/http-method)})
-     cultivate first :id)
+ (-> (cultivate :path "subscription"
+                :httpMethods {:POST (cs/http-method)})
+     first :id)
  => :subscription-post
 
- (-> (cs/endpoint :path "describe/{object}"
-                  :httpMethods {:GET (cs/http-method)})
-     cultivate first :id)
+ (-> (cultivate :path "describe/{object}"
+                :httpMethods {:GET (cs/http-method)})
+     first :id)
  => :describe-object-get)
 
 (fact
  "Descriptions are pulled out of the raw-content based on the endpoint id."
 
- (-> (cs/endpoint :path "terms"
-                  :httpMethods {:GET (cs/http-method)})
-     cultivate first :description)
+ (-> (cultivate :path "terms"
+                :httpMethods {:GET (cs/http-method)})
+     first :description)
  => "terms desc")
 
 (fact
  "All paths are prefixed with a slash."
 
- (-> (cs/endpoint :path "terms") cultivate first :path) => "/terms"
- (-> (cs/endpoint :path "terms") cultivate first :api-path) => "/api/2/terms")
+ (-> (cultivate :path "terms") first :path) => "/terms"
+ (-> (cultivate :path "terms") first :api-path) => "/api/2/terms")
 
 (fact
  "We generate one endpoint for each http verb, so the method is straight on the endpoint."
 
- (-> (cs/endpoint :httpMethods {:GET (cs/http-method)}) cultivate first :method) => :GET)
+ (-> (cultivate :httpMethods {:GET (cs/http-method)}) first :method) => :GET)
 
 (fact
  "Names are cut apart and stiched together to fit the httpMethod."
 
- (-> (cs/endpoint :name "Create subscription") cultivate first :name)
+ (-> (cultivate :name "Create subscription") first :name)
  => "Create subscription"
 
- (->> (cs/endpoint :name "Get or create a product"
-                   :httpMethods {:GET (cs/http-method)
-                                 :POST (cs/http-method)})
-      cultivate (map (juxt :method :name)) set)
+ (->> (cultivate :name "Get or create a product"
+                 :httpMethods {:GET (cs/http-method)
+                               :POST (cs/http-method)})
+      (map (juxt :method :name)) set)
  => #{[:GET "Get a product"]
       [:POST "Create a product"]}
 
- (->> (cs/endpoint :name "Create, get or delete an order"
-                   :httpMethods {:GET (cs/http-method)
-                                 :POST (cs/http-method)
-                                 :DELETE (cs/http-method)})
-      cultivate (map (juxt :method :name)) set)
+ (->> (cultivate :name "Create, get or delete an order"
+                 :httpMethods {:GET (cs/http-method)
+                               :POST (cs/http-method)
+                               :DELETE (cs/http-method)})
+      (map (juxt :method :name)) set)
  => #{[:GET "Get an order"]
       [:POST "Create an order"]
       [:DELETE "Delete an order"]})
@@ -87,17 +91,17 @@
 (fact
  "Category is more pleasant to use if the levels are named."
 
- (-> (cs/endpoint :category ["Insight" "KPI API"]) cultivate first :category)
+ (-> (cultivate :category ["Insight" "KPI API"]) first :category)
  => {:section "Insight" :api "KPI API"})
 
 (fact
  "Path parameters are included in the general :parameters list.
   They're all required."
 
- (-> (cs/endpoint :pathParameters ["id"]
-                  :parameter_descriptions {:id "The user ID"}
-                  :alias {:id "user_id"})
-     cultivate first :parameters)
+ (-> (cultivate :pathParameters ["id"]
+                :parameter_descriptions {:id "The user ID"}
+                :alias {:id "user_id"})
+     first :parameters)
  => [{:name "id"
       :aliases ["user_id"]
       :description "The user ID"
@@ -107,17 +111,17 @@
 (fact
  "Query parameters are included in the general :parameters list too."
 
- (-> (cs/endpoint :httpMethods {:GET (cs/http-method :required ["email"])}
-                  :parameter_descriptions {:email "The email"})
-     cultivate first :parameters)
+ (-> (cultivate :httpMethods {:GET (cs/http-method {:required ["email"]})}
+                :parameter_descriptions {:email "The email"})
+     first :parameters)
  => [{:name "email"
       :description "The email"
       :type :query
       :required? true}]
 
- (-> (cs/endpoint :httpMethods {:POST (cs/http-method :optional ["name"])}
-                  :parameter_descriptions {:name "The name"})
-     cultivate first :parameters)
+ (-> (cultivate :httpMethods {:POST (cs/http-method {:optional ["name"]})}
+                :parameter_descriptions {:name "The name"})
+     first :parameters)
  => [{:name "name"
       :description "The name"
       :type :query
@@ -131,8 +135,8 @@
 
   Required pagination parameters are not treated this way."
 
- (let [endpoint (-> (cs/endpoint :httpMethods {:GET (cs/http-method :optional ["limit" "offset" "since" "until"])})
-                    cultivate first)]
+ (let [endpoint (-> (cultivate :httpMethods {:GET (cs/http-method {:optional ["limit" "offset" "since" "until"]})})
+                    first)]
 
    (:parameters endpoint) => []
    (:pagination endpoint) => [{:name "limit"
@@ -152,17 +156,17 @@
  "If there are no pagination parameters, the :pagination key is
   removed, instead of it pointing to an empty list."
 
- (-> (cs/endpoint) cultivate first :pagination) => nil)
+ (-> (cultivate) first :pagination) => nil)
 
 (fact
  "The filter parameter is also treated specially, since there is a
   list of valid filters for a given endpoint. This too is removed from
   the proper parameters list (if optional)."
 
- (let [endpoint (-> (cs/endpoint :httpMethods {:GET (cs/http-method :optional ["filters"]
-                                                                    :filters ["merchant"]
-                                                                    :default_filters [])})
-                    cultivate first)]
+ (let [endpoint (-> (cultivate :httpMethods {:GET (cs/http-method {:optional ["filters"]
+                                                                   :filters ["merchant"]
+                                                                   :default_filters []})})
+                    first)]
 
    (:parameters endpoint) => []
    (:filters endpoint) => [{:name "merchant"
@@ -173,59 +177,59 @@
  "If there is no filter parameter, the :filters key is removed,
   instead of it pointing to an empty list."
 
- (-> (cs/endpoint) cultivate first :filters) => nil)
+ (-> (cultivate) first :filters) => nil)
 
 (fact
  "We prefer response-formats over valid-output-formats since
   'response' is more accurate than 'output', and there is no list of
   'invalid' formats, so the validity is implicit."
 
- (-> (cs/endpoint :valid_output_formats ["json" "jsonp"])
-     cultivate first :response-formats)
+ (-> (cultivate :valid_output_formats ["json" "jsonp"])
+     first :response-formats)
  => [:json :jsonp])
 
 (fact
  "Likewise, there's a default-response-format instead of a
   default-output-format."
 
- (-> (cs/endpoint :default_output_format "json")
-     cultivate first :default-response-format)
+ (-> (cultivate :default_output_format "json")
+     first :default-response-format)
  => :json)
 
 (fact
  "We represent the access token types as a set of keys, instead of a
   list, since the data isn't inherently ordered."
 
- (-> (cs/endpoint :httpMethods {:GET (cs/http-method :access_token_types ["server" "user"])})
-     cultivate first :access-token-types)
+ (-> (cultivate :httpMethods {:GET (cs/http-method {:access_token_types ["server" "user"]})})
+     first :access-token-types)
  => #{:server :user})
 
 (fact
  "Authentication is required if there is any access token types
   listed."
 
- (-> (cs/endpoint :httpMethods {:GET (cs/http-method :access_token_types ["server"])})
-     cultivate first :requires-authentication?)
+ (-> (cultivate :httpMethods {:GET (cs/http-method {:access_token_types ["server"]})})
+     first :requires-authentication?)
  => true
 
- (-> (cs/endpoint :httpMethods {:GET (cs/http-method :access_token_types [])})
-     cultivate first :requires-authentication?)
+ (-> (cultivate :httpMethods {:GET (cs/http-method {:access_token_types []})})
+     first :requires-authentication?)
  => false)
 
 (fact
  "Responses are sorted into :success and :failures."
 
- (-> (cs/endpoint :httpMethods
-                  {:GET (cs/http-method :responses [{:status 200
-                                                     :description "OK"
-                                                     :type "string"}
-                                                    {:status 422
-                                                     :description "NO!"
-                                                     :type "string"}
-                                                    {:status 500
-                                                     :description "OH NO!"
-                                                     :type "error"}])})
-     cultivate first :responses)
+ (-> (cultivate :httpMethods
+                {:GET (cs/http-method {:responses [{:status 200
+                                                    :description "OK"
+                                                    :type "string"}
+                                                   {:status 422
+                                                    :description "NO!"
+                                                    :type "string"}
+                                                   {:status 500
+                                                    :description "OH NO!"
+                                                    :type "error"}]})})
+     first :responses)
  => {:success {:status 200
                :description "OK"
                :type :string}
@@ -240,9 +244,9 @@
  "The success response contains a :samples if it is present
   in :sample-responses."
 
- (-> (cs/endpoint :httpMethods {:GET (cs/http-method :responses [{:status 200, :description "", :type "string"}])}
-                  :path "terms")
-     cultivate first :responses)
+ (-> (cultivate :httpMethods {:GET (cs/http-method {:responses [{:status 200, :description "", :type "string"}]})}
+                :path "terms")
+     first :responses)
  => {:success {:status 200
                :description ""
                :type :string
@@ -250,4 +254,4 @@
                          :jsonp "terms jsonp"}}
      :failures []})
 
-(fact (-> (cs/endpoint :deprecated "1.0") cultivate first :deprecated) => "1.0")
+(fact (-> (cultivate :deprecated "1.0") first :deprecated) => "1.0")

@@ -1,6 +1,6 @@
 (ns spid-docs.cultivate.content-shells)
 
-(defn http-method [& {:as m}]
+(defn http-method [& [m]]
   (merge
    {:name "!"
     :optional []
@@ -13,7 +13,7 @@
     :access_token_types []}
    m))
 
-(defn endpoint [& {:as m}]
+(defn endpoint [& [m]]
   (merge
    {:category ["!" "!"]
     :name "!"
