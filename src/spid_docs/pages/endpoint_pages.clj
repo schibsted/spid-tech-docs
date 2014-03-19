@@ -1,31 +1,50 @@
 (ns spid-docs.pages.endpoint-pages
+  "Functions to render endpoint pages. All the functions work on readily
+   cultivated data from cultivate/endpoints, either the whole map, or parts of
+   it. The formal definition of this data structure can be found in
+   spid-docs.validate-cultivated"
   (:require [clojure.string :as str]
             [spid-docs.enlive :as enlive]
             [spid-docs.example-code :refer [create-example-code]]
+            [spid-docs.formatting :refer [pluralize enumerate-humanely to-id]]
             [spid-docs.http :refer [get-response-status-name]]
-            [spid-docs.pages.type-pages :refer [type-path]]
+            [spid-docs.pages.type-pages :refer [render-type-definition]]
+            [spid-docs.routes :refer [api-path endpoint-path]]
             [spid-docs.pimp.markdown :refer [render-inline render]]))
 
-(def lang-names {:curl "cURL" :clojure "Clojure"})
-(def lang-classes {:curl "sh" :clojure "clj"})
-(def format-names {:json "JSON" :jsonp "JSON-P" :xml "XML"})
-(def format-classes {:json "js" :jsonp "js"})
-(def preferred-format-order [:json :jsonp :xml])
+(def lang-names
+  "Human-readable language names"
+  {:curl "cURL" :clojure "Clojure"})
 
-(defn endpoint-url
-  "Given an endpoint, return the URL to the page in the documentation app."
+(def lang-classes
+  "Classes to use for syntax highlighting, should be a valid Pygments lexer"
+  {:curl "sh" :clojure "clj"})
+
+(def format-names
+  "Human-readable names for response formats"
+  {:json "JSON" :jsonp "JSON-P" :xml "XML"})
+
+(def format-classes
+  "Class names representing response formats. Will be used for syntax
+   highlighting, and must be avalid Pygments lexer."
+  {:json "js" :jsonp "js"})
+
+(def preferred-format-order
+  "Sample outputs are rendered in this order"
+  [:json :jsonp :xml])
+
+(defn render-category
+  "Render a link to the containing API category, e.g. 'Identity Management' etc"
   [endpoint]
-  (str "/endpoints/" (:method endpoint) (:path endpoint)))
-
-(defn render-category [endpoint]
-  [:a.mod.category.small.faded.mbn
-   {:href "#"}
-   (get-in endpoint [:category :section])])
+  (let [cat (get-in endpoint [:category :section])]
+    [:a.mod.category.small.faded.mbn {:href (api-path {:id (to-id cat)})} cat]))
 
 (defn render-title [endpoint]
   [:h1.mbn (str (:method endpoint) " " (:path endpoint))])
 
-(defn render-authentication [endpoint]
+(defn render-authentication
+  "Render the kinds of authentication tokens supported by this endpoint."
+  [endpoint]
   (if (:requires-authentication? endpoint)
     [:p.small.faded.mtn
      "Requires authentication with "
@@ -83,22 +102,17 @@
     [:div.wrap
      (render-request-examples endpoint)]]])
 
-(defn- enumerate-humanely
-  "Take a list of words, and return a formatted string that enumerates the words
-   in a human way, e.g. 'cow, horse and pig'."
-  [coll]
-  (str/join "" (drop
-                1 (interleave
-                   (into
-                    (list (str (if (= (count coll) 2) " and " ", and ")) "")
-                    (repeat (dec (count coll)) ", "))
-                   coll))))
-
-(defn- pluralize [word count]
-  (if (= count 1) word (str word "s")))
-
 (defn- format-response-status [status]
   (str status " " (get-response-status-name status)))
+
+(defn- flag-pertinent-types
+  "Flags types mentioned in the endpoint's pertinent types as pertinent, i.e.,
+  marks them for inline rendering on the page."
+  [endpoint types]
+  (let [pertinent (:pertinent-types endpoint)
+        typelist (map #(assoc-in % [:pertinent?]
+                                 (>= (.indexOf pertinent (:id %)) 0)) (vals types))]
+    (zipmap (map :id typelist) typelist)))
 
 (defn render-response-formats [endpoint]
   [:p
@@ -106,10 +120,13 @@
    (enumerate-humanely (:response-formats endpoint))
    (pluralize " response format" (count (:response-formats endpoint)))])
 
-(defn render-response-type [response]
+(defn render-response-type [response types]
   (list
    [:h2 (str "Success: " (format-response-status (:status response)))]
-   (render (:description response))))
+   (render (:description response))
+   (->> (vals types)
+        (filter :pertinent?)
+        (map #(render-type-definition % types)))))
 
 (defn- render-response-failure [failure]
   [:li
@@ -132,19 +149,21 @@
     (map #(render-sample-response % (% samples))
          (sort-by #(.indexOf preferred-format-order %) (keys samples)))]))
 
-(defn- render-response [endpoint]
+(defn- render-response [endpoint types]
   [:div.section
    [:div.main
     [:div.wrap
      [:h1.mbn "Response"]
      (render-response-formats endpoint)
-     (render-response-type (-> endpoint :responses :success))
+     (render-response-type
+      (-> endpoint :responses :success)      ; Success response description
+      (flag-pertinent-types endpoint types)) ; Get the type map with pertinent types flagged
      (render-response-failures (-> endpoint :responses :failures))]]
    [:div.aside
     [:div.wrap
      (render-sample-responses (-> endpoint :responses :success :samples))]]])
 
-(defn create-page [endpoint]
+(defn create-page [endpoint types]
   {:split-page? true ;; Makes the layout render a grey right column
    :title (str (:method endpoint) " " (:path endpoint))
    :body (list [:div.section
@@ -157,9 +176,9 @@
                [:div.separator]
                (render-request endpoint)
                [:div.separator]
-               (render-response endpoint))})
+               (render-response endpoint types))})
 
-(defn create-pages [endpoints]
+(defn create-pages [endpoints types]
   (->> [{:id :get-user-id-userId-email-logins
          :path "/user/{email}/logins"
          :api-path "/api/2/user/{email}/logins"
@@ -185,6 +204,7 @@
          :filters ["merchant"]
          :access-token-types ["server"]
          :requires-authentication? true
+         :pertinent-types [:login_attempt :login-type]
          :responses {:success {:status 200
                                :description "A list of login attempt objects"
                                :type [:login_attempt]
@@ -229,5 +249,5 @@
                                 {:status 418
                                  :description "Why are you contacting your teapot instead of the SPiD servers? Silly rabbit."
                                  :type :error}]}}]
-       (map (juxt endpoint-url #(partial create-page %)))
+       (map (juxt endpoint-path #(partial create-page % types)))
        (into {})))

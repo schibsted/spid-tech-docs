@@ -11,13 +11,10 @@
           :type :query
           :description "Ok"} (into {} options)))
 
-(fact "It generates endpoint urls"
-      (endpoint-url {:path "/logins" :method "GET"}) => "/endpoints/GET/logins")
-
 (fact
  (render-category
   {:category {:section "Identity Management"}}) => [:a.mod.category.small.faded.mbn
-                                                    {:href "#"}
+                                                    {:href "/apis/dentity-management"}
                                                     "Identity Management"])
 
 (fact (render-title {:method "GET" :path "/logins"}) => [:h1.mbn "GET /logins"])
@@ -95,8 +92,18 @@
       "This endpoint supports the json, jsonp, and xml response formats")
 
 (fact
- (render-response-type {:status 200 :description "**Hey**"}) => '([:h2 "Success: 200 OK"]
-                                                                    "<p><strong>Hey</strong></p>"))
+ (let [hiccup (render-response-type {:status 200 :description "**Hey**"} [])]
+   (first hiccup) => [:h2 "Success: 200 OK"]
+   (second hiccup) => "<p><strong>Hey</strong></p>"))
+
+(fact "Renders pertinent types inline"
+      (->>
+       (render-response-type {:status 200 :description "**Hey**"}
+                             {:login {:id :login
+                                      :pertinent? true
+                                      :fields [{:name "id" :type :string}]}})
+       (hiccup-find [:table])
+       count) => 1)
 
 (fact
  (->>
@@ -104,3 +111,8 @@
                              {:status 405 :description "WAT"}])
   (hiccup-find [:li :span])
   (map hiccup-text)) => '("No" "WAT"))
+
+(fact "Renders json sample response before jsonp"
+      (->> (render-sample-responses {:jsonp "JSONP" :json "JSON"})
+           (hiccup-find [:.tab-content])
+           (map hiccup-text)) => '("JSON" "JSONP"))
