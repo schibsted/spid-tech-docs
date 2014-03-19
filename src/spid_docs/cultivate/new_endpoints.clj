@@ -59,18 +59,32 @@
        (filter (comp pagination-descriptions keyword))
        (map #(create-query-parameter % false {:parameter_descriptions pagination-descriptions}))))
 
+(defn- match-sample [[^String path sample] endpoint-id]
+  (let [sample-prefix (str endpoint-id "/sample.")]
+    (when (.startsWith path sample-prefix)
+      [(keyword (subs path (count sample-prefix))) sample])))
+
+(defn- find-endpoint-samples [endpoint-id sample-responses]
+  (keep #(match-sample % endpoint-id) sample-responses))
+
+(defn- add-samples [response endpoint-id sample-responses]
+  (let [samples (find-endpoint-samples endpoint-id sample-responses)]
+    (if (seq samples)
+      (assoc response :samples (into {} samples))
+      response)))
+
 (defn- cultivate-endpoint-1 [endpoint [method details] raw-content]
   (let [{:keys [path category pathParameters valid_output_formats default_output_format deprecated]} endpoint
         {:keys [required optional default_filters filters access_token_types responses]} details
-        {:keys [pagination-descriptions filter-descriptions endpoint-descriptions]} raw-content
-        id (str (to-simple-dashed-word path) "-" (.toLowerCase (name method)))]
+        {:keys [pagination-descriptions filter-descriptions endpoint-descriptions sample-responses]} raw-content
+        endpoint-id (str (to-simple-dashed-word path) "-" (.toLowerCase (name method)))]
     (with-optional-keys
-      {:id (keyword id)
+      {:id (keyword endpoint-id)
        :path (str "/" path)
        :api-path (str "/api/2/" path)
        :method method
        :name (fix-multimethod-name (:name endpoint) method)
-       :description (get endpoint-descriptions (str id ".md"))
+       :description (get endpoint-descriptions (str endpoint-id ".md"))
        :category {:section (first category) :api (second category)}
        :parameters (collect-parameters required optional pathParameters pagination-descriptions endpoint)
        :?pagination (collect-pagination-params optional pagination-descriptions)
@@ -79,8 +93,8 @@
        :default-response-format (keyword default_output_format)
        :access-token-types (set (map keyword access_token_types))
        :requires-authentication? (not (empty? access_token_types))
-       :responses {:success (create-response (first (filter success? responses)))
-                   :failure (map create-response (remove success? responses))}
+       :responses {:success (-> success? (filter responses) first create-response (add-samples endpoint-id sample-responses))
+                   :failures (map create-response (remove success? responses))}
        :?deprecated deprecated})))
 
 (defn cultivate-endpoint [endpoint raw-content]

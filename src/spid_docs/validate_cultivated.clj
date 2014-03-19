@@ -45,7 +45,7 @@
   {:status Num
    :description Str
    :type Keyword
-   (optional-key :sample) Str})
+   (optional-key :samples) Str})
 
 (def Endpoint
   {:id Keyword
@@ -63,5 +63,5 @@
    :access-token-types #{(enum :user :server)}
    :requires-authentication? Boolean
    :responses {:success Response
-               :failure [Response]}
+               :failures [Response]}
    (optional-key :deprecated) Str})

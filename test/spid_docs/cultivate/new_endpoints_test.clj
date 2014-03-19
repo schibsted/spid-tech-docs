@@ -4,7 +4,9 @@
             [spid-docs.cultivate.new-endpoints :refer :all]))
 
 (def raw-content
-  {:endpoint-descriptions {"terms-get.md" "terms desc"}
+  {:sample-responses {"terms-get/sample.json" "terms json"
+                      "terms-get/sample.jsonp" "terms jsonp"}
+   :endpoint-descriptions {"terms-get.md" "terms desc"}
    :pagination-descriptions {:limit  "limit desc"
                              :offset "offset desc"
                              :since  "since desc"
@@ -211,7 +213,7 @@
  => false)
 
 (fact
- "Responses are sorted into :success and :failure."
+ "Responses are sorted into :success and :failures."
 
  (-> (cs/endpoint :httpMethods
                   {:GET (cs/http-method :responses [{:status 200
@@ -227,11 +229,25 @@
  => {:success {:status 200
                :description "OK"
                :type :string}
-     :failure [{:status 422
-                :description "NO!"
-                :type :string}
-               {:status 500
-                :description "OH NO!"
-                :type :error}]})
+     :failures [{:status 422
+                 :description "NO!"
+                 :type :string}
+                {:status 500
+                 :description "OH NO!"
+                 :type :error}]})
+
+(fact
+ "The success response contains a :samples if it is present
+  in :sample-responses."
+
+ (-> (cs/endpoint :httpMethods {:GET (cs/http-method :responses [{:status 200, :description "", :type "string"}])}
+                  :path "terms")
+     cultivate first :responses)
+ => {:success {:status 200
+               :description ""
+               :type :string
+               :samples {:json "terms json"
+                         :jsonp "terms jsonp"}}
+     :failures []})
 
 (fact (-> (cs/endpoint :deprecated "1.0") cultivate first :deprecated) => "1.0")
