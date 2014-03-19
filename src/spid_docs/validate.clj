@@ -29,7 +29,7 @@
    (optional-key :fields) [{:name Str
                             :type (either Keyword [Keyword])
                             (optional-key :description) Str
-                            (optional-key :always-available) Boolean}]
+                            (optional-key :always-available?) Boolean}]
    (optional-key :values) [{:value Str
                             :description Str}]})
 
@@ -45,6 +45,6 @@
              :articles {Str Str}
              :concepts {Str Str}
              :params {Str Keyword}
-             :types [Type]
+             :types {Keyword Type}
              :apis [APICategory]}
             raw-content))

@@ -43,7 +43,7 @@
           :fields [{:name Str
                     :type (either Keyword [Keyword])
                     (optional-key :description) Str
-                    (optional-key :always-available) Boolean}]}))
+                    (optional-key :always-available?) Boolean}]}))
 
 (def EnumType
   (merge PrimitiveType
@@ -59,6 +59,6 @@
              :articles {Str Str}
              :concepts {Str Str}
              :params {Str Keyword}
-             :types [Type]
+             :types {Keyword Type}
              :apis {[Str Str] Str}} ; tuple of [:section :api] -> :description
             raw-content))
