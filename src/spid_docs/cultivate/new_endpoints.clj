@@ -76,7 +76,7 @@
    everywhere."
   (->> optional
        (filter (comp pagination-descriptions keyword))
-       (map #(create-query-parameter % false {:parameter_descriptions pagination-descriptions}))))
+       (map #(create-parameter % :query false {:parameter_descriptions pagination-descriptions}))))
 
 (defn- match-sample [[^String path sample] endpoint-id]
   "Does this path match the given endpoint-id? If it does, keep it and
