@@ -8,7 +8,8 @@
    trailing and double dashes."
   (-> path
       (str/replace #"[^a-zA-Z]+" "-")
-      (str/replace #"-$" "")))
+      (str/replace #"-$" "")
+      (str/replace #"^-" "")))
 
 (def verbs
   "Verbs to use for different http methods when cobbling together the
