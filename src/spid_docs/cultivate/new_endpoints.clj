@@ -4,76 +4,100 @@
             [spid-docs.homeless :refer [with-optional-keys]]))
 
 (defn- to-simple-dashed-word [path]
+  "Replaces all special characters with dashes, avoiding leading,
+   trailing and double dashes."
   (-> path
       (str/replace #"[^a-zA-Z]+" "-")
       (str/replace #"-$" "")))
 
-(def verbs {:GET "Get"
-            :POST "Create"
-            :DELETE "Delete"})
+(def verbs
+  "Verbs to use for different http methods when cobbling together the
+   endpoint name."
+  {:GET "Get"
+   :POST "Create"
+   :DELETE "Delete"})
 
 (defn- fix-multimethod-name [name method]
+  "Since names are shared between http methods in the source
+   endpoints, we detect descriptions that start with a permutation of
+   'get, create or delete' - and replace it with the relevant verb for
+   this method."
   (str/replace name #"(?i)^(?:(?:get|create|delete),? )+or (?:get|create|delete) " (str (verbs method) " ")))
 
-(defn- add-alias-to-param [param endpoint name]
-  (if-let [alias ((keyword name) (:alias endpoint {}))]
+(defn- add-alias-to-param [param endpoint]
+  "Check if the endpoint has an alias for this parameter, and add it
+   to the param map if a match is found."
+  (if-let [alias ((keyword (:name param)) (:alias endpoint {}))]
     (assoc param :aliases [alias])
     param))
 
-(defn- create-path-parameter [name endpoint]
+(defn- create-parameter [name type required? endpoint]
+  "Create a parameter map with the given values. Carries its weight by
+   looking up description and aliases."
   (-> {:name name
        :description ((keyword name) (:parameter_descriptions endpoint))
-       :type :path
-       :required? true}
-      (add-alias-to-param endpoint name)))
-
-(defn- create-query-parameter [name required? endpoint]
-  (-> {:name name
-       :description ((keyword name) (:parameter_descriptions endpoint))
-       :type :query
+       :type type
        :required? required?}
-      (add-alias-to-param endpoint name)))
+      (add-alias-to-param endpoint)))
 
 (defn create-filter [filter defaults filter-descriptions]
+  "Create a filter map with the given values. Looks up description for
+   the filter from the central filter descriptions."
   {:name filter
    :description (filter-descriptions (keyword filter))
    :default? (.contains defaults filter)})
 
 (defn create-response [response]
+  "The only difference between old responses and new responses is that
+   the type is a keyword instead of a string."
   (update-in response [:type] keyword))
 
 (defn success? [response]
+  "Is the response status between 200 and 299, ie a success?"
   (<= 200 (:status response) 299))
 
 (defn- collect-parameters [required optional pathParameters pagination-descriptions endpoint]
+  "Gather required, optional and path parameters in one list. The
+   optional pagination parameters and 'filters' are removed, since
+   they're handled specially elsewhere."
   (concat
-   (map #(create-path-parameter % endpoint) pathParameters)
-   (map #(create-query-parameter % true endpoint) required)
+   (->> pathParameters (map #(create-parameter % :path true endpoint)))
+   (->> required (map #(create-parameter % :query true endpoint)))
    (->> optional
         (remove #{"filters"})
         (remove (comp pagination-descriptions keyword))
-        (map #(create-query-parameter % false endpoint)))))
+        (map #(create-parameter % :query false endpoint)))))
 
 (defn- collect-pagination-params [optional pagination-descriptions]
+  "Gather the pagination parameters in their own list, getting
+   descriptions from a central location instead of on the endpoint
+   itself. This is to avoid repeating descriptions for pagination
+   everywhere."
   (->> optional
        (filter (comp pagination-descriptions keyword))
        (map #(create-query-parameter % false {:parameter_descriptions pagination-descriptions}))))
 
 (defn- match-sample [[^String path sample] endpoint-id]
+  "Does this path match the given endpoint-id? If it does, keep it and
+   use the file ending as a keyword. Otherwise drop it."
   (let [sample-prefix (str endpoint-id "/sample.")]
     (when (.startsWith path sample-prefix)
       [(keyword (subs path (count sample-prefix))) sample])))
 
 (defn- find-endpoint-samples [endpoint-id sample-responses]
+  "Find all sample responses for this endpoint."
   (keep #(match-sample % endpoint-id) sample-responses))
 
 (defn- add-samples [response endpoint-id sample-responses]
+  "If there are any sample responses for this endpoint, add them to the response."
   (let [samples (find-endpoint-samples endpoint-id sample-responses)]
     (if (seq samples)
       (assoc response :samples (into {} samples))
       response)))
 
 (defn- cultivate-endpoint-1 [endpoint [method details] raw-content]
+  "Gather a bunch of information from all over to create a map that
+   includes everything you could ever want to know about an endpoint."
   (let [{:keys [path category pathParameters valid_output_formats default_output_format deprecated]} endpoint
         {:keys [required optional default_filters filters access_token_types responses]} details
         {:keys [pagination-descriptions filter-descriptions endpoint-descriptions sample-responses]} raw-content
@@ -98,4 +122,8 @@
        :?deprecated deprecated})))
 
 (defn cultivate-endpoint [endpoint raw-content]
+  "We define an endpoint as path + http method. The source list of
+   endpoints does not. So this function not only cultivates an endpoint,
+   it splits it into several endpoints based on the given set of http
+   methods."
   (map #(cultivate-endpoint-1 endpoint % raw-content) (:httpMethods endpoint)))
