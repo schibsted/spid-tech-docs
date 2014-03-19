@@ -2,11 +2,8 @@
   (:require [clojure.string :as str]
             [spid-docs.enlive :as enlive]
             [spid-docs.pimp.examples :refer [read-example]]
-            [spid-docs.pimp.markdown :as markdown]))
-
-
-(defn article-url [path]
-  (str/replace path #"\.md$" "/"))
+            [spid-docs.pimp.markdown :as markdown]
+            [spid-docs.routes :refer [article-path]]))
 
 (defn- insert-examples [markdown]
   (str/replace markdown #"(?m)^:example-code ([^ ]+) ([^ ]+) \"([^\"]+)\""
@@ -26,5 +23,5 @@
   HTML with interpolated examples."
   [articles]
   (->> articles
-       (map (juxt #(article-url (first %)) #(partial create-page %)))
+       (map (juxt #(article-path (first %)) #(partial create-page %)))
        (into {})))

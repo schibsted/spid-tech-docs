@@ -1,18 +1,13 @@
 (ns spid-docs.pages.api-pages
   "Functions to work with API categorization levels."
-  (:require [spid-docs.pages.endpoint-pages :as ep]))
-
-(defn api-url
-  "Takes a 'service', i.e., the top-level API categorization unit (Identity
-   management, payment, etc) and returns its URL."
-  [service]
-  (str "/apis/" (subs (str (:id service)) 1)))
+  (:require [spid-docs.pages.endpoint-pages :as ep]
+            [spid-docs.routes :refer [api-path endpoint-path]]))
 
 (defn- render-api [api]
   (list [:h2 (:title api)]
         [:p (:description api)]
         [:ul (map #(vector :li
-                           [:a {:href (ep/endpoint-url %)}
+                           [:a {:href (endpoint-path %)}
                             (str "/" (:path %))]) (:endpoints api))]))
 
 (defn create-page [service]
@@ -26,5 +21,5 @@
   generate a map of url => page function."
   [services]
   (->> services
-       (map (juxt api-url #(partial create-page %)))
+       (map (juxt api-path #(partial create-page %)))
        (into {})))

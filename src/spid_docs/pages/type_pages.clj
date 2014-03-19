@@ -1,12 +1,14 @@
 (ns spid-docs.pages.type-pages
-  (:require [spid-docs.pimp.markdown :as markdown]))
+  (:require [spid-docs.pimp.markdown :as markdown]
+            [spid-docs.routes :refer [type-path]]))
 
-(defn type-path
-  "Given a type (typically one entry from the vector in resources/types.end),
-   return its URL"
-  [type]
-  (if (:description type)
-    (str "/types/" (name (:id type)))))
+(defn render-type-definition
+  "Render the type definition specified by the type map. See the validation data
+   structures for a description of the contents. local-types is a list of type
+   ids for types that are expected to be found inline on the page. Thus, they
+   will be linked as anchors instead of to external pages."
+  [type local-types]
+  [:table])
 
 (defn create-page [type]
   {:body [:div.wrap
