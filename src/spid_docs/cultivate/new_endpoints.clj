@@ -1,12 +1,12 @@
 (ns spid-docs.cultivate.new-endpoints
+  "Gather all relevant information about endpoints from a few different sources."
   (:require [clojure.string :as str]
             [spid-docs.homeless :refer [with-optional-keys]]))
 
-(defn- generate-id [path]
+(defn- to-simple-dashed-word [path]
   (-> path
       (str/replace #"[^a-zA-Z]+" "-")
-      (str/replace #"-$" "")
-      keyword))
+      (str/replace #"-$" "")))
 
 (def verbs {:GET "Get"
             :POST "Create"
@@ -45,33 +45,33 @@
 (defn success? [response]
   (<= 200 (:status response) 299))
 
-(defn- collect-parameters [required optional pathParameters param-descriptions endpoint]
+(defn- collect-parameters [required optional pathParameters pagination-descriptions endpoint]
   (concat
    (map #(create-path-parameter % endpoint) pathParameters)
    (map #(create-query-parameter % true endpoint) required)
    (->> optional
         (remove #{"filters"})
-        (remove (comp param-descriptions keyword))
+        (remove (comp pagination-descriptions keyword))
         (map #(create-query-parameter % false endpoint)))))
 
-(defn- collect-pagination-params [optional param-descriptions]
+(defn- collect-pagination-params [optional pagination-descriptions]
   (->> optional
-       (filter (comp param-descriptions keyword))
-       (map #(create-query-parameter % false {:parameter_descriptions param-descriptions}))))
+       (filter (comp pagination-descriptions keyword))
+       (map #(create-query-parameter % false {:parameter_descriptions pagination-descriptions}))))
 
 (defn- cultivate-endpoint-1 [endpoint [method details] raw-content]
-  (let [{:keys [path name category pathParameters valid_output_formats default_output_format deprecated]} endpoint
+  (let [{:keys [path category pathParameters valid_output_formats default_output_format deprecated]} endpoint
         {:keys [required optional default_filters filters access_token_types responses]} details
-        {:keys [param-descriptions filter-descriptions]} raw-content]
+        {:keys [pagination-descriptions filter-descriptions]} raw-content]
     (with-optional-keys
-      {:id (-> path generate-id)
+      {:id (keyword (str (to-simple-dashed-word path) "-" (.toLowerCase (name method))))
        :path (str "/" path)
        :api-path (str "/api/2/" path)
        :method method
-       :name (fix-multimethod-name name method)
+       :name (fix-multimethod-name (:name endpoint) method)
        :category {:section (first category) :api (second category)}
-       :parameters (collect-parameters required optional pathParameters param-descriptions endpoint)
-       :?pagination (collect-pagination-params optional param-descriptions)
+       :parameters (collect-parameters required optional pathParameters pagination-descriptions endpoint)
+       :?pagination (collect-pagination-params optional pagination-descriptions)
        :?filters (map #(create-filter % default_filters filter-descriptions) filters)
        :response-formats (map keyword valid_output_formats)
        :default-response-format (keyword default_output_format)

@@ -4,10 +4,10 @@
             [spid-docs.cultivate.new-endpoints :refer :all]))
 
 (def raw-content
-  {:param-descriptions {:limit  "limit desc"
-                        :offset "offset desc"
-                        :since  "since desc"
-                        :until  "until desc"}
+  {:pagination-descriptions {:limit  "limit desc"
+                             :offset "offset desc"
+                             :since  "since desc"
+                             :until  "until desc"}
    :filter-descriptions {:merchant "merchant desc"}})
 
 (defn cultivate [endpoint]
@@ -22,10 +22,23 @@
                                 :POST (cs/http-method)}) cultivate count) => 2)
 
 (fact
- "The path is used to generate a friendly identifier."
+ "The path and method is used to generate a friendly identifier. This
+  is used to look up information about the endpoint in other sources."
 
- (-> (cs/endpoint :path "terms") cultivate first :id) => :terms
- (-> (cs/endpoint :path "describe/{object}") cultivate first :id) => :describe-object)
+ (-> (cs/endpoint :path "terms"
+                  :httpMethods {:GET (cs/http-method)})
+     cultivate first :id)
+ => :terms-get
+
+ (-> (cs/endpoint :path "subscription"
+                  :httpMethods {:POST (cs/http-method)})
+     cultivate first :id)
+ => :subscription-post
+
+ (-> (cs/endpoint :path "describe/{object}"
+                  :httpMethods {:GET (cs/http-method)})
+     cultivate first :id)
+ => :describe-object-get)
 
 (fact
  "All paths are prefixed with a slash."
