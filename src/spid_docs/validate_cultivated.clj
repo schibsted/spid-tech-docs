@@ -48,7 +48,7 @@
    (optional-key :sample) Str})
 
 (def Endpoint
-  {:id Str
+  {:id Keyword
    :path Path
    :api-path Path
    :method (enum :GET :POST :DELETE)
