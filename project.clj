@@ -19,6 +19,7 @@
   :aliases {"build-site" ["run" "-m" "spid-docs.web/export"]}
   :profiles {:dev {:plugins [[lein-ring "0.8.10"]
                              [codox "0.6.7"]]
+                   :dependencies [[org.clojure/tools.namespace "0.2.4"]]
                    :source-paths ["dev"]
                    :test-paths ^:replace []}
              :test {:dependencies [[midje "1.6.0"]

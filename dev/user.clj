@@ -4,4 +4,5 @@
             [clojure.set :as set]
             [clojure.pprint :refer [pprint pp print-table]]
             [clojure.repl :refer :all]
-            [hiccup.core :as hiccup]))
+            [hiccup.core :as hiccup]
+            [clojure.tools.namespace.repl :refer [refresh]]))
