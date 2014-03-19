@@ -45,18 +45,18 @@
 (defn success? [response]
   (<= 200 (:status response) 299))
 
-(defn- collect-parameters [required optional pathParameters endpoint]
+(defn- collect-parameters [required optional pathParameters param-descriptions endpoint]
   (concat
    (map #(create-path-parameter % endpoint) pathParameters)
    (map #(create-query-parameter % true endpoint) required)
    (->> optional
         (remove #{"filters"})
-        (remove (comp pagination-params keyword))
+        (remove (comp param-descriptions keyword))
         (map #(create-query-parameter % false endpoint)))))
 
 (defn- collect-pagination-params [optional param-descriptions]
   (->> optional
-       (filter (comp pagination-params keyword))
+       (filter (comp param-descriptions keyword))
        (map #(create-query-parameter % false {:parameter_descriptions param-descriptions}))))
 
 (defn- cultivate-endpoint-1 [endpoint [method details] raw-content]
@@ -70,7 +70,7 @@
        :method method
        :name (fix-multimethod-name name method)
        :category {:section (first category) :api (second category)}
-       :parameters (collect-parameters required optional pathParameters endpoint)
+       :parameters (collect-parameters required optional pathParameters param-descriptions endpoint)
        :?pagination (collect-pagination-params optional param-descriptions)
        :?filters (map #(create-filter % default_filters filter-descriptions) filters)
        :response-formats (map keyword valid_output_formats)
