@@ -26,7 +26,7 @@
    (optional-key :description) Str
    (optional-key :name) Str
    (optional-key :type) Keyword
-   (optional-key :fields) [{:field Keyword
+   (optional-key :fields) [{:name Str
                             :type (either Keyword [Keyword])
                             (optional-key :description) Str
                             (optional-key :always-available) Boolean}]
