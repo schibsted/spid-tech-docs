@@ -2,10 +2,10 @@
   (:require [spid-docs.pimp.markdown :refer :all]
             [midje.sweet :refer :all]))
 
-(fact "It gracefully formats markdown"
-      (parse "### Hey") => "<h3>Hey</h3>"
-      (parse nil) => "")
+(fact "It gracefully renders markdown"
+      (render "### Hey") => "<h3>Hey</h3>"
+      (render nil) => "")
 
-(fact "It formats 'inline' markdown"
-      (inline-parse "Hey *there*") => "Hey <em>there</em>")
+(fact "It renders 'inline' markdown without a containing block element"
+      (render-inline "Hey *there*") => "Hey <em>there</em>")
 

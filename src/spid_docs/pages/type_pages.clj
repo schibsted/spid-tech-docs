@@ -11,7 +11,7 @@
 (defn create-page [type]
   {:body [:div.wrap
           [:h1 (name (:id type))]
-          (markdown/parse (:description type))]})
+          (markdown/render (:description type))]})
 
 (defn create-pages
   "Takes a list of types (typically those defined in resources/types.edn) and

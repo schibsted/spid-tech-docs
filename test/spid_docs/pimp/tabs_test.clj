@@ -4,7 +4,7 @@
             [spid-docs.pimp.tabs :refer :all]))
 
 (fact "It understands :tabs"
-      (transform-tabs (markdown/parse "
+      (transform-tabs (markdown/render "
 ## :tabs My tabs
 ### :tab One
 Hello

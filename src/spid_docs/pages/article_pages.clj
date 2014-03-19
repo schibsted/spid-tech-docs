@@ -16,7 +16,7 @@
                       "\n```\n"))))
 
 (defn create-page [[_ markdown]]
-  (let [body (-> markdown insert-examples markdown/parse)]
+  (let [body (-> markdown insert-examples markdown/render)]
     {:title (->> body (enlive/parse) (enlive/select [:h1]) first :content (apply str))
      :body [:div.wrap body]}))
 
