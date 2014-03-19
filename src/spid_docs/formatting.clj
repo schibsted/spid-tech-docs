@@ -18,3 +18,11 @@
                     (list (str (if (= (count coll) 2) " and " ", and ")) "")
                     (repeat (dec (count coll)) ", "))
                    coll))))
+
+(defn to-id [str]
+  "Replaces all special characters with dashes, avoiding leading,
+   trailing and double dashes."
+  (-> (.toLowerCase str)
+      (str/replace #"[^a-zA-Z]+" "-")
+      (str/replace #"-$" "")
+      (str/replace #"^-" "")))

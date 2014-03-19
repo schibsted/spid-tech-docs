@@ -14,3 +14,8 @@
       (enumerate-humanely ["apple" "banana"]) => "apple and banana"
       (enumerate-humanely ["apple" "banana" "grapes"]) => "apple, banana, and grapes"
       (enumerate-humanely ["apple" "banana" "grapes" "pie"]) => "apple, banana, grapes, and pie")
+
+(fact "Turns strings into id-friendly strings"
+      (to-id "/some/path") => "some-path"
+      (to-id "/some/{path}") => "some-path"
+      (to-id "Some sentence") => "some-sentence")
