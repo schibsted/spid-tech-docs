@@ -23,5 +23,5 @@
                    :source-paths ["dev"]
                    :test-paths ^:replace []}
              :test {:dependencies [[midje "1.6.0"]
-                                   [hiccup-find "0.2.1"]]
+                                   [hiccup-find "0.3.0"]]
                     :plugins [[lein-midje "3.1.3"]]}})

@@ -1,6 +1,6 @@
 (ns spid-docs.pages.endpoints-pages-test
   (:require [clojure.string :as str]
-            [hiccup-find.core :refer [hiccup-find]]
+            [hiccup-find.core :refer [hiccup-find hiccup-text]]
             [hiccup.page :refer [html5]]
             [midje.sweet :refer :all]
             [spid-docs.pages.endpoint-pages :refer :all]))
@@ -102,4 +102,5 @@
  (->>
   (render-response-failures [{:status 404 :description "No"}
                              {:status 405 :description "WAT"}])
-  (hiccup-find [:li])) => '("No" "WAT"))
+  (hiccup-find [:li :span])
+  (map hiccup-text)) => '("No" "WAT"))
