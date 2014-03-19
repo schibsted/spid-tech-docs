@@ -4,7 +4,8 @@
             [spid-docs.cultivate.new-endpoints :refer :all]))
 
 (def raw-content
-  {:pagination-descriptions {:limit  "limit desc"
+  {:endpoint-descriptions {"terms-get.md" "terms desc"}
+   :pagination-descriptions {:limit  "limit desc"
                              :offset "offset desc"
                              :since  "since desc"
                              :until  "until desc"}
@@ -41,6 +42,14 @@
  => :describe-object-get)
 
 (fact
+ "Descriptions are pulled out of the raw-content based on the endpoint id."
+
+ (-> (cs/endpoint :path "terms"
+                  :httpMethods {:GET (cs/http-method)})
+     cultivate first :description)
+ => "terms desc")
+
+(fact
  "All paths are prefixed with a slash."
 
  (-> (cs/endpoint :path "terms") cultivate first :path) => "/terms"
@@ -74,7 +83,7 @@
       [:DELETE "Delete an order"]})
 
 (fact
- "Category is more pleasant to use if it the levels are named."
+ "Category is more pleasant to use if the levels are named."
 
  (-> (cs/endpoint :category ["Insight" "KPI API"]) cultivate first :category)
  => {:section "Insight" :api "KPI API"})

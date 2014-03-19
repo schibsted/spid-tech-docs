@@ -62,13 +62,15 @@
 (defn- cultivate-endpoint-1 [endpoint [method details] raw-content]
   (let [{:keys [path category pathParameters valid_output_formats default_output_format deprecated]} endpoint
         {:keys [required optional default_filters filters access_token_types responses]} details
-        {:keys [pagination-descriptions filter-descriptions]} raw-content]
+        {:keys [pagination-descriptions filter-descriptions endpoint-descriptions]} raw-content
+        id (str (to-simple-dashed-word path) "-" (.toLowerCase (name method)))]
     (with-optional-keys
-      {:id (keyword (str (to-simple-dashed-word path) "-" (.toLowerCase (name method))))
+      {:id (keyword id)
        :path (str "/" path)
        :api-path (str "/api/2/" path)
        :method method
        :name (fix-multimethod-name (:name endpoint) method)
+       :description (get endpoint-descriptions (str id ".md"))
        :category {:section (first category) :api (second category)}
        :parameters (collect-parameters required optional pathParameters pagination-descriptions endpoint)
        :?pagination (collect-pagination-params optional pagination-descriptions)
