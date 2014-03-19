@@ -1,5 +1,7 @@
 (ns spid-docs.pages.endpoints-pages-test
-  (:require [hiccup-find.core :refer [hiccup-find]]
+  (:require [clojure.string :as str]
+            [hiccup-find.core :refer [hiccup-find]]
+            [hiccup.page :refer [html5]]
             [midje.sweet :refer :all]
             [spid-docs.pages.endpoint-pages :refer :all]))
 
@@ -78,3 +80,26 @@
              first
              (hiccup-find [:pre])
              count)) => 1)
+
+(defn text [node]
+  (str/join "" (rest node)))
+
+(fact "Enumerates response formats in a human style (with Oxford comma)"
+      (text (render-response-formats {:response-formats ["json"]})) =>
+      "This endpoint supports the json response format"
+
+      (text (render-response-formats {:response-formats ["json" "jsonp"]})) =>
+      "This endpoint supports the json and jsonp response formats"
+
+      (text (render-response-formats {:response-formats ["json" "jsonp" "xml"]})) =>
+      "This endpoint supports the json, jsonp, and xml response formats")
+
+(fact
+ (render-response-type {:status 200 :description "**Hey**"}) => '([:h2 "Success: 200 OK"]
+                                                                    "<p><strong>Hey</strong></p>"))
+
+(fact
+ (->>
+  (render-response-failures [{:status 404 :description "No"}
+                             {:status 405 :description "WAT"}])
+  (hiccup-find [:li])) => '("No" "WAT"))
