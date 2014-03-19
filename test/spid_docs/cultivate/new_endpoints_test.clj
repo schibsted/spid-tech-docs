@@ -4,8 +4,8 @@
             [spid-docs.cultivate.new-endpoints :refer :all]))
 
 (def raw-content
-  "Test data with relevant raw content when cultivating endpoint. Look
-   for these values in tests below."
+  "Test data with relevant raw content when cultivating endpoints.
+   Look for these values in tests below."
   {:sample-responses {"terms-get/sample.json" "terms json"
                       "terms-get/sample.jsonp" "terms jsonp"}
    :endpoint-descriptions {"terms-get.md" "terms desc"}
