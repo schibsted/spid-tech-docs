@@ -111,7 +111,7 @@
   [endpoint types]
   (reduce (fn [types p] (assoc-in types [p :inline?] true))
           types
-          (:inline-types endpoint)))
+          (filter #(contains? types %) (:inline-types endpoint))))
 
 (defn render-response-formats [endpoint]
   [:p
@@ -155,14 +155,23 @@
      [:h1.mbn "Response"]
      (render-response-formats endpoint)
      (render-response-type
-      (-> endpoint :responses :success)      ; Success response description
-      (flag-inline-types endpoint types)) ; Get the type map with inline types flagged
+      (-> endpoint :responses :success)   ; Success response description
+      (flag-inline-types endpoint types)) ; The type map with inline types flagged
      (render-response-failures (-> endpoint :responses :failures))]]
    [:div.aside
     [:div.wrap
      (render-sample-responses (-> endpoint :responses :success :samples))]]])
 
+(defn- warn-about-missing-typedefs [endpoint types]
+  (if-let [missing (->> (:inline-types endpoint)
+                     (filter #(not (contains? types %))))]
+    (binding [*out* *err*]
+      (println (str "Endpoint " (name (:method endpoint)) " " (:path endpoint)
+                    " references inline type" (if (> (count missing) 1) "s" "")
+                    " with missing definition: " (str/join ", " missing))))))
+
 (defn create-page [endpoint types]
+  (warn-about-missing-typedefs endpoint types)
   {:split-page? true ;; Makes the layout render a grey right column
    :title (str (name (:method endpoint)) " " (:path endpoint))
    :body (list [:div.section
