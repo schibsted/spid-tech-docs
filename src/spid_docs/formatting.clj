@@ -60,10 +60,11 @@
    individual items are calculated, and can thus columnize any kind of
    data (perhaps deeply nested)"
   [coll cols & [count-fn]]
-  (loop [columns (mapv (fn [_] []) (range cols))
-         sorted-coll (sort #(> (count-fn %1) (count-fn %2)) coll)]
-    (if (seq sorted-coll)
-      (recur (update-in columns [(shortest-index columns (column-count count-fn))]
-                        #(conj % (first sorted-coll)))
-             (rest sorted-coll))
-      columns)))
+  (let [count-fn (or count-fn count)]
+    (loop [columns (mapv (fn [_] []) (range cols))
+           sorted-coll (sort #(> (count-fn %1) (count-fn %2)) coll)]
+      (if (seq sorted-coll)
+        (recur (update-in columns [(shortest-index columns (column-count count-fn))]
+                          #(conj % (first sorted-coll)))
+               (rest sorted-coll))
+        columns))))
