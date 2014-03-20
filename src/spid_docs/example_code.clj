@@ -8,7 +8,8 @@
    "name" "John Doe"
    "birthday" "1977-01-31"
    "preferredUsername" "johnd"
-   "object" "User"})
+   "object" "User"
+   "id" "1337"})
 
 (defn- replace-path-parameters [url]
   (str/replace url #"\{([^}]+)\}" (fn [[_ match]] (examples match))))
