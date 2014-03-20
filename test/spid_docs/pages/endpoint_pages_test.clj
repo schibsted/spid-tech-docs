@@ -14,7 +14,7 @@
 (fact
  (render-category
   {:category {:section "Identity Management"}}) => [:a.mod.category.small.faded.mbn
-                                                    {:href "/apis/identity-management"}
+                                                    {:href "/#identity-management"}
                                                     "Identity Management"])
 
 (fact (render-title {:method "GET" :path "/logins"}) => [:h1.mbn "GET /logins"])

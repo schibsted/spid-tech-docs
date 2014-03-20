@@ -1,7 +1,6 @@
 (ns spid-docs.pages
   "Collects all kinds of pages from various sources"
   (:require [clojure.java.io :as io]
-            [spid-docs.pages.api-pages :as apis]
             [spid-docs.pages.article-pages :as articles]
             [spid-docs.pages.endpoint-pages :as endpoints]
             [spid-docs.pages.frontpage :as frontpage]
@@ -18,6 +17,4 @@
                                                 :split-page? true})}
     :endpoints (endpoints/create-pages (:endpoints content) (:types content))
     :articles (articles/create-pages (:articles content))
-    :types (types/create-pages (:types content))
-                                        ;:apis (apis/create-pages (:apis content))
-    }))
+    :types (types/create-pages (:types content))}))

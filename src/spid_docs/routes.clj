@@ -11,7 +11,7 @@
   "Takes a 'service', i.e., the top-level API categorization unit (Identity
    management, payment, etc) and returns its URL."
   [service]
-  (str "/apis/" (to-id-str service)))
+  (str "/#" (to-id-str service)))
 
 (defn article-path
   "Articles live at the root level, and their path is the same as the
