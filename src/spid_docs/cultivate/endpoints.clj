@@ -90,8 +90,9 @@
       response)))
 
 (defn- to-inline-types [string]
+  "Turn a string with space delimited words into a list of keywords."
   (when string
-   (map keyword (str/split string #" "))))
+    (map keyword (str/split string #" "))))
 
 (defn- cultivate-endpoint-1 [endpoint [method details] raw-content]
   "Gather a bunch of information from all over to create a map that
