@@ -28,7 +28,7 @@
              (hiccup-find [:table.sectioned])
              count) => 1)
 
-  (fact "Links to non-pertinent types with description"
+  (fact "Links to non-inline types with description"
         (->> (render-type-definition login types)
              (hiccup-find [:h5 :a]))) => 1)
 

@@ -13,7 +13,7 @@
    The types map defines possible types to link to. If the type is a link to a
    type with a description, a link will be generated. If the target type has no
    description, it is considered trivial, and no link is offered, only the type
-   name. If the target type is pertinent, it is assumed rendered on the same
+   name. If the target type is inline, it is assumed rendered on the same
    page, and an anchor link is generated."
   [type types]
   (let [list-type? (vector? type)
@@ -22,7 +22,7 @@
         prefix (if list-type? "list of " "")
         postfix (if list-type? (if (.endsWith type-name "s") "es" "s") "")
         typedef (type-id types)
-        path (if (:pertinent? typedef)
+        path (if (:inline? typedef)
                (str "#" (name type))
                (type-path typedef))]
     (list prefix
