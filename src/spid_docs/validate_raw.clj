@@ -54,12 +54,16 @@
 (def Type
   (either ObjectType EnumType PrimitiveType))
 
+(def EndpointDescription
+  {:introduction Str
+   (optional-key :inline-types) Str})
+
 (defn validate-raw-content [raw-content]
   (validate {:endpoints [Endpoint]
              :articles {Str Str}
              :concepts {Str Str}
              :sample-responses {Str Str}
-             :endpoint-descriptions {Str Str}
+             :endpoint-descriptions {Str EndpointDescription}
              :pagination-descriptions {Keyword Str}
              :filter-descriptions {Keyword Str}
              :types {Keyword Type}

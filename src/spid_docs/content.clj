@@ -1,7 +1,8 @@
 (ns spid-docs.content
   "Functions for loading and 'cultivating' (i.e. processing, cross-linking, etc)
    content from the various sources."
-  (:require [spid-docs.core :as spid]
+  (:require [mapdown.core :as mapdown]
+            [spid-docs.core :as spid]
             [spid-docs.cultivate.apis :as ca]
             [spid-docs.cultivate.endpoints :as ce]
             [stasis.core :as stasis]))
@@ -14,7 +15,7 @@
    :articles (stasis/slurp-directory "resources/articles" #"\.md$")
    :concepts (stasis/slurp-directory "resources/concepts" #"\.md$")
    :sample-responses (stasis/slurp-directory "resources/sample-responses" #".+\..+$")
-   :endpoint-descriptions (stasis/slurp-directory "resources/endpoints" #"\.md$")
+   :endpoint-descriptions (mapdown/slurp-directory "resources/endpoints" #"\.md$")
    :pagination-descriptions (spid/load-edn "pagination.edn")
    :filter-descriptions (spid/load-edn "filters.edn")
    :types (spid/load-edn "types.edn")

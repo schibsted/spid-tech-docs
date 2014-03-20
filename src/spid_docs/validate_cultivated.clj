@@ -60,6 +60,7 @@
    :default-response-format ResponseFormat
    (optional-key :pagination) [Parameter]
    (optional-key :filters) [Filter]
+   (optional-key :inline-types) [Keyword]
    :access-token-types #{(enum :user :server)}
    :requires-authentication? Boolean
    :responses {:success Response

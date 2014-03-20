@@ -89,6 +89,10 @@
       (assoc response :samples (into {} samples))
       response)))
 
+(defn- to-inline-types [string]
+  (when string
+   (map keyword (str/split string #" "))))
+
 (defn- cultivate-endpoint-1 [endpoint [method details] raw-content]
   "Gather a bunch of information from all over to create a map that
    includes everything you could ever want to know about an endpoint."
@@ -102,7 +106,8 @@
        :api-path (str "/api/2/" path)
        :method method
        :name (fix-multimethod-name (:name endpoint) method)
-       :description (get endpoint-descriptions (str endpoint-id ".md"))
+       :description (get-in endpoint-descriptions [(str endpoint-id ".md") :introduction])
+       :?inline-types (to-inline-types (get-in endpoint-descriptions [(str endpoint-id ".md") :inline-types]))
        :category {:section (first category) :api (second category)}
        :parameters (collect-parameters required optional pathParameters pagination-descriptions endpoint)
        :?pagination (collect-pagination-params optional pagination-descriptions)
