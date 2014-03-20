@@ -1,4 +1,7 @@
 <?php
+
+// php jsonify.php > resources/cached-endpoints.json
+
 require("routes.api.2.php");
 
 echo json_encode(array(

@@ -11,7 +11,7 @@
   "Loads content from .edn and .md files in resources/. See the readme for a
   run-down of various kinds of contents and where/how they are stored."
   []
-  {:endpoints (:data (spid/load-edn "cached-endpoints.edn"))
+  {:endpoints (:data (spid/load-json "cached-endpoints.json"))
    :articles (stasis/slurp-directory "resources/articles" #"\.md$")
    :concepts (stasis/slurp-directory "resources/concepts" #"\.md$")
    :sample-responses (stasis/slurp-directory "resources/sample-responses" #".+\..+$")

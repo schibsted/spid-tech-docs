@@ -1,14 +1,18 @@
 (ns spid-docs.core
   "Various utilities used across many namespaces"
-  (:require [clojure.java.io :as io]
+  (:require [clojure.data.json :as json]
+            [clojure.java.io :as io]
             [clojure.string :as str]))
+
+(defn- check-resource-existance [file]
+  (if (nil? (io/resource file))
+    (throw (Exception. (str "Unable to load " file ", no such file resources/" file)))))
 
 (defn load-edn
   "Read an edn file from resources. The path should be relative to the resources
   directory, e.g. (load-edn 'config.edn') to read resources/config.edn"
   [file]
-  (if (nil? (io/resource file))
-    (throw (Exception. (str "Unable to load " file ", no such file resources/" file))))
+  (check-resource-existance file)
   (let [content (slurp (clojure.java.io/resource file))
         forms (try
                 (read-string (str "[" (str/trim content) "]"))
@@ -18,3 +22,8 @@
       (throw (Exception. (str "File " file " should contain only a single map, but had " (count forms) " forms."))))
     (first forms)))
 
+(defn load-json
+  "Read a json file from resources. Keys are keywordized."
+  [file]
+  (check-resource-existance file)
+  (json/read-str (slurp (io/resource file)) :key-fn keyword))
