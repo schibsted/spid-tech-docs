@@ -24,5 +24,7 @@
 (defn cultivate-content
   "Combine and cross-link content"
   [raw-content]
-  (assoc raw-content
-    :endpoints (mapcat #(ce/cultivate-endpoint % raw-content) (:endpoints raw-content))))
+  (let [endpoints (mapcat #(ce/cultivate-endpoint % raw-content) (:endpoints raw-content))]
+    (assoc raw-content
+      :endpoints endpoints
+      :apis (ca/cultivate-apis (:apis raw-content) endpoints))))

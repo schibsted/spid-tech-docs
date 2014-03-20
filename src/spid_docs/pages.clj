@@ -12,7 +12,7 @@
    return page maps. These will eventually be post-processed and turned into HTML
    pages that Stasis will serve/export to disk."
   (stasis/merge-page-sources
-   {:general-pages {"/" (partial frontpage/create-page (:apis content) (:endpoints content))
+   {:general-pages {"/" (partial frontpage/create-page (:apis content))
                     "/endpoint-mockup/" (fn [] {:body (slurp (io/resource "endpoint-mockup.html"))
                                                 :split-page? true})}
     :endpoints (endpoints/create-pages (:endpoints content) (:types content))
