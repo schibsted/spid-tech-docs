@@ -1,7 +1,7 @@
 (ns spid-docs.cultivate.new-endpoints
   "Gather all relevant information about endpoints from a few different sources."
   (:require [clojure.string :as str]
-            [spid-docs.formatting :refer [to-id]]
+            [spid-docs.formatting :refer [to-id-str]]
             [spid-docs.homeless :refer [with-optional-keys]]))
 
 (def verbs
@@ -95,7 +95,7 @@
   (let [{:keys [path category pathParameters valid_output_formats default_output_format deprecated]} endpoint
         {:keys [required optional default_filters filters access_token_types responses]} details
         {:keys [pagination-descriptions filter-descriptions endpoint-descriptions sample-responses]} raw-content
-        endpoint-id (str (to-id path) "-" (.toLowerCase (name method)))]
+        endpoint-id (str (to-id-str path) "-" (.toLowerCase (name method)))]
     (with-optional-keys
       {:id (keyword endpoint-id)
        :path (str "/" path)

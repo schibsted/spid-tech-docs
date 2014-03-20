@@ -6,7 +6,7 @@
   (:require [clojure.string :as str]
             [spid-docs.enlive :as enlive]
             [spid-docs.example-code :refer [create-example-code]]
-            [spid-docs.formatting :refer [pluralize enumerate-humanely to-id]]
+            [spid-docs.formatting :refer [pluralize enumerate-humanely to-id-str]]
             [spid-docs.http :refer [get-response-status-name]]
             [spid-docs.pages.type-pages :refer [render-type-definition]]
             [spid-docs.routes :refer [api-path endpoint-path]]
@@ -37,7 +37,7 @@
   "Render a link to the containing API category, e.g. 'Identity Management' etc"
   [endpoint]
   (let [cat (get-in endpoint [:category :section])]
-    [:a.mod.category.small.faded.mbn {:href (api-path {:id (to-id cat)})} cat]))
+    [:a.mod.category.small.faded.mbn {:href (api-path {:id (to-id-str cat)})} cat]))
 
 (defn render-title [endpoint]
   [:h1.mbn (str (:method endpoint) " " (:path endpoint))])

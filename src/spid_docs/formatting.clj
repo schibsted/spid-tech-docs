@@ -19,7 +19,7 @@
                     (repeat (dec (count coll)) ", "))
                    coll))))
 
-(defn to-id [str]
+(defn to-id-str [str]
   "Replaces all special characters with dashes, avoiding leading,
    trailing and double dashes."
   (-> (.toLowerCase str)
