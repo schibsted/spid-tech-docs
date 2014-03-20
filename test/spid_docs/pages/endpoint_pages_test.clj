@@ -82,13 +82,13 @@
   (str/join "" (rest node)))
 
 (fact "Enumerates response formats in a human style (with Oxford comma)"
-      (text (render-response-formats {:response-formats ["json"]})) =>
+      (text (render-response-formats {:response-formats [:json]})) =>
       "This endpoint supports the json response format"
 
-      (text (render-response-formats {:response-formats ["json" "jsonp"]})) =>
+      (text (render-response-formats {:response-formats [:json :jsonp]})) =>
       "This endpoint supports the json and jsonp response formats"
 
-      (text (render-response-formats {:response-formats ["json" "jsonp" "xml"]})) =>
+      (text (render-response-formats {:response-formats [:json :jsonp :xml]})) =>
       "This endpoint supports the json, jsonp, and xml response formats")
 
 (fact
