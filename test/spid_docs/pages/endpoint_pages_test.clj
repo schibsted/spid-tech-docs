@@ -21,10 +21,10 @@
 
 (fact (render-authentication
        {:requires-authentication? true
-        :access-token-types ["server"]}) => [:p.small.faded.mtn
-                                             "Requires authentication with "
-                                             [:strong "server"]
-                                             " access token."])
+        :access-token-types [:server]}) => [:p.small.faded.mtn
+                                            "Requires authentication with "
+                                            [:strong "server"]
+                                            " access token."])
 
 (fact (render-authentication
        {:requires-authentication? true

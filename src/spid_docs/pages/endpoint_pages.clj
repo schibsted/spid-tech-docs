@@ -48,7 +48,7 @@
   (if (:requires-authentication? endpoint)
     [:p.small.faded.mtn
      "Requires authentication with "
-     [:strong (str/join " or " (:access-token-types endpoint))]
+     [:strong (str/join " or " (map name (:access-token-types endpoint)))]
      " access token."]))
 
 (defn render-description [endpoint]
