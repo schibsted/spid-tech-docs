@@ -100,15 +100,16 @@
   (let [{:keys [path category pathParameters valid_output_formats default_output_format deprecated]} endpoint
         {:keys [required optional default_filters filters access_token_types responses]} details
         {:keys [pagination-descriptions filter-descriptions endpoint-descriptions sample-responses]} raw-content
-        endpoint-id (str (to-id-str path) "-" (.toLowerCase (name method)))]
+        endpoint-id (str (to-id-str path) "-" (.toLowerCase (name method)))
+        endpoint-file (str "/" endpoint-id ".md")]
     (with-optional-keys
       {:id (keyword endpoint-id)
        :path (str "/" path)
        :api-path (str "/api/2/" path)
        :method method
        :name (fix-multimethod-name (:name endpoint) method)
-       :description (get-in endpoint-descriptions [(str endpoint-id ".md") :introduction])
-       :?inline-types (to-inline-types (get-in endpoint-descriptions [(str endpoint-id ".md") :inline-types]))
+       :description (get-in endpoint-descriptions [endpoint-file :introduction])
+       :?inline-types (to-inline-types (get-in endpoint-descriptions [endpoint-file :inline-types]))
        :category {:section (first category) :api (second category)}
        :parameters (collect-parameters required optional pathParameters pagination-descriptions endpoint)
        :?pagination (collect-pagination-params optional pagination-descriptions)

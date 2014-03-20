@@ -8,8 +8,8 @@
    Look for these values in tests below."
   {:sample-responses {"terms-get.json" "terms json"
                       "terms-get.jsonp" "terms jsonp"}
-   :endpoint-descriptions {"terms-get.md" {:introduction "terms desc"
-                                           :inline-types "string datetime"}}
+   :endpoint-descriptions {"/terms-get.md" {:introduction "terms desc"
+                                            :inline-types "string datetime"}}
    :pagination-descriptions {:limit  "limit desc"
                              :offset "offset desc"
                              :since  "since desc"
