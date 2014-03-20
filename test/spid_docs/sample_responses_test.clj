@@ -74,6 +74,4 @@
 
 (fact "It processes sample response"
       (-> {:code "201" :data {:clientId "666" :url "http://vg.no"}}
-          process-sample-response ) => {:sample-response
-                                        {:status "201"
-                                         :response "{\"clientId\":\"[Your client ID]\", \"url\":\"http://vg.no\"}\n"}})
+          process-sample-response ) => "{\"clientId\":\"[Your client ID]\", \"url\":\"http://vg.no\"}\n")

@@ -47,30 +47,39 @@
          (map process-data))))
 
 (defn process-sample-response [response]
-  {:sample-response
-   {:status (:code response)
-    :response (with-out-str (json/pprint (->> response :data process-data) :escape-slash false))}})
+  (with-out-str (json/pprint (->> response :data process-data) :escape-slash false)))
+
+(defn- get-filename [endpoint]
+  (.toLowerCase (str "resources/sample-responses/"
+                     (to-id-str (:path endpoint)) "-"
+                     (name (:method endpoint)) ".json")))
 
 (defn- generate-sample-response-from-response [endpoint response]
-  (let [filename (str "resources/sample-responses/" (to-id-str endpoint))
+  (let [filename (get-filename endpoint)
         sample (process-sample-response response)]
     (spit filename sample)
     sample))
 
-(defmulti generate-sample-response identity)
-
 (defn- json-parse-data [response]
   (assoc response :data (:data (json/read-json (:data response)))))
 
+(defn- ensure-get [endpoint]
+  (if (not (= (:method endpoint) :GET))
+    (throw (Exception. (str (name (:method endpoint)) " user sample response not implemented")))))
+
 (defn- demo-user-sample [endpoint]
+  (ensure-get endpoint)
   (-> (api/get-config)
       (api/get-login-token)
-      (api/user-get (str "/" endpoint))
+      (api/user-get (:path endpoint))
       (rename-keys {:body :data :status :code})
       (json-parse-data)))
 
-(defmethod generate-sample-response "me" [endpoint]
+(defmulti generate-sample-response #(vector (:method %) (:path %)))
+
+(defmethod generate-sample-response [:GET "/me"] [endpoint]
   (generate-sample-response-from-response endpoint (demo-user-sample endpoint)))
 
 (defmethod generate-sample-response :default [endpoint]
-  (generate-sample-response-from-response endpoint (api/GET endpoint)))
+  (ensure-get endpoint)
+  (generate-sample-response-from-response endpoint (api/GET (:path endpoint))))
