@@ -105,13 +105,13 @@
 (defn- format-response-status [status]
   (str status " " (get-response-status-name status)))
 
-(defn- flag-pertinent-types
-  "Flags types mentioned in the endpoint's pertinent types as pertinent, i.e.,
+(defn- flag-inline-types
+  "Flags types mentioned in the endpoint's inline types as inline, i.e.,
   marks them for inline rendering on the page."
   [endpoint types]
-  (reduce (fn [types p] (assoc-in types [p :pertinent?] true))
+  (reduce (fn [types p] (assoc-in types [p :inline?] true))
           types
-          (:pertinent-types endpoint)))
+          (:inline-types endpoint)))
 
 (defn render-response-formats [endpoint]
   [:p
@@ -124,7 +124,7 @@
    [:h2 (str "Success: " (format-response-status (:status response)))]
    (render (:description response))
    (->> (vals types)
-        (filter :pertinent?)
+        (filter :inline?)
         (map #(render-type-definition % types)))))
 
 (defn- render-response-failure [failure]
@@ -156,7 +156,7 @@
      (render-response-formats endpoint)
      (render-response-type
       (-> endpoint :responses :success)      ; Success response description
-      (flag-pertinent-types endpoint types)) ; Get the type map with pertinent types flagged
+      (flag-inline-types endpoint types)) ; Get the type map with inline types flagged
      (render-response-failures (-> endpoint :responses :failures))]]
    [:div.aside
     [:div.wrap
@@ -203,7 +203,7 @@
          :filters ["merchant"]
          :access-token-types ["server"]
          :requires-authentication? true
-         :pertinent-types [:login_attempt :login-type]
+         :inline-types [:login_attempt :login-type]
          :responses {:success {:status 200
                                :description "A list of login attempt objects"
                                :type [:login_attempt]

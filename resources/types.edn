@@ -81,7 +81,7 @@ verified."
                           {:name "userid" :type :string}
                           {:name "userAgent" :type :string}
                           {:name "created" :type :datetime}
-                          {:name "type" :type :login-type}
+                          {:name "type" :type :login_type}
                           {:name "ip" :type :string :description "Originating IP address"}
                           {:name "initalReferer" :type :string :description "Referer from which the user came from"}
                           {:name "referer" :type :string :description "Referer from which the login attempt came from"}
