@@ -17,7 +17,13 @@
              :description "A login object"
              :fields [{:name "id" :type :string}
                       {:name "emails" :type [:string]}]}
+      user {:id :user
+            :name "User"
+            :description "A user person"
+            :fields [{:name "created" :type :datetime}]}
       types {:login login
+             :user user
+             :datetime {:id :datetime :name "Datetime" :description "Dates and stuff"}
              :string {:id :string :name "String"}
              :login-type {:id :login-type
                           :name "Login type"
@@ -29,9 +35,13 @@
              count) => 1)
 
   (fact "Links to non-inline types with description"
+        (->> (render-type-definition user types)
+             (hiccup-find [:h5 :a])
+             first
+             second ; Attributes
+             :href) => "/types/datetime")
+
+  (fact "Distinguishes lists of types"
         (->> (render-type-definition login types)
-             (hiccup-find [:h5 :a]))) => 1)
-
-
-
-;; TODO: [string]
+             (hiccup-find [:h5])
+             (map hiccup-text)) => ["string" "list of strings"]))
