@@ -11,7 +11,7 @@
             :description "An ISO-8601 formatted date. The specific format used by the API is YYYY-MM-DD"}
  :user {:id :user
         :name "User"
-        :type :object
+        :rendering :object
         :description "The user object is based on the [portable contacts
 specification](http://portablecontacts.net/draft-spec.html). It is extended with
 some custom fields. `userId` is an integer and represents the unique user ID.
@@ -51,7 +51,7 @@ verified."
                  {:name "phoneNumberVerified" :type :string :description "Date when the phone number was last verified"}]}
  :user-status {:id :user-status
                :name "User status"
-               :type :enum
+               :rendering :enum
                :values [{:value "-3" :description "Deleted"}
                         {:value "-2" :description "Blocked from using the service"}
                         {:value "-1" :description "Inactive/disabled account"}
@@ -59,7 +59,7 @@ verified."
                         {:value "1" :description "Verified email/phone/etc"}]}
  :address {:id :address
            :name "Address"
-           :type :object
+           :rendering :object
            :fields [{:name "formatted" :type :string :description "Full address, formatted for display"}
                     {:name "streetAddress" :type :string :description "Full street address component. May include house number, street name, PO BOX, and multi-line extended street address information."}
                     {:name "postalCode" :type :string :description "Zip code."}
@@ -73,7 +73,7 @@ verified."
  :login_attempt {:id :login_attempt
                  :name "Login attempt object"
                  :description "This object contains details about a login attempt"
-                 :type :object
+                 :rendering :object
                  :fields [{:name "id" :type :string}
                           {:name "clientid" :type :string}
                           {:name "merchantId" :type :integer}

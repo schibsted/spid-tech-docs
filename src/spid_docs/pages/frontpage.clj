@@ -1,7 +1,19 @@
 (ns spid-docs.pages.frontpage
   (:require [clojure.java.io :as io]
-            [spid-docs.cultivate.apis :as a]
+            [spid-docs.formatting :refer [columnize]]
             [spid-docs.routes :refer [endpoint-path]]))
+
+(def frontpage-columns 3)
+
+(defn- endpoint-count [api]
+  ;(clojure.pprint/pprint api)
+  ;; (->> (:apis api)
+  ;;      (mapcat :endpoints)
+  ;;      count)
+  1)
+
+(defn- columnize-apis [apis]
+  (columnize apis frontpage-columns endpoint-count))
 
 (defn- render-api [api]
   (map #(vector :li [:a {:href (endpoint-path %)}
@@ -29,4 +41,4 @@
            [:div.line
             (let [cols 3]
               (map-indexed #(render-api-column %1 %2 cols)
-                           (a/columnize apis cols)))]]]})
+                           (columnize-apis apis cols)))]]]})

@@ -12,7 +12,7 @@
             [spid-docs.homeless :refer [wrap-utf-8]]
             [spid-docs.pages :as pages]
             [spid-docs.pimp :refer [prepare-pages]]
-            [spid-docs.validate :refer [validate-raw-content]]
+            [spid-docs.validate-raw :refer [validate-raw-content]]
             [stasis.core :as stasis]))
 
 (defn get-assets

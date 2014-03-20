@@ -4,13 +4,14 @@
    respective page namespaces as this caused cyclic dependencies (e.g. endpoint
    pages links to API pages, so it requires api-pages, which links to enpoint
    pages, so it requires endpoints ..."
-  (:require [clojure.string :as str]))
+  (:require [clojure.string :as str]
+            [spid-docs.formatting :refer [to-id-str]]))
 
 (defn api-path
   "Takes a 'service', i.e., the top-level API categorization unit (Identity
    management, payment, etc) and returns its URL."
   [service]
-  (str "/apis/" (subs (str (:id service)) 1)))
+  (str "/apis/" (to-id-str service)))
 
 (defn article-path
   "Articles live at the root level, and their path is the same as the
@@ -21,7 +22,7 @@
 (defn endpoint-path
   "Given an endpoint, return the path to the page in the documentation app."
   [endpoint]
-  (str "/endpoints/" (:method endpoint) (:path endpoint)))
+  (str "/endpoints/" (name (:method endpoint)) (:path endpoint)))
 
 (defn type-path
   "Given a type (typically one entry from the vector in resources/types.end),

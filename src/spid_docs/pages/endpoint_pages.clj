@@ -6,7 +6,7 @@
   (:require [clojure.string :as str]
             [spid-docs.enlive :as enlive]
             [spid-docs.example-code :refer [create-example-code]]
-            [spid-docs.formatting :refer [pluralize enumerate-humanely to-id-str]]
+            [spid-docs.formatting :refer [pluralize enumerate-humanely]]
             [spid-docs.http :refer [get-response-status-name]]
             [spid-docs.pages.type-pages :refer [render-type-definition]]
             [spid-docs.routes :refer [api-path endpoint-path]]
@@ -37,10 +37,10 @@
   "Render a link to the containing API category, e.g. 'Identity Management' etc"
   [endpoint]
   (let [cat (get-in endpoint [:category :section])]
-    [:a.mod.category.small.faded.mbn {:href (api-path {:id (to-id-str cat)})} cat]))
+    [:a.mod.category.small.faded.mbn {:href (api-path cat)} cat]))
 
 (defn render-title [endpoint]
-  [:h1.mbn (str (:method endpoint) " " (:path endpoint))])
+  [:h1.mbn (str (name (:method endpoint)) " " (:path endpoint))])
 
 (defn render-authentication
   "Render the kinds of authentication tokens supported by this endpoint."
@@ -55,7 +55,7 @@
   (render (:description endpoint)))
 
 (defn render-request-synopsis [endpoint]
-  [:pre [:code.sh (str (:method endpoint) " " (:api-path endpoint))]])
+  [:pre [:code.sh (str (name (:method endpoint)) " " (:api-path endpoint))]])
 
 (defn- render-request-parameter [parameter]
   [:tr.param
@@ -164,7 +164,7 @@
 
 (defn create-page [endpoint types]
   {:split-page? true ;; Makes the layout render a grey right column
-   :title (str (:method endpoint) " " (:path endpoint))
+   :title (str (name (:method endpoint)) " " (:path endpoint))
    :body (list [:div.section
                 [:div.main
                  [:div.wrap
@@ -181,7 +181,7 @@
   (->> endpoints #_[{:id :get-user-id-userId-email-logins
          :path "/user/{email}/logins"
          :api-path "/api/2/user/{email}/logins"
-         :method "GET"
+         :method :GET
          :name "List logins"
          :description "An **awesome** way to look up logins"
          :category {:section "Identity Management" :api "Login API"}

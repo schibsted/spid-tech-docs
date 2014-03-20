@@ -72,7 +72,7 @@
    :url "/api/2/status",
    :pathParameters [],
    :controller "Api/2/Platform.status",
-   :parameter_descriptions [],
+   :parameter_descriptions {},
    :default_output_format "json",
    :description "Get status information from the platform",
    :category ["Utilities" "Platform API"]}
@@ -92,7 +92,7 @@
    :url "/api/2/version",
    :pathParameters [],
    :controller "Api/2/Platform.version",
-   :parameter_descriptions [],
+   :parameter_descriptions {},
    :default_output_format "json",
    :description "Find out what version you are using",
    :category ["Utilities" "Platform API"]}
@@ -112,7 +112,7 @@
    :url "/api/2/terms",
    :pathParameters [],
    :controller "Api/2/Platform.terms",
-   :parameter_descriptions [],
+   :parameter_descriptions {},
    :default_output_format "json",
    :description
    "Returns the current user terms for the client and SPiD",
@@ -436,11 +436,10 @@
      :default_filters [],
      :responses
      [{:status 200, :description "The user object", :type "user"}]}},
-   :access_token_types ["user"],
    :url "/api/2/me",
    :pathParameters [],
    :controller "Api/2/User.me",
-   :parameter_descriptions [],
+   :parameter_descriptions {},
    :default_output_format "json",
    :description "Fetch the authorized requesting user.",
    :category ["Identity Management" "User API"]}
@@ -460,7 +459,7 @@
    :url "/api/2/me/vouchers",
    :pathParameters [],
    :controller "Api/2/User.my_vouchers",
-   :parameter_descriptions [],
+   :parameter_descriptions {},
    :default_output_format "json",
    :description "Get the vouchers for the requesting user ",
    :category ["Payment Services" "Voucher API"]}
@@ -1218,7 +1217,7 @@
    :url "/api/2/reports/dumps",
    :pathParameters [],
    :controller "Api/2/Reports.dumps",
-   :parameter_descriptions [],
+   :parameter_descriptions {},
    :default_output_format "json",
    :description
    "Get a list of available dumps from the reports database.",
@@ -1282,7 +1281,7 @@
    :url "/api/2/anonymous/users",
    :pathParameters [],
    :controller "Api/2/anonymous.anonymous_users",
-   :parameter_descriptions [],
+   :parameter_descriptions {},
    :default_output_format "json",
    :description
    "Get all anonymous user objects changed in the given period",
@@ -1383,7 +1382,7 @@
    :url "/api/2/discounts",
    :pathParameters [],
    :controller "Api/2/Discount.discounts",
-   :parameter_descriptions [],
+   :parameter_descriptions {},
    :default_output_format "json",
    :description "List all discounts for client",
    :category ["Payment Services" "Discount API"]}
@@ -1403,7 +1402,7 @@
    :url "/api/2/clients",
    :pathParameters [],
    :controller "Api/2/Client.clients",
-   :parameter_descriptions [],
+   :parameter_descriptions {},
    :default_output_format "json",
    :description "List all clients",
    :category ["Utilities" "Platform API"]}
@@ -1423,7 +1422,7 @@
    :url "/api/2/productsettings",
    :pathParameters [],
    :controller "Api/2/Client.productsettings",
-   :parameter_descriptions [],
+   :parameter_descriptions {},
    :default_output_format "json",
    :description "Get the client's product settings",
    :category ["Payment Services" "Product API"]}
@@ -1874,7 +1873,7 @@
    :url "/api/2/products/parents",
    :pathParameters [],
    :controller "Api/2/Product.products_parents",
-   :parameter_descriptions [],
+   :parameter_descriptions {},
    :default_output_format "json",
    :description "Get all \"parent\" products for the client",
    :category ["Payment Services" "Product API"]}
@@ -1954,7 +1953,7 @@
    :url "/api/2/injectable/names",
    :pathParameters [],
    :controller "Api/2/Injectable.token_names",
-   :parameter_descriptions [],
+   :parameter_descriptions {},
    :default_output_format "json",
    :description "List out token names for client",
    :category ["Payment Services" "InjectToken API"]}
@@ -2630,7 +2629,7 @@
    :url "/api/2/logout",
    :pathParameters [],
    :controller "Api/2/User.logout",
-   :parameter_descriptions [],
+   :parameter_descriptions {},
    :default_output_format "json",
    :description "Invalidate the user's SPiD session.",
    :category ["Identity Management" "Login API"]}
@@ -2653,7 +2652,7 @@
    :url "/api/*",
    :pathParameters [],
    :controller "Api/2/Utility.not_found",
-   :parameter_descriptions [],
+   :parameter_descriptions {},
    :default_output_format "json",
    :description
    "Response when requesting an endpoint that does not exist.",

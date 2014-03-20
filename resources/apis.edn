@@ -1,21 +1,21 @@
-{["Identity Management" "Login API"] "Retrieve login information"
- ["Identity Management" "User API"] "Create, modify and list user-specific data"
- ["Identity Management" "Email API"] "Check email availability"
- ["Payment" "Product API"] "Create, modify and list products"
- ["Payment" "Subscription API"] "Create, modify and list subscriptions"
- ["Payment" "Bundle API"] "Create and modify bundle items"
- ["Payment" "Digital Contents API"] "List digital contents"
- ["Payment" "Payment API"] "Retrieve payment agreements and transactions status (deprecated)"
- ["Payment" "Direct Payment API"] "Perform direct payments (server-to-server) on an user's SPiD account"
- ["Payment" "Order API"] "Retrieve orders and corresponding items and transactions"
- ["Payment" "Campaign API"] "Create, update and list campaigns"
- ["Payment" "Voucher API"] "Create, update, list and handout vouchers"
- ["Payment" "Paylink API"] "Create, update, and list PayLinks"
- ["Data storage" "SODA API"] "Attach or retrieve specific data to any object (Example: add application specific data as height/weight to a user)"
- ["Data storage" "Data Objects API"] "Attach or retrieve specific data to user (Example: add application specific data as height/weight to a user)"
- ["Reports and analytics" "Report Database API"] "Retrieve client-specific data for local processing"
- ["Reports and analytics" "Key Performance Indicator API"] "Retrieve client-specific KPI data"
- ["Additional APIs" "Inject Token API"] "Import tokens and list token names for clients"
- ["Additional APIs" "Authorization API"] "Authorization extensions for clients"
- ["Additional APIs" "Utility API"] "Utilities to list features, versions and object description"
- ["Additional APIs" "Traits API"] "Adds, deletes or updates the currently saved traits for a specified user"}
+{["Identity Management" "Login API"] {:description "Retrieve login information"}
+ ["Identity Management" "User API"] {:description "Create, modify and list user-specific data"}
+ ["Identity Management" "Email API"] {:description "Check email availability"}
+ ["Payment" "Product API"] {:description "Create, modify and list products"}
+ ["Payment" "Subscription API"] {:description "Create, modify and list subscriptions"}
+ ["Payment" "Bundle API"] {:description "Create and modify bundle items"}
+ ["Payment" "Digital Contents API"] {:description "List digital contents"}
+ ["Payment" "Payment API"] {:description "Retrieve payment agreements and transactions status (deprecated)"}
+ ["Payment" "Direct Payment API"] {:description "Perform direct payments (server-to-server) on an user's SPiD account"}
+ ["Payment" "Order API"] {:description "Retrieve orders and corresponding items and transactions"}
+ ["Payment" "Campaign API"] {:description "Create, update and list campaigns"}
+ ["Payment" "Voucher API"] {:description "Create, update, list and handout vouchers"}
+ ["Payment" "Paylink API"] {:description "Create, update, and list PayLinks"}
+ ["Data storage" "SODA API"] {:description "Attach or retrieve specific data to any object (Example: add application specific data as height/weight to a user)"}
+ ["Data storage" "Data Objects API"] {:description "Attach or retrieve specific data to user (Example: add application specific data as height/weight to a user)"}
+ ["Reports and analytics" "Report Database API"] {:description "Retrieve client-specific data for local processing"}
+ ["Reports and analytics" "Key Performance Indicator API"] {:description "Retrieve client-specific KPI data"}
+ ["Additional APIs" "Inject Token API"] {:description "Import tokens and list token names for clients"}
+ ["Additional APIs" "Authorization API"] {:description "Authorization extensions for clients"}
+ ["Additional APIs" "Utility API"] {:description "Utilities to list features, versions and object description"}
+ ["Additional APIs" "Traits API"] {:description "Adds, deletes or updates the currently saved traits for a specified user"}}

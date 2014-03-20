@@ -25,4 +25,4 @@
   "Combine and cross-link content"
   [raw-content]
   (assoc raw-content
-    :endpoints (mapcat ce/cultivate-endpoint (:endpoints raw-content))))
+    :endpoints (mapcat #(ce/cultivate-endpoint % raw-content) (:endpoints raw-content))))

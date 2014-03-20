@@ -32,10 +32,8 @@
 
 (def PrimitiveType
   {:id Keyword
-   :name Str
-   :rendering :primitive
-   (optional-key :description) Str
-   :inline-type? Boolean}) ; if true, should be rendered inline on endpoint page
+   (optional-key :name) Str
+   (optional-key :description) Str})
 
 (def ObjectType
   (merge PrimitiveType
@@ -67,5 +65,5 @@
              :pagination-descriptions {Keyword Str}
              :filter-descriptions {Keyword Str}
              :types {Keyword Type}
-             :apis {[Str Str] Str}} ; tuple of [:section :api] -> :description
+             :apis {[Str] {Keyword Str}}} ; tuple of [:section :api] -> {:description ""}
             raw-content))

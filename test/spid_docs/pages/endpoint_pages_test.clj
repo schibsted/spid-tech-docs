@@ -1,4 +1,4 @@
-(ns spid-docs.pages.endpoints-pages-test
+(ns spid-docs.pages.endpoint-pages-test
   (:require [clojure.string :as str]
             [hiccup-find.core :refer [hiccup-find hiccup-text]]
             [hiccup.page :refer [html5]]
@@ -14,7 +14,7 @@
 (fact
  (render-category
   {:category {:section "Identity Management"}}) => [:a.mod.category.small.faded.mbn
-                                                    {:href "/apis/dentity-management"}
+                                                    {:href "/apis/identity-management"}
                                                     "Identity Management"])
 
 (fact (render-title {:method "GET" :path "/logins"}) => [:h1.mbn "GET /logins"])
