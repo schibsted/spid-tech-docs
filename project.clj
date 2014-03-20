@@ -15,6 +15,7 @@
                  [prismatic/schema "0.2.0"]
                  [fs "1.3.3"]
                  [clj-http "0.9.0"]]
+  :jvm-opts ["-Djava.awt.headless=true"]
   :ring {:handler spid-docs.web/app}
   :aliases {"build-site" ["run" "-m" "spid-docs.web/export"]}
   :profiles {:dev {:plugins [[lein-ring "0.8.10"]
