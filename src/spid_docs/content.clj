@@ -13,14 +13,15 @@
   {:endpoints (:data (spid/load-edn "cached-endpoints.edn"))
    :articles (stasis/slurp-directory "resources/articles" #"\.md$")
    :concepts (stasis/slurp-directory "resources/concepts" #"\.md$")
-   :params (spid/load-edn "parameters.edn")
+   :sample-responses (stasis/slurp-directory "resources/sample-responses" #".+\..+$")
+   :endpoint-descriptions (stasis/slurp-directory "resources/endpoints" #"\.md$")
+   :pagination-descriptions (spid/load-edn "pagination.edn")
+   :filter-descriptions (spid/load-edn "filters.edn")
    :types (spid/load-edn "types.edn")
    :apis (spid/load-edn "apis.edn")})
 
 (defn cultivate-content
   "Combine and cross-link content"
   [raw-content]
-  (let [endpoints (map ce/cultivate-endpoint (:endpoints raw-content))]
-    (assoc raw-content
-      :endpoints endpoints
-      :apis (ca/cultivate-apis (:apis raw-content) endpoints))))
+  (assoc raw-content
+    :endpoints (mapcat ce/cultivate-endpoint (:endpoints raw-content))))

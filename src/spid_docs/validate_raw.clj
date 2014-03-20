@@ -58,7 +58,10 @@
   (validate {:endpoints [Endpoint]
              :articles {Str Str}
              :concepts {Str Str}
-             :params {Str Keyword}
+             :sample-responses {Str Str}
+             :endpoint-descriptions {Str Str}
+             :pagination-descriptions {Keyword Str}
+             :filter-descriptions {Keyword Str}
              :types {Keyword Type}
              :apis {[Str Str] Str}} ; tuple of [:section :api] -> :description
             raw-content))

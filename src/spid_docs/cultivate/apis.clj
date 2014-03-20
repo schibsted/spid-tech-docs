@@ -21,7 +21,7 @@
        (mapcat :endpoints)
        count))
 
-(defn by-endpoint-count [a b]
+(defn- by-endpoint-count [a b]
   (> (endpoint-count a) (endpoint-count b)))
 
 (defn- shortest-index [col count-column]

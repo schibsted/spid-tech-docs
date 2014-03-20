@@ -6,7 +6,7 @@
   (:require [clojure.data.json :as json]
             [clojure.set :refer [rename-keys]]
             [spid-docs.api-client :as api]
-            [spid-docs.cultivate.endpoints :refer [endpoint-path-to-filename]]
+            [spid-docs.formatting :refer [to-id-str]]
             [spid-docs.homeless :refer [update-existing]])
   (:import java.util.Date))
 
@@ -52,7 +52,7 @@
     :response (with-out-str (json/pprint (->> response :data process-data) :escape-slash false))}})
 
 (defn- generate-sample-response-from-response [endpoint response]
-  (let [filename (str "resources/sample-responses/" (endpoint-path-to-filename endpoint))
+  (let [filename (str "resources/sample-responses/" (to-id-str endpoint))
         sample (process-sample-response response)]
     (spit filename sample)
     sample))

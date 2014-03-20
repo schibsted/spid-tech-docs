@@ -109,10 +109,9 @@
   "Flags types mentioned in the endpoint's pertinent types as pertinent, i.e.,
   marks them for inline rendering on the page."
   [endpoint types]
-  (let [pertinent (:pertinent-types endpoint)
-        typelist (map #(assoc-in % [:pertinent?]
-                                 (>= (.indexOf pertinent (:id %)) 0)) (vals types))]
-    (zipmap (map :id typelist) typelist)))
+  (reduce (fn [types p] (assoc-in types [p :pertinent?] true))
+          types
+          (:pertinent-types endpoint)))
 
 (defn render-response-formats [endpoint]
   [:p
@@ -179,7 +178,7 @@
                (render-response endpoint types))})
 
 (defn create-pages [endpoints types]
-  (->> [{:id :get-user-id-userId-email-logins
+  (->> endpoints #_[{:id :get-user-id-userId-email-logins
          :path "/user/{email}/logins"
          :api-path "/api/2/user/{email}/logins"
          :method "GET"
