@@ -96,11 +96,11 @@
    (first hiccup) => [:h2 "Success: 200 OK"]
    (second hiccup) => "<p><strong>Hey</strong></p>"))
 
-(fact "Renders pertinent types inline"
+(fact "Renders inline types inline"
       (->>
        (render-response-type {:status 200 :description "**Hey**"}
                              {:login {:id :login
-                                      :pertinent? true
+                                      :inline? true
                                       :fields [{:name "id" :type :string}]}})
        (hiccup-find [:table])
        count) => 1)
