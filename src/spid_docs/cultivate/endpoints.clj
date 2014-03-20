@@ -118,7 +118,7 @@
        :default-response-format (keyword default_output_format)
        :access-token-types (set (map keyword access_token_types))
        :requires-authentication? (not (empty? access_token_types))
-       :responses {:success (-> success? (filter responses) first create-response (add-samples endpoint-id sample-responses))
+       :responses {:success (-> success? (filter responses) first create-response (add-samples (str "/" endpoint-id) sample-responses))
                    :failures (map create-response (remove success? responses))}
        :?deprecated deprecated})))
 

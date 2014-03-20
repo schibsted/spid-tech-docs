@@ -6,8 +6,8 @@
 (def raw-content
   "Test data with relevant raw content when cultivating endpoints.
    Look for these values in tests below."
-  {:sample-responses {"terms-get.json" "terms json"
-                      "terms-get.jsonp" "terms jsonp"}
+  {:sample-responses {"/terms-get.json" "terms json"
+                      "/terms-get.jsonp" "terms jsonp"}
    :endpoint-descriptions {"/terms-get.md" {:introduction "terms desc"
                                             :inline-types "string datetime"}}
    :pagination-descriptions {:limit  "limit desc"
