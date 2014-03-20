@@ -3,13 +3,43 @@
             [clojure.string :as str]))
 
 (def examples
-  {"email" "johnd@example.com"
-   "displayName" "John"
-   "name" "John Doe"
+  {"action" "???"
+   "agreementRef" "???"
+   "autoRenew" "???"
    "birthday" "1977-01-31"
-   "preferredUsername" "johnd"
+   "clientId" "42"
+   "clientRef" "???"
+   "code" "???"
+   "content" "???"
+   "currency" "NOK"
+   "description" "???"
+   "displayName" "John"
+   "email" "johnd@example.com"
+   "end_time" "???"
+   "from" "???"
+   "hash" "7374163eed7a0e88f9bf28e128d8da82"
+   "id" "1337"
+   "items" "???"
+   "jwt" "???"
+   "name" "John Doe"
    "object" "User"
-   "id" "1337"})
+   "paymentOptions" "???"
+   "preferredUsername" "johnd"
+   "price" "400"
+   "productId" "1337"
+   "requestReference" "???"
+   "templates" "???"
+   "title" "???"
+   "to" "???"
+   "tokenName" "???"
+   "trait" "???"
+   "traits" "???"
+   "type" "???"
+   "url" "???"
+   "userId" "???"
+   "value" "???"
+   "vat" "???"
+   "voucherGroupId" "???"})
 
 (defn- replace-path-parameters [url]
   (str/replace url #"\{([^}]+)\}" (fn [[_ match]] (examples match))))
