@@ -84,7 +84,39 @@
                      \"displayName\" \"John\"
                      \"name\" \"John Doe\"
                      \"birthday\" \"1977-01-31\"
-                     \"preferredUsername\" \"johnd\"}))")
+                     \"preferredUsername\" \"johnd\"}))"
+
+   (-> get-example :java :minimal)
+   => "String responseJSON = sppClient.
+    GET(\"/status\").
+    getResponseBody();"
+
+   (-> param-example :java :minimal)
+   => "String responseJSON = sppClient.
+    GET(\"/describe/User\").
+    getResponseBody();"
+
+   (-> post-example :java :minimal)
+   => "Map<String, String> params = new HashMap<>() {{
+    put(\"email\", \"johnd@example.com\");
+}};
+
+String responseJSON = sppClient.
+    POST(\"/user\", params).
+    getResponseBody();"
+
+   (-> post-example :java :maximal)
+   => "Map<String, String> params = new HashMap<>() {{
+    put(\"email\", \"johnd@example.com\");,
+    put(\"displayName\", \"John\");,
+    put(\"name\", \"John Doe\");,
+    put(\"birthday\", \"1977-01-31\");,
+    put(\"preferredUsername\", \"johnd\");
+}};
+
+String responseJSON = sppClient.
+    POST(\"/user\", params).
+    getResponseBody();")
 
  (fact "Does not render minimal and maximal when all parameters are required"
        (->

@@ -4,17 +4,18 @@
    it. The formal definition of this data structure can be found in
    spid-docs.validate-cultivated"
   (:require [clojure.string :as str]
+            [hiccup.core :refer [h]]
             [spid-docs.enlive :as enlive]
             [spid-docs.example-code :refer [create-example-code]]
             [spid-docs.formatting :refer [pluralize enumerate-humanely]]
             [spid-docs.http :refer [get-response-status-name]]
             [spid-docs.pages.type-pages :refer [render-type-definition]]
-            [spid-docs.routes :refer [api-path endpoint-path]]
-            [spid-docs.pimp.markdown :refer [render-inline render]]))
+            [spid-docs.pimp.markdown :refer [render-inline render]]
+            [spid-docs.routes :refer [api-path endpoint-path]]))
 
 (def lang-names
   "Human-readable language names"
-  {:curl "cURL" :clojure "Clojure"})
+  {:curl "cURL" :clojure "Clojure" :java "Java"})
 
 (def lang-classes
   "Classes to use for syntax highlighting, should be a valid Pygments lexer"
@@ -91,17 +92,18 @@
    (if (seq filters) (render-filter-parameter filters))])
 
 (defn- render-code [lang code]
-  [:pre [:code {:class lang} code]])
+  [:pre [:code {:class lang} (h code)]])
 
 (defn- render-request-example [[lang example]]
-  (list [:h5.tab (lang lang-names)]
-        [:div.tab-content
-         (if (nil? (:maximal example))
-           (render-code (lang lang-classes) (:minimal example))
-           (list [:h6.mtm "Minimal example"]
-                 (render-code (lang lang-classes) (:minimal example))
-                 [:h6.mtm "With all parameters"]
-                 (render-code (lang lang-classes) (:maximal example))))]))
+  (let [lang-class (or (lang lang-classes) (name lang))]
+    (list [:h5.tab (lang lang-names)]
+          [:div.tab-content
+           (if (nil? (:maximal example))
+             (render-code lang-class (:minimal example))
+             (list [:h6.mtm "Minimal example"]
+                   (render-code lang-class (:minimal example))
+                   [:h6.mtm "With all parameters"]
+                   (render-code lang-class (:maximal example))))])))
 
 (defn render-request-examples [endpoint]
   (list

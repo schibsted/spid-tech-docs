@@ -154,12 +154,30 @@
                           (map #(str "\"" (:name %) "\" \"" (examples (:name %)) "\"") params)) "}"))
          "))")))
 
+(defn- create-params-hash-map [params]
+  (when (seq params)
+    (str "Map<String, String> params = new HashMap<>() {{\n    "
+         (str/join ",\n    "
+                   (map #(str "put(\"" (name (:name %)) "\", \"" (examples (:name %)) "\");") params))
+         "\n}};\n\n")))
+
+(defn java-example-code [{:keys [method path]} params]
+  (let [has-params (seq params)
+        params-hash-map (create-params-hash-map params)
+        api-invocation (str (name method) "(\"" (replace-path-parameters path) "\""
+                            (if has-params (str ", params") "") ")")]
+    (str params-hash-map
+         "String responseJSON = sppClient.\n    " api-invocation ".\n    getResponseBody();")))
+
+(defn- create-examples-with [ex-fn endpoint req-params optional-params all-params]
+  {:minimal (ex-fn endpoint req-params)
+   :maximal (when (seq optional-params) (ex-fn endpoint all-params))})
+
 (defn create-example-code [endpoint]
   (let [params (:parameters endpoint)
         all-params (filter #(= (:type %) :query) params)
         req-params (filter :required? all-params)
         optional-params (difference (set all-params) (set req-params))]
-    {:curl {:minimal (curl-example-code endpoint req-params)
-            :maximal (when (seq optional-params) (curl-example-code endpoint all-params))}
-     :clojure {:minimal (clojure-example-code endpoint req-params)
-               :maximal (when (seq optional-params) (clojure-example-code endpoint all-params))}}))
+    {:curl (create-examples-with curl-example-code endpoint req-params optional-params all-params)
+     :clojure (create-examples-with clojure-example-code endpoint req-params optional-params all-params)
+     :java (create-examples-with java-example-code endpoint req-params optional-params all-params)}))
