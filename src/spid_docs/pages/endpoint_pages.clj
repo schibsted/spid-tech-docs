@@ -15,7 +15,7 @@
 
 (def lang-names
   "Human-readable language names"
-  {:curl "cURL" :clojure "Clojure" :java "Java"})
+  {:curl "cURL" :clojure "Clojure" :java "Java" :php "PHP"})
 
 (def lang-classes
   "Classes to use for syntax highlighting, should be a valid Pygments lexer"

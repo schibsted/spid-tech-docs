@@ -59,32 +59,32 @@
   (:require [spid-sdk-clojure.core :as sdk]))
 
 (-> (sdk/create-client \"[client-id]\" \"[secret]\")
-  (sdk/GET \"/status\"))"
+    (sdk/GET \"/status\"))"
 
    (-> param-example :clojure :minimal)
    => "(ns example
   (:require [spid-sdk-clojure.core :as sdk]))
 
 (-> (sdk/create-client \"[client-id]\" \"[secret]\")
-  (sdk/GET \"/describe/User\"))"
+    (sdk/GET \"/describe/User\"))"
 
    (-> post-example :clojure :minimal)
    => "(ns example
   (:require [spid-sdk-clojure.core :as sdk]))
 
 (-> (sdk/create-client \"[client-id]\" \"[secret]\")
-  (sdk/POST \"/user\" {\"email\" \"johnd@example.com\"}))"
+    (sdk/POST \"/user\" {\"email\" \"johnd@example.com\"}))"
 
    (-> post-example :clojure :maximal)
    => "(ns example
   (:require [spid-sdk-clojure.core :as sdk]))
 
 (-> (sdk/create-client \"[client-id]\" \"[secret]\")
-  (sdk/POST \"/user\" {\"email\" \"johnd@example.com\"
-                     \"displayName\" \"John\"
-                     \"name\" \"John Doe\"
-                     \"birthday\" \"1977-01-31\"
-                     \"preferredUsername\" \"johnd\"}))"
+    (sdk/POST \"/user\" {\"email\" \"johnd@example.com\"
+                       \"displayName\" \"John\"
+                       \"name\" \"John Doe\"
+                       \"birthday\" \"1977-01-31\"
+                       \"preferredUsername\" \"johnd\"}))"
 
    (-> get-example :java :minimal)
    => "String responseJSON = sppClient.
@@ -116,7 +116,35 @@ String responseJSON = sppClient.
 
 String responseJSON = sppClient.
     POST(\"/user\", params).
-    getResponseBody();")
+    getResponseBody();"
+
+   (-> get-example :php :minimal)
+   => "$client->auth();
+echo var_dump($client->api(\"/status\"));"
+
+   (-> param-example :php :minimal)
+   => "$client->auth();
+echo var_dump($client->api(\"/describe/User\"));"
+
+   (-> post-example :php :minimal)
+   => "$params = array(
+    \"email\" => \"johnd@example.com\"
+);
+
+$client->auth();
+echo var_dump($client->api(\"/user\", $params));"
+
+   (-> post-example :php :maximal)
+   => "$params = array(
+    \"email\" => \"johnd@example.com\",
+    \"displayName\" => \"John\",
+    \"name\" => \"John Doe\",
+    \"birthday\" => \"1977-01-31\",
+    \"preferredUsername\" => \"johnd\"
+);
+
+$client->auth();
+echo var_dump($client->api(\"/user\", $params));")
 
  (fact "Does not render minimal and maximal when all parameters are required"
        (->
