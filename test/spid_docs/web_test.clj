@@ -2,7 +2,7 @@
   (:require [spid-docs.web :refer :all]
             [midje.sweet :refer :all]))
 
-#_(fact
+(fact
  "All pages respond with 200 OK"
 
  (doseq [url (keys (get-pages))]
