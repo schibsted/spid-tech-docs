@@ -163,8 +163,8 @@
      (render-sample-responses (-> endpoint :responses :success :samples))]]])
 
 (defn- warn-about-missing-typedefs [endpoint types]
-  (if-let [missing (->> (:inline-types endpoint)
-                     (filter #(not (contains? types %))))]
+  (if-let [missing (seq (->> (:inline-types endpoint)
+                             (filter #(not (contains? types %)))))]
     (binding [*out* *err*]
       (println (str "Endpoint " (name (:method endpoint)) " " (:path endpoint)
                     " references inline type" (if (> (count missing) 1) "s" "")
