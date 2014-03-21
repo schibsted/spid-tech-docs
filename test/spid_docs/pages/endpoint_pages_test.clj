@@ -38,13 +38,13 @@
         :access-token-types []}) => nil)
 
 (fact "Renders parameters ordered: path, required, optional"
-      (->> (render-request-parameters [(param "zzz" {:required? true :type :path})
-                                       (param "login" {:required? false})
-                                       (param "id" {:required? true})
-                                       (param "userId" {:required? true :type :path})
-                                       (param "email" {:required? false})])
+      (->> (render-request-parameters [(param "code" {:required? true :type :path})
+                                       (param "email" {:required? false})
+                                       (param "description" {:required? true})
+                                       (param "expires" {:required? true :type :path})
+                                       (param "familyName" {:required? false})])
            (hiccup-find [:.param :.name])
-           (map second)) => '("zzz" "userId" "id" "login" "email"))
+           (map second)) => '("code" "expires" "description" "email" "familyName"))
 
 (fact "Renders pagination parameters compactly"
       (let [param-row
@@ -72,14 +72,15 @@
            second) => "required path parameter")
 
 (fact "Renders parameter descriptions as markdown"
-      (->> (render-request-parameters [(param "login" {:description "*Rly?*"})])
+      (->> (render-request-parameters [(param "email" {:description "*Rly?*"})])
            (hiccup-find [:.desc])
            (map second)) => '("<em>Rly?</em>"))
 
 (fact "Renders example requests"
-      (->> (render-request-examples {:path "/endpoints"
+      (->> (render-request-examples {:method :GET
+                                     :path "/endpoints"
                                      :api-path "/api/2/endpoints"
-                                     :parameters [(param "login" {:required? false})]
+                                     :parameters [(param "email" {:required? false})]
                                      :access-token-types ["server"]})
            (hiccup-find [:.tab-content])
            first
@@ -87,9 +88,10 @@
            count) => 2) ;; Minimal example, and maximal example with all parameters
 
 (fact "Renders examples with no optional parameters without minimal/maximal distinction"
-      (let [examples (render-request-examples {:path "/endpoints"
+      (let [examples (render-request-examples {:method :GET
+                                               :path "/endpoints"
                                                :api-path "/api/2/endpoints"
-                                               :parameters [(param "login" {:required? true})]
+                                               :parameters [(param "email" {:required? true})]
                                                :access-token-types ["server"]})]
         (->> examples
              (hiccup-find [:.tab-content])

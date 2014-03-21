@@ -209,4 +209,5 @@
     {:curl (create-examples-with curl-example-code endpoint req-params optional-params all-params)
      :clojure (create-examples-with clojure-example-code endpoint req-params optional-params all-params)
      :java (create-examples-with java-example-code endpoint req-params optional-params all-params)
-     :php (create-examples-with php-example-code endpoint req-params optional-params all-params)}))
+     :php (create-examples-with php-example-code endpoint req-params optional-params all-params)
+     }))
