@@ -23,7 +23,7 @@
   "Replaces all special characters with dashes, avoiding leading,
    trailing and double dashes."
   (-> (.toLowerCase str)
-      (str/replace #"[^a-zA-Z]+" "-")
+      (str/replace #"[^a-zA-Z0-9]+" "-")
       (str/replace #"-$" "")
       (str/replace #"^-" "")))
 

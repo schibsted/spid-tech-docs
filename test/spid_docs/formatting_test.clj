@@ -18,7 +18,8 @@
 (fact "Turns strings into id-friendly strings"
       (to-id-str "/some/path") => "some-path"
       (to-id-str "/some/{path}") => "some-path"
-      (to-id-str "Some sentence") => "some-sentence")
+      (to-id-str "Some sentence") => "some-sentence"
+      (to-id-str "Some numbers: 666") => "some-numbers-666")
 
 (fact "Columnizes data structures"
       (columnize [[1] [2] [3] [4]] 2) => [[[1] [3]] [[2] [4]]]
