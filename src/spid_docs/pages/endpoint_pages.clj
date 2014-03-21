@@ -116,7 +116,9 @@
 (defn render-response-formats [endpoint]
   [:p
    "This endpoint supports the "
-   (enumerate-humanely (map name (:response-formats endpoint)))
+   (->> (:response-formats endpoint)
+        (map #(str "<a href=\"/formats/#" (name %) "\">" (% format-names) "</a>"))
+        enumerate-humanely)
    (pluralize " response format" (count (:response-formats endpoint)))])
 
 (defn render-response-type [response types]
