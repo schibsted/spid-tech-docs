@@ -8,7 +8,7 @@ exported to static files.
 ## Up and running
 
 1. **Verify Java version**
-  Run `java -version` and verify that it is version 1.7 something. If not,
+  Run `java -version` and verify that it is version 1.7 or later. If not,
   [download from Oracle]("http://docs.oracle.com/javase/7/docs/webnotes/install/index.html").
 
 2. **Install Leiningen**
@@ -37,10 +37,10 @@ exported to static files.
 
    That should pop up a browser with the SPiD API documentation.
 
-There is a local cached copy of the endpoint descriptions in the repo.
-However, to use all available features, you will need to put your API
-credentials in resources/config.edn. Copy resources/config.default.edn
-and replace the placeholders.
+There is a local cached copy of the endpoint descriptions in the repo. In order
+to refresh it, and use all available features, you will need to put your API
+credentials in resources/config.edn. Copy resources/config.default.edn and
+fill in for the placeholders.
 
 ## Exporting the site
 
@@ -79,7 +79,7 @@ All documentation lives in the `resources/` directory.
 
 Files in this directory will be served as is. Put anything you like here. Please
 do not put HTML files that duplicate markup from the main site. If you want to
-create new pages, look into creating an article instead of dumping a file here.
+create a new page, look into creating an article instead of dumping a file here.
 
 ### resources/articles
 
@@ -155,9 +155,19 @@ clone it directly.
 
 ### resources/endpoints
 
-These are edn files that describe additional meta-data about endpoints. We're
-hoping that many of these files will eventually be made redundant by having the
-`/endpoints` endpoint include more details about each endpoint.
+These are markdown files that describe additional meta-data about endpoints.
+The files have a tiny sliver of structure through the use of sectioning keys:
+
+```text
+:inline-types login_attempt login_type
+
+:description
+
+The endpoint description
+```
+
+The file is sectioned into key/value pairs where the colon-prefixed name is the
+key, and all text up until the next key is the value.
 
 ### resources/sample-responses
 
@@ -170,7 +180,7 @@ from the REPL:
 
 ;; Fetches a sample response from the /api/2/logins endpoint and writes it to
 ;; file (also returns the sample response)
-(generate-sample-response "logins")
+(generate-sample-response {:method :GET :path "/logins"})
 ```
 
 ### Other files in resources
@@ -211,3 +221,10 @@ is the place to define it, to enable cross-linking.
 
 Types that don't have descriptions will not be linked. This is used for basic
 types like strings and numbers, where additional explanation is not necessary.
+
+## Developing the documentation
+
+The documentation is built in Clojure using various libraries. The main
+structured of the app is thoroughly described in
+[Building static sites in Clojure with Stasis](http://cjohansen.no/building-static-sites-in-clojure-with-stasis),
+a tutorial on building sites on the same basic principle.
