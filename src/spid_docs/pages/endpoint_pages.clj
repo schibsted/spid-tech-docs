@@ -73,12 +73,22 @@
      (enumerate-humanely (map :name parameters))]
     [:p.faded.desc [:a {:href "/endpoints/#pagination"} "Pagination"]]]])
 
+(defn- render-filter-parameter [filters]
+  [:tr.param {:id "filter"}
+   [:th [:h4.name "filter"]]
+   [:td
+    [:h5.required "optional"]
+    [:dl.faded.desc
+     (map #(list [:dt [:code (:name %)]]
+                 [:dd (render-inline (:description %))]) filters)]]])
+
 (defn render-request-parameters [parameters & [pagination filters]]
   [:table.sectioned
    (map render-request-parameter (->> parameters
                                       (sort-by :type)
                                       (sort-by (comp not :required?))))
-   (if (seq pagination) (render-pagination-parameters pagination))])
+   (if (seq pagination) (render-pagination-parameters pagination))
+   (if (seq filters) (render-filter-parameter filters))])
 
 (defn- render-code [lang code]
   [:pre [:code {:class lang} code]])
@@ -105,7 +115,7 @@
     [:div.wrap
      [:h1.mbn "Request"]
      (render-request-synopsis endpoint)
-     (render-request-parameters (:parameters endpoint) (:pagination endpoint))]]
+     (render-request-parameters (:parameters endpoint) (:pagination endpoint) (:filters endpoint))]]
    [:div.aside
     [:div.wrap
      (render-request-examples endpoint)]]])

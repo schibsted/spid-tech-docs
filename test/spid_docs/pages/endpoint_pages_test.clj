@@ -57,6 +57,14 @@
         (second param-row) => {:id "pagination"}
         (hiccup-text param-row) => "offset, limit, since, and until\nPagination"))
 
+(fact "Renders filter parameter"
+      (let [filter-row
+            (->> (render-request-parameters [] [] [{:name "merchant", :description "merchant desc", :default? false}])
+                 (hiccup-find [:.param])
+                 first)]
+        (second filter-row) => {:id "filter"}
+        (hiccup-text filter-row) => "filter\noptional\nmerchant\nmerchant desc"))
+
 (fact "Highlights path parameters"
       (->> (render-request-parameters [(param "userId" {:required? true :type :path})])
            (hiccup-find [:.param :.required])
