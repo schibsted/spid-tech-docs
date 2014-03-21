@@ -46,6 +46,17 @@
            (hiccup-find [:.param :.name])
            (map second)) => '("zzz" "userId" "id" "login" "email"))
 
+(fact "Renders pagination parameters compactly"
+      (let [param-row
+            (->> (render-request-parameters [] [(param "offset" {:required? false})
+                                                (param "limit" {:required? false})
+                                                (param "since" {:required? false})
+                                                (param "until" {:required? false})])
+                 (hiccup-find [:.param])
+                 first)]
+        (second param-row) => {:id "pagination"}
+        (hiccup-text param-row) => "offset, limit, since, and until\nPagination"))
+
 (fact "Highlights path parameters"
       (->> (render-request-parameters [(param "userId" {:required? true :type :path})])
            (hiccup-find [:.param :.required])

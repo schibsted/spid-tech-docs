@@ -66,11 +66,19 @@
                     (if (:required? parameter) "required" "optional"))]
     [:p.faded.desc (render-inline (:description parameter))]]])
 
-(defn render-request-parameters [parameters]
+(defn- render-pagination-parameters [parameters]
+  [:tr.param {:id "pagination"}
+   [:td {:colspan 2}
+    [:h4.name
+     (enumerate-humanely (map :name parameters))]
+    [:p.faded.desc [:a {:href "/endpoints/#pagination"} "Pagination"]]]])
+
+(defn render-request-parameters [parameters & [pagination filters]]
   [:table.sectioned
    (map render-request-parameter (->> parameters
                                       (sort-by :type)
-                                      (sort-by (comp not :required?))))])
+                                      (sort-by (comp not :required?))))
+   (if (seq pagination) (render-pagination-parameters pagination))])
 
 (defn- render-code [lang code]
   [:pre [:code {:class lang} code]])
@@ -97,7 +105,7 @@
     [:div.wrap
      [:h1.mbn "Request"]
      (render-request-synopsis endpoint)
-     (render-request-parameters (:parameters endpoint))]]
+     (render-request-parameters (:parameters endpoint) (:pagination endpoint))]]
    [:div.aside
     [:div.wrap
      (render-request-examples endpoint)]]])
@@ -190,35 +198,35 @@
 
 (defn create-pages [endpoints types]
   (->> endpoints #_[{:id :get-user-id-userId-email-logins
-         :path "/user/{email}/logins"
-         :api-path "/api/2/user/{email}/logins"
-         :method :GET
-         :name "List logins"
-         :description "An **awesome** way to look up logins"
-         :category {:section "Identity Management" :api "Login API"}
-         :parameters [{:name "ip"
-                       :description "Only show login attempts from this IP address"
-                       :type :query
-                       :required? false}
-                      {:name "status"
-                       :description "Only show successful (`true`) or failed (`false`) logins"
-                       :type :query
-                       :required? false}
-                      {:name "id/userId/email"
-                       :description "Only show successful (`true`) or failed (`false`) logins"
-                       :type :path
-                       :required? true}]
-         :response-formats ["json" "jsonp"]
-         :default-response-format "json"
-         :pagination ["limit" "since" "offset" "until"]
-         :filters ["merchant"]
-         :access-token-types ["server"]
-         :requires-authentication? true
-         :inline-types [:login_attempt :login-type]
-         :responses {:success {:status 200
-                               :description "A list of login attempt objects"
-                               :type [:login_attempt]
-                               :samples {:json "[{\"status\": \"true\",
+                     :path "/user/{email}/logins"
+                     :api-path "/api/2/user/{email}/logins"
+                     :method :GET
+                     :name "List logins"
+                     :description "An **awesome** way to look up logins"
+                     :category {:section "Identity Management" :api "Login API"}
+                     :parameters [{:name "ip"
+                                   :description "Only show login attempts from this IP address"
+                                   :type :query
+                                   :required? false}
+                                  {:name "status"
+                                   :description "Only show successful (`true`) or failed (`false`) logins"
+                                   :type :query
+                                   :required? false}
+                                  {:name "id/userId/email"
+                                   :description "Only show successful (`true`) or failed (`false`) logins"
+                                   :type :path
+                                   :required? true}]
+                     :response-formats ["json" "jsonp"]
+                     :default-response-format "json"
+                     :pagination ["limit" "since" "offset" "until"]
+                     :filters ["merchant"]
+                     :access-token-types ["server"]
+                     :requires-authentication? true
+                     :inline-types [:login_attempt :login-type]
+                     :responses {:success {:status 200
+                                           :description "A list of login attempt objects"
+                                           :type [:login_attempt]
+                                           :samples {:json "[{\"status\": \"true\",
   \"referer\": \"https://stage.payment.schibsted.no/login\",
   \"clientId\": \"[Your client ID]\",
   \"trackingRef\": false,
@@ -234,7 +242,7 @@
   \"provider\": \"default\",
   \"id\": \"150005945\",
   \"ip\": \"127.0.0.1\"}]"
-                                         :jsonp "callback([{\"status\": \"true\",
+                                                     :jsonp "callback([{\"status\": \"true\",
   \"referer\": \"https://stage.payment.schibsted.no/login\",
   \"clientId\": \"[Your client ID]\",
   \"trackingRef\": false,
@@ -250,14 +258,14 @@
   \"provider\": \"default\",
   \"id\": \"150005945\",
   \"ip\": \"127.0.0.1\"}])"}}
-                     :failures [{:status 401
-                                 :description "Your server access token is missing or invalid. Try re-authenticating."
-                                 :type :error}
-                                {:status 403
-                                 :description "You're not allowed to create users. Contact SPiD to be granted access."
-                                 :type :error}
-                                {:status 418
-                                 :description "Why are you contacting your teapot instead of the SPiD servers? Silly rabbit."
-                                 :type :error}]}}]
+                                 :failures [{:status 401
+                                             :description "Your server access token is missing or invalid. Try re-authenticating."
+                                             :type :error}
+                                            {:status 403
+                                             :description "You're not allowed to create users. Contact SPiD to be granted access."
+                                             :type :error}
+                                            {:status 418
+                                             :description "Why are you contacting your teapot instead of the SPiD servers? Silly rabbit."
+                                             :type :error}]}}]
        (map (juxt endpoint-path #(partial create-page % types)))
        (into {})))
