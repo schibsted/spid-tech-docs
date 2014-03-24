@@ -2,7 +2,7 @@
   "Gather all relevant information about endpoints from a few different sources."
   (:require [clojure.string :as str]
             [spid-docs.formatting :refer [to-id-str]]
-            [spid-docs.homeless :refer [with-optional-keys]]))
+            [spid-docs.homeless :refer [with-optional-keys assoc-non-nil]]))
 
 (def verbs
   "Verbs to use for different http methods when cobbling together the
@@ -101,15 +101,15 @@
         {:keys [required optional default_filters filters access_token_types responses]} details
         {:keys [pagination-descriptions filter-descriptions endpoint-descriptions sample-responses]} raw-content
         endpoint-id (str (to-id-str path) "-" (.toLowerCase (name method)))
-        endpoint-file (str "/" endpoint-id ".md")]
+        {:keys [introduction inline-types success-description]} (get endpoint-descriptions (str "/" endpoint-id ".md") {})]
     (with-optional-keys
       {:id (keyword endpoint-id)
        :path (str "/" path)
        :api-path (str "/api/2/" path)
        :method method
        :name (fix-multimethod-name (:name endpoint) method)
-       :description (get-in endpoint-descriptions [endpoint-file :introduction])
-       :?inline-types (to-inline-types (get-in endpoint-descriptions [endpoint-file :inline-types]))
+       :description introduction
+       :?inline-types (to-inline-types inline-types)
        :category {:section (first category) :api (second category)}
        :parameters (collect-parameters required optional pathParameters pagination-descriptions endpoint)
        :?pagination (collect-pagination-params optional pagination-descriptions)
@@ -118,7 +118,9 @@
        :default-response-format (keyword default_output_format)
        :access-token-types (set (map keyword access_token_types))
        :requires-authentication? (not (empty? access_token_types))
-       :responses {:success (-> success? (filter responses) first create-response (add-samples (str "/" endpoint-id) sample-responses))
+       :responses {:success (-> success? (filter responses) first create-response
+                                (add-samples (str "/" endpoint-id) sample-responses)
+                                (assoc-non-nil :description success-description))
                    :failures (map create-response (remove success? responses))}
        :?deprecated deprecated})))
 

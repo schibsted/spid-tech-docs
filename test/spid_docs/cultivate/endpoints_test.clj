@@ -9,7 +9,8 @@
   {:sample-responses {"/terms-get.json" "terms json"
                       "/terms-get.jsonp" "terms jsonp"}
    :endpoint-descriptions {"/terms-get.md" {:introduction "terms desc"
-                                            :inline-types "string datetime"}}
+                                            :inline-types "string datetime"
+                                            :success-description "success description"}}
    :pagination-descriptions {:limit  "limit desc"
                              :offset "offset desc"
                              :since  "since desc"
@@ -253,13 +254,16 @@
 
 (fact
  "The success response contains a :samples if it is present
-  in :sample-responses."
+  in :sample-responses.
 
- (-> (cultivate :httpMethods {:GET (cs/http-method {:responses [{:status 200, :description "", :type "string"}]})}
+  Also, success description in the endpoints/ markdown files take
+  precedence over the description from the raw endpoints."
+
+ (-> (cultivate :httpMethods {:GET (cs/http-method {:responses [{:status 200, :description "from raw", :type "string"}]})}
                 :path "terms")
      first :responses)
  => {:success {:status 200
-               :description ""
+               :description "success description"
                :type :string
                :samples {:json "terms json"
                          :jsonp "terms jsonp"}}

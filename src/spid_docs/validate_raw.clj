@@ -54,7 +54,8 @@
 
 (def EndpointDescription
   {:introduction Str
-   (optional-key :inline-types) Str})
+   (optional-key :inline-types) Str
+   (optional-key :success-description) Str})
 
 (defn validate-raw-content [raw-content]
   (validate {:endpoints [Endpoint]
