@@ -12,17 +12,20 @@
      (contains? pages (str href "index.html")))))
 
 (fact
- "All pages respond with 200 OK"
+ :slow
+ "Integration tests. Avoid running them with:
+
+ lein with-profile test midje :autotest :filter -slow"
 
  (let [pages (get-pages)]
    (doseq [url (keys pages)]
      (let [response (app {:uri url})
            status (:status response)]
-       ;; This weird comparison is made in order for Midje to show us
-       ;; *which* URL fails.
+
+       ;; Check that the pages respond with 200 OK.
        [url status] => [url 200]
 
-       ;; Link checker
+       ;; Check that all links point to existing pages
        ;; (doseq [link (-> (:body (app {:uri url}))
        ;;                  java.io.StringReader.
        ;;                  enlive/html-resource
