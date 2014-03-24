@@ -28,7 +28,7 @@
 (def format-classes
   "Class names representing response formats. Will be used for syntax
    highlighting, and must be avalid Pygments lexer."
-  {:json "js" :jsonp "js"})
+  {:json "json" :jsonp "js"})
 
 (def preferred-format-order
   "Sample outputs are rendered in this order"
