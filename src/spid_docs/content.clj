@@ -25,6 +25,11 @@
   "Combine and cross-link content"
   [raw-content]
   (let [endpoints (mapcat #(ce/cultivate-endpoint % raw-content) (:endpoints raw-content))]
-    (assoc raw-content
-      :endpoints endpoints
-      :apis (ca/cultivate-apis (:apis raw-content) endpoints))))
+    (-> raw-content
+        (assoc
+            :endpoints endpoints
+            :apis (ca/cultivate-apis (:apis raw-content) endpoints))
+        (dissoc :sample-responses
+                :endpoint-descriptions
+                :pagination-descriptions
+                :filter-descriptions))))

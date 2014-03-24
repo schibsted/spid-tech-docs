@@ -11,11 +11,14 @@
  ["Payment Services" "Campaign API"] {:description "Create, update and list campaigns"}
  ["Payment Services" "Voucher API"] {:description "Create, update, list and handout vouchers"}
  ["Payment Services" "PayLink API"] {:description "Create, update, and list PayLinks"}
- ["Payment Services" "Inject Token API"] {:description "Import tokens and list token names for clients"}
+ ["Payment Services" "Discount API"] {:description "Create, update, and list Discounts"}
+ ["Payment Services" "InjectToken API"] {:description "Import tokens and list token names for clients"}
  ["Data Storage" "SODA Endpoints"] {:description "Attach or retrieve specific data to any object (Example: add application specific data as height/weight to a user)"}
  ["Data Storage" "DataObjects API"] {:description "Attach or retrieve specific data to user (Example: add application specific data as height/weight to a user)"}
  ["Data Storage" "Traits API"] {:description "Adds, deletes or updates the currently saved traits for a specified user"}
  ["Insight" "Report Database API"] {:description "Retrieve client-specific data for local processing"}
- ["Insight" "Key Performance Indicator API"] {:description "Retrieve client-specific KPI data"}
- ["Authorization" "Authorization API"] {:description "Authorization extensions for clients"}
- ["Utilities" "Platform API"] {:description "Utilities to list features, versions and object description"}}
+ ["Insight" "KPI API"] {:description "Retrieve client-specific KPI data"}
+ ["Authorization" "OAuth"] {:description "Authorization extensions for clients"}
+ ["Utilities" "Platform API"] {:description "Utilities to list features, versions and object description"}
+ ;["Utilities" "Sysadmin API"] {:description "Should not be documented."}
+ }

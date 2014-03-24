@@ -1,7 +1,8 @@
 (ns spid-docs.validate-cultivated
-  (:require [schema.core :refer [optional-key validate enum pred eq Str Num Keyword]]))
+  (:require [schema.core :refer [optional-key validate maybe enum pred eq Str Num Keyword]]
+            [spid-docs.validate-raw :refer [Type]]))
 
-(def Path (pred (fn [^String s] (re-find #"^(/[a-zA-Z0-9/{}\-.]+)+/?$" s)) 'simple-slash-prefixed-path))
+(def Path (pred (fn [^String s] (re-find #"^(/[a-zA-Z0-9/{}_\-.]+)+/?\*?$" s)) 'simple-slash-prefixed-path))
 
 (def APICategory
   (enum {:section "Identity Management" :api "Login API"}
@@ -18,18 +19,20 @@
         {:section "Payment Services"    :api "Voucher API"}
         {:section "Payment Services"    :api "PayLink API"}
         {:section "Payment Services"    :api "InjectToken API"}
+        {:section "Payment Services"    :api "Discount API"}
         {:section "Data Storage"        :api "SODA Endpoints"}
         {:section "Data Storage"        :api "DataObjects API"}
         {:section "Data Storage"        :api "Traits API"}
         {:section "Insight"             :api "Report Database API"}
         {:section "Insight"             :api "KPI API"}
         {:section "Authorization"       :api "OAuth"}
-        {:section "Utilities"           :api "Platform API"}))
+        {:section "Utilities"           :api "Platform API"}
+        {:section "Utilities"           :api "Sysadmin API"}))
 
 (def Parameter
   {:name Str
    (optional-key :aliases) [Str]
-   :description Str
+   :description (maybe Str)
    :type (enum :path :query)
    :required? Boolean})
 
@@ -38,14 +41,14 @@
 
 (def Filter
   {:name Str
-   :description Str
+   :description (maybe Str)
    :default? Boolean})
 
 (def Response
-  {:status Num
-   :description Str
-   :type Keyword
-   (optional-key :samples) Str})
+  {(optional-key :status) Num
+   (optional-key :description) Str
+   :type (maybe Keyword)
+   (optional-key :samples) {Keyword Str}})
 
 (def Endpoint
   {:id Keyword
@@ -53,7 +56,7 @@
    :api-path Path
    :method (enum :GET :POST :DELETE)
    :name Str
-   :description Str
+   :description (maybe Str)
    :category APICategory
    :parameters [Parameter]
    :response-formats [ResponseFormat]
@@ -66,3 +69,14 @@
    :responses {:success Response
                :failures [Response]}
    (optional-key :deprecated) Str})
+
+(defn validate-content [content]
+  (validate {:endpoints [Endpoint]
+             :articles {Str Str}
+             :concepts {Str Str}
+             :types {Keyword Type}
+             :apis {[Str] {:api Str
+                           :category Str
+                           :endpoints [Endpoint]
+                           (optional-key :description) Str}}}
+            content))
