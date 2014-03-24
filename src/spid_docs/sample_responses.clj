@@ -57,11 +57,11 @@
                      (to-id-str (:path endpoint)) "-"
                      (name (:method endpoint)))))
 
-(defn- generate-sample-response-from-response [endpoint response]
+(defn- create-sample-responses [endpoint response]
   (let [filename-stub (get-filename-stub endpoint)
         sample (process-sample-response response)]
-    (spit (str filename-stub ".json") sample)
-    (spit (str filename-stub ".jsonp") (str "callback(" (str/trim sample) ");\n"))))
+    [{:filename (str filename-stub ".json"),  :contents sample}
+     {:filename (str filename-stub ".jsonp"), :contents (str "callback(" (str/trim sample) ");\n")}]))
 
 (defn- json-parse-data [response]
   (assoc response :data (:data (json/read-json (:data response)))))
@@ -78,11 +78,15 @@
       (rename-keys {:body :data :status :code})
       (json-parse-data)))
 
+(defn- save-sample-responses [samples]
+  (doseq [{:keys [filename contents]} samples]
+    (spit filename contents)))
+
 (defmulti generate-sample-response #(vector (:method %) (:path %)))
 
 (defmethod generate-sample-response [:GET "/me"] [endpoint]
-  (generate-sample-response-from-response endpoint (demo-user-sample endpoint)))
+  (save-sample-responses (create-sample-responses endpoint (demo-user-sample endpoint))))
 
 (defmethod generate-sample-response :default [endpoint]
   (ensure-get endpoint)
-  (generate-sample-response-from-response endpoint (api/GET (:path endpoint))))
+  (save-sample-responses (create-sample-responses endpoint (api/GET (:path endpoint)))))
