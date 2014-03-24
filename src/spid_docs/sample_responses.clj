@@ -75,7 +75,8 @@
   (-> (api/get-config)
       (api/get-login-token)
       (api/user-get (:path endpoint))
-      (rename-keys {:body :data :status :code})
+      (rename-keys {:body :data
+                    :status :code})
       (json-parse-data)))
 
 (defn- save-sample-responses [samples]
