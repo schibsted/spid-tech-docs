@@ -23,7 +23,7 @@
         postfix (if list-type? (if (.endsWith type-name "s") "es" "s") "")
         typedef (type-id types)
         path (if (:inline? typedef)
-               (str "#" (name type))
+               (str "#" type-name)
                (type-path typedef))]
     (list prefix
           (if path
@@ -49,7 +49,7 @@
    [:a {:name (name (:id type))}]
    (markdown/render (:description type))
    (if (some :always-available? (:fields type))
-     [:p "The check mark <span class=\"check\">✓</span> indicates if the field always contains a valid non-empty value."])
+     [:p "The check mark <span class=\"check\">✓</span> indicates that the field always contains a valid non-empty value."])
    [:table.sectioned.mbl
     (map #(render-type-field % types) (:fields type))]))
 
