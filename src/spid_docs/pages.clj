@@ -14,9 +14,7 @@
   (stasis/merge-page-sources
    {:general-pages {"/" (partial frontpage/create-page (:apis content))
                     "/formats/" (fn [] {:body "TODO"})
-                    "/endpoints/" (fn [] {:body "TODO"})
-                    "/endpoint-mockup/" (fn [] {:body (slurp (io/resource "endpoint-mockup.html"))
-                                                :split-page? true})}
+                    "/endpoints/" (fn [] {:body "TODO"})}
     :endpoints (endpoints/create-pages (:endpoints content) (:types content))
     :articles (articles/create-pages (:articles content))
     :types (types/create-pages (:types content))}))
