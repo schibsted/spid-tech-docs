@@ -9,15 +9,11 @@
             [spid-docs.pimp.highlight :refer [highlight-code-blocks]]
             [spid-docs.pimp.tabs :refer [transform-tabs]]))
 
-(defn- anchorify [node]
-  (fn [content]
-    (conj content {:tag :a :attrs {:name (to-id-str (first content))}})))
-
-(defn add-header-anchors
+(defn add-header-ids
   "Every h2 gets an id that corresponds to the text inside it. This
    enables users to link to every heading on the whole site."
   [html]
-  (transform html [:h2] #(update-in % [:content] (anchorify %))))
+  (transform html [:h2] #(assoc-in % [:attrs :id] (-> % :content first to-id-str))))
 
 (defn render-page
   "Fetch the page and convert its {:title ... :body ...} map into a
@@ -27,7 +23,7 @@
        (layout-page request)
        (highlight-code-blocks)
        (transform-tabs)
-       (add-header-anchors)))
+       (add-header-ids)))
 
 (defn prepare-pages
   "Takes a page map, and wraps all its page functions in a call to
