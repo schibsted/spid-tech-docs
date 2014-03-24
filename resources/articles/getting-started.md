@@ -25,6 +25,7 @@ examples, see the example use-cases.
 ### :tabs Downloading the SDK
 
 #### :tab Java
+
 Download the Java SDK by cloning the GitHub repository:
 
 ```sh
@@ -39,6 +40,16 @@ Now install the SDK into your `.m2` repository:
 ```sh
 cd sdk-java
 mvn install
+```
+
+When you have installed the library, add it to your project's `pom.xml` file:
+
+```xml
+<dependency>
+  <groupId>no.spp.sdk</groupId>
+  <artifactId>spp-sdk</artifactId>
+  <version>1.3.10</version>
+</dependency>
 ```
 
 #### :tab PHP
