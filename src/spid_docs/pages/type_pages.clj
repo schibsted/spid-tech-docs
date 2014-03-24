@@ -33,7 +33,7 @@
 
 (defn- render-type-field [field types]
   [:tr
-   [:th [:h4.nowrap (str (:name field) (render-availability field))]]
+   [:th [:h4.nowrap (:name field) " " (render-availability field)]]
    [:td
     [:h5 (link-to-type (:type field) types)]
     [:p.faded (markdown/render-inline (:description field))]]])
