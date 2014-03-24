@@ -45,8 +45,7 @@
    will be linked as anchors instead of to external pages."
   [type types]
   (list
-   [:h3 (:name type)]
-   [:a {:name (name (:id type))}]
+   [:h3 {:id (name (:id type))} (:name type)]
    (markdown/render (:description type))
    (if (some :always-available? (:fields type))
      [:p "The check mark <span class=\"check\">✓</span> indicates that the field always contains a valid non-empty value."])
