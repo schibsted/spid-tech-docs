@@ -21,9 +21,14 @@
   (let [code (->> node :content (apply str))
         lang (->> node :attrs :class keyword)]
     {:tag :code
-     :content (-> code
-                  (pygments/highlight lang :html)
-                  (extract-code))}))
+     ;; Certain code samples (like a 14Kb HTML string embedded in JSON) trips up
+     ;; Pygments (too much recursion). When that happens, simply skip
+     ;; highlighting
+     :content (try
+                (-> code
+                    (pygments/highlight lang :html)
+                    (extract-code))
+                (catch Exception e code))}))
 
 (defn highlight-code-blocks
   "Finds all <pre> with <code> in them and highlights with Pygments."
