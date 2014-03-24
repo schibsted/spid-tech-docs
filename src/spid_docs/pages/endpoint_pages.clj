@@ -141,12 +141,25 @@
         enumerate-humanely)
    (pluralize " response format" (count (:response-formats endpoint)))])
 
-(defn render-response-type [response types]
+(defn render-response-type
+  "Renders the response type along with any supporting inline-types.
+   For objects that have nested types (objects or lists of objects), these
+   nested structures are typically rendered as inline types. The inline-types
+   vector is a list of keywords. The full map of types (flagged as inline or
+   not) are required to get the actual type description, and to generate the
+   correct links."
+  [response inline-types types]
   (list
    [:h2 (str "Success: " (format-response-status (:status response)))]
    (render (:description response))
-   (->> (vals types)
-        (filter :inline?)
+   (->> inline-types
+        (cons (:type response))
+        (map #(keyword (str/replace (name %) #"^\[|\]$" "")))
+        (map (fn [type]
+               (if (nil? (type types))
+                 (prn (str "Attempted to render undefined type " (name type)))
+                 (type types))))
+        (filter identity)
         (map #(render-type-definition % types)))))
 
 (defn- render-response-failure [failure]
@@ -179,6 +192,7 @@
      (render-response-formats endpoint)
      (render-response-type
       (-> endpoint :responses :success)   ; Success response description
+      (:inline-types endpoint)            ; The inline types
       (flag-inline-types endpoint types)) ; The type map with inline types flagged
      (render-response-failures (-> endpoint :responses :failures))]]
    [:div.aside

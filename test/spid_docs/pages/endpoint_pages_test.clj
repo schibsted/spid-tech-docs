@@ -113,13 +113,24 @@
       "This endpoint supports the <a href=\"/formats/#json\">JSON</a>, <a href=\"/formats/#jsonp\">JSON-P</a>, and <a href=\"/formats/#xml\">XML</a> response formats")
 
 (fact
- (let [hiccup (render-response-type {:status 200 :description "**Hey**"} [])]
+ (let [hiccup (render-response-type {:status 200 :description "**Hey**"} [] {})]
    (first hiccup) => [:h2 "Success: 200 OK"]
    (second hiccup) => "<p><strong>Hey</strong></p>"))
 
 (fact "Renders inline types inline"
       (->>
-       (render-response-type {:status 200 :description "**Hey**"}
+       (render-response-type {:status 200 :description "**Hey**" :type :login}
+                             []
+                             {:login {:id :login
+                                      :inline? true
+                                      :fields [{:name "id" :type :string}]}})
+       (hiccup-find [:table])
+       count) => 1)
+
+(fact "Renders list response types inline"
+      (->>
+       (render-response-type {:status 200 :description "**Hey**" :type (keyword "[login]")}
+                             []
                              {:login {:id :login
                                       :inline? true
                                       :fields [{:name "id" :type :string}]}})
