@@ -2,6 +2,7 @@
   "Functions to facilitate extracting code examples from the example repo."
   (:require [clojure.java.io :as io]
             [clojure.string :as str]
+            [spid-docs.enlive :as enlive]
             [spid-docs.homeless :refer [unindent]]))
 
 (def examples-dir
@@ -56,3 +57,18 @@
 (defn read-example [lang title path]
   (create-example lang path title
                   (read-example-file lang path)))
+
+(defn- inline-example [node]
+  (let [attrs (:attrs node)
+        lang (:lang attrs)]
+    {:tag :pre
+     :attrs {}
+     :content [{:tag :code
+                 :attrs {:class lang}
+                 :content (read-example (keyword lang) (:title attrs) (:src attrs))}]}))
+
+(defn inline-examples
+  "Finds all <spid-example> tags, finds the referred examples and returns the text
+   with the example tags replaced with the actual examples."
+  [html]
+  (enlive/transform (enlive/parse html) [:spid-example] inline-example))

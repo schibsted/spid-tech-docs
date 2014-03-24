@@ -122,7 +122,7 @@ verifiable. This means that code examples must stem from real code-bases that
 can be run and tested. All code used in the docs live in the example code git
 submodule (at [resources/example-repo](./resources/example-repo)). To insert a
 snippet of code from this repository into your pages, you can use the
-`:example-code` custom extension.
+`<spid-example>` custom extension.
 
 First, the code example to be extracted must be commented. The syntax varies by
 language. For Java and PHP, it looks like this:
@@ -146,7 +146,9 @@ this example in the markdown page with the path to this file and the leading
 comment:
 
 ```
-:example-code java /sso/src/main/java/SingleSignOnController.java "Fetch user information and add to session"
+<spid-example lang="java"
+              src="/sso/src/main/java/SingleSignOnController.java"
+              title="Fetch user information and add to session"/>
 ```
 
 We refer to code snippets with the full comment string instead of an

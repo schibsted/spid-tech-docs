@@ -93,15 +93,15 @@ the SPiD login page.
 
 ##### :tab Java
 
-:example-code java /sso/src/main/java/SingleSignOnController.java "Build login URL"
+<spid-example lang="java" src="/sso/src/main/java/SingleSignOnController.java" title="Build login URL"/>
 
 ##### :tab PHP
 
-:example-code php /sso/index.php "Build login URL"
+<spid-example lang="php" src="/sso/index.php" title="Build login URL"/>
 
 ##### :tab Clojure
 
-:example-code clj /sso/src/spid_clojure_sso_example/core.clj "Build login URL"
+<spid-example lang="clj" src="/sso/src/spid_clojure_sso_example/core.clj" title="Build login URL"/>
 
 #### :/tabs
 
@@ -120,21 +120,21 @@ client to communicate with the SPiD API on behalf of the user.
 
 ##### :tab Java
 
-:example-code java /sso/src/main/java/SingleSignOnController.java "Create user client"
+<spid-example lang="java" src="/sso/src/main/java/SingleSignOnController.java" title="Create user client"/>
 
 ##### :tab PHP
 
 The SPiD SDK for PHP needs a few config variables:
 
-:example-code php /sso/config.php.sample "SDK variables"
+<spid-example lang="php" src="/sso/config.php.sample" title="SDK variables"/>
 
 Create the client with the config:
 
-:example-code php /sso/createSession.php "Create user client"
+<spid-example lang="php" src="/sso/createSession.php" title="Create user client"/>
 
 ##### :tab Clojure
 
-:example-code clj /sso/src/spid_clojure_sso_example/core.clj "Create user client"
+<spid-example lang="clj" src="/sso/src/spid_clojure_sso_example/core.clj" title="Create user client"/>
 
 #### :/tabs
 
@@ -148,15 +148,15 @@ on to the client. You'll need it later.
 
 ##### :tab Java
 
-:example-code java /sso/src/main/java/SingleSignOnController.java "Fetch user information and add to session"
+<spid-example lang="java" src="/sso/src/main/java/SingleSignOnController.java" title="Fetch user information and add to session"/>
 
 ##### :tab PHP
 
-:example-code php /sso/createSession.php "Fetch user information and add to session"
+<spid-example lang="php" src="/sso/createSession.php" title="Fetch user information and add to session"/>
 
 ##### :tab Clojure
 
-:example-code clj /sso/src/spid_clojure_sso_example/core.clj "Fetch user information and add to session"
+<spid-example lang="clj" src="/sso/src/spid_clojure_sso_example/core.clj" title="Fetch user information and add to session"/>
 
 #### :/tabs
 
@@ -180,15 +180,15 @@ logging out of SPiD.
 
 ##### :tab Java
 
-:example-code java /sso/src/main/java/SingleSignOnController.java "Log user out"
+<spid-example lang="java" src="/sso/src/main/java/SingleSignOnController.java" title="Log user out"/>
 
 ##### :tab PHP
 
-:example-code php /sso/logout.php "Log user out"
+<spid-example lang="php" src="/sso/logout.php" title="Log user out"/>
 
 ##### :tab Clojure
 
-:example-code clj /sso/src/spid_clojure_sso_example/core.clj "Log user out"
+<spid-example lang="clj" src="/sso/src/spid_clojure_sso_example/core.clj" title="Log user out"/>
 
 ```clj
 (defroutes routes

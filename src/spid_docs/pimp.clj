@@ -3,6 +3,7 @@
    HTML and applies a set of post-processors, such as highlighting
    code examples with Pygments, adding tabs etc."
   (:require [spid-docs.enlive :refer [transform]]
+            [spid-docs.pimp.examples :refer [inline-examples]]
             [spid-docs.formatting :refer [to-id-str]]
             [spid-docs.homeless :refer [update-vals]]
             [spid-docs.layout :refer [layout-page]]
@@ -21,6 +22,7 @@
   [get-page request]
   (->> (get-page)
        (layout-page request)
+       (inline-examples)
        (highlight-code-blocks)
        (transform-tabs)
        (add-header-ids)))
