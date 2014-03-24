@@ -143,4 +143,8 @@ verified."
          :name "Terms"
          :rendering :object
          :fields [{:name "terms"    :type :string  :always-available? true :description "The current terms, as HTML"}
-                  {:name "accepted" :type :boolean :always-available? true :description "If requested with a user token, this field is `true` if the user has accepted the terms."}]}}
+                  {:name "accepted" :type :boolean :always-available? true :description "If requested with a user token, this field is `true` if the user has accepted the terms."}]}
+ :exchange {:id :exchange
+            :name "OAuth exchange object"
+            :rendering :object
+            :fields [{:name "code" :type :string :always-available? true :description "An OAuth access token"}]}}
