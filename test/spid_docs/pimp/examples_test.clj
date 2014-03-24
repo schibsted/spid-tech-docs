@@ -57,7 +57,7 @@ class GettingStarted {
           (inline-examples "<h2>Java</h2>
 <spid-example lang=\"java\"
               src=\"/getting-started/src/main/GettingStarted.java\"
-              title=\"Build login URL\"/>") => "<h2>Java</h2>
+              title=\"Example\"/>") => "<h2>Java</h2>
 <pre><code class=\"java\">private String def() {
     return ghi;
 }</code></pre>")))
