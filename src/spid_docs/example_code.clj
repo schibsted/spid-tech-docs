@@ -195,7 +195,8 @@
         params-assoc-array (create-params-assoc-array params)
         api-invocation (str "(\"" (replace-path-parameters path) "\""
                             (if has-params (str ", $params") "") ")")]
-    (str params-assoc-array
+    (str "<?php\n"
+         params-assoc-array
          "$client->auth();\necho var_dump($client->api" api-invocation ");")))
 
 (defn- create-examples-with [ex-fn endpoint req-params optional-params all-params]

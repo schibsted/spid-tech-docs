@@ -119,15 +119,18 @@ String responseJSON = sppClient.
     getResponseBody();"
 
    (-> get-example :php :minimal)
-   => "$client->auth();
+   => "<?php
+$client->auth();
 echo var_dump($client->api(\"/status\"));"
 
    (-> param-example :php :minimal)
-   => "$client->auth();
+   => "<?php
+$client->auth();
 echo var_dump($client->api(\"/describe/User\"));"
 
    (-> post-example :php :minimal)
-   => "$params = array(
+   => "<?php
+$params = array(
     \"email\" => \"johnd@example.com\"
 );
 
@@ -135,7 +138,8 @@ $client->auth();
 echo var_dump($client->api(\"/user\", $params));"
 
    (-> post-example :php :maximal)
-   => "$params = array(
+   => "<?php
+$params = array(
     \"email\" => \"johnd@example.com\",
     \"displayName\" => \"John\",
     \"name\" => \"John Doe\",
