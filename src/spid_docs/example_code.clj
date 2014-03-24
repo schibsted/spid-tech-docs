@@ -1,6 +1,7 @@
 (ns spid-docs.example-code
   (:require [clojure.set :refer [difference]]
-            [clojure.string :as str]))
+            [clojure.string :as str]
+            [spid-docs.homeless :refer [update-vals]]))
 
 (def examples
   {"action" "???"
@@ -206,8 +207,9 @@
         all-params (filter #(= (:type %) :query) params)
         req-params (filter :required? all-params)
         optional-params (difference (set all-params) (set req-params))]
-    {:curl (create-examples-with curl-example-code endpoint req-params optional-params all-params)
-     :clojure (create-examples-with clojure-example-code endpoint req-params optional-params all-params)
-     :java (create-examples-with java-example-code endpoint req-params optional-params all-params)
-     :php (create-examples-with php-example-code endpoint req-params optional-params all-params)
-     }))
+    (update-vals
+     {:curl curl-example-code
+      :java java-example-code
+      :php php-example-code
+      :clojure clojure-example-code}
+     #(create-examples-with % endpoint req-params optional-params all-params))))
