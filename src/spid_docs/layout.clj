@@ -29,7 +29,7 @@
     [:script "document.body.className = 'js';"]
     [:div#head
      [:div.center.pll
-      [:a {:href "#"} "SPiD Documentation"] " > "
+      [:a {:href "https://docs.spid.no/"} "SPiD Documentation"] " > "
       [:a {:href "/"} "API"]]]
     [:div#main
      [:div.center

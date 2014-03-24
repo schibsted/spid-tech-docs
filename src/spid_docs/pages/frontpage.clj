@@ -22,16 +22,14 @@
 
 (defn- render-api [api]
   (list
-   [:a {:name (to-id-str (:api api))}]
-   [:h4 (:api api)]
+   [:h4 {:id (to-id-str (:api api))} (:api api)]
    [:ul (->> (:endpoints api)
              (map #(vector :li [:a {:href (endpoint-path %)}
                                 [:code (name (:method %))] " " (:path %)])))]))
 
 (defn- render-api-section [[api-section apis]]
   (list
-   [:a {:name (to-id-str api-section)}]
-   [:h3 api-section]
+   [:h3 {:id (to-id-str api-section)} api-section]
    (mapcat render-api apis)))
 
 (defn- render-api-column [num apis total-columns]

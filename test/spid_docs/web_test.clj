@@ -4,12 +4,18 @@
             [net.cgrand.enlive-html :as enlive]
             [spid-docs.web :refer :all]))
 
-(defn link-valid? [pages href]
-  (let [path (first (str/split href #"#"))]
+(defn link-valid? [link page-url pages]
+  (let [href (-> link :attrs :href)
+        [path hash] (str/split href #"#")]
     (or
-     (not (.startsWith href "/"))
-     (contains? pages href)
-     (contains? pages (str href "index.html")))))
+     (when (= "#?" href) ; use #? to postpone writing a link. We'll nag about it, tho.
+       (do (println "TODO: The" (:content link) "at" page-url "needs to point somewhere")
+           true))
+     (and (empty? path) (not (empty? hash))) ; inpage hash navigation
+     (.startsWith path "http://") ; external link
+     (.startsWith path "https://")
+     (contains? pages path) ; known page
+     (contains? pages (str path "index.html")))))
 
 (fact
  :slow
@@ -26,10 +32,10 @@
        [url status] => [url 200]
 
        ;; Check that all links point to existing pages
-       ;; (doseq [link (-> (:body (app {:uri url}))
-       ;;                  java.io.StringReader.
-       ;;                  enlive/html-resource
-       ;;                  (enlive/select [:a]))]
-       ;;   (let [href (get-in link [:attrs :href])]
-       ;;     [url href (link-valid? pages href)] => [url href true]))
-       ))))
+       (doseq [link (-> (app {:uri url})
+                        :body
+                        java.io.StringReader.
+                        enlive/html-resource
+                        (enlive/select [:a]))]
+         (let [href (get-in link [:attrs :href])]
+           [url href (link-valid? link url pages)] => [url href true]))))))
