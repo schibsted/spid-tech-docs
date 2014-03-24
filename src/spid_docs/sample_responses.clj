@@ -49,8 +49,10 @@
 (defn process-sample-response [response]
   (with-out-str (json/pprint (->> response :data process-data) :escape-slash false)))
 
+(def target-directory "resources/sample-responses")
+
 (defn- get-filename [endpoint]
-  (.toLowerCase (str "resources/sample-responses/"
+  (.toLowerCase (str target-directory "/"
                      (to-id-str (:path endpoint)) "-"
                      (name (:method endpoint)) ".json")))
 

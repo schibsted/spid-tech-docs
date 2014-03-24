@@ -1,6 +1,7 @@
 (ns spid-docs.sample-responses-test
-  (:require [spid-docs.sample-responses :refer :all]
-            [midje.sweet :refer :all]))
+  (:require [midje.sweet :refer :all]
+            [spid-docs.sample-responses :refer :all]
+            [test-with-files.core :refer [with-tmp-dir tmp-dir]]))
 
 (fact "It reduces lists of data to a manageable amount"
       (process-data [{:id 1} {:id 2} {:id 3}]) => [{:id 1}])
@@ -75,3 +76,10 @@
 (fact "It processes sample response"
       (-> {:code "201" :data {:clientId "666" :url "http://vg.no"}}
           process-sample-response ) => "{\"clientId\":\"[Your client ID]\", \"url\":\"http://vg.no\"}\n")
+
+(fact "It generates sample response files."
+      (with-tmp-dir
+        (with-redefs [spid-docs.api-client/GET (fn [path] {:data {:status 123, :path path}})
+                      target-directory tmp-dir]
+          (generate-sample-response {:path "/status", :method :GET})
+          (slurp (str tmp-dir "/status-get.json")) => "{\"status\":123, \"path\":\"/status\"}\n")))
