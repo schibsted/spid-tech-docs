@@ -154,7 +154,7 @@
    (render (:description response))
    (->> inline-types
         (cons (:type response))
-        (map #(keyword (str/replace (name %) #"^\[|\]$" "")))
+        (map #(if (keyword? %) % (first %)))
         (map (fn [type]
                (if (nil? (type types))
                  (prn (str "Attempted to render undefined type " (name type)))

@@ -253,6 +253,19 @@
                  :type :error}]})
 
 (fact
+ "Responses that are lists of things are loaded correctly"
+
+ (-> (cultivate :httpMethods
+                {:GET (cs/http-method {:responses [{:status 200
+                                                    :description "OK"
+                                                    :type "[string]"}]})})
+     first :responses)
+ => {:success {:status 200
+               :description "OK"
+               :type [:string]}
+     :failures []})
+
+(fact
  "The success response contains a :samples if it is present
   in :sample-responses.
 

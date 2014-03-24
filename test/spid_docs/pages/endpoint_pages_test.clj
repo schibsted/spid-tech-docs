@@ -129,7 +129,7 @@
 
 (fact "Renders list response types inline"
       (->>
-       (render-response-type {:status 200 :description "Hey" :type (keyword "[login]")}
+       (render-response-type {:status 200 :description "Hey" :type [:login]}
                              []
                              {:login {:id :login
                                       :inline? true

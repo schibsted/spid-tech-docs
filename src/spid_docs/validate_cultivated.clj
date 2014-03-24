@@ -1,5 +1,5 @@
 (ns spid-docs.validate-cultivated
-  (:require [schema.core :refer [optional-key validate maybe enum pred eq Str Num Keyword]]
+  (:require [schema.core :refer [optional-key validate maybe enum pred eq either Str Num Keyword]]
             [spid-docs.validate-raw :refer [Type]]))
 
 (def Path (pred (fn [^String s] (re-find #"^(/[a-zA-Z0-9/{}_\-.]+)+/?\*?$" s)) 'simple-slash-prefixed-path))
@@ -47,7 +47,7 @@
 (def Response
   {(optional-key :status) Num
    (optional-key :description) Str
-   :type (maybe Keyword)
+   :type (maybe (either Keyword [Keyword]))
    (optional-key :samples) {Keyword Str}})
 
 (def Endpoint

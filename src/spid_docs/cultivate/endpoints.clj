@@ -42,9 +42,12 @@
    :default? (.contains defaults filter)})
 
 (defn create-response [response]
-  "The only difference between old responses and new responses is that
-   the type is a keyword instead of a string."
-  (update-in response [:type] keyword))
+  "Differences between old responses and new responses: The type of the response
+   is either a keyword, or a vector with a keyword, signifying a list type. The
+   original type is a string."
+  (update-in response [:type] #(if (re-find #"^\[.*\]$" %)
+                                 [(keyword (str/replace % #"^\[|\]$" ""))]
+                                 (keyword %))))
 
 (defn success? [response]
   "Is the response status between 200 and 299, ie a success?"
