@@ -156,8 +156,9 @@
    [:span.faded (:description failure)]])
 
 (defn render-response-failures [failures]
-  (list [:h2 "Failure cases"]
-        [:ul (map render-response-failure failures)]))
+  (when (seq failures)
+    (list [:h2 "Failure cases"]
+          [:ul (map render-response-failure failures)])))
 
 (defn- render-sample-response [format sample]
   (list [:h5.tab (format format-names)]
