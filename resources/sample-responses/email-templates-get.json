@@ -1,0 +1,165 @@
+{"change_password_notification":
+ {"layout":"notification.html",
+  "subject":"Passordet p\u00e5 din SPiD-konto er endret",
+  "content":
+  "Hei {DISPLAY_NAME}\n<p><strong>Passordet p\u00e5 din SPiD konto er blitt endret den {CHANGED_DATE} kl {CHANGED_TIME} fra ip-adressen {IP}</strong>.</p> <p>Du beh\u00f8ver ikke \u00e5 foreta noe da dette er kun en varsling om hendelsen. Om du mener at dette ikke er gjort av deg ber vi om at du tar kontakt med support omg\u00e5ende p\u00e5: \n{SPID_SUPPORT_MAIL}.</p> <p>Hvis du ikke husker ditt passord eller \u00f8nsker \u00e5 endre den ved en senere anledning, f\u00f8lg anvisningene for glemt passord ved \u00e5 klikke p\u00e5 linken nedenfor:\n {FORGOT_PASSWORD_URL} </p>",
+  "template":"change_password_notification",
+  "tokens":
+  ["DISPLAY_NAME", "FORGOT_PASSWORD_URL", "CHANGED_TIME",
+   "CHANGED_DATE", "IP"]},
+ "post_expiration_autorenew_subscription_fail":
+ {"layout":"notification.html",
+  "content":
+  "Hei {NAME}!\n\nDitt {SERVICE_NAME} abonnement, {SUBSCRIPTION_NAME}, kunne ikke fornyes automatisk den {CURRENT_DATE}!\n\n{FAIL_REASON}\n\n{FAIL_SOLUTION}\n\nDu kan n\u00e5r som helst endre dine abonnementer og betalingsm\u00e5ter ved \u00e5 g\u00e5 til dine kontosider:\n{SUBSCRIPTION_MANAGEMENT_URI}",
+  "subject":
+  "SPiD kunne ikke automatisk fornye et av dine abonnementer",
+  "template":"post_expiration_autorenew_subscription_fail",
+  "tokens":
+  ["NAME", "SERVICE_NAME", "SUBSCRIPTION_NAME", "CURRENT_DATE",
+   "FAIL_REASON", "FAIL_SOLUTION", "SUBSCRIPTION_MANAGEMENT_URI"]},
+ "confirm_email_address":
+ {"layout":"verification.html",
+  "subject":"Bekreft din epost hos SPiD",
+  "content":
+  "Hei,\n\nDu har lagt til {USER_EMAIL} til din SPiD-konto.\nFor \u00e5 kunne bruke e-postadressen m\u00e5 du bekrefte den ved \u00e5 klikke p\u00e5 lenken nedenfor:\n\n<b>{VERIFICATION_URL}</b>",
+  "template":"confirm_email_address",
+  "tokens":["DISPLAY_NAME", "VERIFICATION_URL", "USER_EMAIL"]},
+ "sms_purchase_non_subscription_receipt":
+ {"content":
+  "Du er belastet {TOTAL_PRICE} for '{PRODUCT_NAME}', ordre {ORDER_ID}.",
+  "subject":"Kvittering: SMS kj\u00f8p hos SPiD",
+  "template":"sms_purchase_non_subscription_receipt",
+  "tokens":["TOTAL_PRICE", "PRODUCT_NAME", "URL", "ORDER_ID"]},
+ "confirm_email_address_without_password_with_redirect":
+ {"layout":"verification.html",
+  "subject":"E-postbekreftelse fra SPiD",
+  "content":
+  "Hei {DISPLAY_NAME}!\n\nTakk for at du registrerte deg. En bruker er blitt opprettet basert p\u00e5 e-postadressen din.\nDu kan logge deg inn direkte med f\u00f8lgende:\n\nE-post: {USER_EMAIL}\nLogg deg inn ved \u00e5 klikke p\u00e5 lenken nedenfor:\n<p>{VERIFICATION_URL}</p>",
+  "template":"confirm_email_address_without_password_with_redirect",
+  "tokens":["DISPLAY_NAME", "USER_EMAIL", "VERIFICATION_URL"]},
+ "api_verify_email":
+ {"layout":"verification.html",
+  "subject":"E-postbekreftelse fra SPiD",
+  "content":
+  "Hei {DISPLAY_NAME},\n\nTakk for din henvendelse til kundeservice. For \u00e5 bekrefte din e-postadresse {USER_EMAIL} m\u00e5 du klikke p\u00e5 lenken nedenfor:\n\n<b>{VERIFICATION_URL}</b>",
+  "template":"api_verify_email",
+  "tokens":["DISPLAY_NAME", "VERIFICATION_URL", "USER_EMAIL"]},
+ "post_expiration_payment_identifier":
+ {"layout":"notification.html",
+  "content":
+  "Hei {NAME}!\n\nDin betalingsm\u00e5te for kj\u00f8p, <strong>{PAYMENT_METHOD} {PAYMENT_DESCRIPTION}</strong> har dessverre g\u00e5tt ut p\u00e5 dato.\n\nFor \u00e5 ha muligheten til automatiske fornyelser av dine abonnementer og enklere betaling ber vi om at du oppdaterer dine lagrede betalingsopplysninger ved \u00e5 klikke p\u00e5 lenken nedenfor:\n{BASE_URL}account/summary",
+  "subject":
+  "En betalingsm\u00e5te du har brukt hos SPiD er ikke lenger gyldig",
+  "template":"post_expiration_payment_identifier",
+  "tokens":["NAME", "PAYMENT_METHOD", "PAYMENT_DESCRIPTION"]},
+ "confirm_email_address_without_password":
+ {"layout":"verification.html",
+  "subject":"Din SPiD-konto",
+  "content":
+  "Hei {DISPLAY_NAME}!\n\nTakk for at du registrerte deg i SPiD.\n<p>For \u00e5 kunne anvende ditt konto beh\u00f8ver du sette ett eget passord som du benytter for \u00e5 bekrefte kj\u00f8p og gj\u00f8re endringer av dine opplysninger. Det kan du gj\u00f8re ved \u00e5 klikke p\u00e5 lenken nedenfor.\n {RESET_PASSWORD_URL} </p><p>Hvis du ikke husker ditt passord eller \u00f8nsker \u00e5 endre denne ved en senere anledning, f\u00f8lg veiledningen for glemt passord ved \u00e5 klikke p\u00e5 lenken nedenfor:\n {FORGOT_PASSWORD_URL} </p>",
+  "template":"post_thirdparty_signup",
+  "tokens":
+  ["DISPLAY_NAME", "FORGOT_PASSWORD_URL", "RESET_PASSWORD_URL"]},
+ "new_verification_code":
+ {"layout":"verification.html",
+  "subject":"E-postbekreftelse fra SPiD",
+  "content":
+  "Hei og velkommen til din nye SPiD-konto i {SERVICE_NAME}.\n\nBekreft at din e-postadresse er korrekt ved \u00e5 klikke p\u00e5 lenken nedenfor:\n\n<b>{VERIFICATION_URL}</b>",
+  "template":"new_verification_code",
+  "tokens":["DISPLAY_NAME", "VERIFICATION_URL", "SERVICE_NAME"]},
+ "post_expiration_autorenew_subscription_ok":
+ {"layout":"notification.html",
+  "content":
+  "Hei {NAME}!\n\nDitt {SERVICE_NAME} abonnement, {SUBSCRIPTION_NAME}, ble automatisk fornyet den {EXPIRATION_DATE} til {RENEWAL_PRICE} per {RENEWAL_PERIOD}!\nHvis du ikke \u00f8nsker \u00e5 fortsette med dette abonnementet, kan du skru av automatisk fornyelse ved \u00e5 klikke p\u00e5 lenken nedenfor:\n{SUBSCRIPTION_MANAGEMENT_URI}",
+  "subject":"Abonnement fornyet hos SPiD",
+  "template":"post_expiration_autorenew_subscription_ok",
+  "tokens":
+  ["NAME", "SERVICE_NAME", "SUBSCRIPTION_NAME", "EXPIRATION_DATE",
+   "RENEWAL_PRICE", "RENEWAL_PERIOD", "SUBSCRIPTION_MANAGEMENT_URI"]},
+ "sms_purchase_non_auto_renewal_subscription_receipt":
+ {"content":
+  "Du er belastet {TOTAL_PRICE} for '{PRODUCT_NAME}', ordre {ORDER_ID}. Oversikt finner du p\u00e5 https://payment.schibsted.no/",
+  "subject":"Kvittering: SMS kj\u00f8p hos SPiD",
+  "template":"sms_purchase_non_auto_renewal_subscription_receipt",
+  "tokens":
+  ["TOTAL_PRICE", "PRODUCT_NAME", "URL", "ORDER_ID", "STOP_CODE",
+   "PAYMENT_PROVIDER_NUMBER"]},
+ "confirm_email_address_with_password":
+ {"layout":"verification.html",
+  "subject":"E-postbekreftelse fra SPiD",
+  "content":
+  "Hei og velkommen til din nye SPiD-konto i {SERVICE_NAME}.\n\nBekreft at din e-postadresse er korrekt ved \u00e5 klikke p\u00e5 lenken nedenfor:\n\n<b>{VERIFICATION_URL}</b>",
+  "template":"confirm_email_address_with_password",
+  "tokens":["DISPLAY_NAME", "VERIFICATION_URL", "SERVICE_NAME"]},
+ "added_secondary_email_notification":
+ {"layout":"notification.html",
+  "subject":"En ny e-postadressen er lagt til p\u00e5 din SPiD-konto",
+  "content":
+  "Hei {DISPLAY_NAME}\n<p><strong>E-postadressen {ADDED_EMAIL} er lagt til p\u00e5 din SPiD konto den {CHANGED_DATE} kl {CHANGED_TIME} fra ip-adressen {IP}</strong>.</p> <p>Hvis dette er din e-post, vennligst f\u00f8lg instruksjonene som er sendt til {ADDED_EMAIL}. Om du mener at dette ikke er gjort av deg ber vi om at du tar kontakt med support omg\u00e5ende p\u00e5: \n{SPID_SUPPORT_MAIL}.</p>",
+  "template":"added_secondary_email_notification",
+  "tokens":
+  ["DISPLAY_NAME", "ADDED_EMAIL", "CHANGED_TIME", "CHANGED_DATE",
+   "IP"]},
+ "pre_expiration_autorenew_subscription_on":
+ {"layout":"notification.html",
+  "content":
+  "Hei {NAME}!\n\nDitt {SERVICE_NAME} abonnement, {SUBSCRIPTION_NAME}, utl\u00f8per {EXPIRATION_PERIOD} - den {EXPIRATION_DATE}!\n\nAbonnementet vil bli automatisk fornyet den {RENEWAL_DATE} til {RENEWAL_PRICE} per {RENEWAL_PERIOD}.\n\nHvis du ikke \u00f8nsker \u00e5 fortsette med dette abonnementet, kan du skru AV automatisk fornyelse ved \u00e5 klikke p\u00e5 lenken nedenfor:\n{SUBSCRIPTION_MANAGEMENT_URI}",
+  "subject":"Informasjon om fornyelse av abonnement",
+  "template":"pre_expiration_autorenew_subscription_on",
+  "tokens":
+  ["NAME", "SERVICE_NAME", "SUBSCRIPTION_NAME", "EXPIRATION_PERIOD",
+   "EXPIRATION_DATE", "RENEWAL_DATE", "RENEWAL_PRICE",
+   "RENEWAL_PERIOD", "SUBSCRIPTION_MANAGEMENT_URI"]},
+ "pre_expiration_payment_identifier":
+ {"layout":"notification.html",
+  "content":
+  "Hei {NAME}!\n\nDin betalingsm\u00e5te for kj\u00f8p, <strong>{PAYMENT_METHOD} {PAYMENT_DESCRIPTION}</strong>, l\u00f8per ut <strong>{EXPIRATION_TIME} - den {EXPIRATION_DATE}</strong>!\n\nFor \u00e5 ha muligheten til automatisk fornyelse av dine abonnement og enklere betaling b\u00f8r du oppdatere dine lagrede betalingsopplysninger ved \u00e5 klikke p\u00e5 lenken nedenfor:\n{BASE_URL}account/summary",
+  "subject":"Betalingsm\u00e5te hos SPiD blir snart ugyldig",
+  "template":"pre_expiration_payment_identifier",
+  "tokens":
+  ["NAME", "PAYMENT_METHOD", "PAYMENT_DESCRIPTION", "EXPIRATION_TIME",
+   "EXPIRATION_DATE"]},
+ "post_deletion_payment_identifier":
+ {"layout":"notification.html",
+  "content":
+  "Hei {NAME}!\nDin betalingsm\u00e5te for kj\u00f8p, <strong>{PAYMENT_METHOD} {PAYMENT_DESCRIPTION}</strong> er slettet fra v\u00e5re systemer.\n{DELETION_REASON}\n\nFor holde abonnementet aktiv, b\u00f8r du oppdaterer dine lagrede betalingsopplysninger ved \u00e5 klikke p\u00e5 lenken nedenfor:\n{BASE_URL}account/summary",
+  "subject":"Betalingsm\u00e5te fjernet",
+  "template":"post_deletion_payment_identifier",
+  "tokens":
+  ["NAME", "PAYMENT_METHOD", "PAYMENT_DESCRIPTION",
+   "DELETION_REASON"]},
+ "pre_expiration_autorenew_subscription_off":
+ {"layout":"notification.html",
+  "content":
+  "Hei {NAME}!\n\nDitt {SERVICE_NAME} abonnement, {SUBSCRIPTION_NAME}, utl\u00f8per {EXPIRATION_PERIOD} - den {EXPIRATION_DATE}!\n\nHvis du vil hindre at abonnement stoppes, kan du skru P\u00c5 automatisk fornyelse for kun {RENEWAL_PRICE} per {RENEWAL_PERIOD}. Dette gj\u00f8r du ved \u00e5 klikke p\u00e5 lenken nedenfor:\n{SUBSCRIPTION_MANAGEMENT_URI}",
+  "subject":"Adversel om snarlig utl\u00f8p av abonnement",
+  "template":"pre_expiration_autorenew_subscription_off",
+  "tokens":
+  ["NAME", "SERVICE_NAME", "SUBSCRIPTION_NAME", "EXPIRATION_PERIOD",
+   "EXPIRATION_DATE", "RENEWAL_PRICE", "RENEWAL_PERIOD",
+   "SUBSCRIPTION_MANAGEMENT_URI"]},
+ "sms_purchase_auto_renewal_subscription_receipt":
+ {"content":
+  "Du er belastet {TOTAL_PRICE} for '{PRODUCT_NAME}', ordre {ORDER_ID}, med automatisk fornyelse. Oversikt finner du p\u00e5 https://payment.schibsted.no/",
+  "subject":"Kvittering: SMS kj\u00f8p hos SPiD",
+  "template":"sms_purchase_auto_renewal_subscription_receipt",
+  "tokens":
+  ["TOTAL_PRICE", "PRODUCT_NAME", "URL", "ORDER_ID", "RENEW_PERIOD",
+   "RENEW_PRICE", "STOP_CODE", "PAYMENT_PROVIDER_NUMBER"]},
+ "confirm_email_address_without_password_without_redirect":
+ {"layout":"verification.html",
+  "subject":"E-postbekreftelse fra SPiD",
+  "content":
+  "Hei {DISPLAY_NAME}!\n\nTakk for at du registrerte deg. En bruker er blitt opprettet basert p\u00e5 e-postadressen din.\nDu kan logge deg inn direkte med f\u00f8lgende:\n\nE-post: {USER_EMAIL}\nGlem ikke \u00e5 endre det midlertidige passordet ved \u00e5 klikke p\u00e5 lenken nedenfor:\n<p>{VERIFICATION_URL}</p>",
+  "template":
+  "confirm_email_address_without_password_without_redirect",
+  "tokens":["DISPLAY_NAME", "USER_EMAIL", "VERIFICATION_URL"]},
+ "post_thirdparty_signup":
+ {"layout":"notification.html",
+  "subject":"Din SPiD-konto",
+  "content":
+  "Hei {DISPLAY_NAME}\n\nTakk for at du registrerte deg i SPiD med din {THIRD_PARTY}-konto.\n<p>Det er viktig at du setter ditt eget passord som du skal benytte ved kj\u00f8p og endring av dine opplysninger hos oss. Det kan du gj\u00f8re ved \u00e5 klikke p\u00e5 lenken nedenfor:\n {RESET_PASSWORD_URL} </p><p>Hvis du ikke husker ditt passord eller \u00f8nsker \u00e5 endre den ved en senere anledning, f\u00f8lg anvisningene for glemt passord ved \u00e5 klikke p\u00e5 linken nedenfor:\n {FORGOT_PASSWORD_URL} </p>",
+  "template":"post_thirdparty_signup",
+  "tokens":
+  ["DISPLAY_NAME", "FORGOT_PASSWORD_URL", "RESET_PASSWORD_URL",
+   "THIRD_PARTY"]}}

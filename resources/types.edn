@@ -9,7 +9,7 @@
  :boolean {:id :boolean}
  :integer {:id :integer}
  :date {:id :date
-            :description "An ISO-8601 formatted date. The specific format used by the API is YYYY-MM-DD"}
+        :description "An ISO-8601 formatted date. The specific format used by the API is YYYY-MM-DD"}
  :datetime {:id :datetime
             :description "Date and time on the format `YYYY-MM-DD HH:MM:SS`"}
  :endpoint-response {:id :endpoint-response
@@ -147,4 +147,34 @@ verified."
  :exchange {:id :exchange
             :name "OAuth exchange object"
             :rendering :object
-            :fields [{:name "code" :type :string :always-available? true :description "An OAuth access token"}]}}
+            :fields [{:name "code" :type :string :always-available? true :description "An OAuth access token"}]}
+ :email-template {:id :email-template
+                  :name "Email template"
+                  :rendering :object
+                  :fields [{:name "layout" :type :string :always-available? true}
+                           {:name "subject" :type :string :always-available? true :description "The email subject"}
+                           {:name "template" :type :string :always-available? true}
+                           {:name "tokens" :type :string :always-available? true}]}
+ :email-template-collection {:id :email-template-collection
+                             :name "Email template collection"
+                             :rendering :object
+                             :fields [{:name "change_password_notification" :type :email-template}
+                                      {:name "post_expiration_autorenew_subscription_fail" :type :email-template}
+                                      {:name "confirm_email_address" :type :email-template}
+                                      {:name "sms_purchase_non_subscription_receipt" :type :email-template}
+                                      {:name "confirm_email_address_without_password_with_redirect" :type :email-template}
+                                      {:name "api_verify_email" :type :email-template}
+                                      {:name "post_expiration_payment_identifier" :type :email-template}
+                                      {:name "confirm_email_address_without_password" :type :email-template}
+                                      {:name "new_verification_code" :type :email-template}
+                                      {:name "post_expiration_autorenew_subscription_ok" :type :email-template}
+                                      {:name "sms_purchase_non_auto_renewal_subscription_receipt" :type :email-template}
+                                      {:name "confirm_email_address_with_password" :type :email-template}
+                                      {:name "added_secondary_email_notification" :type :email-template}
+                                      {:name "pre_expiration_autorenew_subscription_on" :type :email-template}
+                                      {:name "pre_expiration_payment_identifier" :type :email-template}
+                                      {:name "post_deletion_payment_identifier" :type :email-template}
+                                      {:name "pre_expiration_autorenew_subscription_off" :type :email-template}
+                                      {:name "sms_purchase_auto_renewal_subscription_receipt" :type :email-template}
+                                      {:name "confirm_email_address_without_password_without_redirect" :type :email-template}
+                                      {:name "post_thirdparty_signup" :type :email-template}]}}
