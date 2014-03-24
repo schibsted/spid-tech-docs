@@ -1,10 +1,11 @@
 (ns spid-docs.sample-responses
-  "Tools to generate sample responses for all documentet endpoints. Atually uses
+  "Tools to generate sample responses for all documentet endpoints. Actually uses
    the API to ensure that sample responses reflect the API, and then runs the
    result through a series of functions that anonymizes and scrambles
    potentially sensitive data."
   (:require [clojure.data.json :as json]
             [clojure.set :refer [rename-keys]]
+            [clojure.string :as str]
             [spid-docs.api-client :as api]
             [spid-docs.formatting :refer [to-id-str]]
             [spid-docs.homeless :refer [update-existing]])
@@ -51,16 +52,16 @@
 
 (def target-directory "resources/sample-responses")
 
-(defn- get-filename [endpoint]
+(defn- get-filename-stub [endpoint]
   (.toLowerCase (str target-directory "/"
                      (to-id-str (:path endpoint)) "-"
-                     (name (:method endpoint)) ".json")))
+                     (name (:method endpoint)))))
 
 (defn- generate-sample-response-from-response [endpoint response]
-  (let [filename (get-filename endpoint)
+  (let [filename-stub (get-filename-stub endpoint)
         sample (process-sample-response response)]
-    (spit filename sample)
-    sample))
+    (spit (str filename-stub ".json") sample)
+    (spit (str filename-stub ".jsonp") (str "callback(" (str/trim sample) ");\n"))))
 
 (defn- json-parse-data [response]
   (assoc response :data (:data (json/read-json (:data response)))))

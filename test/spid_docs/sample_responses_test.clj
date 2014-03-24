@@ -82,4 +82,5 @@
         (with-redefs [spid-docs.api-client/GET (fn [path] {:data {:status 123, :path path}})
                       target-directory tmp-dir]
           (generate-sample-response {:path "/status", :method :GET})
-          (slurp (str tmp-dir "/status-get.json")) => "{\"status\":123, \"path\":\"/status\"}\n")))
+          (slurp (str tmp-dir "/status-get.json")) => "{\"status\":123, \"path\":\"/status\"}\n"
+          (slurp (str tmp-dir "/status-get.jsonp")) => "callback({\"status\":123, \"path\":\"/status\"});\n")))
