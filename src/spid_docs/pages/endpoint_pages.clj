@@ -154,6 +154,7 @@
    (render (:description response))
    (->> inline-types
         (cons (:type response))
+        (filter identity) ; The 404 endpoint has no success response
         (map #(if (keyword? %) % (first %)))
         (map (fn [type]
                (if (nil? (type types))
