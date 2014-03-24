@@ -42,7 +42,7 @@
                      mask-sensitive-data)]
         (:clientId data) => "[Your client ID]"
         (:merchantId data) => "[Your merchant ID]"
-        (:userId data) => #(not (= % "0123456"))
+        (:userId data) => #"^\d{7}$"
         (:email data) => "user@domain.tld"
         (:ip data) => "127.0.0.1"
         (:emails data) => [{:value "user@domain1.tld"} {:value "user@domain2.tld"}]

@@ -11,7 +11,9 @@
             [spid-docs.homeless :refer [update-existing]])
   (:import java.util.Date))
 
-(def scramble-numbers #(map rand-int (range (count %))))
+(def rand-digit (partial rand-int 10))
+
+(def scramble-numbers #(apply str (repeatedly (count %) rand-digit)))
 
 (defn mask-address
   "Anonymize addresses "
