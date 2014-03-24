@@ -33,7 +33,7 @@
 
 (defn- render-type-field [field types]
   [:tr
-   [:th [:h4.nowrap (:name field) " " (render-availability field)]]
+   [:th [:h4.nowrap (list (:name field) (render-availability field))]]
    [:td
     [:h5 (link-to-type (:type field) types)]
     [:p.faded (markdown/render-inline (:description field))]]])
@@ -44,11 +44,14 @@
    ids for types that are expected to be found inline on the page. Thus, they
    will be linked as anchors instead of to external pages."
   [type types]
-  [:h3 (:name type)]
-  [:a {:name (name (:id type))}]
-  (markdown/render (:description type))
-  [:table.sectioned.mbl
-   (map #(render-type-field % types) (:fields type))])
+  (list
+   [:h3 (:name type)]
+   [:a {:name (name (:id type))}]
+   (markdown/render (:description type))
+   (if (some :always-available? (:fields type))
+     [:p "The check mark <span class=\"check\">✓</span> indicates if the field always contains a valid non-empty value."])
+   [:table.sectioned.mbl
+    (map #(render-type-field % types) (:fields type))]))
 
 (defn create-page [type]
   {:body [:div.wrap

@@ -119,7 +119,7 @@
 
 (fact "Renders inline types inline"
       (->>
-       (render-response-type {:status 200 :description "**Hey**" :type :login}
+       (render-response-type {:status 200 :description "Hey" :type :login}
                              []
                              {:login {:id :login
                                       :inline? true
@@ -129,13 +129,34 @@
 
 (fact "Renders list response types inline"
       (->>
-       (render-response-type {:status 200 :description "**Hey**" :type (keyword "[login]")}
+       (render-response-type {:status 200 :description "Hey" :type (keyword "[login]")}
                              []
                              {:login {:id :login
                                       :inline? true
                                       :fields [{:name "id" :type :string}]}})
        (hiccup-find [:table])
        count) => 1)
+
+(fact "Renders always available field with checkmark"
+      (->>
+       (render-response-type {:status 200 :type :login}
+                             []
+                             {:login {:id :login
+                                      :inline? true
+                                      :fields [{:name "id" :type :string :always-available? true}]}})
+       (hiccup-find [:h4 :.check])
+       count) => 1)
+
+(fact "Renders availability hint when any field is always available"
+      (->>
+       (render-response-type {:status 200 :type :login}
+                             []
+                             {:login {:id :login
+                                      :inline? true
+                                      :fields [{:name "id" :type :string}
+                                               {:name "email" :type :string :always-available? true}
+                                               {:name "login" :type :string}]}})
+       hiccup-text) => #(re-find #"The check mark" %))
 
 (fact
  (->>
