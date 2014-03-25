@@ -159,13 +159,11 @@
    (render (:description response))
    (->> inline-types
         (cons (:type response))
-        (remove nil?) ; The 404 endpoint has no success response
-        (map #(if (keyword? %) % (first %)))
-        (map (fn [type]
-               (if (nil? (type types))
-                 (prn (str "Attempted to render undefined type " (name type)))
-                 (type types))))
-        (remove nil?)
+        (keep #(if (keyword? %) % (first %)))
+        (keep (fn [type]
+                (if (nil? (type types))
+                  (println "Attempted to render undefined type" (name type))
+                  (type types))))
         (map #(render-type-definition % types)))))
 
 (defn- render-response-failure [failure]
