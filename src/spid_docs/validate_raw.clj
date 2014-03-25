@@ -66,5 +66,6 @@
              :pagination-descriptions {Keyword Str}
              :filter-descriptions {Keyword Str}
              :types {Keyword Type}
-             :apis {[Str] {Keyword Str}}} ; tuple of [:section :api] -> {:description ""}
+             :apis {[Str] {Keyword Str}} ; tuple of [:section :api] -> {:description ""}
+             :endpoint-blacklist [[(either Str Keyword)]]}
             raw-content))

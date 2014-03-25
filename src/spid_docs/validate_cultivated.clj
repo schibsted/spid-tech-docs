@@ -78,5 +78,6 @@
              :apis {[Str] {:api Str
                            :category Str
                            :endpoints [Endpoint]
-                           (optional-key :description) Str}}}
+                           (optional-key :description) Str}}
+             :endpoint-blacklist [[(either Str Keyword)]]}
             content))

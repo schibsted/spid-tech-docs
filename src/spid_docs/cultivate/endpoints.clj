@@ -132,4 +132,6 @@
    endpoints does not. So this function not only cultivates an endpoint,
    it splits it into several endpoints based on the given set of http
    methods."
-  (map #(cultivate-endpoint-1 endpoint % raw-content) (:httpMethods endpoint)))
+  (->> (:httpMethods endpoint)
+       (remove #(some (partial = [(first %) (:path endpoint)]) (:endpoint-blacklist raw-content)))
+       (map #(cultivate-endpoint-1 endpoint % raw-content))))

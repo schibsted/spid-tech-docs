@@ -1,0 +1,5 @@
+[[:POST "status"]
+ [:GET "qrcode"]
+ [:GET "url/{id}"]
+ [:GET "admin/{section}"]
+ [:GET "admin/{section}/{id}"]]

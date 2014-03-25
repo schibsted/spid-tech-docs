@@ -15,7 +15,8 @@
                              :offset "offset desc"
                              :since  "since desc"
                              :until  "until desc"}
-   :filter-descriptions {:merchant "merchant desc"}})
+   :filter-descriptions {:merchant "merchant desc"}
+   :endpoint-blacklist [[:GET "bad"]]})
 
 (defn cultivate
   "Helper function to create and cultivate endpoints."
@@ -283,3 +284,11 @@
      :failures []})
 
 (fact (-> (cultivate :deprecated "1.0") first :deprecated) => "1.0")
+
+(fact
+ "It purges blacklisted endpoints"
+ (->> (cultivate :name "Get or create a product"
+                 :path "bad"
+                 :httpMethods {:GET (cs/http-method)
+                               :POST (cs/http-method)})
+      (map #(vector (:method %) (:path %)))) => [[:POST "/bad"]])

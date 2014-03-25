@@ -19,7 +19,8 @@
    :pagination-descriptions (spid/load-edn "pagination.edn")
    :filter-descriptions (spid/load-edn "filters.edn")
    :types (spid/load-edn "types.edn")
-   :apis (spid/load-edn "apis.edn")})
+   :apis (spid/load-edn "apis.edn")
+   :endpoint-blacklist (spid/load-edn "endpoint-blacklist.edn")})
 
 (defn cultivate-content
   "Combine and cross-link content"
