@@ -8,7 +8,7 @@
    Look for these values in tests below."
   {:sample-responses {"/terms-get.json" "terms json"
                       "/terms-get.jsonp" "terms jsonp"}
-   :endpoint-descriptions {"/terms-get.md" {:description "terms desc"
+   :endpoint-descriptions {"/terms-get.md" {:introduction "terms desc"
                                             :inline-types "string datetime"
                                             :success-description "success description"}}
    :pagination-descriptions {:limit  "limit desc"
@@ -48,15 +48,6 @@
                 :httpMethods {:GET (cs/http-method)})
      first :id)
  => :describe-object-get)
-
-(fact
- "Uses the short endpoint description as summary."
-
- (-> (cultivate :path "terms"
-                :description "LOL"
-                :httpMethods {:GET (cs/http-method)})
-     first :summary)
- => "LOL")
 
 (fact
  "Descriptions are pulled out of the raw-content based on the endpoint id."

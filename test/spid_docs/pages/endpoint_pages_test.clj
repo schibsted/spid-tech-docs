@@ -37,11 +37,6 @@
        {:requires-authentication? false
         :access-token-types []}) => nil)
 
-(fact "Renders endpoint description"
-      (-> (render-description {:summary "Doing stuff"
-                               :description "OK"})
-          hiccup-text) => "<p>Doing stuff</p><p>OK</p>")
-
 (fact "Renders parameters ordered: path, required, optional"
       (->> (render-request-parameters [(param "code" {:required? true :type :path})
                                        (param "email" {:required? false})

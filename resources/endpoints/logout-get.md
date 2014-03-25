@@ -1,4 +1,4 @@
-:description
+:introduction
 
 Invalidate the user's SPiD session.
 

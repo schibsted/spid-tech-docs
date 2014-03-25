@@ -53,7 +53,7 @@
   (either ObjectType EnumType PrimitiveType))
 
 (def EndpointDescription
-  {:description Str
+  {:introduction Str
    (optional-key :inline-types) Str
    (optional-key :success-description) Str})
 

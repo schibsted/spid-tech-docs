@@ -1,4 +1,4 @@
-:description
+:introduction
 
 Fetching information about a single endpoint is merely a network efficiency
 feature. The exact same information is provided (i.e., there are no further
