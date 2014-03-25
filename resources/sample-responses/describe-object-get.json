@@ -1,0 +1,8 @@
+{"User.status":
+ {"-2":"User blocked",
+  "1":"User verified",
+  "0":"User unverified",
+  "-3":"User deleted",
+  "-1":"User inactive"},
+ "User.gender":
+ {"male":"Male", "undisclosed":"Undisclosed", "female":"Female"}}
