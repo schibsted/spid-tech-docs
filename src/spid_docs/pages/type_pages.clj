@@ -3,7 +3,7 @@
             [spid-docs.routes :refer [type-path]]))
 
 (defn- render-availability [field]
-  (if (:always-available? field) [:span.check "✓"]))
+  (if (:always-available? field) [:span.check " ✓"]))
 
 (defn- link-to-type
   "Link to the type passed in. The type should be either a keyword, which names
@@ -48,7 +48,7 @@
    [:h3 {:id (name (:id type))} (:name type)]
    (markdown/render (:description type))
    (if (some :always-available? (:fields type))
-     [:p.faded "The check mark <span class=\"check\">✓</span> indicates that the field always contains a valid non-empty value."])
+     [:p "The check mark " [:span.check "✓"] " indicates that the field always contains a valid non-empty value."])
    [:table.sectioned.mbl
     (map #(render-type-field % types) (:fields type))]))
 
