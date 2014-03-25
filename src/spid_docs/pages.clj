@@ -13,8 +13,7 @@
    pages that Stasis will serve/export to disk."
   (stasis/merge-page-sources
    {:general-pages {"/" (partial frontpage/create-page (:apis content))
-                    "/formats/" (fn [] {:body "TODO"})
-                    "/endpoints/" (fn [] {:body "TODO"})}
+                    "/endpoints/" (fn [] {:body "TODO - #pagination, #filters, #locale, #formats, #format-json, #format-jsonp, #format-xml"})}
     :endpoints (endpoints/create-pages (:endpoints content) (:types content))
     :articles (articles/create-pages (:articles content))
     :types (types/create-pages (:types content))}))

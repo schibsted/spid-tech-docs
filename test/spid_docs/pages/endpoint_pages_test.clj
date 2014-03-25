@@ -104,13 +104,13 @@
 
 (fact "Enumerates response formats in a human style (with Oxford comma)"
       (text (render-response-formats {:response-formats [:json]})) =>
-      "This endpoint supports the <a href=\"/formats/#json\">JSON</a> response format"
+      "This endpoint supports the <a href=\"/endpoints/#format-json\">JSON</a> response format"
 
       (text (render-response-formats {:response-formats [:json :jsonp]})) =>
-      "This endpoint supports the <a href=\"/formats/#json\">JSON</a> and <a href=\"/formats/#jsonp\">JSON-P</a> response formats"
+      "This endpoint supports the <a href=\"/endpoints/#format-json\">JSON</a> and <a href=\"/endpoints/#format-jsonp\">JSON-P</a> response formats"
 
       (text (render-response-formats {:response-formats [:json :jsonp :xml]})) =>
-      "This endpoint supports the <a href=\"/formats/#json\">JSON</a>, <a href=\"/formats/#jsonp\">JSON-P</a>, and <a href=\"/formats/#xml\">XML</a> response formats")
+      "This endpoint supports the <a href=\"/endpoints/#format-json\">JSON</a>, <a href=\"/endpoints/#format-jsonp\">JSON-P</a>, and <a href=\"/endpoints/#format-xml\">XML</a> response formats")
 
 (fact
  (let [hiccup (render-response-type {:status 200 :description "**Hey**"} [] {})]

@@ -137,7 +137,7 @@
   [:p
    "This endpoint supports the "
    (->> (:response-formats endpoint)
-        (map #(str "<a href=\"/formats/#" (name %) "\">" (% format-names) "</a>"))
+        (map #(str "<a href=\"/endpoints/#format-" (name %) "\">" (% format-names) "</a>"))
         enumerate-humanely)
    (pluralize " response format" (count (:response-formats endpoint)))])
 
