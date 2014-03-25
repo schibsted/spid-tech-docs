@@ -188,4 +188,16 @@ verified."
                         {:name "key"          :type :string   :always-available? true :description "Client-provided key, e.g. the 'name' of this data"}
                         {:name "value"        :type :string   :always-available? true :description "Client-provided value"}
                         {:name "updated"      :type :datetime :always-available? true :description "When this value was last updated"}
-                        {:name "created"      :type :datetime :always-available? true :description "When this value was originally created"}]}}
+                        {:name "created"      :type :datetime :always-available? true :description "When this value was originally created"}]}
+ :status {:id :status
+          :name "API Status"
+          :rendering :object
+          :fields [{:name "oauth"       :type :object   :always-available? true}
+                   {:name "apiVersion"  :type :integer  :always-available? true}
+                   {:name "apiRevision" :type :string   :always-available? true}
+                   {:name "webVersion"  :type :string   :always-available? true}
+                   {:name "webRevision" :type :string   :always-available? true}
+                   {:name "currentTime" :type :datetime :always-available? true}
+                   {:name "timeZone"    :type :string   :always-available? true}
+                   {:name "block"       :type :boolean  :always-available? true}
+                   {:name "platform"    :type :string   :always-available? true :description "'up' if the API is fully operational. Other values will likely indicate some level of reduced operation."}]}}
