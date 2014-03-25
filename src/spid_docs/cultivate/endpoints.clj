@@ -104,14 +104,15 @@
         {:keys [required optional default_filters filters access_token_types responses]} details
         {:keys [pagination-descriptions filter-descriptions endpoint-descriptions sample-responses]} raw-content
         endpoint-id (str (to-id-str path) "-" (.toLowerCase (name method)))
-        {:keys [introduction inline-types success-description]} (get endpoint-descriptions (str "/" endpoint-id ".md") {})]
+        {:keys [description inline-types success-description]} (get endpoint-descriptions (str "/" endpoint-id ".md") {})]
     (with-optional-keys
       {:id (keyword endpoint-id)
        :path (str "/" path)
        :api-path (str "/api/2/" path)
        :method method
        :name (fix-multimethod-name (:name endpoint) method)
-       :description introduction
+       :summary (:description endpoint)
+       :description description
        :?inline-types (to-inline-types inline-types)
        :category {:section (first category) :api (second category)}
        :parameters (collect-parameters required optional pathParameters pagination-descriptions endpoint)

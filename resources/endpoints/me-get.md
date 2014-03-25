@@ -1,4 +1,4 @@
-:introduction
+:description
 
 This endpoint returns the currently logged in user's object. It requires an
 active user session and a matching corresponding oauth token.

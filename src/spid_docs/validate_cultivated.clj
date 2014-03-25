@@ -56,6 +56,7 @@
    :api-path Path
    :method (enum :GET :POST :DELETE)
    :name Str
+   :summary Str
    :description (maybe Str)
    :category APICategory
    :parameters [Parameter]
