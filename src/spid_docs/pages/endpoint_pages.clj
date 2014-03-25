@@ -52,6 +52,11 @@
      [:strong (str/join " or " (map name (:access-token-types endpoint)))]
      " access token."]))
 
+(defn render-deprecation
+  "Render deprecation info"
+  [version]
+  [:p [:strong "Deprecated since version " version]])
+
 (defn render-description [endpoint]
   (render (:description endpoint)))
 
@@ -218,6 +223,7 @@
                   (render-category endpoint)
                   (render-title endpoint)
                   (render-authentication endpoint)
+                  (if (:deprecated endpoint) (render-deprecation (:deprecated endpoint)))
                   (render-description endpoint)]]]
                [:div.separator]
                (render-request endpoint)
