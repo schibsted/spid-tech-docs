@@ -1,4 +1,4 @@
-[{"status":"true",
+callback([{"status":"true",
   "referer":"",
   "clientId":"[Your client ID]",
   "trackingRef":false,
@@ -13,4 +13,4 @@
   "initialReferer":null,
   "provider":null,
   "id":"150011484",
-  "ip":"127.0.0.1"}]
+  "ip":"127.0.0.1"}]);
