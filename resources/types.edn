@@ -178,8 +178,14 @@ verified."
                                       {:name "sms_purchase_auto_renewal_subscription_receipt" :type :email-template}
                                       {:name "confirm_email_address_without_password_without_redirect" :type :email-template}
                                       {:name "post_thirdparty_signup" :type :email-template}]}
- :data_objects {:id :data_objects
-                :name "Data object collection"
-                :rendering :object
-                :fields [{:name "key"   :type :string :description "The client-provided unique key" :always-available? true}
-                         {:name "value" :type :string :description "The client-provided value. Any de-serialization must be performed on the client, SPiD has no concept of what this value represents." :always-available? true}]}}
+ :data-object {:id :data-object
+               :name "Data object"
+               :rendering :object
+               :fields [{:name "dataObjectId" :type :string   :always-available? true}
+                        {:name "clientId"     :type :string   :always-available? true :description "The ID of the client who created the data object"}
+                        {:name "merchantId"   :type :string   :always-available? true :description "The ID of the merchant the client belongs to"}
+                        {:name "userId"       :type :string   :always-available? true :description "The user the data is associated with"}
+                        {:name "key"          :type :string   :always-available? true :description "Client-provided key, e.g. the 'name' of this data"}
+                        {:name "value"        :type :string   :always-available? true :description "Client-provided value"}
+                        {:name "updated"      :type :datetime :always-available? true :description "When this value was last updated"}
+                        {:name "created"      :type :datetime :always-available? true :description "When this value was originally created"}]}}
