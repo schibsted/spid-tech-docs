@@ -1,4 +1,4 @@
-:description
+:introduction
 
 The DataObject API is a key-value store for associating arbitrary meta data with
 a user.

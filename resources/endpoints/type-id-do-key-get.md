@@ -1,4 +1,4 @@
-:description
+:introduction
 
 The Simple Object Data API, or SODA, is an API extension enabling storage of
 simple JSON objects where a unique key can be associated with a client-provided
