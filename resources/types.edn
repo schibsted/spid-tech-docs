@@ -177,4 +177,9 @@ verified."
                                       {:name "pre_expiration_autorenew_subscription_off" :type :email-template}
                                       {:name "sms_purchase_auto_renewal_subscription_receipt" :type :email-template}
                                       {:name "confirm_email_address_without_password_without_redirect" :type :email-template}
-                                      {:name "post_thirdparty_signup" :type :email-template}]}}
+                                      {:name "post_thirdparty_signup" :type :email-template}]}
+ :data_objects {:id :data_objects
+                :name "Data object collection"
+                :rendering :object
+                :fields [{:name "key"   :type :string :description "The client-provided unique key" :always-available? true}
+                         {:name "value" :type :string :description "The client-provided value. Any de-serialization must be performed on the client, SPiD has no concept of what this value represents." :always-available? true}]}}
