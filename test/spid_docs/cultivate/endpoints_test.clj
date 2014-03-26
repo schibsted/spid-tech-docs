@@ -254,6 +254,29 @@
                  :type :error}]})
 
 (fact
+ "403 response is added when not already present and endpoint requires authentication"
+
+ (->> (cultivate :httpMethods
+                 {:GET (cs/http-method {:access_token_types ["server"]
+                                        :responses [{:status 200
+                                                     :description "OK"
+                                                     :type "string"}
+                                                    {:status 400
+                                                     :description "Bad"
+                                                     :type "string"}
+                                                    {:status 422
+                                                     :description "NO!"
+                                                     :type "string"}
+                                                    {:status 500
+                                                     :description "OH NO!"
+                                                     :type "error"}]})})
+      first
+      :responses
+      :failures
+      (map :status))
+ => [400 403 422 500])
+
+(fact
  "Responses that are lists of things are loaded correctly"
 
  (-> (cultivate :httpMethods

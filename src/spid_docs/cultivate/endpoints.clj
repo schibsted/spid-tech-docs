@@ -97,6 +97,19 @@
   (when string
     (map keyword (str/split string #" "))))
 
+(defn- get-failure-responses
+  "Extracts all failure responses, and adds global ones, such as 403 for any
+   endpoint that requires authentication."
+  [http-method]
+  (->> (if (seq (:access_token_types http-method))
+         (->> (conj (:responses http-method) {:status 403
+                                              :description "Access token rejected"
+                                              :type "api-exception"})
+              (sort-by :status))
+         (:responses http-method))
+       (remove success?)
+       (map create-response)))
+
 (defn- cultivate-endpoint-1 [endpoint [method details] raw-content]
   "Gather a bunch of information from all over to create a map that
    includes everything you could ever want to know about an endpoint."
@@ -124,7 +137,7 @@
        :responses {:success (-> success? (filter responses) first create-response
                                 (add-samples (str "/" endpoint-id) sample-responses)
                                 (assoc-non-nil :description success-description))
-                   :failures (map create-response (remove success? responses))}
+                   :failures (get-failure-responses details)}
        :?deprecated deprecated})))
 
 (defn cultivate-endpoint [endpoint raw-content]
