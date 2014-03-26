@@ -1,0 +1,72 @@
+{
+    "id": "4d07800774dea2017e0c0000",
+    "accounts": {
+        "4d06920474dea26227070000": {
+            "id": "4d06920474dea26227070000",
+            "domain": "payment.schibsted.no",
+            "accountName": "SPiD"
+        },
+        "4cf36fa274dea2117e030000": {
+            "id": "4cf36fa274dea2117e030000",
+            "domain": "www.vektklubb.no",
+            "accountName": "Vektklubb.no"
+        },
+        "4d46b0cd74dea2fd799a0000": {
+            "id": "4d46b0cd74dea2fd799a0000",
+            "domain": "e24.no",
+            "accountName": "E24"
+        },
+        "4cb61ac2b3f2a71931060000": {
+            "id": "4cb61ac2b3f2a71931060000",
+            "domain": "vgservices-sdk",
+            "accountName": "Test Client"
+        }
+    },
+    "addresses": [{
+        "type": "home",
+        "latitude": "",
+        "longitude": "",
+        "formatted": "Stagv\u00e4gen 2, 423 38, TORSLANDA, Sweden",
+        "streetAddress": "Stagv\u00e4gen 2",
+        "locality": "TORSLANDA",
+        "region": "",
+        "postalCode": "423 38",
+        "country": "Sweden"
+    }],
+    "agreementAccepted": true,
+    "agreementAcceptedTime": "2011-04-08 15:56:15",
+    "birthday": "1976-05-01",
+    "currentLocation": [],
+    "displayName": "Magnus Jonsson",
+    "email": "magnusj@phrenetic.net",
+    "emailVerified": "2010-12-14 15:35:07",
+    "emails": [{
+        "value": "magnusj@phrenetic.net",
+        "type": "other",
+        "verified": "true",
+        "primary": "true",
+        “verifiedTime”: "2011-04-07 12:54:47"
+    }],
+    "gender": "male",
+    "name": {
+        "familyName": "Jonsson",
+        "givenName": "Magnus",
+        "formatted": "Magnus Jonsson"
+    },
+    "phoneNumber": "",
+    "phoneNumberVerified": false,
+    "phoneNumbers": [],
+    "photo": "http:\/\/www.gravatar.com\/avatar\/cd07db6e011757c10ea66636020f8b77?s=200",
+    "preferredUsername": "Kungen",
+    "published": "2010-12-14 15:32:39",
+    "status": 1,
+    "updated": "2011-04-07 12:54:47",
+   "lastLoggedIn": "2011-04-07 13:00:55",
+   "lastAuthenticated": "2011-04-07 22:09:07",
+   "locale": "sv_SE",
+    "url": "",
+    "userId": "100002",
+    "utcOffset": "+01:00",
+    "verified": "2010-12-14 15:35:07",
+    "tracking": false
+}
