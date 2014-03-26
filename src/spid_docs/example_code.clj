@@ -52,7 +52,7 @@
    "hideItems" "???"
    "homeAddress" "???"
    "id" "1337"
-   "id/userId/email" "???"
+   "userId" "42"
    "invoiceAddress" "???"
    "ip" "???"
    "items" "???"
