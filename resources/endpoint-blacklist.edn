@@ -2,4 +2,7 @@
  [:GET "qrcode"]
  [:GET "url/{id}"]
  [:GET "admin/{section}"]
- [:GET "admin/{section}/{id}"]]
+ [:GET "admin/{section}/{id}"]
+ [:GET "/api/2/email_templates"]
+ [:POST "/api/2/email_templates"]
+ [:GET "/api/2/api/2/"]]
