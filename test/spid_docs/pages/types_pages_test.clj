@@ -8,9 +8,10 @@
                                  :datetime {:id :datetime
                                             :description "ISO-8601"}
                                  :integer {:id :integer}})]
-        ((pages "/types/datetime")) => {:body [:div.wrap
-                                               [:h1 "datetime"]
-                                               "<p>ISO-8601</p>"]}))
+        (->> ((pages "/types/datetime"))
+             :body
+             (hiccup-find [:h1])
+             first) => [:h1 "datetime"]))
 
 (let [login {:id :login
              :name "Login"
@@ -36,6 +37,25 @@
 
   (fact "Links to non-inline types with description"
         (->> (render-type-definition user types)
+             (hiccup-find [:h5 :a])
+             first
+             second ; Attributes
+             :href) => "/types/datetime")
+
+  (fact "Links to non-inline types with fields"
+        (->> (-> types
+                 (assoc-in [:datetime :description] nil)
+                 (assoc-in [:datetime :fields] [{}]))
+             (render-type-definition user)
+             (hiccup-find [:h5 :a])
+             first
+             second ; Attributes
+             :href) => "/types/datetime")
+
+  (fact "Links to non-inline types with fields"
+        (->> (render-type-definition user (-> types
+                                              (assoc-in [:datetime :description] nil)
+                                              (assoc-in [:datetime :fields] [{}])))
              (hiccup-find [:h5 :a])
              first
              second ; Attributes

@@ -1,5 +1,6 @@
 (ns spid-docs.pages.type-pages
-  (:require [spid-docs.pimp.markdown :as markdown]
+  (:require [spid-docs.formatting :refer [pluralize]]
+            [spid-docs.pimp.markdown :as markdown]
             [spid-docs.routes :refer [type-path]]))
 
 (defn- render-availability [field]
@@ -18,18 +19,15 @@
   [type types]
   (let [list-type? (vector? type)
         type-id (if list-type? (first type) type)
-        type-name (name type-id)
-        prefix (if list-type? "list of " "")
-        postfix (if list-type? (if (.endsWith type-name "s") "es" "s") "")
+        type-name (pluralize (name type-id) (if list-type? 2 1))
         typedef (type-id types)
         path (if (:inline? typedef)
                (str "#" type-name)
                (type-path typedef))]
-    (list prefix
+    (list (if list-type? "list of " "")
           (if path
             [:a {:href path} type-name]
-            type-name)
-          postfix)))
+            type-name))))
 
 (defn- render-type-field [field types]
   [:tr
@@ -37,6 +35,13 @@
    [:td
     [:h5 (link-to-type (:type field) types)]
     [:p.faded (markdown/render-inline (:description field))]]])
+
+(defn- render-typedef [type types]
+  (markdown/render (:description type))
+  (if (some :always-available? (:fields type))
+    [:p "The check mark " [:span.check "✓"] " indicates that the field always contains a valid non-empty value."])
+  [:table.sectioned.mbl
+   (map #(render-type-field % types) (:fields type))])
 
 (defn render-type-definition
   "Render the type definition specified by the type map. See the validation data
@@ -46,22 +51,18 @@
   [type types]
   (list
    [:h3 {:id (name (:id type))} (:name type)]
-   (markdown/render (:description type))
-   (if (some :always-available? (:fields type))
-     [:p "The check mark " [:span.check "✓"] " indicates that the field always contains a valid non-empty value."])
-   [:table.sectioned.mbl
-    (map #(render-type-field % types) (:fields type))]))
+   (render-typedef type types)))
 
-(defn create-page [type]
+(defn create-page [type types]
   {:body [:div.wrap
           [:h1 (name (:id type))]
-          (markdown/render (:description type))]})
+          (render-typedef type types)]})
 
 (defn create-pages
   "Takes a map of types (typically those defined in resources/types.edn) and
    returns a map of url => page function."
   [types]
   (->> (vals types)
-       (filter :description)
-       (map (juxt type-path #(partial create-page %)))
+       (filter #(or (:description %) (:fields %) (:values %)))
+       (map (juxt type-path #(partial create-page % types)))
        (into {})))

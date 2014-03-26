@@ -28,5 +28,5 @@
   "Given a type (typically one entry from the vector in resources/types.end),
    return its path."
   [type]
-  (if (:description type)
+  (if (or (:description type) (:fields type) (:values type))
     (str "/types/" (name (:id type)))))
