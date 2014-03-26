@@ -1,0 +1,10 @@
+callback({
+    "dataObjectId": "1",
+    "clientId": "4e8463569caf7ca019000007",
+    "merchantId": "46001",
+    "userId": "100003",
+    "key": "settings",
+    "value": "SETTINGS",
+    "updated": "2013-10-08 21:17:02",
+    "created": "2013-10-08 15:40:36"
+});

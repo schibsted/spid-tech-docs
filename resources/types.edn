@@ -200,4 +200,14 @@ verified."
                    {:name "currentTime" :type :datetime :always-available? true}
                    {:name "timeZone"    :type :string   :always-available? true}
                    {:name "block"       :type :boolean  :always-available? true}
-                   {:name "platform"    :type :string   :always-available? true :description "'up' if the API is fully operational. Other values will likely indicate some level of reduced operation."}]}}
+                   {:name "platform"    :type :string   :always-available? true :description "'up' if the API is fully operational. Other values will likely indicate some level of reduced operation."}]}
+ :success-indicator {:id :success-indicator
+                     :name "Success indicator"
+                     :rendering :object
+                     :fields [{:name "success" :type :boolean}]}
+ :api-exception {:id :api-exception
+                 :name "API Exception"
+                 :rendering :object
+                 :fields [{:name "code"        :type :integer :description "The HTTP response code"}
+                          {:name "type"        :type :string  :description "The type of error, usually 'ApiException'"}
+                          {:name "description" :type :string}]}}
