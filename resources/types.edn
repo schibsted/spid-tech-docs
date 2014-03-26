@@ -210,4 +210,10 @@ verified."
                  :rendering :object
                  :fields [{:name "code"        :type :integer :description "The HTTP response code"}
                           {:name "type"        :type :string  :description "The type of error, usually 'ApiException'"}
-                          {:name "description" :type :string}]}}
+                          {:name "description" :type :string}]}
+ :email-status {:id :email-status
+                :name "Email status"
+                :rendering :object
+                :fields [{:name "exists"    :type :boolean :description "If `true`, this email address exists in some form in SPiD"}
+                         {:name "available" :type :boolean :description "If `true`, this email address may be used to register a new account"}
+                         {:name "verified"  :type :boolean :description "If `true`, the owner has verified this address in SPiD."}]}}
