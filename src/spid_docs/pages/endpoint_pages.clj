@@ -5,11 +5,12 @@
    spid-docs.validate-cultivated"
   (:require [clojure.string :as str]
             [hiccup.core :refer [h]]
+            [inflections.core :refer [plural]]
             [spid-docs.enlive :as enlive]
             [spid-docs.example-code :refer [create-example-code]]
             [spid-docs.formatting :refer [pluralize enumerate-humanely]]
             [spid-docs.http :refer [get-response-status-name]]
-            [spid-docs.pages.type-pages :refer [render-type-definition]]
+            [spid-docs.pages.type-pages :refer [render-type-definition link-to-type]]
             [spid-docs.pimp.markdown :refer [render-inline render]]
             [spid-docs.routes :refer [api-path endpoint-path]]))
 
@@ -156,10 +157,15 @@
   [response inline-types types]
   (list
    [:h2 (str "Success: " (format-response-status (:status response)))]
-   (render (:description response))
+   (render (str (:description response)))
+   (when (map? (:type response))
+     (list "Returns a " (link-to-type (:type response) types) "."))
    (->> inline-types
         (cons (:type response))
-        (keep #(if (keyword? %) % (first %)))
+        (keep #(cond
+                (vector? %) (first %)     ; [:string] - "list of strings"
+                (map? %) (first (vals %)) ; {:userId :user} - "object of users, with userId as property names"
+                :else %))                 ; :string - a straight-forward type
         (keep (fn [type]
                 (if (nil? (type types))
                   (println "Attempted to render undefined type" (name type))

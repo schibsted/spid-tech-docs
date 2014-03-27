@@ -6,6 +6,9 @@
 (defn- render-availability [field]
   (if (:always-available? field) [:span.check " ✓"]))
 
+(defn- get-type-name [type types]
+  (or (:name (type types)) (name type)))
+
 (defn- link-to-typedef [type-name typedef]
   (if-let [path (if (:inline? typedef)
                (str "#" type-name)
@@ -13,21 +16,21 @@
     [:a {:href path} type-name]
     type-name))
 
-(defn- link-to-map-type [type types]
+(defn- link-to-map-type [type types & [options]]
   (let [[key-property value-type] (first (into [] type))
-        type-link (link-to-typedef (plural (name value-type))
+        type-link (link-to-typedef (plural (get-type-name value-type types))
                                    (value-type types))]
     (list "collection of "
           type-link
-          (str ", as an object with "
-               (name key-property)
-               " for property names, and ")
+          ", as an object with "
+          [:code (name key-property)]
+          " for property names, and "
           type-link
           " for values")))
 
 (defn- link-to-list-type [type types]
   (list "list of "
-        (link-to-typedef (plural (name (first type)))
+        (link-to-typedef (plural (get-type-name (first type) types))
                          ((first type) types))))
 
 (defn link-to-type

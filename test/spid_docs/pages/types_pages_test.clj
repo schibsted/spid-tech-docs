@@ -25,7 +25,7 @@
       types {:login login
              :user user
              :datetime {:id :datetime :name "Datetime" :description "Dates and stuff"}
-             :string {:id :string :name "String"}
+             :string {:id :string :name "string"}
              :login-type {:id :login-type
                           :name "Login type"
                           :description "Something"}}]
@@ -95,7 +95,9 @@
                                      {:id :user :description "OK"}
                                      }) => '("collection of "
                                              [:a {:href "/types/user"} "users"]
-                                             ", as an object with userId for property names, and "
+                                             ", as an object with "
+                                             [:code "userId"]
+                                               " for property names, and "
                                              [:a {:href "/types/user"} "users"]
                                              " for values")
 
@@ -103,6 +105,8 @@
                                      {:id :user}
                                      }) => '("collection of "
                                              "users"
-                                             ", as an object with userId for property names, and "
+                                             ", as an object with "
+                                             [:code "userId"]
+                                             " for property names, and "
                                              "users"
                                              " for values"))
