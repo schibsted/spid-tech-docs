@@ -61,7 +61,48 @@
              second ; Attributes
              :href) => "/types/datetime")
 
-  (fact "Distinguishes lists of types"
+  (fact "Distinguishes lists and collections of types"
         (->> (render-type-definition login types)
              (hiccup-find [:h5])
              (map hiccup-text)) => ["string" "list of strings"]))
+
+(fact "Links to types"
+      (link-to-type :string {:string {:id :string}}) => "string"
+
+      (link-to-type :string {:string
+                             {:id :string
+                              :description "Descriptions earns the type a separate page"}
+                             }) => [:a {:href "/types/string"} "string"]
+
+      (link-to-type :something {:something
+                                {:id :something
+                                 :fields [{:name "field" :description "earns the type a separate page"}]}
+                                }) => [:a {:href "/types/something"} "something"]
+
+      (link-to-type :something {:something
+                                {:id :something
+                                 :values [{:value "field" :description "earns the type a separate page"}]}
+                                }) => [:a {:href "/types/something"} "something"]
+
+      (link-to-type [:string] {:string
+                                  {:id :string}}) => '("list of " "strings")
+
+      (link-to-type [:something] {:something
+                                  {:id :something :description "OK"}
+                                  }) => '("list of " [:a {:href "/types/something"} "somethings"])
+
+      (link-to-type {:userId :user} {:user
+                                     {:id :user :description "OK"}
+                                     }) => '("collection of "
+                                             [:a {:href "/types/user"} "users"]
+                                             ", as an object with userId for property names, and "
+                                             [:a {:href "/types/user"} "users"]
+                                             " for values")
+
+      (link-to-type {:userId :user} {:user
+                                     {:id :user}
+                                     }) => '("collection of "
+                                             "users"
+                                             ", as an object with userId for property names, and "
+                                             "users"
+                                             " for values"))

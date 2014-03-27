@@ -1,12 +1,36 @@
 (ns spid-docs.pages.type-pages
-  (:require [spid-docs.formatting :refer [pluralize]]
+  (:require [inflections.core :refer [plural]]
             [spid-docs.pimp.markdown :as markdown]
             [spid-docs.routes :refer [type-path]]))
 
 (defn- render-availability [field]
   (if (:always-available? field) [:span.check " ✓"]))
 
-(defn- link-to-type
+(defn- link-to-typedef [type-name typedef]
+  (if-let [path (if (:inline? typedef)
+               (str "#" type-name)
+               (type-path typedef))]
+    [:a {:href path} type-name]
+    type-name))
+
+(defn- link-to-map-type [type types]
+  (let [[key-property value-type] (first (into [] type))
+        type-link (link-to-typedef (plural (name value-type))
+                                   (value-type types))]
+    (list "collection of "
+          type-link
+          (str ", as an object with "
+               (name key-property)
+               " for property names, and ")
+          type-link
+          " for values")))
+
+(defn- link-to-list-type [type types]
+  (list "list of "
+        (link-to-typedef (plural (name (first type)))
+                         ((first type) types))))
+
+(defn link-to-type
   "Link to the type passed in. The type should be either a keyword, which names
    the type, or it may be a vector. If it is a vector, it should contain a
    single keyword, and denotes a list of the type named by the keyword.
@@ -17,17 +41,10 @@
    name. If the target type is inline, it is assumed rendered on the same
    page, and an anchor link is generated."
   [type types]
-  (let [list-type? (vector? type)
-        type-id (if list-type? (first type) type)
-        type-name (pluralize (name type-id) (if list-type? 2 1))
-        typedef (type-id types)
-        path (if (:inline? typedef)
-               (str "#" type-name)
-               (type-path typedef))]
-    (list (if list-type? "list of " "")
-          (if path
-            [:a {:href path} type-name]
-            type-name))))
+  (cond
+   (vector? type) (link-to-list-type type types)
+   (map? type) (link-to-map-type type types)
+   :else (link-to-typedef (name type) (type types))))
 
 (defn- render-type-field [field types]
   [:tr
@@ -37,11 +54,12 @@
     [:p.faded (markdown/render-inline (:description field))]]])
 
 (defn- render-typedef [type types]
-  (markdown/render (:description type))
-  (if (some :always-available? (:fields type))
-    [:p "The check mark " [:span.check "✓"] " indicates that the field always contains a valid non-empty value."])
-  [:table.sectioned.mbl
-   (map #(render-type-field % types) (:fields type))])
+  (list
+   (markdown/render (:description type))
+   (if (some :always-available? (:fields type))
+     [:p "The check mark " [:span.check "✓"] " indicates that the field always contains a valid non-empty value."])
+   [:table.sectioned.mbl
+    (map #(render-type-field % types) (:fields type))]))
 
 (defn render-type-definition
   "Render the type definition specified by the type map. See the validation data
