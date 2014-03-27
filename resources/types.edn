@@ -266,4 +266,19 @@ verified."
                                 {:name "startDate"      :type :datetime :description "Only provided for subscriptions"}
                                 {:name "expires"        :type :datetime :description "Only provided for subscriptions"}
                                 {:name "autoRenew"      :type :integer  :description "The number of times a subscription will be automatically renewed. Only provided for subscriptions"}
-                                {:name "gracePeriod"    :type :string   :description "Only provided for subscriptions"}]}}
+                                {:name "gracePeriod"    :type :string   :description "Only provided for subscriptions"}]}
+ :digital-content {:id :digital-content
+                   :name "Digital content"
+                   :rendering :object
+                   :fields [{:name "userProductId"   :type :integer  :description "" :always-available? true}
+                            {:name "productId"       :type :integer  :description "" :always-available? true}
+                            {:name "parentProductId" :type :integer  :description "" :always-available? true}
+                            {:name "clientId"        :type :string   :description "" :always-available? true}
+                            {:name "userId"          :type :integer  :description "" :always-available? true}
+                            {:name "orderId"         :type :integer  :description "" :always-available? true}
+                            {:name "status"          :type :integer  :description "" :always-available? true}
+                            {:name "count"           :type :integer  :description "" :always-available? true}
+                            {:name "updated"         :type :datetime :description "" :always-available? true}
+                            {:name "created"         :type :datetime :description "" :always-available? true}
+                            {:name "bundleId"        :type :integer  :description "" :always-available? true}
+                            {:name "statusMsg"       :type :string   :description "" :always-available? true}]}}
