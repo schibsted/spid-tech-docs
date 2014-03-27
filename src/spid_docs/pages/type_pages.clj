@@ -47,7 +47,7 @@
   (cond
    (vector? type) (link-to-list-type type types)
    (map? type) (link-to-map-type type types)
-   :else (link-to-typedef (name type) (type types))))
+   :else (link-to-typedef (get-type-name type types) (type types))))
 
 (defn- render-type-field [field types]
   [:tr

@@ -74,6 +74,12 @@
                               :description "Descriptions earns the type a separate page"}
                              }) => [:a {:href "/types/string"} "string"]
 
+      (link-to-type :string {:string
+                             {:id :string
+                              :name "lol strings"
+                              :description "Links to name if present"}
+                             }) => [:a {:href "/types/string"} "lol strings"]
+
       (link-to-type :something {:something
                                 {:id :something
                                  :fields [{:name "field" :description "earns the type a separate page"}]}
