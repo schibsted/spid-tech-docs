@@ -47,7 +47,7 @@
 (def Response
   {(optional-key :status) Num
    (optional-key :description) Str
-   :type (maybe (either Keyword [Keyword]))
+   :type (maybe (either Keyword [Keyword] {Keyword Keyword}))
    (optional-key :samples) {Keyword Str}})
 
 (def Endpoint

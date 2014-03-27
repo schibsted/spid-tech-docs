@@ -45,9 +45,14 @@
   "Differences between old responses and new responses: The type of the response
    is either a keyword, or a vector with a keyword, signifying a list type. The
    original type is a string."
-  (update-in response [:type] #(if (re-find #"^\[.*\]$" (or % ""))
-                                 [(keyword (str/replace % #"^\[|\]$" ""))]
-                                 (and % (keyword %)))))
+  (update-in response
+             [:type]
+             #(let [list-type (second (re-find #"^\[(.*)\]$" (or % "")))
+                    map-type (rest (re-find #"^\{(.*) (.*)\}$" (or % "")))]
+                (cond
+                 list-type [(keyword list-type)]
+                 (seq map-type) {(keyword (first map-type)) (keyword (second map-type))}
+                 :else (and % (keyword %))))))
 
 (defn success? [response]
   "Is the response status between 200 and 299, ie a success?"
