@@ -342,16 +342,16 @@ verified."
                            {:value "2"  :description "Available, but not selectable"}
                            {:value "3"  :description "Available"}]}
 
- :payment-options {:id :payment-options
-                  :name "Payment options"
+ :payment-option {:id :payment-option
+                  :name "Payment option"
                   :rendering :enum
                   :values [{:value "1" :description "Credits"}
-                           {:value "2" :description "Creditcards"}
-                           {:value "3" :description "SMS"}
-                           {:value "4" :description "Invoice"}
-                           {:value "5" :description "Voucher"}
-                           {:value "6" :description "Klarna Invoice"}
-                           {:value "7" :description "Klarna Mobile"}]}
+                           {:value "2" :description "Credit card"}
+                           {:value "4" :description "SMS"}
+                           {:value "8" :description "Invoice"}
+                           {:value "16" :description "Voucher"}
+                           {:value "32" :description "Klarna Invoice"}
+                           {:value "64" :description "Klarna Mobile"}]}
 
  :product {:id :product
            :name "Product"
@@ -474,4 +474,24 @@ verified."
  :varnish-id {:id :varnish-id
               :name "Varnish SP_ID"
               :rendering :object
-              :fields [{:name "sp_id" :type :string :description "The Varnish SP_ID"}]}}
+              :fields [{:name "sp_id" :type :string :description "The Varnish SP_ID"}]}
+
+ :payment-preference-status {:id :payment-preference-status
+                             :name "Payment preference status"
+                             :rendering :enum
+                             :values [{:value "Unconfirmed" :description ""}
+                                      {:value "Confirmed" :description ""}]}
+
+ :payment-preference {:id :payment-preference
+                      :name "Payment preference"
+                      :rendering :object
+                      :fields [{:name "paymentPreferenceId" :type :integer-string            :description "Unique ID" :always-available? true}
+                               {:name "merchantId"          :type :integer-string            :always-available? true}
+                               {:name "userId"              :type :integer-string            :description "The user's `userId`" :always-available? true}
+                               {:name "clientId"            :type :string                    :description "Your client id" :always-available? true}
+                               {:name "identifierId"        :type :integer-string            :description "Id of the payment identifier/means" :always-available? true}
+                               {:name "identifierType"      :type :payment-option            :always-available? true}
+                               {:name "alias"               :type :string                    :always-available? true}
+                               {:name "status"              :type :payment-preference-status :description "" :always-available? true}
+                               {:name "updated"             :type :datetime                  :always-available? true}
+                               {:name "created"             :type :datetime                  :always-available? true}]}}
