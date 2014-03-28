@@ -469,4 +469,9 @@ verified."
                         {:name "description"   :type :string           :always-available? true}
                         {:name "ip"            :type :string           :description "The IP address from which the transaction was made" :always-available? true}
                         {:name "createdBy"     :type :integer-string   :description "Id of the user who created the transaction" :always-available? true}
-                        {:name "created"       :type :datetime         :always-available? true}]}}
+                        {:name "created"       :type :datetime         :always-available? true}]}
+
+ :varnish-id {:id :varnish-id
+              :name "Varnish SP_ID"
+              :rendering :object
+              :fields [{:name "sp_id" :type :string :description "The Varnish SP_ID"}]}}
