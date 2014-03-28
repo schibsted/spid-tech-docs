@@ -1,0 +1,18 @@
+callback([{
+    "100000": {
+        "transactionId": "100000",
+        "masterId": "0",
+        "clientId": "4cb61ac2b3f2a71931060000",
+        "userId": "100005",
+        "type": "100",
+        "reference": "40127143",
+        "orderId": "99",
+        "amount": "375",
+        "currency": "NOK",
+        "description": "Deposit via PayEx (AutoPay)",
+        "ip": "127.0.0.1",
+        "createdBy": "100005",
+        "created": "2011-03-24 15:16:30"
+    },
+    ...
+]);

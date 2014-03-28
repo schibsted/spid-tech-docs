@@ -385,9 +385,9 @@ verified."
                     {:name "subscriptionFinalEndDate"        :type :datetime       :description "By this date, the subscription is no longer for sale" :always-available? false}
                     {:name "allowMultiSales"                 :type :boolnum        :description "If `\"1\"`, users can purchase this product multiple times" :always-available? true}
                     {:name "status"                          :type :product-status :always-available? true}
-                    {:name "changedBy"                       :type :string         :always-available? false}
+                    {:name "changedBy"                       :type :integer-string :description "Id of the user that made the last change" :always-available? false}
                     {:name "changed"                         :type :datetime       :always-available? false}
-                    {:name "createdBy"                       :type :string         :always-available? true}
+                    {:name "createdBy"                       :type :integer-string :description "Id of the user that created this product" :always-available? true}
                     {:name "created"                         :type :datetime       :always-available? true}
                     {:name "purchaseUri"                     :type :url            :description "A URI where the product may be purchased" :always-available? true}]}
 
@@ -440,4 +440,33 @@ verified."
                          { :name "statusChangeDate"     :type :datetime                        :description "The date of the last change to the subscription's status"                                                                            :always-available? false}
                          { :name "updated"              :type :datetime                        :description "Date and time of last update to the subscription"                                                                                    :always-available? true}
                          { :name "created"              :type :datetime                        :description "Date and time when the subscription was created"                                                                                     :always-available? true}
-                         { :name "product"              :type :product            :description "The product this subscription belongs to"                                                                                            :always-available? true}]}}
+                         { :name "product"              :type :product            :description "The product this subscription belongs to"                                                                                            :always-available? true}]}
+
+ :transaction-type {:id :transaction-type
+                    :name "Transaction type"
+                    :rendering :enum
+                    :values [{:value "100" :description "Deposit"}
+                             {:value "200" :description "Purchase"}
+                             {:value "300" :description "Transfer"}
+                             {:value "400" :description "Fee"}
+                             {:value "500" :description "Redeem"}
+                             {:value "600" :description "Credit"}
+                             {:value "700" :description "Correction"}
+                             {:value "800" :description "Withdraw"}]}
+
+ :transaction {:id :transaction
+               :name "Transaction"
+               :rendering :object
+               :fields [{:name "transactionId" :type :integer-string   :description "Unique id of the transaction" :always-available? true}
+                        {:name "masterId"      :type :integer-string   :description "TODO" :always-available? true}
+                        {:name "clientId"      :type :string           :always-available? true}
+                        {:name "userId"        :type :integer-string   :description "Id of the user the transaction is for" :always-available? true}
+                        {:name "type"          :type :transaction-type :always-available? true}
+                        {:name "reference"     :type :string           :description "Third-party reference" :always-available? true}
+                        {:name "orderId"       :type :integer-string   :always-available? true}
+                        {:name "amount"        :type :price            :always-available? true}
+                        {:name "currency"      :type :string           :always-available? true}
+                        {:name "description"   :type :string           :always-available? true}
+                        {:name "ip"            :type :string           :description "The IP address from which the transaction was made" :always-available? true}
+                        {:name "createdBy"     :type :integer-string   :description "Id of the user who created the transaction" :always-available? true}
+                        {:name "created"       :type :datetime         :always-available? true}]}}
