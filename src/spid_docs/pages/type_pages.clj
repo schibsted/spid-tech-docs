@@ -56,13 +56,28 @@
     [:h5 (link-to-type (:type field) types)]
     [:p.faded (markdown/render-inline (:description field))]]])
 
+(defn- render-type-value [val]
+  [:tr
+   [:th [:h4.nowrap
+         [:code
+          (if (string? (:value val)) "\"")
+          (:value val)
+          (if (string? (:value val)) "\"")]]]
+   [:td
+    [:p.faded (markdown/render-inline (:description val))]]])
+
 (defn- render-typedef [type types]
   (list
    (markdown/render (:description type))
    (if (some :always-available? (:fields type))
      [:p "The check mark " [:span.check "✓"] " indicates that the field always contains a valid non-empty value."])
+   (if (= :enum (:rendering type))
+     [:p "An enum, with the following possible values:"])
    [:table.sectioned.mbl
-    (map #(render-type-field % types) (:fields type))]))
+    ;; Render "both" fields and values - only either one will be present in any
+    ;; given type.
+    (map #(render-type-field % types) (:fields type))
+    (map render-type-value (:values type))]))
 
 (defn render-type-definition
   "Render the type definition specified by the type map. See the validation data

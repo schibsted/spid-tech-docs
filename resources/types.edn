@@ -2,17 +2,35 @@
 ;; endpoints where they are used. If a type is used in more than one endpoint,
 ;; this is the place to define it, to enable cross-linking.
 
-;; Types that don't have descriptions will not be linked. This is used for basic
-;; types like strings and numbers.
+;; Types that don't have descriptions, values or fields will not be linked. This
+;; is used for basic types like strings and numbers.
 
 {:string {:id :string}
  :boolean {:id :boolean}
  :integer {:id :integer}
+ :timestamp {:id :timestamp :name "timestamp, in seconds"}
+ :boolnum {:id :boolnum :name "string, \"1\" (true) or \"0\" (false)"}
+ :integer-string {:id :integer-string
+                  :name "integer (as string)"
+                  :description "Even though the value is encoded as a string in
+                                responses, it does actually contain an integer,
+                                and can be safely cast on the receiving end."}
  :object {:id :object}
+
+ :url {:id :url :name "URL (string)"}
+
  :date {:id :date
         :description "An ISO-8601 formatted date. The specific format used by the API is YYYY-MM-DD"}
+
  :datetime {:id :datetime
             :description "Date and time on the format `YYYY-MM-DD HH:MM:SS`"}
+
+ :price {:id :price
+         :name "price"
+         :description "Prices are provided in cents, as strings. A price is always accompanied
+                       by a `currency` field. If a price field contains the value `\"2900\"` and
+                       `currency` is `\"NOK\"`, the price is 29,00 NOK."}
+
  :endpoint-response {:id :endpoint-response
                      :name "Endpoint response"
                      :description "A possible response from the API"
@@ -20,6 +38,7 @@
                      :fields [{:name "status"      :type :integer :always-available? true :description "The HTTP response code"}
                               {:name "description" :type :string  :always-available? true :description "A description of what this response signifies, and in which cases it may arise"}
                               {:name "type"        :type :string  :always-available? true :description "The symbolic name of the formal type returned as `data` for this endpoint. The type definition is defined in the API documentation."}]}
+
  :http-method {:id :http-method
                :name "HTTP method"
                :rendering :object
@@ -31,6 +50,7 @@
                         {:name "filters"            :type [:string]            :always-available? true :description "Supported filters."}
                         {:name "default_filters"    :type [:string]            :always-available? true :description "Default filters."}
                         {:name "access_token_types" :type [:string]            :always-available? true :description "Supported token types. May be server, user or both. If both, then this action may be taken with either access token type."}]}
+
  :endpoint {:id :endpoint
             :name "Endpoint"
             :rendering :object
@@ -51,33 +71,37 @@ are now reading."
                      {:name "httpMethods"            :type :http-method :always-available? true :description "Details about the supported HTTP methods with their purpose and possible outcomes."}
                      {:name "controller"             :type :string      :always-available? true :description "The server-side controller. Should be ignored."}
                      {:name "description"            :type :string      :always-available? true}]}
+
  :name {:id :name
         :name "Name"
         :rendering :object
         :fields [{:name "givenName"  :type :string}
                  {:name "familyName" :type :string}
                  {:name "formatted"  :type :string :description "Formatted full name, including all middle names, titles and suffixes as appropiate"}]}
+
  :user-status {:id :user-status
                :name "User status"
                :rendering :enum
                :values [{:value "-3" :description "Deleted"}
                         {:value "-2" :description "Blocked from using the service"}
                         {:value "-1" :description "Inactive/disabled account"}
-                        {:value "0" :description "Unverified"}
-                        {:value "1" :description "Verified email/phone/etc"}]}
+                        {:value "0"  :description "Unverified"}
+                        {:value "1"  :description "Verified email/phone/etc"}]}
+
  :address {:id :address
            :name "Address"
            :rendering :object
-           :fields [{:name "formatted" :type :string :description "Full address, formatted for display"}
+           :fields [{:name "formatted"     :type :string :description "Full address, formatted for display"}
                     {:name "streetAddress" :type :string :description "Full street address component. May include house number, street name, PO BOX, and multi-line extended street address information."}
-                    {:name "postalCode" :type :string :description "Zip code."}
-                    {:name "country" :type :string :description "Country name."}
-                    {:name "locality" :type :string :description "City or locality"}
-                    {:name "region" :type :string :description "State or region"}
-                    {:name "latitude" :type :string :description "Latitude geo location"}
-                    {:name "longitude" :type :string :description "Longitude geo location"}
-                    {:name "altitude" :type :string :description "Altitude geo location"}
-                    {:name "type" :type :string :description "Address type, home, shipping, invoice, etc"}]}
+                    {:name "postalCode"    :type :string :description "Zip code."}
+                    {:name "country"       :type :string :description "Country name."}
+                    {:name "locality"      :type :string :description "City or locality"}
+                    {:name "region"        :type :string :description "State or region"}
+                    {:name "latitude"      :type :string :description "Latitude geo location"}
+                    {:name "longitude"     :type :string :description "Longitude geo location"}
+                    {:name "altitude"      :type :string :description "Altitude geo location"}
+                    {:name "type"          :type :string :description "Address type, home, shipping, invoice, etc"}]}
+
  :account {:id :account
            :name "Third-party account."
            :rendering :object
@@ -87,6 +111,7 @@ are now reading."
                     {:name "username"    :type :string :description "Alpha-numeric username" :always-available? true}
                     {:name "userid"      :type :string :description "User/account id in the third-party service" :always-available? true}
                     {:name "profileUrl"  :type :string :description "The user's profile on the third-party service" :always-available? false}]}
+
  :email {:id :email
          :name "Email address"
          :rendering :object
@@ -96,6 +121,7 @@ are now reading."
                   {:name "verified"     :type :boolean  :description "If `true`, the email is verified in SPiD by the user." :always-available? false}
                   {:name "verifiedTime" :type :datetime :description "When the user last verifided this email address." :always-available? false}
                   {:name "hidden"       :type :boolean  :description "TODO" :always-available? false}]}
+
  :phone-number {:id :phone-number
                 :name "Phone number"
                 :rendering :object
@@ -104,6 +130,7 @@ are now reading."
                          {:name "primary"      :type :boolean  :description "If `true`, this is the user's primary phone number." :always-available? false}
                          {:name "verified"     :type :boolean  :description "If `true`, the phone number is verified in SPiD by the user." :always-available? false}
                          {:name "verifiedTime" :type :datetime :description "When the user last verifided this phone number." :always-available? false}]}
+
  :user {:id :user
         :name "User"
         :rendering :object
@@ -116,7 +143,7 @@ The corresponding *Verified fields are the date of the last time those were
 verified."
         :fields [
                  {:name "id"                  :type :string         :description "Legacy `uuid`. Don't use. [Portable contacts](http://portablecontacts.net/draft-spec.html#anchor16)" :always-available? true}
-                 {:name "userId"              :type :integer        :description "Unique user id. Custom extension." :always-available? true}
+                 {:name "userId"              :type :integer-string :description "Unique user id. Custom extension." :always-available? true}
                  {:name "name"                :type :name           :description "The user's full name" :always-available? true}
                  {:name "displayName"         :type :string         :description "Name suitable for displaying to end-users." :always-available? true}
                  {:name "published"           :type :date-time      :always-available? true}
@@ -144,6 +171,7 @@ verified."
                  {:name "phoneNumbers"        :type [:phone-number]}
                  {:name "currentLocation"     :type [:address]}
                  {:name "tracking"            :type :boolean        :description "If `true`, the user has behavioral tracking enabled (pilot feature, may not remain as-is)"}]}
+
  :login-type {:id :login-type
               :name "Login type"
               :rendering :enum
@@ -151,84 +179,92 @@ verified."
                        {:value "auto"       :description "Caused by an active 'remember me' cookie."}
                        {:value "thirdparty" :description "Logged in via third-party provider, such as Facebook, Google, etc."}
                        {:value "api"        :description "Logged in via the SPiD API (used by native mobile apps)."}]}
+
  :login-attempt {:id :login-attempt
                  :name "Login attempt object"
                  :description "This object contains details about a login attempt"
                  :rendering :object
-                 :fields [{:name "id" :type :string}
-                          {:name "clientid" :type :string}
-                          {:name "merchantId" :type :integer}
-                          {:name "email" :type :string}
-                          {:name "userid" :type :string}
-                          {:name "userAgent" :type :string}
-                          {:name "created" :type :date}
-                          {:name "type" :type :login-type}
-                          {:name "ip" :type :string :description "Originating IP address"}
+                 :fields [{:name "id"            :type :string}
+                          {:name "clientid"      :type :string}
+                          {:name "merchantId"    :type :integer-string}
+                          {:name "email"         :type :string}
+                          {:name "userid"        :type :string}
+                          {:name "userAgent"     :type :string}
+                          {:name "created"       :type :date}
+                          {:name "type"          :type :login-type}
+                          {:name "ip"            :type :string :description "Originating IP address"}
                           {:name "initalReferer" :type :string :description "Referer from which the user came from"}
-                          {:name "referer" :type :string :description "Referer from which the login attempt came from"}
-                          {:name "trackingRef" :type :string :description "Client-provided unique visitor reference. Used for tracking"}
-                          {:name "trackingTag" :type :string :description "Client-provided string. Used for custom order tracking"}
-                          {:name "status" :type :string :description "`\"true\"` if login was successful, `\"false\"` if not"}
-                          {:name "hash" :type :string :description "An md5 hash of email+ip+userAgent. Used to identify login attempt patterns"}]}
+                          {:name "referer"       :type :string :description "Referer from which the login attempt came from"}
+                          {:name "trackingRef"   :type :string :description "Client-provided unique visitor reference. Used for tracking"}
+                          {:name "trackingTag"   :type :string :description "Client-provided string. Used for custom order tracking"}
+                          {:name "status"        :type :string :description "`\"true\"` if login was successful, `\"false\"` if not"}
+                          {:name "hash"          :type :string :description "An md5 hash of email+ip+userAgent. Used to identify login attempt patterns"}]}
+
  :version {:id :version
            :name "Version object"
            :rendering :object
-           :fields [{:name "apiVersion"  :type :integer :always-available? true}
-                    {:name "apiRevision" :type :string  :always-available? true}
-                    {:name "webVersion" :type :string :always-available? true}
-                    {:name "webRevision" :type :string :always-available? true}
+           :fields [{:name "apiVersion"  :type :integer  :always-available? true}
+                    {:name "apiRevision" :type :string   :always-available? true}
+                    {:name "webVersion"  :type :string   :always-available? true}
+                    {:name "webRevision" :type :string   :always-available? true}
                     {:name "currentTime" :type :datetime :always-available? true}
-                    {:name "timeZone" :type :string :always-available? true}]}
+                    {:name "timeZone"    :type :string   :always-available? true}]}
+
  :terms {:id :terms
          :name "Terms"
          :rendering :object
          :fields [{:name "terms"    :type :string  :always-available? true :description "The current terms, as HTML"}
                   {:name "accepted" :type :boolean :always-available? true :description "If requested with a user token, this field is `true` if the user has accepted the terms."}]}
+
  :exchange {:id :exchange
             :name "OAuth exchange object"
             :rendering :object
             :fields [{:name "code" :type :string :always-available? true :description "An OAuth access token"}]}
+
  :email-template {:id :email-template
                   :name "Email template"
                   :rendering :object
-                  :fields [{:name "layout" :type :string :always-available? true}
-                           {:name "subject" :type :string :always-available? true :description "The email subject"}
+                  :fields [{:name "layout"   :type :string :always-available? true}
+                           {:name "subject"  :type :string :always-available? true :description "The email subject"}
                            {:name "template" :type :string :always-available? true}
-                           {:name "tokens" :type :string :always-available? true}]}
+                           {:name "tokens"   :type :string :always-available? true}]}
+
  :email-template-collection {:id :email-template-collection
                              :name "Email template collection"
                              :rendering :object
-                             :fields [{:name "change_password_notification" :type :email-template}
-                                      {:name "post_expiration_autorenew_subscription_fail" :type :email-template}
-                                      {:name "confirm_email_address" :type :email-template}
-                                      {:name "sms_purchase_non_subscription_receipt" :type :email-template}
-                                      {:name "confirm_email_address_without_password_with_redirect" :type :email-template}
-                                      {:name "api_verify_email" :type :email-template}
-                                      {:name "post_expiration_payment_identifier" :type :email-template}
-                                      {:name "confirm_email_address_without_password" :type :email-template}
-                                      {:name "new_verification_code" :type :email-template}
-                                      {:name "post_expiration_autorenew_subscription_ok" :type :email-template}
-                                      {:name "sms_purchase_non_auto_renewal_subscription_receipt" :type :email-template}
-                                      {:name "confirm_email_address_with_password" :type :email-template}
-                                      {:name "added_secondary_email_notification" :type :email-template}
-                                      {:name "pre_expiration_autorenew_subscription_on" :type :email-template}
-                                      {:name "pre_expiration_payment_identifier" :type :email-template}
-                                      {:name "post_deletion_payment_identifier" :type :email-template}
-                                      {:name "pre_expiration_autorenew_subscription_off" :type :email-template}
-                                      {:name "sms_purchase_auto_renewal_subscription_receipt" :type :email-template}
+                             :fields [{:name "change_password_notification"                            :type :email-template}
+                                      {:name "post_expiration_autorenew_subscription_fail"             :type :email-template}
+                                      {:name "confirm_email_address"                                   :type :email-template}
+                                      {:name "sms_purchase_non_subscription_receipt"                   :type :email-template}
+                                      {:name "confirm_email_address_without_password_with_redirect"    :type :email-template}
+                                      {:name "api_verify_email"                                        :type :email-template}
+                                      {:name "post_expiration_payment_identifier"                      :type :email-template}
+                                      {:name "confirm_email_address_without_password"                  :type :email-template}
+                                      {:name "new_verification_code"                                   :type :email-template}
+                                      {:name "post_expiration_autorenew_subscription_ok"               :type :email-template}
+                                      {:name "sms_purchase_non_auto_renewal_subscription_receipt"      :type :email-template}
+                                      {:name "confirm_email_address_with_password"                     :type :email-template}
+                                      {:name "added_secondary_email_notification"                      :type :email-template}
+                                      {:name "pre_expiration_autorenew_subscription_on"                :type :email-template}
+                                      {:name "pre_expiration_payment_identifier"                       :type :email-template}
+                                      {:name "post_deletion_payment_identifier"                        :type :email-template}
+                                      {:name "pre_expiration_autorenew_subscription_off"               :type :email-template}
+                                      {:name "sms_purchase_auto_renewal_subscription_receipt"          :type :email-template}
                                       {:name "confirm_email_address_without_password_without_redirect" :type :email-template}
-                                      {:name "post_thirdparty_signup" :type :email-template}]}
+                                      {:name "post_thirdparty_signup"                                  :type :email-template}]}
+
  :data-object {:id :data-object
                :name "Data object"
                :rendering :object
-               :fields [{:name "dataObjectId" :type :integer  :always-available? true :description "Unique data object ID"}
-                        {:name "clientId"     :type :string   :always-available? true :description "The ID of the client who created the data object"}
-                        {:name "merchantId"   :type :integer  :always-available? true :description "The ID of the merchant the client belongs to"}
-                        {:name "userId"       :type :integer  :always-available? true :description "The user the data is associated with"}
-                        {:name "key"          :type :string   :always-available? true :description "Client-provided key, e.g. the 'name' of this data. Max length is 255 bytes."}
-                        {:name "value"        :type :string   :always-available? true :description "Client-provided value. Max length is 65535 bytes."}
-                        {:name "updated"      :type :datetime :always-available? true :description "When this value was last updated"}
-                        {:name "created"      :type :datetime :always-available? true :description "When this value was originally created"}]}
+               :fields [{:name "dataObjectId" :type :integer-string :always-available? true :description "Unique data object ID"}
+                        {:name "clientId"     :type :string         :always-available? true :description "The ID of the client who created the data object"}
+                        {:name "merchantId"   :type :integer-string :always-available? true :description "The ID of the merchant the client belongs to"}
+                        {:name "userId"       :type :integer-string :always-available? true :description "The user the data is associated with"}
+                        {:name "key"          :type :string         :always-available? true :description "Client-provided key, e.g. the 'name' of this data. Max length is 255 bytes."}
+                        {:name "value"        :type :string         :always-available? true :description "Client-provided value. Max length is 65535 bytes."}
+                        {:name "updated"      :type :datetime       :always-available? true :description "When this value was last updated"}
+                        {:name "created"      :type :datetime       :always-available? true :description "When this value was originally created"}]}
+
  :status {:id :status
           :name "API Status"
           :rendering :object
@@ -241,44 +277,167 @@ verified."
                    {:name "timeZone"    :type :string   :always-available? true}
                    {:name "block"       :type :boolean  :always-available? true}
                    {:name "platform"    :type :string   :always-available? true :description "'up' if the API is fully operational. Other values will likely indicate some level of reduced operation."}]}
+
  :success-indicator {:id :success-indicator
                      :name "Success indicator"
                      :rendering :object
                      :fields [{:name "success" :type :boolean}]}
+
  :api-exception {:id :api-exception
                  :name "API Exception"
                  :rendering :object
                  :fields [{:name "code"        :type :integer :description "The HTTP response code"}
                           {:name "type"        :type :string  :description "The type of error, usually 'ApiException'"}
                           {:name "description" :type :string}]}
+
  :email-status {:id :email-status
                 :name "Email status"
                 :rendering :object
                 :fields [{:name "exists"    :type :boolean :description "If `true`, this email address exists in some form in SPiD"}
                          {:name "available" :type :boolean :description "If `true`, this email address may be used to register a new account"}
                          {:name "verified"  :type :boolean :description "If `true`, the owner has verified this address in SPiD."}]}
+
  :user-product-access {:id :user-product-access
                        :name "User product access"
                        :rendering :object
-                       :fields [{:name "productId"      :type :integer  :always-available? true}
-                                {:name "result"         :type :boolean  :description "If `true`, the user has access to the product or subscription" :always-available? true}
-                                {:name "subscriptionId" :type :integer  :description "Only provided for subscriptions"}
-                                {:name "startDate"      :type :datetime :description "Only provided for subscriptions"}
-                                {:name "expires"        :type :datetime :description "Only provided for subscriptions"}
-                                {:name "autoRenew"      :type :integer  :description "The number of times a subscription will be automatically renewed. Only provided for subscriptions"}
-                                {:name "gracePeriod"    :type :string   :description "Only provided for subscriptions"}]}
+                       :fields [{:name "productId"      :type :integer-string :always-available? true}
+                                {:name "result"         :type :boolean        :description "If `true`, the user has access to the product or subscription" :always-available? true}
+                                {:name "subscriptionId" :type :integer-string :description "Only provided for subscriptions"}
+                                {:name "startDate"      :type :datetime       :description "Only provided for subscriptions"}
+                                {:name "expires"        :type :datetime       :description "Only provided for subscriptions"}
+                                {:name "autoRenew"      :type :integer-string :description "The number of times a subscription will be automatically renewed. Only provided for subscriptions"}
+                                {:name "gracePeriod"    :type :string         :description "Only provided for subscriptions"}]}
+
  :digital-content {:id :digital-content
                    :name "Digital content"
                    :rendering :object
-                   :fields [{:name "userProductId"   :type :integer  :description "" :always-available? true}
-                            {:name "productId"       :type :integer  :description "" :always-available? true}
-                            {:name "parentProductId" :type :integer  :description "" :always-available? true}
-                            {:name "clientId"        :type :string   :description "" :always-available? true}
-                            {:name "userId"          :type :integer  :description "" :always-available? true}
-                            {:name "orderId"         :type :integer  :description "" :always-available? true}
-                            {:name "status"          :type :integer  :description "" :always-available? true}
-                            {:name "count"           :type :integer  :description "" :always-available? true}
-                            {:name "updated"         :type :datetime :description "" :always-available? true}
-                            {:name "created"         :type :datetime :description "" :always-available? true}
-                            {:name "bundleId"        :type :integer  :description "" :always-available? true}
-                            {:name "statusMsg"       :type :string   :description "" :always-available? true}]}}
+                   :fields [{:name "userProductId"   :type :integer-string :description "" :always-available? true}
+                            {:name "productId"       :type :integer-string :description "" :always-available? true}
+                            {:name "parentProductId" :type :integer-string :description "" :always-available? true}
+                            {:name "clientId"        :type :string         :description "" :always-available? true}
+                            {:name "userId"          :type :integer-string :description "" :always-available? true}
+                            {:name "orderId"         :type :integer-string :description "" :always-available? true}
+                            {:name "status"          :type :integer-string :description "" :always-available? true}
+                            {:name "count"           :type :integer-string :description "" :always-available? true}
+                            {:name "updated"         :type :datetime       :description "" :always-available? true}
+                            {:name "created"         :type :datetime       :description "" :always-available? true}
+                            {:name "bundleId"        :type :integer-string :description "" :always-available? true}
+                            {:name "statusMsg"       :type :string         :description "" :always-available? true}]}
+
+ :product-type {:id :product-type
+                :name "Product type"
+                :rendering :enum
+                :values [{:value "1" :description "Digital content"}
+                         {:value "2" :description "Subscription"}
+                         {:value "3" :description "Physical product"}
+                         {:value "4" :description "Classifieds"}
+                         {:value "0" :description "Default"}]}
+
+ :product-status {:id :product-status
+                  :name "Product status"
+                  :rendering :enum
+                  :values [{:value "-1" :description "Deleted"}
+                           {:value "0"  :description "Not available"}
+                           {:value "1"  :description "Available, but not visible"}
+                           {:value "2"  :description "Available, but not selectable"}
+                           {:value "3"  :description "Available"}]}
+
+ :payment-options {:id :payment-options
+                  :name "Payment options"
+                  :rendering :enum
+                  :values [{:value "1" :description "Credits"}
+                           {:value "2" :description "Creditcards"}
+                           {:value "3" :description "SMS"}
+                           {:value "4" :description "Invoice"}
+                           {:value "5" :description "Voucher"}
+                           {:value "6" :description "Klarna Invoice"}
+                           {:value "7" :description "Klarna Mobile"}]}
+
+ :product {:id :product
+           :name "Product"
+           :rendering :object
+           :fields [{:name "productId"                       :type :integer-string :description "Unique product id" :always-available? true}
+                    {:name "parentProductId"                 :type :integer-string :description "Id of the parent product, if any" :always-available? false}
+                    {:name "clientId"                        :type :string         :description "Your client id" :always-available? true}
+                    {:name "type"                            :type :product-type   :always-available? true}
+                    {:name "code"                            :type :string         :always-available? true}
+                    {:name "name"                            :type :string         :description "Product display name" :always-available? true}
+                    {:name "description"                     :type :string         :description "A detailed description of the product" :always-available? true}
+                    {:name "url"                             :type :url            :always-available? false}
+                    {:name "price"                           :type :price          :always-available? true}
+                    {:name "vat"                             :type :price          :always-available? true}
+                    {:name "currency"                        :type :string         :description "Price and VAT currency" :always-available? true}
+                    {:name "paymentOptions"                  :type :payment-option :description "Available payment options" :always-available? true}
+                    {:name "quantityLimit"                   :type :integer-string :description "TODO" :always-available? false}
+                    {:name "quantityCount"                   :type :integer-string :description "TODO" :always-available? true}
+                    {:name "saleStart"                       :type :datetime       :description "Start of a sale for this product (i.e. reduced price or with additional benefits)" :always-available? true}
+                    {:name "saleStop"                        :type :datetime       :description "End of a sale" :always-available? true}
+                    {:name "availableStart"                  :type :datetime       :description "When this product is available for purchase" :always-available? false}
+                    {:name "availableStop"                   :type :datetime       :description "When this product is no longer available for purchase" :always-available? false}
+                    {:name "subscriptionPeriod"              :type :timestamp      :description "The subscription period" :always-available? true}
+                    {:name "subscriptionRenewPrice"          :type :price          :description "Price of subscription renewal" :always-available? true}
+                    {:name "subscriptionRenewPeriod"         :type :timestamp      :description "For how long a renewal is valid" :always-available? true}
+                    {:name "subscriptionAutoRenew"           :type :boolnum        :description "If `\"1\"`, the subscription automatically renews" :always-available? true}
+                    {:name "subscriptionAutoRenewLockPeriod" :type :timestamp      :description "The initial period during which auto renew cannot be changed" :always-available? true}
+                    {:name "subscriptionAutoRenewDisabled"   :type :boolnum        :description "If `\"1\"`, auto renew is not available" :always-available? true}
+                    {:name "subscriptionGracePeriod"         :type :integer-string :description "The period after a failed renewal charge the subscription will stay active" :always-available? true}
+                    {:name "subscriptionEmailReceiptLimit"   :type :integer-string :description "The maximum number of email receipts" :always-available? true}
+                    {:name "subscriptionFinalEndDate"        :type :datetime       :description "By this date, the subscription is no longer for sale" :always-available? false}
+                    {:name "allowMultiSales"                 :type :boolnum        :description "If `\"1\"`, users can purchase this product multiple times" :always-available? true}
+                    {:name "status"                          :type :product-status :always-available? true}
+                    {:name "changedBy"                       :type :string         :always-available? false}
+                    {:name "changed"                         :type :datetime       :always-available? false}
+                    {:name "createdBy"                       :type :string         :always-available? true}
+                    {:name "created"                         :type :datetime       :always-available? true}
+                    {:name "purchaseUri"                     :type :url            :description "A URI where the product may be purchased" :always-available? true}]}
+
+ :subscription-status {:id :subscription-status
+                       :name "Subscription status"
+                       :rendering :enum
+                       :values [{:value "-1" :description "Expired"}
+                                {:value "0" :description "Inactive"}
+                                {:value "1" :description "Active"}]}
+
+ :subscription-status-change-code {:id :subscription-status-change-code
+                                   :name "Subscription status change code"
+                                   :rendering :enum
+                                   :values [{:value "100" :description "Subscription expired via multiple failed payment method charge attempts"}
+                                            {:value "110" :description "Subscription expired via API"}
+                                            {:value "120" :description "Subscription expired passively (auto_renew is off)"}
+                                            {:value "130" :description "Subscription expired by force"}
+                                            {:value "140" :description "Subscription expired because it is no longer for sale"}
+                                            {:value "150" :description "Subscription expired because it was renewed (i.e., a new subscription has been created)"}
+                                            {:value "160" :description "Subscription expired because the user deleted their account"}
+                                            {:value "170" :description "Subscription was paused"}
+                                            {:value "180" :description "Expiry date was changed"}
+                                            {:value "190" :description "Subscription expired because the user disabled auto renewal"}]}
+
+ :subscription {:id :subscription
+                :name "Subscription"
+                :rendering :object
+                :fields [{ :name "subscriptionId"       :type :string                          :description "Unique id of the subscription"                                                                                                       :always-available? true}
+                         { :name "clientId"             :type :string                          :description "Your client id"                                                                                                                      :always-available? true}
+                         { :name "productId"            :type :string                          :description "Unique product id"                                                                                                                   :always-available? true}
+                         { :name "parentProductId"      :type :string                          :description "Id of the parent product, if any"                                                                                                    :always-available? false}
+                         { :name "identifierId"         :type :string                          :description "Id of the payment identifier that will be used to renew the subscription"                                                            :always-available? true}
+                         { :name "orderId"              :type :string                          :description "Id of the original order"                                                                                                            :always-available? true}
+                         { :name "startDate"            :type :datetime                        :description "From when the subscription is/was active"                                                                                            :always-available? true}
+                         { :name "originalPurchaseDate" :type :datetime                        :description "When the subscription was originally purchased"                                                                                      :always-available? true}
+                         { :name "expires"              :type :datetime                        :description "When the subscription expires"                                                                                                       :always-available? true}
+                         { :name "autoRenew"            :type :boolnum                         :description "If `\"1\"`, the subscription will automatically renew on the `expires` date."                                                        :always-available? true}
+                         { :name "renewPrice"           :type :price                           :description "The price of renewal, in cents"                                                                                                      :always-available? true}
+                         { :name "currency"             :type :string                          :description "The renewal price currency"                                                                                                          :always-available? true}
+                         { :name "renewPeriod"          :type :timestamp                       :description "Renewal period"                                                                                                                      :always-available? true}
+                         { :name "autoRenewLockPeriod"  :type :timestamp                       :description "Length of the initial period after activation during which it is not allowed to change the auto renew setting for the subscription." :always-available? true}
+                         { :name "autoRenewDisabled"    :type :boolnum                         :description "When `\"0\"`, the subscription's auto renew cannot be changed."                                                                      :always-available? true}
+                         { :name "gracePeriod"          :type :timestamp                       :description "The length of the period the subscription stays active after charging for a renewal fails."                                          :always-available? false}
+                         { :name "emailReceiptCount"    :type :integer-string                  :description "The number of receipts sent via email to the user"                                                                                   :always-available? true}
+                         { :name "finalEndDate"         :type :datetime                        :description "If provided, this date denotes the time when the subscription will no longer be available for sale."                                 :always-available? false}
+                         { :name "chargeRetryCount"     :type :integer-string                  :description "The number of times the previous charge has been retried"                                                                            :always-available? true}
+                         { :name "chargeLastRetry"      :type :datetime                        :description "Time of the last charge retry"                                                                                                       :always-available? false}
+                         { :name "status"               :type :subscription-status             :description "The subscription's current status"                                                                                                   :always-available? true}
+                         { :name "statusChangeCode"     :type :subscription-status-change-code :description "A description of the last change to the subscription's status"                                                                       :always-available? false}
+                         { :name "statusChangeDate"     :type :datetime                        :description "The date of the last change to the subscription's status"                                                                            :always-available? false}
+                         { :name "updated"              :type :datetime                        :description "Date and time of last update to the subscription"                                                                                    :always-available? true}
+                         { :name "created"              :type :datetime                        :description "Date and time when the subscription was created"                                                                                     :always-available? true}
+                         { :name "product"              :type :product            :description "The product this subscription belongs to"                                                                                            :always-available? true}]}}

@@ -22,8 +22,13 @@
             :name "User"
             :description "A user person"
             :fields [{:name "created" :type :datetime}]}
+      status {:id :status
+              :name "Status"
+              :rendering :enum
+              :values [{:value "0" :description "Active"}]}
       types {:login login
              :user user
+             :status status
              :datetime {:id :datetime :name "Datetime" :description "Dates and stuff"}
              :string {:id :string :name "string"}
              :login-type {:id :login-type
@@ -33,6 +38,11 @@
   (fact "Renders type definitions"
         (->> (render-type-definition login types)
              (hiccup-find [:table.sectioned])
+             count) => 1)
+
+  (fact "Renders enum types"
+        (->> (render-type-definition status types)
+             (hiccup-find [:table.sectioned :tr])
              count) => 1)
 
   (fact "Links to non-inline types with description"
