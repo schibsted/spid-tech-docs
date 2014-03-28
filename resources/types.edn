@@ -353,6 +353,13 @@ verified."
                            {:value "32" :description "Klarna Invoice"}
                            {:value "64" :description "Klarna Mobile"}]}
 
+ :bundle-type {:id :bundle-type
+               :name "Bundle type"
+               :rendering :enum
+               :values [{:value "0" :description "Not a bundle"}
+                        {:value "1" :description "Dynamic bundle"}
+                        {:value "2" :description "Onetime bundle"}]}
+
  :product {:id :product
            :name "Product"
            :rendering :object
@@ -360,16 +367,17 @@ verified."
                     {:name "parentProductId"                 :type :integer-string :description "Id of the parent product, if any" :always-available? false}
                     {:name "clientId"                        :type :string         :description "Your client id" :always-available? true}
                     {:name "type"                            :type :product-type   :always-available? true}
+                    {:name "bundle"                          :type :bundle-type    :always-available? true}
                     {:name "code"                            :type :string         :always-available? true}
                     {:name "name"                            :type :string         :description "Product display name" :always-available? true}
                     {:name "description"                     :type :string         :description "A detailed description of the product" :always-available? true}
                     {:name "url"                             :type :url            :always-available? false}
                     {:name "price"                           :type :price          :always-available? true}
-                    {:name "vat"                             :type :price          :always-available? true}
+                    {:name "vat"                             :type :integer-string :description "VAT, in percent" :always-available? true}
                     {:name "currency"                        :type :string         :description "Price and VAT currency" :always-available? true}
-                    {:name "paymentOptions"                  :type :payment-option :description "Available payment options" :always-available? true}
-                    {:name "quantityLimit"                   :type :integer-string :description "TODO" :always-available? false}
-                    {:name "quantityCount"                   :type :integer-string :description "TODO" :always-available? true}
+                    {:name "paymentOptions"                  :type :payment-option :description "Available payment options for this product" :always-available? true}
+                    {:name "quantityLimit"                   :type :integer-string :description "Maximum available sales for this product." :always-available? false}
+                    {:name "quantityCount"                   :type :integer-string :description "Number of sales for this product so far" :always-available? true}
                     {:name "saleStart"                       :type :datetime       :description "Start of a sale for this product (i.e. reduced price or with additional benefits)" :always-available? true}
                     {:name "saleStop"                        :type :datetime       :description "End of a sale" :always-available? true}
                     {:name "availableStart"                  :type :datetime       :description "When this product is available for purchase" :always-available? false}
