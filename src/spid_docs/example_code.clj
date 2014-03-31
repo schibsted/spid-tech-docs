@@ -22,7 +22,7 @@
    "availableStop" "???"
    "birthday" "1977-01-31"
    "birthyear" "???"
-   "bundle" "???"
+   "bundleId" "42"
    "buyerUserId" "???"
    "campaignId" "???"
    "cancelUri" "???"
