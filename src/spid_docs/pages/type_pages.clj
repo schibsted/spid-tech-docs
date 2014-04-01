@@ -7,7 +7,7 @@
   (if (:always-available? field) [:span.check " ✓"]))
 
 (defn- get-type-name
-  ([type] (:name type))
+  ([type] (or (:name type) (name (:id type))))
   ([type types] (or (:name (type types)) (name type))))
 
 (defn- link-to-typedef [type-name typedef]
