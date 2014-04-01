@@ -1,4 +1,4 @@
-(ns spid-docs.pages.types-pages-test
+(ns spid-docs.pages.type-pages-test
   (:require [hiccup-find.core :refer [hiccup-find hiccup-text]]
             [midje.sweet :refer :all]
             [spid-docs.pages.type-pages :refer :all]))
