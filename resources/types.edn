@@ -342,16 +342,18 @@ verified."
                            {:value "2"  :description "Available, but not selectable"}
                            {:value "3"  :description "Available"}]}
 
- :payment-option {:id :payment-option
-                  :name "Payment option"
-                  :rendering :enum
-                  :values [{:value "1" :description "Credits"}
-                           {:value "2" :description "Credit card"}
-                           {:value "4" :description "SMS"}
-                           {:value "8" :description "Invoice"}
-                           {:value "16" :description "Voucher"}
-                           {:value "32" :description "Klarna Invoice"}
-                           {:value "64" :description "Klarna Mobile"}]}
+ :payment-options {:id :payment-options
+                   :name "Payment option"
+                   :description "Payment options are provided as a [bit mask](http://en.wikipedia.org/wiki/Bitmask).
+                                Examples: `2` means credit card, `4` means SMS, while `6` means both credit card and SMS."
+                   :rendering :enum
+                   :values [{:value "1" :description "Credits"}
+                            {:value "2" :description "Credit card"}
+                            {:value "4" :description "SMS"}
+                            {:value "8" :description "Invoice"}
+                            {:value "16" :description "Voucher"}
+                            {:value "32" :description "Klarna Invoice"}
+                            {:value "64" :description "Klarna Mobile"}]}
 
  :bundle-type {:id :bundle-type
                :name "Bundle type"
@@ -363,41 +365,41 @@ verified."
  :product {:id :product
            :name "Product"
            :rendering :object
-           :fields [{:name "productId"                       :type :integer-string :description "Unique product id" :always-available? true}
-                    {:name "parentProductId"                 :type :integer-string :description "Id of the parent product, if any" :always-available? false}
-                    {:name "clientId"                        :type :string         :description "Your client id" :always-available? true}
-                    {:name "type"                            :type :product-type   :always-available? true}
-                    {:name "bundle"                          :type :bundle-type    :always-available? true}
-                    {:name "code"                            :type :string         :always-available? true}
-                    {:name "name"                            :type :string         :description "Product display name" :always-available? true}
-                    {:name "description"                     :type :string         :description "A detailed description of the product" :always-available? true}
-                    {:name "url"                             :type :url            :always-available? false}
-                    {:name "price"                           :type :price          :always-available? true}
-                    {:name "vat"                             :type :integer-string :description "VAT, in percent" :always-available? true}
-                    {:name "currency"                        :type :string         :description "Price and VAT currency" :always-available? true}
-                    {:name "paymentOptions"                  :type :payment-option :description "Available payment options for this product" :always-available? true}
-                    {:name "quantityLimit"                   :type :integer-string :description "Maximum available sales for this product." :always-available? false}
-                    {:name "quantityCount"                   :type :integer-string :description "Number of sales for this product so far" :always-available? true}
-                    {:name "saleStart"                       :type :datetime       :description "Start of a sale for this product (i.e. reduced price or with additional benefits)" :always-available? true}
-                    {:name "saleStop"                        :type :datetime       :description "End of a sale" :always-available? true}
-                    {:name "availableStart"                  :type :datetime       :description "When this product is available for purchase" :always-available? false}
-                    {:name "availableStop"                   :type :datetime       :description "When this product is no longer available for purchase" :always-available? false}
-                    {:name "subscriptionPeriod"              :type :timestamp      :description "The subscription period" :always-available? true}
-                    {:name "subscriptionRenewPrice"          :type :price          :description "Price of subscription renewal" :always-available? true}
-                    {:name "subscriptionRenewPeriod"         :type :timestamp      :description "For how long a renewal is valid" :always-available? true}
-                    {:name "subscriptionAutoRenew"           :type :boolnum        :description "If `\"1\"`, the subscription automatically renews" :always-available? true}
-                    {:name "subscriptionAutoRenewLockPeriod" :type :timestamp      :description "The initial period during which auto renew cannot be changed" :always-available? true}
-                    {:name "subscriptionAutoRenewDisabled"   :type :boolnum        :description "If `\"1\"`, auto renew is not available" :always-available? true}
-                    {:name "subscriptionGracePeriod"         :type :integer-string :description "The period after a failed renewal charge the subscription will stay active" :always-available? true}
-                    {:name "subscriptionEmailReceiptLimit"   :type :integer-string :description "The maximum number of email receipts" :always-available? true}
-                    {:name "subscriptionFinalEndDate"        :type :datetime       :description "By this date, the subscription is no longer for sale" :always-available? false}
-                    {:name "allowMultiSales"                 :type :boolnum        :description "If `\"1\"`, users can purchase this product multiple times" :always-available? true}
-                    {:name "status"                          :type :product-status :always-available? true}
-                    {:name "changedBy"                       :type :integer-string :description "Id of the user that made the last change" :always-available? false}
-                    {:name "changed"                         :type :datetime       :always-available? false}
-                    {:name "createdBy"                       :type :integer-string :description "Id of the user that created this product" :always-available? true}
-                    {:name "created"                         :type :datetime       :always-available? true}
-                    {:name "purchaseUri"                     :type :url            :description "A URI where the product may be purchased" :always-available? true}]}
+           :fields [{:name "productId"                       :type :integer-string  :description "Unique product id" :always-available? true}
+                    {:name "parentProductId"                 :type :integer-string  :description "Id of the parent product, if any" :always-available? false}
+                    {:name "clientId"                        :type :string          :description "Your client id" :always-available? true}
+                    {:name "type"                            :type :product-type    :always-available? true}
+                    {:name "bundle"                          :type :bundle-type     :always-available? true}
+                    {:name "code"                            :type :string          :always-available? true}
+                    {:name "name"                            :type :string          :description "Product display name" :always-available? true}
+                    {:name "description"                     :type :string          :description "A detailed description of the product" :always-available? true}
+                    {:name "url"                             :type :url             :always-available? false}
+                    {:name "price"                           :type :price           :always-available? true}
+                    {:name "vat"                             :type :integer-string  :description "VAT, in percent" :always-available? true}
+                    {:name "currency"                        :type :string          :description "Price and VAT currency" :always-available? true}
+                    {:name "paymentOptions"                  :type :payment-options :description "Available payment options for this product" :always-available? true}
+                    {:name "quantityLimit"                   :type :integer-string  :description "Maximum available sales for this product." :always-available? false}
+                    {:name "quantityCount"                   :type :integer-string  :description "Number of sales for this product so far" :always-available? true}
+                    {:name "saleStart"                       :type :datetime        :description "Start of a sale for this product (i.e. reduced price or with additional benefits)" :always-available? true}
+                    {:name "saleStop"                        :type :datetime        :description "End of a sale" :always-available? true}
+                    {:name "availableStart"                  :type :datetime        :description "When this product is available for purchase" :always-available? false}
+                    {:name "availableStop"                   :type :datetime        :description "When this product is no longer available for purchase" :always-available? false}
+                    {:name "subscriptionPeriod"              :type :timestamp       :description "The subscription period" :always-available? true}
+                    {:name "subscriptionRenewPrice"          :type :price           :description "Price of subscription renewal" :always-available? true}
+                    {:name "subscriptionRenewPeriod"         :type :timestamp       :description "For how long a renewal is valid" :always-available? true}
+                    {:name "subscriptionAutoRenew"           :type :boolnum         :description "If `\"1\"`, the subscription automatically renews" :always-available? true}
+                    {:name "subscriptionAutoRenewLockPeriod" :type :timestamp       :description "The initial period during which auto renew cannot be changed" :always-available? true}
+                    {:name "subscriptionAutoRenewDisabled"   :type :boolnum         :description "If `\"1\"`, auto renew is not available" :always-available? true}
+                    {:name "subscriptionGracePeriod"         :type :integer-string  :description "The period after a failed renewal charge the subscription will stay active" :always-available? true}
+                    {:name "subscriptionEmailReceiptLimit"   :type :integer-string  :description "The maximum number of email receipts" :always-available? true}
+                    {:name "subscriptionFinalEndDate"        :type :datetime        :description "By this date, the subscription is no longer for sale" :always-available? false}
+                    {:name "allowMultiSales"                 :type :boolnum         :description "If `\"1\"`, users can purchase this product multiple times" :always-available? true}
+                    {:name "status"                          :type :product-status  :always-available? true}
+                    {:name "changedBy"                       :type :integer-string  :description "Id of the user that made the last change" :always-available? false}
+                    {:name "changed"                         :type :datetime        :always-available? false}
+                    {:name "createdBy"                       :type :integer-string  :description "Id of the user that created this product" :always-available? true}
+                    {:name "created"                         :type :datetime        :always-available? true}
+                    {:name "purchaseUri"                     :type :url             :description "A URI where the product may be purchased" :always-available? true}]}
 
  :subscription-status {:id :subscription-status
                        :name "Subscription status"
@@ -498,7 +500,7 @@ verified."
                                {:name "userId"              :type :integer-string            :description "The user's `userId`" :always-available? true}
                                {:name "clientId"            :type :string                    :description "Your client id" :always-available? true}
                                {:name "identifierId"        :type :integer-string            :description "Id of the payment identifier/means" :always-available? true}
-                               {:name "identifierType"      :type :payment-option            :always-available? true}
+                               {:name "identifierType"      :type :payment-options           :always-available? true}
                                {:name "alias"               :type :string                    :always-available? true}
                                {:name "status"              :type :payment-preference-status :description "" :always-available? true}
                                {:name "updated"             :type :datetime                  :always-available? true}
@@ -514,44 +516,44 @@ verified."
  :bundle {:id :bundle
           :name "Bundle"
           :rendering :object
-          :fields [{:name "product_id"                          :type :integer-string :description "The bundle's product id" :always-available? true}
-                   {:name "parent_product_id"                   :type :integer-string :description "Parent product id, if any" :always-available? false}
-                   {:name "client_id"                           :type :string         :description "Client id" :always-available? true}
-                   {:name "type"                                :type :boolnum        :description "TODO" :always-available? true}
-                   {:name "bundle"                              :type :boolnum        :description "TODO" :always-available? true}
-                   {:name "code"                                :type :string         :description "TODO" :always-available? true}
-                   {:name "name"                                :type :string         :description "The bundle name" :always-available? true}
-                   {:name "description"                         :type :string         :description "A description of the bundle" :always-available? true}
-                   {:name "url"                                 :type :string         :description "A URL that contains more information about the bundle" :always-available? false}
-                   {:name "price"                               :type :price          :always-available? true}
-                   {:name "vat"                                 :type :integer-string :description "Bundle VAT, in percent" :always-available? true}
-                   {:name "currency"                            :type :string         :description "The price currencu" :always-available? true}
-                   {:name "payment_options"                     :type :payment-option :description "Allowable payment options" :always-available? true}
-                   {:name "quantity_limit"                      :type :integer-string :description "If the bundle is in limited supply (typically the case for physical products), this should be the maximum number of sales allowed" :always-available? false}
-                   {:name "quantity_count"                      :type :integer-string :description "Number of sales for this bundle so far" :always-available? true}
-                   {:name "sale_start"                          :type :datetime       :description "The start of a sale (i.e., reduced price or with additional benefits) for this bundle." :always-available? false}
-                   {:name "sale_stop"                           :type :datetime       :description "The end of a sale" :always-available? false}
-                   {:name "available_start"                     :type :datetime       :description "When the bundle becomes available for sale. If `null`, the bundle is always available for sale." :always-available? false}
-                   {:name "available_stop"                      :type :datetime       :description "When the bundle is no longer available for sale." :always-available? false}
-                   {:name "hide_items"                          :type :string         :description "TODO" :always-available? true}
-                   {:name "subscription_period"                 :type :timestamp      :description "The subscription period" :always-available? true}
-                   {:name "subscription_renew_price"            :type :price          :description "Price of subscription renewal" :always-available? true}
-                   {:name "subscription_renew_period"           :type :timestamp      :description "For how long a renewal is valid" :always-available? true}
-                   {:name "subscription_auto_renew"             :type :boolnum        :description "If `\"1\"`, the subscription automatically renews" :always-available? true}
-                   {:name "subscription_auto_renew_lock_period" :type :timestamp      :description "The initial period during which auto renew cannot be changed" :always-available? true}
-                   {:name "subscription_auto_renew_disabled"    :type :boolnum        :description "If `\"1\"`, auto renew is not available" :always-available? true}
-                   {:name "subscription_grace_period"           :type :integer        :description "The period after a failed renewal charge the subscription will stay active" :always-available? true}
-                   {:name "subscription_email_receipt_limit"    :type :integer        :description "The maximum number of email receipts" :always-available? true}
-                   {:name "subscription_final_end_date"         :type :datetime       :description "By this date, the subscription is no longer for sale" :always-available? false}
-                   {:name "subscription_survey_url"             :type :string         :description "URL to a survey about the bundle" :always-available? false}
-                   {:name "allow_multi_sales"                   :type :boolnum        :description "If `\"1\"`, users can purchase this product multiple times" :always-available? true}
-                   {:name "guardian"                            :type :integer-string :description "TODO" :always-available? true}
-                   {:name "autopay"                             :type :boolnum        :description "TODO" :always-available? true}
-                   {:name "status"                              :type :integer-string :description "TODO" :always-available? true}
-                   {:name "changed_by"                          :type :integer-string :description "Id of the user who last changed the bundle" :always-available? true}
-                   {:name "changed"                             :type :datetime       :description "When the bundle was last changed" :always-available? true}
-                   {:name "created_by"                          :type :integer-string :description "Id of the user who created the bundle" :always-available? true}
-                   {:name "created"                             :type :datetime       :description "When the bundle was created" :always-available? true}]}
+          :fields [{:name "product_id"                          :type :integer-string  :description "The bundle's product id" :always-available? true}
+                   {:name "parent_product_id"                   :type :integer-string  :description "Parent product id, if any" :always-available? false}
+                   {:name "client_id"                           :type :string          :description "Client id" :always-available? true}
+                   {:name "type"                                :type :boolnum         :description "TODO" :always-available? true}
+                   {:name "bundle"                              :type :boolnum         :description "TODO" :always-available? true}
+                   {:name "code"                                :type :string          :description "TODO" :always-available? true}
+                   {:name "name"                                :type :string          :description "The bundle name" :always-available? true}
+                   {:name "description"                         :type :string          :description "A description of the bundle" :always-available? true}
+                   {:name "url"                                 :type :string          :description "A URL that contains more information about the bundle" :always-available? false}
+                   {:name "price"                               :type :price           :always-available? true}
+                   {:name "vat"                                 :type :integer-string  :description "Bundle VAT, in percent" :always-available? true}
+                   {:name "currency"                            :type :string          :description "The price currencu" :always-available? true}
+                   {:name "payment_options"                     :type :payment-options :description "Allowable payment options" :always-available? true}
+                   {:name "quantity_limit"                      :type :integer-string  :description "If the bundle is in limited supply (typically the case for physical products), this should be the maximum number of sales allowed" :always-available? false}
+                   {:name "quantity_count"                      :type :integer-string  :description "Number of sales for this bundle so far" :always-available? true}
+                   {:name "sale_start"                          :type :datetime        :description "The start of a sale (i.e., reduced price or with additional benefits) for this bundle." :always-available? false}
+                   {:name "sale_stop"                           :type :datetime        :description "The end of a sale" :always-available? false}
+                   {:name "available_start"                     :type :datetime        :description "When the bundle becomes available for sale. If `null`, the bundle is always available for sale." :always-available? false}
+                   {:name "available_stop"                      :type :datetime        :description "When the bundle is no longer available for sale." :always-available? false}
+                   {:name "hide_items"                          :type :string          :description "TODO" :always-available? true}
+                   {:name "subscription_period"                 :type :timestamp       :description "The subscription period" :always-available? true}
+                   {:name "subscription_renew_price"            :type :price           :description "Price of subscription renewal" :always-available? true}
+                   {:name "subscription_renew_period"           :type :timestamp       :description "For how long a renewal is valid" :always-available? true}
+                   {:name "subscription_auto_renew"             :type :boolnum         :description "If `\"1\"`, the subscription automatically renews" :always-available? true}
+                   {:name "subscription_auto_renew_lock_period" :type :timestamp       :description "The initial period during which auto renew cannot be changed" :always-available? true}
+                   {:name "subscription_auto_renew_disabled"    :type :boolnum         :description "If `\"1\"`, auto renew is not available" :always-available? true}
+                   {:name "subscription_grace_period"           :type :integer         :description "The period after a failed renewal charge the subscription will stay active" :always-available? true}
+                   {:name "subscription_email_receipt_limit"    :type :integer         :description "The maximum number of email receipts" :always-available? true}
+                   {:name "subscription_final_end_date"         :type :datetime        :description "By this date, the subscription is no longer for sale" :always-available? false}
+                   {:name "subscription_survey_url"             :type :string          :description "URL to a survey about the bundle" :always-available? false}
+                   {:name "allow_multi_sales"                   :type :boolnum         :description "If `\"1\"`, users can purchase this product multiple times" :always-available? true}
+                   {:name "guardian"                            :type :integer-string  :description "TODO" :always-available? true}
+                   {:name "autopay"                             :type :boolnum         :description "TODO" :always-available? true}
+                   {:name "status"                              :type :integer-string  :description "TODO" :always-available? true}
+                   {:name "changed_by"                          :type :integer-string  :description "Id of the user who last changed the bundle" :always-available? true}
+                   {:name "changed"                             :type :datetime        :description "When the bundle was last changed" :always-available? true}
+                   {:name "created_by"                          :type :integer-string  :description "Id of the user who created the bundle" :always-available? true}
+                   {:name "created"                             :type :datetime        :description "When the bundle was created" :always-available? true}]}
 
  :bundle-item {:id :bundle-item
                :name "Bundle item"
@@ -567,4 +569,158 @@ verified."
                         {:name "status"         :type :integer-string :description "TODO"}
                         {:name "status_updated" :type :datetime       :description "When the bundle item status was last updated" :always-available? true}
                         {:name "updated"        :type :datetime       :description "When the bundle item was last updated" :always-available? true}
-                        {:name "created"        :type :datetime       :description "When the bundle was created" :always-available? true}]}}
+                        {:name "created"        :type :datetime       :description "When the bundle was created" :always-available? true}]}
+
+ :order-type {:id :order-type
+              :name "Order type"
+              :rendering :enum
+              :values [{:value "0" :description "Purchase"}
+                       {:value "1" :description "Renew"}
+                       {:value "2" :description "Transfer"}
+                       {:value "3" :description "Re-purchase"}
+                       {:value "4" :description "Direct"}]}
+
+ :order-status {:id :order-status
+                :name "Order status"
+                :rendering :enum
+                :values [{:value "-3" :description "Expired"}
+                         {:value "-2" :description "Cancelled"}
+                         {:value "-1" :description "Failed"}
+                         {:value "0"  :description "Created"}
+                         {:value "1"  :description "Pending"}
+                         {:value "2"  :description "Complete"}
+                         {:value "3"  :description "Credited"}
+                         {:value "4"  :description "Authorized"}]}
+
+ :transaction-synced-status {:id :transaction-synced-status
+                             :name "Transaction synced status"
+                             :rendering :enum
+                             :values [{:value "-1" :description "Order is broken, out of sync with provider"}
+                                      {:value "0"  :description "Order ok"}
+                                      {:value "1"  :description "Order verified"}
+                                      {:value "2"  :description "Order synced and modified status and transactions"}
+                                      {:value "3"  :description "Order synced and fixed"}]}
+
+ :purchase-flow {:id :purchase-flow
+                 :name "Purchase flow"
+                 :rendering :enum
+                 :values [{:value "1" :description "Direct purchase flow"}
+                          {:value "2" :description "Authorize/Capture purchase flow"}]}
+
+ :user-flow {:id :user-flow
+             :name "User flow"
+             :rendering :enum
+             :values [{:value "1" :description "No user involvement"}
+                      {:value "2" :description "User authorized the payment in SPID, without been redirected to a payment provider"}
+                      {:value "3" :description "User was sent to the payment provider for authorization"}
+                      {:value "4" :description "User was sent to the payment provider for authorization with 3D-secure"}]}
+
+ :order-item-type {:id :order-item-type
+                   :name "Order item status"
+                   :rendering :enum
+                   :values [{:value "0"   :description "Default"}
+                            {:value "1"   :description "Digital content"}
+                            {:value "2"   :description "Subscription"}
+                            {:value "3"   :description "Physical product"}
+                            {:value "4"   :description "Classified"}
+                            {:value "201" :description "Payment method fee"}
+                            {:value "202" :description "Transaction fee"}
+                            {:value "203" :description "Handling fee"}
+                            {:value "204" :description "Shipping fee"}
+                            {:value "301" :description "Discount"}]}
+
+ :order-item-status {:id :order-item-status
+                     :name "Order item status"
+                     :rendering :enum
+                     :values [{:value "-2" :description "Cancelled"}
+                              {:value "-1" :description "Expired"}
+                              {:value "0" :description "Created"}
+                              {:value "1" :description "Captured"}
+                              {:value "3" :description "Credited"}]}
+
+ :order-item {:id :order-item
+              :name "Order item"
+              :rendering :object
+              :fields [{:name "orderItemId"         :type :integer  :description "Unique order item ID"                                                           :always-available? true}
+                       {:name "orderId"             :type :integer  :description "Unique Order ID"                                                                :always-available? true}
+                       {:name "clientId"            :type :string   :description "Client ID"                                                                      :always-available? true}
+                       {:name "clientItemReference" :type :string   :description "A client provided reference to this order item. (Inherited from Paylink items)" :always-available? true}
+                       {:name "productId"           :type :integer  :description "Product ID. Defaults to 0"                                                      :always-available? true}
+                       {:name "discountId"          :type :integer  :description "Discount ID (if available)"                                                     :always-available? true}
+                       {:name "type"                :type :integer  :description "Order item type"                                                                :always-available? true}
+                       {:name "status"              :type :integer  :description "Order item status"                                                              :always-available? true}
+                       {:name "code"                :type :string   :description "Product code"                                                                   :always-available? true}
+                       {:name "name"                :type :string   :description "Product Name"                                                                   :always-available? true}
+                       {:name "description"         :type :string   :description "Order item description"                                                         :always-available? true}
+                       {:name "description_2"       :type :string   :description "Order item description, line 2"                                                 :always-available? true}
+                       {:name "description_3"       :type :string   :description "Order item description, line 3"                                                 :always-available? true}
+                       {:name "description_4"       :type :string   :description "Order item description, line 4"                                                 :always-available? true}
+                       {:name "price"               :type :price    :description "Single item price (including VAT amount)"                                       :always-available? true}
+                       {:name "vat"                 :type :integer  :description "VAT in percentage, e.g. 2500 = 25%"                                             :always-available? true}
+                       {:name "capturedAmount"      :type :integer  :description "The amount captured on this item"                                               :always-available? true}
+                       {:name "creditedAmount"      :type :integer  :description "The amount credited on this item"                                               :always-available? true}
+                       {:name "quantity"            :type :integer  :description "The number of occurrences of this productId/type"                               :always-available? true}
+                       {:name "updated"             :type :datetime :description "When the order was last updated"                                                :always-available? true}
+                       {:name "created"             :type :datetime :description "When the order was created"                                                     :always-available? true}]}
+ :order {:id :order
+         :name "Order"
+         :rendering :object
+         :description "Orders contain one or more order items. Orders with
+status other than `failed` and `pending` will have transactions attached to
+them.
+
+Crediting an order can be done by a full credit or a partial credit. Partial
+credits must be done by specifying which order item you want to credit. If you
+specify an amount (optional), the corresponding order item will be partially
+credited. In a full credit there is no need to specify any other fields than
+description, which is required in both full and partial credits.
+
+Crediting an order will trigger a user notification, which will inform the user
+about the order change. This can be optionally turned off by setting the field
+`notifyUser` to false.
+
+Capturing an order can be done by a full or a partial capture. Partial captures
+must be done by specifying which order item you want to capture. If you specify
+an amount (optional), the corresponding order item will be partially captured.
+In a full capture there is no need to specify any other fields.
+
+All captured and credited vat amounts will match the corresponding vat
+percentage set in the order item."
+         :fields [{:name "orderId"           :type :integer            :description "Unique order ID"                                                                       :always-available? true}
+                  {:name "clientId"          :type :string             :description "ID of the client this order belongs to"                                                :always-available? true}
+                  {:name "merchantId"        :type :integer            :description "Merchant ID"                                                                           :always-available? true}
+                  {:name "clientReference"   :type :string             :description "Custom client reference (inherited from Paylinks)"                                     :always-available? true}
+                  {:name "extOrderRef"       :type :string             :description "External order reference"                                                              :always-available? true}
+                  {:name "extTransRef"       :type :string             :description "External transaction reference"                                                        :always-available? true}
+                  {:name "identifierId"      :type :integer            :description "Payment method identifier ID"                                                          :always-available? true}
+                  {:name "identifierType"    :type :payment-options    :description "Payment type for the payment method identifier used"                                   :always-available? true}
+                  {:name "userFlow"          :type :user-flow          :description "The user involvement level during creation of this order"                              :always-available? true}
+                  {:name "purchaseFlow"      :type :purchase-flow      :description "What type of purchase flow this order was processed with"                              :always-available? true}
+                  {:name "userId"            :type :integer            :description "ID of the user this order belongs to"                                                  :always-available? true}
+                  {:name "sellerUserId"      :type :integer            :description "ID of the user who will receive money from this order. Used in P2P."                   :always-available? true}
+                  {:name "paylinkId"         :type :integer            :description "ID used to create this order"                                                          :always-available? true}
+                  {:name "ocr"               :type :string             :description "OCR/KID number"                                                                        :always-available? true}
+                  {:name "type"              :type :order-type         :description "Order type"                                                                            :always-available? true}
+                  {:name "totalPrice"        :type :integer            :description "Total price (including vat amount) for the complete order"                             :always-available? true}
+                  {:name "vat"               :type :integer            :description "VAT in percentage * 100, ex 2500 = 25%"                                                :always-available? true}
+                  {:name "calculatedVat"     :type :integer            :description "Total amount of VAT for this order"                                                    :always-available? true}
+                  {:name "creditedAmount"    :type :integer            :description "Amount of the order credited. Defaults to 0."                                          :always-available? true}
+                  {:name "capturedAmount"    :type :integer            :description "Amount of the order captured. Defaults to full amount or 0, depending on paymentFlow." :always-available? true}
+                  {:name "creditedVatAmount" :type :integer            :description "Credited VAT amount"                                                                   :always-available? true}
+                  {:name "capturedVatAmount" :type :integer            :description "Captured VAT amount"                                                                   :always-available? true}
+                  {:name "currency"          :type :string             :description "Order currency; SEK, NOK, USD"                                                         :always-available? true}
+                  {:name "campaignId"        :type :integer            :description "ID of the campaign that triggered this order"                                          :always-available? true}
+                  {:name "voucherId"         :type :integer            :description "ID of the voucher used for this order"                                                 :always-available? true}
+                  {:name "tag"               :type :string             :description "Can be used for custom order tracking"                                                 :always-available? true}
+                  {:name "status"            :type :order-status                                                                                                            :always-available? true}
+                  {:name "transactionSynced" :type :transaction-synced-status                                                                                               :always-available? true}
+                  {:name "transactionStatus" :type :integer            :description "Third party payment provider transaction status"                                       :always-available? true}
+                  {:name "errorCode"         :type :string             :description "Error Code"                                                                            :always-available? true}
+                  {:name "errorDescription"  :type :string             :description "Error Description"                                                                     :always-available? true}
+                  {:name "errorThirdparty"   :type :string             :description "Third-Party Error Description (e.g. VISA error)"                                       :always-available? true}
+                  {:name "updated"           :type :datetime           :description "The time the order was last updated"                                                   :always-available? true}
+                  {:name "created"           :type :datetime           :description "The time the order was created"                                                        :always-available? true}
+                  {:name "statusChecked"     :type :datetime           :description "The last time the order status was checked by a client via the /status endpoint"       :always-available? true}
+                  {:name "identifier"        :type :payment-identifier :description "Payment method used for this order"                                                    :always-available? true}
+                  {:name "items"             :type [:order-item]                                                                                                            :always-available? true}
+                  {:name "transactions"      :type [:transaction]                                                                                                           :always-available? true}]}}
