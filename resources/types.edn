@@ -662,6 +662,31 @@ verified."
                        {:name "quantity"            :type :integer  :description "The number of occurrences of this productId/type"                               :always-available? true}
                        {:name "updated"             :type :datetime :description "When the order was last updated"                                                :always-available? true}
                        {:name "created"             :type :datetime :description "When the order was created"                                                     :always-available? true}]}
+
+ :payment-id-status {:id :payment-id-status
+                     :name "Payment identifier status"
+                     :rendering :enum
+                     :values [{:value "-1" :description "Deleted"}
+                              {:value "0" :description "Unconfirmed"}
+                              {:value "1" :description "Confirmed"}]}
+
+ :payment-identifier {:id :payment-identifier
+                      :name "Payment identifier"
+                      :description "A payment identifier is a means of payment, e.g. credit card, SMS and others."
+                      :rendering :object
+                      :fields [{:name "identifierId"      :type :integer-string    :description "Unique payment identifier ID" :always-available? true}
+                               {:name "identifier"        :type :string            :description "The actual identifier, like a credit card number or cell phone number" :always-available? true}
+                               {:name "type"              :type :payment-options   :always-available? true}
+                               {:name "mediaDistribution" :type :string            :description "Invoice distribution; `\"PDF\"` or `\"PAPER\"`" :always-available? true}
+                               {:name "method"            :type :string            :description "Payment method (VISA, MC, SMS)" :always-available? true}
+                               {:name "description"       :type :string            :always-available? true}
+                               {:name "expirationDate"    :type :datetime          :description "When this payment identifier expires" :always-available? true}
+                               {:name "userId"            :type :string            :description "`userId` of the user who owns this payment identifier" :always-available? true}
+                               {:name "maxAmount"         :type :string            :description "The maximum amount that can be charged" :always-available? true}
+                               {:name "status"            :type :payment-id-status :always-available? true}
+                               {:name "updated"           :type :string            :description "When the payment identifier was last updated" :always-available? true}
+                               {:name "created"           :type :string            :description "When the payment identifier was created" :always-available? true}]}
+
  :order {:id :order
          :name "Order"
          :rendering :object
