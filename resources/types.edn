@@ -746,6 +746,6 @@ percentage set in the order item."
                   {:name "updated"           :type :datetime           :description "The time the order was last updated"                                                   :always-available? true}
                   {:name "created"           :type :datetime           :description "The time the order was created"                                                        :always-available? true}
                   {:name "statusChecked"     :type :datetime           :description "The last time the order status was checked by a client via the /status endpoint"       :always-available? true}
-                  {:name "identifier"        :type :payment-identifier :description "Payment method used for this order"                                                    :always-available? true}
-                  {:name "items"             :type [:order-item]                                                                                                            :always-available? true}
-                  {:name "transactions"      :type [:transaction]                                                                                                           :always-available? true}]}}
+                  {:name "identifier"        :type :payment-identifier :description "Payment method used for this order"                                                    :always-available? false}
+                  {:name "items"             :type [:order-item]                                                                                                            :always-available? false}
+                  {:name "transactions"      :type [:transaction]                                                                                                           :always-available? false}]}}
