@@ -3,4 +3,4 @@
 Query the user's direct payment preferences. Active payment preferences may be
 used with the Direct Payment API.
 
-:inline-types payment-option payment-preference-status
+:inline-types payment-options payment-preference-status

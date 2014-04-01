@@ -2,4 +2,4 @@
 
 Retrieve older versions of this product.
 
-:inline-types product-status payment-option
+:inline-types product-status payment-options

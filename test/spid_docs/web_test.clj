@@ -7,15 +7,28 @@
 (defn link-valid? [link page-url pages]
   (let [href (-> link :attrs :href)
         [path hash] (str/split href #"#")]
-    (or
-     (when (= "#?" href) ; use #? to postpone writing a link. We'll nag about it, tho.
-       (do (println "TODO: The" (:content link) "at" page-url "needs to point somewhere")
-           true))
-     (and (empty? path) (not (empty? hash))) ; inpage hash navigation
-     (.startsWith path "http://") ; external link
-     (.startsWith path "https://")
-     (contains? pages path) ; known page
-     (contains? pages (str path "index.html")))))
+    (if (or
+         (when (= "#?" href) ; use #? to postpone writing a link. We'll nag about it, tho.
+           (do (println "TODO: The" (:content link) "at" page-url "needs to point somewhere")
+               true))
+         (and (empty? path) (not (empty? hash))) ; inpage hash navigation
+         (.startsWith path "http://")            ; external link
+         (.startsWith path "https://")
+         (contains? pages path)            ; known page
+         (contains? pages (str path "index.html")))
+      :link-valid
+      (do
+        (println "--------------------------------------------------------------------------------")
+        (prn "Checking" link page-url)
+        (prn `(and (empty? ~path) (not (empty? ~hash))) (and (empty? path) (not (empty? hash))))
+        (prn `(.startsWith ~path "http://") (.startsWith path "http://"))
+        (prn `(.startsWith ~path "https://") (.startsWith path "https://"))
+        (prn `(contains? pages ~path) (contains? pages path))
+        (prn `(contains? pages ~(str path "index.html")) (contains? pages (str path "index.html")))
+        (println "--------------------------------------------------------------------------------")
+        (prn (keys pages))
+        (println "--------------------------------------------------------------------------------")
+        :link-to-unknown-page))))
 
 (fact
  :slow
@@ -38,4 +51,4 @@
                         enlive/html-resource
                         (enlive/select [:a]))]
          (let [href (get-in link [:attrs :href])]
-           [url href (link-valid? link url pages)] => [url href true]))))))
+           [url href (link-valid? link url pages)] => [url href :link-valid]))))))

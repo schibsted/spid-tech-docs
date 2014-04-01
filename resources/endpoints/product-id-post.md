@@ -6,4 +6,4 @@ supported query parameters. Updating a product transparently creates a new
 revision. Previous revisions can be accessed through the
 [product revisions endpoint](/endpoints/GET/product/{productId}/revisions).
 
-:inline-types product-status payment-option
+:inline-types product-status payment-options

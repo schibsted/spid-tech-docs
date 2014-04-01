@@ -22,6 +22,7 @@
    "availableStop" "???"
    "birthday" "1977-01-31"
    "birthyear" "???"
+   "bundle" "???"
    "bundleId" "42"
    "buyerUserId" "???"
    "campaignId" "???"
@@ -134,11 +135,15 @@
    "voucherGroupId" "???"
    "w" "???"})
 
+(defn- get-example [match]
+  (or (examples match)
+      (throw (Exception. (str "No example found for parameter '" match "'. Add it to the examples map in src/spid_docs/example_code.clj")))))
+
 (defn- replace-path-parameters [url]
-  (str/replace url #"\{([^}]+)\}" (fn [[_ match]] (examples match))))
+  (str/replace url #"\{([^}]+)\}" (fn [[_ match]] (get-example match))))
 
 (defn- exemplify-params [params]
-  (map #(vector (name (:name %)) (examples (:name %))) params))
+  (map #(vector (name (:name %)) (get-example (:name %))) params))
 
 (defn- format-params [params tpl & [sep]]
   (str/join (or sep "") (map #(-> tpl
