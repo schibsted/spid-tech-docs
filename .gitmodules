@@ -1,9 +1,6 @@
 [submodule "resources/public/styles/pygments-css"]
 	path = resources/public/styles/pygments-css
 	url = https://github.com/richleland/pygments-css.git
-[submodule "resources/example-repo"]
-	path = resources/example-repo
-	url = git@github.com:kodemaker/spid-scratchpad.git
 [submodule "resources/example-repos/php"]
 	path = resources/example-repos/php
 	url = https://github.com/spid-tech-docs/spid-php-examples
