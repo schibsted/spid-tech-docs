@@ -6,8 +6,9 @@
 (defn- render-availability [field]
   (if (:always-available? field) [:span.check " ✓"]))
 
-(defn- get-type-name [type types]
-  (or (:name (type types)) (name type)))
+(defn- get-type-name
+  ([type] (:name type))
+  ([type types] (or (:name (type types)) (name type))))
 
 (defn- link-to-typedef [type-name typedef]
   (if-let [path (if (:inline? typedef)
@@ -91,7 +92,7 @@
 
 (defn create-page [type types]
   {:body [:div.wrap
-          [:h1 (name (:id type))]
+          [:h1 (get-type-name type)]
           (render-typedef type types)]})
 
 (defn create-pages
