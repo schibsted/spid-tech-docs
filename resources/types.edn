@@ -365,6 +365,7 @@ verified."
  :product {:id :product
            :name "Product"
            :rendering :object
+           ;;:inline-types [:product-status]
            :fields [{:name "productId"                       :type :integer-string  :description "Unique product id" :always-available? true}
                     {:name "parentProductId"                 :type :integer-string  :description "Id of the parent product, if any" :always-available? false}
                     {:name "clientId"                        :type :string          :description "Your client id" :always-available? true}
@@ -666,6 +667,7 @@ verified."
  :payment-id-status {:id :payment-id-status
                      :name "Payment identifier status"
                      :rendering :enum
+                     ;;:describe [:Identifier :status] ; TODO?
                      :values [{:value "-1" :description "Deleted"}
                               {:value "0" :description "Unconfirmed"}
                               {:value "1" :description "Confirmed"}]}
