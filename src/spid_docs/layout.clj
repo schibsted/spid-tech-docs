@@ -21,6 +21,7 @@
     [:meta {:name "viewport"
             :content "width=device-width, initial-scale=1.0"}]
     [:title (str title " | SPiD API Documentation")]
+    [:link {:rel "shortcut icon" :href "/favicon.ico"}]
     (serve-to-media-query-capable-browsers
      [:link {:rel "stylesheet" :href (link/file-path request "/styles/responsive.css")}])
     (serve-to-media-query-clueless-browsers
