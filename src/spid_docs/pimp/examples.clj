@@ -7,7 +7,7 @@
 
 (def examples-dir
   "Examples directory, relative to resources/"
-  "example-repo/examples/")
+  "example-repos/")
 
 (defn- find-example
   "Finds a code example in the provided code with the given delimiters."

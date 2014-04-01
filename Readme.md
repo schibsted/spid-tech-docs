@@ -120,7 +120,7 @@ heading level.
 One of the goals of the SPiD documentation is for it to be fully automated and
 verifiable. This means that code examples must stem from real code-bases that
 can be run and tested. All code used in the docs live in the example code git
-submodule (at [resources/example-repo](./resources/example-repo)). To insert a
+submodule (at [resources/example-repos](./resources/example-repos)). To insert a
 snippet of code from this repository into your pages, you can use the
 `<spid-example>` custom extension.
 

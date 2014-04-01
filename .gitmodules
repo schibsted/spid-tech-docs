@@ -4,3 +4,18 @@
 [submodule "resources/example-repo"]
 	path = resources/example-repo
 	url = git@github.com:kodemaker/spid-scratchpad.git
+[submodule "resources/example-repos/php"]
+	path = resources/example-repos/php
+	url = https://github.com/spid-tech-docs/spid-php-examples
+[submodule "resources/example-repos/java"]
+	path = resources/example-repos/java
+	url = https://github.com/spid-tech-docs/spid-java-examples
+[submodule "resources/example-repos/clj"]
+	path = resources/example-repos/clj
+	url = https://github.com/spid-tech-docs/spid-clj-examples
+[submodule "resources/example-repos/js"]
+	path = resources/example-repos/js
+	url = https://github.com/spid-tech-docs/spid-js-examples
+[submodule "resources/example-repos/curl"]
+	path = resources/example-repos/curl
+	url = https://github.com/spid-tech-docs/spid-curl-examples.git

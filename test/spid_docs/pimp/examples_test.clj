@@ -38,7 +38,7 @@ private String ghi() {
     return jkl;
 }")
 
-(with-files [["/example-repo/examples/java/getting-started/src/main/GettingStarted.java" "
+(with-files [["/example-repos/java/getting-started/src/main/GettingStarted.java" "
 class GettingStarted {
     /** Example */
     private String def() {
@@ -51,7 +51,7 @@ class GettingStarted {
 }
 "]]
 
-  (with-redefs [examples-dir (str public-dir "/example-repo/examples/")]
+  (with-redefs [examples-dir (str public-dir "/example-repos/")]
 
     (fact "It inlines in markup"
           (inline-examples "<h2>Java</h2>
