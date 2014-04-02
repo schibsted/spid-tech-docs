@@ -95,6 +95,13 @@
                              }) => [:a {:href "/types/string"} "string"]
 
       (link-to-type :string {:string
+                             {:id :string-thing
+                              :name "string thing"
+                              :inline? true
+                              :description "Descriptions earns the type a separate page"}
+                             }) => [:a {:href "#string-thing"} "string thing"]
+
+      (link-to-type :string {:string
                              {:id :string
                               :name "lol strings"
                               :description "Links to name if present"}
