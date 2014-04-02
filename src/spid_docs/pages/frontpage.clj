@@ -5,43 +5,44 @@
 
 (def frontpage-columns 3)
 
-(defn- endpoint-count
-  "As we're columnizing a map, each 'api' will be a vector with [key value]. The
-  keys in this context are the main API category ('Identity Management', etc).
-  The value entry will be the list of apis with individual enpoints. We map over
-  the list of APIs by extracting the endpoints and then counting them. By
-  reducing over the resulting list of numbers with +, we end up with the total
-  number of endpoints in this main API section."
-  [api]
-  (let [category (first api)
-        apis (second api)]
-    (reduce + (map (comp count :endpoints) apis))))
+(def category-render-order ["Identity Management"
+                            "Payment Services"
+                            "Authorization"
+                            "Data Storage"
+                            "Utilities"
+                            "Insight"])
 
-(defn- columnize-apis [apis]
+(defn- endpoint-count
+  "The number of endpoints in an API (e.g. 'Login API') is used to evenly
+   distribute APIs across columns."
+  [api]
+  (-> api :endpoints count))
+
+(defn- columnize-apis
+  "Returns a list of lists of apis. Each list represents a column and their
+   content is a list of apis to render in the column."
+  [apis]
   (columnize apis frontpage-columns endpoint-count))
 
-(defn- render-api [api]
+(defn- render-api
+  "Renders a single API: the name and a linked list of endpoints"
+  [api]
   (list
    [:h4 {:id (to-id-str (:api api))} (:api api)]
    [:ul (->> (:endpoints api)
              (map #(vector :li [:a {:href (endpoint-path %)}
                                 [:code (name (:method %))] " " (:path %)])))]))
 
-(defn- render-api-section [[api-section apis]]
-  (list
-   [:h3 {:id (to-id-str api-section)} api-section]
-   (mapcat render-api apis)))
+(defn- render-api-column [num apis]
+  [:div {:class (if (= (inc num) frontpage-columns) "lastUnit" "unit s1of3")}
+   (map render-api apis)])
 
-(defn- render-api-column [num apis total-columns]
-  [:div {:class (if (= (inc num) total-columns) "lastUnit" "unit s1of3")}
-   [:div.item (map render-api-section apis)]])
-
-(defn- render-api-columns [apis]
-  (let [by-category (group-by (comp first first) apis)]
-    (->> (zipmap (keys by-category)
-                 (map #(map second %) (vals by-category)))
-         columnize-apis
-         (map-indexed #(render-api-column %1 %2 frontpage-columns)))))
+(defn render-service-apis
+  "Render the services (e.g. 'Identity management') with all APIs distributed
+   across a number of columns (see frontpage-columns towards the top)."
+  [category service-apis]
+  [:div.line [:h3 {:id (to-id-str category)} category]
+   (map-indexed render-api-column (columnize-apis service-apis))])
 
 (defn create-page [apis]
   {:title "SPiD API Documentation"
@@ -51,4 +52,5 @@
           [:div {:class "group" :id "api-reference"}
            [:h2 "API reference"]
            [:p "Looking for API details? Here you will find extensive reference documentation of all API endpoints."]
-           [:div.line (render-api-columns apis)]]]})
+           (let [apis-by-category (group-by :category (vals apis))]
+             (map #(render-service-apis % (apis-by-category %)) category-render-order))]]})
