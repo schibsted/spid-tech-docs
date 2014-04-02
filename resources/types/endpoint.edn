@@ -1,6 +1,7 @@
 {:id :endpoint
  :name "Endpoint"
  :rendering :object
+ :inline-types [:http-method :endpoint-response]
  :description "Endpoint description. Provides information about the
 API itself. Most of this information is displayed in the API documentation you
 are now reading."

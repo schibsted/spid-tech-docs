@@ -26,6 +26,11 @@
               :name "Status"
               :rendering :enum
               :values [{:value "0" :description "Active"}]}
+      product {:id :product
+               :rendering :object
+               :inline-types [:status]
+               :fields [{:name "id" :type :integer}
+                        {:name "status" :type :status}]}
       types {:login login
              :user user
              :status status
@@ -74,7 +79,12 @@
   (fact "Distinguishes lists and collections of types"
         (->> (render-type-definition login types)
              (hiccup-find [:h5])
-             (map hiccup-text)) => ["string" "list of strings"]))
+             (map hiccup-text)) => ["string" "list of strings"])
+
+  (fact "Renders inline types"
+        (->> (create-page product types)
+             :body
+             (hiccup-find [:h3])) => '([:h3 {:id "status"} "Status"])))
 
 (fact "Links to types"
       (link-to-type :string {:string {:id :string}}) => "string"

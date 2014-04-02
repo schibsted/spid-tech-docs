@@ -10,7 +10,7 @@
             [spid-docs.example-code :refer [create-example-code]]
             [spid-docs.formatting :refer [pluralize enumerate-humanely]]
             [spid-docs.http :refer [get-response-status-name]]
-            [spid-docs.pages.type-pages :refer [render-type-definition link-to-type]]
+            [spid-docs.pages.type-pages :refer [render-type-definition render-inline-types link-to-type]]
             [spid-docs.pimp.markdown :refer [render-inline render]]
             [spid-docs.routes :refer [api-path endpoint-path]]))
 
@@ -132,12 +132,13 @@
   (str status " " (get-response-status-name status)))
 
 (defn- flag-inline-types
-  "Flags types mentioned in the endpoint's inline types as inline, i.e.,
-  marks them for inline rendering on the page."
+  "Flags types mentioned in the endpoint's return type's inline types as inline.
+   This information is used to build links from types (i.e., inline types are
+   linked as anchors)."
   [endpoint types]
   (reduce (fn [types p] (assoc-in types [p :inline?] true))
           types
-          (filter #(contains? types %) (:inline-types endpoint))))
+          (:inline-types ((-> endpoint :responses :success :type) types))))
 
 (defn render-response-formats [endpoint]
   [:p
@@ -148,20 +149,19 @@
    (pluralize " response format" (count (:response-formats endpoint)))])
 
 (defn render-response-type
-  "Renders the response type along with any supporting inline-types.
+  "Renders the response type along with its supporting inline-types.
    For objects that have nested types (objects or lists of objects), these
    nested structures are typically rendered as inline types. The inline-types
    vector is a list of keywords. The full map of types (flagged as inline or
    not) are required to get the actual type description, and to generate the
    correct links."
-  [response inline-types types]
+  [response types]
   (list
    [:h2 (str "Success: " (format-response-status (:status response)))]
    (render (str (:description response)))
    (when (map? (:type response))
      (list "Returns a " (link-to-type (:type response) types) "."))
-   (->> inline-types
-        (cons (:type response))
+   (->> [(:type response)]
         (keep #(cond
                 (vector? %) (first %)     ; [:string] - "list of strings"
                 (map? %) (first (vals %)) ; {:userId :user} - "object of users, with userId as property names"
@@ -170,7 +170,8 @@
                 (if (nil? (type types))
                   (println "Attempted to render undefined type" (name type))
                   (type types))))
-        (map #(render-type-definition % types)))))
+        (map #(list (render-type-definition % types)
+                    (render-inline-types % types))))))
 
 (defn- render-response-failure [failure]
   [:li
@@ -202,7 +203,6 @@
      (render-response-formats endpoint)
      (render-response-type
       (-> endpoint :responses :success)   ; Success response description
-      (:inline-types endpoint)            ; The inline types
       (flag-inline-types endpoint types)) ; The type map with inline types flagged
      (render-response-failures (-> endpoint :responses :failures))]]
    [:div.aside

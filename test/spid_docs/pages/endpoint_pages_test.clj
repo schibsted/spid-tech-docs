@@ -113,14 +113,13 @@
       "This endpoint supports the <a href=\"/endpoints/#format-json\">JSON</a>, <a href=\"/endpoints/#format-jsonp\">JSON-P</a>, and <a href=\"/endpoints/#format-xml\">XML</a> response formats")
 
 (fact
- (let [hiccup (render-response-type {:status 200 :description "**Hey**"} [] {})]
+ (let [hiccup (render-response-type {:status 200 :description "**Hey**"} {})]
    (first hiccup) => [:h2 "Success: 200 OK"]
    (second hiccup) => "<p><strong>Hey</strong></p>"))
 
 (fact "Renders inline types inline"
       (->>
        (render-response-type {:status 200 :description "Hey" :type :login}
-                             []
                              {:login {:id :login
                                       :inline? true
                                       :fields [{:name "id" :type :string}]}})
@@ -130,7 +129,6 @@
 (fact "Renders list response types inline"
       (->>
        (render-response-type {:status 200 :description "Hey" :type [:login]}
-                             []
                              {:login {:id :login
                                       :inline? true
                                       :fields [{:name "id" :type :string}]}})
@@ -140,7 +138,6 @@
 (fact "Renders always available field with checkmark"
       (->>
        (render-response-type {:status 200 :type :login}
-                             []
                              {:login {:id :login
                                       :inline? true
                                       :fields [{:name "id" :type :string :always-available? true}]}})
@@ -150,7 +147,6 @@
 (fact "Renders availability hint when any field is always available"
       (->>
        (render-response-type {:status 200 :type :login}
-                             []
                              {:login {:id :login
                                       :inline? true
                                       :fields [{:name "id" :type :string}

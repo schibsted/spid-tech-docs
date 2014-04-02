@@ -33,7 +33,8 @@
 (def PrimitiveType
   {:id Keyword
    (optional-key :name) Str
-   (optional-key :description) Str})
+   (optional-key :description) Str
+   (optional-key :inline-types) [Keyword]})
 
 (def ObjectType
   (merge PrimitiveType
@@ -54,7 +55,6 @@
 
 (def EndpointDescription
   {:introduction Str
-   (optional-key :inline-types) Str
    (optional-key :success-description) Str})
 
 (defn validate-raw-content [raw-content]

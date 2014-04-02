@@ -97,11 +97,6 @@
       (assoc response :samples (into {} samples))
       response)))
 
-(defn- to-inline-types [string]
-  "Turn a string with space delimited words into a list of keywords."
-  (when string
-    (map keyword (str/split string #" "))))
-
 (defn- get-failure-responses
   "Extracts all failure responses, and adds global ones, such as 403 for any
    endpoint that requires authentication."
@@ -122,7 +117,7 @@
         {:keys [required optional default_filters filters access_token_types responses]} details
         {:keys [pagination-descriptions filter-descriptions endpoint-descriptions sample-responses]} raw-content
         endpoint-id (str (to-id-str path) "-" (.toLowerCase (name method)))
-        {:keys [introduction inline-types success-description]} (get endpoint-descriptions (str "/" endpoint-id ".md") {})]
+        {:keys [introduction success-description]} (get endpoint-descriptions (str "/" endpoint-id ".md") {})]
     (with-optional-keys
       {:id (keyword endpoint-id)
        :path (str "/" path)
@@ -130,7 +125,6 @@
        :method method
        :name (fix-multimethod-name (:name endpoint) method)
        :description introduction
-       :?inline-types (to-inline-types inline-types)
        :category {:section (first category) :api (second category)}
        :parameters (collect-parameters required optional pathParameters pagination-descriptions endpoint)
        :?pagination (collect-pagination-params optional pagination-descriptions)

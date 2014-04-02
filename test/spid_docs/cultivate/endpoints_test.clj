@@ -9,7 +9,6 @@
   {:sample-responses {"/terms-get.json" "terms json"
                       "/terms-get.jsonp" "terms jsonp"}
    :endpoint-descriptions {"/terms-get.md" {:introduction "terms desc"
-                                            :inline-types "string datetime"
                                             :success-description "success description"}}
    :pagination-descriptions {:limit  "limit desc"
                              :offset "offset desc"
@@ -57,16 +56,6 @@
                 :httpMethods {:GET (cs/http-method)})
      first :description)
  => "terms desc")
-
-(fact
- "Inline types are available on the endpoint. It's a list of types
-  that should be rendered inline on the endpoints page, since they are
-  particularly relevant."
-
- (-> (cultivate :path "terms"
-                :httpMethods {:GET (cs/http-method)})
-     first :inline-types)
- => [:string :datetime])
 
 (fact
  "All paths are prefixed with a slash."

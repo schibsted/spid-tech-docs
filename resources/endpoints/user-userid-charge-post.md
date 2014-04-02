@@ -43,5 +43,3 @@ order object. If the order status is pending (`"1"`), you should implement the
 [callback functionality](/callbacks/) in order to be notified when the order
 status changes. Correctly implementing callbacks is essential to keep client
 systems synchronised with SPiD.
-
-:inline-types order-type order-status transaction-synced-status order-item transaction payment-options

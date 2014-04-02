@@ -37,5 +37,3 @@ curl http://stage.payment.schibsted.no/api/2/users?oauth_token=TOKEN& \
   limit=10&\
   offset=20
 ```
-
-:inline-types order-item

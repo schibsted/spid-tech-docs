@@ -161,8 +161,6 @@ These are markdown files that describe additional meta-data about endpoints.
 The files have a tiny sliver of structure through the use of sectioning keys:
 
 ```text
-:inline-types login_attempt login_type
-
 :description
 
 The endpoint description

@@ -12,8 +12,8 @@
 
 (defn- link-to-typedef [type-name typedef]
   (if-let [path (if (:inline? typedef)
-               (str "#" type-name)
-               (type-path typedef))]
+                  (str "#" type-name)
+                  (type-path typedef))]
     [:a {:href path} type-name]
     type-name))
 
@@ -90,10 +90,16 @@
    [:h3 {:id (name (:id type))} (:name type)]
    (render-typedef type types)))
 
+(defn render-inline-types [type types]
+  (->> (:inline-types type)
+       (map types)
+       (map #(render-type-definition % types))))
+
 (defn create-page [type types]
   {:body [:div.wrap
           [:h1 (get-type-name type)]
-          (render-typedef type types)]})
+          (list (render-typedef type types)
+                (render-inline-types type types))]})
 
 (defn create-pages
   "Takes a map of types (typically those defined in resources/types.edn) and

@@ -1,6 +1,7 @@
 {:id :subscription
  :name "Subscription"
  :rendering :object
+ :inline-types [:subscription-status :subscription-status-change-code]
  :fields [{ :name "subscriptionId"       :type :string                          :description "Unique id of the subscription"                                                                                                       :always-available? true}
           { :name "clientId"             :type :string                          :description "Your client id"                                                                                                                      :always-available? true}
           { :name "productId"            :type :string                          :description "Unique product id"                                                                                                                   :always-available? true}
@@ -26,4 +27,4 @@
           { :name "statusChangeDate"     :type :datetime                        :description "The date of the last change to the subscription's status"                                                                            :always-available? false}
           { :name "updated"              :type :datetime                        :description "Date and time of last update to the subscription"                                                                                    :always-available? true}
           { :name "created"              :type :datetime                        :description "Date and time when the subscription was created"                                                                                     :always-available? true}
-          { :name "product"              :type :product            :description "The product this subscription belongs to"                                                                                                         :always-available? true}]}
+          { :name "product"              :type :product                         :description "The product this subscription belongs to"                                                                                            :always-available? true}]}
