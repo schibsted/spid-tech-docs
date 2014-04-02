@@ -6,7 +6,7 @@ search. Some parameters are used to fuzzy match, while others perform exact
 matches. See the parameter list for details on which does what.
 
 All regular expression queries use
-[Pearl Compatible Regular Expression](http://en.wikipedia.org/wiki/Perl_Compatible_Regular_Expressions)
+[Perl Compatible Regular Expression](http://en.wikipedia.org/wiki/Perl_Compatible_Regular_Expressions)
 syntax, as implemented in
 [PHP](http://www.php.net/manual/en/reference.pcre.pattern.syntax.php) and other
 places.
