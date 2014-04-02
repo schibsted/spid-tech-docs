@@ -1,0 +1,13 @@
+{:id :client
+ :name "Client"
+ :rendering :object
+ :fields [{:name "id"                   :type :integer-string :always-available? true}
+          {:name "unregisteredPayments" :type :string         :always-available? true}
+          {:name "domain"               :type :string         :always-available? true}
+          {:name "accessTokenLifetime"  :type :string         :always-available? true}
+          {:name "enableSso"            :type :string         :always-available? true}
+          {:name "name"                 :type :string         :always-available? true}
+          {:name "universalDataAccess"  :type :string         :always-available? true}
+          {:name "redirectUris"         :type :string         :always-available? true}
+          {:name "fields"               :type :string         :always-available? true}
+          {:name "autoApprove"          :type :string         :always-available? true}]}
