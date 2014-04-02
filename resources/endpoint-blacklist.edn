@@ -3,6 +3,7 @@
   [:GET "url/{id}"]
   [:GET "admin/{section}"]
   [:GET "admin/{section}/{id}"]
+  [:GET "admin/acl/{role}"]
   [:GET "/api/2/email_templates"]
   [:POST "/api/2/email_templates"]
   [:GET "/api/2/api/2/"]}
