@@ -79,5 +79,5 @@
                            :category Str
                            :endpoints [Endpoint]
                            (optional-key :description) Str}}
-             :endpoint-blacklist [[(either Str Keyword)]]}
+             :endpoint-blacklist #{[(either Str Keyword)]}}
             content))

@@ -151,5 +151,5 @@
    it splits it into several endpoints based on the given set of http
    methods."
   (->> (:httpMethods endpoint)
-       (remove #(some (partial = [(first %) (:path endpoint)]) (:endpoint-blacklist raw-content)))
+       (remove #(contains? (:endpoint-blacklist raw-content) [(first %) (:path endpoint)]))
        (map #(cultivate-endpoint-1 endpoint % raw-content))))

@@ -16,7 +16,7 @@
                              :since  "since desc"
                              :until  "until desc"}
    :filter-descriptions {:merchant "merchant desc"}
-   :endpoint-blacklist [[:GET "bad"]]})
+   :endpoint-blacklist #{[:GET "bad"]}})
 
 (defn cultivate
   "Helper function to create and cultivate endpoints."
