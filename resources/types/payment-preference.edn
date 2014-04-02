@@ -1,0 +1,13 @@
+{:id :payment-preference
+ :name "Payment preference"
+ :rendering :object
+ :fields [{:name "paymentPreferenceId" :type :integer-string            :description "Unique ID" :always-available? true}
+          {:name "merchantId"          :type :integer-string            :always-available? true}
+          {:name "userId"              :type :integer-string            :description "The user's `userId`" :always-available? true}
+          {:name "clientId"            :type :string                    :description "Your client id" :always-available? true}
+          {:name "identifierId"        :type :integer-string            :description "Id of the payment identifier/means" :always-available? true}
+          {:name "identifierType"      :type :payment-options           :always-available? true}
+          {:name "alias"               :type :string                    :always-available? true}
+          {:name "status"              :type :payment-preference-status :description "" :always-available? true}
+          {:name "updated"             :type :datetime                  :always-available? true}
+          {:name "created"             :type :datetime                  :always-available? true}]}

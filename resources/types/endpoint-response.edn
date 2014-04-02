@@ -1,0 +1,7 @@
+{:id :endpoint-response
+ :name "Endpoint response"
+ :description "A possible response from the API"
+ :rendering :object
+ :fields [{:name "status"      :type :integer :always-available? true :description "The HTTP response code"}
+          {:name "description" :type :string  :always-available? true :description "A description of what this response signifies, and in which cases it may arise"}
+          {:name "type"        :type :string  :always-available? true :description "The symbolic name of the formal type returned as `data` for this endpoint. The type definition is defined in the API documentation."}]}

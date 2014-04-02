@@ -1,0 +1,9 @@
+{:id :version
+ :name "Version object"
+ :rendering :object
+ :fields [{:name "apiVersion"  :type :integer  :always-available? true}
+          {:name "apiRevision" :type :string   :always-available? true}
+          {:name "webVersion"  :type :string   :always-available? true}
+          {:name "webRevision" :type :string   :always-available? true}
+          {:name "currentTime" :type :datetime :always-available? true}
+          {:name "timeZone"    :type :string   :always-available? true}]}

@@ -1,0 +1,16 @@
+{:id :transaction
+ :name "Transaction"
+ :rendering :object
+ :fields [{:name "transactionId" :type :integer-string   :description "Unique id of the transaction" :always-available? true}
+          {:name "masterId"      :type :integer-string   :description "TODO" :always-available? true}
+          {:name "clientId"      :type :string           :always-available? true}
+          {:name "userId"        :type :integer-string   :description "Id of the user the transaction is for" :always-available? true}
+          {:name "type"          :type :transaction-type :always-available? true}
+          {:name "reference"     :type :string           :description "Third-party reference" :always-available? true}
+          {:name "orderId"       :type :integer-string   :always-available? true}
+          {:name "amount"        :type :price            :always-available? true}
+          {:name "currency"      :type :string           :always-available? true}
+          {:name "description"   :type :string           :always-available? true}
+          {:name "ip"            :type :string           :description "The IP address from which the transaction was made" :always-available? true}
+          {:name "createdBy"     :type :integer-string   :description "Id of the user who created the transaction" :always-available? true}
+          {:name "created"       :type :datetime         :always-available? true}]}

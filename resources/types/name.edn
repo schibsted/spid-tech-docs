@@ -1,0 +1,6 @@
+{:id :name
+ :name "Name"
+ :rendering :object
+ :fields [{:name "givenName"  :type :string}
+          {:name "familyName" :type :string}
+          {:name "formatted"  :type :string :description "Formatted full name, including all middle names, titles and suffixes as appropiate"}]}

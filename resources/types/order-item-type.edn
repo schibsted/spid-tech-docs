@@ -1,0 +1,13 @@
+{:id :order-item-type
+ :name "Order item status"
+ :rendering :enum
+ :values [{:value "0"   :description "Default"}
+          {:value "1"   :description "Digital content"}
+          {:value "2"   :description "Subscription"}
+          {:value "3"   :description "Physical product"}
+          {:value "4"   :description "Classified"}
+          {:value "201" :description "Payment method fee"}
+          {:value "202" :description "Transaction fee"}
+          {:value "203" :description "Handling fee"}
+          {:value "204" :description "Shipping fee"}
+          {:value "301" :description "Discount"}]}

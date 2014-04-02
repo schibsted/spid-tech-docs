@@ -1,0 +1,6 @@
+{:id :product-settings
+ :name "Product settings"
+ :rendering :object
+ :fields [{:name "CHOOSE_PRODUCT_TITLE",          :type :string :description "The title displayed on the chooose product page"}
+          {:name "CHOOSE_PRODUCT_DESCRIPTION",    :type :string :description "The description displayed on the choose product page"}
+          {:name "CHOOSE_PRODUCT_DEFAULT_CHOICE", :type :string :description "If set to a Product ID. That product will be chosen by default"}]}

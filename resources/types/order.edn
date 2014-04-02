@@ -1,0 +1,62 @@
+{:id :order
+ :name "Order"
+ :rendering :object
+ :description "Orders contain one or more order items. Orders with
+status other than `failed` and `pending` will have transactions attached to
+them.
+
+Crediting an order can be done by a full credit or a partial credit. Partial
+credits must be done by specifying which order item you want to credit. If you
+specify an amount (optional), the corresponding order item will be partially
+credited. In a full credit there is no need to specify any other fields than
+description, which is required in both full and partial credits.
+
+Crediting an order will trigger a user notification, which will inform the user
+about the order change. This can be optionally turned off by setting the field
+`notifyUser` to false.
+
+Capturing an order can be done by a full or a partial capture. Partial captures
+must be done by specifying which order item you want to capture. If you specify
+an amount (optional), the corresponding order item will be partially captured.
+In a full capture there is no need to specify any other fields.
+
+All captured and credited vat amounts will match the corresponding vat
+percentage set in the order item."
+ :fields [{:name "orderId"           :type :integer            :description "Unique order ID"                                                                       :always-available? true}
+          {:name "clientId"          :type :string             :description "ID of the client this order belongs to"                                                :always-available? true}
+          {:name "merchantId"        :type :integer            :description "Merchant ID"                                                                           :always-available? true}
+          {:name "clientReference"   :type :string             :description "Custom client reference (inherited from Paylinks)"                                     :always-available? true}
+          {:name "extOrderRef"       :type :string             :description "External order reference"                                                              :always-available? true}
+          {:name "extTransRef"       :type :string             :description "External transaction reference"                                                        :always-available? true}
+          {:name "identifierId"      :type :integer            :description "Payment method identifier ID"                                                          :always-available? true}
+          {:name "identifierType"    :type :payment-options    :description "Payment type for the payment method identifier used"                                   :always-available? true}
+          {:name "userFlow"          :type :user-flow          :description "The user involvement level during creation of this order"                              :always-available? true}
+          {:name "purchaseFlow"      :type :purchase-flow      :description "What type of purchase flow this order was processed with"                              :always-available? true}
+          {:name "userId"            :type :integer            :description "ID of the user this order belongs to"                                                  :always-available? true}
+          {:name "sellerUserId"      :type :integer            :description "ID of the user who will receive money from this order. Used in P2P."                   :always-available? true}
+          {:name "paylinkId"         :type :integer            :description "ID used to create this order"                                                          :always-available? true}
+          {:name "ocr"               :type :string             :description "OCR/KID number"                                                                        :always-available? true}
+          {:name "type"              :type :order-type         :description "Order type"                                                                            :always-available? true}
+          {:name "totalPrice"        :type :integer            :description "Total price (including vat amount) for the complete order"                             :always-available? true}
+          {:name "vat"               :type :integer            :description "VAT in percentage * 100, ex 2500 = 25%"                                                :always-available? true}
+          {:name "calculatedVat"     :type :integer            :description "Total amount of VAT for this order"                                                    :always-available? true}
+          {:name "creditedAmount"    :type :integer            :description "Amount of the order credited. Defaults to 0."                                          :always-available? true}
+          {:name "capturedAmount"    :type :integer            :description "Amount of the order captured. Defaults to full amount or 0, depending on paymentFlow." :always-available? true}
+          {:name "creditedVatAmount" :type :integer            :description "Credited VAT amount"                                                                   :always-available? true}
+          {:name "capturedVatAmount" :type :integer            :description "Captured VAT amount"                                                                   :always-available? true}
+          {:name "currency"          :type :string             :description "Order currency; SEK, NOK, USD"                                                         :always-available? true}
+          {:name "campaignId"        :type :integer            :description "ID of the campaign that triggered this order"                                          :always-available? true}
+          {:name "voucherId"         :type :integer            :description "ID of the voucher used for this order"                                                 :always-available? true}
+          {:name "tag"               :type :string             :description "Can be used for custom order tracking"                                                 :always-available? true}
+          {:name "status"            :type :order-status                                                                                                            :always-available? true}
+          {:name "transactionSynced" :type :transaction-synced-status                                                                                               :always-available? true}
+          {:name "transactionStatus" :type :integer            :description "Third party payment provider transaction status"                                       :always-available? true}
+          {:name "errorCode"         :type :string             :description "Error Code"                                                                            :always-available? true}
+          {:name "errorDescription"  :type :string             :description "Error Description"                                                                     :always-available? true}
+          {:name "errorThirdparty"   :type :string             :description "Third-Party Error Description (e.g. VISA error)"                                       :always-available? true}
+          {:name "updated"           :type :datetime           :description "The time the order was last updated"                                                   :always-available? true}
+          {:name "created"           :type :datetime           :description "The time the order was created"                                                        :always-available? true}
+          {:name "statusChecked"     :type :datetime           :description "The last time the order status was checked by a client via the /status endpoint"       :always-available? true}
+          {:name "identifier"        :type :payment-identifier :description "Payment method used for this order"                                                    :always-available? false}
+          {:name "items"             :type [:order-item]                                                                                                            :always-available? false}
+          {:name "transactions"      :type [:transaction]                                                                                                           :always-available? false}]}

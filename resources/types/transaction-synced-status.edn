@@ -1,0 +1,8 @@
+{:id :transaction-synced-status
+ :name "Transaction synced status"
+ :rendering :enum
+ :values [{:value "-1" :description "Order is broken, out of sync with provider"}
+          {:value "0"  :description "Order ok"}
+          {:value "1"  :description "Order verified"}
+          {:value "2"  :description "Order synced and modified status and transactions"}
+          {:value "3"  :description "Order synced and fixed"}]}

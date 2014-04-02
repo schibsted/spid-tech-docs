@@ -1,0 +1,11 @@
+{:id :order-status
+ :name "Order status"
+ :rendering :enum
+ :values [{:value "-3" :description "Expired"}
+          {:value "-2" :description "Cancelled"}
+          {:value "-1" :description "Failed"}
+          {:value "0"  :description "Created"}
+          {:value "1"  :description "Pending"}
+          {:value "2"  :description "Complete"}
+          {:value "3"  :description "Credited"}
+          {:value "4"  :description "Authorized"}]}

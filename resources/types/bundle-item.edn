@@ -1,0 +1,15 @@
+{:id :bundle-item
+ :name "Bundle item"
+ :rendering :object
+ :fields [{:name "bundleItemId"   :type :string         :description "Unique bundle item id" :always-available? true}
+          {:name "bundleId"       :type :string         :description "The bundle's product id" :always-available? true}
+          {:name "productId"      :type :string         :description "Id of the product to add" :always-available? true}
+          {:name "price"          :type :price          :always-available? true}
+          {:name "vat"            :type :integer-string :description "VAT, in percent" :always-available? true}
+          {:name "sort"           :type :integer-string :description "Sorting order, relative to other bundle items" :always-available? true}
+          {:name "bundle"         :type :bundle}
+          {:name "product"        :type :product}
+          {:name "status"         :type :integer-string :description "TODO"}
+          {:name "status_updated" :type :datetime       :description "When the bundle item status was last updated" :always-available? true}
+          {:name "updated"        :type :datetime       :description "When the bundle item was last updated" :always-available? true}
+          {:name "created"        :type :datetime       :description "When the bundle was created" :always-available? true}]}

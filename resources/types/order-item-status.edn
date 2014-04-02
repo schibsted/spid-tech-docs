@@ -1,0 +1,8 @@
+{:id :order-item-status
+ :name "Order item status"
+ :rendering :enum
+ :values [{:value "-2" :description "Cancelled"}
+          {:value "-1" :description "Expired"}
+          {:value "0" :description "Created"}
+          {:value "1" :description "Captured"}
+          {:value "3" :description "Credited"}]}

@@ -1,0 +1,4 @@
+{:id :varnish-id
+ :name "Varnish SP_ID"
+ :rendering :object
+ :fields [{:name "sp_id" :type :string :description "The Varnish SP_ID"}]}

@@ -1,0 +1,6 @@
+{:id :subscription-status
+ :name "Subscription status"
+ :rendering :enum
+ :values [{:value "-1" :description "Expired"}
+          {:value "0" :description "Inactive"}
+          {:value "1" :description "Active"}]}

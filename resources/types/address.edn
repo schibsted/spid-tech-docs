@@ -1,0 +1,13 @@
+{:id :address
+ :name "Address"
+ :rendering :object
+ :fields [{:name "formatted"     :type :string :description "Full address, formatted for display"}
+          {:name "streetAddress" :type :string :description "Full street address component. May include house number, street name, PO BOX, and multi-line extended street address information."}
+          {:name "postalCode"    :type :string :description "Zip code."}
+          {:name "country"       :type :string :description "Country name."}
+          {:name "locality"      :type :string :description "City or locality"}
+          {:name "region"        :type :string :description "State or region"}
+          {:name "latitude"      :type :string :description "Latitude geo location"}
+          {:name "longitude"     :type :string :description "Longitude geo location"}
+          {:name "altitude"      :type :string :description "Altitude geo location"}
+          {:name "type"          :type :string :description "Address type, home, shipping, invoice, etc"}]}

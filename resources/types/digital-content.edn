@@ -1,0 +1,15 @@
+{:id :digital-content
+ :name "Digital content"
+ :rendering :object
+ :fields [{:name "userProductId"   :type :integer-string :description "TODO" :always-available? true}
+          {:name "productId"       :type :integer-string :always-available? true}
+          {:name "parentProductId" :type :integer-string  :always-available? true}
+          {:name "clientId"        :type :string         :always-available? true}
+          {:name "userId"          :type :integer-string :always-available? true}
+          {:name "orderId"         :type :integer-string :always-available? true}
+          {:name "status"          :type :integer-string :always-available? true}
+          {:name "count"           :type :integer-string :always-available? true}
+          {:name "updated"         :type :datetime       :description "When the digital content was last updated" :always-available? true}
+          {:name "created"         :type :datetime       :description "When the digital content was created" :always-available? true}
+          {:name "bundleId"        :type :integer-string :always-available? true}
+          {:name "statusMsg"       :type :string         :always-available? true}]}

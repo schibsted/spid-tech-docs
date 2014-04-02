@@ -1,0 +1,9 @@
+{:id :account
+ :name "Third-party account."
+ :rendering :object
+ :fields [{:name "id"          :type :string :description "Unique account id" :always-available? false}
+          {:name "domain"      :type :string :description "Top-most authoritative domain for the account, e.g. twitter.com" :always-available? false}
+          {:name "accountName" :type :string :description "Name of the account/service, e.g. 'Twitter'. For display purposes." :always-available? false}
+          {:name "username"    :type :string :description "Alpha-numeric username" :always-available? true}
+          {:name "userid"      :type :string :description "User/account id in the third-party service" :always-available? true}
+          {:name "profileUrl"  :type :string :description "The user's profile on the third-party service" :always-available? false}]}

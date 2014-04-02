@@ -1,0 +1,11 @@
+{:id :transaction-type
+ :name "Transaction type"
+ :rendering :enum
+ :values [{:value "100" :description "Deposit"}
+          {:value "200" :description "Purchase"}
+          {:value "300" :description "Transfer"}
+          {:value "400" :description "Fee"}
+          {:value "500" :description "Redeem"}
+          {:value "600" :description "Credit"}
+          {:value "700" :description "Correction"}
+          {:value "800" :description "Withdraw"}]}

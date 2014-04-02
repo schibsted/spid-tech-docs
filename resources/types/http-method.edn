@@ -1,0 +1,11 @@
+{:id :http-method
+ :name "HTTP method"
+ :rendering :object
+ :description "A supported endpoint action"
+ :fields [{:name "name"               :type :string              :always-available? true :description "The HTTP method (only GET, POST and DELETE are used by the API)"}
+          {:name "optional"           :type [:string]            :always-available? true :description "A list of optional request parameters."}
+          {:name "required"           :type [:string]            :always-available? true :description "A list of required request parameters."}
+          {:name "responses"          :type [:endpoint-response] :always-available? true :description "A list of possible outcomes of taking this action."}
+          {:name "filters"            :type [:string]            :always-available? true :description "Supported filters."}
+          {:name "default_filters"    :type [:string]            :always-available? true :description "Default filters."}
+          {:name "access_token_types" :type [:string]            :always-available? true :description "Supported token types. May be server, user or both. If both, then this action may be taken with either access token type."}]}

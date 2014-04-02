@@ -7,6 +7,13 @@
             [spid-docs.cultivate.endpoints :as ce]
             [stasis.core :as stasis]))
 
+(defn get-types []
+  (apply merge (spid/load-edn "types.edn")
+         (->> (stasis/slurp-directory "resources/types" #"\.edn$")
+              (map (fn [[file content]] (spid/load-edn-str content file)))
+              (map (juxt :id identity))
+              (into {}))))
+
 (defn load-content
   "Loads content from .edn and .md files in resources/. See the readme for a
   run-down of various kinds of contents and where/how they are stored."
@@ -18,7 +25,7 @@
    :endpoint-descriptions (mapdown/slurp-directory "resources/endpoints" #"\.md$")
    :pagination-descriptions (spid/load-edn "pagination.edn")
    :filter-descriptions (spid/load-edn "filters.edn")
-   :types (spid/load-edn "types.edn")
+   :types (get-types)
    :apis (spid/load-edn "apis.edn")
    :endpoint-blacklist (spid/load-edn "endpoint-blacklist.edn")})
 

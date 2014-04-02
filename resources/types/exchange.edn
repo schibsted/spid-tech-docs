@@ -1,0 +1,4 @@
+{:id :exchange
+ :name "OAuth exchange object"
+ :rendering :object
+ :fields [{:name "code" :type :string :always-available? true :description "An OAuth access token"}]}

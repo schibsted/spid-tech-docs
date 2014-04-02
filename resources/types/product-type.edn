@@ -1,0 +1,8 @@
+{:id :product-type
+ :name "Product type"
+ :rendering :enum
+ :values [{:value "1" :description "Digital content"}
+          {:value "2" :description "Subscription"}
+          {:value "3" :description "Physical product"}
+          {:value "4" :description "Classifieds"}
+          {:value "0" :description "Default"}]}

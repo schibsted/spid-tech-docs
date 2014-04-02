@@ -1,0 +1,6 @@
+{:id :bundle-type
+ :name "Bundle type"
+ :rendering :enum
+ :values [{:value "0" :description "Not a bundle"}
+          {:value "1" :description "Dynamic bundle"}
+          {:value "2" :description "Onetime bundle"}]}
