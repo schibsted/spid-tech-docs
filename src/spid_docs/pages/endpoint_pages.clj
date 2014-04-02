@@ -131,14 +131,25 @@
 (defn- format-response-status [status]
   (str status " " (get-response-status-name status)))
 
+(defn- type-id
+  "Given a type specification like :string, [:string] or {:string :string},
+   return the type id as a keyword"
+  [typespec]
+  (cond
+   (vector? typespec) (first typespec)     ; [:string] - "list of strings"
+   (map? typespec) (first (vals typespec)) ; {:userId :user} - "object of users, with userId as property names"
+   :else typespec))                        ; :string - a straight-forward type
+
 (defn- flag-inline-types
   "Flags types mentioned in the endpoint's return type's inline types as inline.
    This information is used to build links from types (i.e., inline types are
    linked as anchors)."
   [endpoint types]
-  (reduce (fn [types p] (assoc-in types [p :inline?] true))
-          types
-          (:inline-types ((-> endpoint :responses :success :type) types))))
+  (if-let [success-type-id (-> endpoint :responses :success :type type-id)]
+    (reduce (fn [types p] (assoc-in types [p :inline?] true))
+            types
+            (:inline-types (success-type-id types)))
+    types))
 
 (defn render-response-formats [endpoint]
   [:p
@@ -162,10 +173,7 @@
    (when (map? (:type response))
      (list "Returns a " (link-to-type (:type response) types) "."))
    (->> [(:type response)]
-        (keep #(cond
-                (vector? %) (first %)     ; [:string] - "list of strings"
-                (map? %) (first (vals %)) ; {:userId :user} - "object of users, with userId as property names"
-                :else %))                 ; :string - a straight-forward type
+        (keep type-id)
         (keep (fn [type]
                 (if (nil? (type types))
                   (println "Attempted to render undefined type" (name type))
