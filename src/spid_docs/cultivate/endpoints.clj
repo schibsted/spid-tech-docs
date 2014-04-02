@@ -107,11 +107,11 @@
    endpoint that requires authentication."
   [http-method]
   (->> (if (seq (:access_token_types http-method))
-         (->> (conj (:responses http-method) {:status 403
-                                              :description "Access token rejected"
-                                              :type "api-exception"})
-              (sort-by :status))
+         (conj (:responses http-method) {:status 403
+                                         :description "Access token rejected"
+                                         :type "api-exception"})
          (:responses http-method))
+       (sort-by :status)
        (remove success?)
        (map create-response)))
 
