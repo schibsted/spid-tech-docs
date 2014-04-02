@@ -57,6 +57,21 @@ The response will be executable JavaScript:
 callback({ ... });
 ```
 
+The callback function will be called `callback` by default. To change its name,
+use the `callback` query parameter:
+
+```sh
+curl http://stage.payment.schibsted.no/api/2/users?oauth_token=TOKEN& \
+     format=jsonp&\
+     callback=doit
+```
+
+Which will return something like
+
+```js
+doit([...]);
+```
+
 <h3 id="format-xml">XML</h3>
 
 A few SPiD endpoints support XML responses. To force its use, provide the
