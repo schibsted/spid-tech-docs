@@ -1,0 +1,19 @@
+{:id :paylink-item
+ :name "Paylink item"
+ :rendering :object
+ :fields [{:name "paylinkItemId"       :type :integer-string}
+          {:name "paylinkId"           :type :integer-string}
+          {:name "clientId"            :type :string         :description "ID of the client that gets paid (seller client_id)"}
+          {:name "productId"           :type :integer-string :description "ID of an existing product in SPiD"}
+          {:name "clientItemReference" :type :string         :description "Client's custom reference for this item"}
+          {:name "type"                :type :paylink-type}
+          {:name "description"         :type :string}
+          {:name "ogpUri"              :type :string         :description "Open Graph Protocol enabled URI representing the product being purchased"}
+          {:name "price"               :type :integer-string :description "Price (including VAT amount), in \"cents\". 0 or a positive integer."}
+          {:name "vat"                 :type :integer-string :description "VAT in 1/100 percentage ex 2500 = 25%"}
+          {:name "currency"            :type :string         :description "Currency. Ex. NOK. Defaults to the to platform currency"}
+          {:name "quantity"            :type :integer-string :description "The quantity of this item. Defaults to 1, the total cost is price multiplied by quantity"}
+          {:name "updated"             :type :string         :description "When the paylink was last changed"}
+          {:name "updatedBy"           :type :string         :description "ID of the user/client who last updated the paylink item"}
+          {:name "created"             :type :string         :description "When the paylink item was created"}
+          {:name "createdBy"           :type :string         :description "ID of the user/client who created the paylink item"}]}

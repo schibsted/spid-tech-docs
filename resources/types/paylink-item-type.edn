@@ -1,0 +1,13 @@
+{:id :paylink-item-type
+ :name "Paylink item type"
+ :rendering :enum
+ :fields [{:value "0"   :description "Product"}
+          {:value "1"   :description "Digital content"}
+          {:value "2"   :description "Subscription"}
+          {:value "3"   :description "Physical product"}
+          {:value "4"   :description "Classified"}
+          {:value "101" :description "Payment method"}
+          {:value "102" :description "Transaction fee"}
+          {:value "103" :description "Handling fee"}
+          {:value "104" :description "Shipping fee"}
+          {:value "201" :description "Discount"}]}
