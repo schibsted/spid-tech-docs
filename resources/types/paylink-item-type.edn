@@ -1,7 +1,7 @@
 {:id :paylink-item-type
  :name "Paylink item type"
  :rendering :enum
- :fields [{:value "0"   :description "Product"}
+ :values [{:value "0"   :description "Product"}
           {:value "1"   :description "Digital content"}
           {:value "2"   :description "Subscription"}
           {:value "3"   :description "Physical product"}
