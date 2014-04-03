@@ -1,0 +1,7 @@
+{:id :voucher-status
+ :name "Voucher status"
+ :rendering :enum
+ :values [{:value "1" :description "Voucher is expired and can no longer be redeemed"}
+          {:value "0" :description "Voucher is generated and may be either used or handed out"}
+          {:value "1" :description "Voucher is handed out. If the userId field is set, only this user may redeem it"}
+          {:value "2" :description "Voucher is redeemed and can no longer be used. Kept only for historic reasons"}]}

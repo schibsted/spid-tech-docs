@@ -1,0 +1,19 @@
+{:id :voucher
+ :name "Voucher"
+ :rendering :object
+ :description "Vouchers are mainly described by the voucher group they belong
+to. Shared vouchers can be redeemed multiple times and as such never changes its
+status to redeemed. Unique vouchers have unique codes for each user and can only
+be redeemed once."
+ :fields [{:name "voucherId"      :type :integer-string :description "Unique ID of the voucher. Endpoints only ever use the `voucherCode` to access vouchers" :always-available? true}
+          {:name "voucherGroupId" :type :integer-string :description "ID of the voucher group the voucher belongs to" :always-available? true}
+          {:name "userId"         :type :integer-string :description "`userId` of the user that redeemed the voucher or that the voucher is handed out to" :always-available? true}
+          {:name "type"           :type :voucher-type   :description "Voucher group type" :always-available? true}
+          {:name "count"          :type :integer-string :description "Number of time the voucher has been redeemed. Only available for shared vouchers." :always-available? false}
+          {:name "voucherCode"    :type :string         :description "A unique string that gives access to this voucher" :always-available? true}
+          {:name "status"         :type :voucher-status :always-available? true}
+          {:name "handoutBy"      :type :integer-string :description "`userId` of the user that handed out the voucher" :always-available? true}
+          {:name "createdBy"      :type :integer-string :description "`userId` of the user that generated the voucher" :always-available? true}
+          {:name "updated"        :type :datetime       :description "When the voucher was last updated (i.e. had its status changed)" :always-available? true}
+          {:name "created"        :type :datetime       :description "When the voucher was created" :always-available? true}]}
+

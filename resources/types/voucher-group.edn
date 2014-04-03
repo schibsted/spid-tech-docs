@@ -1,0 +1,30 @@
+{:id :voucher-group
+ :name "Voucher group"
+ :rendering :object
+ :inline-types [:voucher :voucher-type :voucher-status]
+ :description "Voucher groups are templates from which vouchers can be
+generated. Individual vouchers are not complete on their own - you need a
+voucher's group to fully identify its functionality. Voucher groups may have
+several limitations, like how many vouchers can be generated (for unique one-off
+vouchers), or how many times a shared voucher (same code used many times) may be
+used.
+
+Two vouchers are supported: Giveaway and Campaign. Giveaway voucher groups are
+connected to a product and redeeming a voucher from this group will create a
+subscription or grant digital content access. The campaign version is used in
+connection to Campaigns that require vouchers to be activated in the purchase
+flow."
+ :fields [{:name "voucherGroupId" :type :integer-string :description "Unique ID of the voucher group" :always-available? true}
+          {:name "clientId"       :type :string         :description "ID of the client that owns the voucher group and its vouchers" :always-available? true}
+          {:name "discountId"     :type :integer-string :description "TODO" :always-available? true}
+          {:name "campaignId"     :type :integer-string :description "Unique ID, used by 'campaign' voucher groups" :always-available? true}
+          {:name "productId"      :type :integer-string :description "Used by 'campaign' voucher groups" :always-available? true}
+          {:name "type"           :type :voucher-type   :description "The type of the voucher group and all its vouchers" :always-available? true}
+          {:name "unique"         :type :boolean        :description "If `true`, the voucher group will generate unique vouchers that may only be used once. If `false`, the voucher group will have exactly one voucher that is shared" :always-available? true}
+          {:name "limit"          :type :integer-string :description "The maximum number of vouchers that may be generated, or the number of times a shared voucer may be used. 0 means no limit" :always-available? true}
+          {:name "title"          :type :string         :description "A descriptive name of the voucher, suitable for presentation to end-users" :always-available? true}
+          {:name "description"    :type :string         :description "A description of the intention of the voucher group" :always-available? true}
+          {:name "createdBy"      :type :integer-string :description "The `userId` of the user that created the voucher group" :always-available? true}
+          {:name "updated"        :type :datetime       :description "When the voucher group was last modified" :always-available? true}
+          {:name "created"        :type :dateime        :description "When the voucher group was created" :always-available? true}]}
+

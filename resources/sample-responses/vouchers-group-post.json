@@ -1,0 +1,15 @@
+{
+    "voucherGroupId": "1",
+    "clientId": "4f06edcbefd04be41f00000a",
+    "discountId": null,
+    "campaignId": "10043",
+    "productId": null,
+    "type": "5",
+    "unique": "1",
+    "limit": "100",
+    "title": "Access to My first campaign group",
+    "description": "This voucher group gives access to the campaign called 'My first campaign'.",
+    "createdBy": "100024",
+    "updated": null,
+    "created": "2012-02-07 13:11:32"
+}
