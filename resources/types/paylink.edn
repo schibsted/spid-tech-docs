@@ -20,4 +20,4 @@
           {:name "updatedBy"       :type :string          :description "ID of the person/client who last updated the paylink"}
           {:name "created"         :type :datetime        :description "When the paylink was created"}
           {:name "createdBy"       :type :string          :description "ID of the person/client who created the paylink"}
-          {:name "items"           :type [:paylink-item]}]}
+          {:name "items"           :type {:paylinkItemId :paylink-item}}]}
