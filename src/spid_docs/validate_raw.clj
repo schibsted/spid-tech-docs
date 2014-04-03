@@ -40,7 +40,7 @@
   (merge PrimitiveType
          {:rendering (eq :object)
           :fields [{:name Str
-                    :type (either Keyword [Keyword])
+                    :type (either Keyword [Keyword] {Keyword Keyword})
                     (optional-key :description) Str
                     (optional-key :always-available?) Boolean}]}))
 
