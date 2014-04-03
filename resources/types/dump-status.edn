@@ -1,0 +1,7 @@
+{:id :dump-status
+ :name "Dump status"
+ :rendering :enum
+ :values [{:value "-1" :description "Deleted"}
+          {:value "0"  :description "Initiated"}
+          {:value "1"  :description "Ready"}
+          {:value "2"  :description "Error"}]}

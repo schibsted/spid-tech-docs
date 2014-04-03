@@ -1,0 +1,13 @@
+{:id :dump-description
+ :name "Dump description"
+ :rendering :object
+ :inline-types [:dump-status]
+ :fields [{:name "dumpId"            :type :integer-string :description "Unique ID of the dump" :always-available? true}
+          {:name "clientId"          :type :string         :description "The client ID" :always-available? true}
+          {:name "created"           :type :datetime       :description "When the dump was created" :always-available? true}
+          {:name "sequenceNumber"    :type :integer-string :description "Number used for ordering between dumps" :always-available? true}
+          {:name "status"            :type :dump-status :always-available? true}
+          {:name "statusDescription" :type :string         :description "Textual description of the dump status" :always-available? true}
+          {:name "dumpFrom"          :type :datetime       :description "First timestamp covered by the dump" :always-available? true}
+          {:name "dumpTo"            :type :datetime       :description "Last timestamp covered by the dump" :always-available? true}
+          {:name "filesize"          :type :integer-string :description "Size of the dump, in bytes" :always-available? true}]}
