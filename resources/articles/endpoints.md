@@ -26,7 +26,7 @@ standard way of retrieving the endpoint return type or information about API
 failures.
 
 More details are available from the
-[response container type sepcification](/types/response-container/). Below is a
+[response container type sepcification](/types/response-container). Below is a
 sample output:
 
 ```js
