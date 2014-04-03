@@ -1,0 +1,17 @@
+{
+    "campaignId": "10032",
+    "clientId": "4f06edcbefd04be41f00000a",
+    "title": "My first campaign",
+    "description": "This is the campaign description",
+    "metaData": null,
+    "startDate": "2012-01-12 12:00:00",
+    "stopDate": "2020-01-12 12:00:00",
+    "additionalReceiptInfo": null,
+    "requireAddress": "1",
+    "requireVoucher": "0",
+    "status": "1",
+    "limit": "1000",
+    "count": "0",
+    "updated": null,
+    "created": "2012-02-07 12:48:00"
+}

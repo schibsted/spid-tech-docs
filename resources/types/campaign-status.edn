@@ -1,0 +1,5 @@
+{:id :campaign-status
+ :name "Campaign status"
+ :rendering :enum
+ :values [{:value 0 :description "New"}
+          {:value 1 :description "Active"}]}
