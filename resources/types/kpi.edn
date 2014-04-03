@@ -1,0 +1,6 @@
+{:id :kpi
+ :name "KPI"
+ :rendering :object
+ :fields [{:name "name"    :type :string         :description "The KPI (see the table above)" :always-available? true}
+          {:name "value"   :type :integer-string :description "The KPI value count"           :always-available? true}
+          {:name "created" :type :datetime       :description "When the KPI was created"      :always-available? true}]}
