@@ -1,0 +1,6 @@
+{:id :api-debug-route
+ :name "API debug route"
+ :rendering :object
+ :fields [{:name "name"       :type :string}
+          {:name "url"        :type :string}
+          {:name "controller" :type :string}]}

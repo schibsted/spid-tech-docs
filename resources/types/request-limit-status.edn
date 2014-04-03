@@ -1,0 +1,6 @@
+{:id :request-limit-status
+ :name "Request limiting status"
+ :rendering :object
+ :fields [{:name "reset"     :type :integer :description "The number of seconds until `remaining` will be reset to `limit`"}
+          {:name "limit"     :type :integer :description "The maximum number of allowed requests within the reset period (typically one hour)"}
+          {:name "remaining" :type :integer :description "The number of remaining API requests in the current reset period"}]}

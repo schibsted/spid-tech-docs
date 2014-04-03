@@ -18,6 +18,47 @@ the available locales are:
 Although rare, you may run into content that has not been localized. In these
 cases, you will get English content back.
 
+<h2 id="response-container">API response container</h2>
+
+All API responses come with a common container. The container object (when the
+response format is JSON) contains some information about the API itself, and a
+standard way of retrieving the endpoint return type or information about API
+failures.
+
+More details are available from the
+[response container type sepcification](/types/response-container/). Below is a
+sample output:
+
+```js
+{
+    "name": "SPP Container",
+    "version": "0.2",
+    "api": 2,
+    "object": "Utility",
+    "type": "element",
+    "code": 200,
+    "request": {
+        "reset": 3537,
+        "limit": 0,
+        "remaining": -3
+    },
+    "debug": {
+        "route": {
+            "name": "Utility:describe",
+            "url": "/api/2/describe/{object}",
+            "controller": "Api\/2\/Utility.describe"
+        },
+        "params": {
+            "options": [],
+            "where": { "object":"User" }
+        }
+    },
+    "meta": null,
+    "error": null,
+    "data": { ... }
+}
+```
+
 <h2 id="formats">Response formats</h2>
 
 Most SPiD endpoints can respond with various response formats. The format used

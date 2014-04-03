@@ -1,0 +1,18 @@
+{:id :response-container
+ :name "API response container"
+ :inline-types [:request-limit-status :api-debug :api-debug-route :api-exception]
+ :rendering :object
+ :description "The response container is returned from every endpoint in the
+API. It defines certain meta-data about the API, along with relevant request
+limiting stats and either an error or the response data from the endpoint."
+ :fields [{:name "name"    :type :string :description "Always `\"SPP Container\"`"}
+          {:name "version" :type :string :description "The API version, currently `\"0.2\"`"}
+          {:name "api"     :type :integer :description "The current API major version"}
+          {:name "object"  :type :string :description "The containing object type for the response"}
+          {:name "type"    :type :string :description "The sub-type of the response"}
+          {:name "code"    :type :integer :description "The HTTP response code"}
+          {:name "request" :type :request-limit-status :description "Current request limiting status"}
+          {:name "meta"    :type :string}
+          {:name "error"   :type :api-exception}
+          {:name "data"    :type :object :description "The endpoint return value. See individual endpoint docs for details on what data is returned."}
+          {:name "debug"   :type :api-debug}]}
