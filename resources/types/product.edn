@@ -2,9 +2,9 @@
  :name "Product"
  :rendering :object
  :inline-types [:product-status :payment-options :bundle-type]
- :fields [{:name "productId"                       :type :integer-string  :description "Unique product id" :always-available? true}
-          {:name "parentProductId"                 :type :integer-string  :description "Id of the parent product, if any" :always-available? false}
-          {:name "clientId"                        :type :string          :description "Your client id" :always-available? true}
+ :fields [{:name "productId"                       :type :integer-string  :description "Unique product ID" :always-available? true}
+          {:name "parentProductId"                 :type :integer-string  :description "ID of the parent product, if any" :always-available? false}
+          {:name "clientId"                        :type :string          :description "Your client ID" :always-available? true}
           {:name "type"                            :type :product-type    :always-available? true}
           {:name "bundle"                          :type :bundle-type     :always-available? true}
           {:name "code"                            :type :string          :always-available? true}
@@ -32,8 +32,8 @@
           {:name "subscriptionFinalEndDate"        :type :datetime        :description "By this date, the subscription is no longer for sale" :always-available? false}
           {:name "allowMultiSales"                 :type :boolnum         :description "If `\"1\"`, users can purchase this product multiple times" :always-available? true}
           {:name "status"                          :type :product-status  :always-available? true}
-          {:name "changedBy"                       :type :integer-string  :description "Id of the user that made the last change" :always-available? false}
+          {:name "changedBy"                       :type :integer-string  :description "ID of the user that made the last change" :always-available? false}
           {:name "changed"                         :type :datetime        :always-available? false}
-          {:name "createdBy"                       :type :integer-string  :description "Id of the user that created this product" :always-available? true}
+          {:name "createdBy"                       :type :integer-string  :description "ID of the user that created this product" :always-available? true}
           {:name "created"                         :type :datetime        :always-available? true}
           {:name "purchaseUri"                     :type :url             :description "A URI where the product may be purchased" :always-available? true}]}

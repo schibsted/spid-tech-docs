@@ -3,7 +3,7 @@
  :rendering :object
  :inline-types [:purchase-flow :paylink-status :payment-options :paylink-item]
  :fields [{:name "paylinkId"       :type :integer-string  :description "Paylink ID"}
-          {:name "clientId"        :type :string          :description "ID of the client that gets paid (seller client id). Defaults to the authenticated client"}
+          {:name "clientId"        :type :string          :description "ID of the client that gets paid (seller client ID). Defaults to the authenticated client"}
           {:name "code"            :type :string          :description "Paylink code"}
           {:name "shortUrl"        :type :string          :description "Paylink short URL"}
           {:name "sellerUserId"    :type :integer-string  :description "ID of the user that gets paid. If set, will connect this paylink to the user as seller and receiver of payment"}

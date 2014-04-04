@@ -1,9 +1,9 @@
 {:id :bundle
  :name "Bundle"
  :rendering :object
- :fields [{:name "product_id"                          :type :integer-string  :description "The bundle's product id" :always-available? true}
-          {:name "parent_product_id"                   :type :integer-string  :description "Parent product id, if any" :always-available? false}
-          {:name "client_id"                           :type :string          :description "Client id" :always-available? true}
+ :fields [{:name "product_id"                          :type :integer-string  :description "The bundle's product ID" :always-available? true}
+          {:name "parent_product_id"                   :type :integer-string  :description "Parent product ID, if any" :always-available? false}
+          {:name "client_id"                           :type :string          :description "Client ID" :always-available? true}
           {:name "type"                                :type :boolnum         :description "TODO" :always-available? true}
           {:name "bundle"                              :type :boolnum         :description "TODO" :always-available? true}
           {:name "code"                                :type :string          :description "TODO" :always-available? true}
@@ -35,7 +35,7 @@
           {:name "guardian"                            :type :integer-string  :description "TODO" :always-available? true}
           {:name "autopay"                             :type :boolnum         :description "TODO" :always-available? true}
           {:name "status"                              :type :integer-string  :description "TODO" :always-available? true}
-          {:name "changed_by"                          :type :integer-string  :description "Id of the user who last changed the bundle" :always-available? true}
+          {:name "changed_by"                          :type :integer-string  :description "ID of the user who last changed the bundle" :always-available? true}
           {:name "changed"                             :type :datetime        :description "When the bundle was last changed" :always-available? true}
-          {:name "created_by"                          :type :integer-string  :description "Id of the user who created the bundle" :always-available? true}
+          {:name "created_by"                          :type :integer-string  :description "ID of the user who created the bundle" :always-available? true}
           {:name "created"                             :type :datetime        :description "When the bundle was created" :always-available? true}]}

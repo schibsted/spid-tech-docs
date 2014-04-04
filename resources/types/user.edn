@@ -27,7 +27,7 @@ Unauthorized access to users will only return the public fields:
 "
  :fields [
           {:name "id"                  :type :string         :description "Legacy `uuid`. Don't use. [Portable contacts](http://portablecontacts.net/draft-spec.html#anchor16)" :always-available? true}
-          {:name "userId"              :type :integer-string :description "Unique user id. Custom extension." :always-available? true}
+          {:name "userId"              :type :integer-string :description "Unique user ID. Custom extension." :always-available? true}
           {:name "name"                :type :name           :description "The user's full name" :always-available? true}
           {:name "displayName"         :type :string         :description "Name suitable for displaying to end-users." :always-available? true}
           {:name "published"           :type :date-time      :always-available? true}
