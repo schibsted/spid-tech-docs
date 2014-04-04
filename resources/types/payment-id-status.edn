@@ -1,7 +1,6 @@
 {:id :payment-id-status
  :name "Payment identifier status"
  :rendering :enum
- ;;:describe [:Identifier :status] ; TODO?
  :values [{:value "-1" :description "Deleted"}
           {:value "0" :description "Unconfirmed"}
           {:value "1" :description "Confirmed"}]}
