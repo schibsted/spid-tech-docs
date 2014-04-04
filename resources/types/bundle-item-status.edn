@@ -1,0 +1,5 @@
+{:id :bundle-item-status
+ :name "Bundle item status"
+ :rendering :enum
+ :values [{:value "0" :description "Deleted"}
+          {:value "1" :description "Active"}]}
