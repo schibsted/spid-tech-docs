@@ -7,7 +7,24 @@ some custom fields. `userId` is an integer and represents the unique user ID.
 `id` is a legacy uuid and should be ignored in new integrations. The `email` and
 `phoneNumber` fields will always contain the primary used for both if available.
 The corresponding *Verified fields are the date of the last time those were
-verified."
+verified.
+
+Unauthorized access to users will only return the public fields:
+
+* `id`
+* `user_id`
+* `status`
+* `play_name`
+* `name`
+* `gender`
+* `ferred_username`
+* `utc_offset`
+* `published`
+* `updated`
+* `ast_logged_in`
+* `locale`
+* `tracking`
+"
  :fields [
           {:name "id"                  :type :string         :description "Legacy `uuid`. Don't use. [Portable contacts](http://portablecontacts.net/draft-spec.html#anchor16)" :always-available? true}
           {:name "userId"              :type :integer-string :description "Unique user id. Custom extension." :always-available? true}
