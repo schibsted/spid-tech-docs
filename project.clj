@@ -4,7 +4,7 @@
   :dependencies [[org.clojure/clojure "1.5.1"]
                  [stasis "1.0.0"]
                  [ring "1.2.1"]
-                 [optimus "0.14.2"]
+                 [optimus "0.14.3"]
                  [hiccup "1.0.5"]
                  [enlive "1.1.5"]
                  [clygments "0.1.1"]
