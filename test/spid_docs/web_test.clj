@@ -38,14 +38,14 @@
 
  (let [pages (get-pages)]
    (doseq [url (keys pages)]
-     (let [response (app {:uri url})
+     (let [response (test-app {:uri url})
            status (:status response)]
 
        ;; Check that the pages respond with 200 OK.
        [url status] => [url 200]
 
        ;; Check that all links point to existing pages
-       (doseq [link (-> (app {:uri url})
+       (doseq [link (-> response
                         :body
                         java.io.StringReader.
                         enlive/html-resource

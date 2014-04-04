@@ -2,11 +2,12 @@
   "The web namespace defines the basic wiring of the site and post-processing of
    pages for cross-cutting concerns such as injecting optimized asset paths. The
    export function also lives here."
-  (:require [optimus.assets :as assets]
+  (:require [clojure.string :as str]
+            [optimus.assets :as assets]
             [optimus.export]
             [optimus.optimizations :as optimizations]
             [optimus.prime :as optimus]
-            [optimus.strategies :refer [serve-live-assets]]
+            [optimus.strategies :refer [serve-live-assets serve-frozen-assets]]
             [ring.middleware.content-type :refer [wrap-content-type]]
             [spid-docs.content :as content]
             [spid-docs.homeless :refer [wrap-utf-8]]
@@ -27,18 +28,32 @@
   "Compress and concatenate CSS and JS as much as possible"
   optimizations/all)
 
+(defn logit [arg msg]
+  (prn msg (str/join "" (repeat (- 25 (count msg)) " ")) (java.util.Date.))
+  arg)
+
 (defn get-pages []
-  (-> (content/load-content)
-      validate-raw-content
-      content/cultivate-content
-      pages/get-pages
-      prepare-pages))
+  (let [content (-> (content/load-content)
+                    validate-raw-content
+                    content/cultivate-content)]
+    (-> content
+        pages/get-pages
+        prepare-pages)))
 
 (def app
   "This is the function we pass to Ring. It will be called with a
    request map for every request."
-  (-> (stasis/serve-pages get-pages)
+  (-> get-pages
+      (stasis/serve-pages)
       (optimus/wrap get-assets optimize serve-live-assets)
+      wrap-content-type
+      wrap-utf-8))
+
+(def test-app
+  "The test app uses static un-opimtized assets to run faster."
+  (-> get-pages
+      (stasis/serve-pages)
+      (optimus/wrap get-assets (fn [assets options] assets) serve-frozen-assets)
       wrap-content-type
       wrap-utf-8))
 
