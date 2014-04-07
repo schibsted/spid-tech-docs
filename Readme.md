@@ -228,3 +228,9 @@ The documentation is built in Clojure using various libraries. The main
 structured of the app is thoroughly described in
 [Building static sites in Clojure with Stasis](http://cjohansen.no/building-static-sites-in-clojure-with-stasis),
 a tutorial on building sites on the same basic principle.
+
+### Running the tests
+
+You can run all the tests with `./run-integration-tests.sh`, or you
+can start autotesting on a faster subset of the tests with
+`./autotest.sh`
