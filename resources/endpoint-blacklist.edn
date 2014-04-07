@@ -1,9 +1,47 @@
-#{[:POST "status"]
+#{;; Native clients (the Android and iOS SDK) use this endpoint to POST device
+  ;; information while getting status information about the API. It's currently
+  ;; not clear whether continuing to expose this API to new clients is
+  ;; desirable, or if it will even stay this way going forward.
+  [:POST "status"]
+
+  ;; Creates arbitrary QR codes. This is considered a legacy endpoint, and not
+  ;; really something that belongs in SPiD. Do not inform new clients about
+  ;; this.
   [:GET "qrcode"]
+
+  ;; Resolve or create bit.ly URLs. This is considered a legacy endpoint, and
+  ;; not really something that belongs in SPiD. Do not inform new clients about
+  ;; this.
   [:GET "url/{id}"]
+
+  ;; Admin endpoints are currently only used internally in SPiD through
+  ;; Ambassador. Since no external clients have access to these, documenting
+  ;; them in the public site is considered as noise at this point.
   [:GET "admin/{section}"]
   [:GET "admin/{section}/{id}"]
   [:GET "admin/acl/{role}"]
+
+  ;; Email templates are no longer in wide-spread use.
   [:GET "/api/2/email_templates"]
   [:POST "/api/2/email_templates"]
-  [:GET "/api/2/api/2/"]}
+
+  ;; This is some sort of meta-endpoint representing error situations. It is not
+  ;; an endpoint clients are supposed to interact directly with, so we ignore it
+  ;; in the docs site.
+  [:GET "/api/2/api/2/"]
+
+  ;; Discounts are currently in flux. It seems that they are not being used
+  ;; outside of SPiD, and it is not know whether they should be promoted to
+  ;; external clients, or if their functionality could be handled just as well
+  ;; by the Campaign API.
+  [:POST "discount"]
+  [:GET "discount/{id}"]
+  [:POST "discount/{id}"]
+  [:GET "discounts"]
+
+  ;; SPiD wallets are not ready yet. There is no reason to use these until they
+  ;; are, as it is likely that they will change completely.
+  [:GET "user/{userId}/balance"]
+
+  ;; Not really sure what this is, but Claes says to ignore for now.
+  [:GET "user/{userId}/payment/settings"]}
