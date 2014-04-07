@@ -17,18 +17,7 @@
          (contains? pages path)            ; known page
          (contains? pages (str path "index.html")))
       :link-valid
-      (do
-        (println "--------------------------------------------------------------------------------")
-        (prn "Checking" link page-url)
-        (prn `(and (empty? ~path) (not (empty? ~hash))) (and (empty? path) (not (empty? hash))))
-        (prn `(.startsWith ~path "http://") (.startsWith path "http://"))
-        (prn `(.startsWith ~path "https://") (.startsWith path "https://"))
-        (prn `(contains? pages ~path) (contains? pages path))
-        (prn `(contains? pages ~(str path "index.html")) (contains? pages (str path "index.html")))
-        (println "--------------------------------------------------------------------------------")
-        (prn (keys pages))
-        (println "--------------------------------------------------------------------------------")
-        :link-to-unknown-page))))
+      :link-to-unknown-page)))
 
 (fact
  :slow
@@ -38,7 +27,7 @@
 
  (let [pages (get-pages)]
    (doseq [url (keys pages)]
-     (let [response (test-app {:uri url})
+     (let [response (app {:uri url})
            status (:status response)]
 
        ;; Check that the pages respond with 200 OK.

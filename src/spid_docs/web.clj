@@ -40,20 +40,16 @@
         pages/get-pages
         prepare-pages)))
 
+(def freeze-assets?
+  (= (System/getProperty "spid.freeze.assets") "true"))
+
 (def app
   "This is the function we pass to Ring. It will be called with a
    request map for every request."
   (-> get-pages
       (stasis/serve-pages)
-      (optimus/wrap get-assets optimize serve-live-assets)
-      wrap-content-type
-      wrap-utf-8))
-
-(def test-app
-  "The test app uses static un-opimtized assets to run faster."
-  (-> get-pages
-      (stasis/serve-pages)
-      (optimus/wrap get-assets (fn [assets options] assets) serve-frozen-assets)
+      (optimus/wrap get-assets optimize
+                    (if freeze-assets? serve-frozen-assets serve-live-assets))
       wrap-content-type
       wrap-utf-8))
 
