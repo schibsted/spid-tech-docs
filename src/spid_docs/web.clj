@@ -32,16 +32,21 @@
   (prn msg (str/join "" (repeat (- 25 (count msg)) " ")) (java.util.Date.))
   arg)
 
-(defn get-pages []
-  (let [content (-> (content/load-content)
-                    validate-raw-content
-                    content/cultivate-content)]
-    (-> content
-        pages/get-pages
-        prepare-pages)))
+(def freeze-pages?
+  (= (System/getProperty "spid.freeze.pages") "true"))
 
 (def freeze-assets?
   (= (System/getProperty "spid.freeze.assets") "true"))
+
+(def get-pages
+  (cond->
+   (fn []
+     (-> (content/load-content)
+         validate-raw-content
+         content/cultivate-content
+         pages/get-pages
+         prepare-pages))
+   freeze-pages? memoize))
 
 (def app
   "This is the function we pass to Ring. It will be called with a
