@@ -16,6 +16,17 @@
   [html]
   (transform html [:h2] #(assoc-in % [:attrs :id] (-> % :content first to-id-str))))
 
+(def skip-pygments?
+  (= (System/getProperty "spid.skip.pygments") "true"))
+
+(defn- maybe-highlight-code-blocks [page]
+  "Parsing and highlighting with Pygments is quite resource intensive,
+   on the order of adding 20 seconds to the full test run. This way we
+   can disable the pygments by setting JVM_OPTS=\"-Dspid.skip.pygments=true\""
+  (if-not skip-pygments?
+    (highlight-code-blocks page)
+    page))
+
 (defn render-page
   "Fetch the page and convert its {:title ... :body ...} map into a
    web page and process the generated markup."
@@ -23,7 +34,7 @@
   (->> (get-page)
        (layout-page request)
        (inline-examples)
-       (highlight-code-blocks)
+       (maybe-highlight-code-blocks)
        (transform-tabs)
        (add-header-ids)))
 
