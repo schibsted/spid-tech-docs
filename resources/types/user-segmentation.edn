@@ -1,0 +1,10 @@
+{:id :user-segmentation
+ :name "Anonymized user data"
+ :rendering :object
+ :fields [{:name "uid"     :type :integer-string :description "The user's `userId`" :always-available? true}
+          {:name "gender"  :type :string         :always-available? false}
+          {:name "yob"     :type :string         :description "The user's year of birth, four digits", :always-available? false}
+          {:name "post"    :type :string         :description "The user's zip code/postal code" :always-available? false}
+          {:name "country" :type :string         :always-available? false}
+          {:name "city"    :type :string         :always-available? false}
+          {:name "deleted" :type :boolean        :description "`true` if user is deleted. When that is the case, only this field and the `uid` will be returned."}]}
