@@ -12,7 +12,7 @@
   ;; Resolve or create bit.ly URLs. This is considered a legacy endpoint, and
   ;; not really something that belongs in SPiD. Do not inform new clients about
   ;; this.
-  [:GET "url/{id}"]
+  [:GET "url/{action}"]
 
   ;; Admin endpoints are currently only used internally in SPiD through
   ;; Ambassador. Since no external clients have access to these, documenting
