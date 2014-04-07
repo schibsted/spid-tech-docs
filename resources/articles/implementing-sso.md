@@ -203,6 +203,6 @@ logging out of SPiD.
 If you're unsure on certain details after reading this guide, do check
 out these working examples:
 
-- [SSO example for PHP](#?)
-- [SSO example for Java](#?)
-- [SSO example for Clojure](#?)
+- [SSO example for PHP](https://github.com/spid-tech-docs/spid-php-examples/tree/master/sso)
+- [SSO example for Java](https://github.com/spid-tech-docs/spid-java-examples/tree/master/sso)
+- [SSO example for Clojure](https://github.com/spid-tech-docs/spid-clj-examples/tree/master/sso)

@@ -5,10 +5,7 @@ the SPiD API and made your first call, verifying that your client ID and secrets
 are correctly configured. You will then be ready to implement login with SPiD.
 
 **NB!** In order to complete this guide, you need to know your client ID and API
-secret. If you do not, [see the merchant setup page](http://whoknows).
-
-If you are looking to get started with the client-side SPiD API (Android, iOS,
-JavaScript), [see the client-side getting started](#?).
+secret. If you do not, [see the merchant setup page](#?).
 
 ## Downloading the appropriate SDK
 
