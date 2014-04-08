@@ -1,4 +1,2 @@
-green='\033[0;32m'
-NC='\033[0m' # No Color
-echo "${green}Running full suite of tests...${NC}"
-JVM_OPTS="-Dspid.freeze.assets=true -Dspid.freeze.pages=true" lein with-profile test midje
+echo "$(tput setf 2)Running full suite of tests...$(tput sgr0)"
+JVM_OPTS="-Dspid.freeze.assets=true -Dspid.freeze.pages=true" lein with-profile test midje :config test/verbose-midje.clj
