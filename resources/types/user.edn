@@ -17,7 +17,7 @@ Unauthorized access to users will only return the public fields:
 * `play_name`
 * `name`
 * `gender`
-* `ferred_username`
+* `preferred_username`
 * `utc_offset`
 * `published`
 * `updated`
