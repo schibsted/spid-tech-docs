@@ -21,6 +21,10 @@ body {
 #head a {color: #fff; text-decoration: none; }
 #head a:hover {text-decoration: underline; }
 
+a:visited {
+    color: #0000FF;
+}
+
 h1, h2, h3, h4, h5 {color: #111; font-weight: bold;}
 h1 {font-size: 32px;}
 h2 {font-size: 22px; border-bottom: 1px solid #ccc;}
