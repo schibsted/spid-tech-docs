@@ -18,7 +18,7 @@ This is the flow to log in a user:
 
 We'll look at this in detail in the rest of the guide. If you prefer
 to just dive in, take a look at
-[these working examples](#Working%20examples).
+[these working examples](#working-examples).
 
 ## Configure your application
 

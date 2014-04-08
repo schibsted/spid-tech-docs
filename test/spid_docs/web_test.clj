@@ -4,20 +4,40 @@
             [net.cgrand.enlive-html :as enlive]
             [spid-docs.web :refer :all]))
 
-(defn link-valid? [link page-url pages]
+(defn- hash-exists? [hash body]
+  (re-find (re-pattern (str "id=\"" hash "\"")) body))
+
+(defn- link-valid? [link page-url body pages the-app]
   (let [href (-> link :attrs :href)
         [path hash] (str/split href #"#")]
-    (if (or
-         (when (= "#?" href) ; use #? to postpone writing a link. We'll nag about it, tho.
-           (do (println "TODO: The" (:content link) "at" page-url "needs to point somewhere")
-               true))
-         (and (empty? path) (not (empty? hash))) ; inpage hash navigation
-         (.startsWith path "http://")            ; external link
-         (.startsWith path "https://")
-         (contains? pages path)            ; known page
+    (cond
+
+     ;; we use #? to postpone writing a link
+     (= "#?" href)
+     (do (println "TODO: The" (:content link) "at" page-url "needs to point somewhere")
+         :valid-link)
+
+     ;; inpage hash navigation
+     (and (empty? path) (not (empty? hash)))
+     (if (hash-exists? hash body)
+       :valid-link
+       :link-to-unknown-hash)
+
+     ;; external link
+     (or (.startsWith path "//")
+         (.startsWith path "http://")
+         (.startsWith path "https://"))
+     :valid-link
+
+     ;; internal link
+     (or (contains? pages path)
          (contains? pages (str path "index.html")))
-      :link-valid
-      :link-to-unknown-page)))
+     (if (or (empty? hash)
+             (hash-exists? hash (:body (the-app {:uri path}))))
+       :valid-link
+       :link-to-unknown-hash)
+
+     :else :link-to-unknown-page)))
 
 (fact
  :slow
@@ -25,19 +45,20 @@
 
  lein with-profile test midje :autotest :filter -slow"
 
- (let [pages (get-pages)]
+ (let [pages (get-pages)
+       the-app (memoize app)]
    (doseq [url (keys pages)]
-     (let [response (app {:uri url})
-           status (:status response)]
+     (let [response (the-app {:uri url})
+           status (:status response)
+           body (:body response)]
 
        ;; Check that the pages respond with 200 OK.
        [url status] => [url 200]
 
        ;; Check that all links point to existing pages
-       (doseq [link (-> response
-                        :body
+       (doseq [link (-> body
                         java.io.StringReader.
                         enlive/html-resource
                         (enlive/select [:a]))]
          (let [href (get-in link [:attrs :href])]
-           [url href (link-valid? link url pages)] => [url href :link-valid]))))))
+           [url href (link-valid? link url body pages the-app)] => [url href :valid-link]))))))

@@ -1,12 +1,12 @@
 # Endpoints
 
-<h2 id="pagination">Pagination</h2>
+## Pagination
 
 Pagination is supported in many SPiD endpoints.
 
-<h2 id="filters">Filters</h2>
+## Filters
 
-<h2 id="locale">Locales</h2>
+## Locales
 
 SPiD supports localized content for some endpoints. Whenever that is the case,
 the available locales are:
@@ -18,7 +18,7 @@ the available locales are:
 Although rare, you may run into content that has not been localized. In these
 cases, you will get English content back.
 
-<h2 id="response-container">API response container</h2>
+## Response container
 
 All API responses come with a common container. The container object (when the
 response format is JSON) contains some information about the API itself, and a
@@ -59,7 +59,7 @@ sample output:
 }
 ```
 
-<h2 id="formats">Response formats</h2>
+## Response formats
 
 Most SPiD endpoints can respond with various response formats. The format used
 is determined by the `format` query parameter supported by all endpoints. Refer
@@ -122,7 +122,19 @@ following query parameter:
 format=xml
 ```
 
-<h2 id="params">Parameters</h2>
+<h3 id="format-tgz">TGZ</h3>
+
+TODO
+
+<h3 id="format-csv">CSV</h3>
+
+TODO
+
+<h3 id="format-png">PNG</h3>
+
+TODO
+
+## Parameters
 
 Some query parameters support multiple values. Whenever this is the case, you
 have a few options for providing these values.

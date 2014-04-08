@@ -1,6 +1,5 @@
 (ns spid-docs.pages.type-pages
   (:require [inflections.core :refer [plural]]
-            [spid-docs.formatting :refer [to-id-str]]
             [spid-docs.pimp.markdown :as markdown]
             [spid-docs.routes :refer [type-path]]))
 
@@ -13,7 +12,7 @@
 
 (defn- link-to-typedef [type-name typedef]
   (if-let [path (if (:inline? typedef)
-                  (str "#" (to-id-str type-name))
+                  (str "#" (name (:id typedef)))
                   (type-path typedef))]
     [:a {:href path} type-name]
     type-name))
