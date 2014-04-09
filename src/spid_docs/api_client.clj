@@ -4,7 +4,8 @@
   (:require [clj-http.client :as http]
             [clojure.data.json :as json]
             [spid-docs.core :as spid]
-            [spid-sdk-clojure.core :as sdk]))
+            [spid-sdk-clojure.core :as sdk]
+            [spid-sdk-clojure.raw :as api]))
 
 (def get-config (memoize #(spid/load-edn "config.edn")))
 
@@ -13,6 +14,15 @@
 
 (defn GET [path]
   (sdk/GET (get-client) path))
+
+(defn raw-GET [path & [params]]
+  (api/GET (get-client) path params))
+
+(defn raw-POST [path params]
+  (api/POST (get-client) path params))
+
+(defn raw-DELETE [path params]
+  (api/DELETE (get-client) path params))
 
 (defn get-endpoints []
   (GET "/endpoints"))
