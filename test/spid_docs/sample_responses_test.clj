@@ -3,79 +3,62 @@
             [spid-docs.sample-responses :refer :all]
             [test-with-files.core :refer [with-tmp-dir tmp-dir]]))
 
-(fact "It reduces lists of data to a manageable amount"
-      (process-data [{:id 1} {:id 2} {:id 3}]) => [{:id 1}])
-
-(fact "It masks potentially sensitive data"
-      (let [data (-> {:clientId "666"
-                      :merchantId "0123456"
-                      :userId "0123456"
-                      :email "christian@kodemaker.no"
-                      :ip "80.65.52.213"
-                      :emails [{:value "some@email.no"} {:value "some-other@email.no"}]
-                      :addresses {:home {:country "NORGE"
-                                         :streetNumber "6"
-                                         :longitude ""
-                                         :floor ""
-                                         :locality "OSLO"
-                                         :formatted "VARGVEIEN 6, 0139 OSLO, NORGE"
-                                         :streetEntrance ""
-                                         :apartment ""
-                                         :postalCode "0139"
-                                         :latitude ""
-                                         :type "home"
-                                         :region ""
-                                         :streetAddress "VARGVEIEN"}
-                                  :office {:country "NORGE"
-                                           :streetNumber "32"
-                                           :longitude ""
-                                           :floor ""
-                                           :locality "OSLO"
-                                           :formatted "Annen gate 32, 0139 OSLO, NORGE"
-                                           :streetEntrance ""
-                                           :apartment ""
-                                           :postalCode "0139"
-                                           :latitude ""
-                                           :type "home"
-                                           :region ""
-                                           :streetAddress "VARGVEIEN"}}}
-                     mask-sensitive-data)]
-        (:clientId data) => "[Your client ID]"
-        (:merchantId data) => "[Your merchant ID]"
-        (:userId data) => #"^\d{7}$"
-        (:email data) => "user@domain.tld"
-        (:ip data) => "127.0.0.1"
-        (:emails data) => [{:value "user@domain1.tld"} {:value "user@domain2.tld"}]
-        (:addresses data) => {:home {:country "NORGE"
-                                     :streetNumber "1"
-                                     :longitude ""
-                                     :floor ""
-                                     :locality "OSLO"
-                                     :formatted "STREET 1, 0123 OSLO, NORGE"
-                                     :streetEntrance ""
-                                     :apartment ""
-                                     :postalCode "0123"
-                                     :latitude ""
-                                     :type "home"
-                                     :region ""
-                                     :streetAddress "STREET"}
-                              :office {:country "NORGE"
-                                       :streetNumber "2"
-                                       :longitude ""
-                                       :floor ""
-                                       :locality "OSLO"
-                                       :formatted "STREET 2, 0123 OSLO, NORGE"
-                                       :streetEntrance ""
-                                       :apartment ""
-                                       :postalCode "0123"
-                                       :latitude ""
-                                       :type "home"
-                                       :region ""
-                                       :streetAddress "STREET"}}))
-
-(fact "It processes sample response"
+(fact "It formats sample response"
       (-> {:code "201" :data {:clientId "666" :url "http://vg.no"}}
-          process-sample-response ) => "{\"clientId\":\"[Your client ID]\", \"url\":\"http://vg.no\"}\n")
+          format-sample-response ) => "{\"clientId\":\"[Your client ID]\", \"url\":\"http://vg.no\"}\n")
+
+(fact
+ (inject-deps {} {} :keyword) => :keyword
+ (inject-deps {} {} 42) => 42
+ (inject-deps {} {} '(42)) => '(42)
+ (inject-deps {:jane {:response {:data 42}}} {'user :jane} 'user) => 42
+ (inject-deps {:jane {:response {:data 42}}} {'user :jane} '(user)) => '(42)
+ (inject-deps {:jane {:response {:data 42}}} {'user :jane} {:id 'user}) => {:id 42}
+ (inject-deps {:jane {:response {:data 42}}} {'user :jane} {:stuff [13 'user]}) => {:stuff [13 42]}
+ (->> [13 '(:name user)]
+      (inject-deps {:jane {:response {:data {:name "Jane"}}}} {'user :jane})
+      eval) => [13 "Jane"])
+
+(fact "Makes dependencies available as bindings path params"
+      (let [sample-def {:method :GET
+                        :path "/somewhere"
+                        :path-params '{:name (:name user)}
+                        :dependencies {'user :john}}
+            loaded-samples [{:id :john
+                             :response {:success? true
+                                        :data {:name "Dude"}}}]
+            interpolated (interpolate-sample-def sample-def loaded-samples)]
+        (:path-params interpolated) => {:name "Dude"}))
+
+(fact "Makes dependencies available as bindings for request params"
+      (let [sample-def {:method :GET
+                        :path "/somewhere"
+                        :params '{:name (:name user)}
+                        :dependencies {'user :john}}
+            loaded-samples [{:id :john
+                             :response {:success? true
+                                        :data {:name "Dude"}}}]
+            interpolated (interpolate-sample-def sample-def loaded-samples)]
+        (:params interpolated) => {:name "Dude"}))
+
+(fact "Interpolates parameters in path"
+      (let [sample-def {:method :GET
+                        :path "/somewhere/{userId}"
+                        :path-params {:userId 42}}]
+        (:path (interpolate-sample-def sample-def)) => "/somewhere/42"))
+
+(fact "Interpolates dependency injected parameters in path"
+      (let [sample-def {:method :GET
+                        :path "/somewhere/{userId}"
+                        :path-params {:userId '(:id user)}
+                        :dependencies {'user :john}}
+            loaded-samples [{:id :john
+                             :response {:data {:id 42}}}]
+            interpolated (interpolate-sample-def sample-def loaded-samples)]
+        (:path interpolated) => "/somewhere/42"))
+
+
+
 
 (fact "It generates sample response files."
       (with-tmp-dir

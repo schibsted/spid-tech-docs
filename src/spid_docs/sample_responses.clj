@@ -8,49 +8,88 @@
             [clojure.string :as str]
             [spid-docs.api-client :as api]
             [spid-docs.formatting :refer [to-id-str]]
-            [spid-docs.homeless :refer [update-existing]])
+            [spid-docs.homeless :refer [update-existing]]
+            [spid-docs.sample-responses.wash :refer [wash-data]])
   (:import java.util.Date))
 
-(def rand-digit (partial rand-int 10))
+(defn format-sample-response [response]
+  (with-out-str (json/pprint (->> response :data wash-data) :escape-slash false)))
 
-(def scramble-numbers #(apply str (repeatedly (count %) rand-digit)))
+(defn- interpolate [string data]
+  (str/replace string #"\{(.*)\}" (fn [[_ var]] (str ((keyword var) data)))))
 
-(defn mask-address
-  "Anonymize addresses "
-  [num address]
-  (assoc address
-    :streetNumber (str (inc num))
-    :postalCode "0123"
-    :streetAddress "STREET"
-    :formatted (str "STREET " (inc num) ", 0123 OSLO, NORGE")))
+(defn inject-deps
+  "Takes a map of samples and injects them into the expression. The expression
+   can be any Clojure expression. bindings is a map of {Symbol Keyword}. The
+   symbols may be used in the expression, and the keywords map to keys in the
+   sample defs map.
 
-(defn mask-addresses [addresses]
-  (->> addresses
-       (map-indexed #(vector (first %2)
-                             (mask-address %1 (second %2))))
-       (into {})))
+   Symbols will be replaced with the :response :data from the defs map for
+   matching bindings.
 
-(defn mask-sensitive-data [data]
-  (update-existing
-   data
-   [:clientId] "[Your client ID]"
-   [:merchantId] "[Your merchant ID]"
-   [:userId] scramble-numbers
-   [:email] "user@domain.tld"
-   [:ip] "127.0.0.1"
-   [:emails] (fn [emails]
-               (map-indexed #(assoc %2 :value (str "user@domain" (inc %1) ".tld")) emails))
-   [:addresses] mask-addresses))
+   Example:
 
-(defn process-data [data]
-  (if (map? data)
-    (mask-sensitive-data data)
-    (->> data
-         (take 1)
-         (map process-data))))
+   (inject-deps {:john {:response {:data {:name \"John\"}}}}
+                {'person :john}
+                [42 person])
+   ;;=>
+   [42 \"John\"]
 
-(defn process-sample-response [response]
-  (with-out-str (json/pprint (->> response :data process-data) :escape-slash false)))
+   See tests for further examples"
+  [defs bindings expr]
+  (let [inject-recursively (partial inject-deps defs bindings)]
+    (cond
+     ;; When the expression is a symbol, first check if we have a binding for this
+     ;; symbol. If we do, check if the binding maps to a sample definition. If it
+     ;; does, replace the symbol with the corresponding sample definition's
+     ;; :response :data. Otherwise, leave the symbol untouched
+     (symbol? expr) (if (and (contains? bindings expr)
+                             (contains? defs (bindings expr)))
+                      (-> ((bindings expr) defs) :response :data)
+                      expr)
+
+     ;; When the expression is a map, recursively inject dependencies in the map
+     ;; values. (Keys are left untouched)
+     (map? expr) (zipmap (keys expr) (map inject-recursively (vals expr)))
+
+     ;; Seqs and vectors are handled recursively.
+     (seq? expr) (map inject-recursively expr)
+     (vector? expr) (mapv inject-recursively expr)
+
+     ;; Other expressions are left untouched
+     :else expr)))
+
+(defn interpolate-sample-def
+  "Injects dependencies and interpolates path parameters. Returns an updated
+   sample definition map."
+  [def & [defs]]
+  (let [defs-map (zipmap (map :id defs) defs)
+        inject-dependencies (comp eval (partial inject-deps defs-map (:dependencies def)))
+        dep-injected (-> def
+                         (update-existing [:params] inject-dependencies)
+                         (update-existing [:path-params] inject-dependencies))]
+    (update-in dep-injected [:path] #(interpolate % (:path-params dep-injected)))))
+
+(defn fetch-sample-response
+  "Fetch sample response from the API"
+  [sample-def]
+  (let [method (:method sample-def)
+        path (:path sample-def)
+        params (:params sample-def)
+        response (cond
+                  (= method :GET) (api/raw-GET path params)
+                  (= method :POST) (api/raw-POST path params)
+                  (= method :DELETE) (api/raw-DELETE path params))]
+    {:method method
+     :path (:path sample-def)
+     :response {:status (:status response)
+                :error (:error response)
+                :data (:data response)
+                :success? (:success? response)}}))
+
+
+
+
 
 (def target-directory "resources/sample-responses")
 
