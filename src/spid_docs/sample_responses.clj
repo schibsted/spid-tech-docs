@@ -7,6 +7,7 @@
             [clojure.set :refer [rename-keys]]
             [clojure.string :as str]
             [spid-docs.api-client :as api]
+            [spid-docs.bindings :refer [resolve-bindings]]
             [spid-docs.formatting :refer [to-id-str]]
             [spid-docs.homeless :refer [update-existing]]
             [spid-docs.sample-responses.wash :refer [wash-data]])
@@ -18,53 +19,12 @@
 (defn- interpolate [string data]
   (str/replace string #"\{(.*)\}" (fn [[_ var]] (str ((keyword var) data)))))
 
-(defn inject-deps
-  "Takes a map of samples and injects them into the expression. The expression
-   can be any Clojure expression. bindings is a map of {Symbol Keyword}. The
-   symbols may be used in the expression, and the keywords map to keys in the
-   sample defs map.
-
-   Symbols will be replaced with the :response :data from the defs map for
-   matching bindings.
-
-   Example:
-
-   (inject-deps {:john {:response {:data {:name \"John\"}}}}
-                {'person :john}
-                [42 (:name person)])
-   ;;=>
-   [42 \"John\"]
-
-   See tests for further examples"
-  [defs bindings expr]
-  (let [inject-recursively (partial inject-deps defs bindings)]
-    (cond
-     ;; When the expression is a symbol, first check if we have a binding for this
-     ;; symbol. If we do, check if the binding maps to a sample definition. If it
-     ;; does, replace the symbol with the corresponding sample definition's
-     ;; :response :data. Otherwise, leave the symbol untouched
-     (symbol? expr) (if (and (contains? bindings expr)
-                             (contains? defs (bindings expr)))
-                      (-> ((bindings expr) defs) :response :data)
-                      expr)
-
-     ;; When the expression is a map, recursively inject dependencies in the map
-     ;; values. (Keys are left untouched)
-     (map? expr) (zipmap (keys expr) (map inject-recursively (vals expr)))
-
-     ;; Seqs and vectors are handled recursively.
-     (seq? expr) (map inject-recursively expr)
-     (vector? expr) (mapv inject-recursively expr)
-
-     ;; Other expressions are left untouched
-     :else expr)))
-
 (defn interpolate-sample-def
   "Injects dependencies and interpolates path parameters. Returns an updated
    sample definition map."
   [def & [defs]]
-  (let [defs-map (zipmap (map :id defs) defs)
-        inject-dependencies (comp eval (partial inject-deps defs-map (:dependencies def)))
+  (let [defs-map (zipmap (map :id defs) (map (comp :data :response) defs))
+        inject-dependencies #(eval (resolve-bindings % (:dependencies def) defs-map))
         dep-injected (-> def
                          (update-existing [:params] inject-dependencies)
                          (update-existing [:path-params] inject-dependencies))]
@@ -99,7 +59,9 @@
 (defn- json-parse-data [response]
   (assoc response :data (:data (json/read-json (:data response)))))
 
-
+(defn get-sample-response [sample-def]
+  (or (get-cached-sample-response sample-def)
+      (fetch-sample-response sample-def)))
 
 
 

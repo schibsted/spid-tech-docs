@@ -7,18 +7,6 @@
       (-> {:code "201" :data {:clientId "666" :url "http://vg.no"}}
           format-sample-response ) => "{\"clientId\":\"[Your client ID]\", \"url\":\"http://vg.no\"}\n")
 
-(fact
- (inject-deps {} {} :keyword) => :keyword
- (inject-deps {} {} 42) => 42
- (inject-deps {} {} '(42)) => '(42)
- (inject-deps {:jane {:response {:data 42}}} {'user :jane} 'user) => 42
- (inject-deps {:jane {:response {:data 42}}} {'user :jane} '(user)) => '(42)
- (inject-deps {:jane {:response {:data 42}}} {'user :jane} {:id 'user}) => {:id 42}
- (inject-deps {:jane {:response {:data 42}}} {'user :jane} {:stuff [13 'user]}) => {:stuff [13 42]}
- (->> [13 '(:name user)]
-      (inject-deps {:jane {:response {:data {:name "Jane"}}}} {'user :jane})
-      eval) => [13 "Jane"])
-
 (fact "Makes dependencies available as bindings path params"
       (let [sample-def {:method :GET
                         :path "/somewhere"
