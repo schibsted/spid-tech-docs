@@ -225,6 +225,16 @@
                     " references inline type" (if (> (count missing) 1) "s" "")
                     " with missing definition: " (str/join ", " missing))))))
 
+(defn- render-relevant-endpoint [{:keys [method path]}]
+  [:li [:a {:href (str "/endpoints/" (name method) path)}
+        [:code method] " " path]])
+
+(defn- render-relevant-endpoints [relevant]
+  (when relevant
+    (list
+     [:h2 "See also"]
+     [:ul (map render-relevant-endpoint relevant)])))
+
 (defn create-page [endpoint types]
   (warn-about-missing-typedefs endpoint types)
   {:split-page? true ;; Makes the layout render a grey right column
@@ -236,7 +246,10 @@
                   (render-title endpoint)
                   (render-authentication endpoint)
                   (if (:deprecated endpoint) (render-deprecation (:deprecated endpoint)))
-                  (render-description endpoint)]]]
+                  (render-description endpoint)]]
+                [:div.aside
+                 [:div.wrap
+                  (render-relevant-endpoints (:relevant-endpoints endpoint))]]]
                [:div.separator]
                (render-request endpoint)
                [:div.separator]

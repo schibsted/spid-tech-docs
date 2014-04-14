@@ -110,10 +110,15 @@
        (remove success?)
        (map create-response)))
 
-(defn- cultivate-endpoint-1 [endpoint [method details] raw-content]
+(defn- get-other-endpoints [method path http-methods]
+  (->> http-methods keys
+       (remove #{method})
+       (map (fn [m] {:method m, :path path}))))
+
+(defn- cultivate-endpoint-1 [endpoint-bundle [method details] http-methods raw-content]
   "Gather a bunch of information from all over to create a map that
    includes everything you could ever want to know about an endpoint."
-  (let [{:keys [path category pathParameters valid_output_formats default_output_format deprecated]} endpoint
+  (let [{:keys [path category pathParameters valid_output_formats default_output_format deprecated]} endpoint-bundle
         {:keys [required optional default_filters filters access_token_types responses]} details
         {:keys [pagination-descriptions filter-descriptions endpoint-descriptions sample-responses]} raw-content
         endpoint-id (str (to-id-str path) "-" (.toLowerCase (name method)))
@@ -123,27 +128,29 @@
        :path (str "/" path)
        :api-path (str "/api/2/" path)
        :method method
-       :name (fix-multimethod-name (:name endpoint) method)
+       :name (fix-multimethod-name (:name endpoint-bundle) method)
        :description introduction
        :category {:section (first category) :api (second category)}
-       :parameters (collect-parameters required optional pathParameters pagination-descriptions endpoint)
+       :parameters (collect-parameters required optional pathParameters pagination-descriptions endpoint-bundle)
        :?pagination (collect-pagination-params optional pagination-descriptions)
        :?filters (map #(create-filter % default_filters filter-descriptions) filters)
        :response-formats (map keyword valid_output_formats)
        :default-response-format (keyword default_output_format)
        :access-token-types (set (map keyword access_token_types))
        :requires-authentication? (not (empty? access_token_types))
+       :?relevant-endpoints (get-other-endpoints method (str "/" path) http-methods)
        :responses {:success (-> success? (filter responses) first create-response
                                 (add-samples (str "/" endpoint-id) sample-responses)
                                 (assoc-non-nil :description success-description))
                    :failures (get-failure-responses details)}
        :?deprecated deprecated})))
 
-(defn cultivate-endpoint [endpoint raw-content]
-  "We define an endpoint as path + http method. The source list of
-   endpoints does not. So this function not only cultivates an endpoint,
+(defn cultivate-endpoint [endpoint-bundle raw-content]
+  "We define an endpoint-bundle as path + http method. The source list of
+   endpoints does not. So this function not only cultivates an endpoint-bundle,
    it splits it into several endpoints based on the given set of http
    methods."
-  (->> (:httpMethods endpoint)
-       (remove #(contains? (:endpoint-blacklist raw-content) [(first %) (:path endpoint)]))
-       (map #(cultivate-endpoint-1 endpoint % raw-content))))
+  (let [http-methods (->> endpoint-bundle
+                          :httpMethods
+                          (remove #(contains? (:endpoint-blacklist raw-content) [(first %) (:path endpoint-bundle)])))]
+    (map #(cultivate-endpoint-1 endpoint-bundle % http-methods raw-content) http-methods)))

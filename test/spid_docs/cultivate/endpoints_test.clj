@@ -50,6 +50,17 @@
  => :describe-object-get)
 
 (fact
+ "Other endpoints on the same path are added to relevant-endpoints"
+
+ (->> (cultivate :path "subscription"
+                 :httpMethods {:GET (cs/http-method)
+                               :POST (cs/http-method)})
+
+      (map (juxt :id :relevant-endpoints)))
+ => [[:subscription-get [{:method :POST, :path "/subscription"}]]
+     [:subscription-post [{:method :GET, :path "/subscription"}]]])
+
+(fact
  "Descriptions are pulled out of the raw-content based on the endpoint id."
 
  (-> (cultivate :path "terms"
