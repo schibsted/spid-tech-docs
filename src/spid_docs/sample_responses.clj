@@ -31,7 +31,7 @@
 
    (inject-deps {:john {:response {:data {:name \"John\"}}}}
                 {'person :john}
-                [42 person])
+                [42 (:name person)])
    ;;=>
    [42 \"John\"]
 
