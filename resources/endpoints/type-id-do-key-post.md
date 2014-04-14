@@ -16,3 +16,9 @@ Simple data objects can be attached to one of the main base API type user,
 product, order, discount or client. You only need to append /do/{key} to each
 supported endpoint and do an HTTP `POST` to attach the object and an HTTP `GET`
 to retrieve the object. An HTTP `DELETE` will remove the object from storage.
+
+:see-also
+
+GET /{type}/{id}/do/{key}
+POST /{type}/{id}/{subtype}/{subid}/do/{key}
+GET /{type}/{id}/{subtype}/{subid}/do/{key}

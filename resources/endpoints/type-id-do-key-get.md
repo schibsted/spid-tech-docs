@@ -6,3 +6,9 @@ JSON object.
 
 By making an HTTP GET to this endpoint, you can retrieve previously
 [stored](/endpoints/POST/{type}/{id}/do/{key}) data objects.
+
+:see-also
+
+POST /{type}/{id}/do/{key}
+POST /{type}/{id}/{subtype}/{subid}/do/{key}
+GET /{type}/{id}/{subtype}/{subid}/do/{key}
