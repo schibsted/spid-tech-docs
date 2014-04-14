@@ -4,6 +4,7 @@
    result through a series of functions that anonymizes and scrambles
    potentially sensitive data."
   (:require [clojure.data.json :as json]
+            [clojure.java.io :as io]
             [clojure.set :refer [rename-keys]]
             [clojure.string :as str]
             [spid-docs.api-client :as api]
@@ -48,56 +49,67 @@
                 :success? (:success? response)}}))
 
 (def target-directory "resources/sample-responses")
-(def cache-directory "resources/sample-responses")
+(def cache-directory "sample-response-cache")
 
 (defn get-file-basename [sample-def]
   (.toLowerCase (str (to-id-str (:path sample-def)) "-" (name (:method sample-def)))))
 
-(defn get-cached-sample-response [sample-def]
-  (slurp (str cache-directory "/" (get-file-basename sample-def))))
+(defn- get-sample-response-cache-file [sample-def]
+  (str cache-directory "/" (get-file-basename sample-def) ".edn"))
 
-(defn- json-parse-data [response]
-  (assoc response :data (:data (json/read-json (:data response)))))
+(defn cache-sample-response
+  "Caches successful sample responses and returns the sample response."
+  [sample-def]
+  (if (<= 200 (-> sample-def :response :status) 299)
+    (spit (str "resources/" (get-sample-response-cache-file sample-def)) sample-def))
+  sample-def)
+
+(defn get-cached-sample-response [sample-def]
+  (let [file (io/resource (get-sample-response-cache-file sample-def))]
+    (if (not (nil? file))
+      (read-string (slurp file)))))
 
 (defn get-sample-response [sample-def]
   (or (get-cached-sample-response sample-def)
-      (fetch-sample-response sample-def)))
+      (cache-sample-response (fetch-sample-response sample-def))))
 
+(defn- get-endpoint [sample-response endpoints]
+  (let [spec [(:method sample-response) (:path sample-response)]]
+    (->> endpoints
+         (filter #(= spec [(:method %) (:path %)]))
+         first)))
 
+(defn- load-and-verify-sample-response [sample-responses def]
+  (let [interpolated (interpolate-sample-def def sample-responses)
+        sample-response (get-sample-response interpolated)
+        response (:response sample-response)]
+    (if (not (<= 200 (:status response) 299))
+      (throw (Exception. (str "Fetching sample response failed!\n"
+                              (name (:method sample-response)) " " (:path sample-response)
+                              "\n    returned " (:status response)))))
+    (conj sample-responses sample-response)))
 
-;; (defn- get-filename-stub [endpoint]
-;;   (.toLowerCase (str target-directory "/"
-;;                      (to-id-str (:path endpoint)) "-"
-;;                      (name (:method endpoint)))))
+(defn- generate-sample-response-files [sample-response endpoint]
+  (let [formats (:response-formats endpoint)
+        json-data (-> sample-response :response format-sample-response)
+        expected-status (-> endpoint :responses :success :status)
+        actual-status (-> sample-response :response :status)
+        output-base (str target-directory "/" (get-file-basename sample-response))]
+    (if (not (= expected-status actual-status))
+      (throw (Exception. (str "Sample response had unexpected response status.\n"
+                              (name (:method sample-response)) " " (:path sample-response)
+                              "\nexpected successful response to return " expected-status
+                              ", but sample response status was " actual-status))))
+    (if (some #(= % :json) formats)
+      (spit (str output-base ".json") json-data))
+    (if (some #(= % :jsonp) formats)
+      (spit (str output-base ".jsonp")
+            (str "callback(" (str/trim json-data) ");\n")))))
 
-;; (defn- create-sample-responses [endpoint response]
-;;   (let [filename-stub (get-filename-stub endpoint)
-;;         sample (process-sample-response response)]
-;;     [{:filename (str filename-stub ".json"),  :contents sample}
-;;      {:filename (str filename-stub ".jsonp"), :contents (str "callback(" (str/trim sample) ");\n")}]))
-
-;; (defn- ensure-get [endpoint]
-;;   (if (not (= (:method endpoint) :GET))
-;;     (throw (Exception. (str (name (:method endpoint)) " user sample response not implemented")))))
-
-;; (defn- demo-user-sample [endpoint]
-;;   (ensure-get endpoint)
-;;   (-> (api/get-config)
-;;       (api/get-login-token)
-;;       (api/user-get (:path endpoint))
-;;       (rename-keys {:body :data
-;;                     :status :code})
-;;       (json-parse-data)))
-
-;; (defn- save-sample-responses [samples]
-;;   (doseq [{:keys [filename contents]} samples]
-;;     (spit filename contents)))
-
-;; (defmulti generate-sample-response #(vector (:method %) (:path %)))
-
-;; (defmethod generate-sample-response [:GET "/me"] [endpoint]
-;;   (save-sample-responses (create-sample-responses endpoint (demo-user-sample endpoint))))
-
-;; (defmethod generate-sample-response :default [endpoint]
-;;   (ensure-get endpoint)
-;;   (save-sample-responses (create-sample-responses endpoint (api/GET (:path endpoint)))))
+(defn generate-sample-responses [sample-defs endpoints]
+  (try
+    (->> sample-defs
+         (reduce load-and-verify-sample-response [])
+         (map #(generate-sample-response-files % (get-endpoint % endpoints))))
+    (catch Exception e
+      (.printStackTrace e))))
