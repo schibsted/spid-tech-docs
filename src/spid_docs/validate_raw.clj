@@ -55,7 +55,8 @@
 
 (def EndpointDescription
   {:introduction Str
-   (optional-key :success-description) Str})
+   (optional-key :success-description) Str
+   (optional-key :see-also) Str})
 
 (defn validate-raw-content [raw-content]
   (validate {:endpoints [Endpoint]

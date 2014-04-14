@@ -3,13 +3,20 @@
             [spid-docs.cultivate.content-shells :as cs]
             [spid-docs.cultivate.endpoints :refer :all]))
 
+(def see-also-example
+  "
+GET /path/to/{id}
+POST /path/to/other/page
+")
+
 (def raw-content
   "Test data with relevant raw content when cultivating endpoints.
    Look for these values in tests below."
   {:sample-responses {"/terms-get.json" "terms json"
                       "/terms-get.jsonp" "terms jsonp"}
    :endpoint-descriptions {"/terms-get.md" {:introduction "terms desc"
-                                            :success-description "success description"}}
+                                            :success-description "success description"
+                                            :see-also see-also-example}}
    :pagination-descriptions {:limit  "limit desc"
                              :offset "offset desc"
                              :since  "since desc"
@@ -307,6 +314,15 @@
                :samples {:json "terms json"
                          :jsonp "terms jsonp"}}
      :failures []})
+
+(fact
+ "The entries in :see-also are parsed and listed under :relevant-endpoints"
+
+ (-> (cultivate :httpMethods {:GET (cs/http-method)}
+                :path "terms")
+     first :relevant-endpoints)
+ => [{:method :GET, :path "/path/to/{id}"}
+     {:method :POST, :path "/path/to/other/page"}])
 
 (fact (-> (cultivate :deprecated "1.0") first :deprecated) => "1.0")
 
