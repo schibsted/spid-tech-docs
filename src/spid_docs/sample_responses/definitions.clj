@@ -1,5 +1,5 @@
 (ns spid-docs.sample-responses.definitions
-  (:require [spid-docs.defsample :refer [defsample]]))
+  (:require [spid-docs.sample-responses.defsample :refer [defsample]]))
 ;; Usikkert
 ;; POST "/oauth/exchange" (["clientId" true] ["type" true] ["redirectUri" false])
 

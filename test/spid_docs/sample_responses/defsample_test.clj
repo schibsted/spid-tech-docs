@@ -1,7 +1,7 @@
-(ns spid-docs.defsample-test
+(ns spid-docs.sample-responses.defsample-test
   (:require [midje.sweet :refer :all]
             [spid-docs.api-client :refer :all]
-            [spid-docs.defsample :refer :all]
+            [spid-docs.sample-responses.defsample :refer :all]
             [test-with-files.core :refer [with-tmp-dir tmp-dir]]))
 
 (fact "Build sample dispatches on number and type of arguments"

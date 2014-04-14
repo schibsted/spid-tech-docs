@@ -1,4 +1,4 @@
-(ns spid-docs.defsample
+(ns spid-docs.sample-responses.defsample
   (:import clojure.lang.Keyword
            clojure.lang.PersistentArrayMap
            clojure.lang.PersistentVector
