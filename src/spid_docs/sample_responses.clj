@@ -87,48 +87,55 @@
                 :data (:data response)
                 :success? (:success? response)}}))
 
-
-
-
-
 (def target-directory "resources/sample-responses")
+(def cache-directory "resources/sample-responses")
 
-(defn- get-filename-stub [endpoint]
-  (.toLowerCase (str target-directory "/"
-                     (to-id-str (:path endpoint)) "-"
-                     (name (:method endpoint)))))
+(defn get-file-basename [sample-def]
+  (.toLowerCase (str (to-id-str (:path sample-def)) "-" (name (:method sample-def)))))
 
-(defn- create-sample-responses [endpoint response]
-  (let [filename-stub (get-filename-stub endpoint)
-        sample (process-sample-response response)]
-    [{:filename (str filename-stub ".json"),  :contents sample}
-     {:filename (str filename-stub ".jsonp"), :contents (str "callback(" (str/trim sample) ");\n")}]))
+(defn get-cached-sample-response [sample-def]
+  (slurp (str cache-directory "/" (get-file-basename sample-def))))
 
 (defn- json-parse-data [response]
   (assoc response :data (:data (json/read-json (:data response)))))
 
-(defn- ensure-get [endpoint]
-  (if (not (= (:method endpoint) :GET))
-    (throw (Exception. (str (name (:method endpoint)) " user sample response not implemented")))))
 
-(defn- demo-user-sample [endpoint]
-  (ensure-get endpoint)
-  (-> (api/get-config)
-      (api/get-login-token)
-      (api/user-get (:path endpoint))
-      (rename-keys {:body :data
-                    :status :code})
-      (json-parse-data)))
 
-(defn- save-sample-responses [samples]
-  (doseq [{:keys [filename contents]} samples]
-    (spit filename contents)))
 
-(defmulti generate-sample-response #(vector (:method %) (:path %)))
 
-(defmethod generate-sample-response [:GET "/me"] [endpoint]
-  (save-sample-responses (create-sample-responses endpoint (demo-user-sample endpoint))))
+;; (defn- get-filename-stub [endpoint]
+;;   (.toLowerCase (str target-directory "/"
+;;                      (to-id-str (:path endpoint)) "-"
+;;                      (name (:method endpoint)))))
 
-(defmethod generate-sample-response :default [endpoint]
-  (ensure-get endpoint)
-  (save-sample-responses (create-sample-responses endpoint (api/GET (:path endpoint)))))
+;; (defn- create-sample-responses [endpoint response]
+;;   (let [filename-stub (get-filename-stub endpoint)
+;;         sample (process-sample-response response)]
+;;     [{:filename (str filename-stub ".json"),  :contents sample}
+;;      {:filename (str filename-stub ".jsonp"), :contents (str "callback(" (str/trim sample) ");\n")}]))
+
+;; (defn- ensure-get [endpoint]
+;;   (if (not (= (:method endpoint) :GET))
+;;     (throw (Exception. (str (name (:method endpoint)) " user sample response not implemented")))))
+
+;; (defn- demo-user-sample [endpoint]
+;;   (ensure-get endpoint)
+;;   (-> (api/get-config)
+;;       (api/get-login-token)
+;;       (api/user-get (:path endpoint))
+;;       (rename-keys {:body :data
+;;                     :status :code})
+;;       (json-parse-data)))
+
+;; (defn- save-sample-responses [samples]
+;;   (doseq [{:keys [filename contents]} samples]
+;;     (spit filename contents)))
+
+;; (defmulti generate-sample-response #(vector (:method %) (:path %)))
+
+;; (defmethod generate-sample-response [:GET "/me"] [endpoint]
+;;   (save-sample-responses (create-sample-responses endpoint (demo-user-sample endpoint))))
+
+;; (defmethod generate-sample-response :default [endpoint]
+;;   (ensure-get endpoint)
+;;   (save-sample-responses (create-sample-responses endpoint (api/GET (:path endpoint)))))

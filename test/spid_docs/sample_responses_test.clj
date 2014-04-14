@@ -57,13 +57,21 @@
             interpolated (interpolate-sample-def sample-def loaded-samples)]
         (:path interpolated) => "/somewhere/42"))
 
-
-
-
-(fact "It generates sample response files."
+(fact "Fetches sample response"
       (with-tmp-dir
-        (with-redefs [spid-docs.api-client/GET (fn [path] {:data {:status 123, :path path}})
-                      target-directory tmp-dir]
-          (generate-sample-response {:path "/status", :method :GET})
-          (slurp (str tmp-dir "/status-get.json")) => "{\"status\":123, \"path\":\"/status\"}\n"
-          (slurp (str tmp-dir "/status-get.jsonp")) => "callback({\"status\":123, \"path\":\"/status\"});\n")))
+        (with-redefs [spid-docs.api-client/get-client (fn [] {})
+                      spid-docs.api-client/raw-GET (fn [path params] {:body "{\"name\":\"SPP Container\",\"version\":\"0.2\",\"api\":2,\"object\":\"Utility\",\"type\":\"error\",\"code\":404,\"request\":{\"reset\":2656,\"limit\":0,\"remaining\":-5},\"debug\":{\"route\":{\"name\":\"Fallback - 404\",\"url\":\"\\/api\\/*\",\"controller\":\"Api\\/2\\/Utility.notFound\"},\"params\":{\"options\":[],\"where\":[]}},\"meta\":null,\"error\":{\"code\":404,\"type\":\"ApiException\",\"description\":\"No such endpoint.\"},\"data\":null}"
+                                                                      :status 404
+                                                                      :error {:code 404
+                                                                              :type "ApiException"
+                                                                              :description "No such endpoint."}
+                                                                      :success? false})]
+          (fetch-sample-response {:method :GET
+                                  :path "/clients"}) => {:method :GET
+                                                         :path "/clients"
+                                                         :response {:status 404
+                                                                    :data nil
+                                                                    :error {:code 404
+                                                                            :type "ApiException"
+                                                                            :description "No such endpoint."}
+                                                                    :success? false}})))
