@@ -1,0 +1,1 @@
+{:cached? true, :method :GET, :path "/describe/User", :parameterized-path "/describe/{object}", :response {:status 200, :error nil, :data {:User.gender {:male "Male", :female "Female", :undisclosed "Undisclosed"}, :User.status {:-3 "User deleted", :-2 "User blocked", :-1 "User inactive", :0 "User unverified", :1 "User verified"}}, :success? true}}

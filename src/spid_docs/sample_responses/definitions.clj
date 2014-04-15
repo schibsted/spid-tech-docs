@@ -1,11 +1,13 @@
 (ns spid-docs.sample-responses.definitions
   (:require [spid-docs.sample-responses.defsample :refer [defsample]]))
+
 ;; Usikkert
-;; POST "/oauth/exchange" (["clientId" true] ["type" true] ["redirectUri" false])
+;; (defsample POST "/oauth/exchange" {:clientId "..." :type "..."})
 
 (defsample GET "/endpoints")
 
-;;;;  (defsample GET "/describe/{object}")
+(defsample GET "/describe/{object}" {:object "User"})
+
 ;;;;  
 ;;;;  (defsample GET "/status")
 ;;;;  
