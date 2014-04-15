@@ -3,7 +3,7 @@
   "https://stage.payment.schibsted.no/auth/login?client_id=52f8e3d9efd04bb749000000&response_type=code&redirect_uri=http%253A%252F%252Flocalhost%253A8080%252Fcreate-session&flow=signup&product_id=0&campaign_id=0&voucher_code=0&voucher_purchase_code=0&tag=0&webview=0",
   "clientId":"[Your client ID]",
   "trackingRef":false,
-  "userId":"967676",
+  "userId":"142691",
   "userAgent":
   "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36",
   "hash":"8fd343cabb97ffa6d4808b83bb85f374",

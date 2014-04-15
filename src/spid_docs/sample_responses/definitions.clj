@@ -26,19 +26,20 @@
 
 (defsample GET "/logins")
 
-;;;;  ;;(defsample POST "/email_templates" {:templates "???"})
-;;;;  ;;(defsample GET "/email_templates")
-;;;;  
+;;(defsample POST "/email_templates" {:templates "???"})
+;;(defsample GET "/email_templates")
+
+(defsample GET "/reports/dumps")
+;;(defsample GET "/reports/dump/{id}")
+;;(defsample GET "/reports/template/{template}")
+
 ;;;;  ;; These depend on user (or something else). Q: How to provide the actual data?
 ;;;;  ;; POST "/{type}/{id}/do/{key}"
 ;;;;  ;; GET "/{type}/{id}/do/{key}"
 ;;;;  ;; POST "/{type}/{id}/{subtype}/{subid}/do/{key}"
 ;;;;  ;; GET "/{type}/{id}/{subtype}/{subid}/do/{key}"
 ;;;;  
-;;;;  (defsample GET "/reports/dumps")
-;;;;  ;;(defsample GET "/reports/dump/{id}")
-;;;;  ;;(defsample GET "/reports/template/{template}")
-;;;;  
+
 ;;;;  (defsample johndoe
 ;;;;    POST "/user" {:email "john@doe.com" :displayName "John Doe" :name "John Doe"})
 ;;;;  
