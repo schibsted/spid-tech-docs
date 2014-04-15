@@ -20,11 +20,11 @@
 
 (defsample GET "/email/{email}/status" {:email (base64-encode "john@doe.com")})
 
-;; (defsample GET "/clients")
+(defsample GET "/clients")
 
-;; (defsample GET "/productsettings")
+(defsample GET "/productsettings")
 
-;; (defsample GET "/logins")
+(defsample GET "/logins")
 
 ;;;;  ;;(defsample POST "/email_templates" {:templates "???"})
 ;;;;  ;;(defsample GET "/email_templates")
