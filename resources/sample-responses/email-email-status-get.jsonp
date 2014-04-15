@@ -1,5 +1,1 @@
-callback({
-    "exists": true,
-    "available": false,
-    "verified": false
-});
+callback({"exists":false, "available":true, "verified":false});

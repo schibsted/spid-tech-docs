@@ -1,5 +1,9 @@
 (ns spid-docs.sample-responses.definitions
-  (:require [spid-docs.sample-responses.defsample :refer [defsample]]))
+  (:require [clojure.data.codec.base64 :as base64]
+            [spid-docs.sample-responses.defsample :refer [defsample]]))
+
+(defn base64-encode [str]
+  (String. (base64/encode (.getBytes str)) "UTF-8"))
 
 ;; Usikkert
 ;; (defsample POST "/oauth/exchange" {:clientId "..." :type "..."})
@@ -8,21 +12,20 @@
 
 (defsample GET "/describe/{object}" {:object "User"})
 
-;;;;  
-;;;;  (defsample GET "/status")
-;;;;  
-;;;;  (defsample GET "/version")
-;;;;  
-;;;;  (defsample GET "/terms")
-;;;;  
-;;;;  (defsample GET "/email/john@doe.com/status")
-;;;;  
-;;;;  (defsample GET "/clients")
-;;;;  
-;;;;  (defsample GET "/productsettings")
-;;;;  
-;;;;  (defsample GET "/logins") ;; (["ip" false] ["status" false])
-;;;;  
+(defsample GET "/status")
+
+(defsample GET "/version")
+
+(defsample GET "/terms")
+
+(defsample GET "/email/{email}/status" {:email (base64-encode "john@doe.com")})
+
+;; (defsample GET "/clients")
+
+;; (defsample GET "/productsettings")
+
+;; (defsample GET "/logins")
+
 ;;;;  ;;(defsample POST "/email_templates" {:templates "???"})
 ;;;;  ;;(defsample GET "/email_templates")
 ;;;;  
