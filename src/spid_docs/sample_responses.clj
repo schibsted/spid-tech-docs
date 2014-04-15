@@ -118,7 +118,7 @@
         expected-status (-> endpoint :responses :success :status)
         actual-status (-> sample-response :response :status)
         output-base (str target-directory "/" (get-file-basename sample-response))]
-    (when (:cached? sample-response)
+    (if (:cached? sample-response)
       (println "    (Load from cache)")
       (println "   " (name (:method sample-response)) (:path sample-response) "=>" actual-status))
     (when (not (= expected-status actual-status))
