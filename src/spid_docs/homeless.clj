@@ -79,7 +79,6 @@
                    (assoc-in memo path (if (fn? val) (val curr) val))
                    memo)) m)))
 
-
 (defn- handle-optional-key [[k v]]
   (if (.startsWith (name k) "?")
     (when-not (or (nil? v)
@@ -89,3 +88,7 @@
 
 (defn with-optional-keys [m]
   (into {} (keep handle-optional-key m)))
+
+(defn eval-in-ns
+  ([forms] (eval-in-ns forms *ns*))
+  ([forms user-ns] (binding [*ns* (or user-ns *ns*)] (eval forms))))

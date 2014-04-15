@@ -54,7 +54,7 @@
 
 (defn- build-sample-def
   "Takes a map of raw data and turns it into a sample response definition map"
-  [sample]
+  [common sample]
   (let [path-params (get-query-params (:path sample) (:params sample))]
     (-> (if (seq path-params)
           (assoc sample :path-params path-params)
@@ -63,13 +63,15 @@
          [:id] keyword
          [:method] keyword
          [:dependencies] get-deps
-         [:params] #(apply dissoc % (keys path-params))))))
+         [:params] #(apply dissoc % (keys path-params)))
+        (merge common))))
 
 (defn build-sample
   "This is the main engine behind the defsample macro. It accepts various
    combinations of arguments and returns a sample response definition map."
-  [forms]
+  [forms & [user-ns]]
   (build-sample-def
+   (if user-ns {:ns user-ns} {})
    (case (mapv type-kw forms)
      ;; (defsample GET "/path")
      [:symbol :string]
@@ -209,8 +211,8 @@
   "Implementation of the defsample macro. It accepts a vector of arguments
    (see the macro), creates a sample response definition, and adds it to the
    sample-responses vector."
-  [forms]
-  (swap! sample-responses #(conj % (build-sample forms))))
+  [forms & [user-ns]]
+  (swap! sample-responses #(conj % (build-sample forms user-ns))))
 
 (defmacro defsample
   "Create a sample response definition map and store it in sample-responses.
@@ -228,4 +230,4 @@
    params       is a map. It may use keys from dependencies as bindings in
                 its values (even in nested expressions)"
   [& forms]
-  (define-sample forms))
+  (define-sample forms *ns*))

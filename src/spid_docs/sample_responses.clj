@@ -10,7 +10,7 @@
             [spid-docs.api-client :as api]
             [spid-docs.bindings :refer [resolve-bindings]]
             [spid-docs.formatting :refer [to-id-str]]
-            [spid-docs.homeless :refer [update-existing]]
+            [spid-docs.homeless :refer [update-existing eval-in-ns]]
             [spid-docs.sample-responses.wash :refer [wash-data]])
   (:import java.util.Date))
 
@@ -28,7 +28,9 @@
    sample definition map."
   [def & [defs]]
   (let [defs-map (zipmap (map :id defs) (map (comp :data :response) defs))
-        inject-dependencies #(eval (resolve-bindings % (:dependencies def) defs-map))
+        inject-dependencies #(eval-in-ns
+                              (resolve-bindings % (:dependencies def) defs-map)
+                              (:ns def))
         dep-injected (-> def
                          (assoc :route (:path def))
                          (update-existing [:params] inject-dependencies)

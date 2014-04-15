@@ -83,7 +83,10 @@
                                                                                    :docstring "Docstring"
                                                                                    :method :POST
                                                                                    :path "/users"
-                                                                                   :params {:id 42}})
+                                                                                   :params {:id 42}}
+
+      (-> (build-sample ['dude ['user 'john] "Docstring" 'POST "/users" {:id 42}] *ns*)
+          :ns) => *ns*)
 
 (fact "build-sample separates path params and query params"
       (build-sample ['GET "/some/{path}" {:path "somewhere"}]) => {:method :GET
