@@ -33,6 +33,9 @@
 ;;(defsample GET "/reports/dump/{id}")
 ;;(defsample GET "/reports/template/{template}")
 
+(defsample johndoe
+  POST "/user" {:email "john@doe.com" :displayName "John Doe" :name "John Doe"})
+
 ;;;;  ;; These depend on user (or something else). Q: How to provide the actual data?
 ;;;;  ;; POST "/{type}/{id}/do/{key}"
 ;;;;  ;; GET "/{type}/{id}/do/{key}"
@@ -40,9 +43,6 @@
 ;;;;  ;; GET "/{type}/{id}/{subtype}/{subid}/do/{key}"
 ;;;;  
 
-;;;;  (defsample johndoe
-;;;;    POST "/user" {:email "john@doe.com" :displayName "John Doe" :name "John Doe"})
-;;;;  
 ;;;;  (defsample POST "/user/{id}/dataobject/{key}")
 ;;;;  (defsample GET "/user/{id}/dataobject/{key}")
 ;;;;  (defsample GET "/user/{id}/dataobjects")
