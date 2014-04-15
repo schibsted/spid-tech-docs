@@ -1,6 +1,6 @@
 (ns spid-docs.validate-cultivated
   (:require [schema.core :refer [optional-key validate maybe enum pred eq either Str Num Keyword]]
-            [spid-docs.validate-raw :refer [Type]]))
+            [spid-docs.validate-raw :refer [Type Article]]))
 
 (def Path (pred (fn [^String s] (re-find #"^(/[a-zA-Z0-9/{}_\-.]+)+/?\*?$" s)) 'simple-slash-prefixed-path))
 
@@ -72,7 +72,7 @@
 
 (defn validate-content [content]
   (validate {:endpoints [Endpoint]
-             :articles {Str Str}
+             :articles {Str Article}
              :concepts {Str Str}
              :types {Keyword Type}
              :apis {[Str] {:api Str

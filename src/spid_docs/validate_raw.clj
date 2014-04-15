@@ -58,9 +58,14 @@
    (optional-key :success-description) Str
    (optional-key :see-also) Str})
 
+(def Article
+  {:title Str
+   :body Str
+   (optional-key :aside) Str})
+
 (defn validate-raw-content [raw-content]
   (validate {:endpoints [Endpoint]
-             :articles {Str Str}
+             :articles {Str Article}
              :concepts {Str Str}
              :sample-responses {Str Str}
              :endpoint-descriptions {Str EndpointDescription}

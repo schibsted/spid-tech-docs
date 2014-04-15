@@ -1,4 +1,17 @@
-# Endpoints
+:title Endpoints
+
+:aside
+
+## Table of Contents
+
+- [Pagination](#pagination)
+- [Filters](#filters)
+- [Locales](#locales)
+- [Response container](#response-container)
+- [Response formats](#response-formats)
+- [Parameters](#parameters)
+
+:body
 
 ## Pagination
 

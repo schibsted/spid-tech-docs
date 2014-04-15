@@ -1,4 +1,6 @@
-# Callbacks
+:title Callbacks
+
+:body
 
 The SPiD platform supports server-side callbacks to enable your service to
 subscribe to changes in data. Your service can then cache data and receive

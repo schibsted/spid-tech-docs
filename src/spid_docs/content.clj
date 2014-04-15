@@ -19,7 +19,7 @@
   run-down of various kinds of contents and where/how they are stored."
   []
   {:endpoints (:data (spid/load-json "cached-endpoints.json"))
-   :articles (stasis/slurp-directory "resources/articles" #"\.md$")
+   :articles (mapdown/slurp-directory "resources/articles" #"\.md$")
    :concepts (stasis/slurp-directory "resources/concepts" #"\.md$")
    :sample-responses (stasis/slurp-directory "resources/sample-responses" #".+\..+$")
    :endpoint-descriptions (mapdown/slurp-directory "resources/endpoints" #"\.md$")

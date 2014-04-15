@@ -1,4 +1,6 @@
-# Implementing Single Sign-On with the SPiD API
+:title Implementing Single Sign-On with the SPiD API
+
+:body
 
 When you have completed this guide, your users can log into your
 application via SPiD, and you can access the SPiD API on their

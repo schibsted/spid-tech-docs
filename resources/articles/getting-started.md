@@ -1,4 +1,6 @@
-# Getting started with the server-side SPiD API
+:title Getting started with the server-side SPiD API
+
+:body
 
 When you have completed this guide, you will have connected your application to
 the SPiD API and made your first call, verifying that your client ID and secrets

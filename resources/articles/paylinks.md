@@ -1,3 +1,7 @@
+:title Paylinks
+
+:body
+
 A paylink object contains common fields, meta data about the paylink, and one or
 more paylink items. Paylink items is what end-users actually pay for. Paylink
 items contains price and VAT information. The total sum is the total of all
