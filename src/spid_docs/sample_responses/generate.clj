@@ -11,5 +11,9 @@
       content/cultivate-content
       :endpoints))
 
-(defn generate []
-  (generate-sample-responses @sample-responses (get-endpoints)))
+(defn generate [& [mode]]
+  (generate-sample-responses
+   @sample-responses
+   (get-endpoints)
+   (read-string (or mode ":build-missing"))))
+

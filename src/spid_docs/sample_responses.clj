@@ -92,10 +92,8 @@
     (str indentation
          (str/join (str "\n" indentation) (str/split s #"\n")))))
 
-(defn- load-and-verify-sample-response [sample-responses def]
-  (let [interpolated (interpolate-sample-def def sample-responses)
-        sample-response (get-sample-response interpolated)
-        response (:response sample-response)
+(defn- verify-sample-response [sample-responses sample-response]
+  (let [response (:response sample-response)
         method (name (:method sample-response))
         route (:route sample-response)]
     (when (not (<= 200 (:status response) 299))
@@ -106,6 +104,17 @@
                            "\n" (indent 4 (format-json (:error response))))
                       {:source :generate})))
     (conj sample-responses sample-response)))
+
+(defn- load-and-verify-sample-response [sample-responses def]
+  (->> (interpolate-sample-def def sample-responses)
+       get-sample-response
+       (verify-sample-response sample-responses)))
+
+(defn- force-load-and-verify-sample-response [sample-responses def]
+  (->> (interpolate-sample-def def sample-responses)
+       fetch-sample-response
+       cache-sample-response
+       (verify-sample-response sample-responses)))
 
 (defn- write-file [file content]
   (println "    Writing" file)
@@ -132,11 +141,36 @@
       (write-file (str output-base ".jsonp")
                   (str "callback(" (str/trim json-data) ");\n")))))
 
-(defn generate-sample-responses [sample-defs endpoints]
+(defn- sample-response-missing? [sample-response formats format]
+  (let [filename (str target-directory "/" (get-file-basename sample-response) ".json")]
+    (and (some #(= % format) formats)
+         (not (.exists (io/file filename))))))
+
+(defn- generate-missing-sample-response-files [sample-response endpoint]
+  (let [formats (:response-formats endpoint)]
+    (when (or (sample-response-missing? sample-response formats :json)
+              (sample-response-missing? sample-response formats :jsonp))
+      (generate-sample-response-files sample-response endpoint))))
+
+(defn generate-sample-responses
+  "Generate sample responses in one of three modes:
+
+   :build-missing    Generates missing sample response files. Uses the
+                     sample-response-cache wherever possible
+   :build-from-cache Regenerates all sample response files, uses the
+                     cache wherever possible
+   :build-from-api   Regenerates all sample response files, and fetches all
+                     responses from the API (and produces new cache files)"
+  [sample-defs endpoints mode]
   (try
-    (->> sample-defs
-         (reduce load-and-verify-sample-response [])
-         (mapv #(generate-sample-response-files % (get-endpoint % endpoints))))
+    (let [load-def (if (= :build-from-api mode)
+                     force-load-and-verify-sample-response
+                     load-and-verify-sample-response)
+          generate-files (if (= :build-missing mode)
+                           generate-missing-sample-response-files
+                           generate-sample-response-files)]
+      (doseq [def (reduce load-def [] sample-defs)]
+        (generate-files def (get-endpoint def endpoints))))
     (catch clojure.lang.ExceptionInfo e
       (println "-----------------------------------")
       (println "Failed to generate sample responses")
