@@ -27,6 +27,7 @@
   (let [defs-map (zipmap (map :id defs) (map (comp :data :response) defs))
         inject-dependencies #(eval (resolve-bindings % (:dependencies def) defs-map))
         dep-injected (-> def
+                         (assoc :route (:path def))
                          (update-existing [:params] inject-dependencies)
                          (update-existing [:path-params] inject-dependencies))]
     (update-in dep-injected [:path] #(interpolate % (:path-params dep-injected)))))
@@ -43,6 +44,7 @@
                   (= method :DELETE) (api/raw-DELETE path params))]
     {:method method
      :path (:path sample-def)
+     :route (:route sample-def)
      :response {:status (:status response)
                 :error (:error response)
                 :data (:data response)
@@ -52,7 +54,7 @@
 (def cache-directory "sample-response-cache")
 
 (defn get-file-basename [sample-def]
-  (.toLowerCase (str (to-id-str (:path sample-def)) "-" (name (:method sample-def)))))
+  (.toLowerCase (str (to-id-str (:route sample-def)) "-" (name (:method sample-def)))))
 
 (defn- get-sample-response-cache-file [sample-def]
   (str cache-directory "/" (get-file-basename sample-def) ".edn"))
@@ -61,7 +63,8 @@
   "Caches successful sample responses and returns the sample response."
   [sample-def]
   (if (<= 200 (-> sample-def :response :status) 299)
-    (spit (str "resources/" (get-sample-response-cache-file sample-def)) sample-def))
+    (spit (str "resources/" (get-sample-response-cache-file sample-def))
+          (assoc sample-def :cached? true)))
   sample-def)
 
 (defn get-cached-sample-response [sample-def]
@@ -74,7 +77,7 @@
       (cache-sample-response (fetch-sample-response sample-def))))
 
 (defn- get-endpoint [sample-response endpoints]
-  (let [spec [(:method sample-response) (:path sample-response)]]
+  (let [spec [(:method sample-response) (:route sample-response)]]
     (->> endpoints
          (filter #(= spec [(:method %) (:path %)]))
          first)))
@@ -90,26 +93,32 @@
     (conj sample-responses sample-response)))
 
 (defn- generate-sample-response-files [sample-response endpoint]
+  (println (name (:method sample-response)) (:route sample-response))
   (let [formats (:response-formats endpoint)
         json-data (-> sample-response :response format-sample-response)
         expected-status (-> endpoint :responses :success :status)
         actual-status (-> sample-response :response :status)
         output-base (str target-directory "/" (get-file-basename sample-response))]
+    (if (:cached? sample-response)
+      (println "    (Load from cache)")
+      (println "   " (name (:method sample-response)) (:path sample-response) "=>" actual-status))
     (if (not (= expected-status actual-status))
       (throw (Exception. (str "Sample response had unexpected response status.\n"
                               (name (:method sample-response)) " " (:path sample-response)
                               "\nexpected successful response to return " expected-status
                               ", but sample response status was " actual-status))))
     (if (some #(= % :json) formats)
-      (spit (str output-base ".json") json-data))
+      (do (println "    Writing" (str output-base ".json"))
+          (spit (str output-base ".json") json-data)))
     (if (some #(= % :jsonp) formats)
-      (spit (str output-base ".jsonp")
-            (str "callback(" (str/trim json-data) ");\n")))))
+      (do (println "    Writing" (str output-base ".jsonp"))
+          (spit (str output-base ".jsonp")
+                (str "callback(" (str/trim json-data) ");\n"))))))
 
 (defn generate-sample-responses [sample-defs endpoints]
   (try
     (->> sample-defs
          (reduce load-and-verify-sample-response [])
-         (map #(generate-sample-response-files % (get-endpoint % endpoints))))
+         (mapv #(generate-sample-response-files % (get-endpoint % endpoints))))
     (catch Exception e
       (.printStackTrace e))))

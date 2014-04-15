@@ -20,7 +20,8 @@
   :jvm-opts ["-Djava.awt.headless=true"
              "-Xmx768M"]
   :ring {:handler spid-docs.web/app}
-  :aliases {"build-site" ["run" "-m" "spid-docs.web/export"]}
+  :aliases {"build-site" ["run" "-m" "spid-docs.web/export"]
+            "generate-sample-responses" ["run" "-m" "spid-docs.sample-responses.generate/generate"]}
   :profiles {:dev {:plugins [[lein-ring "0.8.10"]
                              [codox "0.6.7"]]
                    :dependencies [[org.clojure/tools.namespace "0.2.4"]]

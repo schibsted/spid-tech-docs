@@ -35,6 +35,12 @@
                         :path-params {:userId 42}}]
         (:path (interpolate-sample-def sample-def)) => "/somewhere/42"))
 
+(fact "Keeps parameterized path"
+      (let [sample-def {:method :GET
+                        :path "/somewhere/{userId}"
+                        :path-params {:userId 42}}]
+        (:route (interpolate-sample-def sample-def)) => "/somewhere/{userId}"))
+
 (fact "Interpolates dependency injected parameters in path"
       (let [sample-def {:method :GET
                         :path "/somewhere/{userId}"
@@ -55,11 +61,13 @@
                                                                               :description "No such endpoint."}
                                                                       :success? false})]
           (fetch-sample-response {:method :GET
-                                  :path "/clients"}) => {:method :GET
-                                                         :path "/clients"
-                                                         :response {:status 404
-                                                                    :data nil
-                                                                    :error {:code 404
-                                                                            :type "ApiException"
-                                                                            :description "No such endpoint."}
-                                                                    :success? false}})))
+                                  :path "/clients"
+                                  :route "/clients"}) => {:method :GET
+                                                          :path "/clients"
+                                                          :route "/clients"
+                                                          :response {:status 404
+                                                                     :data nil
+                                                                     :error {:code 404
+                                                                             :type "ApiException"
+                                                                             :description "No such endpoint."}
+                                                                     :success? false}})))
