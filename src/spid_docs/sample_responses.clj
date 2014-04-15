@@ -14,8 +14,11 @@
             [spid-docs.sample-responses.wash :refer [wash-data]])
   (:import java.util.Date))
 
+(defn- format-json [data]
+  (with-out-str (json/pprint data :escape-slash false)))
+
 (defn format-sample-response [response]
-  (with-out-str (json/pprint (->> response :data wash-data) :escape-slash false)))
+  (format-json (->> response :data wash-data)))
 
 (defn- interpolate [string data]
   (str/replace string #"\{(.*)\}" (fn [[_ var]] (str ((keyword var) data)))))
@@ -62,14 +65,14 @@
 (defn cache-sample-response
   "Caches successful sample responses and returns the sample response."
   [sample-def]
-  (if (<= 200 (-> sample-def :response :status) 299)
+  (when (<= 200 (-> sample-def :response :status) 299)
     (spit (str "resources/" (get-sample-response-cache-file sample-def))
           (assoc sample-def :cached? true)))
   sample-def)
 
 (defn get-cached-sample-response [sample-def]
   (let [file (io/resource (get-sample-response-cache-file sample-def))]
-    (if (not (nil? file))
+    (when (not (nil? file))
       (read-string (slurp file)))))
 
 (defn get-sample-response [sample-def]
@@ -82,15 +85,29 @@
          (filter #(= spec [(:method %) (:path %)]))
          first)))
 
+(defn- indent [level s]
+  (let [indentation (reduce (fn [i _] (str i " ")) "" (range level))]
+    (str indentation
+         (str/join (str "\n" indentation) (str/split s #"\n")))))
+
 (defn- load-and-verify-sample-response [sample-responses def]
   (let [interpolated (interpolate-sample-def def sample-responses)
         sample-response (get-sample-response interpolated)
-        response (:response sample-response)]
-    (if (not (<= 200 (:status response) 299))
-      (throw (Exception. (str "Fetching sample response failed!\n"
-                              (name (:method sample-response)) " " (:path sample-response)
-                              "\n    returned " (:status response)))))
+        response (:response sample-response)
+        method (name (:method sample-response))
+        route (:route sample-response)]
+    (when (not (<= 200 (:status response) 299))
+      (throw (ex-info (str method " " (:path sample-response)
+                           (when (not (= (:path sample-response) route))
+                             (str " (" method " " route ")"))
+                           "\n    responded with HTTP status " (:status response)
+                           "\n" (indent 4 (format-json (:error response))))
+                      {:source :generate})))
     (conj sample-responses sample-response)))
+
+(defn- write-file [file content]
+  (println "    Writing" file)
+  (spit file content))
 
 (defn- generate-sample-response-files [sample-response endpoint]
   (println (name (:method sample-response)) (:route sample-response))
@@ -99,26 +116,27 @@
         expected-status (-> endpoint :responses :success :status)
         actual-status (-> sample-response :response :status)
         output-base (str target-directory "/" (get-file-basename sample-response))]
-    (if (:cached? sample-response)
+    (when (:cached? sample-response)
       (println "    (Load from cache)")
       (println "   " (name (:method sample-response)) (:path sample-response) "=>" actual-status))
-    (if (not (= expected-status actual-status))
-      (throw (Exception. (str "Sample response had unexpected response status.\n"
-                              (name (:method sample-response)) " " (:path sample-response)
-                              "\nexpected successful response to return " expected-status
-                              ", but sample response status was " actual-status))))
-    (if (some #(= % :json) formats)
-      (do (println "    Writing" (str output-base ".json"))
-          (spit (str output-base ".json") json-data)))
-    (if (some #(= % :jsonp) formats)
-      (do (println "    Writing" (str output-base ".jsonp"))
-          (spit (str output-base ".jsonp")
-                (str "callback(" (str/trim json-data) ");\n"))))))
+    (when (not (= expected-status actual-status))
+      (throw (ex-info (str "Sample response had unexpected response status.\n"
+                           (name (:method sample-response)) " " (:path sample-response)
+                           "\nexpected successful response to return " expected-status
+                           ", but sample response status was " actual-status) {:source :generate})))
+    (when (some #(= % :json) formats)
+      (write-file (str output-base ".json") json-data))
+    (when (some #(= % :jsonp) formats)
+      (write-file (str output-base ".jsonp")
+                  (str "callback(" (str/trim json-data) ");\n")))))
 
 (defn generate-sample-responses [sample-defs endpoints]
   (try
     (->> sample-defs
          (reduce load-and-verify-sample-response [])
          (mapv #(generate-sample-response-files % (get-endpoint % endpoints))))
-    (catch Exception e
-      (.printStackTrace e))))
+    (catch clojure.lang.ExceptionInfo e
+      (println "-----------------------------------")
+      (println "Failed to generate sample responses")
+      (println "-----------------------------------")
+      (println (.getMessage e)))))
