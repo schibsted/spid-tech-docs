@@ -21,7 +21,7 @@
   (format-json (->> response :data wash-data)))
 
 (defn- interpolate [string data]
-  (str/replace string #"\{(.*)\}" (fn [[_ var]] (str ((keyword var) data)))))
+  (str/replace string #"\{(.*?)\}" (fn [[_ var]] (str ((keyword var) data)))))
 
 (defn interpolate-sample-def
   "Injects dependencies and interpolates path parameters. Returns an updated
