@@ -212,7 +212,8 @@
    (see the macro), creates a sample response definition, and adds it to the
    sample-responses vector."
   [forms & [user-ns]]
-  (swap! sample-responses #(conj % (build-sample forms user-ns))))
+  (swap! sample-responses #(conj % (build-sample forms user-ns)))
+  nil)
 
 (defmacro defsample
   "Create a sample response definition map and store it in sample-responses.
@@ -230,4 +231,5 @@
    params       is a map. It may use keys from dependencies as bindings in
                 its values (even in nested expressions)"
   [& forms]
-  (define-sample forms *ns*))
+  (define-sample forms *ns*)
+  nil)

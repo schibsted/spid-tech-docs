@@ -102,3 +102,7 @@
 
       (define-sample ['chris 'GET "/users"])
       @sample-responses => [{:method :GET :path "/somewhere"} {:id :chris :method :GET :path "/users"}])
+
+(fact "defsample does not eagerly evaluate params and does not return anything"
+      (defsample some-name [user johndoe]
+        GET "/path" {:id (:userId user)}) => nil)
