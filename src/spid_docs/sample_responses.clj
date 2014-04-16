@@ -47,7 +47,8 @@
                   (= method :GET) (api/raw-GET path params)
                   (= method :POST) (api/raw-POST path params)
                   (= method :DELETE) (api/raw-DELETE path params))]
-    {:method method
+    {:id (:id sample-def)
+     :method method
      :path (:path sample-def)
      :route (:route sample-def)
      :response {:status (:status response)

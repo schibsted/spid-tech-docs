@@ -60,9 +60,11 @@
                                                                               :type "ApiException"
                                                                               :description "No such endpoint."}
                                                                       :success? false})]
-          (fetch-sample-response {:method :GET
+          (fetch-sample-response {:id :john
+                                  :method :GET
                                   :path "/clients"
-                                  :route "/clients"}) => {:method :GET
+                                  :route "/clients"}) => {:id :john
+                                                          :method :GET
                                                           :path "/clients"
                                                           :route "/clients"
                                                           :response {:status 404
