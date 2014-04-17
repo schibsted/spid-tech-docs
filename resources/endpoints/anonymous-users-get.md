@@ -21,3 +21,7 @@ from the [GET /user/{userId} endpoint](/endpoints/GET/user/{userId}). The
 purpose of the anonymized form of the returned data in this endpoint is that it
 can be freely used in further calculations without fear of compromising your
 user's identity - so long as the `uid` is removed first.
+
+:see-also
+
+GET /users
