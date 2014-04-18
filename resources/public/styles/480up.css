@@ -3,3 +3,6 @@ body {margin: 0 20px;}
 
 .inline-code,
 .codehilite {font-size: 13px;}
+
+#menu {margin-top: 39px;}
+#menu a {margin-left: 4px; display: inline;}

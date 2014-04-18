@@ -18,8 +18,11 @@ body {
     background:         linear-gradient(to bottom, #1c7bab 0%, #18658f 100%);
 }
 
+#menu a,
 #head a {color: #fff; text-decoration: none; }
+#menu a:hover,
 #head a:hover {text-decoration: underline; }
+
 
 a:visited {color: #0000FF;}
 
@@ -59,8 +62,11 @@ img {display: block; border: none; max-width: 100%; -ms-interpolation-mode: bicu
 
 #main {min-height: 400px; overflow: hidden; margin-bottom: 40px;}
 #body {background: #fdfdfd; border-radius: 10px; padding-bottom: 20px;}
-#logo {margin: 10px;}
+#logo {margin: 10px; float: left;}
 #logo img {height: 50px;}
+
+#menu {margin-top: 5px;}
+#menu a {margin-left: 15px; display: block; font-size: 13px;}
 
 .inline-code,
 .codehilite {background: #f8f8f8; border: 1px solid #ddd; border-radius: 3px; padding: 10px; font-size: 11px;}

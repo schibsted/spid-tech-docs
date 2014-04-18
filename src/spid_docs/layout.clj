@@ -34,7 +34,13 @@
       [:a {:href "/"} "API"]]]
     [:div#main
      [:div.center
-      [:div#logo [:a {:href "/"} [:img {:src (link/file-path request "/images/spid.png")}]]]
+      [:div.bd
+       [:div#logo
+        [:a {:href "/"} [:img {:src (link/file-path request "/images/spid.png")}]]]
+       [:div#menu
+        [:a {:href "/#guides"} "Guides"] " "
+        [:a.nowrap {:href "/#working-examples"} "Working examples"] " "
+        [:a.nowrap {:href "/#api-reference"} "API reference"]]]
       [:div#body (when split-page? {:class "split"})
        [:div.bd body]]]]
     (optimus.hiccup/link-to-js-bundles request ["app.js"])]))
