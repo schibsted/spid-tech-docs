@@ -3,7 +3,7 @@
             [clojure.string :as str]
             [hiccup.core :as hiccup]
             [spid-docs.formatting :refer [columnize to-id-str]]
-            [spid-docs.routes :refer [endpoint-path]]))
+            [spid-docs.routes :refer [endpoint-path prime-categories]]))
 
 (def frontpage-columns 3)
 
@@ -49,8 +49,7 @@
       (assoc api :endpoints endpoints))))
 
 (defn- collapse-other-categories [api]
-  (if (#{"Identity Management"
-         "Payment Services"} (:category api))
+  (if (prime-categories (:category api))
     api
     (assoc api :category "Other")))
 

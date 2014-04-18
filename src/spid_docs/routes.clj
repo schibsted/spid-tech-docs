@@ -7,11 +7,17 @@
   (:require [clojure.string :as str]
             [spid-docs.formatting :refer [to-id-str]]))
 
+(def prime-categories
+  #{"Identity Management"
+    "Payment Services"})
+
 (defn api-path
   "Takes a 'service', i.e., the top-level API categorization unit (Identity
    management, payment, etc) and returns its URL."
   [service]
-  (str "/#" (to-id-str service)))
+  (if (prime-categories service)
+    (str "/#" (to-id-str service))
+    "/#other"))
 
 (defn article-path
   "Articles live at the root level, and their path is the same as the
