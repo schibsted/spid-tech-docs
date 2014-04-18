@@ -64,3 +64,19 @@
                (str/replace
                 #"<apis-by-category/>"
                 (hiccup/html (map #(render-service-apis % (apis-by-category %)) category-render-order)))))})
+
+(defn- remove-non-deprecated-endpoints [api]
+  (let [endpoints (filter :deprecated (:endpoints api))]
+    (when (seq endpoints)
+      (assoc api :endpoints endpoints))))
+
+(defn create-deprecated-endpoints-page [apis]
+  {:title "Deprecated endpoints"
+   :body (let [apis-by-category (->> apis vals
+                                     (keep remove-non-deprecated-endpoints)
+                                     (map collapse-other-categories)
+                                     (group-by :category))]
+           [:div.wrap
+            [:h1 "Deprecated endpoints"]
+            [:p "These endpoints should no longer be used."]
+            (map #(render-service-apis % (apis-by-category %)) category-render-order)])})
