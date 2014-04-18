@@ -33,6 +33,7 @@ h3 {font-size: 20px;}
 
 .mod, .tabs, pre, h1, h2, h3, h4, h5, p, ul, ol, hr, table {margin: 15px 0;}
 .wrap {margin: 0 15px;}
+h2 {margin-top: 30px;}
 
 th,
 strong {font-weight: bold;}
