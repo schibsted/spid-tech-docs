@@ -1,5 +1,7 @@
 (ns spid-docs.pages.frontpage
   (:require [clojure.java.io :as io]
+            [clojure.string :as str]
+            [hiccup.core :as hiccup]
             [spid-docs.formatting :refer [columnize to-id-str]]
             [spid-docs.routes :refer [endpoint-path]]))
 
@@ -41,16 +43,13 @@
   "Render the services (e.g. 'Identity management') with all APIs distributed
    across a number of columns (see frontpage-columns towards the top)."
   [category service-apis]
-  [:div.line [:h3 {:id (to-id-str category)} category]
+  [:div.line [:h2 category]
    (map-indexed render-api-column (columnize-apis service-apis))])
 
 (defn create-page [apis]
   {:title "SPiD API Documentation"
-   :body [:div.wrap
-          [:h1 "SPiD API Documentation"]
-          (slurp (io/resource "frontpage.html"))
-          [:div {:class "group" :id "api-reference"}
-           [:h2 "API reference"]
-           [:p "Looking for API details? Here you will find extensive reference documentation of all API endpoints."]
-           (let [apis-by-category (group-by :category (vals apis))]
-             (map #(render-service-apis % (apis-by-category %)) category-render-order))]]})
+   :body (let [apis-by-category (group-by :category (vals apis))]
+           (-> (slurp (io/resource "frontpage.html"))
+               (str/replace
+                #"<apis-by-category/>"
+                (hiccup/html (map #(render-service-apis % (apis-by-category %)) category-render-order)))))})
