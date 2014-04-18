@@ -9,10 +9,7 @@
 
 (def category-render-order ["Identity Management"
                             "Payment Services"
-                            "Authorization"
-                            "Data Storage"
-                            "Utilities"
-                            "Insight"])
+                            "Other"])
 
 (defn- endpoint-count
   "The number of endpoints in an API (e.g. 'Login API') is used to evenly
@@ -46,9 +43,23 @@
   [:div.line [:h2 category]
    (map-indexed render-api-column (columnize-apis service-apis))])
 
+(defn- remove-deprecated-endpoints [api]
+  (let [endpoints (remove :deprecated (:endpoints api))]
+    (when (seq endpoints)
+      (assoc api :endpoints endpoints))))
+
+(defn- collapse-other-categories [api]
+  (if (#{"Identity Management"
+         "Payment Services"} (:category api))
+    api
+    (assoc api :category "Other")))
+
 (defn create-page [apis]
   {:title "SPiD API Documentation"
-   :body (let [apis-by-category (group-by :category (vals apis))]
+   :body (let [apis-by-category (->> apis vals
+                                     (keep remove-deprecated-endpoints)
+                                     (map collapse-other-categories)
+                                     (group-by :category))]
            (-> (slurp (io/resource "frontpage.html"))
                (str/replace
                 #"<apis-by-category/>"
