@@ -1,14 +1,23 @@
 :title Implementing Single Sign-On with the SPiD API
 
+:aside
+
+## Prerequisites
+
+In order to complete this guide, you need to know your:
+
+- client ID
+- API secret
+
+You should also have gone through the
+[Getting Started](/getting-started/) guide, in particular that you
+have downloaded and installed the appropriate SDK for your platform.
+
 :body
 
 When you have completed this guide, your users can log into your
 application via SPiD, and you can access the SPiD API on their
 behalf.
-
-**NB!** This guide presupposes that you have gone throught the
-[Getting Started](/getting-started/) guide, in particular that you have
-downloaded and installed the appropriate SDK for your platform.
 
 ## Overview
 

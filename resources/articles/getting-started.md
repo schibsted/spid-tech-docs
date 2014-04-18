@@ -1,13 +1,21 @@
 :title Getting started with the server-side SPiD API
 
+:aside
+
+## Prerequisites
+
+In order to complete this guide, you need to know your:
+
+- client ID
+- API secret
+
+If you do not, [see the merchant setup page](#?)
+
 :body
 
 When you have completed this guide, you will have connected your application to
 the SPiD API and made your first call, verifying that your client ID and secrets
 are correctly configured. You will then be ready to implement login with SPiD.
-
-**NB!** In order to complete this guide, you need to know your client ID and API
-secret. If you do not, [see the merchant setup page](#?).
 
 ## Downloading the appropriate SDK
 
