@@ -30,6 +30,9 @@
   ;; in the docs site.
   [:GET "/api/2/api/2/"]
 
+  ;; 404 isn't really an endpoint either
+  [:GET "api/2/*"]
+
   ;; Discounts are currently in flux. It seems that they are not being used
   ;; outside of SPiD, and it is not know whether they should be promoted to
   ;; external clients, or if their functionality could be handled just as well
