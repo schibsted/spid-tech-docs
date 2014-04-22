@@ -17,7 +17,7 @@ product, order, discount or client. You only need to append /do/{key} to each
 supported endpoint and do an HTTP `POST` to attach the object and an HTTP `GET`
 to retrieve the object. An HTTP `DELETE` will remove the object from storage.
 
-:see-also
+:relevant-endpoints
 
 GET /{type}/{id}/do/{key}
 POST /{type}/{id}/{subtype}/{subid}/do/{key}

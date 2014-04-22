@@ -2,7 +2,7 @@
 
 List all data objects.
 
-:see-also
+:relevant-endpoints
 
 GET /user/{id}/dataobjects
 GET /user/{id}/dataobject/{key}

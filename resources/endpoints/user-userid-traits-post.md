@@ -2,7 +2,7 @@
 
 Add traits for user.
 
-:see-also
+:relevant-endpoints
 
 GET /user/{userId}/traits
 DELETE /user/{userId}/trait/{trait}

@@ -2,6 +2,6 @@
 
 Remove a product ("bundle item") from a bundle.
 
-:see-also
+:relevant-endpoints
 
 POST /bundle/{bundleId}/product/{productId}

@@ -2,7 +2,7 @@
 
 Update a [campaign](/types/campaign).
 
-:see-also
+:relevant-endpoints
 
 POST /campaign
 GET /campaign/{campaignId}

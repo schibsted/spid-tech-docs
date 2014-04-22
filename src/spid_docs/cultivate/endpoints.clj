@@ -134,19 +134,19 @@
        (remove success?)
        (map create-response)))
 
-(defn- parse-see-also-line [l]
+(defn- parse-relevant-endpoints-line [l]
   "Takes a string like: GET /the/path and makes a map out of it."
   (let [[method path] (str/split l #" " 2)]
     {:method (keyword method)
      :path path}))
 
-(defn- parse-see-also [see-also]
+(defn- parse-relevant-endpoints [relevant-endpoints]
   "Takes a list of newline separated endpoint signatures, and turns it into a map."
-  (when see-also
-   (->> see-also
+  (when relevant-endpoints
+   (->> relevant-endpoints
         str/trim
         str/split-lines
-        (map parse-see-also-line))))
+        (map parse-relevant-endpoints-line))))
 
 (defn- cultivate-endpoint-1 [endpoint [method details] raw-content]
   "Gather a bunch of information from all over to create a map that
@@ -155,7 +155,7 @@
         {:keys [required optional default_filters filters access_token_types responses]} details
         {:keys [pagination-descriptions filter-descriptions endpoint-descriptions sample-responses]} raw-content
         endpoint-id (str (to-id-str path) "-" (.toLowerCase (name method)))
-        {:keys [introduction success-description see-also]} (get endpoint-descriptions (str "/" endpoint-id ".md") {})]
+        {:keys [introduction success-description relevant-endpoints]} (get endpoint-descriptions (str "/" endpoint-id ".md") {})]
     (with-optional-keys
       {:id (keyword endpoint-id)
        :path (str "/" path)
@@ -171,7 +171,7 @@
        :default-response-format (keyword default_output_format)
        :access-token-types (set (map keyword access_token_types))
        :requires-authentication? (not (empty? access_token_types))
-       :?relevant-endpoints (parse-see-also see-also)
+       :?relevant-endpoints (parse-relevant-endpoints relevant-endpoints)
        :responses {:success (-> success? (filter responses) first create-response
                                 (add-samples (str "/" endpoint-id) sample-responses)
                                 (assoc-non-nil :description success-description))

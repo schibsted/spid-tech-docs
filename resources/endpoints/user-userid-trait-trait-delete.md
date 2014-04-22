@@ -2,7 +2,7 @@
 
 Delete a user trait by key.
 
-:see-also
+:relevant-endpoints
 
 POST /user/{userId}/traits
 GET /user/{userId}/traits

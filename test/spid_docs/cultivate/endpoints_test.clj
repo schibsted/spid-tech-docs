@@ -3,7 +3,7 @@
             [spid-docs.cultivate.content-shells :as cs]
             [spid-docs.cultivate.endpoints :refer :all]))
 
-(def see-also-example
+(def relevant-endpoints-example
   "
 GET /path/to/{id}
 POST /path/to/other/page
@@ -16,7 +16,7 @@ POST /path/to/other/page
                       "/terms-get.jsonp" "terms jsonp"}
    :endpoint-descriptions {"/terms-get.md" {:introduction "terms desc"
                                             :success-description "success description"
-                                            :see-also see-also-example}}
+                                            :relevant-endpoints relevant-endpoints-example}}
    :pagination-descriptions {:limit  "limit desc"
                              :offset "offset desc"
                              :since  "since desc"
@@ -313,7 +313,7 @@ POST /path/to/other/page
                :jsonp "terms jsonp"}})
 
 (fact
- "The entries in :see-also are parsed and listed under :relevant-endpoints"
+ "The entries in :relevant-endpoints are parsed."
 
  (-> (cultivate :httpMethods {:GET (cs/http-method)}
                 :path "terms")

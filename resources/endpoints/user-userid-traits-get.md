@@ -2,7 +2,7 @@
 
 Retrieves all traits for the specified user.
 
-:see-also
+:relevant-endpoints
 
 POST /user/{userId}/traits
 DELETE /user/{userId}/trait/{trait}

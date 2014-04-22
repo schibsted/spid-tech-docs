@@ -2,7 +2,7 @@
 
 Retrieve a specific [campaign](/types/campaign) object.
 
-:see-also
+:relevant-endpoints
 
 POST /campaign
 POST /campaign/{campaignId}

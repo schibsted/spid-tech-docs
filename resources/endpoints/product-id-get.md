@@ -2,6 +2,6 @@
 
 Retrieve a [product](/types/product) object.
 
-:see-also
+:relevant-endpoints
 
 POST /product/{id}
