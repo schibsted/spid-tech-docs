@@ -128,7 +128,9 @@
      (render-request-examples endpoint)]]])
 
 (defn- format-response-status [status]
-  (str status " " (get-response-status-name status)))
+  (if (= status 999)
+    (str "XYZ (Varies)")
+    (str status " " (get-response-status-name status))))
 
 (defn- type-id
   "Given a type specification like :string, [:string] or {:string :string},
