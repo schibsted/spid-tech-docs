@@ -1,6 +1,7 @@
 (ns spid-docs.pages.article-pages
   (:require [clojure.string :as str]
             [spid-docs.enlive :as enlive]
+            [spid-docs.formatting :refer [pluralize]]
             [spid-docs.pimp.markdown :as markdown]
             [spid-docs.routes :refer [article-path]]))
 
@@ -11,7 +12,7 @@
 (defn- render-relevant-endpoints [relevant]
   (when relevant
     (list
-     [:h2 "Relevant endpoints"]
+     [:h2 (pluralize "Relevant endpoint" (count relevant))]
      [:ul (map render-relevant-endpoint relevant)])))
 
 (defn create-page [[_ {:keys [title body aside relevant-endpoints] :as article}]]

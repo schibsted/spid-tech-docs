@@ -237,7 +237,7 @@
 (defn- render-relevant-endpoints [relevant]
   (when relevant
     (list
-     [:h2 "See also"]
+     [:h2 (pluralize "Relevant endpoint" (count relevant))]
      [:ul (map render-relevant-endpoint relevant)])))
 
 (defn create-page [endpoint types]
