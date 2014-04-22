@@ -56,7 +56,7 @@
                 :data (:data response)
                 :success? (:success? response)}}))
 
-(def target-directory "resources/sample-responses")
+(def target-directory "generated/sample-responses")
 (def cache-directory "sample-response-cache")
 
 (defn get-file-basename [sample-def]
@@ -69,7 +69,7 @@
   "Caches successful sample responses and returns the sample response."
   [sample-def]
   (when (<= 200 (-> sample-def :response :status) 299)
-    (spit (str "resources/" (get-sample-response-cache-file sample-def))
+    (spit (str "generated/" (get-sample-response-cache-file sample-def))
           (assoc sample-def :cached? true)))
   sample-def)
 

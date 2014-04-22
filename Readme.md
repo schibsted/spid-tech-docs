@@ -169,20 +169,6 @@ The endpoint description
 The file is sectioned into key/value pairs where the colon-prefixed name is the
 key, and all text up until the next key is the value.
 
-### resources/sample-responses
-
-**NB!** These files are generated, do not edit. Eventually there will be a
-script to regenerate all of them, but for now you can generate individual ones
-from the REPL:
-
-```clj
-(in-ns spid-docs.sample-responses)
-
-;; Fetches a sample response from the /api/2/logins endpoint and writes it to
-;; file (also returns the sample response)
-(generate-sample-response {:method :GET :path "/logins"})
-```
-
 ### Other files in resources
 
 In addition to these directories, there are various files that have specific

@@ -19,6 +19,7 @@
                  [inflections "0.9.5"]]
   :jvm-opts ["-Djava.awt.headless=true"
              "-Xmx768M"]
+  :resource-paths ["resources" "generated"]
   :ring {:handler spid-docs.web/app}
   :aliases {"build-site" ["run" "-m" "spid-docs.web/export"]
             "generate-sample-responses" ["run" "-m" "spid-docs.sample-responses.generate/generate"]}
