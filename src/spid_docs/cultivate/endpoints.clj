@@ -97,6 +97,29 @@
       (assoc response :samples (into {} samples))
       response)))
 
+(def global-failures
+  [{:status 401
+    :description "Not an admin for client. If you are an admin user and are trying to administrate a different client then the one you logged in for and you do not have admin access to it."
+    :type "api-exception"}
+   {:status 401
+    :description "Not an admin client for client. Non admin user trying to administer a different client and the client you logged in with does not have admin rights over this client."
+    :type "api-exception"}
+   {:status 403
+    :description "Client is not authorized to access this API endpoint. Contact SPiD to request access."
+    :type "api-exception"}
+   {:status 403
+    :description "Requesting IP is not whitelisted"
+    :type "api-exception"}
+   {:status 404
+    :description "Unknown client ID"
+    :type "api-exception"}
+   {:status 404
+    :description "Client ID mismatch. The client making the request is no the owner of this resource, and does not have administrative privileges for it."
+    :type "api-exception"}
+   {:status 420
+    :description "Request Ratelimit exceeded"
+    :type "api-exception"}])
+
 (defn- get-failure-responses
   "Extracts all failure responses, and adds global ones, such as 403 for any
    endpoint that requires authentication."
@@ -106,6 +129,7 @@
                                          :description "Access token rejected"
                                          :type "api-exception"})
          (:responses http-method))
+       (concat global-failures)
        (sort-by :status)
        (remove success?)
        (map create-response)))

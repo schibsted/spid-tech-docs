@@ -190,6 +190,9 @@
 (defn render-response-failures [failures]
   (when (seq failures)
     (list [:h2 "Failure cases"]
+          [:p "Some HTTP response codes are used for multiple error situations.
+               There is no consistent way to tell these apart, but the error
+               object will contain a textual explanation of the reason for the error."]
           [:ul (map render-response-failure failures)])))
 
 (defn- render-sample-response [format sample]
