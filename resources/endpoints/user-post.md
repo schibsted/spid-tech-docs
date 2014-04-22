@@ -1,6 +1,9 @@
 :introduction
 
-Create a new user. The email is globally unique in SPiD, and there can only be
+Create a new user. Not available for mobile clients, for historical reasons.
+See the [signup endpoint](/endpoints/POST/signup).
+
+The email is globally unique in SPiD, and there can only be
 one account associated with any given email address. To query for the
 availability of an email address, see the
 [email status endpoint](/endpoints/GET/email/{email}/status).
@@ -13,3 +16,7 @@ Only an available email address is required to create a SPiD account. The
 additional parameters that can be provided may also be filled in by the user in
 their SPiD profile at any later point.
 
+:relevant-endpoints
+
+POST /signup
+GET /email/{email}/status

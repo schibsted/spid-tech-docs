@@ -17,3 +17,8 @@ they accept the terms prior to calling this endpoint.
 
 When users sign up through SPiD's own UI, they will be prompted to read and
 accept the terms.
+
+:relevant-endpoints
+
+POST /user
+POST /signup
