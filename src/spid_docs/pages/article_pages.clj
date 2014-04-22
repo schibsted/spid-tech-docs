@@ -4,23 +4,30 @@
             [spid-docs.pimp.markdown :as markdown]
             [spid-docs.routes :refer [article-path]]))
 
-(defn create-page [[_ article]]
-  (let [body (list
-              [:h1 (:title article)]
-              (markdown/render (:body article)))
-        aside (:aside article)]
-    (if aside
+(defn- render-relevant-endpoint [{:keys [method path]}]
+  [:li [:a {:href (str "/endpoints/" (name method) path)}
+        [:code method] " " path]])
+
+(defn- render-relevant-endpoints [relevant]
+  (when relevant
+    (list
+     [:h2 "Relevant endpoints"]
+     [:ul (map render-relevant-endpoint relevant)])))
+
+(defn create-page [[_ {:keys [title body aside relevant-endpoints] :as article}]]
+  (let [body (list [:h1 title] (markdown/render body))]
+    (if (or aside relevant-endpoints)
       (-> article
           (assoc :split-page? true)
           (assoc :body (list
-                        [:div.main
-                         [:div.wrap
-                          body]]
+                        [:div.main [:div.wrap body]]
                         [:div.aside
                          [:div.wrap
-                          (markdown/render aside)]])))
-      (assoc article :body
-             [:div.wrap body]))))
+                          (when aside
+                            (markdown/render aside))
+                          (when relevant-endpoints
+                            (render-relevant-endpoints relevant-endpoints))]])))
+      (assoc article :body [:div.wrap body]))))
 
 (defn create-pages
   "Given a map of markdown files (path => content), generate a map of url =>

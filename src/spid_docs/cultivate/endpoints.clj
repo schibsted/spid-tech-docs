@@ -2,7 +2,8 @@
   "Gather all relevant information about endpoints from a few different sources."
   (:require [clojure.string :as str]
             [spid-docs.formatting :refer [to-id-str]]
-            [spid-docs.homeless :refer [with-optional-keys assoc-non-nil]]))
+            [spid-docs.homeless :refer [with-optional-keys assoc-non-nil]]
+            [spid-docs.cultivate.util :refer [parse-relevant-endpoints]]))
 
 (def verbs
   "Verbs to use for different http methods when cobbling together the
@@ -133,20 +134,6 @@
        (sort-by :status)
        (remove success?)
        (map create-response)))
-
-(defn- parse-relevant-endpoints-line [l]
-  "Takes a string like: GET /the/path and makes a map out of it."
-  (let [[method path] (str/split l #" " 2)]
-    {:method (keyword method)
-     :path path}))
-
-(defn- parse-relevant-endpoints [relevant-endpoints]
-  "Takes a list of newline separated endpoint signatures, and turns it into a map."
-  (when relevant-endpoints
-   (->> relevant-endpoints
-        str/trim
-        str/split-lines
-        (map parse-relevant-endpoints-line))))
 
 (defn- cultivate-endpoint-1 [endpoint [method details] raw-content]
   "Gather a bunch of information from all over to create a map that

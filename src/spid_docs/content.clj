@@ -3,8 +3,9 @@
    content from the various sources."
   (:require [mapdown.core :as mapdown]
             [spid-docs.core :as spid]
-            [spid-docs.cultivate.apis :as ca]
-            [spid-docs.cultivate.endpoints :as ce]
+            [spid-docs.cultivate.apis :refer [cultivate-apis]]
+            [spid-docs.cultivate.endpoints :refer [cultivate-endpoint]]
+            [spid-docs.cultivate.articles :refer [cultivate-articles]]
             [stasis.core :as stasis]))
 
 (defn get-types []
@@ -32,11 +33,12 @@
 (defn cultivate-content
   "Combine and cross-link content"
   [raw-content]
-  (let [endpoints (mapcat #(ce/cultivate-endpoint % raw-content) (:endpoints raw-content))]
+  (let [endpoints (mapcat #(cultivate-endpoint % raw-content) (:endpoints raw-content))]
     (-> raw-content
         (assoc
             :endpoints endpoints
-            :apis (ca/cultivate-apis (:apis raw-content) endpoints))
+            :apis (cultivate-apis (:apis raw-content) endpoints)
+            :articles (cultivate-articles (:articles raw-content)))
         (dissoc :sample-responses
                 :endpoint-descriptions
                 :pagination-descriptions

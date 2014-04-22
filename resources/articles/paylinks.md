@@ -1,5 +1,11 @@
 :title Paylinks
 
+:relevant-endpoints
+
+POST /paylink
+GET /paylink/{paylinkId}
+DELETE /paylink/{paylinkId}
+
 :body
 
 A paylink object contains common fields, meta data about the paylink, and one or
