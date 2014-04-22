@@ -52,10 +52,9 @@
                                                 (param "limit" {:required? false})
                                                 (param "since" {:required? false})
                                                 (param "until" {:required? false})])
-                 (hiccup-find [:.param])
+                 (hiccup-find [:#pagination])
                  first)]
-        (second param-row) => {:id "pagination"}
-        (hiccup-text param-row) => "offset, limit, since, and until\nPagination"))
+        (hiccup-text param-row) => "The pagination parameters <strong>offset</strong>, <strong>limit</strong>, <strong>since</strong>, and <strong>until</strong> are also supported."))
 
 (fact "Renders filter parameter"
       (let [filter-row

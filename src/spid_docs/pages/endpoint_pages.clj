@@ -74,11 +74,9 @@
     [:p.faded.desc (render-inline (:description parameter))]]])
 
 (defn- render-pagination-parameters [parameters]
-  [:tr.param {:id "pagination"}
-   [:td {:colspan 2}
-    [:h4.name
-     (enumerate-humanely (map :name parameters))]
-    [:p.faded.desc [:a {:href "/endpoints/#pagination"} "Pagination"]]]])
+  [:p#pagination
+   "The " [:a {:href "/endpoints/#pagination"} "pagination"] " parameters "
+   (enumerate-humanely (map (fn [p] (str "<strong>" (:name p) "</strong>")) parameters)) " are also supported."])
 
 (defn- render-filter-parameter [filters]
   [:tr.param {:id "filter"}
@@ -90,12 +88,13 @@
                  [:dd (render-inline (:description %))]) filters)]]])
 
 (defn render-request-parameters [parameters & [pagination filters]]
-  [:table.sectioned
-   (map render-request-parameter (->> parameters
-                                      (sort-by :type)
-                                      (sort-by (comp not :required?))))
-   (if (seq pagination) (render-pagination-parameters pagination))
-   (if (seq filters) (render-filter-parameter filters))])
+  (list
+   [:table.sectioned
+    (map render-request-parameter (->> parameters
+                                       (sort-by :type)
+                                       (sort-by (comp not :required?))))
+    (when (seq filters) (render-filter-parameter filters))]
+   (when (seq pagination) (render-pagination-parameters pagination))))
 
 (defn- render-code [lang code]
   [:pre [:code {:class lang} (h code)]])
