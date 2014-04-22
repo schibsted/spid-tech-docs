@@ -100,10 +100,10 @@
 
 (def global-failures
   [{:status 401
-    :description "Not an admin for client. If you are an admin user and are trying to administrate a different client then the one you logged in for and you do not have admin access to it."
+    :description "You don't have administration rights for this client."
     :type "api-exception"}
    {:status 401
-    :description "Not an admin client for client. Non admin user trying to administer a different client and the client you logged in with does not have admin rights over this client."
+    :description "Your client doesn't have administration rights for this client."
     :type "api-exception"}
    {:status 403
     :description "Client is not authorized to access this API endpoint. Contact SPiD to request access."
