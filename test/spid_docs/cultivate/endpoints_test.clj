@@ -228,26 +228,21 @@ POST /path/to/other/page
 (fact
  "Responses are sorted into :success and :failures."
 
- (-> (cultivate :httpMethods
-                {:GET (cs/http-method {:responses [{:status 200
-                                                    :description "OK"
-                                                    :type "string"}
-                                                   {:status 422
-                                                    :description "NO!"
-                                                    :type "string"}
-                                                   {:status 500
-                                                    :description "OH NO!"
-                                                    :type "error"}]})})
-     first :responses)
- => {:success {:status 200
-               :description "OK"
-               :type :string}
-     :failures [{:status 422
-                 :description "NO!"
-                 :type :string}
-                {:status 500
-                 :description "OH NO!"
-                 :type :error}]})
+ (let [responses (-> (cultivate :httpMethods
+                                {:GET (cs/http-method {:responses [{:status 200
+                                                                    :description "OK"
+                                                                    :type "string"}
+                                                                   {:status 422
+                                                                    :description "NO!"
+                                                                    :type "string"}
+                                                                   {:status 500
+                                                                    :description "OH NO!"
+                                                                    :type "error"}]})})
+                     first :responses)]
+   (:success responses) => {:status 200
+                            :description "OK"
+                            :type :string}
+   (map :status (:failures responses)) => [401 401 403 403 404 404 420 422 500]))
 
 (fact
  "403 response is added when not already present and endpoint requires authentication"
@@ -270,7 +265,7 @@ POST /path/to/other/page
       :responses
       :failures
       (map :status))
- => [400 403 422 500])
+ => [400 401 401 403 403 403 404 404 420 422 500])
 
 (fact
  "Responses that are lists of things are loaded correctly"
@@ -279,11 +274,11 @@ POST /path/to/other/page
                 {:GET (cs/http-method {:responses [{:status 200
                                                     :description "OK"
                                                     :type "[string]"}]})})
-     first :responses)
- => {:success {:status 200
-               :description "OK"
-               :type [:string]}
-     :failures []})
+     first :responses
+     :success)
+ => {:status 200
+     :description "OK"
+     :type [:string]})
 
 (fact
  "Responses that are objects of things are loaded correctly"
@@ -292,11 +287,12 @@ POST /path/to/other/page
                 {:GET (cs/http-method {:responses [{:status 200
                                                     :description "OK"
                                                     :type "{userId user}"}]})})
-     first :responses)
- => {:success {:status 200
-               :description "OK"
-               :type {:userId :user}}
-     :failures []})
+     first
+     :responses
+     :success)
+ => {:status 200
+     :description "OK"
+     :type {:userId :user}})
 
 (fact
  "The success response contains a :samples if it is present
@@ -307,13 +303,14 @@ POST /path/to/other/page
 
  (-> (cultivate :httpMethods {:GET (cs/http-method {:responses [{:status 200, :description "from raw", :type "string"}]})}
                 :path "terms")
-     first :responses)
- => {:success {:status 200
-               :description "success description"
-               :type :string
-               :samples {:json "terms json"
-                         :jsonp "terms jsonp"}}
-     :failures []})
+     first
+     :responses
+     :success)
+ => {:status 200
+     :description "success description"
+     :type :string
+     :samples {:json "terms json"
+               :jsonp "terms jsonp"}})
 
 (fact
  "The entries in :see-also are parsed and listed under :relevant-endpoints"
