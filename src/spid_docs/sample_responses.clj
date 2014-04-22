@@ -149,9 +149,10 @@
 
 (defn- generate-missing-sample-response-files [sample-response endpoint]
   (let [formats (:response-formats endpoint)]
-    (when (or (sample-response-missing? sample-response formats :json)
+    (if (or (sample-response-missing? sample-response formats :json)
               (sample-response-missing? sample-response formats :jsonp))
-      (generate-sample-response-files sample-response endpoint))))
+      (generate-sample-response-files sample-response endpoint)
+      (println "Skipping already generated" (name (:method sample-response)) (:path sample-response)))))
 
 (defn generate-sample-responses
   "Generate sample responses in one of three modes:
@@ -163,6 +164,11 @@
    :build-from-api   Regenerates all sample response files, and fetches all
                      responses from the API (and produces new cache files)"
   [sample-defs endpoints mode]
+  (case mode
+    :build-from-cache (println "Re-building generated sample responses from cache")
+    :build-from-api (println "Re-fetching all data from the API and re-building generated sample responses")
+    (println "Generating missing sample responses.\nTo regenerate existing responses, try one of:\n"
+             "   lein generate-sample-responses :build-from-cache\n    lein generate-sample-responses :build-from-api\n"))
   (try
     (let [load-def (if (= :build-from-api mode)
                      force-load-and-verify-sample-response
