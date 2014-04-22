@@ -200,11 +200,12 @@
         [:div.tab-content (render-code (format format-classes) sample)]))
 
 (defn render-sample-responses [samples]
-  (list
-   [:h2 "Sample response"]
-   [:div.tabs
-    (map #(render-sample-response % (% samples))
-         (sort-by #(.indexOf preferred-format-order %) (keys samples)))]))
+  (when (seq samples)
+   (list
+    [:h2 "Sample response"]
+    [:div.tabs
+     (map #(render-sample-response % (% samples))
+          (sort-by #(.indexOf preferred-format-order %) (keys samples)))])))
 
 (defn- render-response [endpoint types]
   [:div.section
