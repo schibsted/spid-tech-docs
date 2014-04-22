@@ -1,0 +1,8 @@
+{"email":"user@domain.tld",
+ "oauthToken":"22c881513b93e52a11254083b30cbffb2161c9fc",
+ "accounts":
+ {"52f8e3d9efd04bb749000000":
+  {"id":"52f8e3d9efd04bb749000000",
+   "domain":"www.kodemaker.no",
+   "accountName":"Kodemaker"}},
+ "merchants":[47000]}

@@ -1,0 +1,1 @@
+{:cached? true, :id nil, :method :GET, :path "/user/238342/trigger/emailverification", :route "/user/{userId}/trigger/{trigger}", :response {:status 201, :error nil, :data {:success true}, :success? true}}

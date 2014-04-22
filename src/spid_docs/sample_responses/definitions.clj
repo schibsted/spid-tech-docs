@@ -5,9 +5,6 @@
 (defn base64-encode [str]
   (String. (base64/encode (.getBytes str)) "UTF-8"))
 
-;; Usikkert
-;; (defsample POST "/oauth/exchange" {:clientId "..." :type "..."})
-
 (defsample GET "/endpoints")
 
 (defsample GET "/describe/{object}" {:object "User"})
@@ -26,73 +23,107 @@
 
 (defsample GET "/logins")
 
-;; We probably won't include these (deprecated/not in use)
-;;(defsample POST "/email_templates" {:templates "???"})
-;;(defsample GET "/email_templates")
-
 (defsample GET "/reports/dumps")
-;; Deprecated, and there are no dumps for the docs user, so we'll ignore these
-;;(defsample GET "/reports/dump/{id}")
-;;(defsample GET "/reports/template/{template}")
 
 (defsample johndoe
   POST "/user" {:email "john@doe.com" :displayName "John Doe" :name "John Doe"})
 
-;; Currently fails on "no such user"
-;;; (defsample [user johndoe]
-;;;   POST "/{type}/{id}/do/{key}" {:type "User"
-;;;                                 :id (:id user)
-;;;                                 :key "rating"
-;;;                                 :rating "10"})
+(comment
+  ;; User reference is invalid or does not exists: 238342
 
-;;; (defsample [user johndoe]
-;;;   GET "/{type}/{id}/do/{key}" {:type "User"
-;;;                                :id (:id user)
-;;;                                :key "rating"})
+  (defsample [user johndoe]
+    POST "/{type}/{id}/do/{key}" {:type "User"
+                                  :id (:userId user)
+                                  :key "rating"
+                                  :rating "10"})
 
-;;; (defsample [user johndoe]
-;;;   POST "/{type}/{id}/{subtype}/{subid}/do/{key}" {:type "User"
-;;;                                                   :id (:id user)
-;;;                                                   :subtype "TODO"
-;;;                                                   :subid "TODO"
-;;;                                                   :key "rating"
-;;;                                                   :rating "10"})
+  (defsample [user johndoe]
+    GET "/{type}/{id}/do/{key}" {:type "User"
+                                 :id (:userId user)
+                                 :key "rating"})
 
-;;; (defsample
-;;;   GET "/{type}/{id}/{subtype}/{subid}/do/{key}" {:type "User"
-;;;                                                  :id (:id user)
-;;;                                                  :subtype "TODO"
-;;;                                                  :subid "TODO"
-;;;                                                  :key "rating"})
+  (defsample [user johndoe]
+    POST "/{type}/{id}/{subtype}/{subid}/do/{key}" {:type "User"
+                                                    :id (:id user)
+                                                    :subtype "TODO"
+                                                    :subid "TODO"
+                                                    :key "rating"
+                                                    :rating "10"})
 
-;;;;  (defsample POST "/user/{id}/dataobject/{key}")
-;;;;  (defsample GET "/user/{id}/dataobject/{key}")
-;;;;  (defsample GET "/user/{id}/dataobjects")
-;;;;  (defsample GET "/dataobjects")
-;;;;  (defsample DELETE "/user/{id}/dataobject/{key}")
-;;;;
-;;;;  (defsample GET "/user/{userId}/trigger/{trigger}")
-;;;;
-;;;;  (defsample POST "/signup") ;(email, [password, redirectUri])
-;;;;
-;;;;  (defsample POST "/signup_jwt") ;(jwt)
-;;;;
-;;;;  (defsample POST "/attach_jwt") ;(jwt)
-;;;;
-;;;;  (defsample GET "/user/{userId}/varnishId")
-;;;;
-;;;;  (defsample GET "/user/{userId}")
-;;;;
-;;;;  (defsample GET "/users") ;; ([fields, sort, id, userId, email, emails, emails_regex, displayName, givenName, familyName, fullName, preferredUsername, phoneNumber, phoneNumbers, gender, birthday, address_formatted, address_postalCode, address_country, address_region, address_locality, address_streetAddress, orderId, paymentIdentifier]
-;;;;
-;;;;  (defsample GET "/search/users") ;; ([clientId, query, id, userId, email, displayName, givenName, familyName, fullName, preferredUsername, gender, birthyear, emails, phoneNumber, phoneNumbers, address, homeAddress, invoiceAddress, deliveryAddress, status, /search/users/{query}, query, clientId])
-;;;;
-;;;;  (defsample GET "/user/{userId}/logins")          ;([ip, status])
-;;;;
-;;;;  (defsample POST "/user/{userId}/traits") ;("traits")
-;;;;  (defsample GET "/user/{userId}/traits") ;(["key"])
-;;;;  (defsample DELETE "/user/{userId}/trait/{trait}") ;("trait, "trait")
-;;;;
+  (defsample
+    GET "/{type}/{id}/{subtype}/{subid}/do/{key}" {:type "User"
+                                                   :id (:id user)
+                                                   :subtype "TODO"
+                                                   :subid "TODO"
+                                                   :key "rating"}))
+
+(comment
+  ;; Token is not authorized to access this user.
+
+  (defsample dataobject [user johndoe]
+    POST "/user/{id}/dataobject/{key}" {:id (:userId user)
+                                        :key "mysetting"
+                                        :value "My custom value"})
+
+  (defsample [user johndoe]
+    GET "/user/{id}/dataobject/{key}" {:id (:userId user)
+                                       :key "mysetting"})
+
+  (defsample [user johndoe]
+    GET "/user/{id}/dataobjects" {:id (:userId user)}))
+
+(comment
+  ;; No dataObjects found (because the above error)
+
+  (defsample GET "/dataobjects"))
+
+(comment
+  ;; Token is not authorized to access this user.
+
+  (defsample [user johndoe]
+    DELETE "/user/{id}/dataobject/{key}" {:id (:userId user)
+                                          :key "mysetting"}))
+
+
+(defsample [user johndoe]
+  GET "/user/{userId}/trigger/{trigger}" {:userId (:userId user)
+                                          :trigger "emailverification"})
+
+(defsample janedoe
+  POST "/signup" {:email "jane@doe.com"})
+
+(comment
+  (defsample POST "/signup_jwt" {:jwt "TODO"})
+
+  (defsample POST "/attach_jwt" {:jwt "TODO"}))
+
+(comment
+  ;; This client is not configured to use Varnish
+
+  (defsample [user johndoe]
+    GET "/user/{userId}/varnishId" {:userId (:userId user)}))
+
+(defsample [user johndoe]
+  GET "/user/{userId}" {:userId (:userId user)})
+
+(defsample GET "/users")
+
+(defsample GET "/search/users" {:email "john@doe.com"})
+
+(defsample [user johndoe]
+  GET "/user/{userId}/logins" {:userId (:userId user)})
+
+(defsample trait [user johndoe]
+  POST "/user/{userId}/traits" {:userId (:userId user)
+                                :traits "{\"key\":\"some-data\"}"})
+
+(defsample [user johndoe]
+  GET "/user/{userId}/traits" {:userId (:userId user)})
+
+(defsample [user johndoe]
+  DELETE "/user/{userId}/trait/{trait}" {:userId (:userId user)
+                                         :trait "key"})
+
 ;;;;  (defsample POST "/user/{userId}") ;([displayName, name, birthday, addresses, gender, photo, preferredUsername, url, utcOffset]
 ;;;;
 ;;;;  (defsample GET "/anonymous/users")

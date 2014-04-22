@@ -1,0 +1,1 @@
+{:cached? true, :id nil, :method :DELETE, :path "/user/238342/trait/key", :route "/user/{userId}/trait/{trait}", :response {:status 202, :error nil, :data {:trait "OK"}, :success? true}}
