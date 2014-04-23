@@ -16,3 +16,4 @@ this endpoint.
 
 POST /user
 GET /terms
+GET /email/{email}/status

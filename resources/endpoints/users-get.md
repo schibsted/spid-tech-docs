@@ -60,4 +60,4 @@ considered active.
 :relevant-endpoints
 
 GET /user/{userId}
-
+POST /user

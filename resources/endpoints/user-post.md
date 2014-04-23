@@ -20,3 +20,5 @@ their SPiD profile at any later point.
 
 POST /signup
 GET /email/{email}/status
+GET /user/{userId}
+GET /users
