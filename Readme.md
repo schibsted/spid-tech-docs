@@ -7,11 +7,7 @@ exported to static files.
 
 ## Up and running
 
-1. **Verify Java version**
-  Run `java -version` and verify that it is version 1.7 or later. If not,
-  [download from Oracle]("http://docs.oracle.com/javase/7/docs/webnotes/install/index.html").
-
-2. **Install Leiningen**
+1. **Install Leiningen**
    If you use homebrew:
 
    ```sh
@@ -22,7 +18,7 @@ exported to static files.
    [Leiningen](https://github.com/technomancy/leiningen#leiningen)
    readme.
 
-3. **Fetch the git submodules**
+2. **Fetch the git submodules**
    The example code as well as syntax highlighting themes are pulled in as
    submodules.
 
@@ -30,7 +26,7 @@ exported to static files.
    git submodule update --init
    ```
 
-4. **Run the web server**
+3. **Run the web server**
    ```sh
    lein ring server
    ```
