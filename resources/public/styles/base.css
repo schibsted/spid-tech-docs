@@ -19,9 +19,10 @@ body {
 }
 
 #menu a,
-#head a {color: #fff; text-decoration: none; }
-#menu a:hover,
-#head a:hover {text-decoration: underline; }
+#head a {color: #fff;}
+
+a {text-decoration: none}
+a:hover {text-decoration: underline;}
 
 
 a:visited {color: #0000FF;}
