@@ -8,6 +8,7 @@ exported to static files.
 ## Up and running
 
 1. **Install Leiningen**
+
    If you use homebrew:
 
    ```sh
@@ -18,7 +19,18 @@ exported to static files.
    [Leiningen](https://github.com/technomancy/leiningen#leiningen)
    readme.
 
-2. **Fetch the git submodules**
+2. **Manually install some dependencies**
+
+   Because the Java SDK is not yet in maven central, you have to clone and
+   install it manually. The same goes for the Clojure SDK, since it relies
+   on the Java SDK.
+
+   Follow the instructions in the [spid-sdk-clojure README](https://github.com/spid-tech-docs/spid-sdk-clojure).
+
+   This will change once the SDKs are in Maven Central.
+
+3. **Fetch the git submodules**
+
    The example code as well as syntax highlighting themes are pulled in as
    submodules.
 
@@ -26,7 +38,8 @@ exported to static files.
    git submodule update --init
    ```
 
-3. **Run the web server**
+4. **Run the web server**
+
    ```sh
    lein ring server
    ```
