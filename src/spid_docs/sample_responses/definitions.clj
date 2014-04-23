@@ -108,8 +108,6 @@
 
 (defsample GET "/users")
 
-(defsample GET "/search/users" {:email "john@doe.com"})
-
 (defsample [user johndoe]
   GET "/user/{userId}/logins" {:userId (:userId user)})
 
