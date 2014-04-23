@@ -66,6 +66,7 @@
    :access-token-types #{(enum :user :server)}
    :requires-authentication? Boolean
    (optional-key :relevant-endpoints) [{:method Keyword :path Path}]
+   (optional-key :relevant-types) [Str]
    :responses {:success Response
                :failures [Response]}
    (optional-key :deprecated) Str})

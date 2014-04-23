@@ -8,7 +8,7 @@
             [inflections.core :refer [plural]]
             [spid-docs.enlive :as enlive]
             [spid-docs.example-code :refer [create-example-code]]
-            [spid-docs.formatting :refer [pluralize enumerate-humanely]]
+            [spid-docs.formatting :refer [pluralize enumerate-humanely capitalize]]
             [spid-docs.http :refer [get-response-status-name]]
             [spid-docs.pages.type-pages :refer [render-type-definition render-inline-types link-to-type]]
             [spid-docs.pimp.markdown :refer [render-inline render]]
@@ -202,11 +202,11 @@
 
 (defn render-sample-responses [samples]
   (when (seq samples)
-   (list
-    [:h2 "Sample response"]
-    [:div.tabs
-     (map #(render-sample-response % (% samples))
-          (sort-by #(.indexOf preferred-format-order %) (keys samples)))])))
+    (list
+     [:h2 "Sample response"]
+     [:div.tabs
+      (map #(render-sample-response % (% samples))
+           (sort-by #(.indexOf preferred-format-order %) (keys samples)))])))
 
 (defn- render-response [endpoint types]
   [:div.section
@@ -234,11 +234,16 @@
   [:li [:a {:href (str "/endpoints/" (name method) path)}
         [:code method] " " path]])
 
-(defn- render-relevant-endpoints [relevant]
-  (when relevant
+(defn- render-relevant-type [type]
+  [:li "The " [:a {:href (str "/types/" type)} (capitalize type) " object"]])
+
+(defn- render-see-also [relevant-endpoints relevant-types]
+  (when (or relevant-endpoints relevant-types)
     (list
      [:h2 "See also"]
-     [:ul (map render-relevant-endpoint relevant)])))
+     [:ul
+      (concat (map render-relevant-type relevant-types)
+              (map render-relevant-endpoint relevant-endpoints))])))
 
 (defn create-page [endpoint types]
   (warn-about-missing-typedefs endpoint types)
@@ -254,7 +259,8 @@
                   (render-description endpoint)]]
                 [:div.aside
                  [:div.wrap
-                  (render-relevant-endpoints (:relevant-endpoints endpoint))]]]
+                  (render-see-also (:relevant-endpoints endpoint)
+                                   (:relevant-types endpoint))]]]
                [:div.separator]
                (render-request endpoint)
                [:div.separator]

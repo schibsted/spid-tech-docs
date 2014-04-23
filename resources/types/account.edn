@@ -1,5 +1,5 @@
 {:id :account
- :name "Third-party account."
+ :name "Third-party account"
  :rendering :object
  :fields [{:name "id"          :type :string :description "Unique account ID" :always-available? false}
           {:name "domain"      :type :string :description "Top-most authoritative domain for the account, e.g. twitter.com" :always-available? false}

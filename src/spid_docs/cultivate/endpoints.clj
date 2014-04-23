@@ -142,7 +142,7 @@
         {:keys [required optional default_filters filters access_token_types responses]} details
         {:keys [pagination-descriptions filter-descriptions endpoint-descriptions sample-responses]} raw-content
         endpoint-id (str (to-id-str path) "-" (.toLowerCase (name method)))
-        {:keys [introduction success-description relevant-endpoints]} (get endpoint-descriptions (str "/" endpoint-id ".md") {})]
+        {:keys [introduction success-description relevant-endpoints relevant-types]} (get endpoint-descriptions (str "/" endpoint-id ".md") {})]
     (with-optional-keys
       {:id (keyword endpoint-id)
        :path (str "/" path)
@@ -159,6 +159,7 @@
        :access-token-types (set (map keyword access_token_types))
        :requires-authentication? (not (empty? access_token_types))
        :?relevant-endpoints (parse-relevant-endpoints relevant-endpoints)
+       :?relevant-types (when relevant-types (str/split relevant-types #" "))
        :responses {:success (-> success? (filter responses) first create-response
                                 (add-samples (str "/" endpoint-id) sample-responses)
                                 (assoc-non-nil :description success-description))

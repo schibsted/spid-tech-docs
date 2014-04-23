@@ -16,7 +16,8 @@ POST /path/to/other/page
                       "/terms-get.jsonp" "terms jsonp"}
    :endpoint-descriptions {"/terms-get.md" {:introduction "terms desc"
                                             :success-description "success description"
-                                            :relevant-endpoints relevant-endpoints-example}}
+                                            :relevant-endpoints relevant-endpoints-example
+                                            :relevant-types "user order"}}
    :pagination-descriptions {:limit  "limit desc"
                              :offset "offset desc"
                              :since  "since desc"
@@ -320,6 +321,13 @@ POST /path/to/other/page
      first :relevant-endpoints)
  => [{:method :GET, :path "/path/to/{id}"}
      {:method :POST, :path "/path/to/other/page"}])
+
+(fact
+ "The relevant types are listed."
+ (-> (cultivate :httpMethods {:GET (cs/http-method)}
+                :path "terms")
+     first :relevant-types)
+ => ["user" "order"])
 
 (fact (-> (cultivate :deprecated "1.0") first :deprecated) => "1.0")
 

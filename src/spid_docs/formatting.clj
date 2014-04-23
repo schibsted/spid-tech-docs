@@ -9,6 +9,11 @@
   [word & [count]]
   (if (= count 1) word (plural word)))
 
+(defn capitalize
+  [s]
+  (str (.toUpperCase (subs s 0 1))
+       (subs s 1)))
+
 (defn enumerate-humanely
   "Take a list of words, and return a formatted string that enumerates the words
    in a human way, e.g. 'cow, horse and pig'."

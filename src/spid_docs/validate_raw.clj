@@ -56,7 +56,8 @@
 (def EndpointDescription
   {:introduction Str
    (optional-key :success-description) Str
-   (optional-key :relevant-endpoints) Str})
+   (optional-key :relevant-endpoints) Str
+   (optional-key :relevant-types) Str})
 
 (def Article
   {:title Str

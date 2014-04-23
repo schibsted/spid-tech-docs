@@ -1,3 +1,10 @@
+:relevant-endpoints
+
+GET /user/{userId}
+POST /user
+
+:relevant-types user
+
 :introduction
 
 List [users](/types/user). All query parameters are user properties
@@ -56,8 +63,3 @@ curl http://stage.payment.schibsted.no/api/2/users?oauth_token=TOKEN& \
 The endpoint supports many filters (see below). If no filters are provided,
 active users for the client is returned. Users with status 0 and 1 are
 considered active.
-
-:relevant-endpoints
-
-GET /user/{userId}
-POST /user
