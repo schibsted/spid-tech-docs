@@ -9,7 +9,7 @@ for the availability of an email address, see the
 
 When the user is signed up through this endpoint, terms are
 automatically accepted, and the client must make sure to ask the user
-if they accept [the terms](/endpoints/GET/terms/) prior to calling
+if they accept [the terms](/endpoints/GET/terms) prior to calling
 this endpoint.
 
 :relevant-endpoints
