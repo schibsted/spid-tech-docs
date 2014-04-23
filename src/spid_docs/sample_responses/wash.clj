@@ -27,6 +27,7 @@
    [:merchantId] "[Your merchant ID]"
    [:userId] scramble-numbers
    [:email] "user@domain.tld"
+   [:oauthToken] "0123456789abcdef0123456789abcdef01234567"
    [:ip] "127.0.0.1"
    [:emails] (fn [emails]
                (map-indexed #(assoc %2 :value (str "user@domain" (inc %1) ".tld")) emails))
