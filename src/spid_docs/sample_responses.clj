@@ -167,7 +167,7 @@
   (case mode
     :build-from-cache (println "Re-building generated sample responses from cache")
     :build-from-api (println "Re-fetching all data from the API and re-building generated sample responses")
-    (println "Generating missing sample responses.\nTo regenerate existing responses, try one of:\n"
+    (println "Generating missing sample responses.\n\nTo regenerate existing responses, try one of:\n"
              "   lein generate-sample-responses :build-from-cache\n    lein generate-sample-responses :build-from-api\n"))
   (try
     (let [load-def (if (= :build-from-api mode)

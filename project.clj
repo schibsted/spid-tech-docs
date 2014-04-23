@@ -16,9 +16,12 @@
                  [prismatic/schema "0.2.1"]
                  [fs "1.3.3"]
                  [clj-http "0.9.0"]
-                 [inflections "0.9.5"]]
+                 [inflections "0.9.5"]
+                 [org.slf4j/slf4j-api "1.7.5"]
+                 [ch.qos.logback/logback-classic "1.0.13"]]
   :jvm-opts ["-Djava.awt.headless=true"
              "-Xmx768M"]
+  :test2junit-output-dir "target/test2junit"
   :resource-paths ["resources" "generated"]
   :ring {:handler spid-docs.web/app}
   :aliases {"build-site" ["run" "-m" "spid-docs.web/export"]
@@ -26,6 +29,7 @@
   :profiles {:dev {:plugins [[lein-ring "0.8.10"]
                              [codox "0.6.7"]]
                    :dependencies [[org.clojure/tools.namespace "0.2.4"]]
+                   :resource-paths ["dev/resources"]
                    :source-paths ["dev"]
                    :test-paths ^:replace []}
              :test {:dependencies [[midje "1.6.0"]
