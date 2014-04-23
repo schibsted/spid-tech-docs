@@ -109,6 +109,9 @@
 (defsample GET "/users")
 
 (defsample [user johndoe]
+  GET "/search/users" {:email (:email user)})
+
+(defsample [user johndoe]
   GET "/user/{userId}/logins" {:userId (:userId user)})
 
 (defsample trait [user johndoe]
