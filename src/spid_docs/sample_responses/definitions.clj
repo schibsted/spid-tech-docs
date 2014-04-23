@@ -92,6 +92,11 @@
 (defsample janedoe
   POST "/signup" {:email "jane@doe.com"})
 
+(defsample mycampaign
+  POST "/campaign" {:title "My Campaign"})
+
+(defsample GET "/campaigns")
+
 (comment
   (defsample POST "/signup_jwt" {:jwt "TODO"})
 
