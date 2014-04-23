@@ -12,7 +12,7 @@
 (defn- render-relevant-endpoints [relevant]
   (when relevant
     (list
-     [:h2 (pluralize "Relevant endpoint" (count relevant))]
+     [:h2 "Relevant endpoints"]
      [:ul (map render-relevant-endpoint relevant)])))
 
 (defn create-page [[_ {:keys [title body aside relevant-endpoints] :as article}]]
