@@ -22,3 +22,5 @@ POST /signup
 GET /email/{email}/status
 GET /user/{userId}
 GET /users
+
+:relevant-types user

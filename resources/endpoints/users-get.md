@@ -7,7 +7,7 @@ POST /user
 
 :introduction
 
-List [users](/types/user). All query parameters are user properties
+List users. All query parameters are user properties
 that will be used to search for users. When sending multiple query
 parameters, the API performs an `AND` search. Some parameters are used
 to fuzzy match, while others perform exact matches. See the parameter

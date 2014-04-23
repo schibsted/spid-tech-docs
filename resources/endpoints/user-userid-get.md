@@ -7,3 +7,5 @@ Fetch an existing user by their `userId` (not to be mistaken by the deprecated
 
 GET /users
 POST /user
+
+:relevant-types user
