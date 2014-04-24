@@ -70,15 +70,15 @@
 (defn- render-typedef [type types]
   (list
    (markdown/render (:description type))
-   (if (some :always-available? (:fields type))
-     [:p "The check mark " [:span.check "✓"] " indicates that the field always contains a valid non-empty value."])
    (if (= :enum (:rendering type))
      [:p "An enum, with the following possible values:"])
    [:table.sectioned.mbl
     ;; Render "both" fields and values - only either one will be present in any
     ;; given type.
     (map #(render-type-field % types) (:fields type))
-    (map render-type-value (:values type))]))
+    (map render-type-value (:values type))]
+   (if (some :always-available? (:fields type))
+     [:p.faded "The check mark " [:span.check "✓"] " indicates that the field always contains a valid non-empty value."])))
 
 (defn render-type-definition
   "Render the type definition specified by the type map. See the validation data
