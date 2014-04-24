@@ -4,32 +4,16 @@
 
 ## Table of Contents
 
+- [Response container](#response-container)
+- [Response formats](#response-formats)
 - [Pagination](#pagination)
 - [Filters](#filters)
 - [Locales](#locales)
-- [Response container](#response-container)
-- [Response formats](#response-formats)
 - [Parameters](#parameters)
 
 :body
 
-## Pagination
-
-Pagination is supported in many SPiD endpoints.
-
-## Filters
-
-## Locales
-
-SPiD supports localized content for some endpoints. Whenever that is the case,
-the available locales are:
-
-* `nb_NO` - For Norwegian Bokmål
-* `sv_SE` - For Swedish
-* `en_US` - For American English (default)
-
-Although rare, you may run into content that has not been localized. In these
-cases, you will get English content back.
+This page collects some general workings of endpoints in SPiD.
 
 ## Response container
 
@@ -39,7 +23,7 @@ standard way of retrieving the endpoint return type or information about API
 failures.
 
 More details are available from the
-[response container type sepcification](/types/response-container). Below is a
+[response container type specification](/types/response-container). Below is a
 sample output:
 
 ```js
@@ -72,6 +56,7 @@ sample output:
 }
 ```
 
+
 ## Response formats
 
 Most SPiD endpoints can respond with various response formats. The format used
@@ -91,7 +76,7 @@ format=json
 
 <h3 id="format-jsonp">JSONP</h3>
 
-[JSONP](http://en.wikipedia.org/wiki/JSONP) is supported by all endpoints that
+[JSONP](http://en.wikipedia.org/wiki/JSONP) is supported by most endpoints that
 support JSON. JSONP ("JSON with padding") is JSON wrapped in a function call,
 served as JavaScript. Because JavaScript can be served from mixed sources on a
 web page, JSONP circumvents certain security restrictions and complexity
@@ -126,26 +111,64 @@ Which will return something like
 doit([...]);
 ```
 
-<h3 id="format-xml">XML</h3>
+<span id="format-xml"></span>
+<span id="format-tgz"></span>
+<span id="format-csv"></span>
+<span id="format-png"></span>
 
-A few SPiD endpoints support XML responses. To force its use, provide the
-following query parameter:
+### Other formats
+
+A few SPiD endpoints support other response types:
+
+- **XML**: The extensible markup language with pointy brackets
+- **TGZ**: Packaged and compressed files
+- **CSV**: Comma separated values
+- **PNG**: An image file
+
+To force their use, provide the `format` query parameter. Like this
+for XML:
 
 ```text
 format=xml
 ```
 
-<h3 id="format-tgz">TGZ</h3>
 
-TODO
+## Pagination
 
-<h3 id="format-csv">CSV</h3>
+Pagination is supported in many SPiD endpoints. These are the parameters to control paging:
 
-TODO
+- `limit`: The maximum number of results to return. May not exceed 1000.
+- `offset`: How many results to skip over.
+- `until`: Entries older than this unix timestamp are excluded from the results.
+- `since`: Entries newer than this unix timestamp are excluded from the results.
 
-<h3 id="format-png">PNG</h3>
+You might find that using `since` instead of `offset` helps you avoid
+overlaps between pages in a rapidly growing result set.
 
-TODO
+Both `until` and `since` accept several time formats, most notably
+relative formats like `yesterday` and `first day of January`. Read
+more about
+[supported date and time formats](http://www.php.net/manual/en/datetime.formats.php).
+
+Please note that not all parameters are available for all endpoints.
+See the individual endpoint pages for details.
+
+
+## Filters
+
+
+## Locales
+
+SPiD supports localized content for some endpoints. Whenever that is the case,
+the available locales are:
+
+- `nb_NO` - For Norwegian Bokmål
+- `sv_SE` - For Swedish
+- `en_US` - For American English (default)
+
+Although rare, you may run into content that has not been localized. In these
+cases, you will get English content back.
+
 
 ## Parameters
 
