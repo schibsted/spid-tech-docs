@@ -177,7 +177,7 @@
         (keep type-id)
         (keep (fn [type]
                 (if (nil? (type types))
-                  (println "Attempted to render undefined type" (name type))
+                  (throw (Exception. (str "Attempted to render undefined type " (name type) ". Not a typo? Add it to resources/types.edn.")))
                   (type types))))
         (map #(list (render-type-definition % types)
                     (render-inline-types % types))))))
