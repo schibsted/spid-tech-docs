@@ -16,4 +16,4 @@
                     "/deprecated/" (partial frontpage/create-deprecated-endpoints-page (:apis content))}
     :endpoints (endpoints/create-pages (:endpoints content) (:types content))
     :articles (articles/create-pages (:articles content))
-    :types (types/create-pages (:types content))}))
+    :types (types/create-pages (:types content) (:endpoints content))}))

@@ -95,17 +95,39 @@
        (map types)
        (map #(render-type-definition % types))))
 
-(defn create-page [type types]
-  {:body [:div.wrap
-          [:h1 (get-type-name type)]
-          (list (render-typedef type types)
-                (render-inline-types type types))]})
+(defn find-relevant-endpoints [type endpoints]
+  (filter #(some #{(name (:id type))} (:relevant-types %)) endpoints))
+
+(defn- render-relevant-endpoint [{:keys [method path]}]
+  [:li [:a {:href (str "/endpoints/" (name method) path)}
+        [:code method] " " path]])
+
+(defn- render-body [type types]
+  (list
+   [:h1 (get-type-name type)]
+   (render-typedef type types)
+   (render-inline-types type types)))
+
+
+(defn- render-aside [relevant-endpoints]
+  (list
+   [:h2 "Relevant endpoints"]
+   [:ul (map render-relevant-endpoint relevant-endpoints)]))
+
+(defn create-page [type types endpoints]
+  (let [relevant-endpoints (find-relevant-endpoints type endpoints)]
+    (if (seq relevant-endpoints)
+      {:body (list
+              [:div.main [:div.wrap (render-body type types)]]
+              [:div.aside [:div.wrap (render-aside relevant-endpoints)]])
+       :split-page? true}
+      {:body [:div.wrap (render-body type types)]})))
 
 (defn create-pages
   "Takes a map of types (typically those defined in resources/types.edn) and
    returns a map of url => page function."
-  [types]
+  [types endpoints]
   (->> (vals types)
        (filter #(or (:description %) (:fields %) (:values %)))
-       (map (juxt type-path #(partial create-page % types)))
+       (map (juxt type-path #(partial create-page % types endpoints)))
        (into {})))
