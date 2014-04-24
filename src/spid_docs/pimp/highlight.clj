@@ -26,7 +26,7 @@
      ;; highlighting
      :content (try
                 (-> code
-                    (pygments/highlight lang :html)
+                    (pygments/highlight (or lang "text") :html)
                     (extract-code))
                 (catch Exception e code))}))
 
