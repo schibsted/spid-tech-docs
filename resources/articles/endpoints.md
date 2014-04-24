@@ -156,6 +156,29 @@ See the individual endpoint pages for details.
 
 ## Filters
 
+Several endpoints accept the `filter` argument. It is a generic way to
+get different results - usually filtering the result down to a subset,
+but not always.
+
+Each endpoint specifies which filters it supports, but here are some common ones:
+
+- `merchant` Show all results within the current merchant rather than the current client
+- `updated` Filter by users that have updated their account, order by last updated (should be used with since & until)
+- `verified` Filter by users with status = 1 (verified)
+- `unverified` Filter by users with status = 0 (unverified)
+- `inactive` Filter by users with status = -1 (inactive/disabled account)
+- `blocked` Filter by users with status = -2 (blocked from using the service)
+- `deleted` Filter by users with status = -3 (deleted from the platform/service)
+- `facebook` Filter by users using Facebook as a third party login
+- `google` Filter by users using Google as a third party login
+- `live` Filter by users using Live as a third party login
+- `imported` Filter by users that have been imported
+
+Multiple filters can be active at once. Separate them by a comma:
+
+```
+filter=updated,verified
+```
 
 ## Locales
 
