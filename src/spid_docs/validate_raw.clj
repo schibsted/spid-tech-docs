@@ -71,7 +71,6 @@
              :concepts {Str Str}
              :sample-responses {Str Str}
              :endpoint-descriptions {Str EndpointDescription}
-             :pagination-descriptions {Keyword Str}
              :filter-descriptions {Keyword Str}
              :types {Keyword Type}
              :apis {[Str] {Keyword Str}} ; tuple of [:section :api] -> {:description ""}

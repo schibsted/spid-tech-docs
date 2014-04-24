@@ -59,7 +59,10 @@
   "Is the response status between 200 and 299, ie a success?"
   (<= 200 (:status response) 299))
 
-(defn- collect-parameters [required optional pathParameters pagination-descriptions endpoint]
+(def pagination-params
+  #{"limit" "offset" "since" "until"})
+
+(defn- collect-parameters [required optional pathParameters endpoint]
   "Gather required, optional and path parameters in one list. The
    optional pagination parameters and 'filters' are removed, since
    they're handled specially elsewhere."
@@ -68,17 +71,16 @@
    (->> required (map #(create-parameter % :query true endpoint)))
    (->> optional
         (remove #{"filters"})
-        (remove (comp pagination-descriptions keyword))
+        (remove pagination-params)
         (map #(create-parameter % :query false endpoint)))))
 
-(defn- collect-pagination-params [optional pagination-descriptions]
-  "Gather the pagination parameters in their own list, getting
-   descriptions from a central location instead of on the endpoint
-   itself. This is to avoid repeating descriptions for pagination
+(defn- collect-pagination-params [optional]
+  "Gather the pagination parameters in their own list. They are
+   treated specially, since we don't want to repeat info about them
    everywhere."
   (->> optional
-       (filter (comp pagination-descriptions keyword))
-       (map #(create-parameter % :query false {:parameter_descriptions pagination-descriptions}))))
+       (filter pagination-params)
+       (map #(create-parameter % :query false {}))))
 
 (defn- match-sample [[^String path sample] endpoint-id]
   "Does this path match the given endpoint-id? If it does, keep it and
@@ -140,7 +142,7 @@
    includes everything you could ever want to know about an endpoint."
   (let [{:keys [path category pathParameters valid_output_formats default_output_format deprecated]} endpoint
         {:keys [required optional default_filters filters access_token_types responses]} details
-        {:keys [pagination-descriptions filter-descriptions endpoint-descriptions sample-responses]} raw-content
+        {:keys [filter-descriptions endpoint-descriptions sample-responses]} raw-content
         endpoint-id (str (to-id-str path) "-" (.toLowerCase (name method)))
         {:keys [introduction success-description relevant-endpoints relevant-types]} (get endpoint-descriptions (str "/" endpoint-id ".md") {})]
     (with-optional-keys
@@ -151,8 +153,8 @@
        :name (fix-multimethod-name (:name endpoint) method)
        :description introduction
        :category {:section (first category) :api (second category)}
-       :parameters (collect-parameters required optional pathParameters pagination-descriptions endpoint)
-       :?pagination (collect-pagination-params optional pagination-descriptions)
+       :parameters (collect-parameters required optional pathParameters endpoint)
+       :?pagination (collect-pagination-params optional)
        :?filters (map #(create-filter % default_filters filter-descriptions) filters)
        :response-formats (map keyword valid_output_formats)
        :default-response-format (keyword default_output_format)

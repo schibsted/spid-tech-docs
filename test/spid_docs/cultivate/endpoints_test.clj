@@ -18,10 +18,6 @@ POST /path/to/other/page
                                             :success-description "success description"
                                             :relevant-endpoints relevant-endpoints-example
                                             :relevant-types "user order"}}
-   :pagination-descriptions {:limit  "limit desc"
-                             :offset "offset desc"
-                             :since  "since desc"
-                             :until  "until desc"}
    :filter-descriptions {:merchant "merchant desc"}
    :endpoint-blacklist #{[:GET "bad"]}})
 
@@ -150,16 +146,16 @@ POST /path/to/other/page
 
    (:parameters endpoint) => []
    (:pagination endpoint) => [{:name "limit"
-                               :description "limit desc"
+                               :description nil
                                :type :query, :required? false}
                               {:name "offset"
-                               :description "offset desc"
+                               :description nil
                                :type :query, :required? false}
                               {:name "since"
-                               :description "since desc"
+                               :description nil
                                :type :query, :required? false}
                               {:name "until"
-                               :description "until desc"
+                               :description nil
                                :type :query, :required? false}]))
 
 (fact

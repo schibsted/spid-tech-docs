@@ -24,7 +24,6 @@
    :concepts (stasis/slurp-directory "resources/concepts" #"\.md$")
    :sample-responses (stasis/slurp-directory "generated/sample-responses" #".+\..+$")
    :endpoint-descriptions (mapdown/slurp-directory "resources/endpoints" #"\.md$")
-   :pagination-descriptions (spid/load-edn "pagination.edn")
    :filter-descriptions (spid/load-edn "filters.edn")
    :types (get-types)
    :apis (spid/load-edn "apis.edn")
@@ -41,5 +40,4 @@
             :articles (cultivate-articles (:articles raw-content)))
         (dissoc :sample-responses
                 :endpoint-descriptions
-                :pagination-descriptions
                 :filter-descriptions))))
