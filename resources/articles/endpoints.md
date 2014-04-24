@@ -11,6 +11,8 @@
 - [Locales](#locales)
 - [Parameters](#parameters)
 
+Looking for the list of all endpoints? See the [API reference](/#api-reference).
+
 :body
 
 This page collects some general workings of endpoints in SPiD.
