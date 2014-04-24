@@ -7,7 +7,8 @@
       (let [pages (create-pages {:string {:id :string}
                                  :datetime {:id :datetime
                                             :description "ISO-8601"}
-                                 :integer {:id :integer}})]
+                                 :integer {:id :integer}}
+                                [])]
         (->> ((pages "/types/datetime"))
              :body
              (hiccup-find [:h1])
@@ -82,7 +83,7 @@
              (map hiccup-text)) => ["string" "list of strings"])
 
   (fact "Renders inline types"
-        (->> (create-page product types)
+        (->> (create-page product types [])
              :body
              (hiccup-find [:h3])) => '([:h3 {:id "status"} "Status"])))
 
