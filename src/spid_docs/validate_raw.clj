@@ -73,6 +73,5 @@
              :endpoint-descriptions {Str EndpointDescription}
              :filter-descriptions {Keyword Str}
              :types {Keyword Type}
-             :apis {[Str] {Keyword Str}} ; tuple of [:section :api] -> {:description ""}
              :endpoint-blacklist #{[(either Str Keyword)]}}
             raw-content))

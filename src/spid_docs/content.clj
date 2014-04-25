@@ -26,7 +26,6 @@
    :endpoint-descriptions (mapdown/slurp-directory "resources/endpoints" #"\.md$")
    :filter-descriptions (spid/load-edn "filters.edn")
    :types (get-types)
-   :apis (spid/load-edn "apis.edn")
    :endpoint-blacklist (spid/load-edn "endpoint-blacklist.edn")})
 
 (defn cultivate-content
@@ -36,7 +35,7 @@
     (-> raw-content
         (assoc
             :endpoints endpoints
-            :apis (cultivate-apis (:apis raw-content) endpoints)
+            :apis (cultivate-apis endpoints)
             :articles (cultivate-articles (:articles raw-content)))
         (dissoc :sample-responses
                 :endpoint-descriptions

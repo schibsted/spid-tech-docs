@@ -186,12 +186,6 @@ key, and all text up until the next key is the value.
 In addition to these directories, there are various files that have specific
 functionality.
 
-#### resources/apis.edn
-
-This file describes the service/api categorization. The ids of services and apis
-defined in this file can be used to categorize endpoints in
-`resources/endpoints/*.edn`.
-
 #### resources/types.edn
 
 Types used across many endpoints. Many types are defined inline for the
