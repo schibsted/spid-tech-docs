@@ -10,7 +10,7 @@
 (def get-config (memoize #(spid/load-edn "config.edn")))
 
 (def get-client (memoize #(let [conf (get-config)]
-                            (sdk/create-server-client (:client-id conf) (:client-secret conf)))))
+                            (sdk/create-server-client (:client-id conf) (:client-secret conf) {:spp-base-url (:spid-base-url conf), :redirect-uri "http://localhost"}))))
 
 (defn GET [path]
   (sdk/GET (get-client) path))
