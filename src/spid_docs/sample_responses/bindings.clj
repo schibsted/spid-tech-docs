@@ -1,4 +1,4 @@
-(ns spid-docs.bindings)
+(ns spid-docs.sample-responses.bindings)
 
 (defn create-local-namespace
   "Import data from some global namespace into a local namespace. The bindings

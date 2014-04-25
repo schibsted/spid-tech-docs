@@ -1,5 +1,5 @@
-(ns spid-docs.bindings-test
-  (:require [spid-docs.bindings :refer :all]
+(ns spid-docs.sample-responses.bindings-test
+  (:require [spid-docs.sample-responses.bindings :refer :all]
             [midje.sweet :refer :all]))
 
 (fact

@@ -8,7 +8,7 @@
             [clojure.set :refer [rename-keys]]
             [clojure.string :as str]
             [spid-docs.api-client :as api]
-            [spid-docs.bindings :refer [resolve-bindings]]
+            [spid-docs.sample-responses.bindings :refer [resolve-bindings]]
             [spid-docs.formatting :refer [to-id-str]]
             [spid-docs.homeless :refer [update-existing eval-in-ns]]
             [spid-docs.sample-responses.wash :refer [wash-data]])
