@@ -1,4 +1,4 @@
-(ns spid-docs.core
+(ns spid-docs.load
   "Various utilities used across many namespaces"
   (:require [clojure.data.json :as json]
             [clojure.java.io :as io]
