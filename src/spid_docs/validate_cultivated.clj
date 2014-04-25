@@ -80,7 +80,6 @@
 (defn validate-content [content]
   (validate {:endpoints [Endpoint]
              :articles {Str Article}
-             :concepts {Str Str}
              :types {Keyword Type}
              :apis {[Str] {:api Str
                            :category Str

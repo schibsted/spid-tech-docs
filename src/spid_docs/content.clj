@@ -21,7 +21,6 @@
   []
   {:endpoints (:data (spid/load-json "cached-endpoints.json"))
    :articles (mapdown/slurp-directory "resources/articles" #"\.md$")
-   :concepts (stasis/slurp-directory "resources/concepts" #"\.md$")
    :sample-responses (stasis/slurp-directory "generated/sample-responses" #".+\..+$")
    :endpoint-descriptions (mapdown/slurp-directory "resources/endpoints" #"\.md$")
    :filter-descriptions (spid/load-edn "filters.edn")

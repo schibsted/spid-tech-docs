@@ -68,7 +68,6 @@
 (defn validate-raw-content [raw-content]
   (validate {:endpoints [Endpoint]
              :articles {Str Article}
-             :concepts {Str Str}
              :sample-responses {Str Str}
              :endpoint-descriptions {Str EndpointDescription}
              :filter-descriptions {Keyword Str}
