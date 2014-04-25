@@ -9,15 +9,10 @@ exported to static files.
 
 1. **Install Leiningen**
 
-   If you use homebrew:
-
-   ```sh
-   brew update && brew install leiningen
-   ```
-
-   Otherwise follow the instructions in the
-   [Leiningen](https://github.com/technomancy/leiningen#leiningen)
-   readme.
+   1. Download the [lein script](https://raw.github.com/technomancy/leiningen/stable/bin/lein)
+   2. Place it on your $PATH where your shell can find it (eg. `~/bin`)
+   3. Set it to be executable (`chmod a+x ~/bin/lein`)
+   4. Run it (`lein`) and it will download the self-install package
 
 2. **Manually install some dependencies**
 
