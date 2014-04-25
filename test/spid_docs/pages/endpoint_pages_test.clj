@@ -80,7 +80,8 @@
                                      :path "/endpoints"
                                      :api-path "/api/2/endpoints"
                                      :parameters [(param "email" {:required? false})]
-                                     :access-token-types ["server"]})
+                                     :access-token-types ["server"]}
+                                    {"email" "john@example.com"})
            (hiccup-find [:.tab-content])
            first
            (hiccup-find [:pre])
@@ -91,7 +92,8 @@
                                                :path "/endpoints"
                                                :api-path "/api/2/endpoints"
                                                :parameters [(param "email" {:required? true})]
-                                               :access-token-types ["server"]})]
+                                               :access-token-types ["server"]}
+                                              {"email" "john@example.com"})]
         (->> examples
              (hiccup-find [:.tab-content])
              first

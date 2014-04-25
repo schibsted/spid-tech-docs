@@ -60,5 +60,6 @@
                            :category Str
                            :endpoints [Endpoint]
                            (optional-key :description) Str}}
+             :example-params {Str Str}
              :endpoint-blacklist #{[(either Str Keyword)]}}
             content))

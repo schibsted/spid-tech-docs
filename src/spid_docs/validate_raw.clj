@@ -72,5 +72,6 @@
              :endpoint-descriptions {Str EndpointDescription}
              :filter-descriptions {Keyword Str}
              :types {Keyword Type}
+             :example-params {Str Str}
              :endpoint-blacklist #{[(either Str Keyword)]}}
             raw-content))

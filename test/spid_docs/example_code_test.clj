@@ -2,13 +2,24 @@
   (:require [midje.sweet :refer :all]
             [spid-docs.example-code :refer :all]))
 
+(def example-params
+  {"id" "id"
+   "email" "johnd@example.com"
+   "displayName" "John"
+   "name" "John Doe"
+   "birthday" "1977-01-31"
+   "preferredUsername" "johnd"
+   "property" "status"
+   "locale" "nb_NO"
+   "object" "User"})
+
 (fact
  (let [get-example (create-example-code
                     {:method "GET"
                      :parameters []
                      :path "/status"
                      :api-path "/api/2/status"
-                     :access-token-types []})
+                     :access-token-types []} example-params)
        post-example (create-example-code
                      {:method "POST"
                       :parameters [{:name "email" :required? true :type :query}
@@ -18,7 +29,7 @@
                                    {:name "preferredUsername" :required? false :type :query}]
                       :path "/user"
                       :api-path "/api/2/user"
-                      :access-token-types ["server"]})
+                      :access-token-types ["server"]} example-params)
        param-example (create-example-code
                       {:method "GET"
                        :parameters [{:name "property" :required? false :type :query}
@@ -26,7 +37,7 @@
                                     {:name "object" :required? true :type :path}]
                        :path "/describe/{object}"
                        :api-path "/api/2/describe/{object}"
-                       :access-token-types ["server"]})]
+                       :access-token-types ["server"]} example-params)]
 
    (-> get-example :curl :minimal)
    => "curl https://payment.schibsted.no/api/2/status"
@@ -157,6 +168,6 @@ echo var_dump($client->api(\"/user\", $params));")
           :parameters [{:name "id" :required? true :descripton "Ok" :type :query}]
           :path "/status"
           :api-path "/api/2/status"
-          :access-token-types []})
+          :access-token-types []} example-params)
         :clojure
         :maximal) => nil))

@@ -25,6 +25,7 @@
    :endpoint-descriptions (mapdown/slurp-directory "resources/endpoints" #"\.md$")
    :filter-descriptions (load-edn "filters.edn")
    :types (get-types)
+   :example-params (load-edn "example-params.edn")
    :endpoint-blacklist (load-edn "endpoint-blacklist.edn")})
 
 (defn cultivate-content
