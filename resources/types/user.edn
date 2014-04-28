@@ -50,7 +50,7 @@ Unauthorized access to users will only return the public fields:
           {:name "lastAuthenticated"   :type :datetime       :description "The last time the user authenticated with their password" :always-available? true}
           {:name "imported"            :type :datetime}
           {:name "migrated"            :type :datetime}
-          {:name "addresses"           :type [:address]}
+          {:name "addresses"           :type {:type :address}}
           {:name "accounts"            :type [:account]      :description "Third-party accounts and other client services"}
           {:name "currentLocation"     :type [:address]}
           {:name "tracking"            :type :boolean        :description "If `true`, the user has behavioral tracking enabled (pilot feature, may not remain as-is)"}]}

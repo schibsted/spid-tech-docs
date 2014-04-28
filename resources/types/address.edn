@@ -10,4 +10,4 @@
           {:name "latitude"      :type :string :description "Latitude geo location"}
           {:name "longitude"     :type :string :description "Longitude geo location"}
           {:name "altitude"      :type :string :description "Altitude geo location"}
-          {:name "type"          :type :string :description "Address type, home, shipping, invoice, etc"}]}
+          {:name "type"          :type :string :description "Address type: `home`, `delivery`, or `invoice`"}]}

@@ -1,5 +1,6 @@
 (ns spid-docs.sample-responses.definitions
   (:require [clojure.data.codec.base64 :as base64]
+            [clojure.data.json :as json]
             [spid-docs.sample-responses.defsample :refer [defsample]]))
 
 (defn base64-encode [str]
@@ -130,11 +131,15 @@
   DELETE "/user/{userId}/trait/{trait}" {:userId (:userId user)
                                          :trait "key"})
 
-;;;;  (defsample POST "/user/{userId}") ;([displayName, name, birthday, addresses, gender, photo, preferredUsername, url, utcOffset]
-;;;;
-;;;;  (defsample GET "/anonymous/users")
-;;;;
-;;;;  ;; Products
+(defsample [user johndoe]
+  POST "/user/{userId}" {:userId (:userId user)
+                         :name "John Spencer Doe"
+                         :addresses (json/write-str {:home {:country "Norway"}})})
+
+(defsample GET "/anonymous/users" {:since "2014-01-01"
+                                   :until "2014-04-28"})
+
+;; Products
 ;;;;
 ;;;;  (defsample POST "/product") ;; (code, name, price, vat, paymentOptions, type, currency, [bundle, hideItems, status, parentProductId, description, url, quantityLimit, saleStart, saleStop, availableStart, availableStop, allowMultiSales, subscriptionPeriod, subscriptionRenewPrice, subscriptionRenewPeriod, subscriptionAutoRenew, subscriptionAutoRenewLockPeriod, subscriptionAutoRenewDisabled, subscriptionGracePeriod, subscriptionEmailReceiptLimit, subscriptionFinalEndDate, subscriptionSurveyUrl])
 ;;;;
