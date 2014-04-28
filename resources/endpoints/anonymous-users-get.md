@@ -1,10 +1,11 @@
 :introduction
 
 Retrieve an anonymized list of users that was created or updated in the given
-period.
+period. Users that have been removed will be returned as an object with just the
+id and `deleted` set to `true`.
 
-Users that have been removed will be returned as an object with just the id and
-`deleted` set to `true`.
+Pagination parameters `since` and `until` default to `"yesterday"` and
+`"today"`, respectively.
 
 **NB!** Do not use `until=NOW` with pagination, as the paginated sequence will
 never end.
