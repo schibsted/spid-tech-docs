@@ -1,11 +1,7 @@
 {:id :voucher-type
  :name "Voucher type"
  :rendering :enum
- :values [{:value "1" :description "Internal (Not in use)"}
-          {:value "2" :description "Discount (Not in use)"}
-          {:value "3" :description "Giveaway, when redeemed, the user is given the product directly, without creating an order (thus, no there will be no receipt generated from the system)"}
-          {:value "4" :description "Virtual Money (Not in use)"}
-          {:value "5" :description "Campaign, redeems as a campaign purchase"}
-          {:value "6" :description "Free with order, redeemer is given product and order is created for 0 value"}
-          {:value "7" :description "Extend subscription (Not un use, per 2.7)"}
-          {:value "8" :description "Voucher as payment method"}]}
+ :values [{:value "5" :description "**Campaign, redeems as a campaign purchase**"}
+          {:value "8" :description "**Voucher as payment method**"}
+          {:value "3" :description "Giveaway, when redeemed, the user is given the product directly, without creating an order (thus, no there will be no receipt generated from the system). For testing purposes only, not available in production."}
+          {:value "6" :description "Free with order, redeemer is given product and order is created for 0 value. Replaced by `8`"}]}
