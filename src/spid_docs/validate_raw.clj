@@ -1,5 +1,6 @@
 (ns spid-docs.validate-raw
-  (:require [schema.core :refer [optional-key validate either eq Str Num Keyword]]))
+  (:require [schema.core :refer [optional-key validate either eq Str Num Keyword]])
+  (:import clojure.lang.IExceptionInfo))
 
 (def HttpMethod
   {:name Str
@@ -66,12 +67,15 @@
    (optional-key :relevant-endpoints) Str})
 
 (defn validate-raw-content [raw-content]
-  (validate {:endpoints [Endpoint]
-             :articles {Str Article}
-             :sample-responses {Str Str}
-             :endpoint-descriptions {Str EndpointDescription}
-             :filter-descriptions {Keyword Str}
-             :types {Keyword Type}
-             :example-params {Str Str}
-             :endpoint-blacklist #{[(either Str Keyword)]}}
-            raw-content))
+  (try
+    (validate {:endpoints [Endpoint]
+               :articles {Str Article}
+               :sample-responses {Str Str}
+               :endpoint-descriptions {Str EndpointDescription}
+               :filter-descriptions {Keyword Str}
+               :types {Keyword Type}
+               :example-params {Str Str}
+               :endpoint-blacklist #{[(either Str Keyword)]}}
+              raw-content)
+    (catch Exception e
+        (throw (Exception. (.getMessage e))))))
