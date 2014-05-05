@@ -165,7 +165,7 @@ but not always.
 Each endpoint specifies which filters it supports, but here are some common ones:
 
 - `merchant` Show all results within the current merchant rather than the current client
-- `updated` Filter by users that have updated their account, order by last updated (should be used with since & until)
+- `updated` Filter by users that have updated their account, order by last updated (requires usage of since and/or until)
 - `verified` Filter by users with status = 1 (verified)
 - `unverified` Filter by users with status = 0 (unverified)
 - `inactive` Filter by users with status = -1 (inactive/disabled account)
