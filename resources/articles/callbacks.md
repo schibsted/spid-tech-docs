@@ -19,7 +19,7 @@
 
 The SPiD platform supports server-side callbacks that enable your service to
 subscribe to changes in data. Your service can then cache data and receive
-updates, rather than continuously poll SPiD's servers. Caching data and using
+updates, rather than continuously polling SPiD's servers. Caching data and using
 this API can improve the reliability of your app or service and decrease its
 load times.
 
@@ -140,16 +140,17 @@ minutes, and possible less often (if there are fewer changes).
 
 ## Callback responses
 
-When your client receives callback requests, it should respond with HTTP code
-`202 Accepted`. If the callback does not respond with `202`, SPiD will retry
-again immediately, and then four more times, with increasing lag time, over the
-subsequent 25 hours. If all of these requests go un-accepted, the callback
-request will be marked as failed.
+When your client receives callback requests, it should respond with
+HTTP code `202 Accepted`. If the callback does not respond with `202`,
+SPiD will retry again immediately, and then four more times at
+increasing intervals over the subsequent 25 hours. If all of these
+requests go un-accepted, the callback request will be marked as
+failed.
 
 Retries occur after five minutes, fifteen minutes, one hour, twelve hours and
 again twelve hours. There is a thirty second timeout before SPiD quits the
-connection and considers the request failed. Do not synchronously process
-callback data before responding to the callback request.
+connection and considers the request failed. *Do not synchronously process
+callback data before responding to the callback request.*
 
 ## Order status callback
 
