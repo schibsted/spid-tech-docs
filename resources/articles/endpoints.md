@@ -38,8 +38,8 @@ sample output:
     "code": 200,
     "request": {
         "reset": 3537,
-        "limit": 0,
-        "remaining": -3
+        "limit": 3600,
+        "remaining": 3
     },
     "debug": {
         "route": {
