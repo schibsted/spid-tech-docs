@@ -26,7 +26,8 @@
      ;; external link
      (or (.startsWith path "//")
          (.startsWith path "http://")
-         (.startsWith path "https://"))
+         (.startsWith path "https://")
+         (.startsWith path "mailto:"))
      :valid-link
 
      ;; internal link
