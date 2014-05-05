@@ -68,7 +68,7 @@
 
 (defn validate-raw-content [raw-content]
   (try
-    (validate {:endpoints [Endpoint]
+    (validate {:endpoints {Str Endpoint}
                :articles {Str Article}
                :sample-responses {Str Str}
                :endpoint-descriptions {Str EndpointDescription}
@@ -76,6 +76,8 @@
                :types {Keyword Type}
                :example-params {Str Str}
                :endpoint-blacklist #{[(either Str Keyword)]}}
-              raw-content)
+              (update-in raw-content [:endpoints]
+                         #(into {} (map (juxt :path identity) %))))
     (catch Exception e
-        (throw (Exception. (.getMessage e))))))
+        (throw (Exception. (.getMessage e)))))
+  raw-content)
