@@ -19,6 +19,8 @@
                  [inflections "0.9.5"]
                  [org.slf4j/slf4j-api "1.7.5"]
                  [ch.qos.logback/logback-classic "1.0.13"]]
+  :plugins [[lein-shell "0.3.0"]]
+  :prep-tasks [["shell" "./update-example-repos.sh"]]
   :jvm-opts ["-Djava.awt.headless=true"
              "-Xmx1024M"]
   :test2junit-output-dir "target/test2junit"
