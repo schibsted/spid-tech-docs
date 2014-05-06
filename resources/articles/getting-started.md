@@ -70,14 +70,6 @@ git clone https://github.com/schibsted/sdk-php.git
 If you do not have Git installed, you can also download a
 [zip file](https://github.com/schibsted/sdk-php/archive/master.zip).
 
-Finally, make sure that the SDK is on your PHP system's `include_path`. You can
-add the files to your project folder, or include it like this:
-
-```php
-// Add SPiD SDK to include_path
-set_include_path(get_include_path() . PATH_SEPARATOR . "/path/to/sdk");
-```
-
 #### :tab Clojure
 
 Eventually, the Clojure SDK will be available from Clojars. However, as the Java
@@ -290,7 +282,7 @@ The following is a minimal example of using the PHP SDK. It fetches the
 
 ```php
 <?php
-require_once("../../../sdk-php/src/Client.php");
+require_once("/path/to/sdk-php/src/Client.php");
 
 $client = new VGS_Client(array(
     VGS_Client::CLIENT_ID          => $argv[1],
