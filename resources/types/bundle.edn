@@ -4,8 +4,8 @@
  :fields [{:name "product_id"                          :type :integer-string  :description "The bundle's product ID" :always-available? true}
           {:name "parent_product_id"                   :type :integer-string  :description "Parent product ID, if any" :always-available? false}
           {:name "client_id"                           :type :string          :description "Client ID" :always-available? true}
-          {:name "type"                                :type :product-type    :description :always-available? true}
-          {:name "bundle"                              :type :bundle-type     :description :always-available? true}
+          {:name "type"                                :type :product-type    :always-available? true}
+          {:name "bundle"                              :type :bundle-type     :always-available? true}
           {:name "code"                                :type :string          :description "Client-specified identifier that may be more memorable than SPiD's generated ID numbers" :always-available? true}
           {:name "name"                                :type :string          :description "The bundle name" :always-available? true}
           {:name "description"                         :type :string          :description "A description of the bundle" :always-available? true}
