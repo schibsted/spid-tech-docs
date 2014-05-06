@@ -34,7 +34,7 @@
           {:name "allow_multi_sales"                   :type :boolnum         :description "If `\"1\"`, users can purchase this product multiple times" :always-available? true}
           {:name "guardian"                            :type :integer-string  :description "TODO" :always-available? true}
           {:name "autopay"                             :type :boolnum         :description "TODO" :always-available? true}
-          {:name "status"                              :type :product-status  :description :always-available? true}
+          {:name "status"                              :type :product-status  :always-available? true}
           {:name "changed_by"                          :type :integer-string  :description "ID of the user who last changed the bundle" :always-available? true}
           {:name "changed"                             :type :datetime        :description "When the bundle was last changed" :always-available? true}
           {:name "created_by"                          :type :integer-string  :description "ID of the user who created the bundle" :always-available? true}
