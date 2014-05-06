@@ -142,8 +142,16 @@
                                    :until "2014-04-28"})
 
 ;; Products
-;;;;
-;;;;  (defsample POST "/product") ;; (code, name, price, vat, paymentOptions, type, currency, [bundle, hideItems, status, parentProductId, description, url, quantityLimit, saleStart, saleStop, availableStart, availableStop, allowMultiSales, subscriptionPeriod, subscriptionRenewPrice, subscriptionRenewPeriod, subscriptionAutoRenew, subscriptionAutoRenewLockPeriod, subscriptionAutoRenewDisabled, subscriptionGracePeriod, subscriptionEmailReceiptLimit, subscriptionFinalEndDate, subscriptionSurveyUrl])
+
+;;(defsample POST "/product")
+
+;; (code, name, price, vat, paymentOptions, type, currency,
+;;[bundle, hideItems, status, parentProductId, description, url, quantityLimit,
+;;saleStart, saleStop, availableStart, availableStop, allowMultiSales, subscriptionPeriod,
+;;subscriptionRenewPrice, subscriptionRenewPeriod, subscriptionAutoRenew,
+;;subscriptionAutoRenewLockPeriod, subscriptionAutoRenewDisabled, subscriptionGracePeriod,
+;;subscriptionEmailReceiptLimit, subscriptionFinalEndDate, subscriptionSurveyUrl])
+
 ;;;;
 ;;;;  ;; POST igjen for å legge til children
 ;;;;  (defsample GET "/products") ;; ([productId, name, code, price, parentProductId, sort])
