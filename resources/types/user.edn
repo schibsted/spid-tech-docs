@@ -9,7 +9,8 @@ some custom fields. `userId` is an integer and represents the unique user ID.
 The corresponding *Verified fields are the date of the last time those were
 verified.
 
-Unauthorized access to users will only return the public fields:
+When requesting a user that is not connected to the authorized client, only
+public profile data will be available:
 
 * `id`
 * `user_id`
