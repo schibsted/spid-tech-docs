@@ -4,9 +4,9 @@
  :fields [{:name "product_id"                          :type :integer-string  :description "The bundle's product ID" :always-available? true}
           {:name "parent_product_id"                   :type :integer-string  :description "Parent product ID, if any" :always-available? false}
           {:name "client_id"                           :type :string          :description "Client ID" :always-available? true}
-          {:name "type"                                :type :boolnum         :description "TODO" :always-available? true}
-          {:name "bundle"                              :type :boolnum         :description "TODO" :always-available? true}
-          {:name "code"                                :type :string          :description "TODO" :always-available? true}
+          {:name "type"                                :type :product-type    :description :always-available? true}
+          {:name "bundle"                              :type :bundle-type     :description :always-available? true}
+          {:name "code"                                :type :string          :description "Client-specified identifier that may be more memorable than SPiD's generated ID numbers" :always-available? true}
           {:name "name"                                :type :string          :description "The bundle name" :always-available? true}
           {:name "description"                         :type :string          :description "A description of the bundle" :always-available? true}
           {:name "url"                                 :type :string          :description "A URL that contains more information about the bundle" :always-available? false}
@@ -20,7 +20,7 @@
           {:name "sale_stop"                           :type :datetime        :description "The end of a sale" :always-available? false}
           {:name "available_start"                     :type :datetime        :description "When the bundle becomes available for sale. If `null`, the bundle is always available for sale." :always-available? false}
           {:name "available_stop"                      :type :datetime        :description "When the bundle is no longer available for sale." :always-available? false}
-          {:name "hide_items"                          :type :string          :description "TODO" :always-available? true}
+          {:name "hide_items"                          :type :string          :description "If `\"1\"`, individual bundle items will be hidden in customer communications" :always-available? true}
           {:name "subscription_period"                 :type :timestamp       :description "The subscription period" :always-available? true}
           {:name "subscription_renew_price"            :type :price           :description "Price of subscription renewal" :always-available? true}
           {:name "subscription_renew_period"           :type :timestamp       :description "For how long a renewal is valid" :always-available? true}
@@ -34,7 +34,7 @@
           {:name "allow_multi_sales"                   :type :boolnum         :description "If `\"1\"`, users can purchase this product multiple times" :always-available? true}
           {:name "guardian"                            :type :integer-string  :description "TODO" :always-available? true}
           {:name "autopay"                             :type :boolnum         :description "TODO" :always-available? true}
-          {:name "status"                              :type :integer-string  :description "TODO" :always-available? true}
+          {:name "status"                              :type :product-status  :description :always-available? true}
           {:name "changed_by"                          :type :integer-string  :description "ID of the user who last changed the bundle" :always-available? true}
           {:name "changed"                             :type :datetime        :description "When the bundle was last changed" :always-available? true}
           {:name "created_by"                          :type :integer-string  :description "ID of the user who created the bundle" :always-available? true}

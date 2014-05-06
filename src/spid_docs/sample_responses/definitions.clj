@@ -43,19 +43,21 @@
                                  :id (:userId user)
                                  :key "rating"})
 
+  ;; Needs a product
   (defsample [user johndoe]
-    POST "/{type}/{id}/{subtype}/{subid}/do/{key}" {:type "User"
+    POST "/{type}/{id}/{subtype}/{subid}/do/{key}" {:type "user"
                                                     :id (:id user)
-                                                    :subtype "TODO"
-                                                    :subid "TODO"
+                                                    :subtype "product"
+                                                    :subid "PID"
                                                     :key "rating"
                                                     :rating "10"})
 
+  ;; Needs a product
   (defsample
-    GET "/{type}/{id}/{subtype}/{subid}/do/{key}" {:type "User"
+    GET "/{type}/{id}/{subtype}/{subid}/do/{key}" {:type "user"
                                                    :id (:id user)
-                                                   :subtype "TODO"
-                                                   :subid "TODO"
+                                                   :subtype "product"
+                                                   :subid "PID"
                                                    :key "rating"}))
 
 (comment

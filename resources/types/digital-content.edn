@@ -1,9 +1,9 @@
 {:id :digital-content
  :name "Digital content"
  :rendering :object
- :fields [{:name "userProductId"   :type :integer-string :description "TODO" :always-available? true}
+ :fields [{:name "userProductId"   :type :integer-string :always-available? true}
           {:name "productId"       :type :integer-string :always-available? true}
-          {:name "parentProductId" :type :integer-string  :always-available? true}
+          {:name "parentProductId" :type :integer-string :always-available? true}
           {:name "clientId"        :type :string         :always-available? true}
           {:name "userId"          :type :integer-string :always-available? true}
           {:name "orderId"         :type :integer-string :always-available? true}
