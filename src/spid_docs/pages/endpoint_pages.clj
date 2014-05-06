@@ -264,7 +264,8 @@
                [:div.separator]
                (render-request endpoint example-params)
                [:div.separator]
-               (render-response endpoint types))})
+               (render-response endpoint types)
+               [:div#comments])})
 
 (defn create-pages [endpoints types example-params]
   (->> endpoints

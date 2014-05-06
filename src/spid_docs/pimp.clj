@@ -3,10 +3,11 @@
    HTML and applies a set of post-processors, such as highlighting
    code examples with Pygments, adding tabs etc."
   (:require [spid-docs.enlive :refer [transform]]
-            [spid-docs.pimp.examples :refer [inline-examples]]
             [spid-docs.formatting :refer [to-id-str]]
             [spid-docs.homeless :refer [update-vals]]
             [spid-docs.layout :refer [layout-page]]
+            [spid-docs.pimp.comments :refer [add-comments]]
+            [spid-docs.pimp.examples :refer [inline-examples]]
             [spid-docs.pimp.highlight :refer [highlight-code-blocks]]
             [spid-docs.pimp.tabs :refer [transform-tabs]]))
 
@@ -36,7 +37,8 @@
        (inline-examples)
        (maybe-highlight-code-blocks)
        (transform-tabs)
-       (add-header-ids)))
+       (add-header-ids)
+       (add-comments)))
 
 (defn prepare-pages
   "Takes a page map, and wraps all its page functions in a call to

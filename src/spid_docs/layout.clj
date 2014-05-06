@@ -43,4 +43,8 @@
         [:a.nowrap {:href "/#api-reference"} "API reference"]]]
       [:div#body (when split-page? {:class "split"})
        [:div.bd body]]]]
-    (optimus.hiccup/link-to-js-bundles request ["app.js"])]))
+    (optimus.hiccup/link-to-js-bundles request ["app.js"])
+    [:script
+     "(function() {if (!document.getElementById('disqus_thread')) {return}var dsq = document.createElement('script');dsq.type = 'text/javascript';dsq.async = true;
+dsq.src = '//spidtechdocs.disqus.com/embed.js';
+(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);}())"]]))
