@@ -5,7 +5,7 @@
 
 ![Order status state machine](/images/order-status.png)
 
-See [callbacks](/callbacks) to learn how to subscribe to these changes."
+See [callbacks](/callbacks/) to learn how to subscribe to these changes."
  :values [{:value "-3" :description "Expired"}
           {:value "-2" :description "Cancelled"}
           {:value "-1" :description "Failed"}
