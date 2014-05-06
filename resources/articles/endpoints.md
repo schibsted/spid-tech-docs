@@ -6,7 +6,10 @@
 
 - [Response container](#response-container)
 - [Response formats](#response-formats)
+- [Encoding](#encoding)
 - [Pagination](#pagination)
+- [Selection](#selection)
+- [Sorting](#sorting)
 - [Filters](#filters)
 - [Locales](#locales)
 - [Parameters](#parameters)
@@ -131,26 +134,69 @@ To force their use, provide the lower case abbreviation as the URL suffix, e.g.:
 http://staging.payment.schibsted.no/api/2/user/42.xml
 ```
 
+## Encoding
+
+**The SPiD API expects all data to be UTF-8 encoded.**
+
+All incoming data is actively checked for valid UTF-8 sequences. If an invalid
+sequence is found, the data is presumed to be ISO-8859-1 and converted
+accordingly to UTF-8. Sending data in any other encoding will result in garbage
+in SPiD. It won’t be dangerous garbage (we will always store valid UTF-8) but it
+will still be garbage. [More information about UTF-8](http://www.utf-8.com/).
+
 ## Pagination
 
-Pagination is supported in many SPiD endpoints. These are the parameters to control paging:
+Pagination is supported in many SPiD endpoints. There are four parameters that
+control paging:
 
 - `limit`: The maximum number of results to return. May not exceed 1000.
 - `offset`: How many results to skip over.
-- `until`: Entries older than this unix timestamp are excluded from the results.
-- `since`: Entries newer than this unix timestamp are excluded from the results.
+- `until`: Entries older than this are excluded from the results.
+- `since`: Entries newer than this are excluded from the results.
 
-You might find that using `since` instead of `offset` helps you avoid
-overlaps between pages in a rapidly growing result set.
+There is a hard limit of 1000 results. Larger result sets will be truncated.
 
-Both `until` and `since` accept several time formats, most notably
-relative formats like `yesterday` and `first day of January`. Read
-more about
+In rapidly growing result sets, using `since` instead of `offset` is recommended
+to avoid overlaps between pages.
+
+Both `until` and `since` accept several time formats; timestamps, dates and even
+fuzzy formats like `yesterday` and `first day of January`. Read more about
 [supported date and time formats](http://www.php.net/manual/en/datetime.formats.php).
 
-Please note that not all parameters are available for all endpoints.
-See the individual endpoint pages for details.
+Not all parameters are available for all endpoints. See individual endpoint
+API docs for details.
 
+## Selection
+
+By default, responses will contain full object descriptions, with most or all
+object properties. If you only need certain properties, you can trim the result
+by using the `fields` query parameter. As an example, this is how you would
+request a certain user with only the `firstName`, `displayName` and `photo`
+properties included in the response:
+
+```text
+GET https://payment.schibsted.no/api/2/user/daniel.bentes@vg.no?fields=firstName,displayName,photo
+```
+
+## Sorting
+
+For endpoints that return collections, you can sort the results using the `sort`
+request parameter in a map-like manner. You may specify multiple sorting
+properties, and for each one whether to sort ascending (`asc`) or descending
+(`desc`).
+
+Example:
+
+```text
+GET https://payment.schibsted.no/api/2/orders?sort[status]=desc&sort[updated]=asc
+```
+
+Endpoints that support sorting:
+
+* [/orders](/endpoints/GET/orders)
+* [/subscriptions](/endpoints/GET/subscriptions)
+* [/digitalcontents](/endpoints/GET/digitalcontents)
+* [/campaigns](/endpoints/GET/campaigns)
 
 ## Filters
 
