@@ -26,8 +26,7 @@ exported to static files.
 
 3. **Fetch the git submodules**
 
-   The example code as well as syntax highlighting themes are pulled in as
-   submodules.
+   Syntax highlighting themes are pulled in as submodules:
 
    ```sh
    git submodule update --init
