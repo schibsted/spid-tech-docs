@@ -52,7 +52,11 @@
     (find-example (format ";;; %s" title) ";;;" code)))
 
 (defn- read-example-file [lang path]
-  (slurp (io/resource (str examples-dir (name lang) path))))
+  (let [full-path (str examples-dir (name lang) path)
+        resource (io/resource full-path)]
+    (if resource
+      (slurp resource)
+      (throw (Exception. (format "No example file %s found." full-path))))))
 
 (defn read-example [lang title path]
   (create-example lang path title
@@ -64,8 +68,8 @@
     {:tag :pre
      :attrs {}
      :content [{:tag :code
-                 :attrs {:class lang}
-                 :content (read-example (keyword lang) (:title attrs) (:src attrs))}]}))
+                :attrs {:class lang}
+                :content (read-example (keyword lang) (:title attrs) (:src attrs))}]}))
 
 (defn inline-examples
   "Finds all <spid-example> tags, finds the referred examples and returns the text
