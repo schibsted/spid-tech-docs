@@ -37,8 +37,9 @@ These variables change between production and staging environments:
 
 - Your client ID
 - Your client secret
-- Your base URL
+- Your client signature secret
 - The base URL to SPiD
+- Your base URL
 
 How you choose to configure your application is up to you, but
 these variables should not be hard coded.
@@ -86,7 +87,7 @@ header("Location: /");
 ## Send the user to the SPiD login page
 
 Once you've got your configuration, you can patch together the URL
-to the SPiD login page. It's on `<spid-base-url>/oauth/authorize`,
+to the SPiD login page. It's on `<spid-base-url>/login`,
 with these parameters:
 
 - `client_id`: Yeah, it's your client ID.
