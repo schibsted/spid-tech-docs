@@ -34,11 +34,11 @@ curl http://stage.payment.schibsted.no/api/2/users?oauth_token=TOKEN& \
 ```
 
 Get the whole user object from users where email matches exactly
-"daniel.bentes@vg.no":
+"johndoe@example.com":
 
 ```sh
 curl http://stage.payment.schibsted.no/api/2/users?oauth_token=TOKEN& \
-  email=daniel.bentes@vg.no
+  email=johndoe@example.com
 ```
 
 Get all users that where registered between 2011-01-20 (timestamp 1295478000)

@@ -136,13 +136,12 @@ http://staging.payment.schibsted.no/api/2/user/42.xml
 
 ## Encoding
 
-**The SPiD API expects all data to be UTF-8 encoded.**
+**The SPiD API expects all data to be [UTF-8](http://www.utf-8.com/) encoded.**
 
-All incoming data is actively checked for valid UTF-8 sequences. If an invalid
-sequence is found, the data is presumed to be ISO-8859-1 and converted
-accordingly to UTF-8. Sending data in any other encoding will result in garbage
-in SPiD. It won’t be dangerous garbage (we will always store valid UTF-8) but it
-will still be garbage. [More information about UTF-8](http://www.utf-8.com/).
+All incoming data is actively checked for valid UTF-8 sequences. For
+historical reasons, if an invalid sequence is found, the data is
+presumed to be ISO-8859-1 and converted accordingly to UTF-8. You
+should not rely on this feature, but instead always use UTF-8.
 
 ## Pagination
 
@@ -175,7 +174,7 @@ request a certain user with only the `firstName`, `displayName` and `photo`
 properties included in the response:
 
 ```text
-GET https://payment.schibsted.no/api/2/user/daniel.bentes@vg.no?fields=firstName,displayName,photo
+GET /user/johndoe@example.com?fields=firstName,displayName,photo
 ```
 
 ## Sorting
@@ -188,15 +187,8 @@ properties, and for each one whether to sort ascending (`asc`) or descending
 Example:
 
 ```text
-GET https://payment.schibsted.no/api/2/orders?sort[status]=desc&sort[updated]=asc
+GET /orders?sort[status]=desc&sort[updated]=asc
 ```
-
-Endpoints that support sorting:
-
-* [/orders](/endpoints/GET/orders)
-* [/subscriptions](/endpoints/GET/subscriptions)
-* [/digitalcontents](/endpoints/GET/digitalcontents)
-* [/campaigns](/endpoints/GET/campaigns)
 
 ## Filters
 
