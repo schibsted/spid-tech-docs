@@ -61,19 +61,18 @@ sample output:
 
 ## Response formats
 
-Most SPiD endpoints can respond with various response formats. The format used
-is determined by the `format` query parameter supported by all endpoints. Refer
-to individual endpoint API docs for information on what formats are supported in
-each case.
+Many SPiD endpoints can respond with various response formats. The format used
+is determined by the URL suffix/file name extension used. Refer to individual
+endpoint API docs for information on supported formats.
 
 <h3 id="format-json">JSON</h3>
 
 [JSON](http://json.org/) is the most commonly supported response type used in
 SPiD. It is also the default format used by most endpoints. To force the use of
-JSON, send the following query parameter:
+JSON, use the `.json` suffix on URLs:
 
 ```text
-format=json
+http://staging.payment.schibsted.no/api/2/user/42.json
 ```
 
 <h3 id="format-jsonp">JSONP</h3>
@@ -84,12 +83,12 @@ served as JavaScript. Because JavaScript can be served from mixed sources on a
 web page, JSONP circumvents certain security restrictions and complexity
 associated with other forms of
 [cross-origin resource sharing](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing),
-at the expense of a potentially higher risk.
+at the expense of higher security risk.
 
-To force the use of JSONP, send the following query parameter:
+To force the use of JSONP, use the `.jsonp` suffix on URLs:
 
 ```text
-format=jsonp
+http://staging.payment.schibsted.no/api/2/user/42.jsonp
 ```
 
 The response will be executable JavaScript:
@@ -102,8 +101,7 @@ The callback function will be called `callback` by default. To change its name,
 use the `callback` query parameter:
 
 ```sh
-curl http://stage.payment.schibsted.no/api/2/users?oauth_token=TOKEN& \
-     format=jsonp&\
+curl http://stage.payment.schibsted.no/api/2/users.jsonp?oauth_token=TOKEN&\
      callback=doit
 ```
 
@@ -127,13 +125,11 @@ A few SPiD endpoints support other response types:
 - **CSV**: Comma separated values
 - **PNG**: An image file
 
-To force their use, provide the `format` query parameter. Like this
-for XML:
+To force their use, provide the lower case abbreviation as the URL suffix, e.g.:
 
 ```text
-format=xml
+http://staging.payment.schibsted.no/api/2/user/42.xml
 ```
-
 
 ## Pagination
 
