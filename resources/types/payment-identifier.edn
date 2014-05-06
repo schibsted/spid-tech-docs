@@ -2,9 +2,10 @@
  :name "Payment identifier"
  :description "A payment identifier is a means of payment, e.g. credit card, SMS and others."
  :rendering :object
+ :inline-types [:payment-id-type :payment-id-status]
  :fields [{:name "identifierId"      :type :integer-string    :description "Unique payment identifier ID" :always-available? true}
           {:name "identifier"        :type :string            :description "The actual identifier, like a credit card number or cell phone number" :always-available? true}
-          {:name "type"              :type :payment-options   :always-available? true}
+          {:name "type"              :type :payment-id-type   :always-available? true}
           {:name "mediaDistribution" :type :string            :description "Invoice distribution; `\"PDF\"` or `\"PAPER\"`" :always-available? true}
           {:name "method"            :type :string            :description "Payment method (VISA, MC, SMS)" :always-available? true}
           {:name "description"       :type :string            :always-available? true}
