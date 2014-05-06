@@ -13,16 +13,16 @@ When requesting a user that is not connected to the authorized client, only
 public profile data will be available:
 
 * `id`
-* `user_id`
+* `userId`
 * `status`
-* `play_name`
+* `displayName`
 * `name`
 * `gender`
 * `preferred_username`
-* `utc_offset`
+* `utcOffset`
 * `published`
 * `updated`
-* `ast_logged_in`
+* `lastLoggedIn`
 * `locale`
 * `tracking`
 "
