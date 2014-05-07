@@ -265,7 +265,7 @@
                (render-request endpoint example-params)
                [:div.separator]
                (render-response endpoint types)
-               [:div#comments])})
+               [:div.disqus-comments {:id (endpoint-path endpoint)}])})
 
 (defn create-pages [endpoints types example-params]
   (->> endpoints
