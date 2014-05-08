@@ -54,12 +54,13 @@
 (fact "Fetches sample response"
       (with-tmp-dir
         (with-redefs [spid-docs.api-client/get-client (fn [] {})
-                      spid-docs.api-client/raw-GET (fn [path params] {:body "{\"name\":\"SPP Container\",\"version\":\"0.2\",\"api\":2,\"object\":\"Utility\",\"type\":\"error\",\"code\":404,\"request\":{\"reset\":2656,\"limit\":0,\"remaining\":-5},\"debug\":{\"route\":{\"name\":\"Fallback - 404\",\"url\":\"\\/api\\/*\",\"controller\":\"Api\\/2\\/Utility.notFound\"},\"params\":{\"options\":[],\"where\":[]}},\"meta\":null,\"error\":{\"code\":404,\"type\":\"ApiException\",\"description\":\"No such endpoint.\"},\"data\":null}"
-                                                                      :status 404
-                                                                      :error {:code 404
-                                                                              :type "ApiException"
-                                                                              :description "No such endpoint."}
-                                                                      :success? false})]
+                      spid-docs.api-client/get-token (fn [_] {})
+                      spid-docs.api-client/GET (fn [path params] {:body "{\"name\":\"SPP Container\",\"version\":\"0.2\",\"api\":2,\"object\":\"Utility\",\"type\":\"error\",\"code\":404,\"request\":{\"reset\":2656,\"limit\":0,\"remaining\":-5},\"debug\":{\"route\":{\"name\":\"Fallback - 404\",\"url\":\"\\/api\\/*\",\"controller\":\"Api\\/2\\/Utility.notFound\"},\"params\":{\"options\":[],\"where\":[]}},\"meta\":null,\"error\":{\"code\":404,\"type\":\"ApiException\",\"description\":\"No such endpoint.\"},\"data\":null}"
+                                                                  :status 404
+                                                                  :error {:code 404
+                                                                          :type "ApiException"
+                                                                          :description "No such endpoint."}
+                                                                  :success? false})]
           (fetch-sample-response {:id :john
                                   :method :GET
                                   :path "/clients"

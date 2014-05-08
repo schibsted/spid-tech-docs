@@ -1,6 +1,5 @@
 (ns spid-docs.sample-responses.defsample-test
   (:require [midje.sweet :refer :all]
-            [spid-docs.api-client :refer :all]
             [spid-docs.sample-responses.defsample :refer :all]
             [test-with-files.core :refer [with-tmp-dir tmp-dir]]))
 

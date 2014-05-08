@@ -53,9 +53,9 @@ When you have installed the library, add it to your project's `pom.xml` file:
 
 ```xml
 <dependency>
-  <groupId>no.spp.sdk</groupId>
-  <artifactId>spp-sdk</artifactId>
-  <version>1.3.10</version>
+  <groupId>no.spid</groupId>
+  <artifactId>no.spid.api.client</artifactId>
+  <version>1.0</version>
 </dependency>
 ```
 
@@ -104,7 +104,7 @@ lein intall
 Finally, use it in your `project.clj`:
 
 ```clojure
-[spid-sdk-clojure "0.1.0"]
+[spid-sdk-clojure "0.5.1"]
 ```
 
 #### :tab iOS
@@ -318,12 +318,13 @@ The following is a minimal example of using the Clojure SDK. It fetches the
 
 ```clojure
 (ns getting-started.core
-  (:require [spid-sdk-clojure.core :refer [create-client GET]]))
+  (:require [spid-sdk-clojure.core :refer [create-client create-server-token GET]]))
 
 (defn test-run-api [client-id secret]
-  (let [options {:spp-base-url "https://stage.payment.schibsted.no"}
-        client (create-client client-id secret options)]
-    (clojure.pprint/pprint (GET client "/endpoints"))))
+  (let [options {:spid-base-url "https://stage.payment.schibsted.no"}
+        client (create-client client-id secret options)
+        token (create-server-token client)]
+    (clojure.pprint/pprint (GET client token "/endpoints"))))
 ```
 
 You can run this code from the example repository, filling in your actual

@@ -72,33 +72,37 @@
    => "(ns example
   (:require [spid-sdk-clojure.core :as sdk]))
 
-(-> (sdk/create-client \"[client-id]\" \"[secret]\")
-    (sdk/GET \"/status\"))"
+(let [client (sdk/create-client \"[client-id]\" \"[secret]\")
+      token (sdk/create-server-token client)]
+  (sdk/GET client token \"/status\"))"
 
    (-> param-example :clojure :minimal)
    => "(ns example
   (:require [spid-sdk-clojure.core :as sdk]))
 
-(-> (sdk/create-client \"[client-id]\" \"[secret]\")
-    (sdk/GET \"/describe/User\"))"
+(let [client (sdk/create-client \"[client-id]\" \"[secret]\")
+      token (sdk/create-server-token client)]
+  (sdk/GET client token \"/describe/User\"))"
 
    (-> post-example :clojure :minimal)
    => "(ns example
   (:require [spid-sdk-clojure.core :as sdk]))
 
-(-> (sdk/create-client \"[client-id]\" \"[secret]\")
-    (sdk/POST \"/user\" {\"email\" \"johnd@example.com\"}))"
+(let [client (sdk/create-client \"[client-id]\" \"[secret]\")
+      token (sdk/create-server-token client)]
+  (sdk/POST client token \"/user\" {\"email\" \"johnd@example.com\"}))"
 
    (-> post-example :clojure :maximal)
    => "(ns example
   (:require [spid-sdk-clojure.core :as sdk]))
 
-(-> (sdk/create-client \"[client-id]\" \"[secret]\")
-    (sdk/POST \"/user\" {\"email\" \"johnd@example.com\"
-                       \"displayName\" \"John\"
-                       \"name\" \"John Doe\"
-                       \"birthday\" \"1977-01-31\"
-                       \"preferredUsername\" \"johnd\"}))"
+(let [client (sdk/create-client \"[client-id]\" \"[secret]\")
+      token (sdk/create-server-token client)]
+  (sdk/POST client token \"/user\" {\"email\" \"johnd@example.com\"
+                                  \"displayName\" \"John\"
+                                  \"name\" \"John Doe\"
+                                  \"birthday\" \"1977-01-31\"
+                                  \"preferredUsername\" \"johnd\"}))"
 
    (-> get-example :java :minimal)
    => "String responseJSON = sppClient.

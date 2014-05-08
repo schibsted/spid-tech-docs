@@ -44,9 +44,9 @@
         path (:path sample-def)
         params (:params sample-def)
         response (cond
-                  (= method :GET) (api/raw-GET path params)
-                  (= method :POST) (api/raw-POST path params)
-                  (= method :DELETE) (api/raw-DELETE path params))]
+                  (= method :GET) (api/GET path params)
+                  (= method :POST) (api/POST path params)
+                  (= method :DELETE) (api/DELETE path params))]
     {:id (:id sample-def)
      :method method
      :path (:path sample-def)

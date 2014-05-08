@@ -5,7 +5,6 @@
            clojure.lang.Symbol
            java.lang.String)
   (:require [clojure.string :as str]
-            [spid-docs.api-client :as api]
             [spid-docs.homeless :refer [update-existing]]))
 
 (def sample-responses

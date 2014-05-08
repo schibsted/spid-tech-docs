@@ -2,22 +2,20 @@
   "Functions for working with the SPiD API. The SPiD API is used by the
    documentation to get sample responses etc."
   (:require [spid-docs.load :refer [load-edn]]
-            [spid-sdk-clojure.core :as sdk]
-            [spid-sdk-clojure.raw :as api]))
+            [spid-sdk-clojure.core :as sdk]))
 
 (def get-config (memoize #(load-edn "config.edn")))
 
 (def get-client (memoize #(let [conf (get-config)]
-                            (sdk/create-server-client (:client-id conf) (:client-secret conf) {:spp-base-url (:spid-base-url conf), :redirect-uri "http://localhost"}))))
+                            (sdk/create-client (:client-id conf) (:client-secret conf) {:spid-base-url (:spid-base-url conf), :redirect-uri "http://localhost"}))))
 
-(defn GET [path]
-  (sdk/GET (get-client) path))
+(def get-token (memoize #(let [client (get-client)] (sdk/create-server-token client))))
 
-(defn raw-GET [path & [params]]
-  (api/GET (get-client) path params))
+(defn GET [path & [params]]
+  (sdk/GET (get-client) (get-token) path params))
 
-(defn raw-POST [path params]
-  (api/POST (get-client) path params))
+(defn POST [path params]
+  (sdk/POST (get-client) (get-token) path params))
 
-(defn raw-DELETE [path params]
-  (api/DELETE (get-client) path params))
+(defn DELETE [path params]
+  (sdk/DELETE (get-client) (get-token) path params))

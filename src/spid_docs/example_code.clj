@@ -26,12 +26,13 @@
                         " \\\n   -d \":name=:value\"")))
 
 (defn clojure-example-code [{:keys [method path example-params]} params]
-  (let [sdk-invocation (str "    (sdk/" method " \"" (replace-path-parameters path example-params) "\"")
+  (let [sdk-invocation (str "  (sdk/" method " client token \"" (replace-path-parameters path example-params) "\"")
         param-map-indentation (apply str (repeat (count sdk-invocation) " "))]
     (str "(ns example
   (:require [spid-sdk-clojure.core :as sdk]))
 
-(-> (sdk/create-client \"[client-id]\" \"[secret]\")\n"
+(let [client (sdk/create-client \"[client-id]\" \"[secret]\")
+      token (sdk/create-server-token client)]\n"
          sdk-invocation
          (when (seq params)
            (str " {"
