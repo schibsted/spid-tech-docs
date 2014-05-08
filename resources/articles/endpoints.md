@@ -192,29 +192,25 @@ GET http://payment.schibsted.no/api/2/orders?sort[status]=desc&sort[updated]=asc
 
 ## Filters
 
-Several endpoints accept the `filter` argument. It is a generic way to get
-different results - usually filtering the result down to a subset, but not
-always.
+Many endpoints accept the `filter` request parameter. It can be used to provide
+one or more filters, which will affect how the endpoint behaves. The two main
+types of filters are:
 
-Each endpoint specifies which filters it supports, but here are some common ones:
+1. **Status filters** - these filters (such as `active`, `verified`, `deleted`
+   etc) allow you to control the status of returned items. If you specify
+   multiple status filters, they will be `OR`-ed, e.g. `filters=active,deleted`
+   will return all items that are active and all items that are deleted.
 
-- `merchant` Show all results within the current merchant rather than the current client
-- `updated` Filter by users that have updated their account, order by last updated (requires usage of since and/or until)
-- `verified` Filter by users with status = 1 (verified)
-- `unverified` Filter by users with status = 0 (unverified)
-- `inactive` Filter by users with status = -1 (inactive/disabled account)
-- `blocked` Filter by users with status = -2 (blocked from using the service)
-- `deleted` Filter by users with status = -3 (deleted from the platform/service)
-- `facebook` Filter by users using Facebook as a third party login
-- `google` Filter by users using Google as a third party login
-- `live` Filter by users using Live as a third party login
-- `imported` Filter by users that have been imported
+2. **Type filters** - these filters (such as `bundle`, `subscription` etc) allow
+   you to control what kind of items are returned. Multiple type filters are
+   `OR`-ed, e.g. `filters=bundle,subscription` will return every product that is
+   either a bundle or a subscription.
 
-Multiple filters can be active at once. Separate them by a comma:
+Combined status and type filters are `AND`-ed together:
+`filters=active,bundle,subscription` will return all active products that are
+either bundles or subscriptions.
 
-```text
-GET http://payment.schibsted.no/api/2/users?filter=updated,verified
-```
+See individual endpoints for supported filters.
 
 ## Locales
 
