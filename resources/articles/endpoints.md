@@ -187,7 +187,7 @@ properties, and for each one whether to sort ascending (`asc`) or descending
 Example:
 
 ```text
-GET /orders?sort[status]=desc&sort[updated]=asc
+GET http://payment.schibsted.no/api/2/orders?sort[status]=desc&sort[updated]=asc
 ```
 
 ## Filters
@@ -212,8 +212,8 @@ Each endpoint specifies which filters it supports, but here are some common ones
 
 Multiple filters can be active at once. Separate them by a comma:
 
-```
-filter=updated,verified
+```text
+GET http://payment.schibsted.no/api/2/users?filter=updated,verified
 ```
 
 ## Locales
