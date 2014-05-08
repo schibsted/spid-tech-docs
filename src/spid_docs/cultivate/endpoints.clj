@@ -30,7 +30,7 @@
   "Create a parameter map with the given values. Carries its weight by
    looking up description and aliases."
   (-> {:name name
-       :description ((keyword name) (:parameter_descriptions endpoint))
+       :description ((keyword name) (:parameterDescriptions endpoint))
        :type type
        :required? required?}
       (add-alias-to-param endpoint)))
@@ -127,7 +127,7 @@
   "Extracts all failure responses, and adds global ones, such as 403 for any
    endpoint that requires authentication."
   [http-method]
-  (->> (if (seq (:access_token_types http-method))
+  (->> (if (seq (:accessTokenTypes http-method))
          (conj (:responses http-method) {:status 403
                                          :description "Access token rejected"
                                          :type "api-exception"})
@@ -148,7 +148,7 @@
   "Gather a bunch of information from all over to create a map that
    includes everything you could ever want to know about an endpoint."
   (let [{:keys [path category pathParameters valid_output_formats default_output_format deprecated]} endpoint
-        {:keys [required optional default_filters filters access_token_types responses]} details
+        {:keys [required optional defaultFilters filters accessTokenTypes responses]} details
         {:keys [filter-descriptions endpoint-descriptions sample-responses]} raw-content
         endpoint-id (str (to-id-str path) "-" (.toLowerCase (name method)))
         {:keys [introduction success-description relevant-endpoints relevant-types example-params]} (get endpoint-descriptions (str "/" endpoint-id ".md") {})]
@@ -162,11 +162,11 @@
        :category {:section (first category) :api (second category)}
        :parameters (collect-parameters required optional pathParameters endpoint)
        :?pagination (collect-pagination-params optional)
-       :?filters (map #(create-filter % default_filters filter-descriptions) filters)
+       :?filters (map #(create-filter % defaultFilters filter-descriptions) filters)
        :response-formats (map keyword valid_output_formats)
        :default-response-format (keyword default_output_format)
-       :access-token-types (set (map keyword access_token_types))
-       :requires-authentication? (not (empty? access_token_types))
+       :access-token-types (set (map keyword accessTokenTypes))
+       :requires-authentication? (not (empty? accessTokenTypes))
        :?relevant-endpoints (parse-relevant-endpoints relevant-endpoints)
        :?relevant-types (when relevant-types (str/split relevant-types #" "))
        :example-params (merge (:example-params raw-content) (parse-example-params example-params))

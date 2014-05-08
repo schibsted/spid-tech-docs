@@ -13,7 +13,7 @@ are now reading."
           {:name "url"                    :type :string      :always-available? true :description "The full absolute path to this endpoint."}
           {:name "valid_output_formats"   :type :string      :always-available? true :description "Possible ouput formats. Use by sending format=[name] as a request parameter."}
           {:name "default_output_format"  :type :string      :always-available? true :description "The default output format, typically `json`."}
-          {:name "parameter_descriptions" :type :object      :always-available? true :description "An object with parameter docstrings. The property names of this object are names of either request parameters or path parameters, and the value is a description of the parameter's purpose."}
+          {:name "parameterDescriptions"  :type :object      :always-available? true :description "An object with parameter docstrings. The property names of this object are names of either request parameters or path parameters, and the value is a description of the parameter's purpose."}
           {:name "alias"                  :type :object      :description "Some parameters have aliases; names that may be used in their place. The property names in this object are parameter names and the value denotes which parameter it will map to. `\"id\": \"user_id\"` means that `id` is an alternative way to provide the `user_id` parameter."}
           {:name "deprecated"             :type :string      :description "If deprecated, this string will indicate from which version it was deprecated."}
           {:name "httpMethods"            :type :http-method :always-available? true :description "Details about the supported HTTP methods with their purpose and possible outcomes."}

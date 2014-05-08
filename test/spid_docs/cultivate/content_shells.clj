@@ -9,8 +9,8 @@
                  :description "!"
                  :type "!"}]
     :filters []
-    :default_filters []
-    :access_token_types []}
+    :defaultFilters []
+    :accessTokenTypes []}
    m))
 
 (defn endpoint [& [m]]
@@ -26,5 +26,5 @@
     :default_output_format "!"
     :valid_output_formats []
     :httpMethods {:GET (http-method)}
-    :parameter_descriptions {}}
+    :parameterDescriptions {}}
    m))

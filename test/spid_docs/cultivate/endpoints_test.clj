@@ -108,7 +108,7 @@ POST /path/to/other/page
   They're all required."
 
  (-> (cultivate :pathParameters ["id"]
-                :parameter_descriptions {:id "The user ID"}
+                :parameterDescriptions {:id "The user ID"}
                 :alias {:id "user_id"})
      first :parameters)
  => [{:name "id"
@@ -121,7 +121,7 @@ POST /path/to/other/page
  "Query parameters are included in the general :parameters list too."
 
  (-> (cultivate :httpMethods {:GET (cs/http-method {:required ["email"]})}
-                :parameter_descriptions {:email "The email"})
+                :parameterDescriptions {:email "The email"})
      first :parameters)
  => [{:name "email"
       :description "The email"
@@ -129,7 +129,7 @@ POST /path/to/other/page
       :required? true}]
 
  (-> (cultivate :httpMethods {:POST (cs/http-method {:optional ["name"]})}
-                :parameter_descriptions {:name "The name"})
+                :parameterDescriptions {:name "The name"})
      first :parameters)
  => [{:name "name"
       :description "The name"
@@ -174,7 +174,7 @@ POST /path/to/other/page
 
  (let [endpoint (-> (cultivate :httpMethods {:GET (cs/http-method {:optional ["filters"]
                                                                    :filters ["merchant"]
-                                                                   :default_filters []})})
+                                                                   :defaultFilters []})})
                     first)]
 
    (:parameters endpoint) => []
@@ -209,7 +209,7 @@ POST /path/to/other/page
  "We represent the access token types as a set of keys, instead of a
   list, since the data isn't inherently ordered."
 
- (-> (cultivate :httpMethods {:GET (cs/http-method {:access_token_types ["server" "user"]})})
+ (-> (cultivate :httpMethods {:GET (cs/http-method {:accessTokenTypes ["server" "user"]})})
      first :access-token-types)
  => #{:server :user})
 
@@ -217,11 +217,11 @@ POST /path/to/other/page
  "Authentication is required if there is any access token types
   listed."
 
- (-> (cultivate :httpMethods {:GET (cs/http-method {:access_token_types ["server"]})})
+ (-> (cultivate :httpMethods {:GET (cs/http-method {:accessTokenTypes ["server"]})})
      first :requires-authentication?)
  => true
 
- (-> (cultivate :httpMethods {:GET (cs/http-method {:access_token_types []})})
+ (-> (cultivate :httpMethods {:GET (cs/http-method {:accessTokenTypes []})})
      first :requires-authentication?)
  => false)
 
@@ -248,7 +248,7 @@ POST /path/to/other/page
  "403 response is added when not already present and endpoint requires authentication"
 
  (->> (cultivate :httpMethods
-                 {:GET (cs/http-method {:access_token_types ["server"]
+                 {:GET (cs/http-method {:accessTokenTypes ["server"]
                                         :responses [{:status 200
                                                      :description "OK"
                                                      :type "string"}

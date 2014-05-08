@@ -10,8 +10,8 @@
                 :description Str
                 :type Str}]
    :filters [Str]
-   :default_filters [Str]
-   :access_token_types [Str]})
+   :defaultFilters [Str]
+   :accessTokenTypes [Str]})
 
 (def Endpoint
   {:category [Str]
@@ -27,7 +27,7 @@
    :httpMethods {(optional-key :GET) HttpMethod
                  (optional-key :POST) HttpMethod
                  (optional-key :DELETE) HttpMethod}
-   :parameter_descriptions {Keyword Str}
+   :parameterDescriptions {Keyword Str}
    (optional-key :alias) {Keyword Str}
    (optional-key :deprecated) Str})
 
