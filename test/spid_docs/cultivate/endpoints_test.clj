@@ -17,7 +17,10 @@ POST /path/to/other/page
    :endpoint-descriptions {"/terms-get.md" {:introduction "terms desc"
                                             :success-description "success description"
                                             :relevant-endpoints relevant-endpoints-example
-                                            :relevant-types "user order"}}
+                                            :relevant-types "user order"
+                                            :example-params "userId: custom"}}
+   :example-params {"userId" "42"
+                    "orderId" "43"}
    :filter-descriptions {:merchant "merchant desc"}
    :endpoint-blacklist #{[:GET "bad"]}})
 
@@ -324,6 +327,20 @@ POST /path/to/other/page
                 :path "terms")
      first :relevant-types)
  => ["user" "order"])
+
+(fact
+ "example-params are added to each endpoint"
+
+ (-> (cultivate) first :example-params) => {"userId" "42"
+                                            "orderId" "43"})
+
+(fact
+ "example-params specific to an endpoint is merged in"
+
+ (-> (cultivate :httpMethods {:GET (cs/http-method)}
+                :path "terms")
+     first :example-params) => {"userId" "custom"
+                                "orderId" "43"})
 
 (fact (-> (cultivate :deprecated "1.0") first :deprecated) => "1.0")
 

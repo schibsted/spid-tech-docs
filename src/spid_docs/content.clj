@@ -39,4 +39,5 @@
             :articles (cultivate-articles (:articles raw-content)))
         (dissoc :sample-responses
                 :endpoint-descriptions
-                :filter-descriptions))))
+                :filter-descriptions
+                :example-params))))

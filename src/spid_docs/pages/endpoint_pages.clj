@@ -110,13 +110,13 @@
                    [:h6.mtm "With all parameters"]
                    (render-code lang-class (:maximal example))))])))
 
-(defn render-request-examples [endpoint example-params]
+(defn render-request-examples [endpoint]
   (list
    [:h2 "Example request"]
    [:div.tabs
-    (map render-request-example (create-example-code endpoint example-params))]))
+    (map render-request-example (create-example-code endpoint))]))
 
-(defn render-request [endpoint example-params]
+(defn render-request [endpoint]
   [:div.section.request
    [:div.main
     [:div.wrap
@@ -125,7 +125,7 @@
      (render-request-parameters (:parameters endpoint) (:pagination endpoint) (:filters endpoint))]]
    [:div.aside
     [:div.wrap
-     (render-request-examples endpoint example-params)]]])
+     (render-request-examples endpoint)]]])
 
 (defn- format-response-status [status]
   (if (= status 999)
@@ -245,7 +245,7 @@
       (concat (map render-relevant-type relevant-types)
               (map render-relevant-endpoint relevant-endpoints))])))
 
-(defn create-page [endpoint types example-params]
+(defn create-page [endpoint types]
   (warn-about-missing-typedefs endpoint types)
   {:split-page? true ;; Makes the layout render a grey right column
    :title (str (name (:method endpoint)) " " (:path endpoint))
@@ -262,12 +262,12 @@
                   (render-see-also (:relevant-endpoints endpoint)
                                    (:relevant-types endpoint))]]]
                [:div.separator]
-               (render-request endpoint example-params)
+               (render-request endpoint)
                [:div.separator]
                (render-response endpoint types)
                [:div.disqus-comments {:id (endpoint-path endpoint)}])})
 
-(defn create-pages [endpoints types example-params]
+(defn create-pages [endpoints types]
   (->> endpoints
-       (map (juxt endpoint-path #(partial create-page % types example-params)))
+       (map (juxt endpoint-path #(partial create-page % types)))
        (into {})))

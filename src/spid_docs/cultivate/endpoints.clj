@@ -137,6 +137,13 @@
        (remove success?)
        (map create-response)))
 
+(defn- parse-example-params [s]
+  (when s
+    (->> s
+         (str/split-lines)
+         (map #(str/split % #":\s*"))
+         (into {}))))
+
 (defn- cultivate-endpoint-1 [endpoint [method details] raw-content]
   "Gather a bunch of information from all over to create a map that
    includes everything you could ever want to know about an endpoint."
@@ -144,7 +151,7 @@
         {:keys [required optional default_filters filters access_token_types responses]} details
         {:keys [filter-descriptions endpoint-descriptions sample-responses]} raw-content
         endpoint-id (str (to-id-str path) "-" (.toLowerCase (name method)))
-        {:keys [introduction success-description relevant-endpoints relevant-types]} (get endpoint-descriptions (str "/" endpoint-id ".md") {})]
+        {:keys [introduction success-description relevant-endpoints relevant-types example-params]} (get endpoint-descriptions (str "/" endpoint-id ".md") {})]
     (with-optional-keys
       {:id (keyword endpoint-id)
        :path (str "/" path)
@@ -162,6 +169,7 @@
        :requires-authentication? (not (empty? access_token_types))
        :?relevant-endpoints (parse-relevant-endpoints relevant-endpoints)
        :?relevant-types (when relevant-types (str/split relevant-types #" "))
+       :example-params (merge (:example-params raw-content) (parse-example-params example-params))
        :responses {:success (-> success? (filter responses) first create-response
                                 (add-samples (str "/" endpoint-id) sample-responses)
                                 (assoc-non-nil :description success-description))

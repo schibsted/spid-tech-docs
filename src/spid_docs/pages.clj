@@ -14,6 +14,6 @@
   (stasis/merge-page-sources
    {:general-pages {"/" (partial frontpage/create-page (:apis content))
                     "/deprecated/" (partial frontpage/create-deprecated-endpoints-page (:apis content))}
-    :endpoints (endpoints/create-pages (:endpoints content) (:types content) (:example-params content))
+    :endpoints (endpoints/create-pages (:endpoints content) (:types content))
     :articles (articles/create-pages (:articles content))
     :types (types/create-pages (:types content) (:endpoints content))}))

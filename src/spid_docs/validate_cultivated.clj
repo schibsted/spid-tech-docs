@@ -40,6 +40,7 @@
    (optional-key :filters) [Filter]
    :access-token-types #{(enum :user :server)}
    :requires-authentication? Boolean
+   :example-params {Str Str}
    (optional-key :relevant-endpoints) [{:method Keyword :path Path}]
    (optional-key :relevant-types) [Str]
    :responses {:success Response
@@ -60,6 +61,5 @@
                            :category Str
                            :endpoints [Endpoint]
                            (optional-key :description) Str}}
-             :example-params {Str Str}
              :endpoint-blacklist #{[(either Str Keyword)]}}
             content))

@@ -58,7 +58,8 @@
   {:introduction Str
    (optional-key :success-description) Str
    (optional-key :relevant-endpoints) Str
-   (optional-key :relevant-types) Str})
+   (optional-key :relevant-types) Str
+   (optional-key :example-params) Str})
 
 (def Article
   {:title Str
