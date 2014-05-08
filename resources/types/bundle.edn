@@ -32,8 +32,8 @@
           {:name "subscription_final_end_date"         :type :datetime        :description "By this date, the subscription is no longer for sale" :always-available? false}
           {:name "subscription_survey_url"             :type :string          :description "URL to a survey about the bundle" :always-available? false}
           {:name "allow_multi_sales"                   :type :boolnum         :description "If `\"1\"`, users can purchase this product multiple times" :always-available? true}
-          {:name "guardian"                            :type :integer-string  :description "TODO" :always-available? true}
-          {:name "autopay"                             :type :boolnum         :description "TODO" :always-available? true}
+          {:name "guardian"                            :type :boolnum         :description "If `\"1\"`, access to this product is granted through owning a child product" :always-available? true}
+          {:name "autopay"                             :type :boolnum         :description "If `\"1\"`, this product can be purchased or renewed through the payment autopay API" :always-available? true}
           {:name "status"                              :type :product-status  :always-available? true}
           {:name "changed_by"                          :type :integer-string  :description "ID of the user who last changed the bundle" :always-available? true}
           {:name "changed"                             :type :datetime        :description "When the bundle was last changed" :always-available? true}

@@ -192,9 +192,9 @@ GET /orders?sort[status]=desc&sort[updated]=asc
 
 ## Filters
 
-Several endpoints accept the `filter` argument. It is a generic way to
-get different results - usually filtering the result down to a subset,
-but not always.
+Several endpoints accept the `filter` argument. It is a generic way to get
+different results - usually filtering the result down to a subset, but not
+always.
 
 Each endpoint specifies which filters it supports, but here are some common ones:
 
