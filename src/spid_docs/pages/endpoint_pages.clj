@@ -245,6 +245,12 @@
       (concat (map render-relevant-type relevant-types)
               (map render-relevant-endpoint relevant-endpoints))])))
 
+(defn- render-comments [endpoint]
+  [:div.section
+   [:div.main
+    [:div.wrap
+     [:div.disqus-comments {:id (endpoint-path endpoint)}]]]])
+
 (defn create-page [endpoint types]
   (warn-about-missing-typedefs endpoint types)
   {:split-page? true ;; Makes the layout render a grey right column
@@ -265,7 +271,7 @@
                (render-request endpoint)
                [:div.separator]
                (render-response endpoint types)
-               [:div.disqus-comments {:id (endpoint-path endpoint)}])})
+               (render-comments endpoint))})
 
 (defn create-pages [endpoints types]
   (->> endpoints

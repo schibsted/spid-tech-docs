@@ -22,15 +22,14 @@
       (-> article
           (assoc :split-page? true)
           (assoc :body (list
-                        [:div.main [:div.wrap body]]
+                        [:div.main [:div.wrap body comments]]
                         [:div.aside
                          [:div.wrap
                           (when aside
                             (markdown/render aside))
                           (when relevant-endpoints
-                            (render-relevant-endpoints relevant-endpoints))]]
-                        comments)))
-      (assoc article :body (list [:div.wrap body] comments)))))
+                            (render-relevant-endpoints relevant-endpoints))]])))
+      (assoc article :body (list [:div.wrap body comments])))))
 
 (defn create-pages
   "Given a map of markdown files (path => content), generate a map of url =>
