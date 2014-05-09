@@ -20,13 +20,13 @@
 
 (defn curl-example-code [{:keys [api-path method access-token-types example-params]} params]
   (apply str "curl https://payment.schibsted.no" (replace-path-parameters api-path example-params)
-         (when (= "POST" method) " \\\n   -X POST")
+         (when (= :POST method) " \\\n   -X POST")
          (when (seq access-token-types) " \\\n   -d \"oauth_token=[access token]\"")
          (format-params (exemplify-params params example-params)
                         " \\\n   -d \":name=:value\"")))
 
 (defn clojure-example-code [{:keys [method path example-params access-token-types]} params]
-  (let [sdk-invocation (str "  (sdk/" method " client token \"" (replace-path-parameters path example-params) "\"")
+  (let [sdk-invocation (str "  (sdk/" (name method) " client token \"" (replace-path-parameters path example-params) "\"")
         param-map-indentation (apply str (repeat (count sdk-invocation) " "))
         token (if (contains? access-token-types :user)
                 "create-user-token client \"[code]\""
@@ -65,7 +65,7 @@
          (format-params (exemplify-params params example-params) "    \":name\" => \":value\"" ",\n")
          "\n);\n\n")))
 
-(defn php-example-code [{:keys [method path example-params]} params]
+(defn php-example-code [{:keys [path example-params]} params]
   (let [has-params (seq params)
         params-assoc-array (create-params-assoc-array params example-params)
         api-invocation (str "(\"" (replace-path-parameters path example-params) "\""

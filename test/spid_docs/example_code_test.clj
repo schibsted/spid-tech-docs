@@ -15,14 +15,14 @@
 
 (fact
  (let [get-example (create-example-code
-                    {:method "GET"
+                    {:method :GET
                      :parameters []
                      :path "/status"
                      :api-path "/api/2/status"
                      :access-token-types []
                      :example-params example-params})
        post-example (create-example-code
-                     {:method "POST"
+                     {:method :POST
                       :parameters [{:name "email" :required? true :type :query}
                                    {:name "displayName" :required? false :type :query}
                                    {:name "name" :required? false :type :query}
@@ -33,7 +33,7 @@
                       :access-token-types #{:server}
                       :example-params example-params})
        param-example (create-example-code
-                      {:method "GET"
+                      {:method :GET
                        :parameters [{:name "property" :required? false :type :query}
                                     {:name "locale" :required? false :type :query}
                                     {:name "object" :required? true :type :path}]
@@ -42,7 +42,7 @@
                        :access-token-types #{:server}
                        :example-params example-params})
        user-token-example (create-example-code
-                      {:method "GET"
+                      {:method :GET
                        :parameters [{:name "property" :required? false :type :query}
                                     {:name "locale" :required? false :type :query}
                                     {:name "object" :required? true :type :path}]
