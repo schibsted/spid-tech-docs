@@ -43,10 +43,11 @@
   (let [method (:method sample-def)
         path (:path sample-def)
         params (:params sample-def)
+        token (api/create-server-token)
         response (cond
-                  (= method :GET) (api/GET path params)
-                  (= method :POST) (api/POST path params)
-                  (= method :DELETE) (api/DELETE path params))]
+                  (= method :GET) (api/GET token path params)
+                  (= method :POST) (api/POST token path params)
+                  (= method :DELETE) (api/DELETE token path params))]
     {:id (:id sample-def)
      :method method
      :path (:path sample-def)
