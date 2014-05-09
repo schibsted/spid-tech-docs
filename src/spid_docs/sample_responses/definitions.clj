@@ -233,7 +233,9 @@
 ;;;;
 ;;;;  ;; Med user token
 ;;;;  ;; GET "/terms" (med oath_token, not_accepted)
-;;;;  ;; GET "/me"
+
+(defsample GET "/me")
+
 ;;;;  ;; GET "/me/vouchers"
 ;;;;  ;; GET "/logout" ()
 ;;;;

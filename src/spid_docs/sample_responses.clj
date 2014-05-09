@@ -43,7 +43,9 @@
   (let [method (:method sample-def)
         path (:path sample-def)
         params (:params sample-def)
-        token (api/get-server-token)
+        token (if (contains? (:access-token-types sample-def) :server)
+                (api/get-server-token)
+                (api/get-user-token))
         response (cond
                   (= method :GET) (api/GET token path params)
                   (= method :POST) (api/POST token path params)
@@ -151,7 +153,7 @@
 (defn- generate-missing-sample-response-files [sample-response endpoint]
   (let [formats (:response-formats endpoint)]
     (if (or (sample-response-missing? sample-response formats :json)
-              (sample-response-missing? sample-response formats :jsonp))
+            (sample-response-missing? sample-response formats :jsonp))
       (generate-sample-response-files sample-response endpoint)
       (println "Skipping already generated" (name (:method sample-response)) (:path sample-response)))))
 
@@ -176,8 +178,11 @@
                      load-and-verify-sample-response)
           generate-files (if (= :build-missing mode)
                            generate-missing-sample-response-files
-                           generate-sample-response-files)]
-      (doseq [def (reduce load-def [] sample-defs)]
+                           generate-sample-response-files)
+          loaded-defs (reduce #(load-def %1 (assoc %2 :access-token-types
+                                                   (:access-token-types (get-endpoint %2 endpoints))))
+                              [] sample-defs)]
+      (doseq [def loaded-defs]
         (generate-files def (get-endpoint def endpoints))))
     (catch clojure.lang.ExceptionInfo e
       (println "-----------------------------------")

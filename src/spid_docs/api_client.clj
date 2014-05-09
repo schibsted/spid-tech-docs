@@ -9,8 +9,9 @@
 (def get-client (memoize #(let [conf (get-config)]
                             (sdk/create-client (:client-id conf) (:client-secret conf) {:spid-base-url (:spid-base-url conf), :redirect-uri "http://localhost"}))))
 
-(def get-server-token (memoize #(let [client (get-client)] (sdk/create-server-token client))))
-(def get-user-token (memoize #(let [client (get-client)] (sdk/create-user-token client))))
+(def get-server-token (memoize #(sdk/create-server-token (get-client))))
+(def get-user-token (memoize #(let [user (:demo-user (get-config))]
+                                (sdk/create-user-token (get-client) (:email user) (:password user)))))
 
 (defn GET [token path & [params]]
   (sdk/GET (get-client) token path params))

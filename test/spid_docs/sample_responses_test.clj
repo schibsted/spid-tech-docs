@@ -64,6 +64,7 @@
                                                   :success? false})]
           (fetch-sample-response {:id :john
                                   :method :GET
+                                  :access-token-types #{:server}
                                   :path "/clients"
                                   :route "/clients"}) => {:id :john
                                                           :method :GET
@@ -79,7 +80,7 @@
 (fact "Fetches sample response for user"
       (with-tmp-dir
         (with-redefs [spid-docs.api-client/get-client (fn [] {})
-                      spid-docs.api-client/get-server-token (fn [] {})
+                      spid-docs.api-client/get-user-token (fn [] {})
                       spid-docs.api-client/GET (fn [token path params]
                                                  {:body "{\"name\":\"SPP Container\",\"version\":\"0.2\",\"api\":2,\"object\":\"Utility\",\"type\":\"error\",\"code\":404,\"request\":{\"reset\":2656,\"limit\":0,\"remaining\":-5},\"debug\":{\"route\":{\"name\":\"Fallback - 404\",\"url\":\"\\/api\\/*\",\"controller\":\"Api\\/2\\/Utility.notFound\"},\"params\":{\"options\":[],\"where\":[]}},\"meta\":null,\"error\":{\"code\":404,\"type\":\"ApiException\",\"description\":\"No such endpoint.\"},\"data\":null}"
                                                   :status 404
@@ -89,14 +90,15 @@
                                                   :success? false})]
           (fetch-sample-response {:id :john
                                   :method :GET
-                                  :path "/clients"
-                                  :route "/clients"}) => {:id :john
-                                                          :method :GET
-                                                          :path "/clients"
-                                                          :route "/clients"
-                                                          :response {:status 404
-                                                                     :data nil
-                                                                     :error {:code 404
-                                                                             :type "ApiException"
-                                                                             :description "No such endpoint."}
-                                                                     :success? false}})))
+                                  :access-token-types #{:user}
+                                  :path "/me"
+                                  :route "/me"}) => {:id :john
+                                                     :method :GET
+                                                     :path "/me"
+                                                     :route "/me"
+                                                     :response {:status 404
+                                                                :data nil
+                                                                :error {:code 404
+                                                                        :type "ApiException"
+                                                                        :description "No such endpoint."}
+                                                                :success? false}})))
