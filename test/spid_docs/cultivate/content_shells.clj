@@ -23,8 +23,8 @@
     :method "!"
     :url "!"
     :controller "!"
-    :default_output_format "!"
-    :valid_output_formats []
+    :defaultOutputFormat "!"
+    :validOutputFormats []
     :httpMethods {:GET (http-method)}
     :parameterDescriptions {}}
    m))

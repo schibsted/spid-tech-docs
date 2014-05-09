@@ -22,8 +22,8 @@
    :method Str
    :url Str
    :controller Str
-   :default_output_format Str
-   :valid_output_formats [Str]
+   :defaultOutputFormat Str
+   :validOutputFormats [Str]
    :httpMethods {(optional-key :GET) HttpMethod
                  (optional-key :POST) HttpMethod
                  (optional-key :DELETE) HttpMethod}

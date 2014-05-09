@@ -193,7 +193,7 @@ POST /path/to/other/page
   'response' is more accurate than 'output', and there is no list of
   'invalid' formats, so the validity is implicit."
 
- (-> (cultivate :valid_output_formats ["json" "jsonp"])
+ (-> (cultivate :validOutputFormats ["json" "jsonp"])
      first :response-formats)
  => [:json :jsonp])
 
@@ -201,7 +201,7 @@ POST /path/to/other/page
  "Likewise, there's a default-response-format instead of a
   default-output-format."
 
- (-> (cultivate :default_output_format "json")
+ (-> (cultivate :defaultOutputFormat "json")
      first :default-response-format)
  => :json)
 

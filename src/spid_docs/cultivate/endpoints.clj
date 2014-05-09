@@ -147,7 +147,7 @@
 (defn- cultivate-endpoint-1 [endpoint [method details] raw-content]
   "Gather a bunch of information from all over to create a map that
    includes everything you could ever want to know about an endpoint."
-  (let [{:keys [path category pathParameters valid_output_formats default_output_format deprecated]} endpoint
+  (let [{:keys [path category pathParameters validOutputFormats defaultOutputFormat deprecated]} endpoint
         {:keys [required optional defaultFilters filters accessTokenTypes responses]} details
         {:keys [filter-descriptions endpoint-descriptions sample-responses]} raw-content
         endpoint-id (str (to-id-str path) "-" (.toLowerCase (name method)))
@@ -163,8 +163,8 @@
        :parameters (collect-parameters required optional pathParameters endpoint)
        :?pagination (collect-pagination-params optional)
        :?filters (map #(create-filter % defaultFilters filter-descriptions) filters)
-       :response-formats (map keyword valid_output_formats)
-       :default-response-format (keyword default_output_format)
+       :response-formats (map keyword validOutputFormats)
+       :default-response-format (keyword defaultOutputFormat)
        :access-token-types (set (map keyword accessTokenTypes))
        :requires-authentication? (not (empty? accessTokenTypes))
        :?relevant-endpoints (parse-relevant-endpoints relevant-endpoints)
