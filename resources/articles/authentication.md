@@ -38,11 +38,11 @@ data for all users who have granted the client access to its data.
 Obtaining user tokens by redirecting the user to SPiD to log in is covered in
 depth in the [Implementing SSO guide](/implementing-sso/).
 
-While it is not recommended to manually handle user passwords, it is possible to
-programatically obtain a user token given your client id, API secret and a
-user's credentials. You may want to do this for testing purposes (e.g.
-programatically testing an endpoint like [/me](/endpoints/GET/me) that only
-works with a user token).
+While it is not recommended, or even feasible, to manually handle user
+passwords, it is possible to programatically obtain a user token given your
+client id, API secret and a user's credentials. You may want to do this for
+testing purposes (e.g. programatically testing an endpoint like
+[/me](/endpoints/GET/me) that only works with a user token).
 
 A user token is obtained by requesting the `password` grant type from `/oauth/token`:
 
@@ -74,6 +74,11 @@ When successful, this request will return a JSON object:
 ```
 
 The `access_token` may be used to make API requests on behalf of this user.
+
+**NB!** This will only work if the user is already logged in. So, in order to
+make use of this, you have to
+[log in via SPiD the regular way](http://stage.payment.schibsted.no/login)
+first.
 
 ## Obtaining a server token
 
