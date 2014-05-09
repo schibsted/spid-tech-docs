@@ -10,7 +10,7 @@
                  [clygments "0.1.1"]
                  [me.raynes/cegdown "0.1.1"]
                  [mapdown "0.1.0"]
-                 [spid-sdk-clojure "0.5.2"]
+                 [spid-sdk-clojure "0.5.3"]
                  [commons-lang "2.5"]
                  [ring/ring-codec "1.0.0"]
                  [prismatic/schema "0.2.1"]
