@@ -15,9 +15,19 @@
      [:h2 "Relevant endpoints"]
      [:ul (map render-relevant-endpoint relevant)])))
 
-(defn create-page [[_ {:keys [title body aside relevant-endpoints] :as article}]]
+(defn- render-contribution [filename]
+  (list
+   [:h2 "Help us improve"]
+   [:p "Did you spot an error? Or maybe you just have a suggestion for how we can improve? "
+    [:a {:href "#disqus_thread"} "Leave a comment"]
+    ", or better yet, "
+    [:a {:href (str "https://github.com/spid-tech-docs/spid-tech-docs/edit/master/resources/articles"
+                    filename)} "send us a pull request"]
+    " on GitHub to fix it (in-browser editing, only takes a moment)."]))
+
+(defn create-page [[filename {:keys [title body aside relevant-endpoints] :as article}]]
   (let [body (list [:h1 title] (markdown/render body))
-        comments [:div.disqus-comments {:id (article-path _)}]]
+        comments [:div.disqus-comments {:id (article-path filename)}]]
     (if (or aside relevant-endpoints)
       (-> article
           (assoc :split-page? true)
@@ -28,7 +38,8 @@
                           (when aside
                             (markdown/render aside))
                           (when relevant-endpoints
-                            (render-relevant-endpoints relevant-endpoints))]])))
+                            (render-relevant-endpoints relevant-endpoints))
+                          (render-contribution filename)]])))
       (assoc article :body (list [:div.wrap body comments])))))
 
 (defn create-pages

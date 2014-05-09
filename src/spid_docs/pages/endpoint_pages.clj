@@ -8,7 +8,7 @@
             [inflections.core :refer [plural]]
             [spid-docs.enlive :as enlive]
             [spid-docs.example-code :refer [create-example-code]]
-            [spid-docs.formatting :refer [pluralize enumerate-humanely capitalize]]
+            [spid-docs.formatting :refer [pluralize enumerate-humanely capitalize to-id-str]]
             [spid-docs.http :refer [get-response-status-name]]
             [spid-docs.pages.type-pages :refer [render-type-definition render-inline-types link-to-type]]
             [spid-docs.pimp.markdown :refer [render-inline render]]
@@ -251,6 +251,17 @@
     [:div.wrap
      [:div.disqus-comments {:id (endpoint-path endpoint)}]]]])
 
+(defn- render-contribution [endpoint]
+  (list
+   [:h2 "Help us improve"]
+   [:p "Did you spot an error? Or maybe you just have a suggestion for how we can improve? "
+    [:a {:href "#disqus_thread"} "Leave a comment"]
+    ", or better yet, "
+    [:a {:href (str "https://github.com/spid-tech-docs/spid-tech-docs/edit/master/resources/endpoints/"
+                    (to-id-str (:path endpoint)) "-" (.toLowerCase (name (:method endpoint)))
+                    ".md")} "send us a pull request"]
+    " on GitHub to fix it (in-browser editing, only takes a moment)."]))
+
 (defn create-page [endpoint types]
   (warn-about-missing-typedefs endpoint types)
   {:split-page? true ;; Makes the layout render a grey right column
@@ -266,7 +277,8 @@
                 [:div.aside
                  [:div.wrap
                   (render-see-also (:relevant-endpoints endpoint)
-                                   (:relevant-types endpoint))]]]
+                                   (:relevant-types endpoint))
+                  (render-contribution endpoint)]]]
                [:div.separator]
                (render-request endpoint)
                [:div.separator]
