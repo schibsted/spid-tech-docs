@@ -8,7 +8,7 @@ for some common gotchas.
 ## Empty objects
 
 In some cases, empty JSON objects (e.g. objects with no properties) returned
-from the API will be represented as and empty array. To illustrate, let's say an
+from the API will be represented as an empty array. To illustrate, let's say an
 endpoint returns this:
 
 ```js
@@ -38,4 +38,10 @@ If you request a user with no addresses, you may get this response:
 Depending on your language of choice and how you handle JSON, this inconsistency
 may need to be worked around.
 
+## Searches with no results
 
+Some endpoints that search data will return with HTTP response code 404 when
+there are no data, instead of returning an empty result set with a successful
+HTTP response code. Any code performing searches with the API should handle
+404s. Refer to each individual endpoint for documentation on possible failure
+states.
