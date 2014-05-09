@@ -45,3 +45,10 @@ there are no data, instead of returning an empty result set with a successful
 HTTP response code. Any code performing searches with the API should handle
 404s. Refer to each individual endpoint for documentation on possible failure
 states.
+
+## Logging in a user with /oauth/token
+
+When attempting to obtain a user token by `POST`-ing to `/oauth/token`, email
+addresses using an alias (e.g. the username part has a `+` in it) will result in
+a failure. SPiD is generally email address aliases (e.g.
+`myaddress+myalias@domain.tld`) aware, and this will be fixed in the future.
