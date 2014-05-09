@@ -30,7 +30,7 @@
                                    {:name "preferredUsername" :required? false :type :query}]
                       :path "/user"
                       :api-path "/api/2/user"
-                      :access-token-types ["server"]
+                      :access-token-types #{:server}
                       :example-params example-params})
        param-example (create-example-code
                       {:method "GET"
@@ -39,7 +39,16 @@
                                     {:name "object" :required? true :type :path}]
                        :path "/describe/{object}"
                        :api-path "/api/2/describe/{object}"
-                       :access-token-types ["server"]
+                       :access-token-types #{:server}
+                       :example-params example-params})
+       user-token-example (create-example-code
+                      {:method "GET"
+                       :parameters [{:name "property" :required? false :type :query}
+                                    {:name "locale" :required? false :type :query}
+                                    {:name "object" :required? true :type :path}]
+                       :path "/me"
+                       :api-path "/api/2/me"
+                       :access-token-types #{:user}
                        :example-params example-params})]
 
    (-> get-example :curl :minimal)
@@ -83,6 +92,14 @@
 (let [client (sdk/create-client \"[client-id]\" \"[secret]\")
       token (sdk/create-server-token client)]
   (sdk/GET client token \"/describe/User\"))"
+
+   (-> user-token-example :clojure :minimal)
+   => "(ns example
+  (:require [spid-sdk-clojure.core :as sdk]))
+
+(let [client (sdk/create-client \"[client-id]\" \"[secret]\")
+      token (sdk/create-user-token client \"[code]\")]
+  (sdk/GET client token \"/me\"))"
 
    (-> post-example :clojure :minimal)
    => "(ns example
