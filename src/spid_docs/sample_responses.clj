@@ -165,7 +165,11 @@
    :build-from-cache Regenerates all sample response files, uses the
                      cache wherever possible
    :build-from-api   Regenerates all sample response files, and fetches all
-                     responses from the API (and produces new cache files)"
+                     responses from the API (and produces new cache files)
+
+Beware! In order for this to work well, you need to add the username and
+password for a demo user in resources/config.edn, AND make sure this user
+is logged into https://stage.payment.schibsted.no/"
   [sample-defs endpoints mode]
   (case mode
     :build-from-cache (println "Re-building generated sample responses from cache")
@@ -188,4 +192,7 @@
       (println "-----------------------------------")
       (println "Failed to generate sample responses")
       (println "-----------------------------------")
+      (println "Beware! In order for this to work well, you need to add the username and
+password for a demo user in resources/config.edn, AND make sure this user
+is logged into https://stage.payment.schibsted.no/")
       (println (.getMessage e)))))
