@@ -43,7 +43,7 @@
   (let [method (:method sample-def)
         path (:path sample-def)
         params (:params sample-def)
-        token (api/create-server-token)
+        token (api/get-server-token)
         response (cond
                   (= method :GET) (api/GET token path params)
                   (= method :POST) (api/POST token path params)
