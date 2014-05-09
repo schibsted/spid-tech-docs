@@ -44,7 +44,36 @@ user's credentials. You may want to do this for testing purposes (e.g.
 programatically testing an endpoint like [/me](/endpoints/GET/me) that only
 works with a user token).
 
-...
+A user token is obtained by requesting the `password` grant type from `/oauth/token`:
+
+```sh
+curl -X POST -d grant_type=password&\
+                client_id=<CLIENT_ID>&\
+                client_secret=<CLIENT_SECRET>&\
+                redirect_uri=http://localhost&\
+                username=<username>&\
+                password=<password>\
+            https://stage.payment.schibsted.no/oauth/token
+```
+
+You may have to quote the entire data string, depending on the user's email and
+password.
+
+When successful, this request will return a JSON object:
+
+```js
+{
+  "access_token": "322c4c33a0bb327ea6a06d05fa37bf3613190499",
+  "expires_in": 604800,
+  "scope": null,
+  "user_id": "938029",
+  "is_admin": false,
+  "refresh_token": "818518449498eb3e5d228e016461f1f148e91002",
+  "server_time": 1399628771
+}
+```
+
+The `access_token` may be used to make API requests on behalf of this user.
 
 ## Obtaining a server token
 
