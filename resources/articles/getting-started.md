@@ -173,7 +173,7 @@ everything set up, you might want to continue with configuring single sign-on.
 The following is a minimal example of using the Java API client. It fetches the
 /endpoints endpoint, which returns a description of all available endpoints.
 
-<spid-example lang="java" src="/login/src/main/java/no/spid/examples/LoginController.java" title="Build login URL"/>
+<spid-example lang="java" src="/getting-started/src/main/java/no/spid/examples/GettingStarted.java" title="Getting started"/>
 
 You can run this code from the example repository, filling in your actual
 client-id and secret:
