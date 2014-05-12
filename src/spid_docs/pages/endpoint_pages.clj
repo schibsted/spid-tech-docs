@@ -259,7 +259,8 @@
     ", or better yet, "
     [:a {:href (str "https://github.com/spid-tech-docs/spid-tech-docs/edit/master/resources/endpoints/"
                     (to-id-str (:path endpoint)) "-" (.toLowerCase (name (:method endpoint)))
-                    ".md")} "send us a pull request"]
+                    ".md")
+         :target "_blank"} "send us a pull request"]
     " on GitHub to fix it (in-browser editing, only takes a moment)."]])
 
 (defn create-page [endpoint types]

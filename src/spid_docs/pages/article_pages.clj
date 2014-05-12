@@ -22,7 +22,8 @@
     [:a {:href "#disqus_thread"} "Leave a comment"]
     ", or better yet, "
     [:a {:href (str "https://github.com/spid-tech-docs/spid-tech-docs/edit/master/resources/articles"
-                    filename)} "send us a pull request"]
+                    filename)
+         :target "_blank"} "send us a pull request"]
     " on GitHub to fix it (in-browser editing, only takes a moment)."]])
 
 (defn create-page [[filename {:keys [title body aside relevant-endpoints] :as article}]]
