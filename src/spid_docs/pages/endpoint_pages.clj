@@ -252,7 +252,7 @@
      [:div.disqus-comments {:id (endpoint-path endpoint)}]]]])
 
 (defn- render-contribution [endpoint]
-  (list
+  [:div.grid-bound
    [:h2 "Help us improve"]
    [:p "Did you spot an error? Or maybe you just have a suggestion for how we can improve? "
     [:a {:href "#disqus_thread"} "Leave a comment"]
@@ -260,7 +260,7 @@
     [:a {:href (str "https://github.com/spid-tech-docs/spid-tech-docs/edit/master/resources/endpoints/"
                     (to-id-str (:path endpoint)) "-" (.toLowerCase (name (:method endpoint)))
                     ".md")} "send us a pull request"]
-    " on GitHub to fix it (in-browser editing, only takes a moment)."]))
+    " on GitHub to fix it (in-browser editing, only takes a moment)."]])
 
 (defn create-page [endpoint types]
   (warn-about-missing-typedefs endpoint types)

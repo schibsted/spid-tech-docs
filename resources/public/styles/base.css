@@ -109,4 +109,5 @@ th {padding-right: 10px;}
 .category {float: right; font-weight: normal;}
 .right {float: right;}
 
-.frill {display: none;}
+.frill {display: none;} /* add to purely decorative stuff that should be hidden on very small screens */
+.grid-bound {display: none;} /* add to sections that should be hidden when the grid collapses */
