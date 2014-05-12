@@ -190,8 +190,8 @@ by piping to python while including the `json.tool` library:
 mvn install -q exec:java -Dexec.mainClass="no.spid.examples.GettingStarted" -Dexec.args="<client-id> <secret>" -e | python -m json.tool
 ```
 
-When working with the SDK from Java, you might be more interested in
-`SpidApiResponse`'s `getJSONData()` method:
+When working with the Java client, you might be more interested in
+`SpidApiResponse`'s `getJSONData()` method.
 
 
 #### :tab PHP
