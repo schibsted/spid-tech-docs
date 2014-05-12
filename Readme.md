@@ -67,7 +67,7 @@ set up a local web server for it.
 ## Developing the site
 
 The documentation is built in Clojure using various libraries. The main
-structured of the app is thoroughly described in
+structure of the app is thoroughly described in
 [Building static sites in Clojure with Stasis](http://cjohansen.no/building-static-sites-in-clojure-with-stasis),
 a tutorial on building sites on the same basic principle.
 
