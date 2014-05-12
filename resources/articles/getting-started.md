@@ -17,7 +17,7 @@ When you have completed this guide, you will have connected your application to
 the SPiD API and made your first call, verifying that your client ID and secrets
 are correctly configured. You will then be ready to implement login with SPiD.
 
-## Downloading the appropriate SDK
+## Downloading the appropriate SDK/Client
 
 To work with the SPiD APIs, it is recommended that you use one of the official
 SDKs. The SDKs are thin wrappers that primarily spare you the details of working
@@ -33,29 +33,13 @@ examples, see the example use-cases.
 
 #### :tab Java
 
-Download the Java SDK by cloning the GitHub repository:
-
-```sh
-git clone https://github.com/schibsted/sdk-java.git
-```
-
-If you do not have Git installed, you can also download a
-[zip file](https://github.com/schibsted/sdk-java/archive/master.zip).
-
-Now install the SDK into your `.m2` repository:
-
-```sh
-cd sdk-java
-mvn install
-```
-
-When you have installed the library, add it to your project's `pom.xml` file:
+The Java API client library is deployed in Maven central, just add it to your project's `pom.xml` file:
 
 ```xml
 <dependency>
   <groupId>no.spid</groupId>
   <artifactId>no.spid.api.client</artifactId>
-  <version>1.0</version>
+  <version>1.2</version>
 </dependency>
 ```
 
@@ -72,39 +56,10 @@ If you do not have Git installed, you can also download a
 
 #### :tab Clojure
 
-Eventually, the Clojure SDK will be available from Clojars. However, as the Java
-SDK still is not yet available on a central nexus, you need to build both on
-your own for now.
-
-Download and install the Java SDK:
-
-```sh
-git clone https://github.com/schibsted/sdk-java.git
-cd sdk-java
-mvn install
-```
-
-Download the Clojure SDK by cloning it from GitHub:
-
-```sh
-git clone https://github.com/schibsted/sdk-spid-clojure.git
-```
-
-If you do not have Git installed, you can also download a
-[zip file](https://github.com/schibsted/sdk-spid-clojure/archive/master.zip).
-
-Install (you will need to have [Leiningen](http://leiningen.org/) installed for
-this)
-
-```sh
-cd sdk-spid-clojure
-lein intall
-```
-
-Finally, use it in your `project.clj`:
+The Clojure client is deployed in Clojars, just put it in your `project.clj`:
 
 ```clojure
-[spid-sdk-clojure "0.5.1"]
+[spid-sdk-clojure "0.5.4"]
 ```
 
 #### :tab iOS
@@ -215,48 +170,16 @@ everything set up, you might want to continue with configuring single sign-on.
 
 #### :tab Java
 
-The following is a minimal example of using the Java SDK. It fetches the
+The following is a minimal example of using the Java API client. It fetches the
 /endpoints endpoint, which returns a description of all available endpoints.
 
-```java
-import no.spp.sdk.client.ServerClientBuilder;
-import no.spp.sdk.client.SPPClient;
-import no.spp.sdk.client.SPPClientResponse;
-import no.spp.sdk.exception.SPPClientException;
-import no.spp.sdk.exception.SPPClientResponseException;
-import no.spp.sdk.exception.SPPClientRefreshTokenException;
-import no.spp.sdk.oauth.ClientCredentials;
-
-public class GettingStarted {
-    // Where SPiD will redirect users after login, leave empty for now, not
-    // relevant for endpoints that don't require an authenticated user
-    private static String REDIRECT_URI = "";
-
-    // Test against the staging area
-    private static String SPP_BASE_URL = "https://stage.payment.schibsted.no";
-
-    public static void main(String[] argv) {
-        final String clientId = argv[0];
-        final String secret = argv[1];
-        final ClientCredentials credentials = new ClientCredentials(clientId, secret, REDIRECT_URI);
-
-        try {
-            SPPClient client = new ServerClientBuilder(credentials).withBaseUrl(SPP_BASE_URL).build();
-            String responseJSON = client.GET("/endpoints").getResponseBody();
-            System.out.println(responseJSON);
-        } catch (SPPClientException | SPPClientResponseException | SPPClientRefreshTokenException e) {
-            System.out.println("Failed to interact with the SPiD API");
-            e.printStackTrace();
-        }
-    }
-}
-```
+<spid-example lang="java" src="/login/src/main/java/no/spid/examples/LoginController.java" title="Build login URL"/>
 
 You can run this code from the example repository, filling in your actual
 client-id and secret:
 
 ```sh
-mvn compile -q exec:java -Dexec.mainClass="GettingStarted" -Dexec.args="client-id secret"
+mvn install -q exec:java -Dexec.mainClass="no.spid.examples.GettingStarted" -Dexec.args="<client-id> <secret>" -e
 ```
 
 This returns about 40K of compressed, highly unreadable JSON data. If you have
@@ -264,16 +187,12 @@ Python installed (most *nixes have, including OSX), you can improve the output
 by piping to python while including the `json.tool` library:
 
 ```sh
-mvn compile -q exec:java -Dexec.mainClass="GettingStarted" -Dexec.args="client-id secret" | python -m json.tool
+mvn install -q exec:java -Dexec.mainClass="no.spid.examples.GettingStarted" -Dexec.args="<client-id> <secret>" -e | python -m json.tool
 ```
 
 When working with the SDK from Java, you might be more interested in
-`SPPClientResponse`'s `getJSONObject()` method:
+`SpidApiResponse`'s `getJSONData()` method:
 
-```java
-SPPClient client = new ServerClientBuilder(credentials).withBaseUrl(SPP_BASE_URL).build();
-JSONObject result = client.GET("/endpoints").getJSONObject();
-```
 
 #### :tab PHP
 
