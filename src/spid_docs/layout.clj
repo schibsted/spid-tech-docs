@@ -31,7 +31,10 @@
     [:div#head
      [:div.center.pll
       [:a {:href "https://docs.spid.no/"} "SPiD Documentation"] " > "
-      [:a {:href "/"} "API"]]]
+      [:a {:href "/"} "API"]
+      [:form.right.prl {:action "https://www.google.com/search"}
+       [:input {:type "search", :name "q", :placeholder "Search"}]
+       [:input {:type "hidden", :name "sitesearch", :value "preview-docs.spid.no"}]]]]
     [:div#main
      [:div.center
       [:div.bd
