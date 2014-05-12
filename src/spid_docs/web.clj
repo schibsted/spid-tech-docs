@@ -68,8 +68,3 @@
     (optimus.export/save-assets assets export-dir)
     (stasis/export-pages (get-pages) export-dir {:optimus-assets assets})))
 
-(comment
-  ;; This is very frequently very useful for REPL stuff
-  (def endpoints (:endpoints (-> (content/load-content)
-                                 validate-raw-content
-                                 content/cultivate-content))))
