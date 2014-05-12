@@ -64,8 +64,7 @@
         (seq removed))))
 
 (defn import-endpoints []
-  (println (str "Importing endpoints from " (:spid-base-url (get-config)) "/api/2" import-path))
-  (println (apply str (repeat 80 "-")))
+  (println (str "Fetching " (:spid-base-url (get-config)) "/api/2" import-path))
   (let [old-endpoints (:endpoints (load-content))
         response (GET (get-server-token) import-path)
         _ (assert-200-ok (:status response))

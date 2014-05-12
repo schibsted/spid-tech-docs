@@ -45,7 +45,11 @@ exported to static files.
 There is a local cached copy of the endpoint descriptions in the repo. In order
 to refresh it, and use all available features, you will need to put your API
 credentials in `resources/config.edn`. Copy `resources/config.sample.edn` and
-fill in the placeholders.
+fill in the placeholders. Then run:
+
+```
+./import-endpoints.sh
+```
 
 ## Writing documentation
 

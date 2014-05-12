@@ -39,4 +39,5 @@
                                    [hiccup-find "0.3.0"]
                                    [test-with-files "0.1.0"]]
                     :resource-paths ["test/resources"]
-                    :plugins [[lein-midje "3.1.3"]]}})
+                    :plugins [[lein-midje "3.1.3"]]}
+             :basic {:prep-tasks ^:replace []}})
