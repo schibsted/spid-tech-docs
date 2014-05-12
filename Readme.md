@@ -14,17 +14,7 @@ exported to static files.
    3. Set it to be executable (`chmod a+x ~/bin/lein`)
    4. Run it (`lein`) and it will download the self-install package
 
-2. **Manually install some dependencies**
-
-   Because the Java SDK is not yet in maven central, you have to clone and
-   install it manually. The same goes for the Clojure SDK, since it relies
-   on the Java SDK.
-
-   Follow the instructions in the [spid-sdk-clojure README](https://github.com/spid-tech-docs/spid-sdk-clojure).
-
-   This will change once the SDKs are in Maven Central.
-
-3. **Run the web server**
+2. **Run the web server**
 
    ```sh
    lein ring server
