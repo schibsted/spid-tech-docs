@@ -6,7 +6,7 @@
 @import "960up.css";
 @import "1200up.css";
 @import "1400up.css";
-@import "pygments-css/github.css";
+@import "pygments.css";
 @import "space.css";
 
 #main {width: 1200px;}

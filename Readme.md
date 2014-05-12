@@ -24,15 +24,7 @@ exported to static files.
 
    This will change once the SDKs are in Maven Central.
 
-3. **Fetch the git submodules**
-
-   Syntax highlighting themes are pulled in as submodules:
-
-   ```sh
-   git submodule update --init
-   ```
-
-4. **Run the web server**
+3. **Run the web server**
 
    ```sh
    lein ring server
