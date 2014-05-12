@@ -46,6 +46,13 @@
         [:a.nowrap {:href "/#api-reference"} "API reference"]]]
       [:div#body (when split-page? {:class "split"})
        [:div.bd body]]]]
+    [:div#footer
+     [:div.center
+      "This is the technical documentation for the "
+      [:a {:href "http://www.schibstedpayment.no/spid/"} "SPiD platform"]
+      " by "
+      [:a {:href "http://www.schibstedpayment.no/about/"} "Schibsted Payment"]
+      "."]]
     (optimus.hiccup/link-to-js-bundles request ["app.js"])
     [:script
      "(function() {if (!document.getElementById('disqus_thread')) {return}var dsq = document.createElement('script');dsq.type = 'text/javascript';dsq.async = true;

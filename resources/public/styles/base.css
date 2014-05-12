@@ -62,10 +62,12 @@ img {display: block; border: none; max-width: 100%; -ms-interpolation-mode: bicu
 
 .center {max-width: 1400px; margin: 0 auto;}
 
-#main {min-height: 400px; overflow: hidden; margin-bottom: 40px;}
+#main {min-height: 400px; overflow: hidden; margin-bottom: 10px;}
 #body {background: #fdfdfd; border-radius: 10px; padding-bottom: 20px;}
 #logo {margin: 10px; float: left;}
 #logo img {height: 50px;}
+#footer {margin-bottom: 40px; text-align: center; font-size: 13px; color: #fff; opacity: 0.6;}
+#footer a {color: #ccf;}
 
 #menu {margin-top: 5px;}
 #menu a {margin-left: 15px; display: block; font-size: 13px;}
