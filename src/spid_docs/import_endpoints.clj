@@ -2,7 +2,7 @@
   (:require [clojure.data.json :as json]
             [clojure.set :as set]
             [schema.core :refer [validate Str]]
-            [spid-docs.api-client :refer [GET get-config get-server-token]]
+            [spid-docs.api-client :refer [GET get-config get-server-token config-exists?]]
             [spid-docs.content :refer [load-content]]
             [spid-docs.validate-raw :refer [Endpoint]]))
 
@@ -64,24 +64,32 @@
         (seq removed))))
 
 (defn import-endpoints []
-  (println (str "Fetching " (:spid-base-url (get-config)) "/api/2" import-path))
-  (let [old-endpoints (:endpoints (load-content))
-        response (GET (get-server-token) import-path)
-        _ (assert-200-ok (:status response))
-        new-endpoints (:data response)]
-    (if-not (schema-is-valid? new-endpoints)
-      (do (report-changed-endpoint-keys old-endpoints new-endpoints)
-          (println "Aborting import, since schema has changed. It no longer passes")
-          (println "our expectations for the data structure.")
-          (println)
-          (println "If this is just a new field to be ignored by the tech-docs")
-          (println "site, add it as an optional field to the schema in validate_raw.clj.")
-          (println "Otherwise, there's Clojure programming ahead."))
-      (do
-        (if-not (report-endpoint-changes old-endpoints new-endpoints)
-          (println "No changes detected.")
+  (if-not (config-exists?)
+    (do
+      (println "Aborting import, no configuration file detected.")
+      (println "")
+      (println "  cp resources/config.sample.edn resources/config.edn")
+      (println "  vim resources/config.edn")
+      (println ""))
+    (do
+      (println (str "Fetching " (:spid-base-url (get-config)) "/api/2" import-path))
+      (let [old-endpoints (:endpoints (load-content))
+            response (GET (get-server-token) import-path)
+            _ (assert-200-ok (:status response))
+            new-endpoints (:data response)]
+        (if-not (schema-is-valid? new-endpoints)
+          (do (report-changed-endpoint-keys old-endpoints new-endpoints)
+              (println "Aborting import, since schema has changed. It no longer passes")
+              (println "our expectations for the data structure.")
+              (println)
+              (println "If this is just a new field to be ignored by the tech-docs")
+              (println "site, add it as an optional field to the schema in validate_raw.clj.")
+              (println "Otherwise, there's Clojure programming ahead."))
           (do
-            (report-changed-endpoint-keys old-endpoints new-endpoints)
-            (spit "generated/cached-endpoints.json"
-                  (:body response))
-            (println "Wrote generated/cached-endpoints.json")))))))
+            (if-not (report-endpoint-changes old-endpoints new-endpoints)
+              (println "No changes detected.")
+              (do
+                (report-changed-endpoint-keys old-endpoints new-endpoints)
+                (spit "generated/cached-endpoints.json"
+                      (:body response))
+                (println "Wrote generated/cached-endpoints.json")))))))))

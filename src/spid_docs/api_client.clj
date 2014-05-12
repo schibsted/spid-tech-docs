@@ -1,8 +1,12 @@
 (ns spid-docs.api-client
   "Functions for working with the SPiD API. The SPiD API is used by the
    documentation to get sample responses etc."
-  (:require [spid-docs.load :refer [load-edn]]
+  (:require [clojure.java.io :as io]
+            [spid-docs.load :refer [load-edn]]
             [spid-sdk-clojure.core :as sdk]))
+
+(defn config-exists? []
+  (io/resource "config.edn"))
 
 (def get-config (memoize #(load-edn "config.edn")))
 
