@@ -9,11 +9,10 @@
             [stasis.core :as stasis]))
 
 (defn get-types []
-  (apply merge (load-edn "types.edn")
-         (->> (stasis/slurp-directory "resources/types" #"\.edn$")
-              (map (fn [[file content]] (load-edn-str content file)))
-              (map (juxt :id identity))
-              (into {}))))
+  (->> (stasis/slurp-directory "resources/types" #"\.edn$")
+       (map (fn [[file content]] (load-edn-str content file)))
+       (map (juxt :id identity))
+       (into {})))
 
 (defn load-content
   "Loads content from .edn and .md files in resources/. See the readme for a

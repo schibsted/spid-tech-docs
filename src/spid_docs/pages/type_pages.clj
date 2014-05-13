@@ -124,7 +124,7 @@
       {:body [:div.wrap (render-body type types)]})))
 
 (defn create-pages
-  "Takes a map of types (typically those defined in resources/types.edn) and
+  "Takes a map of types (typically those defined in resources/types/) and
    returns a map of url => page function."
   [types endpoints]
   (->> (vals types)

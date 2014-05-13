@@ -1,0 +1,5 @@
+{:id :price
+ :name "price"
+ :description "Prices are provided in cents, as strings. A price is always accompanied
+               by a `currency` field. If a price field contains the value `\"2900\"` and
+               `currency` is `\"NOK\"`, the price is 29,00 NOK."}
