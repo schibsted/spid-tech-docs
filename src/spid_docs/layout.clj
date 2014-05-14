@@ -48,11 +48,12 @@
        [:div.bd body]]]]
     [:div#footer
      [:div.center
-      "This is the technical documentation for the "
-      [:a {:href "http://www.schibstedpayment.no/spid/"} "SPiD platform"]
+      "You're reading the technical documentation for the "
+      [:a.nowrap {:href "http://www.schibstedpayment.no/spid/"} "SPiD platform"]
       " by "
-      [:a {:href "http://www.schibstedpayment.no/about/"} "Schibsted Payment"]
-      "."]]
+      [:a.nowrap {:href "http://www.schibstedpayment.no/about/"} "Schibsted Payment"]
+      ". "
+      [:span.nowrap "Way to go!"]]]
     (optimus.hiccup/link-to-js-bundles request ["app.js"])
     [:script
      "(function() {if (!document.getElementById('disqus_thread')) {return}var dsq = document.createElement('script');dsq.type = 'text/javascript';dsq.async = true;
