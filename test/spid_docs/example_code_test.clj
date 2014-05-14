@@ -79,47 +79,47 @@
 
    (-> get-example :clojure :minimal)
    => "(ns example
-  (:require [spid-sdk-clojure.core :as sdk]))
+  (:require [spid-client-clojure.core :as spid]))
 
-(let [client (sdk/create-client \"[client-id]\" \"[secret]\")
-      token (sdk/create-server-token client)]
-  (sdk/GET client token \"/status\"))"
+(let [client (spid/create-client \"[client-id]\" \"[secret]\")
+      token (spid/create-server-token client)]
+  (spid/GET client token \"/status\"))"
 
    (-> param-example :clojure :minimal)
    => "(ns example
-  (:require [spid-sdk-clojure.core :as sdk]))
+  (:require [spid-client-clojure.core :as spid]))
 
-(let [client (sdk/create-client \"[client-id]\" \"[secret]\")
-      token (sdk/create-server-token client)]
-  (sdk/GET client token \"/describe/User\"))"
+(let [client (spid/create-client \"[client-id]\" \"[secret]\")
+      token (spid/create-server-token client)]
+  (spid/GET client token \"/describe/User\"))"
 
    (-> user-token-example :clojure :minimal)
    => "(ns example
-  (:require [spid-sdk-clojure.core :as sdk]))
+  (:require [spid-client-clojure.core :as spid]))
 
-(let [client (sdk/create-client \"[client-id]\" \"[secret]\")
-      token (sdk/create-user-token client \"[code]\")]
-  (sdk/GET client token \"/me\"))"
+(let [client (spid/create-client \"[client-id]\" \"[secret]\")
+      token (spid/create-user-token client \"[code]\")]
+  (spid/GET client token \"/me\"))"
 
    (-> post-example :clojure :minimal)
    => "(ns example
-  (:require [spid-sdk-clojure.core :as sdk]))
+  (:require [spid-client-clojure.core :as spid]))
 
-(let [client (sdk/create-client \"[client-id]\" \"[secret]\")
-      token (sdk/create-server-token client)]
-  (sdk/POST client token \"/user\" {\"email\" \"johnd@example.com\"}))"
+(let [client (spid/create-client \"[client-id]\" \"[secret]\")
+      token (spid/create-server-token client)]
+  (spid/POST client token \"/user\" {\"email\" \"johnd@example.com\"}))"
 
    (-> post-example :clojure :maximal)
    => "(ns example
-  (:require [spid-sdk-clojure.core :as sdk]))
+  (:require [spid-client-clojure.core :as spid]))
 
-(let [client (sdk/create-client \"[client-id]\" \"[secret]\")
-      token (sdk/create-server-token client)]
-  (sdk/POST client token \"/user\" {\"email\" \"johnd@example.com\"
-                                  \"displayName\" \"John\"
-                                  \"name\" \"John Doe\"
-                                  \"birthday\" \"1977-01-31\"
-                                  \"preferredUsername\" \"johnd\"}))"
+(let [client (spid/create-client \"[client-id]\" \"[secret]\")
+      token (spid/create-server-token client)]
+  (spid/POST client token \"/user\" {\"email\" \"johnd@example.com\"
+                                   \"displayName\" \"John\"
+                                   \"name\" \"John Doe\"
+                                   \"birthday\" \"1977-01-31\"
+                                   \"preferredUsername\" \"johnd\"}))"
 
    (-> get-example :java :minimal)
    => "SpidOAuthToken token = spidClient.getServerToken();

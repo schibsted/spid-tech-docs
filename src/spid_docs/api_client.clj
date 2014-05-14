@@ -3,7 +3,7 @@
    documentation to get sample responses etc."
   (:require [clojure.java.io :as io]
             [spid-docs.load :refer [load-edn]]
-            [spid-sdk-clojure.core :as sdk]))
+            [spid-client-clojure.core :as sdk]))
 
 (defn config-exists? []
   (io/resource "config.edn"))

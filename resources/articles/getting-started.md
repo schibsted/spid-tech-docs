@@ -59,7 +59,7 @@ If you do not have Git installed, you can also download a
 The Clojure client is deployed in Clojars, just put it in your `project.clj`:
 
 ```clojure
-[spid-sdk-clojure "0.5.4"]
+[spid-client-clojure "0.5.6"]
 ```
 
 #### :tab iOS
@@ -162,7 +162,7 @@ the [JS SDK docs](https://github.com/schibsted/sdk-js) for how to do this.
 
 ## Interacting with the API
 
-Now that you have installed an SDK, you will use it to make first contact with
+Now that you have installed a SDK/Client, you will use it to make first contact with
 the SPiD API. Don't worry, it will be quick and painless. When you've got
 everything set up, you might want to continue with configuring single sign-on.
 
@@ -199,26 +199,7 @@ When working with the Java client, you might be more interested in
 The following is a minimal example of using the PHP SDK. It fetches the
 /endpoints endpoint, which returns a description of all available endpoints.
 
-```php
-<?php
-require_once("/path/to/sdk-php/src/Client.php");
-
-$client = new VGS_Client(array(
-    VGS_Client::CLIENT_ID          => $argv[1],
-    VGS_Client::CLIENT_SECRET      => $argv[2],
-    VGS_Client::CLIENT_SIGN_SECRET => $argv[3],
-    VGS_Client::STAGING_DOMAIN     => "stage.payment.schibsted.no",
-    VGS_Client::HTTPS              => true,
-    VGS_Client::REDIRECT_URI       => "http://localhost:8181/explorer.php",
-    VGS_Client::DOMAIN             => "localhost:8181",
-    VGS_Client::COOKIE             => true,
-    VGS_Client::API_VERSION        => 2,
-    VGS_Client::PRODUCTION         => false
-));
-
-$client->auth();
-echo var_dump($client->api("/endpoints"));
-```
+<spid-example lang="php" src="/getting-started/getting-started.php" title="Getting started"/>
 
 You can run this code from the example repository, filling in your actual
 client-id, secret and signing secret:
@@ -232,19 +213,10 @@ available endpoints along with details on how to interact with them.
 
 #### :tab Clojure
 
-The following is a minimal example of using the Clojure SDK. It fetches the
+The following is a minimal example of using the Clojure client. It fetches the
 /endpoints endpoint, which returns a description of all available endpoints.
 
-```clojure
-(ns getting-started.core
-  (:require [spid-sdk-clojure.core :refer [create-client create-server-token GET]]))
-
-(defn test-run-api [client-id secret]
-  (let [options {:spid-base-url "https://stage.payment.schibsted.no"}
-        client (create-client client-id secret options)
-        token (create-server-token client)]
-    (clojure.pprint/pprint (GET client token "/endpoints"))))
-```
+<spid-example lang="clj" src="/getting-started/src/getting_started/core.clj" title="Getting started"/>
 
 You can run this code from the example repository, filling in your actual
 client-id and secret:
