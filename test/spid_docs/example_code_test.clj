@@ -122,13 +122,21 @@
                                   \"preferredUsername\" \"johnd\"}))"
 
    (-> get-example :java :minimal)
-   => "String responseJSON = sppClient.
-    GET(\"/status\").
+   => "SpidOAuthToken token = spidClient.getServerToken();
+String responseJSON = spidClient.
+    GET(token, \"/status\").
+    getResponseBody();"
+
+   (-> user-token-example :java :minimal)
+   => "SpidOAuthToken token = spidClient.getUserToken(code);
+String responseJSON = spidClient.
+    GET(token, \"/me\").
     getResponseBody();"
 
    (-> param-example :java :minimal)
-   => "String responseJSON = sppClient.
-    GET(\"/describe/User\").
+   => "SpidOAuthToken token = spidClient.getServerToken();
+String responseJSON = spidClient.
+    GET(token, \"/describe/User\").
     getResponseBody();"
 
    (-> post-example :java :minimal)
@@ -136,8 +144,9 @@
     put(\"email\", \"johnd@example.com\");
 }};
 
-String responseJSON = sppClient.
-    POST(\"/user\", params).
+SpidOAuthToken token = spidClient.getServerToken();
+String responseJSON = spidClient.
+    POST(token, \"/user\", params).
     getResponseBody();"
 
    (-> post-example :java :maximal)
@@ -149,8 +158,9 @@ String responseJSON = sppClient.
     put(\"preferredUsername\", \"johnd\");
 }};
 
-String responseJSON = sppClient.
-    POST(\"/user\", params).
+SpidOAuthToken token = spidClient.getServerToken();
+String responseJSON = spidClient.
+    POST(token, \"/user\", params).
     getResponseBody();"
 
    (-> get-example :php :minimal)

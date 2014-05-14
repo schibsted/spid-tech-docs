@@ -51,13 +51,16 @@
          (format-params (exemplify-params params example-params) "put(\":name\", \":value\");" ",\n    ")
          "\n}};\n\n")))
 
-(defn java-example-code [{:keys [method path example-params]} params]
+(defn java-example-code [{:keys [method path example-params access-token-types]} params]
   (let [has-params (seq params)
         params-hash-map (create-params-hash-map params example-params)
-        api-invocation (str (name method) "(\"" (replace-path-parameters path example-params) "\""
+        api-invocation (str (name method) "(token, \"" (replace-path-parameters path example-params) "\""
                             (if has-params (str ", params") "") ")")]
     (str params-hash-map
-         "String responseJSON = sppClient.\n    " api-invocation ".\n    getResponseBody();")))
+         (if (contains? access-token-types :user)
+           "SpidOAuthToken token = spidClient.getUserToken(code);\n"
+           "SpidOAuthToken token = spidClient.getServerToken();\n")
+         "String responseJSON = spidClient.\n    " api-invocation ".\n    getResponseBody();")))
 
 (defn- create-params-assoc-array [params example-params]
   (when (seq params)
