@@ -36,9 +36,9 @@ fill in the placeholders. Then run:
 ## Writing documentation
 
 Check out
-[the wiki](https://github.com/spid-tech-docs/spid-tech-docs/wiki).
+[the wiki](https://github.com/schibsted/spid-tech-docs/wiki).
 First time around? Start with the
-[general overview](https://github.com/spid-tech-docs/spid-tech-docs/wiki/general-overview).
+[general overview](https://github.com/schibsted/spid-tech-docs/wiki/general-overview).
 
 ## Exporting the site
 

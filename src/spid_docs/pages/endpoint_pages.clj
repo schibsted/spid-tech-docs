@@ -257,7 +257,7 @@
    [:p "Did you spot an error? Or maybe you just have a suggestion for how we can improve? "
     [:a {:href "#disqus_thread"} "Leave a comment"]
     ", or better yet, "
-    [:a {:href (str "https://github.com/spid-tech-docs/spid-tech-docs/edit/master/resources/endpoints/"
+    [:a {:href (str "https://github.com/schibsted/spid-tech-docs/edit/master/resources/endpoints/"
                     (to-id-str (:path endpoint)) "-" (.toLowerCase (name (:method endpoint)))
                     ".md")
          :target "_blank"} "send us a pull request"]
