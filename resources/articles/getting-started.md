@@ -9,7 +9,7 @@ In order to complete this guide, you need to know your:
 - client ID
 - API secret
 
-If you do not, [see the merchant setup page](https://docs.spid.no/display/MER/Merchants)
+If you do not, [see the merchant setup page](https://docs.spid.no/display/MER/)
 
 :body
 
