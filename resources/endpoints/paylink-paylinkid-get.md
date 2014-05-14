@@ -1,3 +1,3 @@
 :introduction
 
-Retrieve paylink by ID.
+Retrieve [paylink](/paylinks/) by ID.

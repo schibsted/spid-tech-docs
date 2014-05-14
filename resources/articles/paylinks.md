@@ -6,6 +6,12 @@ POST /paylink
 GET /paylink/{paylinkId}
 DELETE /paylink/{paylinkId}
 
+:aside
+
+## Relevant type definitions
+
+- [Paylink](/types/paylink/)
+
 :body
 
 A paylink object contains common fields, meta data about the paylink, and one or
@@ -17,7 +23,7 @@ Paylink items may be optionally coupled to a current product in SPiD, identified
 by the `productId` field. Paylink items also contain a type, indicating the kind
 of item and how it is processed, tracked and visualized to the end-user.
 
-There is no need to have a pre-defined product in SPiD to use pay links. This is
+There is no need to have a pre-defined product in SPiD to use paylinks. This is
 the reason why we allow the paylink creator to specify payment options available
 during the purchase.
 
@@ -35,3 +41,5 @@ Each paylink item will generate a corresponding order item. The
 well as the `clientReference` for the paylink header, which will be added to the
 order header. This enables clients to track each order item and each order using
 their own references.
+
+![Paylink schema](/images/paylinks-schema.png)

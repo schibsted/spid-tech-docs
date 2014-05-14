@@ -1,3 +1,3 @@
 :introduction
 
-Create a new paylink.
+Create a new [paylink](/paylinks/).
