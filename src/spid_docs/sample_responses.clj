@@ -3,19 +3,16 @@
    the API to ensure that sample responses reflect the API, and then runs the
    result through a series of functions that anonymizes and scrambles
    potentially sensitive data."
-  (:require [clojure.data.json :as json]
-            [clojure.java.io :as io]
+  (:require [clojure.java.io :as io]
             [clojure.set :refer [rename-keys]]
             [clojure.string :as str]
             [spid-docs.api-client :as api]
-            [spid-docs.sample-responses.bindings :refer [resolve-bindings]]
             [spid-docs.formatting :refer [to-id-str]]
             [spid-docs.homeless :refer [update-existing eval-in-ns]]
+            [spid-docs.json :refer [format-json]]
+            [spid-docs.sample-responses.bindings :refer [resolve-bindings]]
             [spid-docs.sample-responses.wash :refer [wash-data]])
   (:import java.util.Date))
-
-(defn- format-json [data]
-  (with-out-str (json/pprint data :escape-slash false)))
 
 (defn format-sample-response [response]
   (format-json (->> response :data wash-data)))
