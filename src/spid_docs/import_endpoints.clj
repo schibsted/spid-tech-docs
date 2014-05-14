@@ -56,12 +56,7 @@
     (when (seq removed)
       (println "Removed endpoints:")
       (doseq [path removed] (println "  -" path))
-      (println))
-
-    ;; return: did anything change?
-    (or (seq changed)
-        (seq added)
-        (seq removed))))
+      (println))))
 
 (defn import-endpoints []
   (if-not (config-exists?)
@@ -77,19 +72,19 @@
             response (GET (get-server-token) import-path)
             _ (assert-200-ok (:status response))
             new-endpoints (:data response)]
-        (if-not (schema-is-valid? new-endpoints)
-          (do (report-changed-endpoint-keys old-endpoints new-endpoints)
+        (if (= old-endpoints new-endpoints)
+          (println "No changes detected.")
+          (if-not (schema-is-valid? new-endpoints)
+            (do
+              (report-changed-endpoint-keys old-endpoints new-endpoints)
               (println "Aborting import, since schema has changed. It no longer passes")
               (println "our expectations for the data structure.")
               (println)
               (println "If this is just a new field to be ignored by the tech-docs")
               (println "site, add it as an optional field to the schema in validate_raw.clj.")
               (println "Otherwise, there's Clojure programming ahead."))
-          (do
-            (if-not (report-endpoint-changes old-endpoints new-endpoints)
-              (println "No changes detected.")
-              (do
-                (report-changed-endpoint-keys old-endpoints new-endpoints)
-                (spit "generated/cached-endpoints.json"
-                      (:body response))
-                (println "Wrote generated/cached-endpoints.json")))))))))
+            (do
+              (report-endpoint-changes old-endpoints new-endpoints)
+              (report-changed-endpoint-keys old-endpoints new-endpoints)
+              (spit "generated/cached-endpoints.json" (:body response))
+              (println "Wrote generated/cached-endpoints.json"))))))))
