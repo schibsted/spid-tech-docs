@@ -28,10 +28,10 @@ direct purchase or authorization in a user's SPiD account. For now, only credit
 card payments are supported through this API.
 
 Billing requests will create an order with corresponding order lines. The order
-may also be tagged as a client would normally do through [Paylinks](/paylinks/),
-with both their own client references (on the order and each order lines) and
-with the tag parameter used in the normal SPiD purchase flows where the user is
-involved.
+may also be tagged as a client would normally do through
+[Paylinks](/paylink-api/), with both their own client references (on the order
+and each order lines) and with the tag parameter used in the normal SPiD
+purchase flows where the user is involved.
 
 ## Preconditions and requirements
 

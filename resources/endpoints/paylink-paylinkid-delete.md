@@ -1,4 +1,4 @@
 :introduction
 
-Mark [paylink](/paylinks/) as deleted. This will effectively disable the
+Mark [paylink](/paylink-api/) as deleted. This will effectively disable the
 paylink, but it will not be physically deleted from SPiD.
