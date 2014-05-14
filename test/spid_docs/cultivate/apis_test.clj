@@ -7,7 +7,7 @@
                        {:path "/me" :category {:section "Identity Management" :api "User API"}}
                        {:path "/logout" :category {:section "Identity Management" :api "Login API"}}
                        {:path "/login" :category {:section "Identity Management" :api "Login API"}}]
-            cultivated (cultivate-apis endpoints)]
+            cultivated (cultivate-apis endpoints {})]
         (-> (cultivated ["Identity Management" "Login API"])
             :endpoints
             count) => 3

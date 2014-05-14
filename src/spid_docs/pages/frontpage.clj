@@ -27,7 +27,10 @@
   "Renders a single API: the name and a linked list of endpoints"
   [api]
   (list
-   [:h4 {:id (to-id-str (:api api))} (:api api)]
+   [:h4 {:id (to-id-str (:api api))}
+    (if (:url api)
+      [:a {:href (:url api)} (:api api)]
+      (:api api))]
    [:ul (->> (:endpoints api)
              (map #(vector :li [:a {:href (endpoint-path %)}
                                 [:code (name (:method %))] " " (:path %)])))]))

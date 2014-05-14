@@ -17,7 +17,7 @@
      (do (println "TODO: The" (:content link) "at" page-url "needs to point somewhere")
          :valid-link)
 
-     ;; inpage hash navigation
+     ;; in-page hash navigation
      (and (empty? path) (not (empty? hash)))
      (if (hash-exists? hash body)
        :valid-link
@@ -28,6 +28,10 @@
          (.startsWith path "http://")
          (.startsWith path "https://")
          (.startsWith path "mailto:"))
+     :valid-link
+
+     ;; assets, we're currently not checking those
+     (.startsWith path "/images/")
      :valid-link
 
      ;; internal link

@@ -92,3 +92,6 @@
 (defn eval-in-ns
   ([forms] (eval-in-ns forms *ns*))
   ([forms user-ns] (binding [*ns* (or user-ns *ns*)] (eval forms))))
+
+(defn in? [xs e]
+  (some #(= e %) xs))

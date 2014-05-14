@@ -53,13 +53,17 @@
    (optional-key :aside) Str
    (optional-key :relevant-endpoints) [{:method Keyword :path Path}]})
 
+(def Api
+  {:api Str
+   :category Str
+   :endpoints [Endpoint]
+   (optional-key :url) Str
+   (optional-key :description) Str})
+
 (defn validate-content [content]
   (validate {:endpoints [Endpoint]
              :articles {Str Article}
              :types {Keyword Type}
-             :apis {[Str] {:api Str
-                           :category Str
-                           :endpoints [Endpoint]
-                           (optional-key :description) Str}}
+             :apis {[Str] Api}
              :endpoint-blacklist #{[(either Str Keyword)]}}
             content))
