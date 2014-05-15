@@ -5,7 +5,7 @@
 
 (fact "It formats sample response"
       (-> {:code "201" :data {:clientId "666" :url "http://vg.no"}}
-          format-sample-response ) => "{\"clientId\":\"[Your client ID]\", \"url\":\"http://vg.no\"}\n")
+          format-sample-response ) => "{\n  \":clientId\": \"[Your client ID]\",\n  \":url\": \"http://vg.no\"\n}")
 
 (fact "Makes dependencies available as bindings path params"
       (let [sample-def {:method :GET
