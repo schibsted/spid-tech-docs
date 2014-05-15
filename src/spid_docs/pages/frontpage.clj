@@ -3,7 +3,7 @@
             [clojure.string :as str]
             [hiccup.core :as hiccup]
             [spid-docs.formatting :refer [columnize to-id-str]]
-            [spid-docs.routes :refer [endpoint-path prime-categories]]))
+            [spid-docs.routes :refer [endpoint-path prime-categories article-path]]))
 
 (def frontpage-columns 3)
 
@@ -56,7 +56,11 @@
     api
     (assoc api :category "Other")))
 
-(defn create-page [apis]
+(defn create-article-hrefs [articles]
+  (map #(vector :a {:href (article-path %)} "\""(:title (articles %))"\", ") (keys articles))
+  )
+
+(defn create-page [apis articles]
   {:title "SPiD API Documentation"
    :body (let [apis-by-category (->> apis vals
                                      (keep remove-deprecated-endpoints)
@@ -65,7 +69,10 @@
            (-> (slurp (io/resource "frontpage.html"))
                (str/replace
                 #"<apis-by-category/>"
-                (hiccup/html (map #(render-service-apis % (apis-by-category %)) category-render-order)))))})
+                (hiccup/html (map #(render-service-apis % (apis-by-category %)) category-render-order)))
+               (str/replace
+                "<list-of-articles/>"
+                (hiccup/html (create-article-hrefs articles)))))})
 
 (defn- remove-non-deprecated-endpoints [api]
   (let [endpoints (filter :deprecated (:endpoints api))]

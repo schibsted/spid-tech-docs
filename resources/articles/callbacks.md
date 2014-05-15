@@ -43,6 +43,8 @@ When an object changes, an HTTP POST request will be made to the client-defined
 callback URL. The response body will contain Base64 encoded text signed with your
 signature secret.
 
+NOTE: The payload in the callback from SPiD made by HTTP POST 'Content-Type: text/plain'.
+
 NOTE: Your signature secret is **not** the same as your client secret (which is
 used for authentication). It is a different secret specifically used for signing
 requests and decoding signed responses. If you do not have a signing secret,
