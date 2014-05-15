@@ -10,7 +10,7 @@ DELETE /paylink/{paylinkId}
 
 ## Relevant type definitions
 
-- [Paylink](/types/paylink/)
+- [Paylink](/types/paylink)
 
 :body
 
