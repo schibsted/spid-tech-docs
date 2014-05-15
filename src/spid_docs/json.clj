@@ -6,7 +6,10 @@
   (json/json-str data :escape-slash false))
 
 (defn format-json [data]
-  (.toJson (.create (.setPrettyPrinting (GsonBuilder.)))
+  (.toJson (-> (GsonBuilder.)
+               .setPrettyPrinting
+               .serializeNulls
+               .create)
            (.parse (JsonParser.) (to-json data))))
 
 ;; First turning data to JSON, then parsing it out again, just to turn it back
