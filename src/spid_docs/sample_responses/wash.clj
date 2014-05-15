@@ -29,6 +29,7 @@
    [:email] "user@domain.tld"
    [:oauthToken] "0123456789abcdef0123456789abcdef01234567"
    [:ip] "127.0.0.1"
+   [:terms] "[HTML with the current SPiD terms]"
    [:emails] (fn [emails]
                (map-indexed #(assoc %2 :value (str "user@domain" (inc %1) ".tld")) emails))
    [:addresses] mask-addresses))
