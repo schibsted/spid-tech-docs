@@ -56,9 +56,16 @@
     api
     (assoc api :category "Other")))
 
+(defn render-article-link [[path article]]
+  [:li [:a {:href (article-path path)} (:title article)]])
+
+(defn render-article-list [num articles]
+  [:div {:class (if (= (inc num) frontpage-columns) "lastUnit" "unit s1of3")}
+   [:ul
+    (map render-article-link articles)]])
+
 (defn create-article-hrefs [articles]
-  (map #(vector :a {:href (article-path %)} "\""(:title (articles %))"\", ") (keys articles))
-  )
+  (map-indexed render-article-list (columnize articles frontpage-columns)))
 
 (defn create-page [apis articles]
   {:title "SPiD API Documentation"
