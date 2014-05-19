@@ -1,5 +1,7 @@
 :title SPiD Authentication
 
+:frontpage
+
 :aside
 
 ## Prerequisites

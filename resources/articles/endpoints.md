@@ -1,5 +1,7 @@
 :title Endpoints
 
+:frontpage
+
 :aside
 
 ## Table of Contents

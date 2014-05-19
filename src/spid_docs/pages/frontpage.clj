@@ -67,6 +67,9 @@
 (defn create-article-hrefs [articles]
   (map-indexed render-article-list (columnize articles frontpage-columns)))
 
+(defn- frontpage-articles [articles]
+  (into {} (filter #(:frontpage (second %)) articles)))
+
 (defn create-page [apis articles]
   {:title "SPiD API Documentation"
    :body (let [apis-by-category (->> apis vals
@@ -79,7 +82,7 @@
                 (hiccup/html (map #(render-service-apis % (apis-by-category %)) category-render-order)))
                (str/replace
                 "<list-of-articles/>"
-                (hiccup/html (create-article-hrefs articles)))))})
+                (hiccup/html (create-article-hrefs (frontpage-articles articles))))))})
 
 (defn- remove-non-deprecated-endpoints [api]
   (let [endpoints (filter :deprecated (:endpoints api))]

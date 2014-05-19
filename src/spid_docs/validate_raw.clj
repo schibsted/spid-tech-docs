@@ -65,6 +65,7 @@
   {:title Str
    :body Str
    (optional-key :aside) Str
+   (optional-key :frontpage) Str
    (optional-key :relevant-endpoints) Str})
 
 (defn validate-raw-content [raw-content]

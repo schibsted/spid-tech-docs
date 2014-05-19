@@ -1,5 +1,7 @@
 :title Callbacks
 
+:frontpage
+
 :aside
 
 ## Table of Contents

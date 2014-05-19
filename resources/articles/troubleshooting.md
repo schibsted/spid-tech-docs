@@ -1,5 +1,7 @@
 :title Troubleshooting
 
+:frontpage
+
 :body
 
 This article offers potential solutions for common problems as well as pointers

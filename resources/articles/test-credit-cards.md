@@ -1,5 +1,7 @@
 :title Credit cards for testing
 
+:frontpage
+
 :aside
 
 :body
