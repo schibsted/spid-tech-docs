@@ -111,3 +111,9 @@ th {padding-right: 10px;}
 
 .frill {display: none;} /* add to purely decorative stuff that should be hidden on very small screens */
 .grid-bound {display: none;} /* add to sections that should be hidden when the grid collapses */
+
+.table>tbody>tr>td,.table>tbody>tr>th,.table>thead>tr>td,.table>thead>tr>th {padding: 8px; line-height: 1.42857143; vertical-align: top; border-top: 1px solid #ddd;}
+.table {width: 100%}
+.table>tbody>tr:first-child>th,.table>thead>tr:first-child>th {border-top: none;}
+.table-striped>tbody>tr:nth-child(odd)>td,.table-striped>tbody>tr:nth-child(odd)>th {background-color: #f9f9f9;}
+.table-hover>tbody>tr:hover>td,.table-hover>tbody>tr:hover>th {background-color: #f0f0f0;}
