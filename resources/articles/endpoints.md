@@ -6,6 +6,7 @@
 
 - [Response container](#response-container)
 - [Response formats](#response-formats)
+- [Signed responses](#signed-responses)
 - [Encoding](#encoding)
 - [Pagination](#pagination)
 - [Selection](#selection)
@@ -133,6 +134,44 @@ To force their use, provide the lower case abbreviation as the URL suffix, e.g.:
 ```text
 http://staging.payment.schibsted.no/api/2/user/42.xml
 ```
+
+## Signed responses
+
+Some API endpoints return encoded and signed data. This can be enabled upon
+request, and is enabled by default on the payment API endpoints.
+
+There are 2 fields in the API container that indicate a signed response. The
+`sig` parameter is a signature string, while `algorithm` is the algorithm used
+to encrypt the signature string.
+
+The signature ensures that the data you are receiving is actually sent by SPiD.
+It is signed using your Client signature secret which is only known to you and
+SPiD. Without this secret, third parties cannot modify the `sig` parameter
+without also invalidating the data in the provided response.
+
+The response data must be Base64 decoded to JSON before it can be used.
+
+### :tabs Decoding responses
+
+#### :tab PHP
+
+```php
+<?php
+$data = json_decode(base64UrlDecode($container['data']), true);
+$sig = base64UrlDecode($encoded_sig);
+```
+
+To verify the data content, recreate the payload with the signature using the
+specified algorithm and your client signature secret. SHA256 is the default
+hashing algorithm.
+
+```php
+<?php
+$expected_sig = hash_hmac('sha256', $container['data'], $client_signature_secret, true);
+$verified = ($sig === $expected_sig);
+```
+
+### :/tabs
 
 ## Encoding
 
