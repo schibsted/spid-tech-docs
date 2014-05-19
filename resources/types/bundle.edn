@@ -1,5 +1,6 @@
 {:id :bundle
  :name "Bundle"
+ :description "For more information about bundles, see [the Bundle API](/bundle-api/)"
  :rendering :object
  :fields [{:name "product_id"                          :type :integer-string  :description "The bundle's product ID" :always-available? true}
           {:name "parent_product_id"                   :type :integer-string  :description "Parent product ID, if any" :always-available? false}
