@@ -1,15 +1,19 @@
-callback([{"status":"1",
-  "clientId":"[Your client ID]",
-  "additionalReceiptInfo":null,
-  "requireVoucher":"0",
-  "count":"0",
-  "startDate":null,
-  "title":"My Campaign",
-  "created":"2014-04-23 14:28:30",
-  "updated":"2014-04-23 14:28:30",
-  "limit":null,
-  "stopDate":null,
-  "campaignId":"10044",
-  "requireAddress":"0",
-  "metaData":null,
-  "description":null}]);
+callback([
+  {
+    "status": "1",
+    "clientId": "[Your client ID]",
+    "additionalReceiptInfo": null,
+    "requireVoucher": "0",
+    "count": "0",
+    "startDate": null,
+    "title": "My Campaign",
+    "created": "2014-04-23 14:28:30",
+    "updated": "2014-04-23 14:28:30",
+    "limit": null,
+    "stopDate": null,
+    "campaignId": "10044",
+    "requireAddress": "0",
+    "metaData": null,
+    "description": null
+  }
+]);

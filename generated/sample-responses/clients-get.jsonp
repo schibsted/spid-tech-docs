@@ -1,20 +1,26 @@
-callback({"52f4cce0efd04b9d68000007":
- {"unregisteredPayments":false,
-  "domain":"",
-  "accessTokenLifetime":"604800",
-  "enableSso":false,
-  "name":"Fanaposten eAvis iOS",
-  "universalDataAccess":false,
-  "redirectUris":["spid-52f4cce0efd04b9d68000007://login"],
-  "fields":
-  {"gender":false,
-   "homeAddress":false,
-   "deliveryAddress":false,
-   "phoneNumber":false,
-   "displayName":false,
-   "email":true,
-   "invoiceAddress":false,
-   "names":true,
-   "birthday":false},
-  "autoApprove":false,
-  "id":"52f4cce0efd04b9d68000007"}});
+callback({
+  "52f4cce0efd04b9d68000007": {
+    "unregisteredPayments": false,
+    "domain": "",
+    "accessTokenLifetime": "604800",
+    "enableSso": false,
+    "name": "Fanaposten eAvis iOS",
+    "universalDataAccess": false,
+    "redirectUris": [
+      "spid-52f4cce0efd04b9d68000007://login"
+    ],
+    "fields": {
+      "gender": false,
+      "homeAddress": false,
+      "deliveryAddress": false,
+      "phoneNumber": false,
+      "displayName": false,
+      "email": "user@domain.tld",
+      "invoiceAddress": false,
+      "names": true,
+      "birthday": false
+    },
+    "autoApprove": false,
+    "id": "52f4cce0efd04b9d68000007"
+  }
+});

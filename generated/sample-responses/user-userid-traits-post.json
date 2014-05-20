@@ -1,1 +1,4 @@
-{"key":"some-data", "trait":"OK"}
+{
+  "key": "some-data",
+  "trait": "OK"
+}

@@ -1,4 +1,5 @@
-callback({"accepted":false,
- "terms":
- "<p>HTML with the current SPiD terms.</p>",
- "change_date":"10. mars 2012"});
+callback({
+  "accepted": false,
+  "terms": "[HTML with the current SPiD terms]",
+  "change_date": "10. mars 2012"
+});

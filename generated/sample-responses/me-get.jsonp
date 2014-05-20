@@ -1,4 +1,4 @@
-{
+callback({
   "status": 1,
   "merchants": [
     47000
@@ -64,4 +64,4 @@
   "birthday": "2003-02-01",
   "lastLoggedIn": "2014-05-20 08:21:44",
   "passwordChanged": false
-}
+});

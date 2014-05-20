@@ -1,1 +1,3 @@
-callback({ "success": true });
+callback({
+  "success": true
+});

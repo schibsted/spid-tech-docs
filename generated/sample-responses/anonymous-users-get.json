@@ -1,6 +1,10 @@
-[{"uid":"236900",
-  "gender":"M",
-  "yob":"1984",
-  "post":"",
-  "country":"",
-  "city":""}]
+[
+  {
+    "uid": "236900",
+    "gender": "M",
+    "yob": "1984",
+    "post": "",
+    "country": "",
+    "city": ""
+  }
+]

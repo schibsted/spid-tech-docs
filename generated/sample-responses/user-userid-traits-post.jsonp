@@ -1,1 +1,4 @@
-callback({"key":"some-data", "trait":"OK"});
+callback({
+  "key": "some-data",
+  "trait": "OK"
+});
