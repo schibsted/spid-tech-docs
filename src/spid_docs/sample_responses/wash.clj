@@ -1,5 +1,6 @@
 (ns spid-docs.sample-responses.wash
-  (:require [spid-docs.homeless :refer [update-existing]]))
+  (:require [clojure.set :as set]
+            [spid-docs.homeless :refer [update-existing update-vals]]))
 
 (def rand-digit (partial rand-int 10))
 
@@ -34,9 +35,22 @@
                (map-indexed #(assoc %2 :value (str "user@domain" (inc %1) ".tld")) emails))
    [:addresses] mask-addresses))
 
+(defn- list-like-map? [data]
+  (and (map? data)
+       (seq data)
+       (every? map? (vals data))
+       (seq (apply set/intersection (map (comp set keys) (vals data))))))
+
+(defn- take-entry-with-most-keys [data]
+  (->> data
+       (sort-by (fn [[k v]] (- (count (keys v)))))
+       (take 1)
+       (into {})))
+
 (defn wash-data [data]
-  (if (map? data)
-    (mask-sensitive-data data)
-    (->> data
-         (take 1)
-         (map wash-data))))
+  (cond
+   (list-like-map? data) (update-vals (mask-sensitive-data (take-entry-with-most-keys data)) wash-data)
+   (map? data) (update-vals (mask-sensitive-data data) wash-data)
+   (seq? data) (->> data (take 1) (map wash-data))
+   (vector? data) (->> data (take 1) (map wash-data))
+   :else data))

@@ -5,6 +5,28 @@
 (fact "It reduces lists of data to a manageable amount"
       (wash-data [{:id 1} {:id 2} {:id 3}]) => [{:id 1}])
 
+(fact "It reduces list-like maps to a manageable amount"
+      (wash-data {"id1" {:name "abc"}
+                  "id2" {:name "def"}}) => {"id1" {:name "abc"}})
+
+(fact "To be a list-like map, all maps have to have at least one key in common."
+      (wash-data {"id1" {:name "abc"}
+                  "id2" {:title "def"}}) => {"id1" {:name "abc"}
+                                             "id2" {:title "def"}})
+
+(fact "It chooses the entry in a list-like map with the most keys."
+      (wash-data {"id1" {:name "abc"}
+                  "id2" {:name "def"
+                         :title "ghi"}}) => (wash-data {"id2" {:name "def"
+                                                               :title "ghi"}}))
+
+(fact "It works on nested structures"
+      (wash-data {"accounts" {"id1" {:name "abc"}
+                              "id2" {:name "def"}}}) => {"accounts" {"id1" {:name "abc"}}})
+
+(fact "It works with empty maps"
+      (wash-data {"empty" {}}) => {"empty" {}})
+
 (fact "It masks potentially sensitive data"
       (let [data (-> {:clientId "666"
                       :merchantId "0123456"
