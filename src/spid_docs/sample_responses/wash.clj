@@ -49,8 +49,13 @@
 
 (defn wash-data [data]
   (cond
-   (list-like-map? data) (update-vals (mask-sensitive-data (take-entry-with-most-keys data)) wash-data)
-   (map? data) (update-vals (mask-sensitive-data data) wash-data)
+   (list-like-map? data) (-> data
+                             take-entry-with-most-keys
+                             mask-sensitive-data
+                             (update-vals wash-data))
+   (map? data) (-> data
+                   mask-sensitive-data
+                   (update-vals wash-data))
    (seq? data) (->> data (take 1) (map wash-data))
    (vector? data) (->> data (take 1) (map wash-data))
    :else data))
