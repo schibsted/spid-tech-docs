@@ -16,6 +16,8 @@
 - [Filters](#filters)
 - [Locales](#locales)
 - [Parameters](#parameters)
+- [Java request example](#java-request-example)
+- [PHP request example](#php-request-example)
 
 Looking for the list of all endpoints? See the [API reference](/#api-reference).
 
@@ -289,3 +291,19 @@ server-side environments (PHP, Rails, others):
 ```text
 key[]=one-value&key[]=other-value
 ```
+
+## Java request example
+
+Java examples throughout the endpoint API docs are excerpts, to spare you from
+wading through repeated boilerplate. To put it all in context, the following is
+a full example, including import statements.
+
+<spid-example lang="java" src="/getting-started/src/main/java/no/spid/examples/GettingStarted.java" title="Getting started"/>
+
+## PHP request example
+
+PHP examples throughout the endpoint API docs are excerpts, to spare you from
+wading through repeated boilerplate. To put it all in context, the following is
+a full example.
+
+<spid-example lang="php" src="/getting-started/getting-started.php" title="Getting started"/>

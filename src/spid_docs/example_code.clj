@@ -36,14 +36,14 @@
 
 (let [client (spid/create-client \"[client-id]\" \"[secret]\")
       token (spid/" token ")]\n"
-         sdk-invocation
-         (when (seq params)
-           (str " {"
-                (format-params (exemplify-params params example-params)
-                               "\":name\" \":value\""
-                               (str "\n  " param-map-indentation)) ; Two additional spaces to account or " {"
-                "}"))
-         "))")))
+      sdk-invocation
+      (when (seq params)
+        (str " {"
+             (format-params (exemplify-params params example-params)
+                            "\":name\" \":value\""
+                            (str "\n  " param-map-indentation)) ; Two additional spaces to account or " {"
+             "}"))
+      "))")))
 
 (defn- create-params-hash-map [params example-params]
   (when (seq params)
@@ -86,9 +86,12 @@
         all-params (filter #(= (:type %) :query) params)
         req-params (filter :required? all-params)
         optional-params (difference (set all-params) (set req-params))]
-    (update-vals
-     {:curl curl-example-code
-      :java java-example-code
-      :php php-example-code
-      :clojure clojure-example-code}
-     #(create-examples-with % endpoint req-params optional-params all-params))))
+    (-> {:curl curl-example-code
+         :java java-example-code
+         :php php-example-code
+         :clojure clojure-example-code}
+        (update-vals #(create-examples-with % endpoint req-params optional-params all-params))
+        (assoc-in [:java :footnote]
+                  "This example is an excerpt, see <a href=\"/endpoints/#java-request-example\">the full example</a>")
+        (assoc-in [:php :footnote]
+                  "This example is an excerpt, see <a href=\"/endpoints/#php-request-example\">the full example</a>"))))

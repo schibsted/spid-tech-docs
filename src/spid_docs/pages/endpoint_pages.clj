@@ -108,7 +108,8 @@
              (list [:h6.mtm "Minimal example"]
                    (render-code lang-class (:minimal example))
                    [:h6.mtm "With all parameters"]
-                   (render-code lang-class (:maximal example))))])))
+                   (render-code lang-class (:maximal example))))
+           (when (:footnote example) [:p (:footnote example)])])))
 
 (defn render-request-examples [endpoint]
   (list
