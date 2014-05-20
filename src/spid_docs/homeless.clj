@@ -20,11 +20,18 @@
   (into {} (for [[k v] m] [k (f v)])))
 
 (defn assoc-non-nil
-  "Assoc value v into map m with key k if unless v is nil."
+  "Assoc value v into map m with key k unless v is nil."
   [m k v]
   (if (nil? v)
     m
     (assoc m k v)))
+
+(defn assoc-if
+  "Assoc if b is true."
+  [m b & args]
+  (if b
+    (apply assoc m args)
+    m))
 
 (defn min*
   "Like min, but takes a list - and 0 elements is okay."
