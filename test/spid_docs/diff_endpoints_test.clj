@@ -102,3 +102,19 @@
      :types)
  => {:removed #{"object"}
      :added #{"string"}})
+
+(fact
+ "Response types uses some syntax to signify lists and maps. That's fine, we'll cope."
+
+ (-> (diff-endpoints [(cs/endpoint
+                       {:httpMethods {:GET (cs/http-method
+                                            {:responses [{:status 200
+                                                          :description ""
+                                                          :type "[object]"}]})}})]
+                     [(cs/endpoint
+                       {:httpMethods {:GET (cs/http-method
+                                            {:responses [{:status 200
+                                                          :description ""
+                                                          :type "{id object}"}]})}})])
+
+     :types) => nil) ;; ie, no change in types, since they both refer the 'object' type

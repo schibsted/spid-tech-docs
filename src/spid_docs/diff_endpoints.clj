@@ -37,9 +37,17 @@
           (mapcat :optional (vals (:httpMethods endpoint)))
           (mapcat :required (vals (:httpMethods endpoint)))))
 
+(defn- flatten-type [^String type]
+  "Types sometimes come in lists and maps. Like [type] and {id type}. Boil it
+  down to just the type."
+  (cond
+   (and (.startsWith type "[") (.endsWith type "]")) (subs type 1 (dec (count type)))
+   (and (.startsWith type "{") (.endsWith type "}")) (second (re-find #"\{[^ ]+ ([^ ]+)\}" type))
+   :else type))
+
 (defn- all-types [endpoint]
   "Return a list of all return types for the endpoint."
-  (map :type (mapcat :responses (vals (:httpMethods endpoint)))))
+  (map (comp flatten-type :type) (mapcat :responses (vals (:httpMethods endpoint)))))
 
 (defn- all-relevant-properties [endpoint]
   "Return a list of properties used to describe the endpoint. This includes the
