@@ -17,10 +17,9 @@
                           (dissoc :url)
                           (assoc :urls []))]
                      [(cs/endpoint)])
-     (dissoc :changed)) ;; not relevant for this test
- => {:schema-change? true
-     :schema {:added #{"url"}
-              :removed #{"urls"}}})
+     :schema)
+ => {:added #{"url"}
+     :removed #{"urls"}})
 
 (fact
  "We also check the properties used to describe httpMethods."
@@ -31,10 +30,9 @@
                                                (assoc :id "x"))}})]
                      [(cs/endpoint
                        {:httpMethods {:GET (cs/http-method)}})])
-     (dissoc :changed)) ;; not relevant for this test
- => {:schema-change? true
-     :schema {:removed #{"httpMethods/id"}
-              :added #{"httpMethods/name"}}})
+     :schema)
+ => {:removed #{"httpMethods/id"}
+     :added #{"httpMethods/name"}})
 
 (fact
  "The new endpoints are validated, to see if the changes are breaking,
@@ -44,11 +42,8 @@
                      [(-> (cs/endpoint)
                           (dissoc :url)
                           (assoc :urls []))])
-     (dissoc :changed)) ;; not relevant for this test
- => {:schema-change? true
-     :schema {:removed #{"url"}
-              :added #{"urls"}}
-     :breaking-change? true})
+     :breaking-change?)
+ => true)
 
 (fact
  "We detect added and removed endpoints, determined by [path method] pairs."
@@ -63,8 +58,8 @@
      :removed #{{:path "/path", :method :GET}}})
 
 (fact
- "We also detect any changes to existing endpoints, but don't report on
-  exactly what these changes are."
+ "We also detect any changes to existing endpoints. Note that we don't dig in to
+  find out exactly what these changes are."
 
  (diff-endpoints [(cs/endpoint
                    {:path "/path"

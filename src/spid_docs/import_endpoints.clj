@@ -7,7 +7,7 @@
 (def import-path "/endpoints")
 
 (defn- report-changed-endpoint-keys [diff]
-  (when (:schema-change? diff)
+  (when (seq (:schema diff))
     (println "Note! The endpoint fields have changed since last import:")
     (doseq [field (-> diff :schema :added)] (println (format "  - Added field \"%s\"" field)))
     (doseq [field (-> diff :schema :removed)] (println (format "  - Removed field \"%s\"" field)))
