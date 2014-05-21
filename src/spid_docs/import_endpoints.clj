@@ -1,26 +1,26 @@
 (ns spid-docs.import-endpoints
   (:require [clojure.data.json :as json]
             [clojure.set :as set]
-            [schema.core :refer [validate Str]]
+            [schema.core :as schema]
             [spid-docs.api-client :refer [GET get-config get-server-token config-exists?]]
             [spid-docs.content :refer [load-content]]
             [spid-docs.homeless :refer [assoc-if]]
             [spid-docs.validate-raw :refer [Endpoint]]))
 
 (defn- extract-relevant-keys [endpoints]
+  "Return a list of all property names used for all endpoints, including the
+   properties used in all httpMethod objects."
   (->> (concat (map name (mapcat keys endpoints))
                (map #(str "httpMethods/" (name %))
                     (mapcat keys (mapcat (comp vals :httpMethods) endpoints))))
        set))
 
 (defn- schema-is-valid? [endpoints]
-  (try
-    (validate [Endpoint] endpoints)
-    true
-    (catch Exception e
-      false)))
+  "Check if the given endpoints matches our expectations."
+  (not (schema/check [Endpoint] endpoints)))
 
 (defn- find-schema-changes [old new]
+  "Compare properties used to describe endpoints in old and new version."
   (let [old-keys (extract-relevant-keys old)
         new-keys (extract-relevant-keys new)
         added (sort (set/difference new-keys old-keys))
@@ -28,22 +28,25 @@
     (when (or (seq added) (seq removed))
       {:added added, :removed removed})))
 
-(defn- paths [endpoint]
+(defn- get-signatures [endpoint]
+  "Return a list of {:path :method} for each of httpMethods in endpoint."
   (map (fn [method] {:path (:path endpoint)
                      :method method})
        (keys (:httpMethods endpoint))))
 
 (defn- flatten-http-methods [endpoint]
+  "Return a list of endpoints each with a single entry in httpMethods from the original."
   (let [methods (:httpMethods endpoint)]
     (map (fn [method] (assoc endpoint :httpMethods (select-keys methods [method])))
          (keys methods))))
 
 (defn- find-endpoint-changes [old new]
-  (let [old-paths (set (mapcat paths old))
-        new-paths (set (mapcat paths new))
+  "Return a map of added, removed and changed endpoints."
+  (let [old-paths (set (mapcat get-signatures old))
+        new-paths (set (mapcat get-signatures new))
         added (sort (set/difference new-paths old-paths))
         removed (sort (set/difference old-paths new-paths))
-        changed (sort (-> (set (mapcat paths
+        changed (sort (-> (set (mapcat get-signatures
                                        (set/difference (set (mapcat flatten-http-methods old))
                                                        (set (mapcat flatten-http-methods new)))))
                           (set/difference added removed)))]
@@ -53,6 +56,7 @@
             (seq changed) (assoc :changed changed))))
 
 (defn- add-schema-changes [m old new]
+  "If there are any schema changes, add them to the map along with :schema-change set to true."
   (if-let [schema-changes (find-schema-changes old new)]
     (assoc m
       :schema-change? true
@@ -60,6 +64,7 @@
     m))
 
 (defn compare-endpoint-lists [old new]
+  "Diff old and new endpoints, and return a summary of the changes."
   (if (= old new)
     {:no-changes? true}
     (-> {}
