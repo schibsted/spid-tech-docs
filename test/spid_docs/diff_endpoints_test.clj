@@ -91,3 +91,19 @@
  => {:removed #{"old-opt" "old-pp" "old-req"}
      :added #{"new-opt" "new-pp" "new-req"}})
 
+(fact
+ "We detect changes in response types."
+
+ (-> (diff-endpoints [(cs/endpoint
+                       {:httpMethods {:GET (cs/http-method
+                                            {:responses [{:status 200
+                                                          :description ""
+                                                          :type "object"}]})}})]
+                     [(cs/endpoint
+                       {:httpMethods {:GET (cs/http-method
+                                            {:responses [{:status 200
+                                                          :description ""
+                                                          :type "string"}]})}})])
+     :types)
+ => {:removed #{"object"}
+     :added #{"string"}})

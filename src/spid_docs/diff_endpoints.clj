@@ -53,6 +53,7 @@
             (seq changed) (assoc :changed changed))))
 
 (defn- all-params [endpoint]
+  "Return a list of all params for the endpoint."
   (concat (:pathParameters endpoint)
           (mapcat :optional (vals (:httpMethods endpoint)))
           (mapcat :required (vals (:httpMethods endpoint)))))
@@ -63,6 +64,20 @@
         new-params (set (mapcat all-params new))
         added (set/difference new-params old-params)
         removed (set/difference old-params new-params)]
+    (when (or (seq added) (seq removed))
+      (-> {}
+          (assoc-non-nil :added added)
+          (assoc-non-nil :removed removed)))))
+
+(defn- all-types [endpoint]
+  (map :type (mapcat :responses (vals (:httpMethods endpoint)))))
+
+(defn- find-type-changes [old new]
+  "Return a map of added and removed parameter names."
+  (let [old-types (set (mapcat all-types old))
+        new-types (set (mapcat all-types new))
+        added (set/difference new-types old-types)
+        removed (set/difference old-types new-types)]
     (when (or (seq added) (seq removed))
       (-> {}
           (assoc-non-nil :added added)
@@ -83,4 +98,5 @@
         (add-schema-changes old new)
         (assoc-if (not (schema-is-valid? new)) :breaking-change? true)
         (assoc-non-nil :params (find-param-changes old new))
+        (assoc-non-nil :types (find-type-changes old new))
         (merge (find-endpoint-changes old new)))))
