@@ -19,8 +19,8 @@
                              [(cs/endpoint)])
      (dissoc :changed)) ;; not relevant for this test
  => {:schema-change? true
-     :schema {:added ["url"]
-              :removed ["urls"]}})
+     :schema {:added #{"url"}
+              :removed #{"urls"}}})
 
 (fact
  "We also check the properties used to describe httpMethods."
@@ -33,8 +33,8 @@
                                {:httpMethods {:GET (cs/http-method)}})])
      (dissoc :changed)) ;; not relevant for this test
  => {:schema-change? true
-     :schema {:removed ["httpMethods/id"]
-              :added ["httpMethods/name"]}})
+     :schema {:removed #{"httpMethods/id"}
+              :added #{"httpMethods/name"}}})
 
 (fact
  "The new endpoints are validated, to see if the changes are breaking,
@@ -46,8 +46,8 @@
                                   (assoc :urls []))])
      (dissoc :changed)) ;; not relevant for this test
  => {:schema-change? true
-     :schema {:removed ["url"]
-              :added ["urls"]}
+     :schema {:removed #{"url"}
+              :added #{"urls"}}
      :breaking-change? true})
 
 (fact
@@ -59,8 +59,8 @@
                          [(cs/endpoint
                            {:path "/path"
                             :httpMethods {:POST (cs/http-method)}})])
- => {:added [{:path "/path", :method :POST}]
-     :removed [{:path "/path", :method :GET}]})
+ => {:added #{{:path "/path", :method :POST}}
+     :removed #{{:path "/path", :method :GET}}})
 
 (fact
  "We also detect any changes to existing endpoints, but don't report on
@@ -74,4 +74,19 @@
                            {:path "/path"
                             :httpMethods {:GET (cs/http-method
                                                 {:name "def"})}})])
- => {:changed [{:path "/path", :method :GET}]})
+ => {:changed #{{:path "/path", :method :GET}}})
+
+(fact
+ "We detect changes in parameter names."
+
+ (-> (compare-endpoint-lists [(cs/endpoint {:pathParameters ["old-pp" "same-pp"]
+                                            :httpMethods {:GET (cs/http-method
+                                                                {:optional ["old-opt" "same-opt"]
+                                                                 :required ["old-req" "same-req"]})}})]
+                             [(cs/endpoint {:pathParameters ["new-pp" "same-pp"]
+                                            :httpMethods {:GET (cs/http-method
+                                                                {:optional ["new-opt" "same-opt"]
+                                                                 :required ["new-req" "same-req"]})}})])
+     :params)
+ => {:removed #{"old-opt" "old-pp" "old-req"}
+     :added #{"new-opt" "new-pp" "new-req"}})
