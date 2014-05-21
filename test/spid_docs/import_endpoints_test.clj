@@ -4,10 +4,10 @@
             [spid-docs.import-endpoints :refer :all]))
 
 (fact
- "Equal lists are equal. No changes detected."
+ "Equal lists are equal. No changes detected. Returns nil."
 
- (compare-endpoint-lists [] []) => {:no-changes? true}
- (compare-endpoint-lists [(cs/endpoint)] [(cs/endpoint)]) => {:no-changes? true})
+ (compare-endpoint-lists [] []) => nil
+ (compare-endpoint-lists [(cs/endpoint)] [(cs/endpoint)]) => nil)
 
 (fact
  "The properties that describe each endpoint (the schema) are checked for

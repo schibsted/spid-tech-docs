@@ -81,8 +81,7 @@
 
 (defn compare-endpoint-lists [old new]
   "Diff old and new endpoints, and return a summary of the changes."
-  (if (= old new)
-    {:no-changes? true}
+  (when-not (= old new)
     (-> {}
         (add-schema-changes old new)
         (assoc-if (not (schema-is-valid? new)) :breaking-change? true)
@@ -147,7 +146,7 @@
     (let [old-content (load-content)
           {:keys [new-endpoints raw-response]} (load-new-endpoints)
           diff (compare-endpoint-lists (:endpoints old-content) new-endpoints)]
-      (if (:no-changes? diff)
+      (if-not diff
         (println "No changes detected.")
         (if (:breaking-change? diff)
           (do
