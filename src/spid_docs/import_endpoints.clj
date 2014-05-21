@@ -1,5 +1,6 @@
 (ns spid-docs.import-endpoints
   (:require [clojure.data.json :as json]
+            [clojure.pprint :refer [pprint]]
             [spid-docs.api-client :refer [GET get-config get-server-token config-exists?]]
             [spid-docs.content :refer [load-content]]
             [spid-docs.diff-endpoints :refer [diff-endpoints]]))
@@ -48,8 +49,7 @@
       (throw (Exception.
               (format "Unexpected status %d when fetching endpoints at %s"
                       (:status response) import-path))))
-    {:new-endpoints (:data response)
-     :raw-response (:body response)}))
+    (:data response)))
 
 (defn import-endpoints []
   (if-not (config-exists?)
@@ -60,8 +60,9 @@
       (println "  vim resources/config.edn")
       (println))
     (let [old-content (load-content)
-          {:keys [new-endpoints raw-response]} (load-new-endpoints)
-          diff (diff-endpoints (:endpoints old-content) new-endpoints)]
+          old-endpoints (:endpoints old-content)
+          new-endpoints (load-new-endpoints)
+          diff (diff-endpoints old-endpoints new-endpoints)]
       (if-not diff
         (println "No changes detected.")
         (if (:breaking-change? diff)
@@ -77,5 +78,5 @@
             (report-endpoint-changes diff)
             (report-example-params-changes diff (:example-params old-content))
             (report-changed-endpoint-keys diff)
-            (spit "generated/cached-endpoints.json" raw-response)
-            (println "Wrote generated/cached-endpoints.json")))))))
+            (spit "generated/cached-endpoints.edn" (with-out-str (pprint new-endpoints)))
+            (println "Wrote generated/cached-endpoints.edn")))))))

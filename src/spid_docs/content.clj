@@ -2,10 +2,10 @@
   "Functions for loading and 'cultivating' (i.e. processing, cross-linking, etc)
    content from the various sources."
   (:require [mapdown.core :as mapdown]
-            [spid-docs.load :refer [load-edn load-json load-edn-str]]
             [spid-docs.cultivate.apis :refer [cultivate-apis]]
-            [spid-docs.cultivate.endpoints :refer [cultivate-endpoint]]
             [spid-docs.cultivate.articles :refer [cultivate-articles]]
+            [spid-docs.cultivate.endpoints :refer [cultivate-endpoint]]
+            [spid-docs.load :refer [load-edn load-edn-str]]
             [stasis.core :as stasis]))
 
 (defn get-types []
@@ -18,7 +18,7 @@
   "Loads content from .edn and .md files in resources/. See the readme for a
   run-down of various kinds of contents and where/how they are stored."
   []
-  {:endpoints (:data (load-json "cached-endpoints.json"))
+  {:endpoints (load-edn "cached-endpoints.edn")
    :articles (mapdown/slurp-directory "resources/articles" #"\.md$")
    :sample-responses (stasis/slurp-directory "generated/sample-responses" #".+\..+$")
    :endpoint-descriptions (mapdown/slurp-directory "resources/endpoints" #"\.md$")

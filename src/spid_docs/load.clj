@@ -1,7 +1,6 @@
 (ns spid-docs.load
   "Various utilities used across many namespaces"
-  (:require [clojure.data.json :as json]
-            [clojure.java.io :as io]
+  (:require [clojure.java.io :as io]
             [clojure.string :as str]))
 
 (defn- check-resource-existance [file]
@@ -25,8 +24,3 @@
   (check-resource-existance file)
   (load-edn-str (slurp (clojure.java.io/resource file)) file))
 
-(defn load-json
-  "Read a json file from resources. Keys are keywordized."
-  [file]
-  (check-resource-existance file)
-  (json/read-str (slurp (io/resource file)) :key-fn keyword))
