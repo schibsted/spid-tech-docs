@@ -21,6 +21,9 @@
       (to-id-str "Some sentence") => "some-sentence"
       (to-id-str "Some numbers: 666") => "some-numbers-666")
 
+(fact "Titleizes"
+      (titleize "some-string") => "Some String")
+
 (fact "Columnizes data structures"
       (columnize [[1] [2] [3] [4]] 2) => [[[1] [3]] [[2] [4]]]
       (columnize [[1] [2 3] [4] [5]] 2) => [[[2 3] [5]] [[1] [4]]]

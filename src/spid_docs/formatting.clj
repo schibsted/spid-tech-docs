@@ -14,6 +14,12 @@
   (str (.toUpperCase (subs s 0 1))
        (subs s 1)))
 
+(defn titleize
+  [s]
+  (->> (str/split s #"\W")
+       (map capitalize)
+       (str/join " ")))
+
 (defn enumerate-humanely
   "Take a list of words, and return a formatted string that enumerates the words
    in a human way, e.g. 'cow, horse and pig'."

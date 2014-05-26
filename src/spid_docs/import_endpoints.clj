@@ -3,7 +3,8 @@
             [clojure.pprint :refer [pprint]]
             [spid-docs.api-client :refer [GET get-config get-server-token config-exists?]]
             [spid-docs.content :refer [load-content]]
-            [spid-docs.diff-endpoints :refer [diff-endpoints]]))
+            [spid-docs.diff-endpoints :refer [diff-endpoints]]
+            [spid-docs.formatting :refer [titleize]]))
 
 (def import-path "/endpoints")
 
@@ -42,15 +43,28 @@
         (doseq [p superfluous] (println "  -" p))
         (println)))))
 
-(defn- report-type-changes [diff types-map]
+(defn- create-dummy-endtype-definition [type]
+  (str "{:id :" type "
+ :name \"" (titleize type) "\"
+ :description \"\"}
+
+;; consider adding
+;;  - :inline-types (other types to render along with this one)
+;;  - :rendering :enum along with :values (see dump-status.edn)
+;;  - :rendering :object along with :fields (see email.edn)"))
+
+(defn- handle-type-changes [diff types-map]
   (when (:types diff)
     (let [types (set (map name (keys types-map)))
           missing (remove types (-> diff :types :added))
           superfluous (filter types (-> diff :types :removed))]
       (when (seq missing)
-        (println "NB! Type definitions are missing for these new return types,")
-        (println "and must be added to resources/types/:")
-        (doseq [p missing] (println "  -" p))
+        (println "NB! Type definitions are missing for new return types.")
+        (println "Empty definition files have been added. Please edit them:")
+        (doseq [p missing]
+          (let [path (str "resources/types/" p ".edn")]
+            (spit path (create-dummy-endtype-definition p))
+            (println "  -" path)))
         (println))
       (when (seq superfluous)
         (println "Consider removing these outdated type definitions from resources/types/:")
@@ -92,7 +106,7 @@
           (do
             (report-endpoint-changes diff)
             (report-example-params-changes diff (:example-params old-content))
-            (report-type-changes diff (:types old-content))
+            (handle-type-changes diff (:types old-content))
             (report-changed-endpoint-keys diff)
             (spit "generated/cached-endpoints.edn" (with-out-str (pprint new-endpoints)))
             (println "Wrote generated/cached-endpoints.edn")))))))
