@@ -31,16 +31,31 @@
 (defn- report-example-params-changes [diff example-params]
   (when (:params diff)
     (let [missing (remove example-params (-> diff :params :added))
-          superflous (filter example-params (-> diff :params :removed))]
+          superfluous (filter example-params (-> diff :params :removed))]
       (when (seq missing)
         (println "NB! Examples are missing for these new parameters,")
         (println "and must be added to resources/example-params.edn:")
         (doseq [p missing] (println "  -" p))
         (println))
-      (when (seq superflous)
+      (when (seq superfluous)
         (println "Consider removing these outdated parameters from resources/example-params.edn:")
-        (doseq [p superflous] (println "  -" p))
+        (doseq [p superfluous] (println "  -" p))
         (println)))))
+
+(defn- report-type-changes [diff types-map]
+  (when (:types diff)
+    (let [types (set (map name (keys types-map)))
+          missing (remove types (-> diff :types :added))
+          superfluous (filter types (-> diff :types :removed))]
+      (when (seq missing)
+        (println "NB! Type definitions are missing for these new return types,")
+        (println "and must be added to resources/types/:")
+        (doseq [p missing] (println "  -" p))
+        (println))
+      (when (seq superfluous)
+        (println "Consider removing these outdated type definitions from resources/types/:")
+        (doseq [p superfluous] (println "  -" p))
+        (println))      )))
 
 (defn- load-new-endpoints []
   (println (str "Fetching " (:spid-base-url (get-config)) "/api/2" import-path))
@@ -77,6 +92,7 @@
           (do
             (report-endpoint-changes diff)
             (report-example-params-changes diff (:example-params old-content))
+            (report-type-changes diff (:types old-content))
             (report-changed-endpoint-keys diff)
             (spit "generated/cached-endpoints.edn" (with-out-str (pprint new-endpoints)))
             (println "Wrote generated/cached-endpoints.edn")))))))
