@@ -91,7 +91,7 @@ to the SPiD login page. It's on `<spid-base-url>/login`,
 with these parameters:
 
 - `client_id`: Yeah, it's your client ID.
-- `response_code`: Which is always `code` in this version of the API.
+- `response_type`: Which is always `code` in this version of the API.
 - `redirect_uri`: The URI where the user is redirected after logging in.
 
 Patch together and use it for your login link.
