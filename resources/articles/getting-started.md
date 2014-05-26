@@ -379,7 +379,7 @@ abstraction that might fail/be used wrongly.
 Start by requesting an OAuth token:
 
 ```sh
-curl -X -d "client_id=CLIENT-ID&client_secret=SECRET&grant_type=client_credentials" https://stage.payment.schibsted.no/oauth/token
+curl -X POST -d "client_id=CLIENT-ID&client_secret=SECRET&grant_type=client_credentials" https://stage.payment.schibsted.no/oauth/token
 ```
 
 If all goes well, you should get a response like this back:
