@@ -1,9 +1,10 @@
 (ns spid-docs.cultivate.endpoints
   "Gather all relevant information about endpoints from a few different sources."
   (:require [clojure.string :as str]
+            [spid-docs.cultivate.util :refer [parse-relevant-endpoints]]
             [spid-docs.formatting :refer [to-id-str]]
-            [spid-docs.homeless :refer [with-optional-keys assoc-non-nil]]
-            [spid-docs.cultivate.util :refer [parse-relevant-endpoints]]))
+            [spid-docs.homeless :refer [with-optional-keys assoc-non-nil in?]]
+            [spid-docs.routes :refer [article-path]]))
 
 (def verbs
   "Verbs to use for different http methods when cobbling together the
@@ -144,12 +145,19 @@
          (map #(str/split % #":\s*"))
          (into {}))))
 
+(defn- find-relevant-articles [category articles]
+  (let [api-name (second category)
+        article (str "/" (to-id-str api-name) ".md")]
+    (when (in? (vec (keys articles)) article)
+      [{:title (str "Docs for the " api-name)
+        :path (article-path article)}])))
+
 (defn- cultivate-endpoint-1 [endpoint [method details] raw-content]
   "Gather a bunch of information from all over to create a map that
    includes everything you could ever want to know about an endpoint."
   (let [{:keys [path category pathParameters validOutputFormats defaultOutputFormat deprecated]} endpoint
         {:keys [required optional defaultFilters filters accessTokenTypes responses]} details
-        {:keys [filter-descriptions endpoint-descriptions sample-responses]} raw-content
+        {:keys [filter-descriptions endpoint-descriptions sample-responses articles]} raw-content
         endpoint-id (str (to-id-str path) "-" (.toLowerCase (name method)))
         {:keys [introduction success-description relevant-endpoints relevant-types example-params]} (get endpoint-descriptions (str "/" endpoint-id ".md") {})]
     (with-optional-keys
@@ -169,6 +177,7 @@
        :requires-authentication? (not (empty? accessTokenTypes))
        :?relevant-endpoints (parse-relevant-endpoints relevant-endpoints)
        :?relevant-types (when relevant-types (str/split relevant-types #" "))
+       :?relevant-articles (find-relevant-articles category articles)
        :example-params (merge (:example-params raw-content) (parse-example-params example-params))
        :responses {:success (-> success? (filter responses) first create-response
                                 (add-samples (str "/" endpoint-id) sample-responses)

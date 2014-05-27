@@ -19,6 +19,7 @@ POST /path/to/other/page
                                             :relevant-endpoints relevant-endpoints-example
                                             :relevant-types "user order"
                                             :example-params "userId: custom"}}
+   :articles {"/direct-payment-api.md" "An article"}
    :example-params {"userId" "42"
                     "orderId" "43"}
    :filter-descriptions {:merchant "merchant desc"}
@@ -323,6 +324,14 @@ POST /path/to/other/page
  "The relevant types are listed."
  (-> (cultivate :path "terms") first :relevant-types)
  => ["user" "order"])
+
+(fact
+ "Relevant articles are found based on category."
+
+ (-> (cultivate :category ["Payment Services" "Direct Payment API"])
+     first :relevant-articles)
+ => [{:title "Docs for the Direct Payment API"
+      :path "/direct-payment-api/"}])
 
 (fact
  "example-params are added to each endpoint"

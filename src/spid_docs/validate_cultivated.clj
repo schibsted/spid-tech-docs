@@ -43,6 +43,7 @@
    :example-params {Str Str}
    (optional-key :relevant-endpoints) [{:method Keyword :path Path}]
    (optional-key :relevant-types) [Str]
+   (optional-key :relevant-articles) [{:title Str :path Path}]
    :responses {:success Response
                :failures [Response]}
    (optional-key :deprecated) Str})

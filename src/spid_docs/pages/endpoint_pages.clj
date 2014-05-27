@@ -238,12 +238,17 @@
 (defn- render-relevant-type [type]
   [:li "The " [:a {:href (str "/types/" type)} (capitalize type) " object"]])
 
-(defn- render-see-also [relevant-endpoints relevant-types]
-  (when (or relevant-endpoints relevant-types)
+(defn- render-relevant-article [article]
+  [:li [:a {:href (:path article)}
+        (:title article)]])
+
+(defn- render-see-also [{:keys [relevant-endpoints relevant-types relevant-articles]}]
+  (when (or relevant-endpoints relevant-types relevant-articles)
     (list
      [:h2 "See also"]
      [:ul
-      (concat (map render-relevant-type relevant-types)
+      (concat (map render-relevant-article relevant-articles)
+              (map render-relevant-type relevant-types)
               (map render-relevant-endpoint relevant-endpoints))])))
 
 (defn- render-comments [endpoint]
@@ -278,8 +283,7 @@
                   (render-description endpoint)]]
                 [:div.aside
                  [:div.wrap
-                  (render-see-also (:relevant-endpoints endpoint)
-                                   (:relevant-types endpoint))
+                  (render-see-also endpoint)
                   (render-contribution endpoint)]]]
                [:div.separator]
                (render-request endpoint)
