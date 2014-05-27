@@ -68,11 +68,12 @@
          (format-params (exemplify-params params example-params) "    \":name\" => \":value\"" ",\n")
          "\n);\n\n")))
 
-(defn php-example-code [{:keys [path example-params]} params]
+(defn php-example-code [{:keys [method path example-params]} params]
   (let [has-params (seq params)
         params-assoc-array (create-params-assoc-array params example-params)
         api-invocation (str "(\"" (replace-path-parameters path example-params) "\""
-                            (if has-params (str ", $params") "") ")")]
+                            (when (= :POST method) ", \"POST\"")
+                            (when has-params (str ", $params")) ")")]
     (str "<?php\n"
          params-assoc-array
          "$client->auth();\necho var_dump($client->api" api-invocation ");")))

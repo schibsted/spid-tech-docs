@@ -180,7 +180,7 @@ $params = array(
 );
 
 $client->auth();
-echo var_dump($client->api(\"/user\", $params));"
+echo var_dump($client->api(\"/user\", \"POST\", $params));"
 
    (-> post-example :php :maximal)
    => "<?php
@@ -193,7 +193,7 @@ $params = array(
 );
 
 $client->auth();
-echo var_dump($client->api(\"/user\", $params));")
+echo var_dump($client->api(\"/user\", \"POST\", $params));")
 
  (fact "Does not render minimal and maximal when all parameters are required"
        (->
