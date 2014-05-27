@@ -25,3 +25,7 @@ exchange code, the app may share this code with the backend, which then
 authenticates directly with SPiD with the code and gets its own user access
 token - thus keeping a high level of security and giving both apps and backends
 full access to user data and the SPiD APIs.
+
+:example-params
+
+type: code
