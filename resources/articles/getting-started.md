@@ -378,9 +378,7 @@ abstraction that might fail/be used wrongly.
 
 Start by requesting an OAuth token:
 
-```sh
-curl -X POST -d "client_id=CLIENT-ID&client_secret=SECRET&grant_type=client_credentials" https://stage.payment.schibsted.no/oauth/token
-```
+<spid-example lang="sh" src="/getting-started.sh" title="Request an OAuth token"/>
 
 If all goes well, you should get a response like this back:
 
@@ -396,15 +394,9 @@ If all goes well, you should get a response like this back:
 
 Using the provided `access_token`, you may now browse the API endpoints:
 
-```sh
-curl https://stage.payment.schibsted.no/api/2/endpoints?oauth_token=68d602d1a3d3cc1b2805cdeb53fb5207d273a7ec
-```
+<spid-example lang="sh" src="/getting-started.sh" title="Fetch API endpoints"/>
 
-If you have Python installed (most *nixes, including OSX, does), you can grab a
-nicely formatted JSON document this way:
-
-```sh
-curl https://stage.payment.schibsted.no/api/2/endpoints?oauth_token=68d602d1a3d3cc1b2805cdeb53fb5207d273a7ec | python -m json.tool
-```
+The pipe into python makes the JSON document nice and readable. You can of
+course skip that part if you don't have python installed.
 
 ### :/tabs

@@ -51,8 +51,20 @@
   (with-missing-example-warning path title
     (find-example (format ";;; %s" title) ";;;" code)))
 
+(defmethod create-example :sh [_ path title code]
+  (-> (with-missing-example-warning path title
+        (find-example (format "### %s" title) "###" code))
+      (str/replace #" --silent\b" "")
+      (str/replace #"\$server\b" "https://stage.payment.schibsted.no")))
+
+(def example-dir-folders
+  {:java "java"
+   :php "php"
+   :clj "clj"
+   :sh "curl"})
+
 (defn- read-example-file [lang path]
-  (let [full-path (str examples-dir (name lang) path)
+  (let [full-path (str examples-dir (example-dir-folders lang) path)
         resource (io/resource full-path)]
     (if resource
       (slurp resource)
