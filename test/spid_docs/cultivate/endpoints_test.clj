@@ -315,17 +315,13 @@ POST /path/to/other/page
 (fact
  "The entries in :relevant-endpoints are parsed."
 
- (-> (cultivate :httpMethods {:GET (cs/http-method)}
-                :path "terms")
-     first :relevant-endpoints)
+ (-> (cultivate :path "terms") first :relevant-endpoints)
  => [{:method :GET, :path "/path/to/{id}"}
      {:method :POST, :path "/path/to/other/page"}])
 
 (fact
  "The relevant types are listed."
- (-> (cultivate :httpMethods {:GET (cs/http-method)}
-                :path "terms")
-     first :relevant-types)
+ (-> (cultivate :path "terms") first :relevant-types)
  => ["user" "order"])
 
 (fact
@@ -337,8 +333,7 @@ POST /path/to/other/page
 (fact
  "example-params specific to an endpoint is merged in"
 
- (-> (cultivate :httpMethods {:GET (cs/http-method)}
-                :path "terms")
+ (-> (cultivate :path "terms")
      first :example-params) => {"userId" "custom"
                                 "orderId" "43"})
 
