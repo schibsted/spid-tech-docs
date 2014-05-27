@@ -50,21 +50,21 @@ Because transactions are handled asynchronously it is recommended to implement
 SPiD's [callback functionality](/callbacks/) when working with payments. This
 way your client can stay up to date on transaction statuses.
 
-## Direct payment API flowchart for direct charges
+## Sequence diagram for direct charges
 
 Click for bigger version
 
-[![Direct payment API flowchart for direct charges](/images/direct_payment_api_flow_direct.png)](/images/direct_payment_api_flow_direct.png)
+[![Sequence diagram for direct charges](/images/direct_payment_api_flow_direct.png)](/images/direct_payment_api_flow_direct.png)
 
-## Direct payment API flowchard for authorization
+## Sequence diagram for authorization
 
 Click for bigger version
 
-[![Direct payment API flowchard for authorization](/images/direct_payment_api_flow_authorize.png)](/images/direct_payment_api_flow_authorize.png)
+[![Sequence diagram for authorization](/images/direct_payment_api_flow_authorize.png)](/images/direct_payment_api_flow_authorize.png)
 
-## Direct payment API flowchart for failures with new paylink option
+## Sequence diagram for failures with new paylink option
 
-This flowchart illustrates the recommended strategy for direct payment failures.
+This diagram illustrates the recommended strategy for direct payment failures.
 Because the client never really knows if a user has a valid payment identifier
 or whether other direct payment preconditions have not been met, a retry may be
 attempted with a paylink. When a failure occurs, the client can create a paylink
@@ -75,4 +75,4 @@ payment flow. This way the client ensures that the user adds or updates their
 credit card in SPiD, making it available for the next charge via the Direct
 payment API.
 
-[![Direct payment API flowchart with failures and paylinks](/images/direct_payment_paylink.png)](/images/direct_payment_paylink.png)
+[![Sequence diagram with failures and paylinks](/images/direct_payment_paylink.png)](/images/direct_payment_paylink.png)
