@@ -44,15 +44,15 @@ their own references.
 
 ![Paylink schema](/images/paylinks-schema.png)
 
-## Flowcharts
+## Sequence diagrams
 
 In the following diagrams, "SPiD API" is the REST API, and "SPiD" is SPiD in the
 browser - the UI your users will see when entering credit cards, logging in etc.
 
 ### Paylink direct purchase flow
 
-![Paylink direct purchase flowchart](/images/paylink-direct-purchase-flow.png)
+![Paylink direct purchase diagram](/images/paylink-direct-purchase-flow.png)
 
 ### Paylink authorize/capture flow
 
-![Paylink authorize/capture flowchart](/images/paylink-authorize-capture-flow.png)
+![Paylink authorize/capture diagram](/images/paylink-authorize-capture-flow.png)
