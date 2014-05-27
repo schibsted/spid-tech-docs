@@ -159,7 +159,7 @@
    (->> (:response-formats endpoint)
         (map #(str "<a href=\"/endpoints/#format-" (name %) "\">" (% format-names) "</a>"))
         enumerate-humanely)
-   (pluralize " response format" (count (:response-formats endpoint)))])
+   (str (pluralize " response format" (count (:response-formats endpoint))) ".")])
 
 (defn render-response-type
   "Renders the response type along with its supporting inline-types.
