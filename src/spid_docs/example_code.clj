@@ -93,6 +93,6 @@
          :clojure clojure-example-code}
         (update-vals #(create-examples-with % endpoint req-params optional-params all-params))
         (assoc-in [:java :footnote]
-                  "This example is an excerpt, see <a href=\"/endpoints/#java-request-example\">the full example</a>")
+                  "This example is an excerpt, see <a href=\"/endpoints/#java-request-example\">a full example</a>")
         (assoc-in [:php :footnote]
-                  "This example is an excerpt, see <a href=\"/endpoints/#php-request-example\">the full example</a>"))))
+                  "This example is an excerpt, see <a href=\"/endpoints/#php-request-example\">a full example</a>"))))
