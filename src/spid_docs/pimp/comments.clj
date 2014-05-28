@@ -17,7 +17,7 @@
                            {:tag :script
                             :content (str "var disqus_shortname = 'spidtechdocs';
 var disqus_identifier = '" (get-in el [:attrs :id]) "';
-var disqus_url = 'http://docs.spid.no" (get-in el [:attrs :id]) "';")}]))
+var disqus_url = 'http://techdocs.spid.no" (get-in el [:attrs :id]) "';")}]))
 
 (defn add-comments
   "Add Disqus comments if the page contains a <div id=\"comments\"/>"
