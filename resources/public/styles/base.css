@@ -32,9 +32,9 @@ h1 {font-size: 32px;}
 h2 {font-size: 22px; border-bottom: 1px solid #ccc;}
 h3 {font-size: 20px;}
 
-.mod, .tabs, pre, h1, h2, h3, h4, h5, p, ul, ol, hr, table {margin: 15px 0;}
+.mod, .tabs, pre, h1, h2, h4, h5, p, ul, ol, hr, table {margin: 15px 0;}
 .wrap {margin: 0 15px;}
-h2 {margin-top: 30px;}
+h2, h3 {margin-top: 30px;}
 
 th,
 strong {font-weight: bold;}
@@ -112,8 +112,9 @@ th {padding-right: 10px;}
 .frill {display: none;} /* add to purely decorative stuff that should be hidden on very small screens */
 .grid-bound {display: none;} /* add to sections that should be hidden when the grid collapses */
 
-.table>tbody>tr>td,.table>tbody>tr>th,.table>thead>tr>td,.table>thead>tr>th {padding: 8px; line-height: 1.42857143; vertical-align: top; border-top: 1px solid #ddd;}
+.table td, .table th {padding: 8px; line-height: 1.42857143; vertical-align: top; border-top: 1px solid #ddd;}
 .table {width: 100%}
-.table>tbody>tr:first-child>th,.table>thead>tr:first-child>th {border-top: none;}
-.table-striped>tbody>tr:nth-child(odd)>td,.table-striped>tbody>tr:nth-child(odd)>th {background-color: #f9f9f9;}
-.table-hover>tbody>tr:hover>td,.table-hover>tbody>tr:hover>th {background-color: #f0f0f0;}
+.table tr:first-child th {border-top: none;}
+.table-striped tr:nth-child(odd) td,.table-striped tr:nth-child(odd) th {background-color: #f9f9f9;}
+.table-hover tr:hover td,.table-hover tr:hover th {background-color: #f0f0f0;}
+.table thead th {background-color: #f9f9f9;}

@@ -61,9 +61,10 @@
    (optional-key :relevant-types) Str
    (optional-key :example-params) Str})
 
-(def Article
-  {:title Str
-   :body Str
+(def ArticleFragment
+  {:body Str
+   (optional-key :title) Str
+   (optional-key :heading) Str
    (optional-key :aside) Str
    (optional-key :frontpage) Str
    (optional-key :relevant-endpoints) Str})
@@ -71,7 +72,7 @@
 (defn validate-raw-content [raw-content]
   (try
     (validate {:endpoints {Str Endpoint}
-               :articles {Str Article}
+               :articles {Str (either ArticleFragment [ArticleFragment])}
                :sample-responses {Str Str}
                :endpoint-descriptions {Str EndpointDescription}
                :filter-descriptions {Keyword Str}
@@ -81,5 +82,5 @@
               (update-in raw-content [:endpoints]
                          #(into {} (map (juxt :path identity) %))))
     (catch Exception e
-        (throw (Exception. (.getMessage e)))))
+      (throw (Exception. (.getMessage e)))))
   raw-content)

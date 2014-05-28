@@ -13,7 +13,7 @@ If you do not, [see the merchant setup page](https://docs.spid.no/display/MER/)
 
 ## See also
 
-- [Getting started with the JavaScript client](/getting-started-with-javascript/)
+- [The JavaScript SDK](/sdks/javascript/)
 
 :body
 

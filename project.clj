@@ -9,7 +9,7 @@
                  [enlive "1.1.5"]
                  [clygments "0.1.1"]
                  [me.raynes/cegdown "0.1.1"]
-                 [mapdown "0.1.0"]
+                 [mapdown "0.2.0"]
                  [spid-client-clojure "1.0.0"]
                  [commons-lang "2.5"]
                  [ring/ring-codec "1.0.0"]

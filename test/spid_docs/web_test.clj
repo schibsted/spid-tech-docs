@@ -8,9 +8,15 @@
   (re-find (re-pattern (str "id=\"" hash "\"")) body))
 
 (defn- link-valid? [link page-url body pages the-app]
-  (let [href (-> link :attrs :href)
-        [path hash] (str/split href #"#")]
+  (let [attrs (:attrs link)
+        href (:href attrs)
+        [path hash] (and href (str/split href #"#"))]
     (cond
+     ;; If there's no href, but there is an id or name, it's an anchor. Relax,
+     ;; it's ok.
+     (and (nil? href)
+          (or (:id attrs) (:name attrs)))
+     :valid-link
 
      ;; we use #? to postpone writing a link
      (= "#?" href)

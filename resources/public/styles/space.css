@@ -1,5 +1,6 @@
+h3 {margin-bottom: 5px;}
 h5 {margin-bottom: 0;}
-h5+p {margin-top: 0;}
+h3+p, h5+p {margin-top: 0;}
 
 .mtn {margin-top: 0;}
 .mtm {margin-top: 15px;}

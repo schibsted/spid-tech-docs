@@ -50,10 +50,11 @@
 
 (def Article
   {:title Str
-   :body Str
-   (optional-key :aside) Str
-      (optional-key :frontpage) Str
-   (optional-key :relevant-endpoints) [{:method Keyword :path Path}]})
+   :frontpage Boolean
+   :sections [{:body Str
+               (optional-key :heading) Str
+               (optional-key :aside) Str
+               (optional-key :relevant-endpoints) [{:method Keyword :path Path}]}]})
 
 (def Api
   {:api Str

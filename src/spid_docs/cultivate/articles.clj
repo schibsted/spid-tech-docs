@@ -1,10 +1,21 @@
 (ns spid-docs.cultivate.articles
   (:require [spid-docs.cultivate.util :refer [parse-relevant-endpoints]]
-            [spid-docs.homeless :refer [assoc-non-nil update-vals]]))
+            [spid-docs.homeless :refer [assoc-non-nil update-vals with-optional-keys]]))
 
-(defn cultivate-article [article]
-  (assoc-non-nil article :relevant-endpoints
-                 (parse-relevant-endpoints (:relevant-endpoints article))))
+(defn- vectorify-articles [articles]
+  (update-vals articles #(if (map? %) [%] (vec %))))
+
+(defn- cultivate-section [{:keys [body heading title aside relevant-endpoints]}]
+  (with-optional-keys
+    {:body body
+     :?heading (or heading title)
+     :?aside aside
+     :?relevant-endpoints (parse-relevant-endpoints relevant-endpoints)}))
+
+(defn cultivate-article [article-sections]
+  {:title (-> article-sections first :title)
+   :frontpage (not (nil? (some :frontpage article-sections)))
+   :sections (map cultivate-section article-sections)})
 
 (defn cultivate-articles [articles]
-  (update-vals articles cultivate-article))
+  (update-vals (vectorify-articles articles) cultivate-article))

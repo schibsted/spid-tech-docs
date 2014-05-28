@@ -13,7 +13,7 @@ POST /path/to/other/page
 
  (-> (cultivate-articles {:readme {:body "README"
                                    :relevant-endpoints relevant-endpoints-example}})
-     :readme :relevant-endpoints)
+     :readme :sections first :relevant-endpoints)
 
  => [{:method :GET, :path "/path/to/{id}"}
      {:method :POST, :path "/path/to/other/page"}])
