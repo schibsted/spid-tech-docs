@@ -4,7 +4,7 @@
             [spid-docs.api-client :refer [GET get-config get-server-token config-exists?]]
             [spid-docs.content :refer [load-content]]
             [spid-docs.diff-endpoints :refer [diff-endpoints]]
-            [spid-docs.formatting :refer [titleize]]))
+            [spid-docs.formatting :refer [titleize to-id-str]]))
 
 (def import-path "/endpoints")
 
@@ -15,18 +15,31 @@
     (doseq [field (-> diff :schema :removed)] (println (format "  - Removed field \"%s\"" field)))
     (println)))
 
+(def dummy-endpoint-description
+  ":introduction
+
+Describe endpoint here. Preferably before pushing to the site. If you're reading
+this on the tech docs site, please have a good laugh at our expense, and then
+[give us some feedback](#disqus_thread).")
+
 (defn- report-endpoint-changes [{:keys [changed added removed]}]
   (when changed
     (println "Changed endpoints:")
     (doseq [e changed] (println "  -" (name (:method e)) (:path e)))
     (println))
-  (when added
-    (println "Added endpoints:")
-    (doseq [e added] (println "  -" (name (:method e)) (:path e)))
-    (println))
   (when removed
     (println "Removed endpoints:")
     (doseq [e removed] (println "  -" (name (:method e)) (:path e)))
+    (println))
+  (when added
+    (println "Added endpoints:")
+    (doseq [e added] (println "  -" (name (:method e)) (:path e)))
+    (println)
+    (println "Empty description files have been added. Please edit them:")
+    (doseq [e added]
+      (let [path (str "resources/endpoints/" (to-id-str (:path e)) "-" (.toLowerCase (name (:method e))) ".md")]
+        (spit path dummy-endpoint-description)
+        (println "  -" path)))
     (println)))
 
 (defn- report-example-params-changes [diff example-params]
