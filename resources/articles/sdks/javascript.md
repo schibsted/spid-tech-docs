@@ -423,8 +423,8 @@ var redirectUri = "http://example.com";
 var clientId = "4321abc0000";
 ```
 
-### VGS.getLoginURI
 <a id="get-login-uri"></a>
+### VGS.getLoginURI
 
 Returns the login URI.
 
@@ -433,8 +433,8 @@ VGS.getLoginURI(); //=> "https://stage.payment.schibsted.no/login?response_type=
 VGS.getLoginURI(redirectUri, clientId); //=> "https://stage.payment.schibsted.no/login?response_type=code&flow=signup&client_id=abcdef&redirect_uri=http%3A%2F%2Fexample.com"
 ```
 
-### VGS.getSignupURI
 <a id="get-signup-uri"></a>
+### VGS.getSignupURI
 
 Returns the signup URI.
 
@@ -443,8 +443,8 @@ VGS.getSignupURI(); //=> "https://stage.payment.schibsted.no/signup?response_typ
 VGS.getSignupURI(redirectUri, clientId); //=> "https://stage.payment.schibsted.no/signup?response_type=code&flow=signup&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
 ```
 
-### VGS.getLogoutURI
 <a id="get-logout-uri"></a>
+### VGS.getLogoutURI
 
 Returns the logout URI.
 
@@ -453,8 +453,8 @@ VGS.getLogoutURI(); //=> "https://stage.payment.schibsted.no/logout?response_typ
 VGS.getLogoutURI(redirectUri, clientId); //=> "https://stage.payment.schibsted.no/logout?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
 ```
 
-### VGS.getAccountURI
 <a id="get-account-uri"></a>
+### VGS.getAccountURI
 
 Returns the account summary page URI.
 
@@ -463,8 +463,8 @@ VGS.getAccountURI(); //=> "https://stage.payment.schibsted.no/account/summary?re
 VGS.getAccountURI(redirectUri, clientId); //=> "https://stage.payment.schibsted.no/account/summary?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
 ```
 
-### VGS.getPurchaseHistoryURI
 <a id="get-purchase-history-uri"></a>
+### VGS.getPurchaseHistoryURI
 
 Returns the purchase history page URI.
 
@@ -473,8 +473,8 @@ VGS.getPurchaseHistoryURI(); //=> "https://stage.payment.schibsted.no/account/pu
 VGS.getPurchaseHistoryURI(redirectUri, clientId); //=> "https://stage.payment.schibsted.no/account/purchasehistory?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
 ```
 
-### VGS.getSubscriptionsURI
 <a id="get-subscriptions-uri"></a>
+### VGS.getSubscriptionsURI
 
 Returns the subscriptions page URI.
 
@@ -483,8 +483,8 @@ VGS.getSubscriptionsURI(); //=> "https://stage.payment.schibsted.no/account/subs
 VGS.getSubscriptionsURI(redirectUri, clientId); //=> "https://stage.payment.schibsted.no/account/subscriptions?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
 ```
 
-### VGS.getProductsURI
 <a id="get-products-uri"></a>
+### VGS.getProductsURI
 
 Returns the products page URI.
 
@@ -493,8 +493,8 @@ VGS.getProductsURI(); //=> "https://stage.payment.schibsted.no/account/products?
 VGS.getProductsURI(redirectUri, clientId); //=> "https://stage.payment.schibsted.no/account/products?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
 ```
 
-### VGS.getRedeemVoucherURI
 <a id="get-redeem-voucher-uri"></a>
+### VGS.getRedeemVoucherURI
 
 Returns the redeem voucher page URI. If `voucher_code` is supplied, the voucher
 will automatically be redeemed when the URI is visited.
@@ -508,8 +508,8 @@ VGS.getRedeemVoucherURI(voucherCode, redirectUri, clientId);
 //=> "https://stage.payment.schibsted.no/account/redeem?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com&voucher_code=12312314"
 ```
 
-### VGS.getPurchaseProductURI
 <a id="get-purchase-product-uri"></a>
+### VGS.getPurchaseProductURI
 
 Returns the purchase product page URI. If `product_id` is supplied, the URI will
 lead to the "choose payment method" page, otherwise it will lead to the "choose
@@ -524,8 +524,8 @@ VGS.getPurchaseProductURI(productId, redirectUri, clientId);
 //=> "https://stage.payment.schibsted.no/auth/start?response_type=code&flow=payment&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com&product_id=12312314"
 ```
 
-### VGS.getPurchaseCampaignURI(campaign_id, product_id, voucher_code redirect_uri, client_id)`
 <a id="get-purchase-campaign-uri"></a>
+### VGS.getPurchaseCampaignURI(campaign_id, product_id, voucher_code redirect_uri, client_id)`
 
 Get URI for purchase campaign page. If `campaign_id` is supplied, the URI will
 take the user to the products in the campaign.
@@ -541,8 +541,8 @@ VGS.getPurchaseCampaignURI(campaignId, productId, voucherCode, redirectUri, clie
 //=> "https://stage.payment.schibsted.no/auth/start?response_type=code&flow=payment&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com&campaign_id=39843984&product_id=12312314&voucher_code=89878966"
 ```
 
-### VGS.getLoginStatus
 <a id="get-login-status"></a>
+### VGS.getLoginStatus
 
 ```js
 VGS.getLoginStatus(callback, force)
@@ -584,8 +584,8 @@ If you check the user's status through `VGS.init`, you can subscribe to the
 identical to that which would be returned by calling `VGS.getLoginStatus`
 explicitly.
 
-### VGS.hasProduct
 <a id="has-product"></a>
+### VGS.hasProduct
 
 ```js
 VGS.hasProduct(product_id, callback, force)
@@ -617,8 +617,8 @@ VGS.hasProduct(2134423, function (response) {
 });
 ```
 
-### VGS.hasSubscription
 <a id="has-subscription"></a>
+### VGS.hasSubscription
 
 ```js
 VGS.hasSubscription(product_id, callback, force)
@@ -651,9 +651,9 @@ VGS.hasSubscription(324892374, function (response) {
 });
 ```
 
-### VGS.Auth.logout
 <a id="auth"></a>
 <a id="logout"></a>
+### VGS.Auth.logout
 
 Logs the user out, and calls the callback when done.
 
@@ -663,9 +663,9 @@ VGS.Auth.logout(function (data) {
 });
 ```
 
-### VGS.Event.subscribers
 <a id="event"></a>
 <a id="subscribers"></a>
+### VGS.Event.subscribers
 
 Returns an object of all event subscribers, with event names as keys, and arrays
 of functions (e.g. event handlers) as values.
@@ -679,8 +679,8 @@ VGS.Event.subscribers()
 // }
 ```
 
-### VGS.Event.subscribe
 <a id="subscribe"></a>
+### VGS.Event.subscribe
 
 Register subscriber for event. The event handler function will be called
 whenever the named event occurs.
@@ -691,8 +691,8 @@ VGS.Event.subscribe("auth:login", function (data) {
 });
 ```
 
-### VGS.Event.unsubscribe
 <a id="unsubscribe"></a>
+### VGS.Event.unsubscribe
 
 Remove previously subscribed function. Pass in the event name and the function
 originally passed to `VGS.Event.subscribe`.
@@ -712,8 +712,8 @@ VGS.Event.unsubscribe("auth:login", callback);
 Note that it must be the same function reference, you cannot inline the function
 in the `subscribe` call when you want to later unsubscribe it.
 
-### VGS.Event.monitor
 <a id="monitor"></a>
+### VGS.Event.monitor
 
 Monitor an event for some period of time. The callback is invoked immediately
 when `monitor` is called, and then every time the event fires. When the callback
@@ -733,8 +733,8 @@ VGS.Event.monitor("auth:login", function (data) {
 });
 ```
 
-### VGS.Event.clear
 <a id="clear"></a>
+### VGS.Event.clear
 
 Clear all subscribers for an event.
 
@@ -742,8 +742,8 @@ Clear all subscribers for an event.
 VGS.Event.clear("auth:login");
 ```
 
-### VGS.Event.fire
 <a id="fire"></a>
+### VGS.Event.fire
 
 Fire an event. The first argument is the event name, additional arguments are
 passed to subscribers. This function is used by the JS SDK to propagate events
