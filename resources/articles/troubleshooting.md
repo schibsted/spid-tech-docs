@@ -54,7 +54,3 @@ When attempting to obtain a user token by `POST`-ing to `/oauth/token`, email
 addresses using an alias (e.g. the username part has a `+` in it) will result in
 a failure. SPiD is generally email address aliases (e.g.
 `myaddress+myalias@domain.tld`) aware, and this will be fixed in the future.
-
-Logging in programatically also requires the user to already be
-[logged in](http://stage.payment.schibsted.no/login), even if you're providing
-the username and password with the request.
