@@ -59,7 +59,8 @@
   [:p [:strong "Deprecated since version " version]])
 
 (defn render-description [endpoint]
-  (render (:description endpoint)))
+  (render (or (:description endpoint)
+              (:name endpoint))))
 
 (defn render-request-synopsis [endpoint]
   [:pre [:code.sh (str (name (:method endpoint)) " " (:api-path endpoint))]])
