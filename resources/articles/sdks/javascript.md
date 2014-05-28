@@ -5,7 +5,6 @@
 
 ## On this page
 
-- [Downloading the JavaScript SDK](#downloading-the-javascript-sdk)
 - [Loading and initialization](#loading-and-initialization)
 - [Events](#events)
 - [Response signature and validation](#response-signature-and-validation)
@@ -23,17 +22,7 @@ information about the user's authentication/authorization status. It is not a
 general purpose SDK to make arbitrary requests against the API. A Node SDK is
 being developed to fill this role for server-side JavaScript.
 
-## Downloading the JavaScript SDK
-
-Download the JavaScript SDK by downloading the
-[latest version from GitHub](https://github.com/schibsted/sdk-js/tree/master/dist).
-Note that both the unminified and minified versions bundle the
-[JSON2.js](https://github.com/douglascrockford/JSON-js) script. If you do not
-need it (e.g., you don't need support for <= IE7), download the source code and
-build it yourself. Refer to the
-[JS SDK Readme](https://github.com/schibsted/sdk-js) for how to do this.
-
-## Loading and initialization
+## Loading and initializing
 
 The following code will load and initialize the JavaScript SDK with the most
 common options. Replace `YOUR_CLIENT_ID`, `SPID_JSSDK_URI` and `SPID_SERVER_URI`
@@ -764,3 +753,11 @@ option is set to `true`, the cookies will be created for your own domain.
 Loading the JS SDK directly from SPiD is recommended for performance reasons.
 This way, the SDK is cached across clients, meaning that users that have
 previously visited other clients may not need to download the SDK for your site.
+
+To use a local copy of the SDK, download the
+[latest version from GitHub](https://github.com/schibsted/sdk-js/tree/master/dist).
+Note that both the unminified and minified versions bundle the
+[JSON2.js](https://github.com/douglascrockford/JSON-js) script. If you do not
+need it (e.g., you don't need support for <= IE7), download the source code and
+build it yourself. Refer to the
+[JS SDK Readme](https://github.com/schibsted/sdk-js) for how to do this.
