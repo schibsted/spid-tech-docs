@@ -18,7 +18,17 @@ POST /path/to/other/page
                                             :success-description "success description"
                                             :relevant-endpoints relevant-endpoints-example
                                             :relevant-types "user order"
-                                            :example-params "userId: custom"}}
+                                            :example-params "userId: custom"}
+
+                           ;; these dummy endpoint descriptions are not relevant to the test,
+                           ;; but required, since cultivate complains about missing description files:
+                           "/-get.md" {}
+                           "/-post.md" {}
+                           "/-delete.md" {}
+                           "/describe-object-get.md" {}
+                           "/subscription-post.md" {}
+                           "/bad-post.md" {}}
+
    :articles {"/direct-payment-api.md" "An article"}
    :example-params {"userId" "42"
                     "orderId" "43"}

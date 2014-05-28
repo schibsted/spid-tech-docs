@@ -159,7 +159,10 @@
         {:keys [required optional defaultFilters filters accessTokenTypes responses]} details
         {:keys [filter-descriptions endpoint-descriptions sample-responses articles]} raw-content
         endpoint-id (str (to-id-str path) "-" (.toLowerCase (name method)))
-        {:keys [introduction success-description relevant-endpoints relevant-types example-params]} (get endpoint-descriptions (str "/" endpoint-id ".md") {})]
+        endpoint-description (get endpoint-descriptions (str "/" endpoint-id ".md"))
+        {:keys [introduction success-description relevant-endpoints relevant-types example-params]} endpoint-description]
+    (when-not endpoint-description
+      (throw (Exception. (str "Missing endpoint description file resources/" endpoint-id ".md"))))
     (with-optional-keys
       {:id (keyword endpoint-id)
        :path (str "/" path)
