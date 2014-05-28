@@ -20,7 +20,8 @@ var disqus_identifier = '" (get-in el [:attrs :id]) "';
 var disqus_url = 'http://techdocs.spid.no" (get-in el [:attrs :id]) "';")}]))
 
 (defn add-comments
-  "Add Disqus comments if the page contains a <div class=\"disqus-comments\"/>"
+  "Add Disqus comments if the page contains a <div class=\"disqus-comments\"/>.
+   The element in question must also have the page URL as id."
   [markup]
   (sniptest markup
             [:div.disqus-comments] comment-markup))
