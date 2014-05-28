@@ -39,10 +39,10 @@ with the appropriate values.
 - https://stage.payment.schibsted.no for Norwegian stage clients
 - https://stage.payment.schibsted.se for Swedish stage clients
 
-`SPID_JSSDK_URI` will either point to SPiD's servers, or your locally downloaded
-copy. Read more about this under [hosting](#hosting). When using the SDK live
-from SPiD, the URL typically looks like
-`https://payment.schibsted.(se|no)/js/spid-sdk-{version}.min.js`, e.g.
+`SPID_JSSDK_URI` will normally point to SPiD's servers. Read more about this
+under [hosting](#hosting). When using the SDK live from SPiD, the URL typically
+looks like `https://payment.schibsted.(se|no)/js/spid-sdk-{version}.min.js`,
+e.g.
 [https://payment.schibsted.no/js/spid-sdk-1.7.1.min.js](https://payment.schibsted.no/js/spid-sdk-1.7.1.min.js).
 
 ### Synchronously loading the JS SDK
