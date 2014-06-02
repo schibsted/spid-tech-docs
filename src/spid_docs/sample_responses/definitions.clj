@@ -148,46 +148,119 @@
 
 ;; Products
 
-;;(defsample POST "/product")
+(comment
+  ;; 403 - could it be that the client doesn't have access to the endpoint?
 
-;; (code, name, price, vat, paymentOptions, type, currency,
-;;[bundle, hideItems, status, parentProductId, description, url, quantityLimit,
-;;saleStart, saleStop, availableStart, availableStop, allowMultiSales, subscriptionPeriod,
-;;subscriptionRenewPrice, subscriptionRenewPeriod, subscriptionAutoRenew,
-;;subscriptionAutoRenewLockPeriod, subscriptionAutoRenewDisabled, subscriptionGracePeriod,
-;;subscriptionEmailReceiptLimit, subscriptionFinalEndDate, subscriptionSurveyUrl])
+  (defsample themovie
+    POST "/product" {:code "themovie"
+                     :name "The Movie"
+                     :price 4758
+                     :vat 1142
+                     :paymentOptions 2 ;; "Credit card"
+                     :type 1 ;; "Digital contents"
+                     :currency "NOK"})
 
-;;;;
-;;;;  ;; POST igjen for å legge til children
-;;;;  (defsample GET "/products") ;; ([productId, name, code, price, parentProductId, sort])
-;;;;  (defsample GET "/product/{id}")
-;;;;  (defsample POST "/product/{id}") ;; ([name, description, price, vat, paymentOptions, url, quantityLimit, status, availableStart, availableStop, saleStart, saleStop, hideItems, allowMultiSales, subscriptionPeriod, subscriptionRenewPrice, subscriptionRenewPeriod, subscriptionAutoRenew, subscriptionAutoRenewLockPeriod, subscriptionAutoRenewDisabled, subscriptionGracePeriod, subscriptionEmailReceiptLimit, subscriptionFinalEndDate, subscriptionSurveyUrl])
-;;;;
-;;;;  (defsample GET "/product/{productId}/children")
-;;;;
-;;;;  ;; Krever at produktet er endret, tror jeg
-;;;;  (defsample GET "/product/{productId}/revisions")
-;;;;
-;;;;  (defsample GET "/products/parents")
-;;;;
-;;;;  ;; Må lage bundle først?
-;;;;  (defsample POST "/bundle/{bundleId}/product/{productId}") ;; ([sort, price, vat])
-;;;;  (defsample DELETE "/bundle/{bundleId}/product/{productId}")
-;;;;
-;;;;  (defsample POST "/vouchers/group") ;; (title, type, [campaignId, productId, description" false] ["unique" false] ["voucherCode" false])
-;;;;
-;;;;  (defsample GET "/voucher/{voucherCode}")            ;; (["voucherCode" true])
-;;;;  (defsample POST "/vouchers/generate/{voucherGroupId}") ;; (["voucherGroupId" true] ["amount" false])
-;;;;  (defsample POST "/vouchers/handout/{voucherGroupId}") ;; (["voucherGroupId" true] ["amount" false])
-;;;;  (defsample POST "/voucher_handout") ;; (["userId" true] ["voucherGroupId" true])
-;;;;  (defsample GET "/vouchers/groups") ;; (["title" false] ["campaignId" false] ["type" false] ["productId" false])
-;;;;  (defsample GET "/vouchers/group/{voucherGroupId}") ;; (["voucherGroupId" true])
-;;;;  (defsample POST "/vouchers/group/{voucherGroupId}") ;; (["voucherGroupId" true] ["title" false] ["description" false])
-;;;;
-;;;;  ;; Må være lagt til i UI-et(?)
-;;;;  (defsample GET "/identifier/{identifierId}")
-;;;;
-;;;;  (defsample GET "/agreements/{userId}/payment")
+  (defsample vgplus
+    POST "/product" {:code "vg+"
+                     :name "VG+"
+                     :price 4758
+                     :vat 1142
+                     :paymentOptions 2 ;; "Credit card"
+                     :type 2 ;; "Subscription"
+                     :currency "NOK"})
+
+  (defsample vgplus-3mo [parent vgplus]
+    POST "/product" {:code "vg+3mo"
+                     :name "VG+ 3 måneder"
+                     :price 4758
+                     :vat 1142
+                     :paymentOptions 2 ;; "Credit card"
+                     :type 2 ;; "Subscription"
+                     :currency "NOK"
+                     :parentProductId (:productId parent)})
+
+  (defsample vgplus-6mo [parent vgplus]
+    POST "/product" {:code "vg+6mo"
+                     :name "VG+ 6 måneder"
+                     :price 9516
+                     :vat 2284
+                     :paymentOptions 2 ;; "Credit card"
+                     :type 2 ;; "Subscription"
+                     :currency "NOK"
+                     :parentProductId (:productId parent)})
+
+  (defsample [product vgplus]
+    GET "/product/{productId}" {:productId (:productId product)})
+
+  (defsample [product vgplus]
+    POST "/product/{productId}" {:productId (:productId product)
+                                 :name "VG PLUSS"})
+
+  (defsample [product vgplus]
+    GET "/product/{productId}/children" {:productId (:productId product)})
+
+  (defsample [product vgplus]
+    GET "/product/{productId}/revisions" {:productId (:productId product)})
+
+  (defsample [product vgplus-3mo]
+    GET "/product/{productId}/parents" {:productId (:productId product)})
+
+  (defsample vgplus-bundle
+    POST "/product" {:code "vg+bundle"
+                     :name "VG+ Alle slag"
+                     :price 9516
+                     :vat 2284
+                     :paymentOptions 2 ;; "Credit card"
+                     :type 2 ;; "Subscription"
+                     :bundle 1 ;; "Dynamic bundle"
+                     :currency "NOK"})
+
+  (defsample [bundle vgplus-bundle
+              product vgplus-3mo]
+    POST "/bundle/{bundleId}/product/{productId}" {:bundleId (:productId bundle)
+                                                   :productId (:productId product)})
+
+  (defsample [bundle vgplus-bundle
+              product vgplus-3mo]
+    DELETE "/bundle/{bundleId}/product/{productId}" {:bundleId (:productId bundle)
+                                                     :productId (:productId product)}))
+
+(comment
+  ;; 403
+  (defsample vouchers-for-all
+    POST "/vouchers/group" {:title "Vouchers for all"
+                            :type "8" ;; "Voucher as payment method"
+                            :voucherCode "v4a"})
+
+  (defsample [group vouchers-for-all]
+    GET "/voucher/{voucherCode}" {:voucherCode (:voucherCode group)})
+
+  (defsample [group vouchers-for-all]
+    POST "/vouchers/generate/{voucherGroupId}" {:voucherGroupId (:voucherGroupId group)})
+
+  (defsample [group vouchers-for-all]
+    POST "/vouchers/handout/{voucherGroupId}" {:voucherGroupId (:voucherGroupId group)})
+
+  (defsample [user johndoe
+              group vouchers-for-all]
+    POST "/voucher_handout" {:userId (:userId user)
+                             :voucherGroupId (:voucherGroupId group)})
+
+  (defsample GET "/vouchers/groups")
+
+  (defsample [group vouchers-for-all]
+    GET "/vouchers/group/{voucherGroupId}" {:voucherGroupId (:voucherGroupId group)})
+
+  (defsample [group vouchers-for-all]
+    POST "/vouchers/group/{voucherGroupId}" {:voucherGroupId (:voucherGroupId group)}))
+
+(comment
+  ;; Må være lagt til i UI-et(?)
+  (defsample GET "/identifier/{identifierId}") {:identifierId "???"})
+
+(defsample [user johndoe]
+  GET "/agreements/{userId}/payment" {:userId (:userId user)})
+
 ;;;;  (defsample GET "/logins/{userId}")
 ;;;;
 ;;;;  (defsample POST "/paylink") ;; (["title" true] ["items" true] ["clientReference" false] ["purchaseFlow" false] ["paymentOptions" false] ["expires" false] ["redirectUri" false] ["cancelUri" false] ["sellerUserId" false] ["buyerUserId" false])
