@@ -5,7 +5,7 @@
 
 ## On this page
 
-- [Loading and initialization](#loading-and-initialization)
+- [Loading and initialization](#loading-and-initializing)
 - [Events](#events)
 - [Response signature and validation](#response-signature-and-validation)
 - [API Docs](#api-docs)

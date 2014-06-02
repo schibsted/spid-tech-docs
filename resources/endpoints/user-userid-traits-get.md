@@ -1,6 +1,10 @@
 :introduction
 
-Retrieves all traits for the specified user.
+Retrieves all traits for the specified user. Traits are used for Mixpanel
+analytics integration. Refer to the
+[Mixpanel analytics integration guide](/mixpanel-integration-guide/) for more
+information on the data format of the traits JSON-object and other aspects of
+the integration.
 
 :relevant-endpoints
 
