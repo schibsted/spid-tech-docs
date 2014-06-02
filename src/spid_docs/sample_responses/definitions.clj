@@ -270,6 +270,7 @@
 
 (comment
   ;; 403
+  ;; TODO: Må muligens JSON-enkode :items
   (defsample buy-star-wars
     POST "/paylink" {:title "Star Wars Movies"
                      :items [{:description "Star Wars IV"
@@ -298,79 +299,106 @@
   (defsample [user johndoe]
     GET "/user/{userId}/preferences/payment" {:userId (:userId user)})
 
+  ;; TODO: Legg til hash (verified hash)
+  ;; TODO: Muligens JSON-enkode :items
   (defsample [user johndoe]
     POST "/user/{userId}/charge" {:userId (:userId user)
-                                  :requestReference "ref"})
+                                  :requestReference "ref"
+                                  :items [{:description "Star Wars IV"
+                                           :price 7983
+                                           :vat 1917}
+                                          {:description "Star Wars V"
+                                           :price 7983
+                                           :vat 1917}
+                                          {:description "Star Wars VI"
+                                           :price 7983
+                                           :vat 1917}]
+                                  :hash "??? verified hash av params"}))
 
-;; (["userId" true]
-;; ["hash" true]
-;; ["requestReference" true]
-;; ["items" true]
-;; ["clientReference" false]
-;; ["paymentOptions" false]
-;; ["purchaseFlow" false] ["sellerUserId" false] ["tag" false] ["type" false]
+(comment
+  ;; Trenger en ordre
 
+  (defsample GET "/orders")
+  (defsample GET "/order/{orderId}" {:orderId "???"})
+  (defsample GET "/order/{orderId}/transactions" {:orderId "???"})
 
-  )
+  (defsample [user johndoe]
+    GET "/user/{userId}/orders" {:userId (:userId user)})
 
+  (defsample [user johndoe]
+    GET "/user/{userId}/order/{orderId}" {:userId (:userId user)
+                                          :orderId "???"})
 
+  (defsample [user johndoe]
+    GET "/user/{userId}/transactions" {:userId (:userId user)})
 
-;;;;  ;; Hvordan _lage_ en order??
-;;;;
-;;;;  (defsample GET "/orders") ;; (["sort" false] ["userId" false] ["status" false] ["ocr" false] ["orderId" false] ["clientReference" false])
-;;;;  (defsample GET "/order/{orderId}")  ;; (["orderId" true])
-;;;;  (defsample GET "/order/{orderId}/transactions") ;; (["orderId" true])
-;;;;
-;;;;  (defsample GET "/user/{userId}/orders") ;; (["userId" true] ["status" false])
-;;;;  (defsample GET "/user/{userId}/order/{orderId}") ;; (["userId" true] ["orderId" true])
-;;;;  (defsample GET "/user/{userId}/transactions") ;; (["userId" true])
-;;;;
-;;;;  (defsample GET "/order/{orderId}/items")                  ;; (["orderId" true])
-;;;;  (defsample GET "/order/{orderId}/status")                           ;; (["orderId" true])
-;;;;  (defsample POST "/order/{orderId}/credit") ;; (["orderId" true] ["description" true] ["amount" false] ["orderItemId" false] ["notifyUser" false])
-;;;;
-;;;;  (defsample POST "/user/{userId}/order/{orderId}/credit") ;; (["userId" true] ["orderId" true])
-;;;;
-;;;;  (defsample POST "/order/{orderId}/capture") ;; (["orderId" true] ["amount" false] ["orderItemId" false] ["description" false])
-;;;;  (defsample POST "/order/{orderId}/complete")         ;; (["orderId" true])
-;;;;
-;;;;  (defsample POST "/user/{userId}/product/{productId}")
-;;;;  (defsample  GET "/user/{userId}/product/{productId}")
-;;;;  (defsample GET "/user/{userId}/products")
-;;;;  (defsample DELETE "/user/{userId}/product/{productId}")
-;;;;
-;;;;  (defsample POST "/order/{orderId}/cancel") ;; (["orderId" true])
-;;;;
-;;;;  (defsample POST "/user/{userId}/subscription") ;; (["userId" true] ["productId" true] ["startDate" false] ["orderId" false] ["expires" false])
-;;;;  (defsample GET "/user/{userId}/subscription/{subscriptionId}")
-;;;;  (defsample GET "/user/{userId}/subscriptions")
-;;;;  (defsample POST "/user/{userId}/subscription/{subscriptionId}") ;; ("autoRenew")
-;;;;  (defsample GET "/subscriptions")
-;;;;  (defsample DELETE "/user/{userId}/subscription/{subscriptionId}")
-;;;;
-;;;;  (defsample GET "/digitalcontents")
-;;;;
-;;;;  ;; Med user token
-;;;;  ;; GET "/terms" (med oath_token, not_accepted)
+  (defsample GET "/order/{orderId}/items" {:orderId "???"})
+  (defsample GET "/order/{orderId}/status" {:orderId "???"})
+  (defsample POST "/order/{orderId}/credit" {:orderId "???"
+                                             :description "Credit order"})
 
-(defsample GET "/me")
+  (defsample [user johndoe]
+    POST "/user/{userId}/order/{orderId}/credit" {:userId (:userId user)
+                                                  :orderId "???"})
 
-;;;;  ;; GET "/me/vouchers"
-;;;;  ;; GET "/logout" ()
-;;;;
-;;;;  ;; Med admin token (vet lite om disse)
-;;;;  ;; GET "/injectable/names"
-;;;;  ;; POST "/injectable/import" (tokenName, content)
-;;;;
-;;;;  ;; Dunno
-;;;;
-;;;;  ;; (defsample GET "/campaign/{campaignId}") ;; (["campaignId" true])
-;;;;  ;; (defsample POST "/campaign/{campaignId}") ;; (["campaignId" true] ["title" false] ["description" false] ["metaData" false] ["status" false] ["startDate" false] ["stopDate" false] ["additionalReceiptInfo" false] ["requireAddress" false] ["requireVoucher" false] ["products" false])
-;;;;  ;; (defsample POST "/campaign") ;; (["title" true] ["description" false] ["metaData" false] ["startDate" false] ["stopDate" false] ["additionalReceiptInfo" false] ["requireAddress" false] ["requireVoucher" false] ["products" false])
-;;;;  ;; (defsample GET "/campaigns") ;; (["sort" false] ["campaignId" false] ["title" false] ["description" false] ["status" false])
-;;;;  ;; (defsample GET "/product/{productId}/campaigns") ;; (["productId" true])
-;;;;
-;;;;  ;; Deprecated
-;;;;  (defsample POST "/payment") ;; (["action" true] ["productId" true] ["clientRef" true] ["agreementRef" true] ["hash" true] ["price" false])
-;;;;  (defsample GET "/payment/{id}")       ;; (["id" true])
-;;;;  (defsample GET "/payments") ;; (["clientRef" false] ["userId" false] ["productId" false] ["status" false])
+  (defsample POST "/order/{orderId}/capture" {:orderId "????"})
+
+  (defsample POST "/order/{orderId}/complete" {:orderId "????"})
+
+  (defsample [user johndoe
+              product vgplus]
+    POST "/user/{userId}/product/{productId}" {:userId (:userId user)
+                                               :productId (:productId product)})
+
+  (defsample [user johndoe
+              product vgplus]
+    GET "/user/{userId}/product/{productId}" {:userId (:userId user)
+                                              :productId (:productId product)})
+
+  (defsample [user johndoe]
+    GET "/user/{userId}/products" {:userId (:userId user)})
+
+  (defsample [user johndoe
+              product vgplus]
+    DELETE "/user/{userId}/product/{productId}" {:userId (:userId user)
+                                                 :productId (:productId product)})
+
+  (defsample POST "/order/{orderId}/cancel" {:orderId "???"})
+
+  (defsample [user johndoe
+              product vgplus]
+    POST "/user/{userId}/subscription" {:userId (:userId user)
+                                        :productId (:productId product)})
+
+  (defsample [user johndoe
+              subscription vgplus]
+    GET "/user/{userId}/subscription/{subscriptionId}" {:userId (:userId user)
+                                                        :subscriptionId (:productId subscription)})
+
+  (defsample [user johndoe]
+    GET "/user/{userId}/subscriptions" {:userId (:userId user)})
+
+  (defsample [user johndoe
+              subscription vgplus]
+    POST "/user/{userId}/subscription/{subscriptionId}" {:userId (:userId user)
+                                                         :subscriptionId (:productId subscription)})
+
+  (defsample GET "/subscriptions")
+
+  (defsample [user johndoe
+              subscription vgplus]
+    DELETE "/user/{userId}/subscription/{subscriptionId}" {:userId (:userId user)
+                                                           :subscriptionId (:productId subscription)}))
+
+(defsample GET "/digitalcontents")
+
+(comment
+  ;; User token
+
+  (defsample GET "/terms")
+
+  (defsample GET "/me")
+
+  (defsample GET "/me/vouchers")
+
+  (defsample GET "/logout"))
