@@ -23,7 +23,7 @@
 (comment
   ;; There are no product settings for our account.
   ;; Commented out to avoid a sample response of "[]"
-  ;; which would be only noise (and a little embarrasing)
+  ;; which would only be noise (and a little embarrasing)
 
   (defsample GET "/productsettings"))
 
