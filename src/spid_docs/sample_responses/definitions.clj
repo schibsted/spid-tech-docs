@@ -258,22 +258,63 @@
   ;; Må være lagt til i UI-et(?)
   (defsample GET "/identifier/{identifierId}") {:identifierId "???"})
 
-(defsample [user johndoe]
-  GET "/agreements/{userId}/payment" {:userId (:userId user)})
+(comment
+  ;; 403
+  (defsample [user johndoe]
+    GET "/agreements/{userId}/payment" {:userId (:userId user)}))
 
-;;;;  (defsample GET "/logins/{userId}")
-;;;;
-;;;;  (defsample POST "/paylink") ;; (["title" true] ["items" true] ["clientReference" false] ["purchaseFlow" false] ["paymentOptions" false] ["expires" false] ["redirectUri" false] ["cancelUri" false] ["sellerUserId" false] ["buyerUserId" false])
-;;;;  (defsample GET "/paylink/{paylinkId}") ;; (["id" true])
-;;;;  (defsample DELETE "/paylink/{paylinkId}")        ;; (["id" true])
-;;;;
-;;;;  ;; Avhenger av cronjob klokka 05:00 ...
-;;;;  (defsample GET "/kpis") ;; (["name" false] ["sort" false])
-;;;;
-;;;;  ;; Avhenger av kredittkort lagt til på web
-;;;;  (defsample GET "/user/{userId}/preferences/payment")
-;;;;  (defsample POST "/user/{userId}/charge") ;; (["userId" true] ["hash" true] ["requestReference" true] ["items" true] ["clientReference" false] ["paymentOptions" false] ["purchaseFlow" false] ["sellerUserId" false] ["tag" false] ["type" false])
-;;;;
+(comment
+  ;; 403
+  (defsample [user johndoe]
+    GET "/logins/{userId}"  {:userId (:userId user)}))
+
+(comment
+  ;; 403
+  (defsample buy-star-wars
+    POST "/paylink" {:title "Star Wars Movies"
+                     :items [{:description "Star Wars IV"
+                              :price 7983
+                              :vat 1917}
+                             {:description "Star Wars V"
+                              :price 7983
+                              :vat 1917}
+                             {:description "Star Wars VI"
+                              :price 7983
+                              :vat 1917}]})
+
+  (defsample [paylink buy-star-wars]
+    GET "/paylink/{paylinkId}" {:paylinkId (:paylinkId paylink)})
+
+  (defsample [paylink buy-star-wars]
+    DELETE "/paylink/{paylinkId}" {:paylinkId (:paylinkId paylink)}))
+
+(comment
+  ;; Avhenger av cronjob klokka 05:00 ...
+  (defsample GET "/kpis"))
+
+(comment
+  ;; Avhenger av kredittkort lagt til på web
+
+  (defsample [user johndoe]
+    GET "/user/{userId}/preferences/payment" {:userId (:userId user)})
+
+  (defsample [user johndoe]
+    POST "/user/{userId}/charge" {:userId (:userId user)
+                                  :requestReference "ref"})
+
+;; (["userId" true]
+;; ["hash" true]
+;; ["requestReference" true]
+;; ["items" true]
+;; ["clientReference" false]
+;; ["paymentOptions" false]
+;; ["purchaseFlow" false] ["sellerUserId" false] ["tag" false] ["type" false]
+
+
+  )
+
+
+
 ;;;;  ;; Hvordan _lage_ en order??
 ;;;;
 ;;;;  (defsample GET "/orders") ;; (["sort" false] ["userId" false] ["status" false] ["ocr" false] ["orderId" false] ["clientReference" false])
