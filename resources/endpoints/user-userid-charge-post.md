@@ -1,7 +1,7 @@
 :introduction
 
 Charge or authorize a payment onto an end-user's SPiD account. Refer to
-[the direct payment API introduction](/direct-payment-api/) for a details.
+[the direct payment API introduction](/direct-payment-api/) for details.
 
 ## Successful responses
 
