@@ -45,7 +45,7 @@ it is discouraged for several reasons:
 ## Example authentication flow
 
 This example shows how the authentication flow works on the Fedrelandsvennen
-eReader app, which uses fvnereader://login as its custom URI scheme. The
+eReader app, which uses `fvnereader://login` as its custom URI scheme. The
 authentication happens on our stage platform.
 
 1. Direct user to authorize your app on SPiD
