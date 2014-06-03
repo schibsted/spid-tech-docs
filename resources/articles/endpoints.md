@@ -141,38 +141,134 @@ http://staging.payment.schibsted.no/api/2/user/42.xml
 
 ## Signed responses
 
-Some API endpoints return encoded and signed data. This can be enabled upon
-request, and is enabled by default on the payment API endpoints.
+Some API endpoints return signed data. This can be enabled upon request, and is
+enabled by default on the payment API endpoints.
 
 There are 2 fields in the API container that indicate a signed response. The
 `sig` parameter is a signature string, while `algorithm` is the algorithm used
 to encrypt the signature string.
 
 The signature ensures that the data you are receiving is actually sent by SPiD.
-It is signed using your Client signature secret which is only known to you and
-SPiD. Without this secret, third parties cannot modify the `sig` parameter
-without also invalidating the data in the provided response.
+It is signed using your signature secret which is only known to you and SPiD.
+Without this secret, third parties cannot modify the `sig` parameter without
+also invalidating the data in the provided response.
 
-The response data must be Base64 decoded to JSON before it can be used.
+The response data must be
+[Base64 URL decoded](http://en.wikipedia.org/wiki/Base64#URL_applications) to
+JSON before it can be used.
+
+To experiment with signature verification, try this sample response:
+
+```js
+{
+    "name": "SPP Container",
+    "version": "0.2",
+    "api": 2,
+    "object": "Payment",
+    "type": "collection",
+    "code": 200,
+    "request": {
+        "reset": 3600,
+        "limit": 360000,
+        "remaining": 360000
+    },
+    "debug": {
+        "route": {
+            "name": "Search transactions",
+            "url": "/api/2/payments",
+            "controller": "Api/2/Payment.payments"
+        },
+        "params": {
+            "options": [],
+            "where": {
+                "clientRef": "521b89dc836b9"
+            }
+        }
+    },
+    "meta": {
+        "count": 1,
+        "offset": 0
+    },
+    "error": null,
+    "data": "eyJvYmplY3QiOiJvcmRlciIsImVudHJ5IjpbeyJvcmRlcl9pZCI6IjMwMDAxNCIsImNoYW5nZWRfZmllbGRzIjoic3RhdHVzIiwidGltZSI6IjIwMTItMDktMzAgMTM6MjE6NDMifSx7Im9yZGVyX2lkIjoiMzAwMDE2IiwiY2hhbmdlZF9maWVsZHMiOiJzdGF0dXMiLCJ0aW1lIjoiMjAxMi0wOS0zMCAxMzoyMTo0MyJ9XX0",
+    "algorithm": "HMAC-SHA256",
+    "sig": "GTUVPjN1LzdyU1qwHjnMKS2oNxckfGzXWA6WOGHVOOg"
+}
+
+// Sign secret: a274de
+```
 
 ### :tabs Decoding responses
 
 #### :tab PHP
 
+`$container` is a full [response container](#response-container).
+
 ```php
 <?php
-$data = json_decode(base64UrlDecode($container['data']), true);
-$sig = base64UrlDecode($encoded_sig);
+function base64_url_decode($input) {
+    return base64_decode(strtr($input, '-_', '+/'));
+}
+
+$data = json_decode(base64_url_decode($container['data']), true);
+$sig = base64_url_decode($container['sig']);
 ```
 
-To verify the data content, recreate the payload with the signature using the
-specified algorithm and your client signature secret. SHA256 is the default
-hashing algorithm.
+To verify the data, recreate the payload with the signature using the specified
+algorithm and your client signature secret. SHA256 is the default hashing
+algorithm.
 
 ```php
 <?php
-$expected_sig = hash_hmac('sha256', $container['data'], $client_signature_secret, true);
-$verified = ($sig === $expected_sig);
+// $sign_secret = "a274de";
+$expected_sig = hash_hmac('sha256', $container['data'], $sign_secret, true);
+
+if ($sig === $expected_sig) {
+    echo "Authenticity of data verified\n";
+} else {
+    echo "Authenticity of data cannot be verified. Someone is doing something naughty!\n";
+}
+```
+
+#### :tab Java
+
+```java
+import no.spid.api.client.SpidApiResponse;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+
+import org.apache.commons.codec.binary.Base64;
+
+class ResponseVerifier {
+    private static byte[] base64UrlDecode(String str) {
+        return Base64.decodeBase64(str.replace("-", "+").replace("_", "/").trim());
+    }
+
+    public static boolean verify(SpidApiResponse response, String signSecret) (
+        byte[] signature = base64UrlDecode(response.getResponseSignature());
+        byte[] payload = base64UrlDecode(response.getJsonValue("data"));
+        byte[] generatedSignature = null;
+
+        try {
+            SecretKeySpec sks = new SecretKeySpec(signSecret.getBytes("UTF-8"), "HmacSHA256");
+            Mac mac = Mac.getInstance("HmacSHA256");
+            mac.init(sks);
+            generatedSignature = mac.doFinal(payload.getBytes("UTF-8"));
+        } catch (NoSuchAlgorithmException | InvalidKeyException | UnsupportedEncodingException ex) {
+            throw ex;
+        }
+
+        return Arrays.equals(generatedSignature, signature);
+    }
+
+    public static String decode(SpidApiResponse response, String signSecret) {
+        if (!verify(response, signSecret)) {
+            throw new Error("Data has been tampered with!");
+        }
+        return new String(base64UrlDecode(response.getJsonValue("data")));
+    }
+}
 ```
 
 ### :/tabs
