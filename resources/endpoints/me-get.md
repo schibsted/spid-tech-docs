@@ -10,3 +10,7 @@ cases.
 
 This means that you can also use `/me` to check if the user has logged in
 through the SPiD web site.
+
+:relevant-endpoints
+
+GET /user/{userId}

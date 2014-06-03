@@ -26,3 +26,4 @@ user's identity - so long as the `uid` is removed first.
 :relevant-endpoints
 
 GET /users
+GET /user/{userId}

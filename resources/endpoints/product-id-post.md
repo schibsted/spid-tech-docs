@@ -9,3 +9,4 @@ revision. Previous revisions can be accessed through the
 :relevant-endpoints
 
 GET /product/{id}
+GET /product/{productId}/revisions

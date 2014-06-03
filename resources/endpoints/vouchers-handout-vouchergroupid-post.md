@@ -7,3 +7,7 @@ The person or system that hands out vouchers must be responsible for remembering
 them or making sure they are used. See the
 [separate endpoint](/endpoints/POST/voucher_handout) for automatically giving a
 voucher to a user.
+
+:relevant-endpoints
+
+POST /voucher_handout
