@@ -173,6 +173,19 @@ POST /path/to/other/page
                                :type :query, :required? false}]))
 
 (fact
+ "When there's just a single pagination parameter, it is not treaded specially
+  in this way. The pagination parameters are offered together, so this is to
+  reduce problems with name collisions."
+
+ (let [endpoint (-> (cultivate :httpMethods {:GET (cs/http-method {:optional ["limit"]})})
+                    first)]
+
+   (:parameters endpoint) => [{:name "limit"
+                               :description nil
+                               :type :query, :required? false}]
+   (:pagination endpoint) => nil))
+
+(fact
  "If there are no pagination parameters, the :pagination key is
   removed, instead of it pointing to an empty list."
 

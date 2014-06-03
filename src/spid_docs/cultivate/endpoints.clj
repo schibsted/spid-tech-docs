@@ -63,6 +63,19 @@
 (def pagination-params
   #{"limit" "offset" "since" "until"})
 
+(defn- enough-pagination-params? [params]
+  (< 1 (count (filter pagination-params params))))
+
+(defn- maybe-remove-pagination-params [params]
+  (if (enough-pagination-params? params)
+    (remove pagination-params params)
+    params))
+
+(defn- maybe-filter-pagination-params [params]
+  (if (enough-pagination-params? params)
+    (filter pagination-params params)
+    []))
+
 (defn- collect-parameters [required optional pathParameters endpoint]
   "Gather required, optional and path parameters in one list. The
    optional pagination parameters and 'filters' are removed, since
@@ -72,7 +85,7 @@
    (->> required (map #(create-parameter % :query true endpoint)))
    (->> optional
         (remove #{"filters"})
-        (remove pagination-params)
+        (maybe-remove-pagination-params)
         (map #(create-parameter % :query false endpoint)))))
 
 (defn- collect-pagination-params [optional]
@@ -80,7 +93,7 @@
    treated specially, since we don't want to repeat info about them
    everywhere."
   (->> optional
-       (filter pagination-params)
+       (maybe-filter-pagination-params)
        (map #(create-parameter % :query false {}))))
 
 (defn- match-sample [[^String path sample] endpoint-id]
