@@ -46,5 +46,9 @@
   ;; are, as it is likely that they will change completely.
   [:GET "user/{userId}/balance"]
 
+  ;; Some endpoints are just aliases for other endpoints, and were never
+  ;; even documented in the old site. Remove the outdated alias.
+  [:GET "logins/{userId}"]
+
   ;; Not really sure what this is, but Claes says to ignore for now.
   [:GET "user/{userId}/payment/settings"]}
