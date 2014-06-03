@@ -16,7 +16,7 @@ connection to Campaigns that require vouchers to be activated in the purchase
 flow."
  :fields [{:name "voucherGroupId" :type :integer-string :description "Unique ID of the voucher group" :always-available? true}
           {:name "clientId"       :type :string         :description "ID of the client that owns the voucher group and its vouchers" :always-available? true}
-          {:name "discountId"     :type :integer-string :description "TODO" :always-available? true}
+          {:name "discountId"     :type :integer-string :description "" :always-available? true}
           {:name "campaignId"     :type :integer-string :description "Unique ID, used by 'campaign' voucher groups" :always-available? true}
           {:name "productId"      :type :integer-string :description "Used by 'campaign' voucher groups" :always-available? true}
           {:name "type"           :type :voucher-type   :description "The type of the voucher group and all its vouchers" :always-available? true}

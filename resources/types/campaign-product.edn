@@ -8,8 +8,8 @@ the campaign product will require manual updates, if necessary."
  :fields [{:name "id"              :type :integer-string :description "Unique ID of the campaign product" :always-available? true}
           {:name "campaignId"      :type :integer-string :description "ID of the campaign this product belongs to" :always-available? true}
           {:name "productId"       :type :integer-string :description "The original product ID" :always-available? true}
-          {:name "discountId"      :type :integer-string :description "TODO" :always-available? true}
+          {:name "discountId"      :type :integer-string :description "" :always-available? true}
           {:name "newPrice"        :type :price          :description "The campaign price, in cents" :always-available? true}
-          {:name "includeChildren" :type :boolnum        :description "TODO" :always-available? true}
+          {:name "includeChildren" :type :boolnum        :description "" :always-available? true}
           {:name "updated"         :type :datetime       :description "When the campaign product was last updated" :always-available? true}
           {:name "created"         :type :datetime       :description "When the campaign product was created" :always-available? true}]}
