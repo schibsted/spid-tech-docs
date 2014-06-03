@@ -43,7 +43,8 @@
        [:div#menu
         [:a {:href "/#guides"} "Guides"] " "
         [:a.nowrap {:href "/#working-examples"} "Working examples"] " "
-        [:a.nowrap {:href "/#api-reference"} "API reference"]]]
+        [:a.nowrap {:href "/#api-reference"} "API reference"]
+        [:a.nowrap {:href "https://docs.spid.no/pages/viewpage.action?pageId=2523213"} "Merchants site"]]]
       [:div#body (when split-page? {:class "split"})
        [:div.bd body]]]]
     [:div#footer
