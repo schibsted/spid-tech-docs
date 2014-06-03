@@ -24,9 +24,11 @@
                                           #"/scripts/.*\.js"])
    (assets/load-assets "public" [#".*"])))
 
-(def optimize
+(defn optimize [assets options]
   "Compress and concatenate CSS and JS as much as possible"
-  optimizations/all)
+  (->> (optimizations/all assets options)
+       (remove :bundled)
+       (remove :outdated)))
 
 (defn logit [arg msg]
   (prn msg (str/join "" (repeat (- 25 (count msg)) " ")) (java.util.Date.))
