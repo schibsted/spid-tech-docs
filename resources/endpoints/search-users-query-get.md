@@ -6,3 +6,5 @@ parameter. Performs a full-text search for users.
 :relevant-endpoints
 
 GET /search/users
+
+:relevant-types user

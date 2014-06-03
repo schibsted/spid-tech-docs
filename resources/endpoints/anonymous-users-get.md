@@ -27,3 +27,5 @@ user's identity - so long as the `uid` is removed first.
 
 GET /users
 GET /user/{userId}
+
+:relevant-types user-segmentation

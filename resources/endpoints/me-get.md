@@ -14,3 +14,5 @@ through the SPiD web site.
 :relevant-endpoints
 
 GET /user/{userId}
+
+:relevant-types user
