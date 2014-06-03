@@ -1,7 +1,5 @@
 :title Callbacks
-
 :frontpage
-
 :aside
 
 ## Table of Contents
@@ -21,7 +19,7 @@
 
 The SPiD platform supports server-side callbacks that enable your service to
 subscribe to changes in data. Your service can then cache data and receive
-updates, rather than continuously polling SPiD's servers. Caching data and using
+updates, rather than continuously poll SPiD's servers. Caching data and using
 this API can improve the reliability of your app or service and decrease its
 load times.
 
@@ -42,15 +40,16 @@ subscription changes.
 ## Callback requests
 
 When an object changes, an HTTP POST request will be made to the client-defined
-callback URL. The response body will contain Base64 encoded text signed with your
-signature secret.
+callback URL. The response body will contain
+[Base64 URL encoded](http://en.wikipedia.org/wiki/Base64#URL_applications) text
+signed with your signature secret.
 
-NOTE: The payload in the callback from SPiD made by HTTP POST 'Content-Type: text/plain'.
+**Note**: The content-type of the `POST` request made by SPiD is `"text/plain"`.
 
-NOTE: Your signature secret is **not** the same as your client secret (which is
-used for authentication). It is a different secret specifically used for signing
-requests and decoding signed responses. If you do not have a signing secret,
-[contact SPiD](mailto:support@spid.no).
+**NOTE**: Your signature secret is **not** the same as your client secret (which
+is used for authentication). It is a different secret specifically used for
+signing requests and decoding signed responses. If you do not have a signing
+secret, [contact SPiD](mailto:support@spid.no).
 
 The response body contains an encoded signature and encoded data, separated by a
 dot, e.g. `"<signature>.<data>"`. Here is an example:
@@ -126,6 +125,33 @@ function base64_url_decode($input) {
 $payload = file_get_contents("php://input");
 $parsed = parse_signed_request($payload, $SPID_CREDENTIALS[VGS_Client::CLIENT_SIGN_SECRET]);
 $data = json_decode($parsed, true);
+```
+
+#### :tab Java
+
+The following example manually achieves the same effect as the Java API client
+method `SpidSecurityHelper.decryptAndValidateSignedRequest(String request)` (see
+[SpidSecurityHelper.java](https://github.com/schibsted/spid-client-java/blob/master/src/main/java/no/spid/api/security/SpidSecurityHelper.java#L32)
+in the [Java API client](https://github.com/schibsted/spid-client-java) for a
+full example).
+
+```java
+byte[] signature = base64UrlDecode(request.split("\\.")[0]);
+byte[] payload = base64UrlDecode(request.split("\\.")[1]);
+byte[] expectedSignature = null;
+
+try {
+    SecretKeySpec sks = new SecretKeySpec(signSecret.getBytes("UTF-8"), "HmacSHA256");
+    Mac mac = Mac.getInstance("HmacSHA256");
+    mac.init(sks);
+    expectedSignature = mac.doFinal(payload.getBytes("UTF-8"));
+} catch (NoSuchAlgorithmException | InvalidKeyException | UnsupportedEncodingException ex) {
+    throw ex;
+}
+
+if (!Arrays.equals(expectedSignature, signature)) {
+    throw new SpidApiException("Signature is not valid!");
+}
 ```
 
 ### :/tabs
