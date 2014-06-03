@@ -1,7 +1,7 @@
 (ns spid-docs.pages.type-pages
   (:require [inflections.core :refer [plural]]
             [spid-docs.pimp.markdown :as markdown]
-            [spid-docs.routes :refer [type-path]]))
+            [spid-docs.routes :refer [type-path endpoint-path]]))
 
 (defn- render-availability [field]
   (if (:always-available? field) [:span.check " ✓"]))
@@ -98,8 +98,8 @@
 (defn find-relevant-endpoints [type endpoints]
   (filter #(some #{(name (:id type))} (:relevant-types %)) endpoints))
 
-(defn- render-relevant-endpoint [{:keys [method path]}]
-  [:li [:a {:href (str "/endpoints/" (name method) path)}
+(defn- render-relevant-endpoint [{:keys [method path] :as endpoint}]
+  [:li [:a {:href (endpoint-path endpoint)}
         [:code method] " " path]])
 
 (defn- render-body [type types]

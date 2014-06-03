@@ -1,6 +1,6 @@
 :introduction
 
-Retrieve a specific [campaign](/types/campaign) object.
+Retrieve a specific [campaign](/types/campaign/) object.
 
 :relevant-endpoints
 

@@ -9,7 +9,7 @@ DELETE /bundle/{bundleId}/product/{productId}
 
 ## Relevant type definitions
 
-- [Bundle](/types/bundle)
+- [Bundle](/types/bundle/)
 
 :body
 

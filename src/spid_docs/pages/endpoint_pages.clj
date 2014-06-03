@@ -231,12 +231,12 @@
                     " references inline type" (if (> (count missing) 1) "s" "")
                     " with missing definition: " (str/join ", " missing))))))
 
-(defn- render-relevant-endpoint [{:keys [method path]}]
-  [:li [:a {:href (str "/endpoints/" (name method) path)}
+(defn- render-relevant-endpoint [{:keys [method path] :as endpoint}]
+  [:li [:a {:href (endpoint-path endpoint)}
         [:code method] " " path]])
 
 (defn- render-relevant-type [type]
-  [:li "The " [:a {:href (str "/types/" type)} (capitalize type) " object"]])
+  [:li "The " [:a {:href (str "/types/" type "/")} (capitalize type) " object"]])
 
 (defn- render-relevant-article [article]
   [:li [:a {:href (:path article)}

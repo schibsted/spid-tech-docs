@@ -9,7 +9,7 @@
                                             :description "ISO-8601"}
                                  :integer {:id :integer}}
                                 [])]
-        (->> ((pages "/types/datetime"))
+        (->> ((pages "/types/datetime/"))
              :body
              (hiccup-find [:h1])
              first) => [:h1 "datetime"]))
@@ -56,7 +56,7 @@
              (hiccup-find [:h5 :a])
              first
              second ; Attributes
-             :href) => "/types/datetime")
+             :href) => "/types/datetime/")
 
   (fact "Links to non-inline types with fields"
         (->> (-> types
@@ -66,7 +66,7 @@
              (hiccup-find [:h5 :a])
              first
              second ; Attributes
-             :href) => "/types/datetime")
+             :href) => "/types/datetime/")
 
   (fact "Links to non-inline types with fields"
         (->> (render-type-definition user (-> types
@@ -75,7 +75,7 @@
              (hiccup-find [:h5 :a])
              first
              second ; Attributes
-             :href) => "/types/datetime")
+             :href) => "/types/datetime/")
 
   (fact "Distinguishes lists and collections of types"
         (->> (render-type-definition login types)
@@ -93,7 +93,7 @@
       (link-to-type :string {:string
                              {:id :string
                               :description "Descriptions earns the type a separate page"}
-                             }) => [:a {:href "/types/string"} "string"]
+                             }) => [:a {:href "/types/string/"} "string"]
 
       (link-to-type :string {:string
                              {:id :string-thing
@@ -106,33 +106,33 @@
                              {:id :string
                               :name "lol strings"
                               :description "Links to name if present"}
-                             }) => [:a {:href "/types/string"} "lol strings"]
+                             }) => [:a {:href "/types/string/"} "lol strings"]
 
       (link-to-type :something {:something
                                 {:id :something
                                  :fields [{:name "field" :description "earns the type a separate page"}]}
-                                }) => [:a {:href "/types/something"} "something"]
+                                }) => [:a {:href "/types/something/"} "something"]
 
       (link-to-type :something {:something
                                 {:id :something
                                  :values [{:value "field" :description "earns the type a separate page"}]}
-                                }) => [:a {:href "/types/something"} "something"]
+                                }) => [:a {:href "/types/something/"} "something"]
 
       (link-to-type [:string] {:string
                                   {:id :string}}) => '("list of " "strings")
 
       (link-to-type [:something] {:something
                                   {:id :something :description "OK"}
-                                  }) => '("list of " [:a {:href "/types/something"} "somethings"])
+                                  }) => '("list of " [:a {:href "/types/something/"} "somethings"])
 
       (link-to-type {:userId :user} {:user
                                      {:id :user :description "OK"}
                                      }) => '("collection of "
-                                             [:a {:href "/types/user"} "users"]
+                                             [:a {:href "/types/user/"} "users"]
                                              ", as an object with "
                                              [:code "userId"]
                                                " for property names, and "
-                                             [:a {:href "/types/user"} "users"]
+                                             [:a {:href "/types/user/"} "users"]
                                              " for values")
 
       (link-to-type {:userId :user} {:user

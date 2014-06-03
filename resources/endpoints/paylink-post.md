@@ -18,5 +18,5 @@ Additionally, you may use the following optional fields:
 - `quantity`
 - `type`
 
-See the [paylink item object specification](/types/paylink-item) for further
+See the [paylink item object specification](/types/paylink-item/) for further
 details on these fields.

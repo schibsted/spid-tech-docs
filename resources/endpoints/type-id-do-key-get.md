@@ -5,7 +5,7 @@ simple JSON objects where a unique key can be associated with a client-provided
 JSON object.
 
 By making an HTTP GET to this endpoint, you can retrieve previously
-[stored](/endpoints/POST/{type}/{id}/do/{key}) data objects.
+[stored](/endpoints/POST/{type}/{id}/do/{key}/) data objects.
 
 :relevant-endpoints
 

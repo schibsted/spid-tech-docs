@@ -4,12 +4,12 @@
 
 ## Relevant endpoints
 
-- [`POST` /user/{userId}/charge](/endpoints/POST/user/{userId}/charge)
-- [`GET` /user/{userId}/preferences/payment](/endpoints/GET/user/{userId}/preferences/payment)
-- [`POST` /order/{orderId}/capture](/endpoints/POST/order/{orderId}/capture)
-- [`POST` /order/{orderId}/credit](/endpoints/POST/order/{orderId}/credit)
-- [`POST` /order/{orderId}/cancel](/endpoints/POST/order/{orderId}/cancel)
-- [`POST` /paylink](/endpoints/POST/paylink)
+- [`POST` /user/{userId}/charge](/endpoints/POST/user/{userId}/charge/)
+- [`GET` /user/{userId}/preferences/payment](/endpoints/GET/user/{userId}/preferences/payment/)
+- [`POST` /order/{orderId}/capture](/endpoints/POST/order/{orderId}/capture/)
+- [`POST` /order/{orderId}/credit](/endpoints/POST/order/{orderId}/credit/)
+- [`POST` /order/{orderId}/cancel](/endpoints/POST/order/{orderId}/cancel/)
+- [`POST` /paylink](/endpoints/POST/paylink/)
 
 :body
 
@@ -22,7 +22,7 @@ SPiD, like 1-click/in-app purchases.
 
 ## Basic functionality
 
-[The `/user/{userId}/charge` endpoint](/endpoints/POST/user/{userId}/charge)
+[The `/user/{userId}/charge` endpoint](/endpoints/POST/user/{userId}/charge/)
 will handle a payment request containing the parameters needed to perform a
 direct purchase or authorization in a user's SPiD account. For now, only credit
 card payments are supported through this API.
@@ -68,7 +68,7 @@ This diagram illustrates the recommended strategy for direct payment failures.
 Because the client never really knows if a user has a valid payment identifier
 or whether other direct payment preconditions have not been met, a retry may be
 attempted with a paylink. When a failure occurs, the client can create a paylink
-via the [Paylink endpoint](/endpoints/POST/paylink), which will will create a
+via the [Paylink endpoint](/endpoints/POST/paylink/), which will will create a
 purchase URL for the same products to be charged. This link must be communicated
 to the user so that they may complete the purchase via the ordinary redirect
 payment flow. This way the client ensures that the user adds or updates their

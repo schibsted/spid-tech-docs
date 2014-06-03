@@ -18,7 +18,7 @@ uniquely identify users. As such, this data is suitable for aggregating into
 user segments.
 
 Note that most clients can use the data returned to retrieve full user profiles
-from the [GET /user/{userId} endpoint](/endpoints/GET/user/{userId}). The
+from the [GET /user/{userId} endpoint](/endpoints/GET/user/{userId}/). The
 purpose of the anonymized form of the returned data in this endpoint is that it
 can be freely used in further calculations without fear of compromising your
 user's identity - so long as the `uid` is removed first.

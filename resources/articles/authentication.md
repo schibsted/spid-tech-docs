@@ -44,7 +44,7 @@ While it is not recommended, or even feasible, to manually handle user
 passwords, it is possible to programatically obtain a user token given your
 client id, API secret and a user's credentials. You may want to do this for
 testing purposes (e.g. programatically testing an endpoint like
-[/me](/endpoints/GET/me) that only works with a user token).
+[/me](/endpoints/GET/me/) that only works with a user token).
 
 A user token is obtained by requesting the `password` grant type from `/oauth/token`:
 

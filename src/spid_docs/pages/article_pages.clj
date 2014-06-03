@@ -4,10 +4,10 @@
             [spid-docs.enlive :as enlive]
             [spid-docs.formatting :refer [pluralize]]
             [spid-docs.pimp.markdown :as markdown]
-            [spid-docs.routes :refer [article-path]]))
+            [spid-docs.routes :refer [article-path endpoint-path]]))
 
-(defn- render-relevant-endpoint [{:keys [method path]}]
-  [:li [:a {:href (str "/endpoints/" (name method) path)}
+(defn- render-relevant-endpoint [{:keys [method path] :as endpoint}]
+  [:li [:a {:href (endpoint-path endpoint)}
         [:code method] " " path]])
 
 (defn- render-relevant-endpoints [relevant]

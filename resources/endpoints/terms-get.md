@@ -11,7 +11,7 @@ will be `true`.
 
 ## Accepting terms
 
-When the user is signed up through [the API](/endpoints/POST/signup), terms
+When the user is signed up through [the API](/endpoints/POST/signup/), terms
 are automatically accepted, and the client must make sure to ask the user if
 they accept the terms prior to calling this endpoint.
 

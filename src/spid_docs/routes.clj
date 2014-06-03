@@ -28,11 +28,11 @@
 (defn endpoint-path
   "Given an endpoint, return the path to the page in the documentation app."
   [endpoint]
-  (str "/endpoints/" (name (:method endpoint)) (:path endpoint)))
+  (str "/endpoints/" (name (:method endpoint)) (:path endpoint) "/"))
 
 (defn type-path
   "Given a type (typically one entry from the vector in resources/types.end),
    return its path."
   [type]
   (if (or (:description type) (:fields type) (:values type))
-    (str "/types/" (name (:id type)))))
+    (str "/types/" (name (:id type)) "/")))

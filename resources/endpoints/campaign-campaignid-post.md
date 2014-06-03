@@ -1,6 +1,6 @@
 :introduction
 
-Update a [campaign](/types/campaign).
+Update a [campaign](/types/campaign/).
 
 :relevant-endpoints
 

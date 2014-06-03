@@ -14,8 +14,8 @@
 
 ## Relevant type definitions
 
-- [Order](/types/order)
-- [User](/types/user)
+- [Order](/types/order/)
+- [User](/types/user/)
 
 :body
 
@@ -167,7 +167,7 @@ Callbacks **will not** be made under the following conditions:
 * The order status does not change (partial captures change the order, but does
   not update the status unless the whole order is captured)
 * The client has requested its status through the
-  [`/order/{orderId}/status`](/endpoints/GET/order/{orderId}/status) after
+  [`/order/{orderId}/status`](/endpoints/GET/order/{orderId}/status/) after
   creating the order (thus, there are no further updates to relay). All clients
   should always request the order status as part of the normal payment flow.
 

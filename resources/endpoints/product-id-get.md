@@ -1,6 +1,6 @@
 :introduction
 
-Retrieve a [product](/types/product) object.
+Retrieve a [product](/types/product/) object.
 
 :relevant-endpoints
 

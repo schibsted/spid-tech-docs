@@ -1,6 +1,6 @@
 :introduction
 
-List and search all [campaigns](/types/campaign).
+List and search all [campaigns](/types/campaign/).
 
 :relevant-endpoints
 

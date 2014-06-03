@@ -31,9 +31,9 @@ properties will be added to any event generated, regardless of whether the user
 is logged in or not (not all events are triggered by the users themselves).
 
 User traits can be managed through the REST-API:
-[Create](/endpoints/POST/user/{userId}/traits),
-[list](/endpoints/GET/user/{userId}/traits), and
-[delete](/endpoints/DELETE/user/{userId}/trait/{trait}).
+[Create](/endpoints/POST/user/{userId}/traits/),
+[list](/endpoints/GET/user/{userId}/traits/), and
+[delete](/endpoints/DELETE/user/{userId}/trait/{trait}/).
 
 ### Logging traits for users
 
@@ -69,11 +69,11 @@ zOJ7x_oA3EnL4CB5AsgONtWfdF2r_N6c-aLZTaGy-z8.eyJTdWJzY3JpYmVkIHNpbmNlIjoiMjAxMi0x
 
 The traits object can be updated and queried through the following endpoints:
 
-- [`GET` /user/{userId}/traits](/endpoints/GET/user/{userId}/traits)
+- [`GET` /user/{userId}/traits](/endpoints/GET/user/{userId}/traits/)
     List current traits
-- [`POST` /user/{userId}/traits](/endpoints/POST/user/{userId}/traits)
+- [`POST` /user/{userId}/traits](/endpoints/POST/user/{userId}/traits/)
     Add or update traits
-- [`DELETE` /user/{userId}/traits/{trait}](/endpoints/DELETE/user/{userId}/trait/{trait})
+- [`DELETE` /user/{userId}/traits/{trait}](/endpoints/DELETE/user/{userId}/trait/{trait}/)
     Delete a trait by property name
 
 ## Events tracked by SPiD

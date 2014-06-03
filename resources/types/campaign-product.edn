@@ -2,7 +2,7 @@
  :name "Campaign product"
  :rendering :object
  :description "A campaign product is a modification of a product within a
-campaign. This object represents a separate [product](/types/product), and only
+campaign. This object represents a separate [product](/types/product/), and only
 overrides the price. Note that in case of price changes for the original product,
 the campaign product will require manual updates, if necessary."
  :fields [{:name "id"              :type :integer-string :description "Unique ID of the campaign product" :always-available? true}
