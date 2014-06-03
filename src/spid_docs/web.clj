@@ -60,11 +60,18 @@
 
 (def export-dir "./dist")
 
+(defn- load-export-dir []
+  (stasis/slurp-directory export-dir #"\.[^.]+$"))
+
 (defn export
   "Export the entire site as flat files to the export-dir."
   []
-  (let [assets (optimize (get-assets) {})]
+  (let [assets (optimize (get-assets) {})
+        old-files (load-export-dir)]
     (stasis/empty-directory! export-dir)
     (optimus.export/save-assets assets export-dir)
-    (stasis/export-pages (get-pages) export-dir {:optimus-assets assets})))
-
+    (stasis/export-pages (get-pages) export-dir {:optimus-assets assets})
+    (println)
+    (println "Export complete:")
+    (stasis/report-differences old-files (load-export-dir))
+    (println)))
