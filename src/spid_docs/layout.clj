@@ -55,14 +55,4 @@
       [:a.nowrap {:href "http://www.schibstedpayment.no/about/"} "Schibsted Payment"]
       ". "
       [:span.nowrap "Way to go!"]]]
-    (optimus.hiccup/link-to-js-bundles request ["app.js"])
-    [:script
-     "(function() {if (!document.getElementById('disqus_thread')) {return}var dsq = document.createElement('script');dsq.type = 'text/javascript';dsq.async = true;
-dsq.src = '//spidtechdocs.disqus.com/embed.js';
-(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);}())"]
-    [:script "(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-         })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-51489276-1', 'spid.no');
-ga('send', 'pageview');"]]))
+    (optimus.hiccup/link-to-js-bundles request ["app.js"])]))
