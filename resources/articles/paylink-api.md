@@ -16,13 +16,14 @@ DELETE /paylink/{paylinkId}
 
 Paylinks allow clients to charge a customer for products without storing them in
 SPiD's product database. A paylink contains products, their prices and other
-metadata. It comes with a URL that takes the user to SPiD checkout where they can
-pay for the products. Upon completion, the user is sent back to the client with
-a confirmation from SPiD.
+metadata. It comes with a URL that takes the user to SPiD checkout where they
+can pay for the products. Upon completion, the user is sent back to the client
+with a confirmation from SPiD. A paylink object represents a single purchase,
+and may only be used once.
 
-Paylink objects contain meta-data and one or more paylink items. Paylink items
-are what end-users actually pay for. They contain price and VAT information. The
-total sum of a paylink is the total of all items.
+Paylink items are what end-users actually pay for. Each item has a price (which
+is the total price, including VAT) and VAT, as well as other metadata. The total
+price payed is the sum of each paylink item.
 
 Paylink items can optionally be coupled to a current product in SPiD, identified
 by the `productId` field. Paylink items also contain a type, indicating the kind
