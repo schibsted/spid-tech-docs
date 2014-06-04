@@ -25,4 +25,4 @@ details on these fields.
 
 :example-params
 
-items: [{\\"description\\":\\"Star Wars IV\\",\\"price\\":7983,\\"vat\\":1917},{\\"description\\":\\"Star Wars V\\",\\"price\\":7983,\\"vat\\":1917},{\\"description\\":\\"Star Wars VI\\",\\"price\\":7983,\\"vat\\":1917}]
+items: [{\\"description\\":\\"Star Wars IV\\",\\"price\\":9900,\\"vat\\":1917},{\\"description\\":\\"Star Wars V\\",\\"price\\":9900,\\"vat\\":1917},{\\"description\\":\\"Star Wars VI\\",\\"price\\":9900,\\"vat\\":1917}]
