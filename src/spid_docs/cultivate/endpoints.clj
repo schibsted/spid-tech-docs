@@ -155,7 +155,7 @@
   (when s
     (->> s
          (str/split-lines)
-         (map #(str/split % #":\s*"))
+         (map #(str/split % #":\s*" 2))
          (into {}))))
 
 (defn- find-relevant-articles [category articles]

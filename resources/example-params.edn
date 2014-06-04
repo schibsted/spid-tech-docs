@@ -55,7 +55,7 @@
  "userId" "42"
  "invoiceAddress" "Street 123"
  "ip" "8.8.8.8"
- "items" "[{\"description\":\"Star Wars IV\",\"price\":7983,\"vat\":1917},{\"description\":\"Star Wars V\",\"price\":7983,\"vat\":1917},{\"description\":\"Star Wars VI\",\"price\":7983,\"vat\":1917}]"
+ "items" "[]"
  "jwt" "{}"
  "key" "some-data"
  "limit" "10"

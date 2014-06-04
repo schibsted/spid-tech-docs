@@ -22,3 +22,7 @@ See the [paylink item object specification](/types/paylink-item/) for further
 details on these fields.
 
 :relevant-types paylink-item
+
+:example-params
+
+items: [{\\"description\\":\\"Star Wars IV\\",\\"price\\":7983,\\"vat\\":1917},{\\"description\\":\\"Star Wars V\\",\\"price\\":7983,\\"vat\\":1917},{\\"description\\":\\"Star Wars VI\\",\\"price\\":7983,\\"vat\\":1917}]

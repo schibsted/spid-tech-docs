@@ -18,7 +18,7 @@ POST /path/to/other/page
                                             :success-description "success description"
                                             :relevant-endpoints relevant-endpoints-example
                                             :relevant-types "user order"
-                                            :example-params "userId: custom"}
+                                            :example-params "userId: custom:123"}
 
                            ;; these dummy endpoint descriptions are not relevant to the test,
                            ;; but required, since cultivate complains about missing description files:
@@ -366,7 +366,7 @@ POST /path/to/other/page
  "example-params specific to an endpoint is merged in"
 
  (-> (cultivate :path "terms")
-     first :example-params) => {"userId" "custom"
+     first :example-params) => {"userId" "custom:123"
                                 "orderId" "43"})
 
 (fact (-> (cultivate :deprecated "1.0") first :deprecated) => "1.0")
