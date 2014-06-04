@@ -29,9 +29,9 @@ Paylink items can optionally be coupled to a current product in SPiD, identified
 by the `productId` field. Paylink items also contain a type, indicating the kind
 of item and how it is processed, tracked and visualized to the end-user.
 
-By providing a `redirect_uri` during the payment flow, the client can control
+By providing a `redirectUri` during the payment flow, the client can control
 where the user is sent after successful payment. If one is not provided, the
-client-default `redirectUrl` will be used.
+client-default redirect URI will be used.
 
 Both the whole paylink object and each paylink item have client reference
 fields. These can be used by the client in order to track and process paylinks
