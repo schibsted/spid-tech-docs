@@ -15,10 +15,10 @@ DELETE /paylink/{paylinkId}
 :body
 
 Paylinks allow clients to charge a customer for products without storing them in
-SPiD's product database. A paylink is simply a link that represents a set of
-products, their prices and other meta-data. Following the link will take the
-user to SPiD checkout where they can pay for the products. Upon completion, the
-user is sent back to the client with a confirmation from SPiD.
+SPiD's product database. A paylink contains products, their prices and other
+metadata. It comes with a URL that takes the user to SPiD checkout where they can
+pay for the products. Upon completion, the user is sent back to the client with
+a confirmation from SPiD.
 
 Paylink objects contain meta-data and one or more paylink items. Paylink items
 are what end-users actually pay for. They contain price and VAT information. The
