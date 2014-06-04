@@ -6,8 +6,8 @@ The `items` parameter should be a JSON array of objects. Each object should
 contain at least the following required fields:
 
 - `description`
-- `price`
-- `vat`
+- `price` (total price including vat)
+- `vat` (fraction × 10000, for instance 25% would be 2500)
 
 Additionally, you may use the following optional fields:
 
@@ -25,4 +25,4 @@ details on these fields.
 
 :example-params
 
-items: [{\\"description\\":\\"Star Wars IV\\",\\"price\\":9900,\\"vat\\":1917},{\\"description\\":\\"Star Wars V\\",\\"price\\":9900,\\"vat\\":1917},{\\"description\\":\\"Star Wars VI\\",\\"price\\":9900,\\"vat\\":1917}]
+items: [{\\"description\\":\\"Star Wars IV\\",\\"price\\":9900,\\"vat\\":2500},{\\"description\\":\\"Star Wars V\\",\\"price\\":9900,\\"vat\\":2500},{\\"description\\":\\"Star Wars VI\\",\\"price\\":9900,\\"vat\\":2500}]
