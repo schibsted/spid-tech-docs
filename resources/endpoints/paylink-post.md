@@ -20,3 +20,5 @@ Additionally, you may use the following optional fields:
 
 See the [paylink item object specification](/types/paylink-item/) for further
 details on these fields.
+
+:relevant-types paylink-item
