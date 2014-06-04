@@ -14,23 +14,23 @@ DELETE /paylink/{paylinkId}
 
 :body
 
-A paylink object contains common fields, meta data about the paylink, and one or
-more paylink items. Paylink items is what end-users actually pay for. Paylink
-items contains price and VAT information. The total sum is the total of all
-items for each paylink.
+Paylinks allow clients to charge a customer for products without storing them in
+SPiD's product database. A paylink is simply a link that represents a set of
+products, their prices and other meta-data. Following the link will take the
+user to SPiD checkout where they can pay for the products. Upon completion, the
+user is sent back to the client with a confirmation from SPiD.
 
-Paylink items may be optionally coupled to a current product in SPiD, identified
+Paylink objects contain meta-data and one or more paylink items. Paylink items
+are what end-users actually pay for. They contain price and VAT information. The
+total sum of a paylink is the total of all items.
+
+Paylink items can optionally be coupled to a current product in SPiD, identified
 by the `productId` field. Paylink items also contain a type, indicating the kind
 of item and how it is processed, tracked and visualized to the end-user.
 
-There is no need to have a pre-defined product in SPiD to use paylinks. This is
-the reason why we allow the paylink creator to specify payment options available
-during the purchase.
-
-A `redirectUri` may be optionally pre-defined in the paylink. This can be
-overridden by the client if a `redirect_uri` is provided during the payment
-flow. It will be used to redirect the user after a purchase or authorization in
-SPiD.
+By providing a `redirect_uri` during the payment flow, the client can control
+where the user is sent after successful payment. If one is not provided, the
+client-default `redirectUrl` will be used.
 
 Both the whole paylink object and each paylink item have client reference
 fields. These can be used by the client in order to track and process paylinks
@@ -41,6 +41,9 @@ Each paylink item will generate a corresponding order item. The
 well as the `clientReference` for the paylink header, which will be added to the
 order header. This enables clients to track each order item and each order using
 their own references.
+
+When using paylinks, it is **strongly** recommended to also implement the
+[callback functionality](/callbacks/).
 
 ![Paylink schema](/images/paylinks-schema.png)
 
