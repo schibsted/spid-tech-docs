@@ -12,7 +12,7 @@
           {:name "description"                         :type :string          :description "A description of the bundle" :always-available? true}
           {:name "url"                                 :type :string          :description "A URL that contains more information about the bundle" :always-available? false}
           {:name "price"                               :type :price           :always-available? true}
-          {:name "vat"                                 :type :integer-string  :description "Bundle VAT, in percent" :always-available? true}
+          {:name "vat"                                 :type :integer-string  :description "Bundle VAT, fraction × 10000. For instance, 25% would be 2500" :always-available? true}
           {:name "currency"                            :type :string          :description "The price currencu" :always-available? true}
           {:name "payment_options"                     :type :payment-options :description "Allowable payment options" :always-available? true}
           {:name "quantity_limit"                      :type :integer-string  :description "If the bundle is in limited supply (typically the case for physical products), this should be the maximum number of sales allowed" :always-available? false}

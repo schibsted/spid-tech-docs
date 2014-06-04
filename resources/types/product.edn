@@ -12,7 +12,7 @@
           {:name "description"                     :type :string          :description "A detailed description of the product" :always-available? true}
           {:name "url"                             :type :url             :always-available? false}
           {:name "price"                           :type :price           :always-available? true}
-          {:name "vat"                             :type :integer-string  :description "VAT, in percent" :always-available? true}
+          {:name "vat"                             :type :integer-string  :description "VAT, fraction × 10000. For instance, 25% would be 2500" :always-available? true}
           {:name "currency"                        :type :string          :description "Price and VAT currency" :always-available? true}
           {:name "paymentOptions"                  :type :payment-options :description "Available payment options for this product" :always-available? true}
           {:name "quantityLimit"                   :type :integer-string  :description "Maximum available sales for this product." :always-available? false}

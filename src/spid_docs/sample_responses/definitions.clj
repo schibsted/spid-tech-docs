@@ -154,8 +154,8 @@
   (defsample themovie
     POST "/product" {:code "themovie"
                      :name "The Movie"
-                     :price 4758
-                     :vat 1142
+                     :price 9900
+                     :vat 2500
                      :paymentOptions 2 ;; "Credit card"
                      :type 1 ;; "Digital contents"
                      :currency "NOK"})
@@ -163,8 +163,8 @@
   (defsample vgplus
     POST "/product" {:code "vg+"
                      :name "VG+"
-                     :price 4758
-                     :vat 1142
+                     :price 9900
+                     :vat 2500
                      :paymentOptions 2 ;; "Credit card"
                      :type 2 ;; "Subscription"
                      :currency "NOK"})
@@ -172,8 +172,8 @@
   (defsample vgplus-3mo [parent vgplus]
     POST "/product" {:code "vg+3mo"
                      :name "VG+ 3 måneder"
-                     :price 4758
-                     :vat 1142
+                     :price 9900
+                     :vat 2500
                      :paymentOptions 2 ;; "Credit card"
                      :type 2 ;; "Subscription"
                      :currency "NOK"

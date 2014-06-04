@@ -6,7 +6,7 @@
           {:name "bundleId"       :type :string             :description "The bundle's product ID" :always-available? true}
           {:name "productId"      :type :string             :description "ID of the product to add" :always-available? true}
           {:name "price"          :type :price              :always-available? true}
-          {:name "vat"            :type :integer-string     :description "VAT, in percent" :always-available? true}
+          {:name "vat"            :type :integer-string     :description "VAT, fraction × 10000. For instance, 25% would be 2500" :always-available? true}
           {:name "sort"           :type :integer-string     :description "Sorting order, relative to other bundle items" :always-available? true}
           {:name "bundle"         :type :bundle}
           {:name "product"        :type :product}

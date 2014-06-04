@@ -21,7 +21,7 @@ must be done by specifying which order item you want to capture. If you specify
 an amount (optional), the corresponding order item will be partially captured.
 In a full capture there is no need to specify any other fields.
 
-All captured and credited vat amounts will match the corresponding vat
+All captured and credited VAT amounts will match the corresponding VAT
 percentage set in the order item."
  :fields [{:name "orderId"           :type :integer            :description "Unique order ID"                                                                       :always-available? true}
           {:name "clientId"          :type :string             :description "ID of the client this order belongs to"                                                :always-available? true}
@@ -38,8 +38,8 @@ percentage set in the order item."
           {:name "paylinkId"         :type :integer            :description "ID used to create this order"                                                          :always-available? true}
           {:name "ocr"               :type :string             :description "OCR/KID number"                                                                        :always-available? true}
           {:name "type"              :type :order-type         :description "Order type"                                                                            :always-available? true}
-          {:name "totalPrice"        :type :integer            :description "Total price (including vat amount) for the complete order"                             :always-available? true}
-          {:name "vat"               :type :integer            :description "VAT in percentage * 100, ex 2500 = 25%"                                                :always-available? true}
+          {:name "totalPrice"        :type :integer            :description "Total price (including VAT amount) for the complete order"                             :always-available? true}
+          {:name "vat"               :type :integer            :description "VAT, fraction × 10000. For instance, 25% would be 2500"                                :always-available? true}
           {:name "calculatedVat"     :type :integer            :description "Total amount of VAT for this order"                                                    :always-available? true}
           {:name "creditedAmount"    :type :integer            :description "Amount of the order credited. Defaults to 0."                                          :always-available? true}
           {:name "capturedAmount"    :type :integer            :description "Amount of the order captured. Defaults to full amount or 0, depending on paymentFlow." :always-available? true}

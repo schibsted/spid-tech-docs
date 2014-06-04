@@ -16,7 +16,7 @@
           {:name "description_3"       :type :string   :description "Order item description, line 3"                                                 :always-available? true}
           {:name "description_4"       :type :string   :description "Order item description, line 4"                                                 :always-available? true}
           {:name "price"               :type :price    :description "Single item price (including VAT amount)"                                       :always-available? true}
-          {:name "vat"                 :type :integer  :description "VAT in percentage, e.g. 2500 = 25%"                                             :always-available? true}
+          {:name "vat"                 :type :integer  :description "VAT, fraction × 10000. For instance, 25% would be 2500"                         :always-available? true}
           {:name "capturedAmount"      :type :integer  :description "The amount captured on this item"                                               :always-available? true}
           {:name "creditedAmount"      :type :integer  :description "The amount credited on this item"                                               :always-available? true}
           {:name "quantity"            :type :integer  :description "The number of occurrences of this productId/type"                               :always-available? true}
