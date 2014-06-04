@@ -2,7 +2,8 @@
   "PMP, Markup Post Processor, pimps the pages. It renders pages to
    HTML and applies a set of post-processors, such as highlighting
    code examples with Pygments, adding tabs etc."
-  (:require [spid-docs.enlive :refer [transform]]
+  (:require [optimus.link :as link]
+            [spid-docs.enlive :refer [transform]]
             [spid-docs.formatting :refer [to-id-str]]
             [spid-docs.homeless :refer [update-vals]]
             [spid-docs.layout :refer [layout-page]]
@@ -16,6 +17,20 @@
    enables users to link to every heading on the whole site."
   [html]
   (transform html [:h2] #(assoc-in % [:attrs :id] (-> % :content first to-id-str))))
+
+(defn optify
+  "Helper that examines paths with the supplied prefix and either subs
+  in their cache-busting URLs or returns them unchanged."
+  [req prefix]
+  (fn [^String src]
+    (or (and (.startsWith src prefix)
+             (not-empty (link/file-path req src)))
+        src)))
+
+(defn optify-images
+  "Make sure images are served with cache busters."
+  [request html]
+  (transform html [:img] #(update-in % [:attrs :src] (optify request "/images/"))))
 
 (def skip-pygments?
   (= (System/getProperty "spid.skip.pygments") "true"))
@@ -37,6 +52,7 @@
        (inline-examples)
        (maybe-highlight-code-blocks)
        (transform-tabs)
+       (optify-images request)
        (add-header-ids)
        (add-comments)))
 
