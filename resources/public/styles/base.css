@@ -118,3 +118,5 @@ th {padding-right: 10px;}
 .table-striped tr:nth-child(odd) td,.table-striped tr:nth-child(odd) th {background-color: #f9f9f9;}
 .table-hover tr:hover td,.table-hover tr:hover th {background-color: #f0f0f0;}
 .table thead th {background-color: #f9f9f9;}
+
+.warning {background-color: #fcf7d5; border: 1px solid #eadbbc; color: #000;}
