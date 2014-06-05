@@ -22,9 +22,8 @@ to pay and return to your site.
 
 ### When to use Paylinks
 
-- Bla
-- Bla bla
-- Yada
+- When you want to offer all possible payment options
+- When you want to get off the ground quickly
 
 ## Direct payment
 
@@ -38,4 +37,6 @@ should look into [creating subscriptions](/endpoints/POST/product/) in SPiD.
 
 ### When to use direct payment
 
-- Hmm
+- Recurring payments where the recurring logic is handled on your end
+- One-click shopping where you don't want to send the user through SPiD's checkout
+- When implementing your own checkout process
