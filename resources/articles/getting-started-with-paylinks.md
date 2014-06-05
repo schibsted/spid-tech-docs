@@ -42,11 +42,11 @@ These variables change between production and staging environments:
 - Your base URL
 
 How you choose to configure your application is up to you, but
-these variables should not be hard coded.
+these variables should not be hard-coded.
 
 ## The user chooses products on your website
 
-Here are some things to keep in mind when implementing this on your site:
+Here are some things to keep in mind when implementing paylinks on your site:
 
 - Before you create the Paylink, you need to know what items the user wants to purchase,
   as well as the price, VAT and quantities of each.
@@ -63,7 +63,7 @@ field to specify quantity:
 We prepare the purchase by creating a Paylink - which has a URL to which we can
 redirect the user for payment.
 
-To create a Paylink, SPiD expects a few parameters:
+To [create a Paylink](/endpoints/POST/paylink/), SPiD expects a few parameters:
 
 - `items` A list of items as a JSON-string, each item with: `description`, `price`, `vat` and `quantity`
 - `title` A description shown to the user on the payment page.
