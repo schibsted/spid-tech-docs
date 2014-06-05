@@ -51,28 +51,32 @@
   (with-missing-example-warning path title
     (find-example (format ";;; %s" title) ";;;" code)))
 
+(defmethod create-example :html [_ path title code]
+  (with-missing-example-warning path title
+    (find-example (format "<!-- %s -->" title) "<!---->" code)))
+
 (defmethod create-example :sh [_ path title code]
   (-> (with-missing-example-warning path title
         (find-example (format "### %s" title) "###" code))
       (str/replace #" --silent\b" "")
       (str/replace #"\$server\b" "https://stage.payment.schibsted.no")))
 
-(def example-dir-folders
-  {:java "java"
-   :php "php"
-   :clj "clj"
-   :sh "curl"})
-
-(defn- read-example-file [lang path]
-  (let [full-path (str examples-dir (example-dir-folders lang) path)
+(defn- read-example-file [lang repo path]
+  (let [full-path (str examples-dir repo path)
         resource (io/resource full-path)]
     (if resource
       (slurp resource)
       (throw (Exception. (format "No example file %s found." full-path))))))
 
-(defn read-example [lang title path]
+(defn read-example [lang repo title path]
   (create-example lang path title
-                  (read-example-file lang path)))
+                  (read-example-file lang repo path)))
+
+(def example-dir-folders
+  {:java "java"
+   :php "php"
+   :clj "clj"
+   :sh "curl"})
 
 (defn- inline-example [node]
   (let [attrs (:attrs node)
@@ -81,7 +85,11 @@
      :attrs {}
      :content [{:tag :code
                 :attrs {:class lang}
-                :content (read-example (keyword lang) (:title attrs) (:src attrs))}]}))
+                :content (read-example (keyword lang)
+                                       (or (:repo attrs)
+                                           (example-dir-folders (keyword lang))) ;; if no repo is given, use lang to look it up
+                                       (:title attrs)
+                                       (:src attrs))}]}))
 
 (defn inline-examples
   "Finds all <spid-example> tags, finds the referred examples and returns the text
