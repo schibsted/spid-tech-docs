@@ -39,16 +39,15 @@ purchase flows.
 * The user to be charged must have a connection to the client.
 * The user must have a valid credit card that is available for direct payments
 
-If the user does not have a valid credit card or other valid payment methods for
-direct payment, the client can optionally create a paylink and send the user to
-SPiD to add a valid credit card into his account along with doing the initial
-payment.
+If the user does not have a valid credit card, the client can optionally create
+a [paylink](/paylink-api/) and send the user to SPiD. Here they will be prompted
+to add a valid credit card to their account while making the payment.
 
 ## Callbacks
 
-Because transactions are handled asynchronously it is recommended to implement
-SPiD's [callback functionality](/callbacks/) when working with payments. This
-way your client can stay up to date on transaction statuses.
+Because transactions are handled asynchronously it is **strongly recommended**
+to implement SPiD's [callback functionality](/callbacks/) when working with
+payments. This way your client can stay up to date on transaction statuses.
 
 ## Sequence diagram for direct charges
 
@@ -66,13 +65,13 @@ Click for bigger version
 
 This diagram illustrates the recommended strategy for direct payment failures.
 Because the client never really knows if a user has a valid payment identifier
-or whether other direct payment preconditions have not been met, a retry may be
+or whether other direct payment preconditions have been met, a retry may be
 attempted with a paylink. When a failure occurs, the client can create a paylink
-via the [Paylink endpoint](/endpoints/POST/paylink/), which will will create a
+via the [Paylink endpoint](/endpoints/POST/paylink/), which will create a
 purchase URL for the same products to be charged. This link must be communicated
 to the user so that they may complete the purchase via the ordinary redirect
-payment flow. This way the client ensures that the user adds or updates their
-credit card in SPiD, making it available for the next charge via the Direct
-payment API.
+payment flow (e.g. with a redirect or as a button/link). As the user completes
+checkout in SPiD, they will need to add a credit card, which will be charged
+directly next time a direct payment is attempted.
 
 [![Sequence diagram with failures and paylinks](/images/direct_payment_paylink.png)](/images/direct_payment_paylink.png)
