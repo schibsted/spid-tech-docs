@@ -49,19 +49,29 @@ Because transactions are handled asynchronously it is **strongly recommended**
 to implement SPiD's [callback functionality](/callbacks/) when working with
 payments. This way your client can stay up to date on transaction statuses.
 
-## Sequence diagram for direct charges
+## Purchase flows
+
+In the following diagrams, "SPiD API" is the REST API, and "SPiD" is SPiD in the
+browser - the UI your users will see when entering credit cards, logging in etc.
+
+### Direct
+
+Set `purchaseFlow` to `DIRECT` to use this flow. It is the default flow (when
+`purchaseFlow` is omitted).
 
 Click for bigger version
 
 [![Sequence diagram for direct charges](/images/direct_payment_api_flow_direct.png)](/images/direct_payment_api_flow_direct.png)
 
-## Sequence diagram for authorization
+### Authorize
+
+Set `purchaseFlow` to `AUTHORIZE` to use this flow.
 
 Click for bigger version
 
 [![Sequence diagram for authorization](/images/direct_payment_api_flow_authorize.png)](/images/direct_payment_api_flow_authorize.png)
 
-## Sequence diagram for failures with new paylink option
+### Failures with new paylink option
 
 This diagram illustrates the recommended strategy for direct payment failures.
 Because the client never really knows if a user has a valid payment identifier

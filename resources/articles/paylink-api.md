@@ -48,15 +48,20 @@ When using paylinks, it is **strongly** recommended to also implement the
 
 ![Paylink schema](/images/paylinks-schema.png)
 
-## Sequence diagrams
+## Purchase flows
 
 In the following diagrams, "SPiD API" is the REST API, and "SPiD" is SPiD in the
 browser - the UI your users will see when entering credit cards, logging in etc.
 
 ### Paylink direct purchase flow
 
+Set `purchaseFlow` to `DIRECT` to use this flow. It is the default flow (when
+`purchaseFlow` is omitted).
+
 ![Paylink direct purchase diagram](/images/paylink-direct-purchase-flow.png)
 
 ### Paylink authorize/capture flow
+
+Set `purchaseFlow` to `AUTHORIZE` to use this flow.
 
 ![Paylink authorize/capture diagram](/images/paylink-authorize-capture-flow.png)
