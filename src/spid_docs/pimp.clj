@@ -30,7 +30,9 @@
 (defn optify-images
   "Make sure images are served with cache busters."
   [request html]
-  (transform html [:img] #(update-in % [:attrs :src] (optify request "/images/"))))
+  (transform html
+             [:img] #(update-in % [:attrs :src] (optify request "/images/"))
+             [:a] #(update-in % [:attrs :href] (optify request "/images/"))))
 
 (def skip-pygments?
   (= (System/getProperty "spid.skip.pygments") "true"))
