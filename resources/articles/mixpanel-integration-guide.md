@@ -5,7 +5,7 @@
 In order to offer seamless Mixpanel tracking across multiple services and SPiD,
 the SPiD user must be identified as soon as possible. To do this, the
 [JS SDK](/sdks/javascript/) should be loaded and initialized prior to any event
-tracking. I no SPiD user is found (the user is not logged in), the SDK will
+tracking. If no SPiD user is found (the user is not logged in), the SDK will
 return a unique visitor ID that can be used to track events. This visitor ID
 **must** be used with every event tracked by the client service through
 Mixpanel. As soon as the user logs in (or registers), SPiD will connect the
