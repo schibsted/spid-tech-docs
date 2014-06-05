@@ -28,7 +28,13 @@ allow the user to pay and return to your site.
 
 ## Direct payment
 
-Direct payment is a more ...
+Direct payment allows for server-to-server API calls to charge or authorize
+payments on a user's SPiD account. It can be used for recurring payments and
+other payments where the user does not need to be sent through a checkout flow
+on SPiD's pages.
+
+If you want recurring payments to be handled fully automatically by SPiD, you
+should look into [creating subscriptions](/endpoints/POST/product/) in SPiD.
 
 ### When to use direct payment
 
