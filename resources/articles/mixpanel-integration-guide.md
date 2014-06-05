@@ -58,14 +58,9 @@ for a list of supported types.
 ```
 
 The traits JSON object must then be signed with the client's signature secret
-and base64url encoded before passing this data to SPiD client side. Signing
-helps prevent tampering of user traits by a third party.
-
-The following is an example of signing the above object with the secret "test":
-
-```text
-zOJ7x_oA3EnL4CB5AsgONtWfdF2r_N6c-aLZTaGy-z8.eyJTdWJzY3JpYmVkIHNpbmNlIjoiMjAxMi0xMS0yMCIsIk5ld3NsZXR0ZXIgc3Vic2NyaWJlciI6dHJ1ZSwiR29hbHMgcmVhY2hlZCI6MTIsIkFjY291bnQgdHlwZSI6IlBlcnNvbmFsIiwiYWxnb3JpdGhtIjoiSE1BQy1TSEEyNTYiLCJ0IjoxMzcyMTUwMjU3LjExfQ
-```
+and base64url encoded before passing this data to SPiD client side.
+[Signing](#signing-your-traits-json-object) helps prevent tampering of user
+traits by a third party.
 
 The traits object can be updated and queried through the following endpoints:
 
@@ -445,13 +440,28 @@ mixpanel.track('Viewed campaign page', {'campaign': 'Sommerkampanje'});
 ## Signing your traits JSON object
 
 We use the same signature scheme that is provided by all responses from SPiD to
-the JS SDK. The signature string is basically a concatenation of a base64url
+the JS SDK. The signature string is a concatenation of a base64url
 encoded HMAC-256 hashed signature, hashed with your client signature secret, of
 the JSON object provided, a dot (.) and the base64url encoded version of your
-provided JSON object. It looks similar to this (without newlines added):
+provided JSON object. It looks like this:
 
 ```text
-zOJ7x_oA3EnL4CB5AsgONtWfdF2r_N6c-aLZTaGy-z8
-.
-eyJTdWJzY3JpYmVkIHNpbmNlIjoiMjAxMi0xMS0yMCIsIk5ld3NsZXR0ZXIgc3Vic2NyaWJlciI6dHJ1ZSwiR29hbHMgcmVhY2hlZCI6MTIsIkFjY291bnQgdHlwZSI6IlBlcnNvbmFsIiwiYWxnb3JpdGhtIjoiSE1BQy1TSEEyNTYiLCJ0IjoxMzcyMTUwMjU3LjExfQ
+zOJ7x_oA3EnL4CB5AsgONtWfdF2r_N6c-aLZTaGy-z8.eyJTdWJzY3JpYmVkIHNpbmNlIjoiMjAxMi0xMS0yMCIsIk5ld3NsZXR0ZXIgc3Vic2NyaWJlciI6dHJ1ZSwiR29hbHMgcmVhY2hlZCI6MTIsIkFjY291bnQgdHlwZSI6IlBlcnNvbmFsIiwiYWxnb3JpdGhtIjoiSE1BQy1TSEEyNTYiLCJ0IjoxMzcyMTUwMjU3LjExfQ
 ```
+
+The signed data has two parts:
+
+```text
+<signature>.<data>
+```
+
+To sign the object, perform the following steps:
+
+1. JSON stringify the object
+2. Create an HMAC SHA256 hash of the stringified JSON object with your client signing secret
+3. Base64 URL encode the raw hash data - this is your signature
+4. Base64 URL encode your stringified JSON object - this is your payload
+4. Concatenate the signature, a dot and the payload
+
+See also [signed responses](/endpoints/#signed-responses), and signing in
+[callback requests](/callbacks/), both of which use the same basic algorithm.
