@@ -19,6 +19,11 @@
   [m f]
   (into {} (for [[k v] m] [k (f v)])))
 
+(defn update-in-existing [m path f]
+  (if-not (nil? (get-in m path))
+    (update-in m path f)
+    m))
+
 (defn assoc-non-nil
   "Assoc value v into map m with key k unless v is nil."
   [m k v]

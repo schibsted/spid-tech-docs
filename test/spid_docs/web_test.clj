@@ -37,7 +37,7 @@
      :valid-link
 
      ;; assets, we're currently not checking those
-     (.startsWith path "/images/")
+     (.endsWith path ".png")
      :valid-link
 
      ;; internal link

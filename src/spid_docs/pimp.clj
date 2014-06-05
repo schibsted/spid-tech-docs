@@ -5,7 +5,7 @@
   (:require [optimus.link :as link]
             [spid-docs.enlive :refer [transform]]
             [spid-docs.formatting :refer [to-id-str]]
-            [spid-docs.homeless :refer [update-vals]]
+            [spid-docs.homeless :refer [update-vals update-in-existing]]
             [spid-docs.layout :refer [layout-page]]
             [spid-docs.pimp.comments :refer [add-comments]]
             [spid-docs.pimp.examples :refer [inline-examples]]
@@ -23,7 +23,8 @@
   in their cache-busting URLs or returns them unchanged."
   [req prefix]
   (fn [^String src]
-    (or (and (.startsWith src prefix)
+    (or (and src
+             (.startsWith src prefix)
              (not-empty (link/file-path req src)))
         src)))
 
@@ -32,7 +33,7 @@
   [request html]
   (transform html
              [:img] #(update-in % [:attrs :src] (optify request "/images/"))
-             [:a] #(update-in % [:attrs :href] (optify request "/images/"))))
+             [:a] #(update-in-existing % [:attrs :href] (optify request "/images/"))))
 
 (def skip-pygments?
   (= (System/getProperty "spid.skip.pygments") "true"))
