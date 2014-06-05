@@ -6,7 +6,7 @@ The `items` parameter should be a JSON array of objects. Each object should
 contain at least the following required fields:
 
 - `description`
-- `price` (total price including vat)
+- `price` (total price including VAT, in cents - 10000 is 100,-)
 - `vat` (fraction × 10000, for instance 25% would be 2500)
 
 Additionally, you may use the following optional fields:

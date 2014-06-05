@@ -7,7 +7,7 @@
           {:name "clientItemReference" :type :string   :description "A client provided reference to this order item. (Inherited from Paylink items)" :always-available? true}
           {:name "productId"           :type :integer  :description "Product ID. Defaults to 0"                                                      :always-available? true}
           {:name "discountId"          :type :integer  :description "Discount ID (if available)"                                                     :always-available? true}
-          {:name "type"                :type :integer  :description "Order item type"                                                                :always-available? true}
+          {:name "type"                :type :order-item-type       :always-available? true}
           {:name "status"              :type :integer  :description "Order item status"                                                              :always-available? true}
           {:name "code"                :type :string   :description "Product code"                                                                   :always-available? true}
           {:name "name"                :type :string   :description "Product Name"                                                                   :always-available? true}

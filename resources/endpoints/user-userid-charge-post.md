@@ -3,7 +3,38 @@
 Charge or authorize a payment onto an end-user's SPiD account. Refer to
 [the direct payment API introduction](/direct-payment-api/) for details.
 
-For the `hash` parameter, see [the article on verified hashes](/verified-hash/).
+The `items` parameter should be a JSON array of objects. There is two basic ways
+of providing order items: by referencing a product stored in SPiD, or by
+providing all the product data inline.
+
+### Products stored in SPiD
+
+When selling products stored in SPiD, each order item should contain the
+following fields:
+
+- `name`
+- `productId`
+
+### Products not stored in SPiD
+
+When selling products unknown to SPiD, each order item must provide the
+necessary details:
+
+- `name`
+- `description` - a short text displayed in receipts
+- `price` - total price including VAT, in "cents" (10000 is 100,-)
+- `vat` - fraction × 10000, for instance 25% would be 2500
+
+### Optional order item fields
+
+An order item may also use the following optional fields:
+
+- `clientItemReference`
+- `type`
+- `quantity`
+
+See the [order item object specification](/types/order-item/) for further
+details on these fields.
 
 ## Successful responses
 

@@ -1,5 +1,5 @@
 {:id :order-item-type
- :name "Order item status"
+ :name "Order item type"
  :rendering :enum
  :values [{:value "0"   :description "Default"}
           {:value "1"   :description "Digital content"}
