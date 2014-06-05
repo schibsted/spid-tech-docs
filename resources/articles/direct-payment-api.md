@@ -23,15 +23,15 @@ SPiD, like 1-click/in-app purchases.
 ## Basic functionality
 
 [The `/user/{userId}/charge` endpoint](/endpoints/POST/user/{userId}/charge/)
-will handle a payment request containing the parameters needed to perform a
-direct purchase or authorization in a user's SPiD account. For now, only credit
-card payments are supported through this API.
+can be used to create a request to perform a direct purchase or authorization in
+a user's SPiD account. For now, only credit card payments are supported through
+this API.
 
 Billing requests will create an order with corresponding order lines. The order
-may also be tagged as a client would normally do through
-[Paylinks](/paylink-api/), with both their own client references (on the order
-and each order lines) and with the tag parameter used in the normal SPiD
-purchase flows where the user is involved.
+may be tagged in the same way as when using [paylinks](/paylink-api/). That
+includes client references for the order and/or order lines, as well as the
+[tag parameter](http://localhost:3000/tracking-parameters/) used in regular SPiD
+purchase flows.
 
 ## Preconditions and requirements
 
