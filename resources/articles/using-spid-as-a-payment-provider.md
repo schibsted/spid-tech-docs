@@ -15,10 +15,10 @@ recommended to get a rough overview of each approach before diving in.
 ## Paylinks
 
 With paylinks there is little setup, and you can have a working checkout process
-in literally 10 minutes. With paylinks, there is no need to store products or
-other data in SPiD - all you need is to inform SPiD via the REST API about the
-contents of an order, and SPiD will give you back a checkout URL. The URL will
-allow the user to pay and return to your site.
+in literally 10 minutes. There is no need to store products or other data in
+SPiD - all you need is to inform SPiD via the REST API about the contents of an
+order, and SPiD will give you back a checkout URL. The URL will allow the user
+to pay and return to your site.
 
 ### When to use Paylinks
 
