@@ -3,6 +3,8 @@
 Charge or authorize a payment onto an end-user's SPiD account. Refer to
 [the direct payment API introduction](/direct-payment-api/) for details.
 
+For the `hash` parameter, see [the article on verified hashes](/verified-hash/).
+
 ## Successful responses
 
 Successful responses from this endpoint indicate that the transaction was
