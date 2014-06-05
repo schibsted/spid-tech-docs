@@ -5,7 +5,6 @@
 
 - [Paylinks](#paylinks)
 - [Direct payment](#direct-payment)
-- [Products in SPiD](#products-in-spid)
 
 :body
 
