@@ -257,7 +257,7 @@
     [:div.wrap
      [:div.disqus-comments {:id (endpoint-path endpoint)}]]]])
 
-(defn- render-contribution [endpoint]
+(defn- render-meta [endpoint]
   [:div.grid-bound
    [:h2 "Help us improve"]
    [:p "Did you spot an error? Or maybe you just have a suggestion for how we can improve? "
@@ -267,7 +267,10 @@
                     (to-id-str (:path endpoint)) "-" (.toLowerCase (name (:method endpoint)))
                     ".md")
          :target "_blank"} "send us a pull request"]
-    " on GitHub to fix it (in-browser editing, only takes a moment)."]])
+    " on GitHub to fix it (in-browser editing, only takes a moment)."]
+   [:p [:a {:href (str "https://github.com/schibsted/spid-tech-docs/commits/master/resources/endpoints/"
+                       (to-id-str (:path endpoint)) "-" (.toLowerCase (name (:method endpoint)))
+                       ".md")} "History of this page"]]])
 
 (defn create-page [endpoint types]
   (warn-about-missing-typedefs endpoint types)
@@ -284,7 +287,7 @@
                 [:div.aside
                  [:div.wrap
                   (render-see-also endpoint)
-                  (render-contribution endpoint)]]]
+                  (render-meta endpoint)]]]
                [:div.separator]
                (render-request endpoint)
                [:div.separator]

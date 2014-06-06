@@ -16,7 +16,7 @@
      [:h2 "Relevant endpoints"]
      [:ul (map render-relevant-endpoint relevant)])))
 
-(defn- render-contribution [filename]
+(defn- render-meta [filename]
   (list
    [:h2 "Help us improve"]
    [:p "Did you spot an error? Or maybe you just have a suggestion for how we can improve? "
@@ -25,7 +25,9 @@
     [:a {:href (str "https://github.com/schibsted/spid-tech-docs/edit/master/resources/articles"
                     filename)
          :target "_blank"} "send us a pull request"]
-    " on GitHub to fix it (in-browser editing, only takes a moment)."]))
+    " on GitHub to fix it (in-browser editing, only takes a moment)."]
+   [:p [:a {:href (str "https://github.com/schibsted/spid-tech-docs/commits/master/resources/articles" filename)}
+        "History of this page"]]))
 
 (defn- format-article-section [{:keys [heading aside body relevant-endpoints contributions]}]
   [:div.section
@@ -46,7 +48,7 @@
   {:split-page? true
    :title title
    :body (list
-          (->> (assoc-in (vec sections) [0 :contributions] (render-contribution filename))
+          (->> (assoc-in (vec sections) [0 :contributions] (render-meta filename))
                (map format-article-section)
                (interpose [:div.separator]))
           (format-article-section (get-comment-section filename)))})
