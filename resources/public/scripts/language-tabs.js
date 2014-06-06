@@ -44,8 +44,17 @@
   c.doall(setupTab, document.querySelectorAll(".tab"));
   c.doall(setupTabContent, document.querySelectorAll("div.tabs"));
 
-  function cookieValue(key) {
-    return document.cookie.replace(new RegExp("(?:(?:^|.*;\s*)" + key + "\s*\=\s*([^;]*).*$)|^.*$"), "$1");
+  function cookieValue(key){
+    var raw = document.cookie.split("; "), kv;
+
+    for (var i = 0, l = raw.length; i < l; i++) {
+      kv = raw[i].split("=");
+      if (kv[0] === key) {
+        return kv[1];
+      }
+    }
+
+    return null;
   }
 
   var matches = window.location.href.match(/[&\?]lang=([a-zA-Z]+)/);
