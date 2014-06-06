@@ -5,6 +5,11 @@
 
   var eventHub = bane.createEventEmitter();
 
+  function setLang(lang) {
+    eventHub.emit("language:" + lang.toLowerCase());
+    document.cookie = "lang=" + lang.toLowerCase() + "; path=/";
+  }
+
   function setupTabContent(tabs) {
     var container = document.createElement("div");
     var selectedTab;
@@ -18,7 +23,7 @@
 
     c.doall(function (node) {
       if (node.className === "tab") {
-        eventHub.on("language:" + node.innerHTML, function () {
+        eventHub.on("language:" + node.innerHTML.toLowerCase(), function () {
           selectTab(node);
         });
       }
@@ -31,8 +36,7 @@
 
   function setupTab(tab) {
     tab.onclick = function () {
-      eventHub.emit("language:" + tab.innerHTML);
-      document.cookie = "lang=" + tab.innerHTML;
+      setLang(tab.innerHTML);
     };
   }
 
@@ -43,9 +47,12 @@
     return document.cookie.replace(new RegExp("(?:(?:^|.*;\s*)" + key + "\s*\=\s*([^;]*).*$)|^.*$"), "$1");
   }
 
-  if (cookieValue("lang")) {
-    eventHub.emit("language:" + cookieValue("lang"));
-  }
+  var matches = window.location.href.match(/[&\?]lang=([a-zA-Z]+)/);
 
+  if (matches && matches[1]) {
+    setLang(matches[1]);
+  } else if (cookieValue("lang")) {
+    setLang(cookieValue("lang"));
+  }
 
 }());
