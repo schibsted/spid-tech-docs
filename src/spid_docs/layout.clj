@@ -30,7 +30,7 @@
     [:script "document.body.className = 'js';"]
     [:div#head
      [:div.center.pll
-      [:a {:href "https://techdocs.spid.no/"} "SPiD" [:span.frill " Documentation"]] " > "
+      [:a {:href "http://techdocs.spid.no/"} "SPiD" [:span.frill " Documentation"]] " > "
       [:a {:href "/"} "API"]
       [:form.right.prl {:action "https://www.google.com/search"}
        [:input {:type "search", :name "q", :placeholder "Search"}]
