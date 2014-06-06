@@ -75,20 +75,48 @@ We'll take the quantities posted by the user, and create the data.
 
 #### :tabs Create Paylink data:
 
+##### :tab Java
+
+<spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="The entirety of our product catalog right here"/>
+
+<spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Create data to POST to /paylink"/>
+
+Note that the items are encoded as a JSON string.
+
+##### :tab PHP
+
+<spid-example lang="php" src="/paylinks/checkout.php" title="The entirety of our product catalog right here"/>
+
+<spid-example lang="php" src="/paylinks/checkout.php" title="Create data to POST to /paylink"/>
+
+Note that the SPiD SDK will turn `items` into a JSON string for you.
+
 ##### :tab Clojure
 
 <spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="The entirety of our product catalog right here"/>
 
 <spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Create data to POST to /paylink"/>
 
-#### :/tabs
-
 Note that the items are encoded as a JSON string.
+
+#### :/tabs
 
 With our data in hand, we can create the Paylink by POSTing to
 [the /paylinks endpoint](/endpoints/POST/paylink/).
 
 #### :tabs Create paylink
+
+##### :tab Java
+
+<spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Create SPiD client"/>
+
+<spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Create Paylink"/>
+
+##### :tab PHP
+
+<spid-example lang="php" src="/paylinks/checkout.php" title="Create SPiD client"/>
+
+<spid-example lang="php" src="/paylinks/checkout.php" title="Create Paylink"/>
 
 ##### :tab Clojure
 
@@ -106,6 +134,14 @@ payment.
 
 #### :tabs Redirect to SPiD
 
+##### :tab Java
+
+<spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Create Paylink and redirect to SPiD"/>
+
+##### :tab PHP
+
+<spid-example lang="php" src="/paylinks/checkout.php" title="Redirect to SPiD"/>
+
 ##### :tab Clojure
 
 <spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Create Paylink and redirect to SPiD"/>
@@ -113,6 +149,43 @@ payment.
 #### :/tabs
 
 The user will be presented with a summary of the order, along with payment options.
+
+## The user returns after completing the purchase
+
+SPiD will redirect the user to your given `redirectUri` after a successful
+purchase. It is a GET request, which includes an `order_id` query parameter. Use
+this to look up information about the order.
+
+#### :tabs Look up the order and its status
+
+##### :tab Java
+
+<spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Order status codes"/>
+
+<spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Fetch order info"/>
+
+##### :tab PHP
+
+<spid-example lang="php" src="/paylinks/success.php" title="Order status codes"/>
+
+<spid-example lang="php" src="/paylinks/success.php" title="Fetch order info"/>
+
+##### :tab Clojure
+
+<spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Order status codes"/>
+
+<spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Fetch order info"/>
+
+#### :/tabs
+
+The order status is likely **Complete** (status `"2"`), meaning everything is
+proceeding according to our plans. Time to give the user what they payed for.
+
+#### Cancel
+
+The user might also cancel the purchase, in which case they'll be redirected to
+your given `cancelUri`. It will include a `spid_page` query parameter that
+describes where in the process the user left.
 
 ## Working examples
 
