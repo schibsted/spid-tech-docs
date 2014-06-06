@@ -8,7 +8,7 @@
   function setLang(lang) {
     lang = lang.toLowerCase() === "clj" ? "clojure" : lang;
     eventHub.emit("language:" + lang.toLowerCase());
-    document.cookie = "lang=" + lang.toLowerCase() + "; path=/";
+    document.cookie = "language=" + lang.toLowerCase() + "; path=/";
   }
 
   function setupTabContent(tabs) {
@@ -52,8 +52,8 @@
 
   if (matches && matches[1]) {
     setLang(matches[1]);
-  } else if (cookieValue("lang")) {
-    setLang(cookieValue("lang"));
+  } else if (cookieValue("language")) {
+    setLang(cookieValue("language"));
   }
 
 }());
