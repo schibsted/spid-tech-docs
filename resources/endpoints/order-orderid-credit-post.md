@@ -18,3 +18,9 @@ item will be credited in full.
 Regardless of the type of credit, the `notifyUser` request parameter may be used
 to specify whether or not the user should be notified about the credit
 transaction (`1` for yes, `0` for no).
+
+:relevant-endpoints
+
+POST /order/{orderId}/capture
+POST /order/{orderId}/complete
+POST /order/{orderId}/cancel

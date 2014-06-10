@@ -21,3 +21,9 @@ To perform a partial capture, provide the `orderItemId` request parameter to
 specify which order item to capture, and optionally the `amount` request
 parameter to specify how much to capture. If `amount` is not provided, the order
 item will be captureed in full.
+
+:relevant-endpoints
+
+POST /order/{orderId}/complete
+POST /order/{orderId}/credit
+POST /order/{orderId}/cancel

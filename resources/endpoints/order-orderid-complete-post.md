@@ -7,3 +7,9 @@ a part of the final order.
 When the order has been successfully completed, capturing further order items is
 not possible. This endpoint finalizes the order and generates a receipt for the
 captured items.
+
+:relevant-endpoints
+
+POST /order/{orderId}/capture
+POST /order/{orderId}/credit
+POST /order/{orderId}/cancel
