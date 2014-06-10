@@ -2,6 +2,8 @@
 
 Update a [campaign](/types/campaign/).
 
+:relevant-types campaign
+
 :relevant-endpoints
 
 POST /campaign

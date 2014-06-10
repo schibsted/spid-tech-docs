@@ -2,6 +2,8 @@
 
 List and search all [campaigns](/types/campaign/).
 
+:relevant-types campaign
+
 :relevant-endpoints
 
 POST /campaign

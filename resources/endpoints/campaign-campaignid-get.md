@@ -2,6 +2,8 @@
 
 Retrieve a specific [campaign](/types/campaign/) object.
 
+:relevant-types campaign
+
 :relevant-endpoints
 
 POST /campaign
