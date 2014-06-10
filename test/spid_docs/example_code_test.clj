@@ -198,7 +198,7 @@ echo var_dump($client->api(\"/user\", \"POST\", $params));")
  (fact "Does not render minimal and maximal when all parameters are required"
        (->
         (create-example-code
-         {:method "GET"
+         {:method :GET
           :parameters [{:name "id" :required? true :descripton "Ok" :type :query}]
           :path "/status"
           :api-path "/api/2/status"

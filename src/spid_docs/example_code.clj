@@ -20,9 +20,10 @@
 
 (defn curl-example-code [{:keys [api-path method access-token-types example-params]} params]
   (apply str "curl https://payment.schibsted.no" (replace-path-parameters api-path example-params)
-         (when (= :GET method) " -G")
-         (when (= :POST method) " \\\n   -X POST")
-         (when (= :DELETE method) " \\\n   -X DELETE")
+         (case method
+           :GET " -G"
+           :POST " \\\n   -X POST"
+           :DELETE " \\\n   -X DELETE")
          (when (seq access-token-types) " \\\n   -d \"oauth_token=[access token]\"")
          (format-params (exemplify-params params example-params)
                         " \\\n   -d \":name=:value\"")))
@@ -75,6 +76,7 @@
         params-assoc-array (create-params-assoc-array params example-params)
         api-invocation (str "(\"" (replace-path-parameters path example-params) "\""
                             (when (= :POST method) ", \"POST\"")
+                            (when (= :DELETE method) ", \"DELETE\"")
                             (when has-params (str ", $params")) ")")]
     (str "<?php\n"
          params-assoc-array
