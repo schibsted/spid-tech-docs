@@ -1,7 +1,7 @@
 :introduction
 
 Get
-[generated voucher codes](/endpoints/POST/vouchers/generate/%7BvoucherGroupId%7D/).
+[generated voucher codes](/endpoints/POST/vouchers/generate/{voucherGroupId}/).
 The codes that are returned in this endpoint gets their status changed to
 "handed out". They will not be returned again by repeated calls to this
 endpoint. Handed out vouchers are in limbo until used. The person or system that

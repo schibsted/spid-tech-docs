@@ -5,7 +5,7 @@ template from which vouchers can be generated, it describes what kind of access
 its vouchers grant.
 
 Once a voucher group is created, you must
-[generate individual vouchers](/endpoints/POST/vouchers/generate/%7BvoucherGroupId%7D/)
+[generate individual vouchers](/endpoints/POST/vouchers/generate/{voucherGroupId}/)
 to hand out.
 
 :relevant-types voucher-group
