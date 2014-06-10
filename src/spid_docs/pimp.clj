@@ -10,7 +10,8 @@
             [spid-docs.pimp.comments :refer [add-comments]]
             [spid-docs.pimp.examples :refer [inline-examples]]
             [spid-docs.pimp.highlight :refer [highlight-code-blocks]]
-            [spid-docs.pimp.tabs :refer [transform-tabs]]))
+            [spid-docs.pimp.tabs :refer [transform-tabs]]
+            [spid-docs.pimp.toc :refer [create-toc]]))
 
 (defn add-header-ids
   "Every h2 gets an id that corresponds to the text inside it. This
@@ -57,6 +58,7 @@
        (transform-tabs)
        (optify-images request)
        (add-header-ids)
+       (create-toc)
        (add-comments)))
 
 (defn prepare-pages

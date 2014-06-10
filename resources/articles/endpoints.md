@@ -6,18 +6,7 @@
 
 ## Table of Contents
 
-- [Response container](#response-container)
-- [Response formats](#response-formats)
-- [Signed responses](#signed-responses)
-- [Encoding](#encoding)
-- [Pagination](#pagination)
-- [Selection](#selection)
-- [Sorting](#sorting)
-- [Filters](#filters)
-- [Locales](#locales)
-- [Parameters](#parameters)
-- [Java request example](#java-request-example)
-- [PHP request example](#php-request-example)
+<spid-toc></spid-toc>
 
 Looking for the list of all endpoints? See the [API reference](/#api-reference).
 

@@ -4,11 +4,7 @@
 
 ## Table of Contents
 
-- [Types of callbacks](#types-of-callbacks)
-- [Callback requests](#callback-requests)
-- [Callback responses](#callback-responses)
-- [Order status callback](#order-status-callback)
-- [User status callback](#user-status-callback)
+<spid-toc></spid-toc>
 
 ## Relevant type definitions
 
@@ -37,7 +33,7 @@ receive notification of the change within a couple of minutes of its occurrence.
   </div>
 </div>
 
-## Types of Callbacks
+## Types of callbacks
 
 The SPiD platform currently supports two kinds of callbacks:
 
