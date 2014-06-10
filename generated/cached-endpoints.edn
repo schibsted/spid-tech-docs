@@ -1363,9 +1363,9 @@
   {:GET
    {:name "GET",
     :required [],
-    :optional [],
+    :optional ["filters"],
     :accessTokenTypes ["server" "user"],
-    :filters [],
+    :filters ["items" "identifier"],
     :defaultFilters [],
     :responses
     [{:status 200,
