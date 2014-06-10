@@ -10,6 +10,7 @@
             [spid-docs.example-code :refer [create-example-code]]
             [spid-docs.formatting :refer [pluralize enumerate-humanely capitalize to-id-str]]
             [spid-docs.http :refer [get-response-status-name]]
+            [spid-docs.pages.type-pages :refer [get-type-name]]
             [spid-docs.pages.type-pages :refer [render-type-definition render-inline-types link-to-type]]
             [spid-docs.pimp.markdown :refer [render-inline render]]
             [spid-docs.routes :refer [api-path endpoint-path]]))
@@ -235,20 +236,23 @@
   [:li [:a {:href (endpoint-path endpoint)}
         [:code method] " " path]])
 
-(defn- render-relevant-type [type]
-  [:li "The " [:a {:href (str "/types/" type "/")} (capitalize type) " object"]])
+(defn- render-relevant-type [type types]
+  [:li "The " [:a {:href (str "/types/" type "/")}
+               (-> (get-type-name (keyword type) types)
+                   (str/replace #" object$" ""))
+               " object"]])
 
 (defn- render-relevant-article [article]
   [:li [:a {:href (:path article)}
         (:title article)]])
 
-(defn- render-see-also [{:keys [relevant-endpoints relevant-types relevant-articles]}]
+(defn- render-see-also [{:keys [relevant-endpoints relevant-types relevant-articles]} types]
   (when (or relevant-endpoints relevant-types relevant-articles)
     (list
      [:h2 "See also"]
      [:ul
       (concat (map render-relevant-article relevant-articles)
-              (map render-relevant-type relevant-types)
+              (map #(render-relevant-type % types) relevant-types)
               (map render-relevant-endpoint relevant-endpoints))])))
 
 (defn- render-comments [endpoint]
@@ -286,7 +290,7 @@
                   (render-description endpoint)]]
                 [:div.aside
                  [:div.wrap
-                  (render-see-also endpoint)
+                  (render-see-also endpoint types)
                   (render-meta endpoint)]]]
                [:div.separator]
                (render-request endpoint)

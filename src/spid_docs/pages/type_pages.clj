@@ -6,7 +6,7 @@
 (defn- render-availability [field]
   (if (:always-available? field) [:span.check " ✓"]))
 
-(defn- get-type-name
+(defn get-type-name
   ([type] (or (:name type) (name (:id type))))
   ([type types] (or (:name (type types)) (name type))))
 
