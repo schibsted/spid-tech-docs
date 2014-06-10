@@ -1,7 +1,7 @@
 :introduction
 
 Hands out a voucher to user. Assumes that vouchers for the voucher group has
-been generated upront, and that there are available vouchers that are neither
+been generated upfront, and that there are available vouchers that are neither
 redeemed, handed out, nor expired. The voucher that is given to the user has its
 status changed to "handed out".
 
