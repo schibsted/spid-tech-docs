@@ -20,7 +20,9 @@
 
 (defn curl-example-code [{:keys [api-path method access-token-types example-params]} params]
   (apply str "curl https://payment.schibsted.no" (replace-path-parameters api-path example-params)
+         (when (= :GET method) " -G")
          (when (= :POST method) " \\\n   -X POST")
+         (when (= :DELETE method) " \\\n   -X DELETE")
          (when (seq access-token-types) " \\\n   -d \"oauth_token=[access token]\"")
          (format-params (exemplify-params params example-params)
                         " \\\n   -d \":name=:value\"")))

@@ -52,13 +52,13 @@
                        :example-params example-params})]
 
    (-> get-example :curl :minimal)
-   => "curl https://payment.schibsted.no/api/2/status"
+   => "curl https://payment.schibsted.no/api/2/status -G"
 
    (-> get-example :curl :maximal)
    => nil
 
    (-> param-example :curl :minimal)
-   => "curl https://payment.schibsted.no/api/2/describe/User \\
+   => "curl https://payment.schibsted.no/api/2/describe/User -G \\
    -d \"oauth_token=[access token]\""
 
    (-> post-example :curl :minimal)
