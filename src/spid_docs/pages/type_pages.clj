@@ -106,8 +106,8 @@
   (list
    [:h1 (get-type-name type)]
    (render-typedef type types)
-   (render-inline-types type types)))
-
+   (render-inline-types type types)
+   [:div.disqus-comments {:id (type-path type)}]))
 
 (defn- render-aside [relevant-endpoints]
   (list
