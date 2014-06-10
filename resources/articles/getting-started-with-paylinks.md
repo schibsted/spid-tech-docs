@@ -28,7 +28,9 @@ This is the flow:
 - The user completes payment on the SPiD website, and is redirected back to your site with an order ID.
 - You use the order ID to track the status of payment.
 
-We'll look at this in detail in the rest of the guide. If you prefer to just
+It's illustrated in [this sequence diagram](/paylink-api/#purchase-flows).
+
+We'll look at these steps in detail in the rest of the guide. If you prefer to just
 dive in, take a look at [these working examples](#working-examples).
 
 ## Configure your application
