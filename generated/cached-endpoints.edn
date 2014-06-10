@@ -2828,7 +2828,7 @@
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
   {:voucherGroupId "ID of the voucher group to hand out vouchers for",
-   :amount "The number of vouchers to retrieve"},
+   :amount "The number of vouchers to retrieve. Defaults to 1."},
   :method "POST",
   :name "Handout vouchers",
   :httpMethods

@@ -1,7 +1,7 @@
 {:id :voucher
  :name "Voucher"
  :rendering :object
- :description "Vouchers are mainly described by the voucher group they belong
+ :description "Vouchers are mainly described by the [voucher group](/types/voucher-group/) they belong
 to. Shared vouchers can be redeemed multiple times and as such never changes its
 status to redeemed. Unique vouchers have unique codes for each user and can only
 be redeemed once."

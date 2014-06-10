@@ -7,3 +7,9 @@ status changed to "handed out".
 
 Failure means a voucher was not available. More info on failure may be found in
 the error value of the [container](/endpoints/#response-container).
+
+:relevant-types voucher voucher-group
+
+:relevant-endpoints
+
+GET /me/vouchers
