@@ -40,9 +40,6 @@ The SPiD platform currently supports two kinds of callbacks:
 * Order status changes
 * User status changes
 
-Further callbacks are planned for future versions of SPiD, such as user and
-subscription changes.
-
 ## Callback requests
 
 When an object changes, an HTTP POST request will be made to the client-defined
