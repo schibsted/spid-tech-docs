@@ -8,22 +8,24 @@
 
 :body
 
-SPiD can be used as a payent provider through a few different APIs. Below you
-will find guides and working examples for three approaches, but it is
-recommended to get a rough overview of each approach before diving in.
+SPiD can be used as a payent provider in a few different ways. This page
+contains guides and working examples for three approaches, and it is recommended
+to get a rough overview of each approach before diving in.
 
 ## Paylinks
 
-With paylinks there is little setup, and you can have a working checkout process
+Paylinks require little to no setup, and you can have a working checkout process
 in literally 10 minutes. There is no need to store products or other data in
-SPiD - all you need is to inform SPiD via the REST API about the contents of an
-order, and SPiD will give you back a checkout URL. The URL will allow the user
+SPiD. All you need to do is to inform SPiD about the contents of an order via
+the REST API, and SPiD will generate a checkout URL. The URL will allow the user
 to pay and return to your site.
 
 ### When to use Paylinks
 
 - When you want to offer all possible payment options
 - When you want to get off the ground quickly
+
+[Guide: Gettting started with paylinks](/getting-started-with-paylinks/)
 
 ## Direct payment
 
@@ -40,3 +42,13 @@ should look into [creating subscriptions](/endpoints/POST/product/) in SPiD.
 - Recurring payments where the recurring logic is handled on your end
 - One-click shopping where you don't want to send the user through SPiD's checkout
 - When implementing your own checkout process
+
+[Guide: Gettting started with direct payment](/getting-started-with-direct-payment/)
+
+## Recurring payments with subscriptions
+
+SPiD can be used to store entire catalogs of products and subscriptions. Using
+SPiD subscriptions offers a low effort approach to recurring payment as SPiD
+will handle all the logic of charging users, timing out subscriptions etc. The
+subscription APIs offer a great deal of flexibility in controlling the behavior,
+......
