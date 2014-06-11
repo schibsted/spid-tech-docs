@@ -1,4 +1,4 @@
-# SPiD API Documentation
+# SPiD API Documentation [![Build Status](https://travis-ci.org/schibsted/spid-tech-docs.svg?branch=master)](https://travis-ci.org/schibsted/spid-tech-docs)
 
 The SPiD API Documentation is a Clojure app that pulls information
 from the API itself and merges it with examples and meta-data stored
