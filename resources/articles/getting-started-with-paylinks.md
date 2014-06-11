@@ -197,3 +197,10 @@ out these working examples:
 - [Paylinks example for PHP](https://github.com/schibsted/spid-php-examples/tree/master/paylinks)
 - [Paylinks example for Java](https://github.com/schibsted/spid-java-examples/tree/master/paylinks)
 - [Paylinks example for Clojure](https://github.com/schibsted/spid-clj-examples/tree/master/paylinks)
+
+## Further reading
+
+- [Callbacks](/callbacks/) notifies you about changes to your orders.
+- Check out the [Direct payment guide](/getting-started-with-direct-payment/) to
+  sell products by providing your own customized check-out experience, or charge
+  users in the background for recurring payments.
