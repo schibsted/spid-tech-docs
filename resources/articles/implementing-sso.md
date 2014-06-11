@@ -105,7 +105,7 @@ the SPiD login page.
 
 ##### :tab Java
 
-<spid-example lang="java" src="/login/src/main/java/no/spid/examples/LoginController.java" title="Build login URL"/>
+<spid-example lang="java" src="/sso/src/main/java/no/spid/examples/LoginController.java" title="Build login URL"/>
 
 ##### :tab PHP
 
@@ -132,7 +132,7 @@ client to communicate with the SPiD API on behalf of the user.
 
 ##### :tab Java
 
-<spid-example lang="java" src="/login/src/main/java/no/spid/examples/LoginController.java" title="Create user client"/>
+<spid-example lang="java" src="/sso/src/main/java/no/spid/examples/LoginController.java" title="Create user client"/>
 
 ##### :tab PHP
 
@@ -160,7 +160,7 @@ on to the client. You'll need it later.
 
 ##### :tab Java
 
-<spid-example lang="java" src="/login/src/main/java/no/spid/examples/LoginController.java" title="Fetch user information and add to session"/>
+<spid-example lang="java" src="/sso/src/main/java/no/spid/examples/LoginController.java" title="Fetch user information and add to session"/>
 
 ##### :tab PHP
 
@@ -192,7 +192,7 @@ logging out of SPiD.
 
 ##### :tab Java
 
-<spid-example lang="java" src="/login/src/main/java/no/spid/examples/LoginController.java" title="Log user out"/>
+<spid-example lang="java" src="/sso/src/main/java/no/spid/examples/LoginController.java" title="Log user out"/>
 
 ##### :tab PHP
 
@@ -216,5 +216,5 @@ If you're unsure on certain details after reading this guide, do check
 out these working examples:
 
 - [SSO example for PHP](https://github.com/schibsted/spid-php-examples/tree/master/sso)
-- [SSO example for Java](https://github.com/schibsted/spid-java-examples/tree/master/login)
+- [SSO example for Java](https://github.com/schibsted/spid-java-examples/tree/master/sso)
 - [SSO example for Clojure](https://github.com/schibsted/spid-clj-examples/tree/master/sso)

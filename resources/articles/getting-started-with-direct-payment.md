@@ -59,6 +59,6 @@ these variables should not be hard-coded.
 If you're unsure on certain details after reading this guide, do check
 out these working examples:
 
-- [Paylinks example for PHP](https://github.com/schibsted/spid-php-examples/tree/master/paylinks)
-- [Paylinks example for Java](https://github.com/schibsted/spid-java-examples/tree/master/paylinks)
-- [Paylinks example for Clojure](https://github.com/schibsted/spid-clj-examples/tree/master/paylinks)
+- [Paylinks example for PHP](https://github.com/schibsted/spid-php-examples/tree/master/direct-payment)
+- [Paylinks example for Java](https://github.com/schibsted/spid-java-examples/tree/master/direct-payment)
+- [Paylinks example for Clojure](https://github.com/schibsted/spid-clj-examples/tree/master/direct-payment)
