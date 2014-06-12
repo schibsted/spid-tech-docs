@@ -75,9 +75,9 @@ To [create a Paylink](/endpoints/POST/paylink/), SPiD expects a few parameters:
 
 We'll take the quantities posted by the user, and create the data.
 
-#### :tabs Create Paylink data:
+# :tabs
 
-##### :tab Java
+## :tab Java
 
 <spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="The entirety of our product catalog right here"/>
 
@@ -85,7 +85,7 @@ We'll take the quantities posted by the user, and create the data.
 
 Note that the items are encoded as a JSON string.
 
-##### :tab PHP
+## :tab PHP
 
 <spid-example lang="php" src="/paylinks/checkout.php" title="The entirety of our product catalog right here"/>
 
@@ -93,7 +93,7 @@ Note that the items are encoded as a JSON string.
 
 Note that the SPiD SDK will turn `items` into a JSON string for you.
 
-##### :tab Clojure
+## :tab Clojure
 
 <spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="The entirety of our product catalog right here"/>
 
@@ -101,32 +101,34 @@ Note that the SPiD SDK will turn `items` into a JSON string for you.
 
 Note that the items are encoded as a JSON string.
 
-#### :/tabs
+# :/tabs
+
+#### Create paylink
 
 With our data in hand, we can create the Paylink by POSTing to
 [the /paylinks endpoint](/endpoints/POST/paylink/).
 
-#### :tabs Create paylink
+# :tabs
 
-##### :tab Java
+## :tab Java
 
 <spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Create SPiD client"/>
 
 <spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Create Paylink"/>
 
-##### :tab PHP
+## :tab PHP
 
 <spid-example lang="php" src="/paylinks/checkout.php" title="Create SPiD client"/>
 
 <spid-example lang="php" src="/paylinks/checkout.php" title="Create Paylink"/>
 
-##### :tab Clojure
+## :tab Clojure
 
 <spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Create SPiD client"/>
 
 <spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Create Paylink"/>
 
-#### :/tabs
+# :/tabs
 
 ## Redirect the user to SPiD for payment
 
@@ -134,21 +136,21 @@ Our new Paylink has [quite a few fields](/types/paylink/), but the one we're
 interested in is the `shortUrl`. We'll use this to send the user to SPiD for
 payment.
 
-#### :tabs Redirect to SPiD
+# :tabs
 
-##### :tab Java
+## :tab Java
 
 <spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Create Paylink and redirect to SPiD"/>
 
-##### :tab PHP
+## :tab PHP
 
 <spid-example lang="php" src="/paylinks/checkout.php" title="Redirect to SPiD"/>
 
-##### :tab Clojure
+## :tab Clojure
 
 <spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Create Paylink and redirect to SPiD"/>
 
-#### :/tabs
+# :/tabs
 
 The user will be presented with a summary of the order, along with payment options.
 
@@ -158,27 +160,27 @@ SPiD will redirect the user to your given `redirectUri` after a successful
 purchase. It is a GET request, which includes an `order_id` query parameter. Use
 this to look up information about the order.
 
-#### :tabs Look up the order and its status
+# :tabs
 
-##### :tab Java
+## :tab Java
 
 <spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Order status codes"/>
 
 <spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Fetch order info"/>
 
-##### :tab PHP
+## :tab PHP
 
 <spid-example lang="php" src="/paylinks/success.php" title="Order status codes"/>
 
 <spid-example lang="php" src="/paylinks/success.php" title="Fetch order info"/>
 
-##### :tab Clojure
+## :tab Clojure
 
 <spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Order status codes"/>
 
 <spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Fetch order info"/>
 
-#### :/tabs
+# :/tabs
 
 The order status is likely **Complete** (status `"2"`), meaning everything is
 proceeding according to our plans. Time to give the user what they payed for.

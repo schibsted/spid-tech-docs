@@ -95,9 +95,11 @@ Each order item should have at least the following fields:
 - `price` - Price, including VAT, in "cents", e.g. NOK100 is represented as 10000
 - `vat` - VAT in percent * 100, 25% is represented as 2500
 
-### :tabs Building the order object
+### Building the order object
 
-#### :tab Java
+# :tabs
+
+## :tab Java
 
 <spid-example lang="java" src="/direct-payment/src/main/java/no/spid/examples/ShopController.java" title="The entirety of our product catalog right here"/>
 <spid-example lang="java" src="/direct-payment/src/main/java/no/spid/examples/ShopController.java" title="Create data to POST to /user/{userId}/charge"/>
@@ -108,7 +110,7 @@ is helper method that wraps functionality in the Java client library:
 <spid-example lang="java" src="/direct-payment/src/main/java/no/spid/examples/BaseController.java" title="Creating the security helper"/>
 <spid-example lang="java" src="/direct-payment/src/main/java/no/spid/examples/BaseController.java" title="Signing parameters"/>
 
-#### :tab PHP
+## :tab PHP
 
 <spid-example lang="php" src="/direct-payment/checkout.php" title="The entirety of our product catalog right here"/>
 <spid-example lang="php" src="/direct-payment/checkout.php" title="Create data to POST to /user/{userId}/charge"/>
@@ -122,7 +124,7 @@ instance of the SDK:
 Also note that the `items` where passed in as an array - the PHP SDK will
 automatically serialize any array parameter into a JSON string.
 
-#### :tab Clojure
+## :tab Clojure
 
 <spid-example lang="clj" src="/direct-payment/src/spid_clojure_direct_payment_example/core.clj" title="The entirety of our product catalog right here"/>
 <spid-example lang="clj" src="/direct-payment/src/spid_clojure_direct_payment_example/core.clj" title="Create data to POST to /user/{userId}/charge"/>
@@ -130,7 +132,9 @@ automatically serialize any array parameter into a JSON string.
 Notice the use of `spid/sign-params` to add the verified hash to the params map.
 This feature is built into the Clojure client library.
 
-### :/tabs
+# :/tabs
+
+### Attempt direct payment
 
 Having built the order object, we can attempt a direct charge. The request may
 fail for a variety of reasons, the most important being that the customer does
@@ -139,16 +143,16 @@ back to creating a paylink and redirecting the user. Once redirected, the user
 will be prompted to add a credit card, ensuring your next attempt at a direct
 charge for this user is likely to succeed.
 
-### :tabs Attempt direct payment
+# :tabs
 
-#### :tab Java
+## :tab Java
 
 <spid-example lang="java" src="/direct-payment/src/main/java/no/spid/examples/ShopController.java" title="Attempting the direct payment, with a Paylink fallback"/>
 
 The user was previously stored in the session by the login action (refer to
 [the SSO guide](/implementing-sso/)).
 
-#### :tab PHP
+## :tab PHP
 
 <spid-example lang="php" src="/direct-payment/checkout.php" title="Attempting the direct payment, with a Paylink fallback"/>
 
@@ -157,14 +161,14 @@ The user was previously stored in the session by the login script (refer to
 
 <spid-example lang="php" src="/direct-payment/checkout.php" title="Retrieving the user"/>
 
-#### :tab Clojure
+## :tab Clojure
 
 <spid-example lang="clj" src="/direct-payment/src/spid_clojure_direct_payment_example/core.clj" title="Attempting the direct payment, with a Paylink fallback"/>
 
 The user was previously stored in the session by the login script (refer to
 [the SSO guide](/implementing-sso/)).
 
-### :/tabs
+# :/tabs
 
 ## Displaying a receipt
 
@@ -174,23 +178,23 @@ with things like [order status](/types/order-status/) and
 [payment identifier type](/types/payment-id-type/) to create receipt for
 the user.
 
-### :tabs Receipt
+# :tabs
 
-#### :tab Java
+## :tab Java
 
 <spid-example lang="java" src="/direct-payment/src/main/java/no/spid/examples/ShopController.java" title="Preparing order data for the receipt view"/>
 <spid-example lang="html" repo="java" src="/direct-payment/src/main/resources/templates/receipt.html" title="Simple receipt"/>
 
-#### :tab PHP
+## :tab PHP
 
 <spid-example lang="php" repo="php" src="/direct-payment/receipt.php" title="Simple receipt"/>
 
-#### :tab Clojure
+## :tab Clojure
 
 <spid-example lang="clj" src="/direct-payment/src/spid_clojure_direct_payment_example/core.clj" title="Extracting order data for the receipt view"/>
 <spid-example lang="html" repo="clj" src="/direct-payment/resources/receipt.html" title="Simple receipt"/>
 
-### :/tabs
+# :/tabs
 
 ## Staying up to date
 
@@ -202,8 +206,8 @@ orders.
 If a direct payment is made with the `purchaseFlow` parameter set to
 `"AUTHORIZE"`, the user's card will only be authorized for the provided amount.
 You must then later either
-[`capture`](/endpoints/POST/order/%7BorderId%7D/capture/) or
-[`credit`](/endpoints/POST/order/%7BorderId%7D/credit/) the order. See
+[`capture`](/endpoints/POST/order/{orderId}/capture/) or
+[`credit`](/endpoints/POST/order/{orderId}/credit/) the order. See
 [the direct payment API](/direct-payment-api/) for full details.
 
 ## Working examples

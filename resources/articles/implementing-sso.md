@@ -53,9 +53,9 @@ create the user's local session with the given code.
 Let's just set up a basic handler for this now, and we can fill it
 in later.
 
-#### :tabs Set up a handler to create the session
+# :tabs
 
-##### :tab Java
+## :tab Java
 
 ```java
 @RequestMapping("/create-session")
@@ -64,14 +64,14 @@ String createSession(@RequestParam String code) {
 }
 ```
 
-##### :tab PHP
+## :tab PHP
 
 ```php
 <?php // createSession.php
 header("Location: /");
 ```
 
-##### :tab Clojure
+## :tab Clojure
 
 ```clj
 (defn create-session [code]
@@ -82,7 +82,7 @@ header("Location: /");
   (GET "/create-session" [code] (create-session code)))
 ```
 
-#### :/tabs
+# :/tabs
 
 ## Send the user to the SPiD login page
 
@@ -101,21 +101,23 @@ The domain also has to match the predefined URI that you have
 registered with SPiD. Only predefined redirect URIs are accepted by
 the SPiD login page.
 
-#### :tabs Build login URL
+### Build login URL
 
-##### :tab Java
+# :tabs
+
+## :tab Java
 
 <spid-example lang="java" src="/sso/src/main/java/no/spid/examples/LoginController.java" title="Build login URL"/>
 
-##### :tab PHP
+## :tab PHP
 
 <spid-example lang="php" src="/sso/index.php" title="Build login URL"/>
 
-##### :tab Clojure
+## :tab Clojure
 
 <spid-example lang="clj" src="/sso/src/spid_clojure_sso_example/core.clj" title="Build login URL"/>
 
-#### :/tabs
+# :/tabs
 
 The login URL can be served directly to your end users for logging in. As
 SPiD supports *remember me* type functionality there is no need for
@@ -128,13 +130,13 @@ back to your application via the redirect URI you provided. The
 redirect will come with a code. Using this code, you can create a
 client to communicate with the SPiD API on behalf of the user.
 
-#### :tabs Create an API client
+# :tabs
 
-##### :tab Java
+## :tab Java
 
 <spid-example lang="java" src="/sso/src/main/java/no/spid/examples/LoginController.java" title="Create user client"/>
 
-##### :tab PHP
+## :tab PHP
 
 The SPiD SDK for PHP needs a few config variables:
 
@@ -144,11 +146,11 @@ Create the client with the config:
 
 <spid-example lang="php" src="/sso/createSession.php" title="Create user client"/>
 
-##### :tab Clojure
+## :tab Clojure
 
 <spid-example lang="clj" src="/sso/src/spid_clojure_sso_example/core.clj" title="Create user client"/>
 
-#### :/tabs
+# :/tabs
 
 ## Fetch user information and create a session
 
@@ -156,21 +158,21 @@ Use the API client you just created to fetch basic user information,
 and create a local session with it. You should also make sure to hang
 on to the client. You'll need it later.
 
-#### :tabs Fetch user information and create session
+# :tabs
 
-##### :tab Java
+## :tab Java
 
 <spid-example lang="java" src="/sso/src/main/java/no/spid/examples/LoginController.java" title="Fetch user information and add to session"/>
 
-##### :tab PHP
+## :tab PHP
 
 <spid-example lang="php" src="/sso/createSession.php" title="Fetch user information and add to session"/>
 
-##### :tab Clojure
+## :tab Clojure
 
 <spid-example lang="clj" src="/sso/src/spid_clojure_sso_example/core.clj" title="Fetch user information and add to session"/>
 
-#### :/tabs
+# :/tabs
 
 ## Log user out
 
@@ -188,17 +190,17 @@ In addition to the user's access token, you pass along another
 redirect URI, so that the user is sent back to your site after
 logging out of SPiD.
 
-#### :tabs Log user out
+# :tabs
 
-##### :tab Java
+## :tab Java
 
 <spid-example lang="java" src="/sso/src/main/java/no/spid/examples/LoginController.java" title="Log user out"/>
 
-##### :tab PHP
+## :tab PHP
 
 <spid-example lang="php" src="/sso/logout.php" title="Log user out"/>
 
-##### :tab Clojure
+## :tab Clojure
 
 <spid-example lang="clj" src="/sso/src/spid_clojure_sso_example/core.clj" title="Log user out"/>
 
@@ -208,7 +210,7 @@ logging out of SPiD.
   (GET "/logout" request (log-user-out request)))
 ```
 
-#### :/tabs
+## :/tabs
 
 ## Working examples
 

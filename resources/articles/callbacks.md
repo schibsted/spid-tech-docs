@@ -82,9 +82,11 @@ The decoded data is a JSON object:
 }
 ```
 
-### :tabs Decoding responses
+### Decoding responses
 
-#### :tab PHP
+# :tabs
+
+## :tab PHP
 
 The following example manually achieves the same effect as the PHP SDK function
 `Client::parseSignedRequest($signed)` (see [callback.php](https://github.com/schibsted/sdk-php/blob/4e40c580561fc1d0187dbac0383e8ba0e50de1e3/examples/callback/index.php)
@@ -130,7 +132,7 @@ $parsed = parse_signed_request($payload, $SPID_CREDENTIALS[VGS_Client::CLIENT_SI
 $data = json_decode($parsed, true);
 ```
 
-#### :tab Java
+## :tab Java
 
 The following example manually achieves the same effect as the Java API client
 method `SpidSecurityHelper.decryptAndValidateSignedRequest(String request)` (see
@@ -157,7 +159,7 @@ if (!Arrays.equals(expectedSignature, signature)) {
 }
 ```
 
-### :/tabs
+# :/tabs
 
 ### Processing callback data
 

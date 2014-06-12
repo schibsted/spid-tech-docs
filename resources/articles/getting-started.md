@@ -33,9 +33,9 @@ who you share it with. The examples below are meant to illustrate the basics of
 using the API, they are *not* examples of production code. For more complete
 examples, see the example use-cases.
 
-### :tabs Downloading the SDK
+# :tabs
 
-#### :tab Java
+## :tab Java
 
 The Java API client library is deployed in Maven central, just add it to your project's `pom.xml` file:
 
@@ -47,7 +47,7 @@ The Java API client library is deployed in Maven central, just add it to your pr
 </dependency>
 ```
 
-#### :tab PHP
+## :tab PHP
 
 Download the PHP SDK by cloning the GitHub repository:
 
@@ -58,7 +58,7 @@ git clone https://github.com/schibsted/sdk-php.git
 If you do not have Git installed, you can also download a
 [zip file](https://github.com/schibsted/sdk-php/archive/master.zip).
 
-#### :tab Clojure
+## :tab Clojure
 
 The Clojure client is deployed in Clojars, just put it in your `project.clj`:
 
@@ -66,7 +66,7 @@ The Clojure client is deployed in Clojars, just put it in your `project.clj`:
 [spid-client-clojure "1.0.0"]
 ```
 
-#### :tab iOS
+## :tab iOS
 
 Download the iOS SDK by cloning the GitHub repository:
 
@@ -88,7 +88,7 @@ Linking the SDK into your project requires a few steps:
 
 - Go to *Build Settings*, search for `linking` and add `-ObjC` to *Other Linker Flags*
 
-#### :tab Android
+## :tab Android
 
 In order to use the Android SPiD SDK, you must fist install the
 [Android SDK](http://developer.android.com/sdk/index.html). Run the Android SDK
@@ -154,7 +154,7 @@ mvn android:deploy
 This will install the app on the emulator. When it finishes you have
 successfully set up the SDK for development. Great success!
 
-### :/tabs
+# :/tabs
 
 ## Interacting with the API
 
@@ -162,9 +162,9 @@ Now that you have installed a SDK/Client, you will use it to make first contact 
 the SPiD API. Don't worry, it will be quick and painless. When you've got
 everything set up, you might want to continue with configuring single sign-on.
 
-### :tabs Getting all endpoints
+# :tabs
 
-#### :tab Java
+## :tab Java
 
 The following is a minimal example of using the Java API client. It fetches the
 /endpoints endpoint, which returns a description of all available endpoints.
@@ -189,8 +189,7 @@ mvn install -q exec:java -Dexec.mainClass="no.spid.examples.GettingStarted" -Dex
 When working with the Java client, you might be more interested in
 `SpidApiResponse`'s `getJSONData()` method.
 
-
-#### :tab PHP
+## :tab PHP
 
 The following is a minimal example of using the PHP SDK. It fetches the
 /endpoints endpoint, which returns a description of all available endpoints.
@@ -207,7 +206,7 @@ php getting-started.php client-id secret sign-secret
 This will print the JSON-decoded response from the server, which shows all
 available endpoints along with details on how to interact with them.
 
-#### :tab Clojure
+## :tab Clojure
 
 The following is a minimal example of using the Clojure client. It fetches the
 /endpoints endpoint, which returns a description of all available endpoints.
@@ -224,7 +223,7 @@ lein run client-id secret
 This will pretty-print the JSON-decoded response from the server, which shows
 all available endpoints along with details on how to interact with them.
 
-#### :tab iOS
+## :tab iOS
 
 The following is a minimal example of using the iOS SDK. It fetches the
 `/endpoints` endpoint, which returns a description of all available endpoints.
@@ -283,7 +282,7 @@ static NSString *const ServerURL = @"https://stage.payment.schibsted.no";
 @end
 ```
 
-#### :tab Android
+## :tab Android
 
 To use the SPiD Android SDK you must first make the library available to your
 application. Add the SPiD SDK as a dependency to your pom.xml:
@@ -369,7 +368,7 @@ In practice, it is likely that you will start by logging in the user and then
 interacting with the API on their behalf. You will learn how to do this from the
 Single Sign-On guide.
 
-#### :tab cURL
+## :tab cURL
 
 Using [cURL](http://curl.haxx.se/dlwiz/) to interact with the API is a good way
 to gain insight into how it works at the networking level. It is also the most
@@ -399,4 +398,4 @@ Using the provided `access_token`, you may now browse the API endpoints:
 The pipe into python makes the JSON document nice and readable. You can of
 course skip that part if you don't have python installed.
 
-### :/tabs
+# :/tabs

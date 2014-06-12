@@ -12,12 +12,14 @@ middleman.
 The sort algorithm is [natsort](http://sourcefrog.net/projects/natsort/)
 ("Natural order string comparison").
 
-## :tabs Hashing example
+## Hashing example
+
+# :tabs
 
 The following are examples of how to hash the `POST` body data so its
 authenticity can be validated by SPiD.
 
-### :tab PHP
+## :tab PHP
 
 ```php
 <?php
@@ -59,7 +61,7 @@ $data['hash'] = createHash($data, $sign_secret);
 $client->api('/user/123/charge', 'POST', $data);
 ```
 
-### :tab PHP SDK
+## :tab PHP SDK
 
 ```php
 <?php
@@ -85,7 +87,7 @@ try {
 }
 ```
 
-### :tab Java SDK
+## :tab Java SDK
 
 ```java
 // no.spid.api.security.SpidSecurityHelper
@@ -103,4 +105,4 @@ securityHelper.addHash(params);
 // Now use params to make a request
 ```
 
-## :/tabs
+# :/tabs

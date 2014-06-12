@@ -187,9 +187,11 @@ To experiment with signature verification, try this sample response:
 // Sign secret: a274de
 ```
 
-### :tabs Decoding responses
+### Decoding responses
 
-#### :tab PHP
+# :tabs
+
+## :tab PHP
 
 `$container` is a full [response container](#response-container).
 
@@ -219,7 +221,7 @@ if ($sig === $expected_sig) {
 }
 ```
 
-#### :tab Java
+## :tab Java
 
 ```java
 import no.spid.api.client.SpidApiResponse;
@@ -260,7 +262,7 @@ class ResponseVerifier {
 }
 ```
 
-### :/tabs
+# :/tabs
 
 ## Encoding
 
