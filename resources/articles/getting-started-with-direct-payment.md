@@ -27,7 +27,8 @@ customized check-out experience, or charge users in the background (for
 recurring payments).
 
 Note that some interactions, like adding a credit card, must happen on SPiD or
-even Payex' sites, for security reasons.
+even Payex' sites, for security reasons. Direct payment only works for users
+with a valid credit card in their SPiD account.
 
 ## Overview
 
@@ -53,7 +54,7 @@ and logs the user out of SPiD.
 
 We will not repeat the code for creating paylinks in this guide, refer to the
 [working examples](#working-examples) or the
-[paylink guide](/getting-started-with-paylinks/).
+[paylink guide](/getting-started-with-paylinks/) for details.
 
 ## The user chooses products on your website
 
@@ -64,7 +65,7 @@ field to specify quantity:
 
 ## Charging for the order
 
-Charging the order works like this:
+To charge for the order:
 
 - Build an `order` object, and `POST` it to `/user/{userId}/charge`
 - `POST` fails
@@ -95,6 +96,17 @@ Each order item should have at least the following fields:
 - `vat` - VAT in percent * 100, 25% is represented as 2500
 
 ### :tabs Building the order object
+
+#### :tab Java
+
+<spid-example lang="java" src="/direct-payment/src/main/java/no/spid/examples/ShopController.java" title="The entirety of our product catalog right here"/>
+<spid-example lang="java" src="/direct-payment/src/main/java/no/spid/examples/ShopController.java" title="Create data to POST to /user/{userId}/charge"/>
+
+Notice the use of `signParams` to add the verified hash to the params map. This
+is helper method that wraps functionality in the Java client library:
+
+<spid-example lang="java" src="/direct-payment/src/main/java/no/spid/examples/BaseController.java" title="Creating the security helper"/>
+<spid-example lang="java" src="/direct-payment/src/main/java/no/spid/examples/BaseController.java" title="Signing parameters"/>
 
 #### :tab PHP
 
@@ -129,6 +141,13 @@ charge for this user is likely to succeed.
 
 ### :tabs Attempt direct payment
 
+#### :tab Java
+
+<spid-example lang="java" src="/direct-payment/src/main/java/no/spid/examples/ShopController.java" title="Attempting the direct payment, with a Paylink fallback"/>
+
+The user was previously stored in the session by the login action (refer to
+[the SSO guide](/implementing-sso/)).
+
 #### :tab PHP
 
 <spid-example lang="php" src="/direct-payment/checkout.php" title="Attempting the direct payment, with a Paylink fallback"/>
@@ -156,6 +175,11 @@ with things like [order status](/types/order-status/) and
 the user.
 
 ### :tabs Receipt
+
+#### :tab Java
+
+<spid-example lang="java" src="/direct-payment/src/main/java/no/spid/examples/ShopController.java" title="Preparing order data for the receipt view"/>
+<spid-example lang="html" repo="java" src="/direct-payment/src/main/resources/templates/receipt.html" title="Simple receipt"/>
 
 #### :tab PHP
 
