@@ -72,12 +72,12 @@ To charge for the order:
     - Build a paylink
     - Redirect the user to SPiD
 - `POST` succeeds
-    - The user is returned with an order
+    - The API returns an order object
     - Callbacks may update the generated order later (credit card transactions are asynchronous)
     - When the order is complete, grant the user access to the product(s)
 
 To charge for the order, the user must be logged in, and you must have their
-`userId`. The [working example apps](#working-examples) all enforce login before
+`userId`. The [working example app](#working-examples) enforces login before
 allowing the user to check out.
 
 ### The order object
@@ -105,7 +105,7 @@ Each order item should have at least the following fields:
 <spid-example lang="java" src="/direct-payment/src/main/java/no/spid/examples/ShopController.java" title="Create data to POST to /user/{userId}/charge"/>
 
 Notice the use of `signParams` to add the verified hash to the params map. This
-is helper method that wraps functionality in the Java client library:
+is a helper method that wraps functionality in the Java client library:
 
 <spid-example lang="java" src="/direct-payment/src/main/java/no/spid/examples/BaseController.java" title="Creating the security helper"/>
 <spid-example lang="java" src="/direct-payment/src/main/java/no/spid/examples/BaseController.java" title="Signing parameters"/>
