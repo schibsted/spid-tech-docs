@@ -9,8 +9,8 @@
 :body
 
 SPiD can be used as a payent provider in a few different ways. This page
-contains guides and working examples for three approaches, and it is recommended
-to get a rough overview of each approach before diving in.
+contains guides and working examples for two approaches, and it is recommended
+to get a rough overview of both approaches before diving in.
 
 ## Paylinks
 
@@ -24,6 +24,7 @@ to pay and return to your site.
 
 - When you want to offer all possible payment options
 - When you want to get off the ground quickly
+- When you are comfortable handling your own product database
 
 [Guide: Gettting started with paylinks](/getting-started-with-paylinks/)
 
@@ -44,11 +45,3 @@ should look into [creating subscriptions](/endpoints/POST/product/) in SPiD.
 - When implementing your own checkout process
 
 [Guide: Gettting started with direct payment](/getting-started-with-direct-payment/)
-
-## Recurring payments with subscriptions
-
-SPiD can be used to store entire catalogs of products and subscriptions. Using
-SPiD subscriptions offers a low effort approach to recurring payment as SPiD
-will handle all the logic of charging users, timing out subscriptions etc. The
-subscription APIs offer a great deal of flexibility in controlling the behavior,
-......
