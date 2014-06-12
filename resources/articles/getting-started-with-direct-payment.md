@@ -17,6 +17,7 @@ SPiD.
 ## See also
 
 - [Callbacks](/callbacks/)
+- [The Direct Payment API](/direct-payment-api/)
 - [`POST` /user/{userId}/charge](/endpoints/POST/user/{userId}/charge/)
 
 :body
@@ -160,7 +161,26 @@ the user.
 
 <spid-example lang="php" repo="php" src="/direct-payment/receipt.php" title="Simple receipt"/>
 
+#### :tab Clojure
+
+<spid-example lang="clj" src="/direct-payment/src/spid_clojure_direct_payment_example/core.clj" title="Extracting order data for the receipt view"/>
+<spid-example lang="html" repo="clj" src="/direct-payment/resources/receipt.html" title="Simple receipt"/>
+
 ### :/tabs
+
+## Staying up to date
+
+Depending on how you charge the user, the order may not be complete when the API
+call finishes. For this reason, it is important that you implement
+[the callback facility](/callbacks/), which will keep you posted about all your
+orders.
+
+If a direct payment is made with the `purchaseFlow` parameter set to
+`"AUTHORIZE"`, the user's card will only be authorized for the provided amount.
+You must then later either
+[`capture`](/endpoints/POST/order/%7BorderId%7D/capture/) or
+[`credit`](/endpoints/POST/order/%7BorderId%7D/credit/) the order. See
+[the direct payment API](/direct-payment-api/) for full details.
 
 ## Working examples
 

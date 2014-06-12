@@ -11,6 +11,10 @@
 - [`POST` /order/{orderId}/cancel](/endpoints/POST/order/{orderId}/cancel/)
 - [`POST` /paylink](/endpoints/POST/paylink/)
 
+## See also
+
+- [Getting started with direct payment](/getting-started-with-direct-payment/)
+
 :body
 
 The Direct Payment API enables server-to-server API calls to charge or authorize
