@@ -17,6 +17,21 @@ def
 ghi")
 
 (fact
+ "It extracts examples from HTML parts of PHP files."
+ (create-example :php "/sso/index.php" "Example" "<?php
+abc
+?>
+<!-- Example -->
+def
+ghi
+<!---->
+<?php
+jkl
+") => "<!-- index.php -->
+def
+ghi")
+
+(fact
  "It adjusts indentation."
  (create-example :java "/sso/src/main/java/Index.java" "Example" "
 abc

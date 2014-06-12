@@ -38,10 +38,17 @@
    example that does not exist"
   (fn [lang path title code] lang))
 
+(defn- find-html-example [title code]
+  (find-example (format "<!-- %s -->" title) "<!---->" code))
+
 (defmethod create-example :php [_ path title code]
-  (str "<?php // " (strip-example-dir path) "\n"
-       (with-missing-example-warning path title
-         (find-example (format "/** %s */" title) "/**/" code))))
+  (let [php-example (find-example (format "/** %s */" title) "/**/" code)
+        html-example (find-html-example title code)]
+    (with-missing-example-warning path title
+      (cond
+       (seq php-example) (str "<?php // " (strip-example-dir path) "\n" php-example)
+       (seq html-example) (str "<!-- " (strip-example-dir path) " -->\n" html-example)
+       :else nil))))
 
 (defmethod create-example :java [_ path title code]
   (with-missing-example-warning path title
@@ -53,7 +60,7 @@
 
 (defmethod create-example :html [_ path title code]
   (with-missing-example-warning path title
-    (find-example (format "<!-- %s -->" title) "<!---->" code)))
+    (find-html-example title code)))
 
 (defmethod create-example :sh [_ path title code]
   (-> (with-missing-example-warning path title
