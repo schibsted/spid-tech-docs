@@ -265,16 +265,7 @@
   [:div.grid-bound
    [:h2 "Help us improve"]
    [:p "Did you spot an error? Or maybe you just have a suggestion for how we can improve? "
-    [:a {:href "#disqus_thread"} "Leave a comment"]
-    ", or better yet, "
-    [:a {:href (str "https://github.com/schibsted/spid-tech-docs/edit/master/resources/endpoints/"
-                    (to-id-str (:path endpoint)) "-" (.toLowerCase (name (:method endpoint)))
-                    ".md")
-         :target "_blank"} "send us a pull request"]
-    " on GitHub to fix it (in-browser editing, only takes a moment)."]
-   [:p [:a {:href (str "https://github.com/schibsted/spid-tech-docs/commits/master/resources/endpoints/"
-                       (to-id-str (:path endpoint)) "-" (.toLowerCase (name (:method endpoint)))
-                       ".md")} "History of this page"]]])
+    [:a {:href "#disqus_thread"} "Leave us a comment"] "."]])
 
 (defn create-page [endpoint types]
   (warn-about-missing-typedefs endpoint types)
