@@ -26,7 +26,7 @@ This is the flow:
 - You send the list of items to SPiD, and get a unique URL back. Redirect the
   user to this Paylink URL.
 - The user completes payment on the SPiD website, and is redirected back to your site with an order ID.
-- You use the order ID to track the status of payment.
+- You refresh your user info, and track the status of payment with the order ID.
 
 It's illustrated in [this sequence diagram](/paylink-api/#purchase-flows).
 
@@ -157,8 +157,41 @@ The user will be presented with a summary of the order, along with payment optio
 ## The user returns after completing the purchase
 
 SPiD will redirect the user to your given `redirectUri` after a successful
-purchase. It is a GET request, which includes an `order_id` query parameter. Use
-this to look up information about the order.
+purchase. It is a GET request, which includes two query parameters: `order_id` and `code`. We'll start with the latter:
+
+### Make sure we've got the right user
+
+The user might have logged in with a different user since we sent them to SPiD
+(like on a shared computer). We need to ensure we're giving the purchased
+product to the right user.
+
+So, like in [the Implementing Single Sign-On guide](/implementing-sso/), we
+create a session for the user with information from SPiD:
+
+# :tabs
+
+## :tab Java
+
+<spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Handle callback from SPiD, make sure we've got the right user"/>
+
+## :tab PHP
+
+<spid-example lang="php" src="/paylinks/callback.php" title="Handle callback from SPiD, make sure we've got the right user"/>
+
+## :tab Clojure
+
+<spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Handle callback from SPiD, make sure we've got the right user"/>
+
+# :/tabs
+
+Note that the code has a short lifespan, so it is prudent to create the user
+token with the code first, and then 302 redirect to another success landing page
+with the code removed from the URL.
+
+### Check the status of the order
+
+Once we've got the right user, we can use the `order_id` to look up information
+about the order.
 
 # :tabs
 
