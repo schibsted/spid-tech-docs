@@ -294,7 +294,8 @@ Depending on the user's actions, multiple events may be fired.
 - `auth.statusChange`
 - `auth.sessionInit`
 - `auth.sessionChange`
-- `Page loads, user not logged in`
+
+#### Page loads, user not logged in
 - `auth.notLoggedin`
 - `auth.sessionChange`
 
