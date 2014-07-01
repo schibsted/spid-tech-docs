@@ -210,7 +210,7 @@ logging out of SPiD.
   (GET "/logout" request (log-user-out request)))
 ```
 
-## :/tabs
+# :/tabs
 
 ## Working examples
 
