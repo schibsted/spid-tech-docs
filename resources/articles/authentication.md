@@ -160,3 +160,22 @@ Recommended reading on
 SPiD provides API clients/SDKs for a number of languages that mostly abstract
 away the OAuth details. The [getting started guide](/getting-started/) provides
 an introduction.
+
+## Best practices and security guidelines
+This section contains a list of best practices and requirements that will be performed on integration and security reviews by SPiD.
+
+### Client credentials handling
+- Client credentials and redirect URIs must NOT be hardcoded anywhere, but made configurable so the same code can be used for both STAGE and PROD environments.
+- Verify that the client configuration for the production environment doesn't use stage credentials or redirect URIs and vice versa. This is especially important before you perform a new release of your application.
+- Client secrets are confidential and must be treated as such. They should NOT be committed to version control systems or publicly transmitted in the client’s organization or between unsecured systems and communication channels.
+
+### Your application's Redirect URI must be valid and follow these security guidelines
+- Previously defined and stored as a valid redirect uri for your client application
+- Doesn't contain other internal or third party based redirect uris encoded in it
+- Doesn't contain invalid characters (\s`!()[]{};',<>«»“”‘’@")
+- Redirect endpoint is recommended to be behind SSL
+- No external Javascript running on redirect URIs that will receive the OAuth code parameter
+
+### Protect your local session, SPiD code and token
+- SPiD code AND user token must NEVER be embedded in your application urls, passed beyond your application's redirect uri or stored in cookies.
+- Your session ID should never be visible in an URL.
