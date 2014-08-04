@@ -91,11 +91,8 @@
 
   (defsample POST "/attach_jwt" {:jwt "TODO"}))
 
-(comment
-  ;; This client is not configured to use Varnish
-
-  (defsample [user johndoe]
-    GET "/user/{userId}/varnishId" {:userId (:userId user)}))
+(defsample [user johndoe]
+  GET "/user/{userId}/varnishId" {:userId (:userId user)})
 
 (defsample [user johndoe]
   GET "/user/{userId}" {:userId (:userId user)})
