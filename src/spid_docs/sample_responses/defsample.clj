@@ -54,7 +54,7 @@
 (defn- build-sample-def
   "Takes a map of raw data and turns it into a sample response definition map"
   [common sample]
-  (let [path-params (get-query-params (:path sample) (:params sample))]
+  (let [path-params (get-query-params (:route sample) (:params sample))]
     (-> (if (seq path-params)
           (assoc sample :path-params path-params)
           sample)
@@ -75,12 +75,12 @@
      ;; (defsample GET "/path")
      [:symbol :string]
      {:method (nth forms 0)
-      :path   (nth forms 1)}
+      :route  (nth forms 1)}
 
      ;; (defsample GET "/users/{userId}" {:userId 42})
      [:symbol :string :map]
      {:method (nth forms 0)
-      :path   (nth forms 1)
+      :route  (nth forms 1)
       :params (nth forms 2)}
 
      ;; (defsample john
@@ -88,14 +88,14 @@
      [:symbol :symbol :string]
      {:id     (nth forms 0)
       :method (nth forms 1)
-      :path   (nth forms 2)}
+      :route  (nth forms 2)}
 
      ;; (defsample john
      ;;   GET "/user/{userId}" {:userId 42})
      [:symbol :symbol :string :map]
      {:id     (nth forms 0)
       :method (nth forms 1)
-      :path   (nth forms 2)
+      :route  (nth forms 2)
       :params (nth forms 3)}
 
      ;; (defsample
@@ -104,7 +104,7 @@
      [:string :symbol :string]
      {:docstring (nth forms 0)
       :method    (nth forms 1)
-      :path      (nth forms 2)}
+      :route     (nth forms 2)}
 
      ;; (defsample
      ;;   "A docstring"
@@ -112,7 +112,7 @@
      [:string :symbol :string :map]
      {:docstring (nth forms 0)
       :method    (nth forms 1)
-      :path      (nth forms 2)
+      :route     (nth forms 2)
       :params    (nth forms 3)}
 
      ;; (defsample [user john]
@@ -120,14 +120,14 @@
      [:vector :symbol :string]
      {:dependencies (nth forms 0)
       :method       (nth forms 1)
-      :path         (nth forms 2)}
+      :route        (nth forms 2)}
 
      ;; (defsample [user john]
      ;;   GET "/user/{userId}" {userId (:id user)})
      [:vector :symbol :string :map]
      {:dependencies (nth forms 0)
       :method       (nth forms 1)
-      :path         (nth forms 2)
+      :route        (nth forms 2)
       :params       (nth forms 3)}
 
      ;; (defsample jane
@@ -137,7 +137,7 @@
      {:id        (nth forms 0)
       :docstring (nth forms 1)
       :method    (nth forms 2)
-      :path      (nth forms 3)}
+      :route     (nth forms 3)}
 
      ;; (defsample jane
      ;;   "A docstring"
@@ -146,7 +146,7 @@
      {:id        (nth forms 0)
       :docstring (nth forms 1)
       :method    (nth forms 2)
-      :path      (nth forms 3)
+      :route     (nth forms 3)
       :params    (nth forms 4)}
 
      ;; (defsample jane [user john]
@@ -155,7 +155,7 @@
      {:id           (nth forms 0)
       :dependencies (nth forms 1)
       :method       (nth forms 2)
-      :path         (nth forms 3)}
+      :route        (nth forms 3)}
 
      ;; (defsample jane [user john]
      ;;   GET "/user/{userId}" {userId (:id user)})
@@ -163,7 +163,7 @@
      {:id           (nth forms 0)
       :dependencies (nth forms 1)
       :method       (nth forms 2)
-      :path         (nth forms 3)
+      :route        (nth forms 3)
       :params       (nth forms 4)}
 
      ;; (defsample [user john]
@@ -173,7 +173,7 @@
      {:dependencies (nth forms 0)
       :docstring    (nth forms 1)
       :method       (nth forms 2)
-      :path         (nth forms 3)}
+      :route        (nth forms 3)}
 
      ;; (defsample [user john]
      ;;   "A docstring"
@@ -182,7 +182,7 @@
      {:dependencies (nth forms 0)
       :docstring    (nth forms 1)
       :method       (nth forms 2)
-      :path         (nth forms 3)
+      :route        (nth forms 3)
       :params       (nth forms 4)}
 
      ;; (defsample jane [user john]
@@ -193,7 +193,7 @@
       :dependencies (nth forms 1)
       :docstring    (nth forms 2)
       :method       (nth forms 3)
-      :path         (nth forms 4)}
+      :route        (nth forms 4)}
 
      ;; (defsample jane [user john]
      ;;   "A docstring"
@@ -203,7 +203,7 @@
       :dependencies (nth forms 1)
       :docstring    (nth forms 2)
       :method       (nth forms 3)
-      :path         (nth forms 4)
+      :route        (nth forms 4)
       :params       (nth forms 5)})))
 
 (defn define-sample

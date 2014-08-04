@@ -29,10 +29,9 @@
                               (resolve-bindings % (:dependencies def) defs-map)
                               (:ns def))
         dep-injected (-> def
-                         (assoc :route (:path def))
                          (update-existing [:params] inject-dependencies)
                          (update-existing [:path-params] inject-dependencies))]
-    (update-in dep-injected [:path] #(interpolate % (:path-params dep-injected)))))
+    (assoc dep-injected :path (interpolate (:route dep-injected) (:path-params dep-injected)))))
 
 (defn fetch-sample-response
   "Fetch sample response from the API"
@@ -83,7 +82,7 @@
       (cache-sample-response (fetch-sample-response sample-def))))
 
 (defn- get-endpoint [sample-response endpoints]
-  (let [spec [(:method sample-response) (:path sample-response)]]
+  (let [spec [(:method sample-response) (:route sample-response)]]
     (->> endpoints
          (filter #(= spec [(:method %) (:path %)]))
          first)))
@@ -143,7 +142,7 @@
                   (str "callback(" (str/trim json-data) ");\n")))))
 
 (defn- sample-response-missing? [sample-response formats format]
-  (let [filename (str target-directory "/" (get-file-basename sample-response) ".json")]
+  (let [filename (str target-directory "/" (get-file-basename sample-response) "." (name format))]
     (and (some #(= % format) formats)
          (not (.exists (io/file filename))))))
 

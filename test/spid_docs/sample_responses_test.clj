@@ -9,7 +9,7 @@
 
 (fact "Makes dependencies available as bindings path params"
       (let [sample-def {:method :GET
-                        :path "/somewhere"
+                        :route "/somewhere"
                         :path-params '{:name (:name user)}
                         :dependencies {'user :john}}
             loaded-samples [{:id :john
@@ -20,7 +20,7 @@
 
 (fact "Makes dependencies available as bindings for request params"
       (let [sample-def {:method :GET
-                        :path "/somewhere"
+                        :route "/somewhere"
                         :params '{:name (:name user)}
                         :dependencies {'user :john}}
             loaded-samples [{:id :john
@@ -31,19 +31,19 @@
 
 (fact "Interpolates parameters in path"
       (let [sample-def {:method :GET
-                        :path "/somewhere/{userId}"
+                        :route "/somewhere/{userId}"
                         :path-params {:userId 42}}]
         (:path (interpolate-sample-def sample-def)) => "/somewhere/42"))
 
 (fact "Keeps parameterized path"
       (let [sample-def {:method :GET
-                        :path "/somewhere/{userId}"
+                        :route "/somewhere/{userId}"
                         :path-params {:userId 42}}]
         (:route (interpolate-sample-def sample-def)) => "/somewhere/{userId}"))
 
 (fact "Interpolates dependency injected parameters in path"
       (let [sample-def {:method :GET
-                        :path "/somewhere/{userId}"
+                        :route "/somewhere/{userId}"
                         :path-params {:userId '(:id user)}
                         :dependencies {'user :john}}
             loaded-samples [{:id :john
