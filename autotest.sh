@@ -9,4 +9,4 @@ echo " - Pages aren't pygmentized"
 echo " - Static assets are frozen"
 echo ""
 echo "Remember to always ./run-integration-tests.sh before pushing your changes."
-JVM_OPTS="-Dspid.skip.pygments=true -Dspid.freeze.assets=true" lein with-profile test midje :autotest :filter -slow
+JVM_OPTS="-Dspid.skip.pygments=true -Dspid.freeze.assets=true" lein with-profile basic,test midje :autotest :filter -slow
