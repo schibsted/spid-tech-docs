@@ -126,17 +126,19 @@
 
 ;; Products
 
+(defsample themovie
+  POST "/product" {:code "themovie"
+                   :name "The Movie"
+                   :price 9900
+                   :vat 2500
+                   :paymentOptions 2 ;; "Credit card"
+                   :type 1 ;; "Digital contents"
+                   :currency "NOK"})
+
 (comment
   ;; 403 - could it be that the client doesn't have access to the endpoint?
 
-  (defsample themovie
-    POST "/product" {:code "themovie"
-                     :name "The Movie"
-                     :price 9900
-                     :vat 2500
-                     :paymentOptions 2 ;; "Credit card"
-                     :type 1 ;; "Digital contents"
-                     :currency "NOK"})
+
 
   (defsample vgplus
     POST "/product" {:code "vg+"

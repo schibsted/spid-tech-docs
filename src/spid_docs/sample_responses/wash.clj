@@ -34,7 +34,8 @@
    [:emails] (fn [emails]
                (map-indexed #(assoc %2 :value (str "user@domain" (inc %1) ".tld")) emails))
    [:addresses] mask-addresses
-   [:clientRef] "[Your client ID]"))
+   [:clientRef] "[Your client ID]"
+   [:createdBy] "[Your client ID]"))
 
 (defn- list-like-map? [data]
   (and (map? data)
