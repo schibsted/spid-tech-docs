@@ -1,0 +1,1 @@
+{:cached? true, :id nil, :method :POST, :path "/client/52f8e3d9efd04bb749000000/do/rating", :route "/{type}/{id}/do/{key}", :response {:status 200, :error nil, :data {:id "53df69d6efd04ba257000000", :clientRef "52f8e3d9efd04bb749000000", :created "2014-08-04 13:09:10", :updated "2014-08-04 13:51:42", :key "rating", :value "10"}, :success? true}}

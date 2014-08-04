@@ -1,6 +1,7 @@
 (ns spid-docs.sample-responses.definitions
   (:require [clojure.data.codec.base64 :as base64]
             [clojure.data.json :as json]
+            [spid-docs.api-client :as api-client]
             [spid-docs.sample-responses.defsample :refer [defsample]]))
 
 (defn base64-encode [str]
@@ -29,11 +30,17 @@
 (defsample johndoe
   POST "/user" {:email "john@doe.com" :displayName "John Doe" :name "John Doe"})
 
+(defsample
+  POST "/{type}/{id}/do/{key}" {:type "client"
+                                :id (:client-id (api-client/get-config))
+                                :key "rating"
+                                :rating "10"})
+
 (comment
   ;; User reference is invalid or does not exists: 238342
 
   (defsample [user johndoe]
-    POST "/{type}/{id}/do/{key}" {:type "User"
+    POST "/{type}/{id}/do/{key}" {:type "user"
                                   :id (:userId user)
                                   :key "rating"
                                   :rating "10"})
