@@ -203,12 +203,13 @@
     DELETE "/bundle/{bundleId}/product/{productId}" {:bundleId (:productId bundle)
                                                      :productId (:productId product)}))
 
+(defsample vouchers-for-all
+  POST "/vouchers/group" {:title "Vouchers for all"
+                          :type "8" ;; "Voucher as payment method"
+                          :voucherCode "v4a"})
+
 (comment
-  ;; 403
-  (defsample vouchers-for-all
-    POST "/vouchers/group" {:title "Vouchers for all"
-                            :type "8" ;; "Voucher as payment method"
-                            :voucherCode "v4a"})
+  ;; Check if the injected dependecies are fully loaded
 
   (defsample [group vouchers-for-all]
     GET "/voucher/{voucherCode}" {:voucherCode (:voucherCode group)})
@@ -232,9 +233,12 @@
   (defsample [group vouchers-for-all]
     POST "/vouchers/group/{voucherGroupId}" {:voucherGroupId (:voucherGroupId group)}))
 
-(comment
-  ;; Må være lagt til i UI-et(?)
-  (defsample GET "/identifier/{identifierId}") {:identifierId "???"})
+;; Identifiers can only be added by the user. If all data is cleared, log in as
+;; the user, and purchase the product created above using one of the test credit
+;; cards. Then manually find the identifier ID in Ambassador and paste it here.
+;; So much for automation...
+
+(defsample GET "/identifier/{identifierId}" {:identifierId "2054"})
 
 (comment
   ;; 403
