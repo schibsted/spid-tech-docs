@@ -34,21 +34,15 @@
   POST "/{type}/{id}/do/{key}" {:type "client"
                                 :id (:client-id (api-client/get-config))
                                 :key "rating"
-                                :rating "10"})
+                                :rating "{\"positive\": 10}"})
+
+(defsample
+  GET "/{type}/{id}/do/{key}" {:type "client"
+                               :id (:client-id (api-client/get-config))
+                               :key "rating"})
 
 (comment
   ;; User reference is invalid or does not exists: 238342
-
-  (defsample [user johndoe]
-    POST "/{type}/{id}/do/{key}" {:type "user"
-                                  :id (:userId user)
-                                  :key "rating"
-                                  :rating "10"})
-
-  (defsample [user johndoe]
-    GET "/{type}/{id}/do/{key}" {:type "User"
-                                 :id (:userId user)
-                                 :key "rating"})
 
   ;; Needs a product
   (defsample [user johndoe]
