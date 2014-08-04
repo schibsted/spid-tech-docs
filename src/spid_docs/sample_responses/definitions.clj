@@ -249,6 +249,7 @@
 (comment
   ;; 403
   ;; TODO: Må muligens JSON-enkode :items
+
   (defsample buy-star-wars
     POST "/paylink" {:title "Star Wars Movies"
                      :items [{:description "Star Wars IV"
@@ -271,11 +272,13 @@
   ;; Avhenger av cronjob klokka 05:00 ...
   (defsample GET "/kpis"))
 
+(defsample [user johndoe]
+  GET "/user/{userId}/preferences/payment" {:userId (:userId user)})
+
 (comment
   ;; Avhenger av kredittkort lagt til på web
 
-  (defsample [user johndoe]
-    GET "/user/{userId}/preferences/payment" {:userId (:userId user)})
+
 
   ;; TODO: Legg til hash (verified hash)
   ;; TODO: Muligens JSON-enkode :items
