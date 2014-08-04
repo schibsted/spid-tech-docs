@@ -135,42 +135,40 @@
                    :type 1 ;; "Digital contents"
                    :currency "NOK"})
 
+(defsample vgplus
+  POST "/product" {:code "vg+"
+                   :name "VG+"
+                   :price 9900
+                   :vat 2500
+                   :paymentOptions 2 ;; "Credit card"
+                   :type 2 ;; "Subscription"
+                   :currency "NOK"})
+
+(defsample vgplus-3mo [parent vgplus]
+  POST "/product" {:code "vg+3mo"
+                   :name "VG+ 3 måneder"
+                   :price 9900
+                   :vat 2500
+                   :paymentOptions 2 ;; "Credit card"
+                   :type 2 ;; "Subscription"
+                   :currency "NOK"
+                   :parentProductId (:productId parent)})
+
+(defsample vgplus-6mo [parent vgplus]
+  POST "/product" {:code "vg+6mo"
+                   :name "VG+ 6 måneder"
+                   :price 9516
+                   :vat 2284
+                   :paymentOptions 2 ;; "Credit card"
+                   :type 2 ;; "Subscription"
+                   :currency "NOK"
+                   :parentProductId (:productId parent)})
+
+(defsample [product themovie]
+  GET "/product/{id}" {:id (:productId product)})
+
 (comment
-  ;; 403 - could it be that the client doesn't have access to the endpoint?
-
-
-
-  (defsample vgplus
-    POST "/product" {:code "vg+"
-                     :name "VG+"
-                     :price 9900
-                     :vat 2500
-                     :paymentOptions 2 ;; "Credit card"
-                     :type 2 ;; "Subscription"
-                     :currency "NOK"})
-
-  (defsample vgplus-3mo [parent vgplus]
-    POST "/product" {:code "vg+3mo"
-                     :name "VG+ 3 måneder"
-                     :price 9900
-                     :vat 2500
-                     :paymentOptions 2 ;; "Credit card"
-                     :type 2 ;; "Subscription"
-                     :currency "NOK"
-                     :parentProductId (:productId parent)})
-
-  (defsample vgplus-6mo [parent vgplus]
-    POST "/product" {:code "vg+6mo"
-                     :name "VG+ 6 måneder"
-                     :price 9516
-                     :vat 2284
-                     :paymentOptions 2 ;; "Credit card"
-                     :type 2 ;; "Subscription"
-                     :currency "NOK"
-                     :parentProductId (:productId parent)})
-
-  (defsample [product vgplus]
-    GET "/product/{productId}" {:productId (:productId product)})
+  ;; Need to be able to create multiple objects from the same URL. Fix
 
   (defsample [product vgplus]
     POST "/product/{productId}" {:productId (:productId product)
