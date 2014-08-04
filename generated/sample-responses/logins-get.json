@@ -1,20 +1,20 @@
 [
   {
     "status": "true",
-    "referer": "https://stage.payment.schibsted.no/auth/login?client_id\u003d52f8e3d9efd04bb749000000\u0026response_type\u003dcode\u0026redirect_uri\u003dhttp%253A%252F%252Flocalhost%253A8080%252Fcreate-session\u0026flow\u003dsignup\u0026product_id\u003d0\u0026campaign_id\u003d0\u0026voucher_code\u003d0\u0026voucher_purchase_code\u003d0\u0026tag\u003d0\u0026webview\u003d0",
+    "referer": "",
     "clientId": "[Your client ID]",
     "trackingRef": false,
-    "userId": "267206",
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_2) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/34.0.1847.116 Safari/537.36",
-    "hash": "8fd343cabb97ffa6d4808b83bb85f374",
+    "userId": "690981",
+    "userAgent": "Java/1.7.0_45",
+    "hash": "470d14299a1ca6bb817b1526c0b47665",
     "trackingTag": false,
     "merchantId": "[Your merchant ID]",
-    "created": "2014-04-15 09:16:29",
+    "created": "2014-08-04 16:15:42",
     "email": "user@domain.tld",
-    "type": "normal",
-    "initialReferer": "http://localhost:8080/",
-    "provider": "default",
-    "id": "150015850",
+    "type": "api",
+    "initialReferer": null,
+    "provider": null,
+    "id": "150032271",
     "ip": "127.0.0.1"
   }
 ]

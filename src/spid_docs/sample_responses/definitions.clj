@@ -243,10 +243,8 @@
 (defsample [user johndoe]
   GET "/agreements/{userId}/payment" {:userId (:userId user)})
 
-(comment
-  ;; 403
-  (defsample [user johndoe]
-    GET "/logins/{userId}"  {:userId (:userId user)}))
+(defsample [user johndoe]
+  GET "/user/{userId}/logins"  {:userId (:userId user)})
 
 (comment
   ;; 403
