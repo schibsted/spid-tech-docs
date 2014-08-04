@@ -240,10 +240,8 @@
 
 (defsample GET "/identifier/{identifierId}" {:identifierId "2054"})
 
-(comment
-  ;; 403
-  (defsample [user johndoe]
-    GET "/agreements/{userId}/payment" {:userId (:userId user)}))
+(defsample [user johndoe]
+  GET "/agreements/{userId}/payment" {:userId (:userId user)})
 
 (comment
   ;; 403
