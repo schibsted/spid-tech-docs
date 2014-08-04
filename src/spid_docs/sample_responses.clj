@@ -83,7 +83,7 @@
       (cache-sample-response (fetch-sample-response sample-def))))
 
 (defn- get-endpoint [sample-response endpoints]
-  (let [spec [(:method sample-response) (:route sample-response)]]
+  (let [spec [(:method sample-response) (:path sample-response)]]
     (->> endpoints
          (filter #(= spec [(:method %) (:path %)]))
          first)))
