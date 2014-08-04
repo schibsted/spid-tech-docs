@@ -85,6 +85,8 @@
 (defsample GET "/campaigns")
 
 (comment
+  ;; Figure out to create an acceptable JWT
+
   (defsample POST "/signup_jwt" {:jwt "TODO"})
 
   (defsample POST "/attach_jwt" {:jwt "TODO"}))
