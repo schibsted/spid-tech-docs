@@ -20,12 +20,7 @@
 
 (defsample GET "/clients")
 
-(comment
-  ;; There are no product settings for our account.
-  ;; Commented out to avoid a sample response of "[]"
-  ;; which would only be noise (and a little embarrasing)
-
-  (defsample GET "/productsettings"))
+(defsample GET "/productsettings")
 
 (defsample GET "/logins")
 
