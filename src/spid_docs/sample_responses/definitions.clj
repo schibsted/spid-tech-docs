@@ -27,6 +27,18 @@
 
 (defsample GET "/reports/dumps")
 
+;; Once the user is created, it must also be verified. Unfortunately, this
+;; cannot be done through the API. If the user is not verified, certain API
+;; endpoints will fail with a 403. If running this script from scratch, it must
+;; be run in two passes - first to create the user. In this first run, the first
+;; endpoint that expects a verified user will crash. Before attempting the
+;; second run, you must manually verifiy the user by visiting the URL in the
+;; generated email. If you want to regenerate the email to find it more easily
+;; in the logs, use GET /user/{userId}/trigger/emailverification
+;;
+;; Many endpoints will fail with "Token is not authorized to access this user"
+;; when trying it with the ID of an unverificated user.
+
 (defsample johndoe
   POST "/user" {:email "john@doe.com" :displayName "John Doe" :name "John Doe"})
 
@@ -41,53 +53,24 @@
                                :id (:client-id (api-client/get-config))
                                :key "rating"})
 
-(comment
-  ;; User reference is invalid or does not exists: 238342
+(defsample dataobject [user johndoe]
+  POST "/user/{id}/dataobject/{key}" {:id (:userId user)
+                                      :key "mysetting"
+                                      :value "My custom value"})
 
-  ;; Needs a product
-  (defsample [user johndoe]
-    POST "/{type}/{id}/{subtype}/{subid}/do/{key}" {:type "user"
-                                                    :id (:id user)
-                                                    :subtype "product"
-                                                    :subid "PID"
-                                                    :key "rating"
-                                                    :rating "10"})
+(defsample [user johndoe]
+  GET "/user/{id}/dataobject/{key}" {:id (:userId user)
+                                     :key "mysetting"})
 
-  ;; Needs a product
-  (defsample
-    GET "/{type}/{id}/{subtype}/{subid}/do/{key}" {:type "user"
-                                                   :id (:id user)
-                                                   :subtype "product"
-                                                   :subid "PID"
-                                                   :key "rating"}))
+(defsample [user johndoe]
+  GET "/user/{id}/dataobjects" {:id (:userId user)})
 
-(comment
-  ;; Token is not authorized to access this user.
+(defsample GET "/dataobjects")
 
-  (defsample dataobject [user johndoe]
-    POST "/user/{id}/dataobject/{key}" {:id (:userId user)
-                                        :key "mysetting"
-                                        :value "My custom value"})
-
-  (defsample [user johndoe]
-    GET "/user/{id}/dataobject/{key}" {:id (:userId user)
-                                       :key "mysetting"})
-
-  (defsample [user johndoe]
-    GET "/user/{id}/dataobjects" {:id (:userId user)}))
-
-(comment
-  ;; No dataObjects found (because the above error)
-
-  (defsample GET "/dataobjects"))
-
-(comment
-  ;; Token is not authorized to access this user.
-
-  (defsample [user johndoe]
-    DELETE "/user/{id}/dataobject/{key}" {:id (:userId user)
-                                          :key "mysetting"}))
-
+;; Java SDK Client has no DELETE method at this point
+;; (defsample [user johndoe]
+;;     DELETE "/user/{id}/dataobject/{key}" {:id (:userId user)
+;;                                           :key "mysetting"})
 
 (defsample [user johndoe]
   GET "/user/{userId}/trigger/{trigger}" {:userId (:userId user)
@@ -398,3 +381,24 @@
   (defsample GET "/me/vouchers")
 
   (defsample GET "/logout"))
+
+
+(comment
+  ;; User reference is invalid or does not exists: 238342
+
+  ;; Needs a product
+  (defsample [user johndoe]
+    POST "/{type}/{id}/{subtype}/{subid}/do/{key}" {:type "user"
+                                                    :id (:id user)
+                                                    :subtype "product"
+                                                    :subid "PID"
+                                                    :key "rating"
+                                                    :rating "10"})
+
+  ;; Needs a product
+  (defsample
+    GET "/{type}/{id}/{subtype}/{subid}/do/{key}" {:type "user"
+                                                   :id (:id user)
+                                                   :subtype "product"
+                                                   :subid "PID"
+                                                   :key "rating"}))

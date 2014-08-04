@@ -502,7 +502,7 @@
     :filters [],
     :defaultFilters [],
     :responses
-    [{:status 200,
+    [{:status 201,
       :description "The newly created data object.",
       :type "data-object"}
      {:status 400,
