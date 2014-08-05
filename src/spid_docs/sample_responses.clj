@@ -8,7 +8,7 @@
             [clojure.string :as str]
             [digest :refer [md5]]
             [spid-docs.api-client :as api]
-            [spid-docs.formatting :refer [to-id-str]]
+            [spid-docs.formatting :refer [to-id-str indent]]
             [spid-docs.homeless :refer [update-existing eval-in-ns]]
             [spid-docs.json :refer [format-json]]
             [spid-docs.sample-responses.bindings :refer [resolve-bindings]]
@@ -92,11 +92,6 @@
     (->> endpoints
          (filter #(= spec [(:method %) (:path %)]))
          first)))
-
-(defn- indent [level s]
-  (let [indentation (reduce (fn [i _] (str i " ")) "" (range level))]
-    (str indentation
-         (str/join (str "\n" indentation) (str/split s #"\n")))))
 
 (defn- verify-sample-response [sample-responses sample-response]
   (let [response (:response sample-response)
@@ -185,17 +180,30 @@ is logged into https://stage.payment.schibsted.no/"
           generate-files (if (= :build-missing mode)
                            generate-missing-sample-response-files
                            generate-sample-response-files)
-          loaded-defs (reduce #(load-def %1 (assoc %2 :access-token-types
-                                                   (:access-token-types (get-endpoint %2 endpoints))))
+          loaded-defs (reduce (fn [defs def]
+                                (if-let [endpoint (get-endpoint def endpoints)]
+                                  (load-def defs (assoc def
+                                                   :access-token-types
+                                                   (:access-token-types endpoint)))
+                                  (throw
+                                   (ex-info
+                                    (str "Unable to find endpoint for route "
+                                         (name (:method def))
+                                         " "
+                                         (:route def)
+                                         "\nMake sure path parameters are named correctly")
+                                    {:source :load-defs}))))
                               [] sample-defs)]
       (doseq [def loaded-defs]
         (generate-files def (get-endpoint def endpoints))))
     (catch clojure.lang.ExceptionInfo e
-      (println (.getMessage e))
       (println "-----------------------------------")
       (println "Failed to generate sample responses")
       (println "-----------------------------------")
       (println "Beware! In order for this to work well, you need to add the username and
 password for a demo user in resources/config.edn, AND make sure this user
-is logged into https://stage.payment.schibsted.no/")
-      (println (.getMessage e)))))
+is logged into https://stage.payment.schibsted.no/
+
+Original error was
+")
+      (println (indent 4 (.getMessage e))))))

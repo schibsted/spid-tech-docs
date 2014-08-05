@@ -80,3 +80,8 @@
                           #(conj % (first sorted-coll)))
                (rest sorted-coll))
         columns))))
+
+(defn indent [level s]
+  (let [indentation (reduce (fn [i _] (str i " ")) "" (range level))]
+    (str indentation
+         (str/join (str "\n" indentation) (str/split s #"\n")))))
