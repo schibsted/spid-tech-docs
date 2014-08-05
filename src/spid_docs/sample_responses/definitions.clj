@@ -142,7 +142,8 @@
                    :vat 2500
                    :paymentOptions 2 ;; "Credit card"
                    :type 2 ;; "Subscription"
-                   :currency "NOK"})
+                   :currency "NOK"
+                   :subscriptionPeriod 2592000})
 
 (defsample vgplus-3mo [parent vgplus]
   POST "/product" {:code "vg+3mo"
@@ -152,7 +153,8 @@
                    :paymentOptions 2 ;; "Credit card"
                    :type 2 ;; "Subscription"
                    :currency "NOK"
-                   :parentProductId (:productId parent)})
+                   :parentProductId (:productId parent)
+                   :subscriptionPeriod 2592000})
 
 (defsample vgplus-6mo [parent vgplus]
   POST "/product" {:code "vg+6mo"
@@ -162,17 +164,19 @@
                    :paymentOptions 2 ;; "Credit card"
                    :type 2 ;; "Subscription"
                    :currency "NOK"
-                   :parentProductId (:productId parent)})
+                   :parentProductId (:productId parent)
+                   :subscriptionPeriod 2592000})
 
 (defsample [product themovie]
   GET "/product/{id}" {:id (:productId product)})
 
+(defsample [product vgplus]
+  POST "/product/{id}" {:id (:productId product)
+                        :name "VG PLUSS"})
+
 (comment
   ;; Need to be able to create multiple objects from the same URL. Fix
 
-  (defsample [product vgplus]
-    POST "/product/{productId}" {:productId (:productId product)
-                                 :name "VG PLUSS"})
 
   (defsample [product vgplus]
     GET "/product/{productId}/children" {:productId (:productId product)})
@@ -244,7 +248,7 @@
   GET "/agreements/{userId}/payment" {:userId (:userId user)})
 
 (defsample [user johndoe]
-  GET "/user/{userId}/logins"  {:userId (:userId user)})
+  GET "/user/{userId}/logins" {:userId (:userId user)})
 
 (comment
   ;; 403
