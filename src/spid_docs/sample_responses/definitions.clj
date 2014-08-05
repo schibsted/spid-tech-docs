@@ -374,34 +374,34 @@
 
 (defsample GET "/digitalcontents")
 
+(defsample GET "/terms")
+(defsample GET "/me")
+(defsample GET "/me/vouchers")
+
 (comment
-  ;; User token
-
-  (defsample GET "/terms")
-
-  (defsample GET "/me")
-
-  (defsample GET "/me/vouchers")
+  ;; 403
 
   (defsample GET "/logout"))
 
-
 (comment
-  ;; User reference is invalid or does not exists: 238342
+  ;; There seems to be a bug in the SODA API for type = user. This avoided above
+  ;; by using type = client, but this is not possible with subtypes (which are
+  ;; apparently only supported for users - which does not work).
+  ;; Presumably, noone uses this deprecated API in the wild.
 
-  ;; Needs a product
-  (defsample [user johndoe]
+  (defsample [user johndoe
+              product themovie]
     POST "/{type}/{id}/{subtype}/{subid}/do/{key}" {:type "user"
-                                                    :id (:id user)
+                                                    :id (:userId user)
                                                     :subtype "product"
-                                                    :subid "PID"
+                                                    :subid (:productId product)
                                                     :key "rating"
                                                     :rating "10"})
 
-  ;; Needs a product
-  (defsample
+  (defsample [user johndoe
+              product themovie]
     GET "/{type}/{id}/{subtype}/{subid}/do/{key}" {:type "user"
                                                    :id (:id user)
                                                    :subtype "product"
-                                                   :subid "PID"
+                                                   :subid (:productId product)
                                                    :key "rating"}))
