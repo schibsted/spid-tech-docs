@@ -174,38 +174,35 @@
   POST "/product/{id}" {:id (:productId product)
                         :name "VG PLUSS"})
 
-(comment
-  ;; Need to be able to create multiple objects from the same URL. Fix
+(defsample [product vgplus]
+  GET "/product/{productId}/children" {:productId (:productId product)})
 
+(defsample [product vgplus]
+  GET "/product/{productId}/revisions" {:productId (:productId product)})
 
-  (defsample [product vgplus]
-    GET "/product/{productId}/children" {:productId (:productId product)})
+(defsample
+  GET "/products/parents")
 
-  (defsample [product vgplus]
-    GET "/product/{productId}/revisions" {:productId (:productId product)})
+(defsample vgplus-bundle
+  POST "/product" {:code "vg+bundle"
+                   :name "VG+ Alle slag"
+                   :price 9516
+                   :vat 2284
+                   :paymentOptions 2 ;; "Credit card"
+                   :type 1 ;; "Product"
+                   :bundle 1 ;; "Dynamic bundle"
+                   :currency "NOK"})
 
-  (defsample [product vgplus-3mo]
-    GET "/product/{productId}/parents" {:productId (:productId product)})
+(defsample [bundle vgplus-bundle
+            product vgplus-3mo]
+  POST "/bundle/{bundleId}/product/{productId}" {:bundleId (:productId bundle)
+                                                 :productId (:productId product)})
 
-  (defsample vgplus-bundle
-    POST "/product" {:code "vg+bundle"
-                     :name "VG+ Alle slag"
-                     :price 9516
-                     :vat 2284
-                     :paymentOptions 2 ;; "Credit card"
-                     :type 2 ;; "Subscription"
-                     :bundle 1 ;; "Dynamic bundle"
-                     :currency "NOK"})
-
-  (defsample [bundle vgplus-bundle
-              product vgplus-3mo]
-    POST "/bundle/{bundleId}/product/{productId}" {:bundleId (:productId bundle)
-                                                   :productId (:productId product)})
-
-  (defsample [bundle vgplus-bundle
-              product vgplus-3mo]
-    DELETE "/bundle/{bundleId}/product/{productId}" {:bundleId (:productId bundle)
-                                                     :productId (:productId product)}))
+;; No DELETE yet
+;; (defsample [bundle vgplus-bundle
+;;             product vgplus-3mo]
+;;   DELETE "/bundle/{bundleId}/product/{productId}" {:bundleId (:productId bundle)
+;;                                                    :productId (:productId product)})
 
 (defsample vouchers-for-all
   POST "/vouchers/group" {:title "Vouchers for all"
