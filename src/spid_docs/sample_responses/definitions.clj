@@ -207,32 +207,32 @@
 (defsample vouchers-for-all
   POST "/vouchers/group" {:title "Vouchers for all"
                           :type "8" ;; "Voucher as payment method"
-                          :voucherCode "v4a"})
+                          :voucherCode "VOUCH4A"
+                          :unique 1})
+
+(defsample GET "/vouchers/groups")
+
+(defsample [group vouchers-for-all]
+  GET "/vouchers/group/{voucherGroupId}" {:voucherGroupId (:voucherGroupId group)})
+
+(defsample [group vouchers-for-all]
+  POST "/vouchers/group/{voucherGroupId}" {:voucherGroupId (:voucherGroupId group)
+                                           :title "Vouchers for everyone!"})
+
+(defsample [group vouchers-for-all]
+  POST "/vouchers/generate/{voucherGroupId}" {:voucherGroupId (:voucherGroupId group)})
+
+(defsample [group vouchers-for-all]
+  POST "/vouchers/handout/{voucherGroupId}" {:voucherGroupId (:voucherGroupId group)})
 
 (comment
-  ;; Check if the injected dependecies are fully loaded
-
-  (defsample [group vouchers-for-all]
-    GET "/voucher/{voucherCode}" {:voucherCode (:voucherCode group)})
-
-  (defsample [group vouchers-for-all]
-    POST "/vouchers/generate/{voucherGroupId}" {:voucherGroupId (:voucherGroupId group)})
-
-  (defsample [group vouchers-for-all]
-    POST "/vouchers/handout/{voucherGroupId}" {:voucherGroupId (:voucherGroupId group)})
-
   (defsample [user johndoe
               group vouchers-for-all]
     POST "/voucher_handout" {:userId (:userId user)
                              :voucherGroupId (:voucherGroupId group)})
 
-  (defsample GET "/vouchers/groups")
-
-  (defsample [group vouchers-for-all]
-    GET "/vouchers/group/{voucherGroupId}" {:voucherGroupId (:voucherGroupId group)})
-
-  (defsample [group vouchers-for-all]
-    POST "/vouchers/group/{voucherGroupId}" {:voucherGroupId (:voucherGroupId group)}))
+  (defsample
+    GET "/voucher/{voucherCode}" {:voucherCode "VOUCH4A"}))
 
 ;; Identifiers can only be added by the user. If all data is cleared, log in as
 ;; the user, and purchase the product created above using one of the test credit

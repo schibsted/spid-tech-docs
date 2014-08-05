@@ -1,0 +1,1 @@
+{:cached? true, :id nil, :method :POST, :path "/vouchers/handout/46", :route "/vouchers/handout/{voucherGroupId}", :params {}, :response {:status 200, :error nil, :data [{:voucherId "557914", :voucherGroupId "46", :voucherCode "SJ-FTMW-BN4A", :type "8", :createdBy "0", :created "2014-08-05 14:37:03"}], :success? true}}

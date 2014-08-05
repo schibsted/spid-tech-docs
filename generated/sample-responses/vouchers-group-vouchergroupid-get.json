@@ -1,10 +1,12 @@
 {
   "clientId": "[Your client ID]",
   "createdBy": "[ID of admin user, or client]",
+  "generatedVouchers": 1,
   "discountId": null,
   "title": "Vouchers for all",
   "voucherGroupId": "46",
   "productId": null,
+  "availableVouchers": 0,
   "created": "2014-08-05 14:29:03",
   "unique": "1",
   "updated": "2014-08-05 14:29:03",

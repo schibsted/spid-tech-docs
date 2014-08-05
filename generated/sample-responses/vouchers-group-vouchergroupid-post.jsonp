@@ -1,15 +1,15 @@
-{
+callback({
   "clientId": "[Your client ID]",
   "createdBy": "[ID of admin user, or client]",
   "discountId": null,
-  "title": "Vouchers for all",
+  "title": "Vouchers for everyone!",
   "voucherGroupId": "46",
   "productId": null,
   "created": "2014-08-05 14:29:03",
   "unique": "1",
-  "updated": "2014-08-05 14:29:03",
+  "updated": "2014-08-05 14:41:42",
   "limit": null,
   "type": "8",
   "campaignId": null,
   "description": null
-}
+});
