@@ -70,6 +70,7 @@
                                                           :method :GET
                                                           :path "/clients"
                                                           :route "/clients"
+                                                          :params nil
                                                           :response {:status 404
                                                                      :data nil
                                                                      :error {:code 404
@@ -96,6 +97,7 @@
                                                      :method :GET
                                                      :path "/me"
                                                      :route "/me"
+                                                     :params nil
                                                      :response {:status 404
                                                                 :data nil
                                                                 :error {:code 404
