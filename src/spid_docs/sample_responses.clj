@@ -6,6 +6,7 @@
   (:require [clojure.java.io :as io]
             [clojure.set :refer [rename-keys]]
             [clojure.string :as str]
+            [digest :refer [md5]]
             [spid-docs.api-client :as api]
             [spid-docs.formatting :refer [to-id-str]]
             [spid-docs.homeless :refer [update-existing eval-in-ns]]
@@ -50,6 +51,7 @@
      :method method
      :path (:path sample-def)
      :route (:route sample-def)
+     :params (:params sample-def)
      :response {:status (:status response)
                 :error (:error response)
                 :data (:data response)
@@ -62,7 +64,11 @@
   (.toLowerCase (str (to-id-str (:route sample-def)) "-" (name (:method sample-def)))))
 
 (defn- get-sample-response-cache-file [sample-def]
-  (str cache-directory "/" (get-file-basename sample-def) ".edn"))
+  (str cache-directory "/"
+       (get-file-basename sample-def)
+       (when (seq (:params sample-def))
+         (str "-" (md5 (str (into (sorted-map) (:params sample-def))))))
+       ".edn"))
 
 (defn cache-sample-response
   "Caches successful sample responses and returns the sample response."
@@ -121,7 +127,7 @@
   (spit file content))
 
 (defn- generate-sample-response-files [sample-response endpoint]
-  (println (name (:method sample-response)) (:route sample-response))
+  (println (name (:method sample-response)) (:route sample-response) (:params sample-response))
   (let [formats (:response-formats endpoint)
         json-data (-> sample-response :response format-sample-response)
         expected-status (-> endpoint :responses :success :status)
@@ -185,6 +191,7 @@ is logged into https://stage.payment.schibsted.no/"
       (doseq [def loaded-defs]
         (generate-files def (get-endpoint def endpoints))))
     (catch clojure.lang.ExceptionInfo e
+      (println (.getMessage e))
       (println "-----------------------------------")
       (println "Failed to generate sample responses")
       (println "-----------------------------------")
