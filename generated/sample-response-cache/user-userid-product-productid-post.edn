@@ -1,0 +1,1 @@
+{:cached? true, :id nil, :method :POST, :path "/user/238342/product/301694", :route "/user/{userId}/product/{productId}", :params {}, :response {:status 200, :error nil, :data {:productId "301694", :result true}, :success? true}}

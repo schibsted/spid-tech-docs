@@ -297,80 +297,107 @@
                                            :vat 1917}]
                                   :hash "??? verified hash av params"}))
 
+;; Order endpoint sample respones rely on orders having been created outside
+;; this script on the client being used
+
+(defsample all-orders GET "/orders")
+
+(defsample first-order [orders all-orders]
+  GET "/order/{orderId}" {:orderId (:orderId (first (vals orders)))})
+
+(defsample [order first-order]
+  GET "/order/{orderId}/transactions" {:orderId (:orderId order)})
+
+(defsample johndoes-orders [user johndoe]
+  GET "/user/{userId}/orders" {:userId (:userId user)})
+
+(defsample [user johndoe
+            orders johndoes-orders]
+  GET "/user/{userId}/order/{orderId}" {:userId (:userId user)
+                                        :orderId (:orderId (first (vals orders)))})
+
+(defsample [user johndoe]
+  GET "/user/{userId}/transactions" {:userId (:userId user)})
+
+(defsample [order first-order]
+  GET "/order/{orderId}/items" {:orderId (:orderId order)})
+
+(defsample [order first-order]
+  GET "/order/{orderId}/status" {:orderId (:orderId order)})
+
+(defsample [order first-order]
+  POST "/order/{orderId}/credit" {:orderId (:orderId order)
+                                  :description "Credit order"})
+
+(defsample [user johndoe
+            product themovie]
+  POST "/user/{userId}/product/{productId}" {:userId (:userId user)
+                                             :productId (:productId product)})
+
+(defsample [user johndoe
+            product themovie]
+  GET "/user/{userId}/product/{productId}" {:userId (:userId user)
+                                            :productId (:productId product)})
+
+(defsample [user johndoe]
+  GET "/user/{userId}/products" {:userId (:userId user)})
+
 (comment
-  ;; Trenger en ordre
-
-  (defsample GET "/orders")
-  (defsample GET "/order/{orderId}" {:orderId "???"})
-  (defsample GET "/order/{orderId}/transactions" {:orderId "???"})
-
-  (defsample [user johndoe]
-    GET "/user/{userId}/orders" {:userId (:userId user)})
-
-  (defsample [user johndoe]
-    GET "/user/{userId}/order/{orderId}" {:userId (:userId user)
-                                          :orderId "???"})
-
-  (defsample [user johndoe]
-    GET "/user/{userId}/transactions" {:userId (:userId user)})
-
-  (defsample GET "/order/{orderId}/items" {:orderId "???"})
-  (defsample GET "/order/{orderId}/status" {:orderId "???"})
-  (defsample POST "/order/{orderId}/credit" {:orderId "???"
-                                             :description "Credit order"})
-
-  (defsample [user johndoe]
-    POST "/user/{userId}/order/{orderId}/credit" {:userId (:userId user)
-                                                  :orderId "???"})
-
-  (defsample POST "/order/{orderId}/capture" {:orderId "????"})
-
-  (defsample POST "/order/{orderId}/complete" {:orderId "????"})
-
+  ;; Update API client
   (defsample [user johndoe
-              product vgplus]
-    POST "/user/{userId}/product/{productId}" {:userId (:userId user)
-                                               :productId (:productId product)})
-
-  (defsample [user johndoe
-              product vgplus]
-    GET "/user/{userId}/product/{productId}" {:userId (:userId user)
-                                              :productId (:productId product)})
-
-  (defsample [user johndoe]
-    GET "/user/{userId}/products" {:userId (:userId user)})
-
-  (defsample [user johndoe
-              product vgplus]
+              product themovie]
     DELETE "/user/{userId}/product/{productId}" {:userId (:userId user)
                                                  :productId (:productId product)})
 
-  (defsample POST "/order/{orderId}/cancel" {:orderId "???"})
+  ;; 412
+  (defsample [order first-order]
+    POST "/order/{orderId}/cancel" {:orderId (:orderId order)}))
 
-  (defsample [user johndoe
-              product vgplus]
-    POST "/user/{userId}/subscription" {:userId (:userId user)
-                                        :productId (:productId product)})
+(defsample [user johndoe
+            product vgplus]
+  POST "/user/{userId}/subscription" {:userId (:userId user)
+                                      :productId (:productId product)})
 
-  (defsample [user johndoe
-              subscription vgplus]
-    GET "/user/{userId}/subscription/{subscriptionId}" {:userId (:userId user)
-                                                        :subscriptionId (:productId subscription)})
+(defsample [user johndoe
+            subscription vgplus]
+  GET "/user/{userId}/subscription/{subscriptionId}" {:userId (:userId user)
+                                                      :subscriptionId (:productId subscription)})
 
-  (defsample [user johndoe]
-    GET "/user/{userId}/subscriptions" {:userId (:userId user)})
+(defsample [user johndoe]
+  GET "/user/{userId}/subscriptions" {:userId (:userId user)})
+
+(comment
+  ;; Subscription could not be updated
 
   (defsample [user johndoe
               subscription vgplus]
     POST "/user/{userId}/subscription/{subscriptionId}" {:userId (:userId user)
-                                                         :subscriptionId (:productId subscription)})
+                                                         :subscriptionId (:productId subscription)
+                                                         :autoRenew 1}))
 
-  (defsample GET "/subscriptions")
+(defsample GET "/subscriptions")
+
+(comment
+  ;; Update API client
 
   (defsample [user johndoe
               subscription vgplus]
     DELETE "/user/{userId}/subscription/{subscriptionId}" {:userId (:userId user)
                                                            :subscriptionId (:productId subscription)}))
+
+(comment
+  ;; 412
+  (defsample [order first-order]
+    POST "/order/{orderId}/capture" {:orderId (:orderId order)})
+
+  ;; 412
+  (defsample [order first-order]
+    POST "/order/{orderId}/complete" {:orderId (:orderId order)})
+
+  (defsample [user johndoe
+              orders johndoes-orders]
+    POST "/user/{userId}/order/{orderId}/credit" {:userId (:userId user)
+                                                  :orderId (:orderId (first (vals orders)))}))
 
 (defsample GET "/digitalcontents")
 
