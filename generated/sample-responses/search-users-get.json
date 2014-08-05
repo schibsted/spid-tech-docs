@@ -1,8 +1,8 @@
 {
   "534d6fc1efd04b7c3f000000": {
-    "status": 0,
+    "status": 1,
     "gender": "undisclosed",
-    "userId": "854125",
+    "userId": "069176",
     "name": {
       "familyName": "Doe",
       "givenName": "John",
@@ -24,22 +24,41 @@
     "emails": [
       {
         "value": "user@domain1.tld",
-        "type": "other"
+        "type": "other",
+        "primary": "true",
+        "verified": "true",
+        "verifiedTime": "2014-08-04T13:08:02.373Z"
       }
     ],
     "published": "2014-04-15T17:43:29.861Z",
     "url": "",
-    "updated": "2014-04-15T17:43:29.861Z",
+    "updated": "2014-08-04T14:04:06.479Z",
     "email": "user@domain.tld",
-    "lastAuthenticated": false,
-    "emailVerified": false,
+    "lastAuthenticated": "2014-08-04T14:04:11.598Z",
+    "emailVerified": "2014-08-04T13:08:02.373Z",
     "preferredUsername": "JohnDoe",
     "currentLocation": [],
-    "addresses": {},
-    "verified": "2014-04-15T17:43:29.861Z",
+    "addresses": {
+      "home": {
+        "country": "Norway",
+        "streetNumber": "1",
+        "longitude": "",
+        "floor": "",
+        "locality": "",
+        "formatted": "STREET 1, 0123 OSLO, NORGE",
+        "streetEntrance": "",
+        "apartment": "",
+        "postalCode": "0123",
+        "latitude": "",
+        "type": "home",
+        "region": "",
+        "streetAddress": "STREET"
+      }
+    },
+    "verified": "2014-08-04T13:08:02.373Z",
     "id": "534d6fc1efd04b7c3f000000",
     "phoneNumbers": [],
     "birthday": "0000-00-00",
-    "lastLoggedIn": false
+    "lastLoggedIn": "2014-08-04T14:04:11.687Z"
   }
 }

@@ -4,7 +4,7 @@
     "referer": "https://stage.payment.schibsted.no/auth/login?client_id\u003d52f8e3d9efd04bb749000000\u0026redirect_uri\u003d\u0026response_type\u003d0\u0026flow\u003dpayment\u0026product_id\u003d301691\u0026campaign_id\u003d0\u0026voucher_code\u003d0\u0026voucher_purchase_code\u003d0\u0026tag\u003d0\u0026webview\u003d0",
     "clientId": "[Your client ID]",
     "trackingRef": false,
-    "userId": "912221",
+    "userId": "369662",
     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36",
     "hash": "6e22cb542d8193695e6c9e4f52f96ded",
     "trackingTag": false,
