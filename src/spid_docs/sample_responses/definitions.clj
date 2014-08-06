@@ -1,6 +1,7 @@
 (ns spid-docs.sample-responses.definitions
   (:require [clojure.data.codec.base64 :as base64]
             [clojure.data.json :as json]
+            [spid-client-clojure.core :as spid]
             [spid-docs.api-client :as api-client]
             [spid-docs.sample-responses.defsample :refer [defsample]]))
 
@@ -274,28 +275,34 @@
   (defsample [paylink buy-star-wars-link]
     DELETE "/paylink/{paylinkId}" {:paylinkId (:paylinkId paylink)}))
 
-
 (defsample [user johndoe]
   GET "/user/{userId}/preferences/payment" {:userId (:userId user)})
 
+;; The params to the direct charge API call was generated with:
 (comment
-  ;; Avhenger av kredittkort lagt til på web
+  (spid/sign-params {:requestReference "Order #4354"
+                     :items (json/write-str [{:name "Star Wars IV"
+                                              :price 7983
+                                              :vat 1917
+                                              :quantity 1}
+                                             {:name "Star Wars V"
+                                              :price 7983
+                                              :vat 1917
+                                              :quantity 1}
+                                             {:name "Star Wars VI"
+                                              :price 7983
+                                              :vat 1917
+                                              :quantity 1}])}
+                    (:client-sign-secret (api-client/get-config))))
 
-  ;; TODO: Legg til hash (verified hash)
-  ;; TODO: Muligens JSON-enkode :items
-  (defsample [user johndoe]
-    POST "/user/{userId}/charge" {:userId (:userId user)
-                                  :requestReference "ref"
-                                  :items [{:description "Star Wars IV"
-                                           :price 7983
-                                           :vat 1917}
-                                          {:description "Star Wars V"
-                                           :price 7983
-                                           :vat 1917}
-                                          {:description "Star Wars VI"
-                                           :price 7983
-                                           :vat 1917}]
-                                  :hash "??? verified hash av params"}))
+;; The user needs to have added a credit card for this to work.
+
+(defsample [user johndoe]
+  POST "/user/{userId}/charge"
+  {:userId (:userId user)
+   :requestReference "Order #4354"
+   :hash "qsB0xVTuGkzMIh9NLPGLSmQ33NQ0KxEHFQELLScY1zU"
+   :items "[{\"vat\":1917,\"quantity\":1,\"name\":\"Star Wars IV\",\"price\":7983},{\"vat\":1917,\"quantity\":1,\"name\":\"Star Wars V\",\"price\":7983},{\"vat\":1917,\"quantity\":1,\"name\":\"Star Wars VI\",\"price\":7983}]"})
 
 ;; Order endpoint sample respones rely on orders having been created outside
 ;; this script on the client being used
