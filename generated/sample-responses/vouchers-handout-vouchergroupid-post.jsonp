@@ -1,10 +1,10 @@
 callback([
   {
-    "voucherId": "557914",
-    "voucherGroupId": "46",
-    "voucherCode": "SJ-FTMW-BN4A",
+    "voucherId": "557916",
+    "voucherGroupId": "47",
+    "voucherCode": "64-HB2I-OPBL",
     "type": "8",
     "createdBy": "[ID of admin user, or client]",
-    "created": "2014-08-05 14:37:03"
+    "created": "2014-08-06 11:47:27"
   }
 ]);

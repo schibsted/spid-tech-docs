@@ -1,0 +1,1 @@
+{:cached? true, :id :johndoes-voucher, :method :POST, :path "/voucher_handout", :route "/voucher_handout", :params {:voucherGroupId "47", :userId "238342"}, :response {:status 200, :error nil, :data {:success true}, :success? true}}

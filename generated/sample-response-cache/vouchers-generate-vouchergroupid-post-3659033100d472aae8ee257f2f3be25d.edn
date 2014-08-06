@@ -1,0 +1,1 @@
+{:cached? true, :id nil, :method :POST, :path "/vouchers/generate/47", :route "/vouchers/generate/{voucherGroupId}", :params {:amount 3}, :response {:status 200, :error nil, :data {:success true}, :success? true}}

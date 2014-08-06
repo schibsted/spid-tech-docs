@@ -13,3 +13,4 @@ the error value of the [container](/endpoints/#response-container).
 :relevant-endpoints
 
 GET /me/vouchers
+POST /vouchers/group

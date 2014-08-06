@@ -51,4 +51,11 @@
   [:GET "logins/{userId}"]
 
   ;; Not really sure what this is, but Claes says to ignore for now.
-  [:GET "user/{userId}/payment/settings"]}
+  [:GET "user/{userId}/payment/settings"]
+
+  ;; There seems to be a bug in the SODA API for type = user (according to
+  ;; Claes, lookup does not work). When using SODA with a subtype, the only
+  ;; supported type is "user", which does not work. Presumably, noone uses this
+  ;; deprecated API in the wild.
+  [:POST "/{type}/{id}/{subtype}/{subid}/do/{key}"]
+  [:GET "/{type}/{id}/{subtype}/{subid}/do/{key}"]}

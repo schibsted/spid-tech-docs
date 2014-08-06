@@ -1,0 +1,1 @@
+{:cached? true, :id nil, :method :GET, :path "/logout", :route "/logout", :params nil, :response {:status 200, :error nil, :data "OK", :success? true}}

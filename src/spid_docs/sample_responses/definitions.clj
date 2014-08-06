@@ -203,37 +203,39 @@
   DELETE "/bundle/{bundleId}/product/{productId}" {:bundleId (:productId bundle)
                                                    :productId (:productId product)})
 
-(defsample vouchers-for-all
-  POST "/vouchers/group" {:title "Vouchers for all"
+(defsample freebies-for-all
+  POST "/vouchers/group" {:title "Freebies for all"
                           :type "8" ;; "Voucher as payment method"
-                          :voucherCode "VOUCH4A"
+                          :voucherCode "F4A"
                           :unique 1})
 
 (defsample GET "/vouchers/groups")
 
-(defsample [group vouchers-for-all]
+(defsample [group freebies-for-all]
   GET "/vouchers/group/{voucherGroupId}" {:voucherGroupId (:voucherGroupId group)})
 
-(defsample [group vouchers-for-all]
+(defsample [group freebies-for-all]
   POST "/vouchers/group/{voucherGroupId}" {:voucherGroupId (:voucherGroupId group)
-                                           :title "Vouchers for everyone!"})
+                                           :title "Freebies for everyone!"})
 
-(defsample [group vouchers-for-all]
-  POST "/vouchers/generate/{voucherGroupId}" {:voucherGroupId (:voucherGroupId group)})
+(defsample [group freebies-for-all]
+  POST "/vouchers/generate/{voucherGroupId}" {:voucherGroupId (:voucherGroupId group)
+                                              :amount 3})
 
-(defsample [group vouchers-for-all]
-  POST "/vouchers/handout/{voucherGroupId}" {:voucherGroupId (:voucherGroupId group)})
+(defsample [user johndoe
+            group freebies-for-all]
+  POST "/voucher_handout" {:userId (:userId user)
+                           :voucherGroupId (:voucherGroupId group)})
 
-(comment
-  ;; 500
-  (defsample [user johndoe
-              group vouchers-for-all]
-    POST "/voucher_handout" {:userId (:userId user)
-                             :voucherGroupId (:voucherGroupId group)})
+;; TODO
 
-  ;; 404
-  (defsample
-    GET "/voucher/{voucherCode}" {:voucherCode "VOUCH4A"}))
+;; (defsample some-vouchers [group freebies-for-all]
+;;   POST "/vouchers/handout/{voucherGroupId}" {:voucherGroupId (:voucherGroupId group)
+;;                                              :amount 1})
+
+;; (defsample [vouchers some-vouchers]
+;;   GET "/voucher/{voucherCode}" {:voucherCode (:voucherCode (first some-vouchers))})
+
 
 ;; Identifiers can only be added by the user. If all data is cleared, log in as
 ;; the user, and purchase the product created above using one of the test credit
@@ -376,50 +378,46 @@
   DELETE "/user/{userId}/subscription/{subscriptionId}" {:userId (:userId user)
                                                          :subscriptionId (:subscriptionId (first (vals subscriptions)))})
 
-(comment
-  ;; 412
-  (defsample [order first-order]
-    POST "/order/{orderId}/capture" {:orderId (:orderId order)})
+(defsample order-to-capture [user johndoe]
+  POST "/user/{userId}/charge"
+  {:userId (:userId user)
+   :requestReference "Order #1111"
+   :hash "n6aIU6IMIIItkmHQPQaBKQMKmd8xcoytZwv9rDp6g0M"
+   :items "[{\"vat\":1917,\"quantity\":1,\"name\":\"Star Wars IV\",\"price\":7983}]"
+   :purchaseFlow "AUTHORIZE"})
 
-  ;; 412
-  (defsample [order first-order]
-    POST "/order/{orderId}/complete" {:orderId (:orderId order)})
+(defsample [order order-to-capture]
+  POST "/order/{orderId}/capture" {:orderId (:orderId order)})
 
-  (defsample [user johndoe
-              orders johndoes-orders]
-    POST "/user/{userId}/order/{orderId}/credit" {:userId (:userId user)
-                                                  :orderId (:orderId (first (vals orders)))}))
+(defsample [order order-to-capture]
+  POST "/order/{orderId}/credit" {:orderId (:orderId order)
+                                  :description "Getting the money"})
+
+(defsample order-to-complete [user johndoe]
+  POST "/user/{userId}/charge"
+  {:userId (:userId user)
+   :requestReference "Order #2222"
+   :hash "19O-jAErcrmbs7D8yx6cse-V8czPIOUUL1_jdccCTbo"
+   :items "[{\"vat\":1917,\"quantity\":1,\"name\":\"Star Wars IV\",\"price\":7983}]"
+   :purchaseFlow "AUTHORIZE"})
+
+(defsample [order order-to-complete]
+  POST "/order/{orderId}/complete" {:orderId (:orderId order)})
+
+(defsample order-to-cancel [user johndoe]
+  POST "/user/{userId}/charge"
+  {:userId (:userId user)
+   :requestReference "Order #3333"
+   :hash "C8h2Dk9GfGpN3TLrbeOufzK2J4zWCRWYBVBny-iLKcA"
+   :items "[{\"vat\":1917,\"quantity\":1,\"name\":\"Star Wars IV\",\"price\":7983}]"
+   :purchaseFlow "AUTHORIZE"})
+
+(defsample [order order-to-cancel]
+  POST "/order/{orderId}/cancel" {:orderId (:orderId order)})
 
 (defsample GET "/digitalcontents")
 (defsample GET "/kpis")
 (defsample GET "/terms")
 (defsample GET "/me")
 (defsample GET "/me/vouchers")
-
-(comment
-  ;; 403
-
-  (defsample GET "/logout"))
-
-(comment
-  ;; There seems to be a bug in the SODA API for type = user. This avoided above
-  ;; by using type = client, but this is not possible with subtypes (which are
-  ;; apparently only supported for users - which does not work).
-  ;; Presumably, noone uses this deprecated API in the wild.
-
-  (defsample [user johndoe
-              product themovie]
-    POST "/{type}/{id}/{subtype}/{subid}/do/{key}" {:type "user"
-                                                    :id (:userId user)
-                                                    :subtype "product"
-                                                    :subid (:productId product)
-                                                    :key "rating"
-                                                    :rating "10"})
-
-  (defsample [user johndoe
-              product themovie]
-    GET "/{type}/{id}/{subtype}/{subid}/do/{key}" {:type "user"
-                                                   :id (:id user)
-                                                   :subtype "product"
-                                                   :subid (:productId product)
-                                                   :key "rating"}))
+(defsample GET "/logout")
