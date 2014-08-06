@@ -1,0 +1,13 @@
+callback({
+  "status": "-1",
+  "clientId": "[Your client ID]",
+  "userId": "127716",
+  "userProductId": "765106",
+  "parentProductId": "301694",
+  "orderId": "0",
+  "count": "0",
+  "bundleId": "0",
+  "productId": "301694",
+  "created": "2014-08-05 15:23:33",
+  "updated": "2014-08-06 10:49:30"
+});

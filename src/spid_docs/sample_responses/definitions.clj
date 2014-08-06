@@ -68,10 +68,9 @@
 
 (defsample GET "/dataobjects")
 
-;; Java SDK Client has no DELETE method at this point
-;; (defsample [user johndoe]
-;;     DELETE "/user/{id}/dataobject/{key}" {:id (:userId user)
-;;                                           :key "mysetting"})
+(defsample [user johndoe]
+  DELETE "/user/{id}/dataobject/{key}" {:id (:userId user)
+                                        :key "mysetting"})
 
 (defsample [user johndoe]
   GET "/user/{userId}/trigger/{trigger}" {:userId (:userId user)
@@ -199,11 +198,10 @@
   POST "/bundle/{bundleId}/product/{productId}" {:bundleId (:productId bundle)
                                                  :productId (:productId product)})
 
-;; No DELETE yet
-;; (defsample [bundle vgplus-bundle
-;;             product vgplus-3mo]
-;;   DELETE "/bundle/{bundleId}/product/{productId}" {:bundleId (:productId bundle)
-;;                                                    :productId (:productId product)})
+(defsample [bundle vgplus-bundle
+            product vgplus-3mo]
+  DELETE "/bundle/{bundleId}/product/{productId}" {:bundleId (:productId bundle)
+                                                   :productId (:productId product)})
 
 (defsample vouchers-for-all
   POST "/vouchers/group" {:title "Vouchers for all"
@@ -270,10 +268,8 @@
 (defsample [paylink buy-star-wars-link]
   GET "/paylink/{paylinkId}" {:paylinkId (:paylinkId paylink)})
 
-(comment
-  ;; DELETE
-  (defsample [paylink buy-star-wars-link]
-    DELETE "/paylink/{paylinkId}" {:paylinkId (:paylinkId paylink)}))
+(defsample [paylink buy-star-wars-link]
+  DELETE "/paylink/{paylinkId}" {:paylinkId (:paylinkId paylink)})
 
 (defsample [user johndoe]
   GET "/user/{userId}/preferences/payment" {:userId (:userId user)})
@@ -349,16 +345,10 @@
 (defsample [user johndoe]
   GET "/user/{userId}/products" {:userId (:userId user)})
 
-(comment
-  ;; Update API client
-  (defsample [user johndoe
-              product themovie]
-    DELETE "/user/{userId}/product/{productId}" {:userId (:userId user)
-                                                 :productId (:productId product)})
-
-  ;; 412
-  (defsample [order first-order]
-    POST "/order/{orderId}/cancel" {:orderId (:orderId order)}))
+(defsample [user johndoe
+            product themovie]
+  DELETE "/user/{userId}/product/{productId}" {:userId (:userId user)
+                                               :productId (:productId product)})
 
 (defsample [user johndoe
             product vgplus]
@@ -370,27 +360,21 @@
   GET "/user/{userId}/subscription/{subscriptionId}" {:userId (:userId user)
                                                       :subscriptionId (:productId subscription)})
 
-(defsample [user johndoe]
+(defsample johndoes-subscriptions [user johndoe]
   GET "/user/{userId}/subscriptions" {:userId (:userId user)})
 
-(comment
-  ;; Subscription could not be updated
-
-  (defsample [user johndoe
-              subscription vgplus]
-    POST "/user/{userId}/subscription/{subscriptionId}" {:userId (:userId user)
-                                                         :subscriptionId (:productId subscription)
-                                                         :autoRenew 1}))
+(defsample [user johndoe
+            subscriptions johndoes-subscriptions]
+  POST "/user/{userId}/subscription/{subscriptionId}" {:userId (:userId user)
+                                                       :subscriptionId (:subscriptionId (first (vals subscriptions)))
+                                                       :autoRenew 1})
 
 (defsample GET "/subscriptions")
 
-(comment
-  ;; Update API client
-
-  (defsample [user johndoe
-              subscription vgplus]
-    DELETE "/user/{userId}/subscription/{subscriptionId}" {:userId (:userId user)
-                                                           :subscriptionId (:productId subscription)}))
+(defsample [user johndoe
+            subscriptions johndoes-subscriptions]
+  DELETE "/user/{userId}/subscription/{subscriptionId}" {:userId (:userId user)
+                                                         :subscriptionId (:subscriptionId (first (vals subscriptions)))})
 
 (comment
   ;; 412
