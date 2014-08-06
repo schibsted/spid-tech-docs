@@ -13,5 +13,11 @@ automatically giving a voucher to a user.
 
 :relevant-endpoints
 
-POST /vouchers/generate/{voucherGroupId}
+GET /me/vouchers
 POST /voucher_handout
+GET /voucher/{voucherCode}
+POST /vouchers/generate/{voucherGroupId}
+POST /vouchers/group
+GET /vouchers/group/{voucherGroupId}
+POST /vouchers/group/{voucherGroupId}
+GET /vouchers/groups
