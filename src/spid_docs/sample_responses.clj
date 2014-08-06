@@ -4,6 +4,7 @@
    result through a series of functions that anonymizes and scrambles
    potentially sensitive data."
   (:require [clojure.java.io :as io]
+            [clojure.pprint :refer [pprint]]
             [clojure.set :refer [rename-keys]]
             [clojure.string :as str]
             [digest :refer [md5]]
@@ -85,7 +86,10 @@
 
 (defn get-sample-response [sample-def]
   (or (get-cached-sample-response sample-def)
-      (cache-sample-response (fetch-sample-response sample-def))))
+      (let [response (fetch-sample-response sample-def)]
+        (if (nil? (-> response :response :status))
+          (throw (ex-info (with-out-str (pprint response)) {:source :fetch-response}))
+          (cache-sample-response response)))))
 
 (defn- get-endpoint [sample-response endpoints]
   (let [spec [(:method sample-response) (:route sample-response)]]
