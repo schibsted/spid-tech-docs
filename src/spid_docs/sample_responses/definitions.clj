@@ -226,11 +226,13 @@
   POST "/vouchers/handout/{voucherGroupId}" {:voucherGroupId (:voucherGroupId group)})
 
 (comment
+  ;; 500
   (defsample [user johndoe
               group vouchers-for-all]
     POST "/voucher_handout" {:userId (:userId user)
                              :voucherGroupId (:voucherGroupId group)})
 
+  ;; 404
   (defsample
     GET "/voucher/{voucherCode}" {:voucherCode "VOUCH4A"}))
 
@@ -247,26 +249,29 @@
 (defsample [user johndoe]
   GET "/user/{userId}/logins" {:userId (:userId user)})
 
+(defsample buy-star-wars-link
+  POST "/paylink" {:title "Star Wars Movies"
+                   :redirectUri "http://localhost:8000/callback"
+                   :cancelUri "http://localhost:8000/cancel"
+                   :clientReference "Order number #3242"
+                   :items (json/write-str [{:description "Star Wars IV"
+                                            :price 7983
+                                            :vat 1917
+                                            :quantity 1}
+                                           {:description "Star Wars V"
+                                            :price 7983
+                                            :vat 1917
+                                            :quantity 1}
+                                           {:description "Star Wars VI"
+                                            :price 7983
+                                            :vat 1917
+                                            :quantity 1}])})
+(defsample [paylink buy-star-wars-link]
+  GET "/paylink/{paylinkId}" {:paylinkId (:paylinkId paylink)})
+
 (comment
-  ;; 403
-  ;; TODO: Må muligens JSON-enkode :items
-
-  (defsample buy-star-wars
-    POST "/paylink" {:title "Star Wars Movies"
-                     :items [{:description "Star Wars IV"
-                              :price 7983
-                              :vat 1917}
-                             {:description "Star Wars V"
-                              :price 7983
-                              :vat 1917}
-                             {:description "Star Wars VI"
-                              :price 7983
-                              :vat 1917}]})
-
-  (defsample [paylink buy-star-wars]
-    GET "/paylink/{paylinkId}" {:paylinkId (:paylinkId paylink)})
-
-  (defsample [paylink buy-star-wars]
+  ;; DELETE
+  (defsample [paylink buy-star-wars-link]
     DELETE "/paylink/{paylinkId}" {:paylinkId (:paylinkId paylink)}))
 
 (comment

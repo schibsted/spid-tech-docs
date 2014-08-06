@@ -3490,7 +3490,7 @@
     :filters [],
     :defaultFilters [],
     :responses
-    [{:status 201,
+    [{:status 200,
       :description "Returns the newly created paylink object",
       :type "paylink"}
      {:status 400,

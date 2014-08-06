@@ -1,0 +1,40 @@
+{
+  "sellerUserId": null,
+  "updatedBy": "52f8e3d9efd04bb749000000",
+  "status": "1",
+  "clientReference": "Order number #3242",
+  "items": {
+    "6199": {
+      "updatedBy": null,
+      "vat": "1917",
+      "clientId": "[Your client ID]",
+      "currency": "NOK",
+      "paylinkId": "4638",
+      "createdBy": "[ID of admin user, or client]",
+      "quantity": "1",
+      "ogpUri": null,
+      "productId": null,
+      "clientItemReference": null,
+      "created": "2014-08-06 08:16:36",
+      "updated": "2014-08-06 08:16:36",
+      "type": "0",
+      "paylinkItemId": "6199",
+      "price": "7983",
+      "description": "Star Wars IV"
+    }
+  },
+  "clientId": "[Your client ID]",
+  "paylinkId": "4638",
+  "cancelUri": "http://localhost:8000/cancel",
+  "createdBy": "[ID of admin user, or client]",
+  "expires": "2014-08-07 08:16:36",
+  "buyerUserId": null,
+  "title": "Star Wars Movies",
+  "code": "4638",
+  "created": "2014-08-06 08:16:36",
+  "updated": "2014-08-06 08:16:36",
+  "shortUrl": "https://stage.payment.schibsted.no/auth/start?paylink\u003d4638",
+  "paymentOptions": "2",
+  "purchaseFlow": "DIRECT",
+  "redirectUri": "http://localhost:8000/callback"
+}

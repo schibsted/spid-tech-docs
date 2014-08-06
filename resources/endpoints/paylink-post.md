@@ -23,6 +23,11 @@ details on these fields.
 
 :relevant-types paylink-item
 
+:relevant-endpoints
+
+GET /paylink/{paylinkId}
+DELETE /paylink/{paylinkId}
+
 :example-params
 
 items: [{\\"description\\":\\"Star Wars IV\\",\\"price\\":9900,\\"vat\\":2500},{\\"description\\":\\"Star Wars V\\",\\"price\\":9900,\\"vat\\":2500},{\\"description\\":\\"Star Wars VI\\",\\"price\\":9900,\\"vat\\":2500}]
