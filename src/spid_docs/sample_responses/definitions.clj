@@ -274,17 +274,12 @@
   (defsample [paylink buy-star-wars-link]
     DELETE "/paylink/{paylinkId}" {:paylinkId (:paylinkId paylink)}))
 
-(comment
-  ;; Avhenger av cronjob klokka 05:00 ...
-  (defsample GET "/kpis"))
 
 (defsample [user johndoe]
   GET "/user/{userId}/preferences/payment" {:userId (:userId user)})
 
 (comment
   ;; Avhenger av kredittkort lagt til på web
-
-
 
   ;; TODO: Legg til hash (verified hash)
   ;; TODO: Muligens JSON-enkode :items
@@ -405,7 +400,7 @@
                                                   :orderId (:orderId (first (vals orders)))}))
 
 (defsample GET "/digitalcontents")
-
+(defsample GET "/kpis")
 (defsample GET "/terms")
 (defsample GET "/me")
 (defsample GET "/me/vouchers")
