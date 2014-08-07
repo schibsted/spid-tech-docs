@@ -85,11 +85,11 @@
 (defsample GET "/campaigns")
 
 (comment
-  ;; Figure out to create an acceptable JWT
-
-  (defsample POST "/signup_jwt" {:jwt "TODO"})
-
-  (defsample POST "/attach_jwt" {:jwt "TODO"}))
+  ;; TODO
+  ;; Pending documentation from Mikael on using JWT, and on how to generate a
+  ;; JWT that will lead to a successful request.
+  (defsample POST "/signup_jwt" {:jwt "??"})
+  (defsample POST "/attach_jwt" {:jwt "??"}))
 
 (defsample [user johndoe]
   GET "/user/{userId}/varnishId" {:userId (:userId user)})
