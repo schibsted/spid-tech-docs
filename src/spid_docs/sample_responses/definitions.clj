@@ -227,15 +227,12 @@
   POST "/voucher_handout" {:userId (:userId user)
                            :voucherGroupId (:voucherGroupId group)})
 
-;; TODO
+(defsample some-vouchers [group freebies-for-all]
+  POST "/vouchers/handout/{voucherGroupId}" {:voucherGroupId (:voucherGroupId group)
+                                             :amount 1})
 
-;; (defsample some-vouchers [group freebies-for-all]
-;;   POST "/vouchers/handout/{voucherGroupId}" {:voucherGroupId (:voucherGroupId group)
-;;                                              :amount 1})
-
-;; (defsample [vouchers some-vouchers]
-;;   GET "/voucher/{voucherCode}" {:voucherCode (:voucherCode (first some-vouchers))})
-
+(defsample [vouchers some-vouchers]
+  GET "/voucher/{voucherCode}" {:voucherCode (:voucherCode (first vouchers))})
 
 ;; Identifiers can only be added by the user. If all data is cleared, log in as
 ;; the user, and purchase the product created above using one of the test credit
