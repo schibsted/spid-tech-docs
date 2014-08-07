@@ -234,13 +234,6 @@
 (defsample [vouchers some-vouchers]
   GET "/voucher/{voucherCode}" {:voucherCode (:voucherCode (first vouchers))})
 
-;; Identifiers can only be added by the user. If all data is cleared, log in as
-;; the user, and purchase the product created above using one of the test credit
-;; cards. Then manually find the identifier ID in Ambassador and paste it here.
-;; So much for automation...
-
-(defsample GET "/identifier/{identifierId}" {:identifierId "2054"})
-
 (defsample [user johndoe]
   GET "/agreements/{userId}/payment" {:userId (:userId user)})
 
@@ -264,6 +257,7 @@
                                             :price 7983
                                             :vat 1917
                                             :quantity 1}])})
+
 (defsample [paylink buy-star-wars-link]
   GET "/paylink/{paylinkId}" {:paylinkId (:paylinkId paylink)})
 
@@ -411,6 +405,9 @@
 
 (defsample [order order-to-cancel]
   POST "/order/{orderId}/cancel" {:orderId (:orderId order)})
+
+(defsample [order first-order]
+  GET "/identifier/{identifierId}" {:identifierId (:identifierId order)})
 
 (defsample GET "/digitalcontents")
 (defsample GET "/kpis")
