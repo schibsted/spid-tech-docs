@@ -70,4 +70,4 @@ JavaScript SDK, otherwise, users will not be recognized, and thus not given
 access to anything.
 
 The `SP_ID` cookie value may be retrieved from the API through the
-[/user/{userId}/varnishId endpoint](/endpoints/GET/user/{userId}/varnishId).
+[/user/{userId}/varnishId endpoint](/endpoints/GET/user/{userId}/varnishId/).
