@@ -58,7 +58,20 @@ browser - the UI your users will see when entering credit cards, logging in etc.
 Set `purchaseFlow` to `DIRECT` to use this flow. It is the default flow (when
 `purchaseFlow` is omitted).
 
-![Paylink direct purchase diagram](/images/paylink-direct-purchase-flow.png)
+```sequence-diagram
+Customer->Client: Ready to checkout
+Note right of Customer: Before redirecting or showing\na purchase button/link, the client\nmust create a paylink serverside\nvia the API
+Client->SPiD API: POST /paylink
+SPiD API->Client: Responds with a paylink URI
+Client->Customer: Show customer the paylink
+Customer->SPiD Web: Customer clicks on the paylink, and is redirected to SPiD for checkout
+Note left of SPiD Web: Customer authorizes the purchase which\nis based on the parameters created\nthrough the paylink API
+SPiD Web->Client: Redirects customer back to the supplied redirect url with ?orderId=123
+Client->SPiD API: Check order status: GET /order/123/status
+SPiD API->Client: Return order and transaction objects
+Note left of Client: Validate order status and\ninforms user that purchase\nis pending review
+Client->Customer: Show confirmation
+```
 
 ### Paylink authorize/capture flow
 
