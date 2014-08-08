@@ -23,7 +23,6 @@ to pay and return to your site.
 ### When to use Paylinks
 
 - When you want to offer all possible payment options
-- When you want to get off the ground quickly
 - When you are comfortable handling your own product database
 
 [Guide: Gettting started with paylinks](/getting-started-with-paylinks/)
@@ -31,17 +30,15 @@ to pay and return to your site.
 ## Direct payment
 
 Direct payment allows for server-to-server API calls to charge or authorize
-payments on a user's SPiD account. It can be used for recurring payments and
-other payments where the user does not need to be sent through a checkout flow
-on SPiD's pages.
+payments on a user's SPiD account. It can be used for recurring payments where
+the user does not need to be sent through a checkout flow on SPiD's pages.
 
 If you want recurring payments to be handled fully automatically by SPiD, you
 should look into [creating subscriptions](/endpoints/POST/product/) in SPiD.
 
 ### When to use direct payment
 
-- Recurring payments where the recurring logic is handled on your end
-- One-click shopping where you don't want to send the user through SPiD's checkout
-- When implementing your own checkout process
+- Recurring payments
+- When you want to handle recurring logic yourself
 
 [Guide: Gettting started with direct payment](/getting-started-with-direct-payment/)
