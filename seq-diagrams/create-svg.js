@@ -6,9 +6,11 @@ var libs = [
   fs.readFileSync("lib/raphael.js"),
   "var Raphael = window.Raphael;",
   "window.Raphael.prototype.renderfix = function () {};",
+  fs.readFileSync("lib/ubuntu-font.js"),
   fs.readFileSync("lib/underscore.js"),
   "var name;", // undeclared global in js-sequence-diagrams
   fs.readFileSync("lib/sequence-diagram.js"),
+  fs.readFileSync("sd-overwrite.js")
 ];
 
 module.exports = function (input) {
