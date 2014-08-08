@@ -9,7 +9,8 @@
             [spid-docs.layout :refer [layout-page]]
             [spid-docs.pimp.comments :refer [add-comments]]
             [spid-docs.pimp.examples :refer [inline-examples]]
-            [spid-docs.pimp.highlight :refer [highlight-code-blocks]]
+            [spid-docs.pimp.highlight :refer [highlight-code-blocks-in-page]]
+            [spid-docs.pimp.seq-diagrams :refer [insert-svg]]
             [spid-docs.pimp.tabs :refer [transform-tabs]]
             [spid-docs.pimp.toc :refer [create-toc]]))
 
@@ -44,7 +45,7 @@
    on the order of adding 20 seconds to the full test run. This way we
    can disable the pygments by setting JVM_OPTS=\"-Dspid.skip.pygments=true\""
   (if-not skip-pygments?
-    (highlight-code-blocks page)
+    (highlight-code-blocks-in-page page)
     page))
 
 (defn render-page
@@ -54,12 +55,13 @@
   (->> (get-page)
        (layout-page request)
        (inline-examples)
-       (maybe-highlight-code-blocks)
        (transform-tabs)
        (optify-images request)
        (add-header-ids)
        (create-toc)
-       (add-comments)))
+       (add-comments)
+       (insert-svg)
+       (maybe-highlight-code-blocks)))
 
 (defn prepare-pages
   "Takes a page map, and wraps all its page functions in a call to

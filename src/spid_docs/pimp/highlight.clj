@@ -36,3 +36,7 @@
   (sniptest markup
             [:pre :code] highlight
             [:pre] #(assoc-in % [:attrs :class] "codehilite"))) ;; fixme: this matches too many <pre>'s
+
+(defn highlight-code-blocks-in-page
+  [page]
+  (update-in page [:contents] highlight-code-blocks))
