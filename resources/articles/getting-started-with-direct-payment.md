@@ -38,8 +38,11 @@ just dive in, take a look at [these working examples](#working-examples).
 
 ## The user signs up for a subscription
 
-This guide does not cover how to initially sell a subscription to a user. The
-example code assumes a subscription and a list of users to charge for that
+This guide presumes that you handle your own subscriptions. See
+[the product endpoint](/endpoints/POST/product/) for fully automatic
+subscriptions handled by SPiD.
+
+The example code assumes a subscription and a list of users to charge for that
 subscription, as you would run as a cron job or something similar. When the
 example code is run, it uses the direct payment API to charge the users
 hard-coded, and prints a summary to the screen.
