@@ -43,19 +43,19 @@ This guide presumes that you handle your own subscriptions. See
 subscriptions handled by SPiD.
 
 The example code presumes a subscription and a list of users to charge for that
-subscription, as you would run as a cron job or something similar. When the
-example code is run, it uses the direct payment API to charge the users
-hard-coded, and prints a summary to the screen.
+subscription, that you would run as a cron job or something similar. When the
+example code is run, it uses the direct payment API to charge the users, and
+prints a summary to the screen.
 
 ## Charging for the order
 
 To charge for the order:
 
-- Prepare the billing information, and `POST` it to `/user/{userId}/charge`
-- The API returns an order object
-- Callbacks may update the generated order later (credit card transactions are
-  asynchronous)
-- When the order is complete, grant the user access to the product(s)
+1. Prepare the billing information, and `POST` it to `/user/{userId}/charge`.
+2. The API returns an order object.
+3. Callbacks may update the generated order later (credit card transactions are
+  asynchronous).
+4. When the order is complete, grant the user access to the product(s).
 
 When using direct payment this way, you are assuming all responsibility for
 negotiating access to content. It is up to you how you achieve this, but you
@@ -66,15 +66,15 @@ such that the user will be granted access to the content the next time they try.
 
 The required fields for a direct charge are:
 
-- `requestReference` - Some unique reference for this order (typically, your order ID)
-- `items` - A JSON array of order items
-- `hash` - A [verified hash](/verified-hash/) of the parameters in the request
+- `requestReference` - Some unique reference for this order (typically, your order ID).
+- `items` - A JSON array of order items.
+- `hash` - A [verified hash](/verified-hash/) of the parameters in the request.
 
 Each order item should have at least the following fields:
 
-- `name`
-- `price` - Price, including VAT, in "cents", e.g. NOK100 is represented as 10000
-- `vat` - VAT in percent * 100, 25% is represented as 2500
+- `name` - So the customer knows what they're paying for.
+- `price` - Price, including VAT, in "cents", e.g. NOK100 is represented as 10000.
+- `vat` - VAT in percent * 100, 25% is represented as 2500.
 
 And optionally `quantity`, if other than `1`.
 
