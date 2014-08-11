@@ -5,7 +5,8 @@ Fetch an existing user by their `userId` (not to be mistaken by the deprecated
 
 :relevant-endpoints
 
-GET /users
+POST /user/{id}
 POST /user
+GET /users
 
 :relevant-types user

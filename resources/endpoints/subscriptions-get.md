@@ -27,3 +27,8 @@ As an example, episode-based digital content is a good fit for limited time
 subscriptions: If new episodes launch every week, create a subscription that is
 valid between the start and end date of a season, say January 1st and March
 31st. Set auto-renewal to 1 week to match the episode frequency.
+
+:relevant-endpoints
+
+POST /product
+GET /product/{id}

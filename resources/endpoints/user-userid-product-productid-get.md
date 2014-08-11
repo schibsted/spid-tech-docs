@@ -6,3 +6,9 @@ id may be either the actual product ID, or an alias. When an alias is used, the
 
 Users gain access to products either through purchase or by receiving them as
 gifts.
+
+:relevant-endpoints
+
+GET /user/{userId}/products
+DELETE /user/{userId}/product/{productId}
+POST /user/{userId}/product/{productId}
