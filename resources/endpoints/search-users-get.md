@@ -6,6 +6,6 @@ Normally used to search for a single user.
 :relevant-endpoints
 
 GET /users
-GET /search/users/{query}
+GET /user/{userId}
 
 :relevant-types user
