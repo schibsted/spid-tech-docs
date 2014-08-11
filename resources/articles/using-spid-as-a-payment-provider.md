@@ -10,7 +10,7 @@
 
 SPiD can be used as a payment provider in two main ways:
 
-### SPiD as your product catalog
+### 1. SPiD as your product catalog
 
 SPiD offers a rich data model in which you can store all your products,
 subscriptions and bundles. These may be created
@@ -27,7 +27,7 @@ When storing your products in SPiD, you have access to all payment options:
 4. Full e-commerce solution in SPiD, where users can choose from your product
    catalog and check out
 
-### Keeping your own product catalog
+### 2. Keeping your own product catalog
 
 Storing products in SPiD is entirely optional, and you may choose not to do so,
 for any number of reasons. If you prefer to keep your own product catalog, you
