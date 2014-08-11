@@ -8,7 +8,7 @@
 
 :body
 
-SPiD can be used as a payent provider in two main ways:
+SPiD can be used as a payment provider in two main ways:
 
 ### SPiD as your product catalog
 
