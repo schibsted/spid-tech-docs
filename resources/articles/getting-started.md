@@ -130,7 +130,7 @@ mvn install
 ```
 
 To verify your install, run the AVD - Android Virtual Device Manager. This
-assumes you updated your `$PATH` as described above.
+presumes you updated your `$PATH` as described above.
 
 ```sh
 android avd

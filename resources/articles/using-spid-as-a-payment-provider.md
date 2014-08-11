@@ -38,7 +38,7 @@ may still use two different means of charging users:
 
 Below you will find guides for implementing both paylinks and direct charge.
 Both of these may be used regardless of where your products are stored, but the
-guides assume no products stored in SPiD. The differences for a product catalog
+guides presume no products stored in SPiD. The differences for a product catalog
 in SPiD are noted where appropriate.
 
 ## Paylinks

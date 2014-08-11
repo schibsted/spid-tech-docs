@@ -42,7 +42,7 @@ This guide presumes that you handle your own subscriptions. See
 [the product endpoint](/endpoints/POST/product/) for fully automatic
 subscriptions handled by SPiD.
 
-The example code assumes a subscription and a list of users to charge for that
+The example code presumes a subscription and a list of users to charge for that
 subscription, as you would run as a cron job or something similar. When the
 example code is run, it uses the direct payment API to charge the users
 hard-coded, and prints a summary to the screen.
