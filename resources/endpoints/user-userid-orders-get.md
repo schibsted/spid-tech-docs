@@ -7,6 +7,6 @@ used to limit the results to [a given status](/types/order-status/).
 
 :relevant-endpoints
 
-GET /user/{id}
+GET /user/{userId}
 GET /user/{userId}/order/{orderId}
 

@@ -14,7 +14,7 @@ SPiD can be used as a payment provider in two main ways:
 
 SPiD offers a rich data model in which you can store all your products,
 subscriptions and bundles. These may be created
-[through the API](/endpoints/POST/product), or through the product
+[through the API](/endpoints/POST/product/), or through the product
 administration interface in Ambassador. The benefit of this approach is that
 non-developers can work directly with the product catalog.
 

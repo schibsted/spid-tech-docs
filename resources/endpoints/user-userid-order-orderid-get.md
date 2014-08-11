@@ -6,6 +6,6 @@ Get a user's order.
 
 :relevant-endpoints
 
-GET /orders/{orderId}/items
-GET /orders/{orderId}/transactions
+GET /order/{orderId}/items
+GET /order/{orderId}/transactions
 GET /user/{userId}/orders

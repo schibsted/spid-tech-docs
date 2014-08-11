@@ -64,7 +64,7 @@ The endpoint supports many filters (see below). If no filters are provided,
 active users for the client is returned. Users with status 0 and 1 are
 considered active.
 
-:relevant-types
+:relevant-endpoints
 
 POST /user
-GET /user/{id}
+GET /user/{userId}
