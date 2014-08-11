@@ -40,3 +40,8 @@ curl http://stage.payment.schibsted.no/api/2/users?oauth_token=TOKEN&\
 
 :relevant-types order
 
+:relevant-endpoints
+
+GET /order/{orderId}
+GET /order/{orderId}/items
+GET /order/{orderId}/transactions

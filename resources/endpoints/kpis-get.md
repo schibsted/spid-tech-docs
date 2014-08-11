@@ -122,3 +122,7 @@ generated for every date, since the cronjob might be stopped due to deployment.
     <td>Number of subscriptions where expiration date changed</td>
   </tr>
 </table>
+
+:relevant-endpoints
+
+GET /anonymous/users
