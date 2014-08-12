@@ -63,17 +63,37 @@ browser - the UI your users will see when entering credit cards, logging in etc.
 Set `purchaseFlow` to `DIRECT` to use this flow. It is the default flow (when
 `purchaseFlow` is omitted).
 
-Click for bigger version
-
-[![Sequence diagram for direct charges](/images/direct_payment_api_flow_direct.png)](/images/direct_payment_api_flow_direct.png)
+```sequence-diagram
+Client->SPiD API: POST /user/123/charge
+Note right of Client: Send a silent billing request that creates an order, with order items, for the specified user.
+Note right of SPiD API: Direct charge the provided order amount\non the user's account with the payment provider.
+SPiD API->Client: Return order, items and transaction objects
+Note left of Client: Validate order status and\ninforms user that purchase\nis completed.
+Client->SPiD API: (optional) POST /order/456/credit
+Note right of Client: Each time Client needs to credit an order\n- fully or partially through order lines.
+SPiD API->Client: Responds with order, items and transaction objects
+```
 
 ### Authorize
 
 Set `purchaseFlow` to `AUTHORIZE` to use this flow.
 
-Click for bigger version
-
-[![Sequence diagram for authorization](/images/direct_payment_api_flow_authorize.png)](/images/direct_payment_api_flow_authorize.png)
+```sequence-diagram
+Client->SPiD API: POST /user/123/charge
+Note right of Client: Send a silent billing request that creates an order, with order items, for the specified user.
+Note right of SPiD API: Reserve the provided order amount\non the user's account with the payment provider.
+SPiD API->Client: Return order and item objects
+Note left of Client: Validate order status and\ninforms user that purchase\nis pending review.
+Client->SPiD API: POST /order/456/capture
+Note right of Client: Each time Client needs to capture an authorized order\n- fully or partially through order lines
+SPiD API->Client: Responds with order, items and transaction objects
+Client->SPiD API: (optional) POST /order/456/credit
+Note right of Client: Each time Client needs to credit an order\n- fully or partially through order lines.
+SPiD API->Client: Responds with order, items and transaction objects
+Client->SPiD API: (optional) POST /order/456/cancel
+Note right of Client: Used when Client wants to cancel\na previous authorized order
+SPiD API->Client: Responds with order, items and transaction objects
+```
 
 ### Failures with new paylink option
 
@@ -88,4 +108,19 @@ payment flow (e.g. with a redirect or as a button/link). As the user completes
 checkout in SPiD, they will need to add a credit card, which will be charged
 directly next time a direct payment is attempted.
 
-[![Sequence diagram with failures and paylinks](/images/direct_payment_paylink.png)](/images/direct_payment_paylink.png)
+```sequence-diagram
+Client->SPiD API: POST /user/123/charge
+Note right of Client: Send a silent billing request that creates an order, with order items, for the specified user.
+Note right of SPiD API: Request fails because of missing payment identifier or accepted agreement.
+SPiD API->Client: Responds with error
+Client->SPiD API: POST /paylink
+SPiD API->Client: Responds with paylink URI
+Client->Customer: Shows user the paylink
+Customer->SPiD Web: Clicks on paylink and is directed to SPiD for checkout
+Note right of SPiD Web: Customer completes the purchase which\nis based on the parameters created\nthrough the paylink API
+SPiD Web->Client: Redirects customer back to the supplied redirect url with ?orderId=123
+Client->SPiD API: Check order status: GET /order/123/status
+SPiD API->Client: Return order and transaction objects
+Note left of Client: Validate order status and\ninforms user that purchase\nis pending review
+Client->Customer: Show confirmation
+```

@@ -50,8 +50,9 @@ When using paylinks, it is **strongly** recommended to also implement the
 
 ## Purchase flows
 
-In the following diagrams, "SPiD API" is the REST API, and "SPiD" is SPiD in the
-browser - the UI your users will see when entering credit cards, logging in etc.
+In the following diagrams, "SPiD API" is the REST API, and "SPiD Web" is SPiD in
+the browser - the UI your users will see when entering credit cards, logging in
+etc.
 
 ### Paylink direct purchase flow
 
@@ -77,4 +78,26 @@ Client->Customer: Show confirmation
 
 Set `purchaseFlow` to `AUTHORIZE` to use this flow.
 
-![Paylink authorize/capture diagram](/images/paylink-authorize-capture-flow.png)
+```sequence-diagram
+Customer->Client: Ready to checkout
+Note right of Customer: Before redirecting or showing\na purchase button/link, the client\nmust create a paylink serverside\nvia the API
+Client->SPiD API: POST /paylink
+SPiD API->Client: Responds with a paylink URI
+Client->Customer: Show customer the paylink
+Customer->SPiD Web: Customer clicks on the paylink, and is redirected to SPiD for checkout
+Note left of SPiD Web: Customer authorizes the purchase which\nis based on the parameters created\nthrough the paylink API
+SPiD Web->Client: Redirects customer back to the supplied redirect url with ?orderId=123
+Client->SPiD API: Check order status: GET /order/123/status
+SPiD API->Client: Return order and transaction objects
+Note left of Client: Validate order status and\ninforms user that purchase\nis pending review
+Client->Customer: Show confirmation
+Client->SPiD API: POST /order/123/capture
+Note right of Client: Each time Client needs to capture an authorized order\n- fully or partially through order lines
+SPiD API->Client: Respond with order and transaction objects
+Client->SPiD API: (optional) POST /order/123/credit
+Note right of Client: Each time Client needs to credit an order\n- fully or partially through order lines
+SPiD API->Client: Respond with order and transaction objects
+Client->SPiD API: (optional) POST /order/123/cancel
+Note right of Client: Used when Client wants to cancel\na previous authorized order
+SPiD API->Client: Respond with order and transaction objects
+```
