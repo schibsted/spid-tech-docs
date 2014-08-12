@@ -24,8 +24,8 @@ module.exports = function (input) {
     "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1");
 
   var escaped = input
-        .replace(/'/g, "\'")
         .replace(/\\/g, "\\\\")
+        .replace(/'/g, "\\'")
         .replace(/\n/g, "\\n");
 
   var scripts = libs.concat([
