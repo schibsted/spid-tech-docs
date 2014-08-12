@@ -10,7 +10,8 @@
   #"(?sm)<pre><code class=\"sequence-diagram\">(.+?)</code></pre>")
 
 (defn insert-svg-image [[_ definition]]
-  (str "<img src='" (-> definition fix get-sequence-diagram :path) "'>"))
+  (let [svg-path (-> definition fix get-sequence-diagram :path)]
+    (str "<a href='" svg-path "'><img src='" svg-path "'></a>")))
 
 (defn get-sequence-diagrams [html]
   (->> html
