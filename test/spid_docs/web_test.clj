@@ -40,6 +40,10 @@
      (.endsWith path ".png")
      :valid-link
 
+     ;; sequence diagrams are generated from the page contents, so they're there.
+     (.startsWith path "/sequence-diagrams/")
+     :valid-link
+
      ;; internal link
      (or (contains? pages path)
          (contains? pages (str path "index.html")))
