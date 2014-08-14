@@ -30,10 +30,6 @@
        (remove :bundled)
        (remove :outdated)))
 
-(defn logit [arg msg]
-  (prn msg (str/join "" (repeat (- 25 (count msg)) " ")) (java.util.Date.))
-  arg)
-
 (def freeze-pages?
   (= (System/getProperty "spid.freeze.pages") "true"))
 
