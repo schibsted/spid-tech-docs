@@ -56,6 +56,28 @@ Device->Client Backend: Logout Backend using internal client API token
 Client Backend->Device: OK
 ```
 
+### Exchange type: session
+
+The process described above allows your backend to communicate on behalf of a
+user logged into the device. You might also need to generate a session for the
+user in a webview layer of a native mobile application. You do that with this
+endpoint as well, setting the `type` to `session`.
+
+Example flow:
+
+```sequence-diagram
+Webview->Native App: Asks for a native logged in user by listening for an authenticated page request (/login or /signup)
+Note right of Webview: User could also login natively
+Native App->SPiD API: POST /oauth/exchange
+Note left of SPiD API: clientId=9876\ntype=session\noauth_token=94daab
+Note right of SPiD API: SPiD generates a onetime code\nthat expires within 1 minute
+SPiD API->Native App: Returns onetime code
+Native App->Webview: Sends onetime code to webview
+Webview->SPiD Web: Redirects user to /auth/session/{onetimecode}
+Note right of SPiD Web: SPiD generates a session based on\nthe user this code belongs to
+SPiD Web->Webview: Returns a SPiD session cookie and redirects user to redirect uri provided
+```
+
 :example-params
 
 type: code
