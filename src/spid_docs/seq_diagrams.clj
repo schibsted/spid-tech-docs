@@ -3,7 +3,10 @@
             [clojure.java.shell :refer [sh]]
             [digest :refer [md5]]))
 
-(defn generate-svg [definition]
+(defn generate-svg
+  "Shell out to the sequence diagram generator in node, passing the
+   definition through standard in."
+  [definition]
   (let [result (sh "node" "index.js"
                    :dir "seq-diagrams/"
                    :in definition)]
@@ -12,6 +15,8 @@
       (throw (ex-info "Could not generate svg" result)))))
 
 (defn get-sequence-diagram [definition]
+  "Hash the definition to generate a unique path, and either return the
+   previously generated svg, or generate it now, save and return."
   (let [path (str "sequence-diagrams/" (md5 definition) ".svg")]
     {:path (str "/" path)
      :svg (if-let [cached (io/resource path)]
