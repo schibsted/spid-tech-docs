@@ -1,15 +1,15 @@
 :title Direct Payment API
 
+:relevant-endpoints
+
+POST /user/{userId}/charge
+GET /user/{userId}/preferences/payment
+POST /order/{orderId}/capture
+POST /order/{orderId}/credit
+POST /order/{orderId}/cancel
+POST /paylink
+
 :aside
-
-## Relevant endpoints
-
-- [`POST` /user/{userId}/charge](/endpoints/POST/user/{userId}/charge/)
-- [`GET` /user/{userId}/preferences/payment](/endpoints/GET/user/{userId}/preferences/payment/)
-- [`POST` /order/{orderId}/capture](/endpoints/POST/order/{orderId}/capture/)
-- [`POST` /order/{orderId}/credit](/endpoints/POST/order/{orderId}/credit/)
-- [`POST` /order/{orderId}/cancel](/endpoints/POST/order/{orderId}/cancel/)
-- [`POST` /paylink](/endpoints/POST/paylink/)
 
 ## See also
 
