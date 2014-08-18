@@ -176,6 +176,14 @@ Beware! In order for this to work well, you need to add the username and
 password for a demo user in resources/config.edn, AND make sure this user
 is logged into https://stage.payment.schibsted.no/"
   [sample-defs endpoints mode]
+  (if-not (api/config-exists?)
+    (do
+      (println "Aborting import, no configuration file detected.")
+      (println)
+      (println "  cp resources/config.sample.edn resources/config.edn")
+      (println "  vim resources/config.edn")
+      (println))
+(do
   (case mode
     :build-from-cache (println "Re-building generated sample responses from cache")
     :build-from-api (println "Re-fetching all data from the API and re-building generated sample responses")
@@ -214,4 +222,4 @@ is logged into https://stage.payment.schibsted.no/
 
 Original error was
 ")
-      (println (indent 4 (.getMessage e))))))
+      (println (indent 4 (.getMessage e))))))))

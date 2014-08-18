@@ -24,14 +24,7 @@ exported to static files.
    Replace `server` with `server-headless` if you would prefer to open
    your own browser window.
 
-There is a local cached copy of the endpoint descriptions in the repo. In order
-to refresh it, and use all available features, you will need to put your API
-credentials in `resources/config.edn`. Copy `resources/config.sample.edn` and
-fill in the placeholders. Then run:
-
-```
-./import-endpoints.sh
-```
+Note: There's no need to restart the server after making changes.
 
 ## Writing documentation
 
