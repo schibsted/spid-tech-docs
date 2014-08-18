@@ -183,43 +183,43 @@ is logged into https://stage.payment.schibsted.no/"
       (println "  cp resources/config.sample.edn resources/config.edn")
       (println "  vim resources/config.edn")
       (println))
-(do
-  (case mode
-    :build-from-cache (println "Re-building generated sample responses from cache")
-    :build-from-api (println "Re-fetching all data from the API and re-building generated sample responses")
-    (println "Generating missing sample responses.\n\nTo regenerate existing responses, try one of:\n"
-             "   lein generate-sample-responses :build-from-cache\n    lein generate-sample-responses :build-from-api\n"))
-  (try
-    (let [load-def (if (= :build-from-api mode)
-                     force-load-and-verify-sample-response
-                     load-and-verify-sample-response)
-          generate-files (if (= :build-missing mode)
-                           generate-missing-sample-response-files
-                           generate-sample-response-files)
-          loaded-defs (reduce (fn [defs def]
-                                (if-let [endpoint (get-endpoint def endpoints)]
-                                  (load-def defs (assoc def
-                                                   :access-token-types
-                                                   (:access-token-types endpoint)))
-                                  (throw
-                                   (ex-info
-                                    (str "Unable to find endpoint for route "
-                                         (name (:method def))
-                                         " "
-                                         (:route def)
-                                         "\nMake sure path parameters are named correctly")
-                                    {:source :load-defs}))))
-                              [] sample-defs)]
-      (doseq [def loaded-defs]
-        (generate-files def (get-endpoint def endpoints))))
-    (catch clojure.lang.ExceptionInfo e
-      (println "-----------------------------------")
-      (println "Failed to generate sample responses")
-      (println "-----------------------------------")
-      (println "Beware! In order for this to work well, you need to add the username and
+    (do
+      (case mode
+        :build-from-cache (println "Re-building generated sample responses from cache")
+        :build-from-api (println "Re-fetching all data from the API and re-building generated sample responses")
+        (println "Generating missing sample responses.\n\nTo regenerate existing responses, try one of:\n"
+                 "   lein generate-sample-responses :build-from-cache\n    lein generate-sample-responses :build-from-api\n"))
+      (try
+        (let [load-def (if (= :build-from-api mode)
+                         force-load-and-verify-sample-response
+                         load-and-verify-sample-response)
+              generate-files (if (= :build-missing mode)
+                               generate-missing-sample-response-files
+                               generate-sample-response-files)
+              loaded-defs (reduce (fn [defs def]
+                                    (if-let [endpoint (get-endpoint def endpoints)]
+                                      (load-def defs (assoc def
+                                                       :access-token-types
+                                                       (:access-token-types endpoint)))
+                                      (throw
+                                       (ex-info
+                                        (str "Unable to find endpoint for route "
+                                             (name (:method def))
+                                             " "
+                                             (:route def)
+                                             "\nMake sure path parameters are named correctly")
+                                        {:source :load-defs}))))
+                                  [] sample-defs)]
+          (doseq [def loaded-defs]
+            (generate-files def (get-endpoint def endpoints))))
+        (catch clojure.lang.ExceptionInfo e
+          (println "-----------------------------------")
+          (println "Failed to generate sample responses")
+          (println "-----------------------------------")
+          (println "Beware! In order for this to work well, you need to add the username and
 password for a demo user in resources/config.edn, AND make sure this user
 is logged into https://stage.payment.schibsted.no/
 
 Original error was
 ")
-      (println (indent 4 (.getMessage e))))))))
+          (println (indent 4 (.getMessage e))))))))
