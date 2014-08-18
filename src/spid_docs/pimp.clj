@@ -14,11 +14,34 @@
             [spid-docs.pimp.tabs :refer [transform-tabs]]
             [spid-docs.pimp.toc :refer [create-toc]]))
 
-(defn add-header-ids
+(defn- get-node-text
+  "Given a node, as produced by enlive, find the text, possibly in nested
+   nodes."
+  [node]
+  (let [text (-> node :content first)]
+    (if (string? text) text (get-node-text text))))
+
+(defn- wrap-in-anchor
+  "Wrap the given content in an enlive element representing an
+   anchor, pointing to itself, defined by the provided target id (string)"
+  [content target]
+  [{:tag :a
+    :attrs {:class "anchor-link"
+            :id target
+            :href (str "#" target)}
+    :content content}])
+
+(defn- anchorify-element [element]
+  (let [target-id (to-id-str (get-node-text element))]
+    (update-in element [:content] #(wrap-in-anchor % target-id))))
+
+(defn- make-headings-clickable
   "Every h2 gets an id that corresponds to the text inside it. This
-   enables users to link to every heading on the whole site."
+   enables users to link to every heading on the whole site. The heading
+   is also converted into a link so users can copy the URL to a specific
+   section with ease."
   [html]
-  (transform html [:h2] #(assoc-in % [:attrs :id] (-> % :content first to-id-str))))
+  (transform html [:h2] anchorify-element))
 
 (defn optify
   "Helper that examines paths with the supplied prefix and either subs
@@ -57,7 +80,7 @@
        (inline-examples)
        (transform-tabs)
        (optify-images request)
-       (add-header-ids)
+       (make-headings-clickable)
        (create-toc)
        (add-comments)
        (insert-svg)

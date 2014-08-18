@@ -120,3 +120,5 @@ th {padding-right: 10px;}
 .table thead th {background-color: #f9f9f9;}
 
 .warning {background-color: #fcf7d5; border: 1px solid #eadbbc; color: #000;}
+
+.anchor-link, .anchor-link:visited, .anchor-link:active, .anchor-link:hover {color: #000; outline: none; text-decoration: none;}
