@@ -2,6 +2,12 @@
 
 :frontpage
 
+:aside
+
+## On this page
+
+<spid-toc></spid-toc>
+
 :body
 
 This article offers potential solutions for common problems as well as pointers
