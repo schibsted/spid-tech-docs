@@ -5,13 +5,7 @@
 
 ## On this page
 
-- [Loading and initialization](#loading-and-initializing)
-- [Events](#events)
-- [Response signature and validation](#response-signature-and-validation)
-- [API Docs](#api-docs)
-- [Hosting](#hosting)
-- [Best practices](#best-practices)
-
+<spid-toc></spid-toc>
 
 ## See also
 
