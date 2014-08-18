@@ -39,16 +39,14 @@
 
 (def ObjectType
   (merge PrimitiveType
-         {:rendering (eq :object)
-          :fields [{:name Str
+         {:fields [{:name Str
                     :type (either Keyword [Keyword] {Keyword Keyword})
                     (optional-key :description) Str
                     (optional-key :always-available?) Boolean}]}))
 
 (def EnumType
   (merge PrimitiveType
-         {:rendering (eq :enum)
-          :values [{:value Str
+         {:values [{:value Str
                     :description Str}]}))
 
 (def Type

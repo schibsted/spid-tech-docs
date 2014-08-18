@@ -25,10 +25,8 @@
             :fields [{:name "created" :type :datetime}]}
       status {:id :status
               :name "Status"
-              :rendering :enum
               :values [{:value "0" :description "Active"}]}
       product {:id :product
-               :rendering :object
                :inline-types [:status]
                :fields [{:name "id" :type :integer}
                         {:name "status" :type :status}]}

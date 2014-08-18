@@ -1,6 +1,5 @@
 {:id :campaign
  :name "Campaign"
- :rendering :object
  :inline-types [:campaign-status]
  :description "Campaigns are groups of products that may be given new prices
 when purchased through the campaign. For a campaign to be applied to a purchase,

@@ -1,6 +1,5 @@
 {:id :client
  :name "Client"
- :rendering :object
  :fields [{:name "id"                   :type :integer-string :always-available? true}
           {:name "unregisteredPayments" :type :string         :always-available? true}
           {:name "domain"               :type :string         :always-available? true}

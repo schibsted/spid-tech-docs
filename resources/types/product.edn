@@ -1,6 +1,5 @@
 {:id :product
  :name "Product"
- :rendering :object
  :inline-types [:product-status :payment-options :bundle-type]
  :fields [{:name "productId"                       :type :integer-string  :description "Unique product ID" :always-available? true}
           {:name "parentProductId"                 :type :integer-string  :description "ID of the parent product, if any" :always-available? false}

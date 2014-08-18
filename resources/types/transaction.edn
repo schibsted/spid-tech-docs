@@ -1,6 +1,5 @@
 {:id :transaction
  :name "Transaction"
- :rendering :object
  :inline-types [:transaction-type]
  :fields [{:name "transactionId" :type :integer-string   :description "Unique ID of the transaction" :always-available? true}
           {:name "masterId"      :type :integer-string   :description "" :always-available? true}

@@ -1,7 +1,6 @@
 {:id :bundle-item
  :name "Bundle item"
  :inline-types [:bundle-item-status]
- :rendering :object
  :fields [{:name "bundleItemId"   :type :string             :description "Unique bundle item ID" :always-available? true}
           {:name "bundleId"       :type :string             :description "The bundle's product ID" :always-available? true}
           {:name "productId"      :type :string             :description "ID of the product to add" :always-available? true}

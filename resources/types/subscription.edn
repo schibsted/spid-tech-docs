@@ -1,6 +1,5 @@
 {:id :subscription
  :name "Subscription"
- :rendering :object
  :inline-types [:subscription-status :subscription-status-change-code]
  :fields [{ :name "subscriptionId"       :type :string                          :description "Unique ID of the subscription"                                                                                                       :always-available? true}
           { :name "clientId"             :type :string                          :description "Your client ID"                                                                                                                      :always-available? true}

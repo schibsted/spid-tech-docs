@@ -1,6 +1,5 @@
 {:id :transaction-type
  :name "Transaction type"
- :rendering :enum
  :values [{:value "100" :description "Deposit"}
           {:value "200" :description "Purchase"}
           {:value "300" :description "Transfer"}

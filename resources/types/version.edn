@@ -1,6 +1,5 @@
 {:id :version
  :name "Version object"
- :rendering :object
  :fields [{:name "apiVersion"  :type :integer  :always-available? true :description "API major version. 2"}
           {:name "apiRevision" :type :string   :always-available? true :description "Always 0 in production"}
           {:name "webVersion"  :type :string   :always-available? true :description "Full API version, currently 2.14.0"}

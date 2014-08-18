@@ -1,6 +1,5 @@
 {:id :login-type
  :name "Login type"
- :rendering :enum
  :values [{:value "normal"     :description "User provided email and password to log in."}
           {:value "auto"       :description "Caused by an active 'remember me' cookie."}
           {:value "thirdparty" :description "Logged in via third-party provider, such as Facebook, Google, etc."}

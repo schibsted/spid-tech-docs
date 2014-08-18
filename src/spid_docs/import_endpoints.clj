@@ -63,8 +63,8 @@ this on the tech docs site, please have a good laugh at our expense, and then
 
 ;; consider adding
 ;;  - :inline-types (other types to render along with this one)
-;;  - :rendering :enum along with :values (see dump-status.edn)
-;;  - :rendering :object along with :fields (see email.edn)"))
+;;  - :values (see dump-status.edn)
+;;  - :fields (see email.edn)"))
 
 (defn- handle-type-changes [diff types-map]
   (when (:types diff)

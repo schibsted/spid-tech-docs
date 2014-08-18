@@ -1,6 +1,5 @@
 {:id :email-template-collection
  :name "Email template collection"
- :rendering :object
  :fields [{:name "change_password_notification"                            :type :email-template}
           {:name "post_expiration_autorenew_subscription_fail"             :type :email-template}
           {:name "confirm_email_address"                                   :type :email-template}

@@ -1,6 +1,5 @@
 {:id :payment-id-type
  :name "Payment identifier type"
- :rendering :enum
  :values [{:value "2" :description "Credit card"}
           {:value "4" :description "SMS"}
           {:value "8" :description "PayEx Invoice"}

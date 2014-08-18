@@ -1,6 +1,5 @@
 {:id :order-status
  :name "Order status"
- :rendering :enum
  :description "Order status changes happen according to the following state-machine:
 
 ![Order status state machine](/images/order-status.png)

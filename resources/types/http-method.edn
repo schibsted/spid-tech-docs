@@ -1,6 +1,5 @@
 {:id :http-method
  :name "HTTP method"
- :rendering :object
  :description "A supported endpoint action"
  :fields [{:name "name"             :type :string              :always-available? true :description "The HTTP method (only GET, POST and DELETE are used by the API)"}
           {:name "optional"         :type [:string]            :always-available? true :description "A list of optional request parameters."}

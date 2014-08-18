@@ -1,6 +1,5 @@
 {:id :address
  :name "Address"
- :rendering :object
  :fields [{:name "formatted"     :type :string :description "Full address, formatted for display"}
           {:name "streetAddress" :type :string :description "Full street address component. May include house number, street name, PO BOX, and multi-line extended street address information."}
           {:name "postalCode"    :type :string :description "Zip code."}

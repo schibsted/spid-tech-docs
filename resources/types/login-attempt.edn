@@ -1,7 +1,6 @@
 {:id :login-attempt
  :name "Login attempt object"
  :description "This object contains details about a login attempt"
- :rendering :object
  :inline-types [:login-type]
  :fields [{:name "id"            :type :string}
           {:name "clientid"      :type :string}

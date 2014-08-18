@@ -1,6 +1,5 @@
 {:id :paylink-status
  :name "Paylink status"
- :rendering :enum
  :values [{:value "-1" :description "Deleted"}
           {:value "0"  :description "Not available"}
           {:value "1"  :description "Available"}

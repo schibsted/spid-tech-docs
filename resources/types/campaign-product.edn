@@ -1,6 +1,5 @@
 {:id :campaign-product
  :name "Campaign product"
- :rendering :object
  :description "A campaign product is a modification of a product within a
 campaign. This object represents a separate [product](/types/product/), and only
 overrides the price. Note that in case of price changes for the original product,

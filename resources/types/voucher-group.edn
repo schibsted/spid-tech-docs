@@ -1,6 +1,5 @@
 {:id :voucher-group
  :name "Voucher group"
- :rendering :object
  :inline-types [:voucher :voucher-type :voucher-status]
  :description "Voucher groups are templates from which [vouchers](/types/voucher/) can be
 generated. Individual vouchers are not complete on their own - you need a

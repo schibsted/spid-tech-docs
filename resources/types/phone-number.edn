@@ -1,6 +1,5 @@
 {:id :phone-number
  :name "Phone number"
- :rendering :object
  :fields [{:name "value"        :type :string   :description "The phone nuber" :always-available? true}
           {:name "type"         :type :string   :description "The type of phone number. Defaults to 'other'." :always-available? true}
           {:name "primary"      :type :boolean  :description "If `true`, this is the user's primary phone number." :always-available? false}

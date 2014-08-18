@@ -1,6 +1,5 @@
 {:id :order-item
  :name "Order item"
- :rendering :object
  :fields [{:name "orderItemId"         :type :integer  :description "Unique order item ID"                                                           :always-available? true}
           {:name "orderId"             :type :integer  :description "Unique Order ID"                                                                :always-available? true}
           {:name "clientId"            :type :string   :description "Client ID"                                                                      :always-available? true}

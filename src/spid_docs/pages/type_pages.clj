@@ -67,10 +67,14 @@
    [:td
     [:p.faded (markdown/render-inline (:description val))]]])
 
+(defn- get-rendering [type]
+  (or (and (:values type) :enum)
+      (and (:fields type) :object)))
+
 (defn- render-typedef [type types]
   (list
    (markdown/render (:description type))
-   (if (= :enum (:rendering type))
+   (if (= :enum (get-rendering type))
      [:p "An enum, with the following possible values:"])
    [:table.sectioned.mbl
     ;; Render "both" fields and values - only either one will be present in any

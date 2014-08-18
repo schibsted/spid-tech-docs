@@ -1,6 +1,5 @@
 {:id :api-exception
  :name "API Exception"
- :rendering :object
  :fields [{:name "code"        :type :integer :description "The API error code"}
           {:name "type"        :type :string  :description "A textual representation of the kind of error that occurred"}
           {:name "description" :type :string  :description "Further details about the error"}]}

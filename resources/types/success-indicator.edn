@@ -1,4 +1,3 @@
 {:id :success-indicator
  :name "Success indicator"
- :rendering :object
  :fields [{:name "success" :type :boolean}]}

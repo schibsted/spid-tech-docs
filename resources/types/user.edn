@@ -1,6 +1,5 @@
 {:id :user
  :name "User"
- :rendering :object
  :description "The user object is based on the [portable contacts
 specification](http://portablecontacts.net/draft-spec.html). It is extended with
 some custom fields. `userId` is an integer and represents the unique user ID.

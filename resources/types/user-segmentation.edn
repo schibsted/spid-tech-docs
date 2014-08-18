@@ -1,6 +1,5 @@
 {:id :user-segmentation
  :name "Anonymized user data"
- :rendering :object
  :fields [{:name "uid"     :type :integer-string :description "The user's `userId`" :always-available? true}
           {:name "gender"  :type :string         :always-available? false}
           {:name "yob"     :type :string         :description "The user's year of birth, four digits", :always-available? false}

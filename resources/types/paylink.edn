@@ -1,6 +1,5 @@
 {:id :paylink
  :name "Paylink"
- :rendering :object
  :inline-types [:purchase-flow :paylink-status :payment-options :paylink-item]
  :fields [{:name "paylinkId"       :type :integer-string  :description "Paylink ID"}
           {:name "clientId"        :type :string          :description "ID of the client that gets paid (seller client ID). Defaults to the authenticated client"}

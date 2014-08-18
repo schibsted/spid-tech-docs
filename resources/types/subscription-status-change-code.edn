@@ -1,6 +1,5 @@
 {:id :subscription-status-change-code
  :name "Subscription status change code"
- :rendering :enum
  :values [{:value "100" :description "Subscription expired via multiple failed payment method charge attempts"}
           {:value "110" :description "Subscription expired via API"}
           {:value "120" :description "Subscription expired passively (auto_renew is off)"}

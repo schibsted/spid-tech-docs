@@ -1,5 +1,4 @@
 {:id :payment-preference-status
  :name "Payment preference status"
- :rendering :enum
  :values [{:value "Unconfirmed" :description ""}
           {:value "Confirmed" :description ""}]}

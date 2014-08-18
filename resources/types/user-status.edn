@@ -1,6 +1,5 @@
 {:id :user-status
  :name "User status"
- :rendering :enum
  :values [{:value "-3" :description "Deleted"}
           {:value "-2" :description "Blocked from using the service"}
           {:value "-1" :description "Inactive/disabled account"}

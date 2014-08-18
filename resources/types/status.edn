@@ -1,6 +1,5 @@
 {:id :status
  :name "API Status"
- :rendering :object
  :fields [{:name "oauth"       :type :object   :always-available? true}
           {:name "apiVersion"  :type :integer  :always-available? true}
           {:name "apiRevision" :type :string   :always-available? true}

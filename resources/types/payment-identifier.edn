@@ -1,7 +1,6 @@
 {:id :payment-identifier
  :name "Payment identifier"
  :description "A payment identifier is a means of payment, e.g. credit card, SMS and others."
- :rendering :object
  :inline-types [:payment-id-type :payment-id-status]
  :fields [{:name "identifierId"      :type :integer-string    :description "Unique payment identifier ID" :always-available? true}
           {:name "identifier"        :type :string            :description "The actual identifier, like a credit card number or cell phone number" :always-available? true}

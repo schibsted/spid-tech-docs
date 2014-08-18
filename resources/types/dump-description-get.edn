@@ -1,6 +1,5 @@
 {:id :dump-description
  :name "Dump description"
- :rendering :object
  :inline-types [:dump-status]
  :fields [{:name "dumpId"            :type :integer-string :description "Unique ID of the dump" :always-available? true}
           {:name "clientId"          :type :string         :description "The client ID" :always-available? true}

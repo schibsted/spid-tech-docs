@@ -1,7 +1,6 @@
 {:id :response-container
  :name "API response container"
  :inline-types [:request-limit-status :api-debug :api-debug-route :api-exception]
- :rendering :object
  :description "The response container is returned from every endpoint in the
 API. It defines certain meta-data about the API, along with relevant request
 limiting stats and either an error or the response data from the endpoint."

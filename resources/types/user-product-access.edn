@@ -1,6 +1,5 @@
 {:id :user-product-access
  :name "User product access"
- :rendering :object
  :fields [{:name "productId"      :type :integer-string :always-available? true}
           {:name "result"         :type :boolean        :description "If `true`, the user has access to the product or subscription" :always-available? true}
           {:name "subscriptionId" :type :integer-string :description "Only provided for subscriptions"}

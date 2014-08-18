@@ -1,6 +1,5 @@
 {:id :payment-preference
  :name "Payment preference"
- :rendering :object
  :inline-types [:payment-options :payment-preference-status]
  :fields [{:name "paymentPreferenceId" :type :integer-string            :description "Unique ID" :always-available? true}
           {:name "merchantId"          :type :integer-string            :always-available? true}

@@ -1,6 +1,5 @@
 {:id :email
  :name "Email address"
- :rendering :object
  :fields [{:name "value"        :type :string   :description "The email address" :always-available? true}
           {:name "type"         :type :string   :description "The type of email. Defaults to 'other'." :always-available? true}
           {:name "primary"      :type :boolean  :description "If `true`, this is the user's primary email address." :always-available? false}

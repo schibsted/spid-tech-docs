@@ -1,6 +1,5 @@
 {:id :email-template
  :name "Email template"
- :rendering :object
  :fields [{:name "layout"   :type :string :always-available? true}
           {:name "subject"  :type :string :always-available? true :description "The email subject"}
           {:name "template" :type :string :always-available? true}

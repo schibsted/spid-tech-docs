@@ -1,6 +1,5 @@
 {:id :data-object
  :name "Data object"
- :rendering :object
  :fields [{:name "dataObjectId" :type :integer-string :always-available? true :description "Unique data object ID"}
           {:name "clientId"     :type :string         :always-available? true :description "The ID of the client who created the data object"}
           {:name "merchantId"   :type :integer-string :always-available? true :description "The ID of the merchant the client belongs to"}

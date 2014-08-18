@@ -1,6 +1,5 @@
 {:id :order
  :name "Order"
- :rendering :object
  :inline-types [:order-item :order-status :order-type :payment-options :purchase-flow :payment-identifier :transaction]
  :description "Orders contain one or more order items. Orders with
 status other than `failed` and `pending` will have transactions attached to
