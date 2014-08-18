@@ -107,3 +107,10 @@
 
 (defn in? [xs e]
   (some #(= e %) xs))
+
+(defn get-node-text
+  "Given a node, as produced by enlive, find the text, possibly in nested
+   nodes."
+  [node]
+  (let [text (-> node :content first)]
+    (if (string? text) text (get-node-text text))))

@@ -4,44 +4,15 @@
    code examples with Pygments, adding tabs etc."
   (:require [optimus.link :as link]
             [spid-docs.enlive :refer [transform]]
-            [spid-docs.formatting :refer [to-id-str]]
             [spid-docs.homeless :refer [update-vals update-in-existing]]
             [spid-docs.layout :refer [layout-page]]
+            [spid-docs.pimp.clickable-headings :refer [make-headings-clickable]]
             [spid-docs.pimp.comments :refer [add-comments]]
             [spid-docs.pimp.examples :refer [inline-examples]]
             [spid-docs.pimp.highlight :refer [highlight-code-blocks-in-page]]
             [spid-docs.pimp.seq-diagrams :refer [insert-svg]]
             [spid-docs.pimp.tabs :refer [transform-tabs]]
             [spid-docs.pimp.toc :refer [create-toc]]))
-
-(defn- get-node-text
-  "Given a node, as produced by enlive, find the text, possibly in nested
-   nodes."
-  [node]
-  (let [text (-> node :content first)]
-    (if (string? text) text (get-node-text text))))
-
-(defn- wrap-in-anchor
-  "Wrap the given content in an enlive element representing an
-   anchor, pointing to itself, defined by the provided target id (string)"
-  [content target]
-  [{:tag :a
-    :attrs {:class "anchor-link"
-            :id target
-            :href (str "#" target)}
-    :content content}])
-
-(defn- anchorify-element [element]
-  (let [target-id (to-id-str (get-node-text element))]
-    (update-in element [:content] #(wrap-in-anchor % target-id))))
-
-(defn- make-headings-clickable
-  "Every h2 gets an id that corresponds to the text inside it. This
-   enables users to link to every heading on the whole site. The heading
-   is also converted into a link so users can copy the URL to a specific
-   section with ease."
-  [html]
-  (transform html [:h2] anchorify-element))
 
 (defn optify
   "Helper that examines paths with the supplied prefix and either subs

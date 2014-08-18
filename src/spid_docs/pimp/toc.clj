@@ -1,12 +1,13 @@
 (ns spid-docs.pimp.toc
   (:require [clojure.string :as str]
-            [net.cgrand.enlive-html :refer [sniptest html-resource select]]))
+            [net.cgrand.enlive-html :refer [sniptest html-resource select]]
+            [spid-docs.homeless :refer [get-node-text]]))
 
 (defn- toc-item [heading]
   (str "<li><a href=\"#"
        (-> heading :attrs :id)
        "\">"
-       (-> heading :content first)
+       (get-node-text heading)
        "</a></li>"))
 
 (defn- find-headings-in-main [html]
