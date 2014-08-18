@@ -1,8 +1,10 @@
 (ns spid-docs.sample-responses
-  "Tools to generate sample responses for all documentet endpoints. Actually uses
+  "Tools to generate sample responses for all documented endpoints. Actually uses
    the API to ensure that sample responses reflect the API, and then runs the
    result through a series of functions that anonymizes and scrambles
-   potentially sensitive data."
+   potentially sensitive data.
+
+   The actual sample responses are defined in sample_responses/definitions.clj"
   (:require [clojure.java.io :as io]
             [clojure.pprint :refer [pprint]]
             [clojure.set :refer [rename-keys]]
@@ -16,7 +18,9 @@
             [spid-docs.sample-responses.wash :refer [wash-data]])
   (:import java.util.Date))
 
-(defn format-sample-response [response]
+(defn format-sample-response
+  "Extract data, pre-process it and return a string of JSON data"
+  [response]
   (format-json (->> response :data wash-data)))
 
 (defn- interpolate [string data]
