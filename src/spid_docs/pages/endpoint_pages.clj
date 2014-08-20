@@ -10,8 +10,7 @@
             [spid-docs.example-code :refer [create-example-code]]
             [spid-docs.formatting :refer [pluralize enumerate-humanely capitalize to-id-str]]
             [spid-docs.http :refer [get-response-status-name]]
-            [spid-docs.pages.type-pages :refer [get-type-name]]
-            [spid-docs.pages.type-pages :refer [render-type-definition render-inline-types link-to-type]]
+            [spid-docs.pages.type-pages :refer [get-type-name render-type-definition render-inline-types link-to-type]]
             [spid-docs.pimp.markdown :refer [render-inline render]]
             [spid-docs.routes :refer [api-path endpoint-path]]))
 
