@@ -1,6 +1,7 @@
 (ns spid-docs.cultivate.endpoints
   "Gather all relevant information about endpoints from a few different sources."
-  (:require [clojure.string :as str]
+  (:require [clojure.java.io :as io]
+            [clojure.string :as str]
             [spid-docs.cultivate.util :refer [parse-relevant-endpoints]]
             [spid-docs.formatting :refer [to-id-str]]
             [spid-docs.homeless :refer [with-optional-keys assoc-non-nil in?]]
@@ -114,28 +115,7 @@
       (assoc response :samples (into {} samples))
       response)))
 
-(def global-failures
-  [{:status 401
-    :description "You don't have administration rights for this client."
-    :type "api-exception"}
-   {:status 401
-    :description "Your client doesn't have administration rights for this client."
-    :type "api-exception"}
-   {:status 403
-    :description "Client is not authorized to access this API endpoint. Contact SPiD to request access."
-    :type "api-exception"}
-   {:status 403
-    :description "Requesting IP is not whitelisted"
-    :type "api-exception"}
-   {:status 404
-    :description "Unknown client ID"
-    :type "api-exception"}
-   {:status 404
-    :description "Client ID mismatch. The client making the request is no the owner of this resource, and does not have administrative privileges for it."
-    :type "api-exception"}
-   {:status 420
-    :description "Request Ratelimit exceeded"
-    :type "api-exception"}])
+(def global-failures (read-string (slurp (io/resource "global-failures.edn"))))
 
 (defn- get-failure-responses
   "Extracts all failure responses, and adds global ones, such as 403 for any
