@@ -52,7 +52,12 @@
        :valid-link
        :link-to-unknown-hash)
 
-     :else :link-to-unknown-page)))
+     :else (if (and (not (re-find #"/$" path))
+                    (link-valid? {:attrs {:href (str path "/" (when hash (str "#" hash)))}
+                                  :content (:content link)}
+                                 page-url body pages the-app))
+             :link-without-trailing-slash
+             :link-to-unknown-page))))
 
 (fact
  :slow
