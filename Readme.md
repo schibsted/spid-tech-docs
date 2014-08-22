@@ -17,7 +17,8 @@ exported to static files.
 2. **Run the web server**
 
    ```sh
-   cd path/to/techdocs
+   git clone git@github.com:schibsted/spid-tech-docs.git
+   cd spid-tech-docs
    lein ring server
    ```
 
