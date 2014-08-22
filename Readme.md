@@ -14,7 +14,7 @@ exported to static files.
    3. Set it to be executable (`chmod a+x ~/bin/lein`)
    4. Run it (`lein`) and it will download the self-install package
 
-2. **Run the web server**
+2. **Fetch and run the web server**
 
    ```sh
    git clone git@github.com:schibsted/spid-tech-docs.git
