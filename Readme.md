@@ -17,6 +17,7 @@ exported to static files.
 2. **Run the web server**
 
    ```sh
+   cd path/to/techdocs
    lein ring server
    ```
 
