@@ -1,4 +1,0 @@
-{:id :purchase-flow
- :name "Purchase flow"
- :values [{:value "1" :description "Direct purchase flow"}
-          {:value "2" :description "Authorize/Capture purchase flow"}]}

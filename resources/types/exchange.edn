@@ -1,2 +1,0 @@
-{:id :exchange
- :fields [{:name "code" :type :string :always-available? true :description "An OAuth authentication code. Expires after 30 seconds."}]}

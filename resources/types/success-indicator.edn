@@ -1,3 +1,0 @@
-{:id :success-indicator
- :name "Success indicator"
- :fields [{:name "success" :type :boolean}]}

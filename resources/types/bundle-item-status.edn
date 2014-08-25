@@ -1,4 +1,0 @@
-{:id :bundle-item-status
- :name "Bundle item status"
- :values [{:value "0" :description "Deleted"}
-          {:value "1" :description "Active"}]}

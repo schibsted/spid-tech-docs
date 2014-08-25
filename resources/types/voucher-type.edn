@@ -1,6 +1,0 @@
-{:id :voucher-type
- :name "Voucher type"
- :values [{:value "5" :description "**Campaign, redeems as a campaign purchase**"}
-          {:value "8" :description "**Voucher as payment method**"}
-          {:value "3" :description "Giveaway, when redeemed, the user is given the product directly, without creating an order (thus, no there will be no receipt generated from the system). For testing purposes only, not available in production."}
-          {:value "6" :description "Free with order, redeemer is given product and order is created for 0 value. Replaced by `8`"}]}

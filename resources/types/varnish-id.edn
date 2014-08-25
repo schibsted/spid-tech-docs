@@ -1,3 +1,0 @@
-{:id :varnish-id
- :name "Varnish SP_ID"
- :fields [{:name "sp_id" :type :string :description "The Varnish SP_ID"}]}

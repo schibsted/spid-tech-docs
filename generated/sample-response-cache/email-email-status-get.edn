@@ -1,1 +1,0 @@
-{:cached? true, :method :GET, :path "/email/am9obkBkb2UuY29t/status", :route "/email/{email}/status", :response {:status 200, :error nil, :data {:exists false, :available true, :verified false}, :success? true}}

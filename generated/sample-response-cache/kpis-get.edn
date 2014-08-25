@@ -1,1 +1,0 @@
-{:cached? true, :id nil, :method :GET, :path "/kpis", :route "/kpis", :params nil, :response {:status 200, :error nil, :data [], :success? true}}

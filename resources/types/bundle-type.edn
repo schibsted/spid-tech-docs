@@ -1,5 +1,0 @@
-{:id :bundle-type
- :name "Bundle type"
- :values [{:value "0" :description "Not a bundle"}
-          {:value "1" :description "Dynamic bundle"}
-          {:value "2" :description "Onetime bundle"}]}

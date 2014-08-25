@@ -1,6 +1,0 @@
-{:id :user-flow
- :name "User flow"
- :values [{:value "1" :description "No user involvement"}
-          {:value "2" :description "User authorized the payment in SPID, without been redirected to a payment provider"}
-          {:value "3" :description "User was sent to the payment provider for authorization"}
-          {:value "4" :description "User was sent to the payment provider for authorization with 3D-secure"}]}

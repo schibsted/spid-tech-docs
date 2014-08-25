@@ -1,9 +1,0 @@
-{:id :user-product-access
- :name "User product access"
- :fields [{:name "productId"      :type :integer-string :always-available? true}
-          {:name "result"         :type :boolean        :description "If `true`, the user has access to the product or subscription" :always-available? true}
-          {:name "subscriptionId" :type :integer-string :description "Only provided for subscriptions"}
-          {:name "startDate"      :type :datetime       :description "Only provided for subscriptions"}
-          {:name "expires"        :type :datetime       :description "Only provided for subscriptions"}
-          {:name "autoRenew"      :type :integer-string :description "The number of times a subscription will be automatically renewed. Only provided for subscriptions"}
-          {:name "gracePeriod"    :type :string         :description "Only provided for subscriptions"}]}

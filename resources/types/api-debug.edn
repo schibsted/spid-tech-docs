@@ -1,5 +1,0 @@
-{:id :api-debug
- :name "API debug information"
- :inline-types [:api-debug-route]
- :fields [{:name "route"  :type :api-debug-route}
-          {:name "params" :type :object :description "An object of request parameters where the parameter names are property names and parameter values are property values."}]}

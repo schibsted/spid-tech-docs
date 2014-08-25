@@ -1,2 +1,0 @@
-{:id :date
- :description "An ISO-8601 formatted date. The specific format used by the API is YYYY-MM-DD"}

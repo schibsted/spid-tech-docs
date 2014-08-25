@@ -1,7 +1,0 @@
-{:id :product-status
- :name "Product status"
- :values [{:value "-1" :description "Deleted"}
-          {:value "0"  :description "Not available"}
-          {:value "1"  :description "Available, but not visible"}
-          {:value "2"  :description "Available, but not selectable"}
-          {:value "3"  :description "Available"}]}

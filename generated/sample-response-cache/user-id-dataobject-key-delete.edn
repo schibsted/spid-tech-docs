@@ -1,1 +1,0 @@
-{:cached? true, :id nil, :method :DELETE, :path "/user/238342/dataobject/mysetting", :route "/user/{id}/dataobject/{key}", :params {}, :response {:status 200, :error nil, :data {:success true}, :success? true}}

@@ -1,5 +1,0 @@
-{:id :integer-string
- :name "integer (as string)"
- :description "Even though the value is encoded as a string in
-               responses, it does actually contain an integer,
-               and can be safely cast on the receiving end."}

@@ -1,7 +1,0 @@
-{:id :order-type
- :name "Order type"
- :values [{:value "0" :description "Purchase"}
-          {:value "1" :description "Renew"}
-          {:value "2" :description "Transfer"}
-          {:value "3" :description "Re-purchase"}
-          {:value "4" :description "Direct"}]}

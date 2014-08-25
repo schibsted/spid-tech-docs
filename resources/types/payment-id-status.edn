@@ -1,5 +1,0 @@
-{:id :payment-id-status
- :name "Payment identifier status"
- :values [{:value "-1" :description "Deleted"}
-          {:value "0" :description "Unconfirmed"}
-          {:value "1" :description "Confirmed"}]}

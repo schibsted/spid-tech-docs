@@ -1,4 +1,0 @@
-{:id :payment-preference-status
- :name "Payment preference status"
- :values [{:value "Unconfirmed" :description ""}
-          {:value "Confirmed" :description ""}]}

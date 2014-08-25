@@ -1,1 +1,0 @@
-{:cached? true, :id nil, :method :GET, :path "/user/238342/subscription/301696", :route "/user/{userId}/subscription/{subscriptionId}", :params {}, :response {:status 200, :error nil, :data [], :success? true}}

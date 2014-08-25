@@ -1,6 +1,0 @@
-{:id :paylink-status
- :name "Paylink status"
- :values [{:value "-1" :description "Deleted"}
-          {:value "0"  :description "Not available"}
-          {:value "1"  :description "Available"}
-          {:value "2"  :description "Used"}]}

@@ -1,1 +1,0 @@
-{:cached? true, :id nil, :method :GET, :path "/user/238342/dataobjects", :route "/user/{id}/dataobjects", :response {:status 200, :error nil, :data {:21 {:dataObjectId "21", :clientId "52f8e3d9efd04bb749000000", :merchantId "47000", :userId "238342", :key "mysetting", :value "My custom value", :updated "2014-08-04 15:10:14", :created "2014-08-04 15:10:14"}}, :success? true}}
