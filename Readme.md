@@ -35,6 +35,8 @@ Check out
 First time around? Start with the
 [general overview](https://github.com/schibsted/spid-tech-docs/wiki/general-overview).
 
+You might also want to check out [a summary of this wiki in presentation form](http://schibsted.github.io/spid-tech-docs/), or even [a video of that presentation](https://www.dropbox.com/s/emdevcfd7u79jae/tech-docs.mp4).
+
 ## Exporting the site
 
 If you want a static export of the site, `cd` into the root of the project, then
