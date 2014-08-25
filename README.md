@@ -11,4 +11,5 @@ There's also a live performance from 2014-08-22 to be found
 
 Feel free to update these slides when things change. You can start the
 presentation locally by going to the root folder and running
-`python -m SimpleHTTPServer`.
+`python -m SimpleHTTPServer`. All the slides are embedded in `index.html`,
+one slide per `<section>`.

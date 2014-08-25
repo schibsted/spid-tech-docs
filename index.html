@@ -1,1 +1,724 @@
-<h1>Github pages yo</h1>
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>SPiD Tech Docs</title>
+
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/default.css" id="theme">
+
+    <style>
+      .highlighted {color: #77aaff};
+      .faded {opacity: 0.3;}
+
+      pre code {background: #000 !important;}
+
+      .unborder {border: none !important;}
+    </style>
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+      if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+      }
+    </script>
+
+    <!--[if lt IE 9]>
+        <script src="lib/js/html5shiv.js"></script>
+        <![endif]-->
+  </head>
+
+  <body>
+
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+
+        <section>
+          <h1>SPiD Tech Docs</h1>
+          <p>Learn You a Docsite For Great Good</p>
+        </section>
+
+        <section>
+          <h1>Agenda</h1>
+          <ul>
+            <li class="fragment">Hows and whys</li>
+            <li class="fragment">A guided tour</li>
+            <li class="fragment">Contributing</li>
+          </ul>
+        </section>
+
+        <section>
+          <h1>Hows</h1>
+          <ul>
+            <li>An application, not a wiki</li>
+            <li class="fragment">Gathers data, generates docs</li>
+            <li class="fragment">Static site on AWS</li>
+          </ul>
+        </section>
+
+        <section>
+          <h1>Whys</h1>
+          <ul>
+            <li>Automation</li>
+            <li class="fragment">Life cycle parity</li>
+            <li class="fragment">Minimize doc rot</li>
+            <li class="fragment">Speed</li>
+          </ul>
+        </section>
+
+        <section>
+          <h1>Downsides</h1>
+          <ul>
+            <li>Small changes are harder</li>
+            <li class="fragment">More code to maintain</li>
+            <li class="fragment">E-mails about broken builds from the docs</li>
+          </ul>
+        </section>
+
+        <section>
+          <h1>Tour</h1>
+          <a target="_blank" href="http://techdocs.spid.no/">The tech docs site</a>
+        </section>
+
+        <section>
+          <h1>Contributing</h1>
+          <ul>
+            <li class="fragment"><a target="_blank" href="http://techdocs.spid.no/using-spid-as-a-payment-provider/">Edit on Github</a></li>
+            <li class="fragment"><a target="_blank" href="https://github.com/schibsted/spid-tech-docs#spid-api-documentation-">Running locally</a></li>
+            <li class="fragment">Integration tests</li>
+          </ul>
+        </section>
+
+        <section>
+          <h1>Data sources</h1>
+          <ul>
+            <li class="fragment">The <code>/endpoints</code> endpoint</li>
+            <li class="fragment">Sample responses from every endpoint</li>
+            <li class="fragment">The Working Examples repos</li>
+            <li class="fragment">Locally in the tech-docs repo</li>
+          </ul>
+        </section>
+
+        <section>
+          <h1>Editing Articles<br>and Guides</h1>
+        </section>
+
+        <section>
+          <p><code>resources/articles/<span class="fragment"><span class="highlighted">direct-payment-api.md</span></span></code></p>
+          <div class="fragment">
+            <h2>&#11015;</h2>
+            <p><code>http://techdocs.spid.no/<span class="highlighted">direct-payment-api/</span></code></p>
+          </div>
+        </section>
+
+        <section>
+          Articles are written in markdown.
+
+          <pre><code>
+  ## Heading
+
+  Bacon ipsum dolor sit amet t-bone strip steak spare ribs bresaola, shank
+  flank ground round filet mignon leberkas tri-tip kevin capicola.
+
+  ### Subheading
+
+  - Ordered lists
+  - look like this
+
+</code></pre>
+
+          <div class="fragment">
+            <h2>&#11015;</h2>
+            <img src="images/articles/markdown.png">
+          </div>
+
+        </section>
+
+        <section>
+          They have a title, body and aside
+
+          <pre><code>
+  :title Direct Payment API
+
+  :body
+
+  The main content of the article.
+
+  :aside
+
+  The sidebar contents.
+
+</code></pre>
+
+          <div class="fragment">
+            <h2>&#11015;</h2>
+            <img src="images/articles/body-and-aside.png">
+          </div>
+
+        </section>
+
+        <section>
+          You can include code blocks, and they'll get highlighted:
+          <pre><code>
+  ```java
+  public static void main (String[] args) {
+    System.out.println("Fencing code blocks! Engarde!");
+  }
+  ```
+
+</code></pre>
+
+          <div class="fragment">
+            <h2>&#11015;</h2>
+            <img src="images/articles/fencing.png">
+          </div>
+
+        </section>
+
+        <section>
+          You can also fetch code snippets from the<br>
+          working examples repos:
+          <pre class="code"><code>
+  &lt;spid-example
+     lang="clj"
+     src="/sso/src/spid_clojure_sso_example/core.clj"
+     title="Build login URL"/>
+
+</code></pre>
+
+<div class="fragment">
+  <h2>&#11015;</h2>
+  <img src="images/articles/working-example.png">
+</div>
+
+</section>
+
+<section>
+  There's support for tabs:
+  <pre class="code"><code>
+  # :tabs
+
+  ## :tab Java
+
+  Java code goes here
+
+  ## :tab PHP
+
+  PHP code goes here
+
+  # :/tabs
+
+</code></pre>
+
+  <div class="fragment">
+    <h2>&#11015;</h2>
+    <img src="images/articles/tabs.png">
+  </div>
+
+</section>
+
+<section>
+  There's support for sequence diagrams:
+  <pre class="code"><code>
+  ```sequence-diagram
+  Browser->Server: Request a page
+  Note right of Server: Fetch page contents from cache
+  Server->Browser: Respond with some HTML
+  ```
+
+</code></pre>
+
+  <div class="fragment">
+    <h2>&#11015;</h2>
+    <img src="images/articles/sequence-diagram.png">
+  </div>
+
+</section>
+
+<section>
+  Link to relevant endpoints:
+  <pre class="code"><code>
+  :relevant-endpoints
+
+  GET /status
+  POST /user
+
+</code></pre>
+
+  <div class="fragment">
+    <h2>&#11015;</h2>
+    <img src="images/articles/relevant-endpoints.png">
+  </div>
+
+</section>
+
+<section>
+  Insert table of contents:
+  <pre class="code"><code>
+  ## Table of Contents
+
+  <spid-toc></spid-toc>
+
+  </code></pre>
+
+  <div class="fragment">
+    <h2>&#11015;</h2>
+    <img src="images/articles/toc.png">
+  </div>
+
+</section>
+
+<section>
+  <h1>Editing Working Examples</h1>
+</section>
+
+<section>
+
+  <code>
+    https://github.com/schibsted/?query=examples
+  </code>
+
+  <div class="fragment">
+    <img src="images/articles/example-repos.png">
+  </div>
+
+</section>
+
+<section>
+  <img src="images/articles/working.png">
+</section>
+
+<section>
+  <pre class="code"><code>
+  &lt;spid-example
+      lang="java"
+      src="/sso/src/main/java/no/spid/examples/LoginController.java"
+      title="Build login URL"/>
+
+</code></pre>
+
+  <div class="fragment">
+    <br>
+
+    Excerpt from <code>LoginController.java</code>:
+
+    <img class="unborder" src="images/articles/java-code.png"></div>
+</section>
+
+<section>
+
+  <h1>Editing Endpoint pages</h1>
+
+</section>
+
+<section>
+  <section data-background="images/endpoints/sources-1.png" data-background-transition="none"></section>
+  <section data-background="images/endpoints/sources-2.png" data-background-transition="none"></section>
+  <section data-background="images/endpoints/sources-3.png" data-background-transition="none"></section>
+  <section data-background="images/endpoints/sources-4.png" data-background-transition="none"></section>
+  <section data-background="images/endpoints/sources-5.png" data-background-transition="none"></section>
+  <section data-background="images/endpoints/sources-6.png" data-background-transition="none"></section>
+  <section data-background="images/endpoints/sources-7.png" data-background-transition="none"></section>
+  <section data-background="images/endpoints/sources-8.png" data-background-transition="none"></section>
+  <section data-background="images/endpoints/sources-9.png" data-background-transition="none"></section>
+  <section data-background="images/endpoints/sources-1.png" data-background-transition="none"></section>
+</section>
+
+<section>
+
+  <h2>Editing routes-file</h2>
+
+  <pre class="fragment code"><code>
+  ./import-endpoints.sh
+
+</code></pre>
+
+  <img class="fragment unborder" src="images/endpoints/import.png">
+
+</section>
+
+<section>
+  <h2>Editing endpoints-files</h2>
+  <code>tech-docs/resources/endpoints/</code>
+</section>
+
+<section>
+  <pre class="code"><code>
+  :introduction
+
+  Markdown goes here
+
+</code></pre>
+
+  <p>Supports relevant features of articles:</p>
+
+  <ul>
+    <li class="fragment">Markdown</li>
+    <li class="fragment">Code highlighting</li>
+    <li class="fragment">Inline code from working examples</li>
+    <li class="fragment">Tabs</li>
+    <li class="fragment">Sequence diagrams</li>
+  </ul>
+
+</section>
+
+<section>
+  <pre class="code"><code>
+  :relevant-types order user
+
+  :relevant-endpoints
+
+  GET /status
+  POST /user
+
+</code></pre>
+  <div class="fragment">
+    <h2>&#11015;</h2>
+    <img src="images/endpoints/relevant.png">
+  </div>
+</section>
+
+<section>
+  <pre class="code"><code>
+  :introduction
+
+  Get verification and availability status for an email address. Note
+  that the email should be base64 encoded.
+
+  :example-params
+
+  email: am9obkBkb2UuY29t
+
+</code></pre>
+</section>
+
+<section>
+  <h2>Editing type definitions</h2>
+  <img class="fragment" src="images/endpoints/types.png">
+</section>
+
+<section>
+  <section data-transition="none">
+    <code>resources/types/voucher.edn</code>
+    <pre class="code"><code>
+  {:id :voucher}
+
+</code></pre>
+  </section>
+
+  <section data-transition="none">
+    <code>resources/types/voucher.edn</code>
+    <pre class="code"><code>
+  {:id :voucher
+   :name "Voucher"}
+
+</code></pre>
+  </section>
+
+  <section data-transition="none">
+    <code>resources/types/voucher.edn</code>
+    <pre class="code"><code>
+  {:id :voucher
+   :name "Voucher"
+   :description "Vouchers are mainly described by the ..."}
+
+</code></pre>
+  </section>
+
+  <section data-transition="none">
+    <code>resources/types/voucher.edn</code>
+    <pre class="code"><code>
+  {:id :voucher
+   :name "Voucher"
+   :description "Vouchers are mainly described by the ..."
+   :fields []}
+
+</code></pre>
+  </section>
+
+  <section data-transition="none">
+    <code>resources/types/voucher.edn</code>
+    <pre class="code"><code>
+  {:id :voucher
+   :name "Voucher"
+   :description "Vouchers are mainly described by the ..."
+   :fields [{:name "voucherId"}]}
+
+</code></pre>
+  </section>
+
+  <section data-transition="none">
+    <code>resources/types/voucher.edn</code>
+    <pre class="code"><code>
+  {:id :voucher
+   :name "Voucher"
+   :description "Vouchers are mainly described by the ..."
+   :fields [{:name "voucherId"
+             :type :integer-string}]}
+
+</code></pre>
+  </section>
+
+  <section data-transition="none">
+    <code>resources/types/voucher.edn</code>
+    <pre class="code"><code>
+  {:id :voucher
+   :name "Voucher"
+   :description "Vouchers are mainly described by the ..."
+   :fields [{:name "voucherId"
+             :type :integer-string
+             :description "Unique ID of the voucher ..."}]}
+
+</code></pre>
+  </section>
+
+  <section data-transition="none">
+    <code>resources/types/voucher.edn</code>
+    <pre class="code"><code>
+  {:id :voucher
+   :name "Voucher"
+   :description "Vouchers are mainly described by the ..."
+   :fields [{:name "voucherId"
+             :type :integer-string
+             :description "Unique ID of the voucher ..."
+             :always-available? true}]}
+
+</code></pre>
+  </section>
+
+  <section data-transition="none">
+    <code>resources/types/voucher.edn</code>
+    <pre class="code"><code>
+  {:id :voucher
+   :name "Voucher"
+   :description "Vouchers are mainly described by the ..."
+   :fields [{:name "voucherId"
+             :type :integer-string
+             :description "Unique ID of the voucher ..."
+             :always-available? true}]
+   :inline-types [:voucher-status]}
+
+</code></pre>
+  </section>
+</section>
+
+<section>
+  <section data-transition="none">
+    <code>resources/types/voucher-status.edn</code>
+    <pre class="code"><code>
+  {:id :voucher-status
+   :name "Voucher status"}
+
+</code></pre>
+  </section>
+  <section data-transition="none">
+    <code>resources/types/voucher-status.edn</code>
+    <pre class="code"><code>
+  {:id :voucher-status
+   :name "Voucher status"
+   :values []}
+
+</code></pre>
+  </section>
+  <section data-transition="none">
+    <code>resources/types/voucher-status.edn</code>
+    <pre class="code"><code>
+  {:id :voucher-status
+   :name "Voucher status"
+   :values [{:value "-1" :description "Voucher is expired and can no longer be redeemed"}]}
+
+</code></pre>
+  </section>
+  <section data-transition="none">
+    <code>resources/types/voucher-status.edn</code>
+    <pre class="code"><code>
+  {:id :voucher-status
+   :name "Voucher status"
+   :values [{:value "-1" :description "Voucher is expired and can no longer be redeemed"}
+            {:value "0" :description "Voucher is generated and may be either used or handed out"}
+            {:value "1" :description "Voucher is handed out. If the userId field is set, only this user may redeem it"}
+            {:value "2" :description "Voucher is redeemed and can no longer be used. Kept only for historic reasons"}]}
+
+</code></pre>
+  </section>
+</section>
+
+<section>
+  <h2>Editing sample responses</h2>
+  <p class="fragment">Well, don't</p>
+</section>
+
+<section>
+  <h2>Generating sample responses</h2>
+</section>
+
+<section>
+  <pre class="code"><code>
+  (defsample GET "/status")
+
+</code></pre>
+
+  <pre class="fragment"><code>
+  > rm generated/sample-response-cache/status-get.edn
+  > rm generated/sample-responses/status-get.*
+
+</code></pre>
+
+  <pre class="fragment"><code>
+  > lein generate-sample-responses
+
+</code></pre>
+
+  <img class="fragment unborder" src="images/endpoints/sample-responses.png">
+
+</section>
+
+<section>
+  <pre class="code"><code>
+  (defsample GET "/describe/{object}" {:object "User"})
+
+</code></pre>
+
+  <pre class="fragment code"><code>
+  (defsample GET "/email/{email}/status"
+    {:email (base64-encode "john@doe.com")})
+
+</code></pre>
+
+  <pre class="fragment code"><code>
+  (defsample johndoe
+    POST "/user" {:email "john@doe.com"
+                  :displayName "John Doe"
+                  :name "John Doe"})
+
+</code></pre>
+
+  <pre class="fragment code"><code>
+  (defsample dataobject [user johndoe]
+    POST "/user/{id}/dataobject/{key}" {:id (:userId user)
+                                        :key "mysetting"
+                                        :value "My custom value"})
+
+</code></pre>
+</section>
+
+<section>
+  <h2>Editing the front page</h2>
+  <ul>
+    <li class="fragment"><code>resources/frontpage.html</code></li>
+    <li class="fragment">
+      <code>&lt;list-of-articles/></code>
+      <pre class="fragment code"><code>
+  :title My article
+  :frontpage
+
+</code></pre>
+    </li>
+    <li class="fragment"><code>&lt;apis-by-category/></code></li>
+    <li class="fragment"><code>resources/endpoint-blacklist.edn</code></li>
+  </ul>
+</section>
+
+<section>
+
+  <h1>Adding an Endpoint</h1>
+
+  <ul>
+    <li class="fragment">Look at the other endpoints in the routes-file</li>
+    <li class="fragment">Add the new one, and have it deployed to staging</li>
+    <li class="fragment"><code>./import-endpoints.sh</code></li>
+  </ul>
+
+</section>
+
+<section>
+  <p><code>./import-endpoints.sh</code> has your back</p>
+  <img class="fragment unborder" src="images/endpoints/added-endpoint.png">
+</section>
+
+<section>
+  <p><code>resources/types/kpi.edn</code></p>
+  <img class="unborder" src="images/endpoints/kpi-type.png">
+
+  <div class="fragment">
+    <p><code>resources/endpoints/kpis-get.md</code></p>
+    <img class="unborder" src="images/endpoints/kpis-get.png">
+  </div>
+</section>
+
+<section>
+  <h2>Want to know more?</h2>
+  <ul>
+    <li><a href="https://github.com/schibsted/spid-tech-docs/wiki">The tech docs wiki</a></li>
+  </ul>
+  <br><br>
+  <div class="fragment">
+    <h3>Contributing to the tech-docs source code</h3>
+    <ul>
+      <li class="fragment"><a href="http://www.braveclojure.com/">Clojure for the Brave and True</a></li>
+      <li class="fragment"><a href="http://cjohansen.no/building-static-sites-in-clojure-with-stasis">Building static sites in Clojure with Stasis</a></li>
+      <li class="fragment"><a href="http://www.clojurebook.com/">Clojure programming</a> (book)</li>
+    </ul>
+  </div>
+
+</section>
+
+<section>
+  <h2>Fin.</h2>
+</section>
+
+</div>
+
+
+<script src="lib/js/head.min.js"></script>
+</div>
+<script src="js/reveal.min.js"></script>
+
+<script>
+
+  // Full list of configuration options available here:
+  // https://github.com/hakimel/reveal.js#configuration
+  Reveal.initialize({
+    controls: true,
+    progress: true,
+    history: true,
+    center: true,
+
+    theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+    transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+    // Parallax scrolling
+    // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+    // parallaxBackgroundSize: '2100px 900px',
+
+    // Optional libraries used to extend on reveal.js
+    dependencies: [
+      { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+      { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+      { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+    ]
+  });
+
+</script>
+
+</body></></>
+</html>

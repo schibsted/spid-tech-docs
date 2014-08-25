@@ -1,0 +1,86 @@
+* Outline
+** Pitch - 2 min
+
+   - Automatisering
+
+   - Minimere sjansene for at docsene blir utdatert
+
+     "Doc-siten har blitt en slags integrasjonstest."
+
+   - følg deploy syklus
+
+** Tour - hva finnes? - 8 min
+
+   - Guides
+   - Working examples
+   - Articles
+   - SDK listing
+   - API reference
+   - Deprecated
+   - (search)
+
+** Hvordan bidra - 5 min
+
+   - Github-basert småfiksing
+   - TravisCI
+   - Sette opp lokalt
+   - ./run-integration-tests.sh
+
+** Hvor kommer dataene fra? - 5 min
+
+   - Routes file
+   - Each endpoint
+   - Working example repos
+   - Lokalt i tech-docs repo
+
+   Vise biter av en endepunkt-side (som pilene)
+
+** Oppgaver - 37 min
+*** Redigere artikler / guides - 10 min
+**** mapdown-greiene
+**** Fenced code blocks m/highlighting
+**** Inline examples
+**** Tabs
+**** Sekvensdiagrammer
+**** Relevant endpoints
+**** Table of Contents
+**** Add header ids
+
+*** Redigere kode-eksempler fra working examples - 3 min
+*** Redigere endepunkter - 10 min
+
+        <section>
+          <section data-background="images/endpoint-sources-1.png" data-background-transition="none"></section>
+          <section data-background="images/endpoint-sources-2.png" data-background-transition="none"></section>
+          <section data-background="images/endpoint-sources-3.png" data-background-transition="none"></section>
+          <section data-background="images/endpoint-sources-4.png" data-background-transition="none"></section>
+          <section data-background="images/endpoint-sources-5.png" data-background-transition="none"></section>
+          <section data-background="images/endpoint-sources-6.png" data-background-transition="none"></section>
+          <section data-background="images/endpoint-sources-7.png" data-background-transition="none"></section>
+          <section data-background="images/endpoint-sources-8.png" data-background-transition="none"></section>
+          <section data-background="images/endpoint-sources-9.png" data-background-transition="none"></section>
+          <section data-background="images/endpoint-sources-1.png" data-background-transition="none"></section>
+        </section>
+
+
+
+**** Routes-fila
+**** Endepunktfiler
+**** Sample responses
+**** Typedefinisjoner
+
+*** Redigere typedefinisjoner - 7 min
+*** Redigere forsiden - 2 min
+**** frontpage.html
+**** endpoint-blacklist.edn
+
+*** Legge til et endepunkt - 5 min
+
+    ./import-endpoints.sh hjelper deg.
+
+**** Routes
+**** Endepunkt-fil
+**** Sample response
+**** Ny type?
+
+** Interrupt-time - 3 min
