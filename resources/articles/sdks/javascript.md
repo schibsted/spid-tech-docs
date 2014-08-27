@@ -184,6 +184,20 @@ comes back to your site after login.
 
 For use with tracker. A float between 0 and 1. Default value is 1.
 
+##### track_anon_opt_out
+
+By default the SPiD pulse part of the sdk will track anonymous users as well as logged 
+in users. If you want to disable tracking of anonymous users set this to `true`.
+_This setting requires the pulse module._
+
+##### track_custom_data
+
+The SPiD pulse accepts custom data as a stringified JSON object. This data is sent to 
+the pulse server and stored into the database in raw format.
+Example value: '{ "articleId": 1234, "section": "sport/football" }'
+Default is `null`.
+_This setting requires the pulse module._
+
 ## Events
 
 Subscribing to the authentication events fired by the JS SDK means your
