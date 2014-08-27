@@ -65,6 +65,32 @@
            "SpidOAuthToken token = spidClient.getServerToken();\n")
          "String responseJSON = spidClient.\n    " api-invocation ".\n    getResponseBody();")))
 
+(defn- create-params-node-map [params example-params]
+  (when (seq params)
+    (str "  var params = {\n"
+         (-> (format-params (exemplify-params params example-params) "    :name: ':value',\n")
+             (str/replace #",\n$" ""))
+         "\n  };\n")))
+
+(defn node-example-code [{:keys [method path example-params access-token-types]} params]
+  (let [token-fn (if (contains? access-token-types :user)
+                   "getUserToken(code, "
+                   "getServerToken(")
+        params-hash-map (create-params-node-map params example-params)]
+    (str
+     "var spidClient = require('spid-client');
+
+spidClient." token-fn "function (err, token) {
+  if (err) { throw err; }
+" params-hash-map "  spidClient."
+(name method) "(token, '"
+(replace-path-parameters path example-params)
+"', " (when params-hash-map "params, ") "function (err, response) {
+    if (err) { throw err; }
+    console.log(response.getResponseBody());
+  });
+});")))
+
 (defn- create-params-assoc-array [params example-params]
   (when (seq params)
     (str "$params = array(\n"
@@ -94,6 +120,7 @@
     (-> {:curl curl-example-code
          :java java-example-code
          :php php-example-code
+         ;; :node node-example-code ; -- waiting for Node SDK to be ready
          :clojure clojure-example-code}
         (update-vals #(create-examples-with % endpoint req-params optional-params all-params))
         (assoc-in [:java :footnote]

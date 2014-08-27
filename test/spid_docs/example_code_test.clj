@@ -42,14 +42,14 @@
                        :access-token-types #{:server}
                        :example-params example-params})
        user-token-example (create-example-code
-                      {:method :GET
-                       :parameters [{:name "property" :required? false :type :query}
-                                    {:name "locale" :required? false :type :query}
-                                    {:name "object" :required? true :type :path}]
-                       :path "/me"
-                       :api-path "/api/2/me"
-                       :access-token-types #{:user}
-                       :example-params example-params})]
+                           {:method :GET
+                            :parameters [{:name "property" :required? false :type :query}
+                                         {:name "locale" :required? false :type :query}
+                                         {:name "object" :required? true :type :path}]
+                            :path "/me"
+                            :api-path "/api/2/me"
+                            :access-token-types #{:user}
+                            :example-params example-params})]
 
    (-> get-example :curl :minimal)
    => "curl https://payment.schibsted.no/api/2/status -G"
@@ -120,6 +120,44 @@
                                    \"name\" \"John Doe\"
                                    \"birthday\" \"1977-01-31\"
                                    \"preferredUsername\" \"johnd\"}))"
+
+   (comment ;; node examples are commented out, waiting for SDK to be ready
+
+     (-> param-example :node :minimal)
+     => "var spidClient = require('spid-client');
+
+spidClient.getServerToken(function (err, token) {
+  if (err) { throw err; }
+  spidClient.GET(token, '/describe/User', function (err, response) {
+    if (err) { throw err; }
+    console.log(response.getResponseBody());
+  });
+});"
+
+     (-> user-token-example :node :minimal)
+     => "var spidClient = require('spid-client');
+
+spidClient.getUserToken(code, function (err, token) {
+  if (err) { throw err; }
+  spidClient.GET(token, '/me', function (err, response) {
+    if (err) { throw err; }
+    console.log(response.getResponseBody());
+  });
+});"
+
+     (-> post-example :node :minimal)
+     => "var spidClient = require('spid-client');
+
+spidClient.getServerToken(function (err, token) {
+  if (err) { throw err; }
+  var params = {
+    email: 'johnd@example.com'
+  };
+  spidClient.POST(token, '/user', params, function (err, response) {
+    if (err) { throw err; }
+    console.log(response.getResponseBody());
+  });
+});")
 
    (-> get-example :java :minimal)
    => "SpidOAuthToken token = spidClient.getServerToken();
