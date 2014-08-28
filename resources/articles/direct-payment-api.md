@@ -1,4 +1,6 @@
 :title Direct Payment API
+:frontpage
+:category payment
 
 :relevant-endpoints
 

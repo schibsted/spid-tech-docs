@@ -1,5 +1,6 @@
 :title OAuth 2.0 Authentication with SPiD on iOS
 :frontpage
+:category api-integration
 :body
 
 One of the most compelling features of the SPiD is Single Sign-On (SSO). SSO

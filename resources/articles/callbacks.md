@@ -1,5 +1,6 @@
 :title Callbacks
 :frontpage
+:category api-integration
 :aside
 
 ## Table of Contents

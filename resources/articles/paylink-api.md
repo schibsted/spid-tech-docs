@@ -1,4 +1,6 @@
 :title The Paylink API
+:frontpage
+:category payment
 
 :relevant-endpoints
 

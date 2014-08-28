@@ -1,6 +1,7 @@
 :title Credit cards for testing
 
 :frontpage
+:category payment
 
 :aside
 

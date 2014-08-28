@@ -1,5 +1,6 @@
 :title Cancel redirects
 :frontpage
+:category api-integration
 :body
 
 When a user cancels a login attempt, or a purchase flow, SPiD can redirect them

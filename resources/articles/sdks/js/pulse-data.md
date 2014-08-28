@@ -1,5 +1,5 @@
 :title Pulse data
-:frontpage
+:category analytics
 :body
 
 <table class="table table-hover">

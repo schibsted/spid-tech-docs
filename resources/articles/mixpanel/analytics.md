@@ -1,4 +1,5 @@
 :title Mixpanel analytics
+:category analytics
 :frontpage
 
 :aside

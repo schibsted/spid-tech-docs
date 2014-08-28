@@ -67,8 +67,23 @@
 (defn create-article-hrefs [articles]
   (map-indexed render-article-list (columnize articles frontpage-columns)))
 
+(def categories
+     {:payment "Payment"
+      :analytics "Analytics and Insight"
+      :api-integration "API and Integration"})
+
 (defn- frontpage-articles [articles]
   (into {} (filter #(:frontpage (second %)) articles)))
+
+(defn- render-category-with-articles [[category articles]]
+  (if (categories category)
+    [:div {:class (if (= (last categories) category) "lastUnit" "unit s1of3")}
+     [:h3 (categories category)]
+     [:ul
+      (map render-article-link articles)]]))
+
+(defn- create-articles-in-categories [articles]
+  (map render-category-with-articles (group-by (fn [[path article]] (:category article)) articles)))
 
 (defn create-page [apis articles]
   {:title "SPiD API Documentation"
@@ -79,6 +94,7 @@
            (-> (slurp (io/resource "frontpage.html"))
                (str/replace "<apis-by-category/>"
                             (hiccup/html (map #(render-service-apis % (apis-by-category %)) category-render-order)))
+               (str/replace "<list-of-articles-in-categories/>" (hiccup/html (create-articles-in-categories (frontpage-articles articles))))
                (str/replace "<list-of-articles/>"
                             (hiccup/html (create-article-hrefs (frontpage-articles articles))))))})
 

@@ -1,7 +1,7 @@
 :title Troubleshooting
 
 :frontpage
-
+:category api-integration
 :aside
 
 ## On this page

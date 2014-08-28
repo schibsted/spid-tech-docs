@@ -1,6 +1,7 @@
 --------------------------------------------------------------------------------
 :title JavaScript SDK
 :frontpage
+:category analytics
 :aside
 
 ## On this page

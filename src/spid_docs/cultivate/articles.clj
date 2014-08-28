@@ -15,6 +15,7 @@
 (defn cultivate-article [article-sections]
   {:title (-> article-sections first :title)
    :frontpage (not (nil? (some :frontpage article-sections)))
+   :category (keyword (some :category article-sections))
    :sections (map cultivate-section article-sections)})
 
 (defn cultivate-articles [articles]

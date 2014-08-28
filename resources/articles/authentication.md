@@ -1,7 +1,7 @@
 :title SPiD Authentication
 
 :frontpage
-
+:category api-integration
 :aside
 
 ## Prerequisites

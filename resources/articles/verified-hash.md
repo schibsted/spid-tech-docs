@@ -1,5 +1,6 @@
 :title Verified hash
 :frontpage
+:category api-integration
 :body
 
 Some endpoints require a `hash` query parameter that contains a hash verifying

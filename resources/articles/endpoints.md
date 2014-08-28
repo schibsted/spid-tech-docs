@@ -1,7 +1,7 @@
 :title Endpoints
 
 :frontpage
-
+:category api-integration
 :aside
 
 ## Table of Contents

@@ -1,5 +1,6 @@
 :title Varnish integration
 :frontpage
+:category api-integration
 :body
 
 Using Varnish and the [JavaScript SDK](/sdks/javascript/), clients can implement

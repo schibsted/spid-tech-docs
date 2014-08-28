@@ -1,5 +1,6 @@
 :title Announcements
 :frontpage
+:category api-integration
 :body
 
 As a consumer of the SPiD API, you should subscribe to our announcement mailing

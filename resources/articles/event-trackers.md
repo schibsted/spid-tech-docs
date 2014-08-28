@@ -1,5 +1,6 @@
 :title Event Trackers
 :frontpage
+:category analytics
 :body
 
 SPiD supports several event trackers. In order to use them, you must provide

@@ -1,4 +1,5 @@
 :frontpage
+:category api-integration
 :aside
 ## SDKS
 
