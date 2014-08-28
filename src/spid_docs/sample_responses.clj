@@ -11,6 +11,7 @@
             [clojure.string :as str]
             [digest :refer [md5]]
             [spid-docs.api-client :as api]
+            [spid-docs.config :as config]
             [spid-docs.formatting :refer [to-id-str indent]]
             [spid-docs.homeless :refer [update-existing eval-in-ns]]
             [spid-docs.json :refer [format-json]]
@@ -176,7 +177,7 @@ Beware! In order for this to work well, you need to add the username and
 password for a demo user in resources/config.edn, AND make sure this user
 is logged into https://stage.payment.schibsted.no/"
   [sample-defs endpoints mode]
-  (if-not (api/config-exists?)
+  (if-not (config/config-exists?)
     (do
       (println "Aborting import, no configuration file detected.")
       (println)
