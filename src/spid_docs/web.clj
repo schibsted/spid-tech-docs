@@ -8,6 +8,7 @@
             [optimus.optimizations :as optimizations]
             [optimus.prime :as optimus]
             [optimus.strategies :refer [serve-live-assets serve-frozen-assets]]
+            [prone.core :as prone]
             [ring.middleware.content-type :refer [wrap-content-type]]
             [spid-docs.content :as content]
             [spid-docs.homeless :refer [wrap-utf-8]]
@@ -65,6 +66,7 @@
    request map for every request."
   (-> get-pages
       (stasis/serve-pages)
+      (prone/wrap-exceptions)
       (optimus/wrap get-assets optimize
                     (if freeze-assets? serve-frozen-assets serve-live-assets))
       wrap-content-type

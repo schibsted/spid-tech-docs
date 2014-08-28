@@ -17,6 +17,7 @@
                  [fs "1.3.3"]
                  [clj-http "0.9.0"]
                  [inflections "0.9.5"]
+                 [prone "0.2.0"]
                  [org.slf4j/slf4j-api "1.7.5"]
                  [ch.qos.logback/logback-classic "1.0.13"]
                  [com.google.code.gson/gson "2.2.4"]

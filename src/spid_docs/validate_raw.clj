@@ -68,17 +68,14 @@
    (optional-key :relevant-endpoints) Str})
 
 (defn validate-raw-content [raw-content]
-  (try
-    (validate {:endpoints {Str Endpoint}
-               :articles {Str (either ArticleFragment [ArticleFragment])}
-               :sample-responses {Str Str}
-               :endpoint-descriptions {Str EndpointDescription}
-               :filter-descriptions {Keyword Str}
-               :types {Keyword Type}
-               :example-params {Str Str}
-               :endpoint-blacklist #{[(either Str Keyword)]}}
-              (update-in raw-content [:endpoints]
-                         #(into {} (map (juxt :path identity) %))))
-    (catch Exception e
-      (throw (Exception. (.getMessage e)))))
+  (validate {:endpoints {Str Endpoint}
+             :articles {Str (either ArticleFragment [ArticleFragment])}
+             :sample-responses {Str Str}
+             :endpoint-descriptions {Str EndpointDescription}
+             :filter-descriptions {Keyword Str}
+             :types {Keyword Type}
+             :example-params {Str Str}
+             :endpoint-blacklist #{[(either Str Keyword)]}}
+            (update-in raw-content [:endpoints]
+                       #(into {} (map (juxt :path identity) %))))
   raw-content)
