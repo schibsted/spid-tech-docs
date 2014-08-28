@@ -26,4 +26,4 @@ services.
     - Format
     - Color
 - [Mixpanel](https://mixpanel.com)
-    See the [Mixpanel analytics integration guide](/mixpanel-integration-guide/).
+    See the [Mixpanel analytics integration guide](/mixpanel/analytics/).
