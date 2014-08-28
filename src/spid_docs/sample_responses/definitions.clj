@@ -2,7 +2,7 @@
   (:require [clojure.data.codec.base64 :as base64]
             [clojure.data.json :as json]
             [spid-client-clojure.core :as spid]
-            [spid-docs.api-client :as api-client]
+            [spid-docs.config :as config]
             [spid-docs.sample-responses.defsample :refer [defsample]]))
 
 (defn base64-encode [str]
@@ -45,13 +45,13 @@
 
 (defsample
   POST "/{type}/{id}/do/{key}" {:type "client"
-                                :id (:client-id (api-client/get-config))
+                                :id (:client-id (config/get-config))
                                 :key "rating"
                                 :rating "{\"positive\": 10}"})
 
 (defsample
   GET "/{type}/{id}/do/{key}" {:type "client"
-                               :id (:client-id (api-client/get-config))
+                               :id (:client-id (config/get-config))
                                :key "rating"})
 
 (defsample dataobject [user johndoe]
@@ -282,7 +282,7 @@
                                               :price 7983
                                               :vat 1917
                                               :quantity 1}])}
-                    (:client-sign-secret (api-client/get-config))))
+                    (:client-sign-secret (config/get-config))))
 
 ;; The user needs to have added a credit card for this to work.
 

@@ -46,16 +46,18 @@
   "Fetch the page and convert its {:title ... :body ...} map into a
    web page and process the generated markup."
   [get-page request]
-  (->> (get-page)
-       (layout-page request)
-       (inline-examples)
-       (transform-tabs)
-       (optify-images request)
-       (make-headings-clickable)
-       (create-toc)
-       (add-comments)
-       (insert-svg)
-       (maybe-highlight-code-blocks)))
+    (let [page (get-page)]
+        (if (string? page) page
+            (->> page
+               (layout-page request)
+               (inline-examples)
+               (transform-tabs)
+               (optify-images request)
+               (make-headings-clickable)
+               (create-toc)
+               (add-comments)
+               (insert-svg)
+               (maybe-highlight-code-blocks)))))
 
 (defn prepare-pages
   "Takes a page map, and wraps all its page functions in a call to

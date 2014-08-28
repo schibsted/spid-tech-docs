@@ -21,6 +21,7 @@
                  [org.slf4j/slf4j-api "1.7.5"]
                  [ch.qos.logback/logback-classic "1.0.13"]
                  [com.google.code.gson/gson "2.2.4"]
+                 [org.clojure/data.xml "0.0.8"]
                  [digest "1.4.4"]]
   :plugins [[lein-shell "0.3.0"]]
   :prep-tasks [["shell" "./update-example-repos.sh"]]

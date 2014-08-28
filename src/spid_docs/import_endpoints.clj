@@ -1,7 +1,8 @@
 (ns spid-docs.import-endpoints
   (:require [clojure.data.json :as json]
             [clojure.pprint :refer [pprint]]
-            [spid-docs.api-client :refer [GET get-config get-server-token config-exists?]]
+            [spid-docs.api-client :refer [GET get-server-token]]
+            [spid-docs.config :refer [get-config config-exists?]]
             [spid-docs.content :refer [load-content]]
             [spid-docs.diff-endpoints :refer [diff-endpoints]]
             [spid-docs.formatting :refer [titleize to-id-str]]))
