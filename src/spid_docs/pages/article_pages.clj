@@ -33,8 +33,8 @@
   [:div.section
    [:div.main
     [:div.wrap
-     (list (when heading [:h1 heading])
-           (markdown/render body))]]
+     (when heading [:h1 heading])
+     (markdown/render body)]]
    [:div.aside
     [:div.wrap
      (when aside (markdown/render aside))
