@@ -34,7 +34,7 @@
      [:div.center.pll
       [:a {:href "http://techdocs.spid.no/"} "SPiD" [:span.frill " Documentation"]] " > "
       [:a {:href "/"} "API"]
-      #_[:form.right.prl {:action "https://www.google.com/search"} ;; the Google search box is commented out, since they can't index a password protected site
+      [:form.right.prl {:action "https://www.google.com/search"}
          [:input {:type "search", :name "q", :placeholder "Search"}]
          [:input {:type "hidden", :name "sitesearch", :value "techdocs.spid.no"}]]]]
     [:div#main
