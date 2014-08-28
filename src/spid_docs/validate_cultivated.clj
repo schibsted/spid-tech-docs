@@ -51,6 +51,7 @@
 (def Article
   {:title Str
    :frontpage Boolean
+   (optional-key :category) (maybe Keyword)
    :sections [{:body Str
                (optional-key :heading) Str
                (optional-key :aside) Str
