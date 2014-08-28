@@ -20,6 +20,8 @@
     [:meta {:charset "utf-8"}]
     [:meta {:name "viewport"
             :content "width=device-width, initial-scale=1.0"}]
+    [:meta {:name "google-site-verification"
+            :content "HfI9gGISsXq8iZodM_2z24acelhEpi-0LumjeYrebu4"}]
     [:title (str title " | SPiD API Documentation")]
     [:link {:rel "shortcut icon" :href (link/file-path request "/favicon.ico")}]
     (serve-to-media-query-capable-browsers
