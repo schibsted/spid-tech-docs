@@ -30,7 +30,21 @@ User traits can be managed through the REST-API:
 
 ### Logging traits for users
 
-[![Sequence diagram: Passing visitor user traits to spid via the JS SDK](/images/passing_visitor_user_traits_to_spid_via_the_js_sdk.png)](/images/passing_visitor_user_traits_to_spid_via_the_js_sdk.png)
+```sequence-diagram
+Browser->Client: Request a page on the client service
+Client->Browser: Respond with content
+Browser->JS SDK: Initiates JS SDK
+JS SDK->SPiD: Checks if current visitor is a SPiD user
+SPiD->JS SDK: Returns a unique visitor ID
+SPiD->Mixpanel: Track autologin event if user was automatically logged in by the JS SDK
+JS SDK->Browser: Trigger the "auth.visitor" event to inform the Client of an identified visitor
+Browser->Mixpanel: Track events based on the unique visitor ID returned by the JS SDK
+Client->Browser: Pass Mixpanel super properties as a signed traits JSON object to the browser
+Browser->SPiD: Send the signed traits JSON object to SPiD via the JS SDK function VGS.setTraits()
+SPiD->SPiD: Decode and verify the signature of the provided traits object for authenticity
+SPiD->SPiD: Save the provided traits to either the identified user or the session
+SPiD->Mixpanel: Tracks SPiD defined events with the attached traits from Client
+```
 
 ## The traits JSON object
 

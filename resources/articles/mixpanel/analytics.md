@@ -33,4 +33,17 @@ SPiD will use the same ID.
 
 ### User identification sequence diagram
 
-[![Sequence diagram: Identifying the visitor](/images/identifying_the_visitor.png)](/images/identifying_the_visitor.png)
+```sequence-diagram
+Browser->Client: Request a page on the client service
+Client->Browser: Respond with content
+Browser->JS SDK: Initiates JS SDK
+JS SDK->SPiD: Checks if current visitor is a SPiD user
+SPiD->JS SDK: Returns a unique visitor ID
+SPiD->Mixpanel: Track autologin event if user was automatically logged in by the JS SDK
+JS SDK->Browser: Trigger the "auth.visitor" event to inform the Client of an identified visitor
+Note left of Browser: Option 1:\nClient side tracking
+Browser->Mixpanel: Track events based on the unique visitor ID returned by the JS SDK
+Note left of Browser: Option 2:\nServer side tracking
+Browser->Client: Send the unique visitor ID returned by the JS SDK to the backend
+Client->Mixpanel: Track events based on the unique visitor ID returned by SPiD
+```
