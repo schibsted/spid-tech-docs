@@ -66,7 +66,7 @@
    request map for every request."
   (-> get-pages
       (stasis/serve-pages)
-      (wrap-exceptions)
+      wrap-exceptions
       (optimus/wrap get-assets optimize
                     (if freeze-assets? serve-frozen-assets serve-live-assets))
       wrap-content-type
