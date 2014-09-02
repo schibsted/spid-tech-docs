@@ -1322,6 +1322,32 @@
   :defaultOutputFormat "json",
   :description "List all (or search for) logins for a user",
   :category ["Identity Management" "Login API"]}
+ {:path "user/{userId}/password",
+  :validOutputFormats ["json"],
+  :parameterDescriptions
+  {:password "Clear text version of the password"},
+  :method "POST",
+  :name "Verify password for user",
+  :httpMethods
+  {:POST
+   {:name "POST",
+    :required ["password"],
+    :optional [],
+    :accessTokenTypes ["user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200, :description "Password correct", :type "boolean"}
+     {:status 403,
+      :description "Password incorrect",
+      :type "api-exception"}]}},
+  :url "/api/2/user/{id}/password",
+  :pathParameters [],
+  :controller "Api/2/User.user_password",
+  :defaultOutputFormat "json",
+  :description
+  "Returns boolean answer to verify provided password for used userId",
+  :category ["Identity Management" "User API"]}
  {:path "user/{userId}/trigger/{trigger}",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
