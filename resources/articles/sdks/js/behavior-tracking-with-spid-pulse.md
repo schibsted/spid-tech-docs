@@ -27,6 +27,7 @@ Initialize the spid-js-sdk in the regular way. Remember to add the options for p
 Read more about this in our [tech docs](http://techdocs.spid.no/sdks/javascript/)
 
 __Example for staging:__ 
+
 ```js
 VGS.init({
     client_id : "your-spid-client-id",
@@ -40,6 +41,7 @@ VGS.init({
 ```
 
 __Example for production:__
+
 ```js
 VGS.init({
     client_id : "your-spid-client-id",

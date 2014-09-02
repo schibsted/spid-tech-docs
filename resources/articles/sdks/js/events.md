@@ -1,5 +1,6 @@
 --------------------------------------------------------------------------------
 :title Events
+:category analytics
 :aside
 
 ## On this page
@@ -16,14 +17,13 @@
 - [Hosting](/sdks/js/hosting/)
 - [Best practices](/sdks/js/best-practices/)
 
-
 ## See also
 
+- [Behavior tracking with SPiD Pulse](/sdks/js/behavior-tracking-with-spid-pulse/)
 - [Getting started with the server-side API](/getting-started/)
 - [Mixpanel analytics](/mixpanel/analytics/)
 
 :body
-
 
 Subscribing to the authentication events fired by the JS SDK means your
 application will be notified if the user's session state changes. This is
@@ -67,7 +67,7 @@ VGS.init({
 The `prod` property should be set to `true` (or omitted) when running against
 the production server.
 
-## Available SDK events
+## Available SDK events:
 
 <table class="table table-hover">
   <thead>

@@ -1,6 +1,21 @@
 :title Pulse data
 :category analytics
+:aside
+
+## Read more about the JavaScript SDK
+
+- [Behavior tracking with SPiD Pulse](/sdks/js/behavior-tracking-with-spid-pulse/)
+
+
+## See also
+
+- [JavaScript SDK](/sdks/javascript/)
+- [Getting started with the server-side API](/getting-started/)
+- [Mixpanel analytics](/mixpanel/analytics/)
+
 :body
+
+These are the data fields sent to the server by the SPiD pulse tracking script. Data is sent on every page load and exit.
 
 <table class="table table-hover">
     <tr>

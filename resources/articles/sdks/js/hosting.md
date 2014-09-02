@@ -1,5 +1,6 @@
 --------------------------------------------------------------------------------
 :title Hosting
+:category analytics
 :aside
 
 ## Read more about the JavaScript SDK
@@ -10,9 +11,9 @@
 - [API Docs](/sdks/js/api-docs/)
 - [Best practices](/sdks/js/best-practices/)
 
-
 ## See also
 
+- [Behavior tracking with SPiD Pulse](/sdks/js/behavior-tracking-with-spid-pulse/)
 - [Getting started with the server-side API](/getting-started/)
 - [Mixpanel analytics](/mixpanel/analytics/)
 

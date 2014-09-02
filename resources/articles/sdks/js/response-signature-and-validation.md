@@ -1,5 +1,6 @@
 --------------------------------------------------------------------------------
 :title Response signature and validation
+:category analytics
 :aside
 
 ## Read more about the JavaScript SDK
@@ -10,9 +11,9 @@
 - [Hosting](/sdks/js/hosting/)
 - [Best practices](/sdks/js/best-practices/)
 
-
 ## See also
 
+- [Behavior tracking with SPiD Pulse](/sdks/js/behavior-tracking-with-spid-pulse/)
 - [Getting started with the server-side API](/getting-started/)
 - [Mixpanel analytics](/mixpanel/analytics/)
 
