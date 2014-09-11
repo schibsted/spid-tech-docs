@@ -26,7 +26,7 @@ include it into the document header.
 Initialize the spid-js-sdk in the regular way. Remember to add the options for pulse tracking.  
 Read more about this in our [tech docs](http://techdocs.spid.no/sdks/javascript/)
 
-__Example for staging:__ 
+#### Example for staging:
 
 ```js
 VGS.init({
@@ -40,12 +40,12 @@ VGS.init({
 });
 ```
 
-__Example for production:__
+#### Example for production:
 
 ```js
 VGS.init({
     client_id : "your-spid-client-id",
-    server    : "payemnt.schibsted.(no|se)",
+    server    : "payment.schibsted.(no|se)",
     prod      : true,
     status    : true,
     track_anon_opt_out : true,
@@ -53,7 +53,7 @@ VGS.init({
 });
 ```
 
-#### SPiD pulse tracking options
+### SPiD pulse tracking options
 
 ##### track_anon_opt_out
 
@@ -62,6 +62,27 @@ By default the SPiD pulse part of the sdk will track anonymous users as well as 
 ##### track_custom_data
 
 The SPiD pulse accepts custom data as a stringified JSON object. This data is sent to the pulse server and stored into the database in raw format. Example value: '{ "articleId": 1234, "section": "sport/football" }' Default is null. This setting requires the pulse module.
+
+### Manual event tracking
+
+To manually track events use the function getPulseTrack. This requires the pulse module and that you have initialized the spid-js-sdk. Use the below options to set up the tracking.
+
+##### name
+
+Unique name for the event, should say something about what the event is tracking.
+
+##### cust
+
+Accepts a JSON object as custom data, works otherwise exactly the same as track_custom_data.
+
+##### Example:
+
+```js
+VGS.getPulseTrack({
+    cust: '{ "articleId" : 12345, "section" : "football" }',
+    name: 'viewed_comments'
+});
+```
 
 
 ### HOWTO setup developer environment

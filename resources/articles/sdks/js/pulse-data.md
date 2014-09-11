@@ -166,6 +166,6 @@ These are the data fields sent to the server by the SPiD pulse tracking script. 
     <tr>
       <td>cust</td>
       <td>Meta</td>
-      <td>[object Object]</td>
+      <td>{ "articleId" : 12345, "section" : "football" }</td>
     </tr>
 </table>
