@@ -12,7 +12,7 @@ services.
     - Report Suite ID
     - Tracking server
     - Namespace
-- [Omniture SiteCatalyst](http://www.adobe.com/products/sitecatalyst.html)
+- [Xiti](http://www.atinternet.com)
     - Collector server
     - Tracking site
     - Xiti light code
