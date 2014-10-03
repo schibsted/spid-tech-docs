@@ -1,4 +1,4 @@
-:title OAuth 2.0 Authentication with SPiD on iOS
+:title OAuth 2.0 Authentication with SPiD on mobile devices
 :frontpage
 :category api-integration
 :body
@@ -12,8 +12,8 @@ redirected back to your app with the oauth authentication code needed to
 finalize the authentication on your app.
 
 SSO primarily works by redirecting users to SPiD on their devices. This can be
-done by opening the login/register dialogue in the Safari mobile browser. After
-the user logs in, or registers and verifies their account, Safari redirects the
+done by opening the login/register dialogue in the mobile browser. After
+the user logs in, or registers and verifies their account, the browser redirects the
 user back to the calling app via the app's custom URI scheme. The URL will
 contain an OAuth code that the app will need to post back to SPiD, along with
 the app's client credentials. In response to this, the app will receive an OAuth
@@ -42,12 +42,16 @@ it is discouraged for several reasons:
     is signing into an app or service that uses SPiD, we assume the user will
     feel comfortable and secure that he is logging in with his SPiD account
     through a safe and recognizable manner.
+    
+## App custom url scheme (iOS), redirect scheme (Android)
+
+The client's custom URI scheme must be spidmobile_<client_id>. For a client with client_id 123
+the login URL would be `spidmobile_123://login`.
 
 ## Example authentication flow
 
-This example shows how the authentication flow works on the Fedrelandsvennen
-eReader app, which uses `fvnereader://login` as its custom URI scheme. The
-authentication happens on our stage platform.
+The following example shows how the authentication flow works for an app with client_id 123
+on the SPiD stage platform.
 
 1. Direct user to authorize your app on SPiD
     Example on stage server:
@@ -59,10 +63,12 @@ authentication happens on our stage platform.
 2. After authentication, the server redirects the user back to the application with an OAuth code
 
     ```text
-    fvnereader://login?code=55d4f8e7fbd1bd4f3e0a312c7765cecfce37c7ec
+    spidmobile_123://login?code=55d4f8e7fbd1bd4f3e0a312c7765cecfce37c7ec
     ```
 
     [More about working with custom URL Schemes in iOS](http://mobile.tutsplus.com/tutorials/iphone/ios-sdk-working-with-url-schemes/).
+    
+    [More about working with custom URL Schemes in Android](http://appurl.org/docs/android).
 
 3. Use the OAuth code to get a permanent OAuth token by `POST`-ing the code
     along with your credentials.
@@ -71,9 +77,9 @@ authentication happens on our stage platform.
 
     ```text
     POST https://stage.payment.schibsted.no/oauth/token
-        client_id=4f6b7595efd04b2d5000000d
+        client_id=123
         client_secret=foobar
-        redirect_uri=fvnereader%3A%2F%2Flogin
+        redirect_uri=spidmobile_123%3A%2F%2Flogin
         grant_type=authorization_code
         code=55d4f8e7fbd1bd4f3e0a312c7765cecfce37c7ec
         scope=
