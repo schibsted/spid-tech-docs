@@ -176,6 +176,7 @@ Response, when logged in
         serverTime: 1360329601
         userId: 270177
         userStatus: "connected"
+        agreementAccepted: true
         sig: "9toJgvXfPgk-5W2162sD8ueHzZ8Ya1ibBWvELv-I-lk.eyJyZXN1bHQiOnRydWUsInNlcnZlclRpbWUiOjEzNjAzMjk2MDEsInVzZXJTdGF0dXMiOiJjb25uZWN0ZWQiLCJ1c2VySWQiOjI3MDE3NywiaWQiOiI1MDYwNGE3ZGRjYjExNGVkMGUwMDAwMDQiLCJkaXNwbGF5TmFtZSI6IkpvYWtpbSBXYW5nZ3JlbiIsImdpdmVuTmFtZSI6IkpvYWtpbSIsImZhbWlseU5hbWUiOiJXYW5nZ3JlbiIsImdlbmRlciI6InVuZGlzY2xvc2VkIiwicGhvdG8iOiJodHRwczpcL1wvc2VjdXJlLmdyYXZhdGFyLmNvbVwvYXZhdGFyXC9lYzMyOTM3YzIyZDFhNGIxNDc0NjU3Yjc3NmQwZjM5OD9zPTIwMCIsImV4cGlyZXNJbiI6NzEzOCwiYmFzZURvbWFpbiI6InNkay5kZXYiLCJhbGdvcml0aG0iOiJITUFDLVNIQTI1NiJ9"
     },
     status: "connected"
