@@ -107,6 +107,35 @@ window.vgsAsyncInit = function() {
 Since version 1.5.0, the SDK is loaded minified by default, for optimal network
 performance.
 
+### Checking and accepting agreements
+
+The response session object contains a boolean field called `agreementAccepted`. If this field is false, you can make the user issue a request to `ajax/acceptAgreement` by pressing a button. If the `acceptAgreement` request is successful, the `auth.sessionChange` will fire, and the event response data will include the updated value for the `agreementAccepted` field.
+
+```html
+<script type="text/javascript" src="SPID_JSSDK_URI"></script>
+<script type="text/javascript">
+ VGS.Event.subscribe('auth.sessionChange', function(data) {
+    if (!data.session || data.session.agreementAccepted) {
+        return;
+    }
+    // show agreement
+}); 
+
+$('.acceptButton').click(function() {
+    var id = VGS.guid();
+    VGS.callbacks[id] = function(data) { VGS.getLoginStatus(null, true); };
+    VGS.Ajax.send('ajax/acceptAgreement.js?callback='+id);
+});
+
+//Initiate SDK
+VGS.init({
+    client_id: "YOUR_CLIENT_ID",
+    server: "SPID_SERVER_URI"
+    // Additional initialization (See below for a full list of available initialization options)
+});
+</script>
+```
+
 ### Initialization options
 
 ##### client_id
