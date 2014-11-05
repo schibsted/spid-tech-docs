@@ -176,8 +176,9 @@ care.
 ##### prod
 
 Set to `true` to fetch from the live production server. Defaults to `true`.
-Typically, you only want to include this option (set to `false`) for debugging
-purposes.
+During development you should set this to `false`, as it controls which session
+cluster to use. Remember to set to `true` or remove this flag before deploying
+to production.
 
 ##### varnish_expiration
 
