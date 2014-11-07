@@ -10,8 +10,26 @@ SHthe client signature secret and finally base64 URL encoded. The verification
 hash ensures that the data being `POST`-ed has not been tampered with by a
 middleman.
 
+**Note: After the string is base64 encoded you should replace + with - and / with _. Also you should remove trailing =.**
+
 The sort algorithm is [natsort](http://sourcefrog.net/projects/natsort/)
 ("Natural order string comparison").
+
+```
+{
+    "a" : "zebra",
+    "x" : "banana",
+    "c" : {
+        "b" : "orange",
+        "c" : "monkey",
+        "a" : "sun"
+    },
+    "b" : "tree"
+}    
+```
+
+Should give the following string after concat:
+zebratreesunorangemonkeybanana
 
 ## Hashing example
 
