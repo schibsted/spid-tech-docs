@@ -107,6 +107,36 @@ window.vgsAsyncInit = function() {
 Since version 1.5.0, the SDK is loaded minified by default, for optimal network
 performance.
 
+### Checking and accepting agreements
+
+The response session object contains a boolean field called `agreementAccepted`. If this field is false, you can make the user issue a request to `ajax/acceptAgreement` by pressing a button. If the `acceptAgreement` request is successful, the `auth.sessionChange` will fire, and the event response data will include the updated value for the `agreementAccepted` field.
+
+```html
+<script type="text/javascript" src="SPID_JSSDK_URI"></script>
+<script type="text/javascript">
+ VGS.Event.subscribe('auth.sessionChange', function(data) {
+    var sess = data.session || {};
+    if (sess.defaultAgreementAccepted && sess.clientAgreementAccepted) {
+        return;
+    }
+    // show SPiD summary and/or client summary depending on booleans
+});
+
+$('.acceptButton').click(function() {
+    var id = VGS.guid();
+    VGS.callbacks[id] = function(data) { VGS.getLoginStatus(null, true); };
+    VGS.Ajax.send('ajax/acceptAgreement.js?callback='+id);
+});
+
+//Initiate SDK
+VGS.init({
+    client_id: "YOUR_CLIENT_ID",
+    server: "SPID_SERVER_URI"
+    // Additional initialization (See below for a full list of available initialization options)
+});
+</script>
+```
+
 ### Initialization options
 
 ##### client_id
@@ -146,8 +176,9 @@ care.
 ##### prod
 
 Set to `true` to fetch from the live production server. Defaults to `true`.
-Typically, you only want to include this option (set to `false`) for debugging
-purposes.
+During development you should set this to `false`, as it controls which session
+cluster to use. Remember to set to `true` or remove this flag before deploying
+to production.
 
 ##### varnish_expiration
 
@@ -193,13 +224,13 @@ For use with tracker. A float between 0 and 1. Default value is 1.
 
 ##### track_anon_opt_out
 
-By default the SPiD pulse part of the sdk will track anonymous users as well as logged 
+By default the SPiD pulse part of the sdk will track anonymous users as well as logged
 in users. If you want to disable tracking of anonymous users set this to `true`.
 _This setting requires the pulse module._
 
 ##### track_custom_data
 
-The SPiD pulse accepts custom data as a stringified JSON object. This data is sent to 
+The SPiD pulse accepts custom data as a stringified JSON object. This data is sent to
 the pulse server and stored into the database in raw format.
 Example value: '{ "articleId": 1234, "section": "sport/football" }'
 Default is `null`.
