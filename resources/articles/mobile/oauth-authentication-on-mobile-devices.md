@@ -1,6 +1,26 @@
 :title OAuth 2.0 Authentication with SPiD on mobile devices
 :frontpage
-:category api-integration
+
+:aside
+
+## Native mobile development
+
+- [Overview](/mobile/overview)
+- [Getting started](/mobile/mobile-development)
+- [Register](/mobile/register)
+- [Login](/mobile/login)
+- [Android](/sdks/android)
+    - [Android sample apps](/sdks/android/sample-apps)
+    - [API](/sdks/android/api)
+- [iOS](/sdks/ios)
+    - [iOS sample apps](/sdks/ios/sample-apps)
+- [Access tokens](/mobile/access-tokens)
+- [Reviews](/mobile/reviews)
+- OAuth for mobile clients
+- [Migration](/mobile/migration)
+- [Best practices](/mobile/best-practices)
+- [FAQ](/mobile/faq)
+
 :body
 
 One of the most compelling features of the SPiD is Single Sign-On (SSO). SSO
@@ -20,21 +40,21 @@ the app's client credentials. In response to this, the app will receive an OAuth
 access token that can be used to make authenticated API requests to SPiD on
 behalf of the signed-in user.
 
+<a name="webviewVsBrowser"></a>
 ## Webview vs Browser redirect
 
 While an embedded webview might appear to provide a more seamless integration,
 it is discouraged for several reasons:
 
-- **Security** - The webview layer is 100% controlled by the app, opening up the
-    [possibility for capturing user input and thus their SPiD credentials](http://welcome.totheinter.net/2011/01/12/stealing-passwords-is-easy-in-native-mobile-apps-despite-oauth/).
+- **Security** - The webview layer is 100% controlled by the app, opening up a vulnerability for 
+    [capturing user input](http://welcome.totheinter.net/2011/01/12/stealing-passwords-is-easy-in-native-mobile-apps-despite-oauth/) and thus their SPiD credentials.
 - **User convenience** - SPiD is used by many services and apps throughout
     Schibsted and SSO will only work on a mobile device if all these services
     and apps use the same authentication mechanism. At the moment this is the
-    Safari mobile browser, where the "remember me" SPiD cookie is saved.
+    mobile browser, where the "remember me" SPiD cookie is saved.
 - **Browser Compatibility** - The browser engine used in webviews is not the
     same as that in the native browser. We’ve seen issues with Javascript and
-    Cookies (cookies not being shared between the app and the mobile Safari
-    browser).
+    Cookies (cookies not being shared between the app and the mobile browser).
 - **Phishing** - In-app webviews makes it easier for rogue apps to succeed in
     stealing (phishing) SPiD user credentials because users cannot verify the
     origin of the login page.
@@ -45,8 +65,10 @@ it is discouraged for several reasons:
     
 ## App custom url scheme (iOS), redirect scheme (Android)
 
-The client's custom URI scheme must be spidmobile_<client_id>. For a client with client_id 123
-the login URL would be `spidmobile_123://login`.
+The client's custom URI scheme must be spidmobile-<client_id>. For a client with client_id 123
+the login URL would be `spidmobile-123://login`.
+
+More about working with custom URL Schemes in [iOS](http://mobile.tutsplus.com/tutorials/iphone/ios-sdk-working-with-url-schemes/) or [Android](http://appurl.org/docs/android).   
 
 ## Example authentication flow
 
@@ -63,12 +85,8 @@ on the SPiD stage platform.
 2. After authentication, the server redirects the user back to the application with an OAuth code
 
     ```text
-    spidmobile_123://login?code=55d4f8e7fbd1bd4f3e0a312c7765cecfce37c7ec
-    ```
-
-    [More about working with custom URL Schemes in iOS](http://mobile.tutsplus.com/tutorials/iphone/ios-sdk-working-with-url-schemes/).
-    
-    [More about working with custom URL Schemes in Android](http://appurl.org/docs/android).
+    spidmobile-123://login?code=55d4f8e7fbd1bd4f3e0a312c7765cecfce37c7ec
+    ``` 
 
 3. Use the OAuth code to get a permanent OAuth token by `POST`-ing the code
     along with your credentials.
@@ -79,10 +97,10 @@ on the SPiD stage platform.
     POST https://stage.payment.schibsted.no/oauth/token
         client_id=123
         client_secret=foobar
-        redirect_uri=spidmobile_123%3A%2F%2Flogin
+        redirect_uri=spidmobile-123%3A%2F%2Flogin
         grant_type=authorization_code
         code=55d4f8e7fbd1bd4f3e0a312c7765cecfce37c7ec
-        scope=
+        scope=ddf
         state=
     ```
 

@@ -1,0 +1,14 @@
+com.spid.android.sdk
+com.spid.android.sdk.accesstoken
+com.spid.android.sdk.browser
+com.spid.android.sdk.configuration
+com.spid.android.sdk.exceptions
+com.spid.android.sdk.jwt
+com.spid.android.sdk.keychain
+com.spid.android.sdk.listener
+com.spid.android.sdk.logger
+com.spid.android.sdk.request
+com.spid.android.sdk.response
+com.spid.android.sdk.user
+com.spid.android.sdk.utils
+com.spid.android.sdk.webview
