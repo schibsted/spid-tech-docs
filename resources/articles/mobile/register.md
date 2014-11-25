@@ -21,7 +21,7 @@
 
 :body
 
-Before creating a user always check first to see if that user already exists. This is accomplished by checking to see whether the user's email address is already connected to a SPiD account using the  [/email/{email}/status](/endpoints/GET/email/%7Bemail%7D/status/) endpoint.
+Before creating a user always check first to see if that user already exists. This is accomplished by checking to see whether the user's email address is already connected to a SPiD account using the  [/email/{email}/status](/endpoints/GET/email/{email}/status/) endpoint.
 
 A user can be registered with SPiD using either the [/signup](/endpoints/POST/signup/) or [/signup_jwt](/endpoints/POST/signup_jwt/) endpoints. When a user registers for a SPiD account the [terms](/endpoints/GET/terms/) must be clearly visible. If they are not the app will be rejected upon review.
 

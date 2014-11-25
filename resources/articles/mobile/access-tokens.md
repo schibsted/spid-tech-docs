@@ -29,7 +29,7 @@ There are two kinds of access tokens as described below.
 
 ### User access token
 
-A user access token represents a user, they are generated upon login. The user access token is used to call the [/oauth/exchange/ ](/oauth/exchange/) end point which returns a one time code that is used to authenticate the user when communicating with the API.
+A user access token represents a user, they are generated upon login. The user access token is used to call the [/oauth/exchange/ ](/endpoints/POST/oauth/exchange/) end point which returns a one time code that is used to authenticate the user when communicating with the API.
 
 ### Client token
 

@@ -55,7 +55,7 @@ SPiDClient.getInstance().configure(config);
 
 ## Connecting to SPiD
 
-The recommended way to connect to SPiD is to use a browser, see explanation [why](/mobile/oauth-authentication-on-mobile-devices/#webviewVsBrowser).
+The recommended way to connect to SPiD is to use a browser, see explanation [why](/mobile/oauth-authentication-on-mobile-devices/).
 However it can be done a number of ways, which is explained in greater detail below.
 
 #### Connecting via browser
