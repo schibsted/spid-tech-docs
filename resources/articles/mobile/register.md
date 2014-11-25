@@ -4,35 +4,26 @@
 
 ## Native mobile development
 
-- [Overview](/mobile/overview)
-- [Getting started](/mobile/mobile-development)
+- [Overview](/mobile/overview/)
+- [Getting started](/mobile/mobile-development/)
 - Register
-- [Login](/mobile/login)
-- [Android](/sdks/android)
-    - [Android sample apps](/sdks/android/sample-apps)
-    - [API](/sdks/android/api)
-- [iOS](/sdks/ios)
-    - [iOS sample apps](/sdks/ios/sample-apps)
-- [Access tokens](/mobile/access-tokens)
-- [Reviews](/mobile/reviews)
-- [OAuth for mobile clients](/mobile/oauth-authentication-on-mobile-devices)
-- [Migration](/mobile/migration)
-- [Best practices](/mobile/best-practices)
-- [FAQ](/mobile/faq)
-
-## More about the Android SDK
-
-- [API Docs](/sdks/android/api-docs/)
-- [Javadoc](/sdks/android/javadoc)
-- [Best practices](/sdks/android/best-practices/)
-- [Reviews](/sdks/androis/reviews/)
-- [OAuth for mobile clients](/oauth-authentication-on-mobile-devices)
+- [Login](/mobile/login/)
+- [Android](/sdks/android/)
+    - [Android sample apps](/sdks/android/sample-apps/)
+- [iOS](/sdks/ios/)
+    - [iOS sample apps](/sdks/ios/sample-apps/)
+- [Access tokens](/mobile/access-tokens/)
+- [Reviews](/mobile/reviews/)
+- [OAuth for mobile clients](/mobile/oauth-authentication-on-mobile-devices/)
+- [Migration](/mobile/migration/)
+- [Best practices](/mobile/best-practices/)
+- [FAQ](/mobile/faq/)
 
 :body
 
 Before creating a user always check first to see if that user already exists. This is accomplished by checking to see whether the user's email address is already connected to a SPiD account using the  [/email/{email}/status](/endpoints/GET/email/%7Bemail%7D/status/) endpoint.
 
-A user can be registered with SPiD using either the [/signup](/endpoints/POST/signup) or [/signup_jwt](/endpoints/POST/signup_jwt) endpoints. When a user registers for a SPiD account the [terms](/endpoints/GET/terms/) must be clearly visible. If they are not the app will be rejected upon review.
+A user can be registered with SPiD using either the [/signup](/endpoints/POST/signup/) or [/signup_jwt](/endpoints/POST/signup_jwt/) endpoints. When a user registers for a SPiD account the [terms](/endpoints/GET/terms/) must be clearly visible. If they are not the app will be rejected upon review.
 
 #### Signup code example
 

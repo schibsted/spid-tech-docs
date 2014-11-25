@@ -6,21 +6,20 @@
 
 ## Native mobile development
 
-- [Overview](/mobile/overview)
-- [Getting started](/mobile/mobile-development)
-- [Register](/mobile/register)
-- [Login](/mobile/login)
+- [Overview](/mobile/overview/)
+- [Getting started](/mobile/mobile-development/)
+- [Register](/mobile/register/)
+- [Login](/mobile/login/)
 - Android
-    - [Android sample apps](/sdks/android/sample-apps)
-    - [API](/sdks/android/api)
-- [iOS](/sdks/ios)
-    - [iOS sample apps](/sdks/ios/sample-apps)
-- [Access tokens](/mobile/access-tokens)
-- [Reviews](/mobile/reviews)
-- [OAuth for mobile clients](/mobile/oauth-authentication-on-mobile-devices)
-- [Migration](/mobile/migration)
-- [Best practices](/mobile/best-practices)
-- [FAQ](/mobile/faq)
+    - [Android sample apps](/sdks/android/sample-apps/)
+- [iOS](/sdks/ios/)
+    - [iOS sample apps](/sdks/ios/sample-apps/)
+- [Access tokens](/mobile/access-tokens/)
+- [Reviews](/mobile/reviews/)
+- [OAuth for mobile clients](/mobile/oauth-authentication-on-mobile-devices/)
+- [Migration](/mobile/migration/)
+- [Best practices](/mobile/best-practices/)
+- [FAQ](/mobile/faq/)
 
 :body
 
@@ -56,7 +55,7 @@ SPiDClient.getInstance().configure(config);
 
 ## Connecting to SPiD
 
-The recommended way to connect to SPiD is to use a browser, see explanation [why](/oauth-authentication-on-mobile-devices#webviewVsBrowser).
+The recommended way to connect to SPiD is to use a browser, see explanation [why](/mobile/oauth-authentication-on-mobile-devices/#webviewVsBrowser).
 However it can be done a number of ways, which is explained in greater detail below.
 
 #### Connecting via browser

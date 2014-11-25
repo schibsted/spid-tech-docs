@@ -4,21 +4,20 @@
 
 ## Native mobile development
 
-- [Overview](/mobile/overview)
+- [Overview](/mobile/overview/)
 - Getting started
-- [Register](/mobile/register)
-- [Login](/mobile/login)
-- [Android](/sdks/android)
-    - [Android sample apps](/sdks/android/sample-apps)
-    - [API](/sdks/android/api)
-- [iOS](/sdks/ios)
-    - [iOS sample apps](/sdks/ios/sample-apps)
-- [Access tokens](/mobile/access-tokens)
-- [Reviews](/mobile/reviews)
-- [OAuth for mobile clients](/mobile/oauth-authentication-on-mobile-devices)
-- [Migration](/mobile/migration)
-- [Best practices](/mobile/best-practices)
-- [FAQ](/mobile/faq)
+- [Register](/mobile/register/)
+- [Login](/mobile/login/)
+- [Android](/sdks/android/)
+    - [Android sample apps](/sdks/android/sample-apps/)
+- [iOS](/sdks/ios/)
+    - [iOS sample apps](/sdks/ios/sample-apps/)
+- [Access tokens](/mobile/access-tokens/)
+- [Reviews](/mobile/reviews/)
+- [OAuth for mobile clients](/mobile/oauth-authentication-on-mobile-devices/)
+- [Migration](/mobile/migration/)
+- [Best practices](/mobile/best-practices/)
+- [FAQ](/mobile/faq/)
 
 :body
 
@@ -42,11 +41,11 @@ Create the clients you need, decide which end points are required (TODO: What mo
 
 ### 4. Develop your app
 
-Develop and test your app, following our recommendations for [best practices](/mobile/best-practices).
+Develop and test your app, following our recommendations for [best practices](/mobile/best-practices/).
 
 ### 5. Submit your app for review
 
-Once your app is done and you're sure you follow the [guidelines](/mobile/reviews) submit it for review.
+Once your app is done and you're sure you follow the [guidelines](/mobile/reviews/) submit it for review.
 
 ### 6. Replace stage credentials
 

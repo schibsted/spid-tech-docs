@@ -5,21 +5,20 @@
 
 ## Native mobile development
 
-- [Overview](/mobile/overview)
-- [Getting started](/mobile/mobile-development)
-- [Register](/mobile/register)
-- [Login](/mobile/login)
-- [Android](/sdks/android)
-    - [Android sample apps](/sdks/android/sample-apps)
-    - [API](/sdks/android/api)
-- [iOS](/sdks/ios)
-    - [iOS sample apps](/sdks/ios/sample-apps)
-- [Access tokens](/mobile/access-tokens)
-- [Reviews](/mobile/reviews)
+- [Overview](/mobile/overview/)
+- [Getting started](/mobile/mobile-development/)
+- [Register](/mobile/register/)
+- [Login](/mobile/login/)
+- [Android](/sdks/android/)
+    - [Android sample apps](/sdks/android/sample-apps/)
+- [iOS](/sdks/ios/)
+    - [iOS sample apps](/sdks/ios/sample-apps/)
+- [Access tokens](/mobile/access-tokens/)
+- [Reviews](/mobile/reviews/)
 - OAuth for mobile clients
-- [Migration](/mobile/migration)
-- [Best practices](/mobile/best-practices)
-- [FAQ](/mobile/faq)
+- [Migration](/mobile/migration/)
+- [Best practices](/mobile/best-practices/)
+- [FAQ](/mobile/faq/)
 
 :body
 
@@ -68,7 +67,7 @@ it is discouraged for several reasons:
 The client's custom URI scheme must be spidmobile-<client_id>. For a client with client_id 123
 the login URL would be `spidmobile-123://login`.
 
-More about working with custom URL Schemes in [iOS](http://mobile.tutsplus.com/tutorials/iphone/ios-sdk-working-with-url-schemes/) or [Android](http://appurl.org/docs/android).   
+More about working with custom URL Schemes in [iOS](http://mobile.tutsplus.com/tutorials/iphone/ios-sdk-working-with-url-schemes/) or [Android](http://appurl.org/docs/android/).   
 
 ## Example authentication flow
 
