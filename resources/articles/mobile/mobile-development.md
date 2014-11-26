@@ -21,36 +21,257 @@
 
 :body
 
-To develop an app for SPiD the following needs to be done.
+## Setup your environment
 
-### 1. Create a user for your company
+To work with the SPiD APIs, it is recommended that you use one of the official
+SDKs. Currently there are SDKs for Android and iOS. The SDKs are thin wrappers 
+that primarily spare you the details of working with OAuth and simplify working
+with the SPiD backend.
 
-Create an account [here](https://stage.payment.schibsted.se) if you do not already have one, a schibsted.com email address is needed to register an account.
+**NB** Your API secret is highly sensitive. Do not hard-code it, and be careful
+who you share it with. The examples below are meant to illustrate the basics of
+using the API, they are **not** examples of production code.
 
-**TODO:** Need a document on user account management we can link to
+# :tabs
 
-### 2. Create a merchant
+## :tab iOS
 
-Create a merchant for your company.
+Download the iOS SDK by cloning the GitHub repository:
 
-**TODO:** Add link to a document explaining to what a merchant/client is for 2 and 3
+```sh
+git clone https://github.com/schibsted/sdk-ios.git
+```
 
-### 3. Create a client and request stage credentials
+If you do not have Git installed, you can also
+[download it as a zip file](https://github.com/schibsted/sdk-ios/archive/master.zip).
 
-Create the clients you need, decide which end points are required (TODO: What more can  be configured for clients?) and request credentials. These credentials are valid only for the stage environment, before you receive credentials you can use for production you need to submit your app for review.
+Linking the SDK into your project requires a few steps:
 
-### 4. Develop your app
+- Find the `.xcodeproj` view. At the bottom of the *General- view,
+  under *Linked frameworks and Libraries*, click *+- and *Add
+  other*. Locate the SDK you downloaded, and add it.
 
-Develop and test your app, following our recommendations for [best practices](/mobile/best-practices/).
+- Also link in `AdSupport.framework` as an Optional link. It is only
+  used during build.
 
-### 5. Submit your app for review
+- Go to *Build Settings*, search for `linking` and add `-ObjC` to *Other Linker Flags*
 
-Once your app is done and you're sure you follow the [guidelines](/mobile/reviews/) submit it for review.
+## :tab Android
 
-### 6. Replace stage credentials
+In order to use the Android SPiD SDK, you must fist install the
+[Android SDK](http://developer.android.com/sdk/installing/studio.html). As the SPiD SDK is built using Gradle we recommend
+using Android Studio. Then run the Android SDK Manager (`./sdk/tools/android sdk`) and make sure you have installed at least
+SDK versions 2.3, 4.0, 4.1 and 4.2.
 
-If your app passes the review you will receive credentials that you can use in production, replace your stage credentials with these when you are ready to deploy your app.
+To run the examples, you will also need
+[Maven 3.1.1 or newer](http://maven.apache.org/download.cgi). As per the
+[maven-android-plugin getting started](https://code.google.com/p/maven-android-plugin/wiki/GettingStarted), set
+environment variable `ANDROID_HOME` to the path of your installed Android SDK
+and add `$ANDROID_HOME/tools` as well as `$ANDROID_HOME/platform-tools` to your
+$PATH. (or on Windows `%ANDROID_HOME%\tools` and
+`%ANDROID_HOME%\platform-tools`).
 
-### 7. Deploy
+Because the Android libraries are not available from any central Maven
+repository, you also need to use the
+[Maven Android SDK Deployer](https://github.com/mosabua/maven-android-sdk-deployer)
+in order to install the Android libraries to your ~/.m2 directory in order to
+build the SPiD Android SDK.
 
-Deploy your app.
+```sh
+git clone https://github.com/mosabua/maven-android-sdk-deployer.git
+cd maven-android-sdk-deployer
+mvn install -P 2.3,4.0,4.1,4.2
+```
+
+Download the Android SDK by cloning it from GitHub:
+
+```sh
+git clone git@github.com:schibsted/sdk-android.git
+```
+
+Start by installing the root project, which will build and install the SDK,
+enabling you to run the provided examples.
+
+```sh
+cd sdk-android
+mvn install
+```
+
+To verify your install either install it on a real device or create a Android Virtual Device, AVD. The instructions below
+presumes you updated your `$PATH` as described above.
+
+```sh
+android avd
+```
+
+If you haven't already, create a new virtual device by clicking "New". Give it a
+name, and choose a device, like Nexus 4. Finally, choose "Google APIs - API
+Level 17" as "Target" and click "Ok".
+
+Select the device from the list and click "Start" to launch it. This will take a
+while.
+
+Before running one of the example apps you need to update it with your own credentials. Instructions how they can be requested are found here (TODO: add link). You also need to set the "android:scheme" in the AndroidManifest.xml which is used when sending redirects to your app. The scheme must be on the format "spidmobile-&lt;your-client-id&gt;" (without the angle brackets, so if your client-id is 123 your url-scheme would be spid-123).
+
+When this is done and you have a physical device or your emulator is running, make sure it works by running one of the SPiD example apps:
+
+```sh
+cd SPiDExampleApp
+mvn android:deploy
+```
+
+This will install the app on the emulator/device. Once installed you have successfully setup your first SPiD app. Congratulations!
+
+# :/tabs
+
+## Interacting with the API
+
+Now that you have installed a SDK/Client, you will use it to make first contact with
+the SPiD API. Don't worry, it will be quick and painless. When you've got
+everything set up, you might want to continue with configuring single sign-on.
+
+# :tabs
+
+## :tab iOS
+
+The following is a minimal example of using the iOS SDK. It fetches the
+`/endpoints` endpoint, which returns a description of all available endpoints.
+
+Open your `*AppDelegate.m` file. In the example, this is `MyAppDelegate`.
+
+We set up the `SPiDClient` singleton, then we need to fetch a client
+token to make the `/endpoints` API call.
+
+```objc
+#import "MyAppDelegate.h"
+#import "SPiDClient.h"
+#import "SPiDResponse.h"
+#import "SPiDTokenRequest.h"
+
+static NSString *const ClientID = @"your-client-id";
+static NSString *const ClientSecret = @"your-client-secret";
+static NSString *const AppURLScheme = @"https";
+static NSString *const ServerURL = @"https://stage.payment.schibsted.no";
+
+@implementation MyAppDelegate
+
+- (void)getClientToken:(void (^)(SPiDError *response))completionHandler
+{
+    SPiDRequest *clientTokenRequest = [SPiDTokenRequest clientTokenRequestWithCompletionHandler:completionHandler];
+    [clientTokenRequest startRequest];
+}
+
+- (void)getEndpoints:(void (^)(SPiDResponse *response))completionHandler
+{
+    NSString *path = [NSString stringWithFormat:@"/endpoints"];
+    SPiDRequest *request = [SPiDRequest apiGetRequestWithPath:path completionHandler:completionHandler];
+    [request startRequestWithAccessToken];
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [SPiDClient setClientID:ClientID
+               clientSecret:ClientSecret
+               appURLScheme:AppURLScheme
+                  serverURL:[NSURL URLWithString:ServerURL]];
+
+    [self getClientToken:^(SPiDError *error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
+        } else {
+            [self getEndpoints:^(SPiDResponse *response) {
+                NSLog(@"Endpoints: %@", [response message]);
+            }];
+        }
+    }];
+
+    return YES;
+}
+
+@end
+```
+
+## :tab Android
+
+To use the SPiD Android SDK you must first make the library available to your
+application. Add the SPiD SDK as a dependency to your pom.xml:
+
+```xml
+<dependency>
+    <groupId>com.schibsted.android</groupId>
+    <artifactId>spid</artifactId>
+    <version>1.1.3</version>
+</dependency>
+```
+
+The `SPiDClient` class is a singleton, and you should configure it in the
+`onCreate` handler in your main activity:
+
+```java
+@Override
+public void onCreate(Bundle savedInstanceState) {
+    // ...
+
+    SPiDClient.getInstance().configure(new SPiDConfigurationBuilder()
+            .clientID("your-client-id")
+            .clientSecret("your-client-secret")
+            .appURLScheme("spid-example")
+            .serverURL("https://stage.payment.schibsted.no")
+            .context(this)
+            .debugMode(true)
+            .build());
+
+    // ...
+}
+```
+
+In order to access the endpoints that don't require a logged in user, you must
+set the client up with an OAuth access token:
+
+```java
+SPiDTokenRequest request = new SPiDTokenRequest(new SPiDAuthorizationListener() {
+    public void onComplete() {
+        String token = SPiDClient.getInstance().getAccessToken().getAccessToken();
+        System.out.println("OAuth token: " + token);
+    }
+
+    public void onSPiDException(SPiDException exception) {}
+    public void onIOException(IOException exception) {}
+    public void onException(Exception exception) {}
+});
+
+request.addBodyParameter("grant_type", "client_credentials");
+request.addBodyParameter("client_id", SPiDClient.getInstance().getConfig().getClientID());
+request.addBodyParameter("client_secret", SPiDClient.getInstance().getConfig().getClientSecret());
+request.addBodyParameter("redirect_uri", "http://localhost");
+
+request.execute();
+```
+
+The redirect URL doesn't have any effect in this scenario, but it is required
+input to the API. Once the request completes successfully, the `SPiDClient`
+singleton will have been configured to use it. You can now request the
+/endpoints endpoint, which describes all available endpoints in the API.
+
+```java
+SPiDApiGetRequest request = new SPiDApiGetRequest("/endpoints", new SPiDRequestListener() {
+    public void onComplete(SPiDResponse result) {
+        // Print 40k of unformatted JSON to Android Logcat
+        System.out.println(result.getBody());
+    }
+
+    public void onSPiDException(SPiDException exception) {}
+    public void onIOException(IOException exception) {}
+    public void onException(Exception exception) {}
+});
+
+request.addQueryParameter("oauth_token", SPiDClient.getInstance().getAccessToken().getAccessToken());
+
+request.execute();
+```
+
+In practice, it is likely that you will start by logging in the user and then
+interacting with the API on their behalf. You will learn how to do this from the
+Single Sign-On guide.
+
+# :/tabs
