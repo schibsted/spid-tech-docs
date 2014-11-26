@@ -48,7 +48,7 @@ of the impending purchase. SPiD will return a URL that will take the user to the
 check out process for the selected products. Products may or may not be storedm
 in SPiD.
 
-[Guide: Gettting started with paylinks](/getting-started-with-paylinks/)
+[Guide: Getting started with paylinks](/getting-started-with-paylinks/)
 
 ## Direct payment
 
@@ -59,4 +59,4 @@ the user does not need to be sent through a checkout flow on SPiD's pages.
 If you want recurring payments to be handled fully automatically by SPiD, you
 should look into [creating subscriptions](/endpoints/POST/product/) in SPiD.
 
-[Guide: Gettting started with direct payment](/getting-started-with-direct-payment/)
+[Guide: Getting started with direct payment](/getting-started-with-direct-payment/)
