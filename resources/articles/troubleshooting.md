@@ -69,3 +69,10 @@ URL in `action` will not preserve it's query string, thus rendering the paylink
 broken. To send the user to SPiD to pay through a paylink, either use a regular
 `<a href="...">...</a>` element (style as a button if desired), or simply use a
 redirect right after creating the paylink.
+
+
+## Error code: invalid_client_id
+
+When logging in with a redirect_uri for the first time you may encounter an error message that say **invalid_client_id**.  If your client id is correct, your client is most likely missing a redirect_uri. Login to [Norwegian stage](https://stage.payment.schibsted.no) or [Swedish stage](https://stage.payment.schibsted.se) to access the self-service (if you want change a production client, please remove the "stage" sub-domain).
+
+
