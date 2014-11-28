@@ -19,7 +19,6 @@ Additionally, you may use the following optional fields:
 - `ogpUri`
 - `currency`
 - `quantity`
-- `type`
 
 See the [paylink item object specification](/types/paylink-item/) for further
 details on these fields.
