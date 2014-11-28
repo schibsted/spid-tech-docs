@@ -9,6 +9,9 @@ contain at least the following required fields:
 - `price` (total price including VAT, in cents - 10000 is 100,-)
 - `vat` (fraction × 10000, for instance 25% would be 2500)
 
+These fields may be omitted if the optional field `productId` is provided. This will make the item inherit `description`, `price`, `vat` from the product.
+Example: if only `description` and `productId` is provided, the item will not inherit `description` from the product.
+
 Additionally, you may use the following optional fields:
 
 - `clientItemReference`
