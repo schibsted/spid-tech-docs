@@ -1,6 +1,6 @@
 :title Client Teaser Documentation
 :frontpage
-:category api-integration
+:category self-service
 :body
 
 ![Client teaser example](/images/client_teaser/client_teaser_example.png)

@@ -70,14 +70,15 @@
 (def categories
      {:payment "Payment"
       :analytics "Analytics and Insight"
-      :api-integration "API and Integration"})
+      :api-integration "API and Integration"
+      :self-service "Self service and support"})
 
 (defn- frontpage-articles [articles]
   (into {} (filter #(:frontpage (second %)) articles)))
 
 (defn- render-category-with-articles [[category articles]]
   (if (categories category)
-    [:div {:class (if (= (last categories) category) "lastUnit" "unit s1of3")}
+    [:div {:class (if (= (last categories) category) "lastUnit" "unit s1of4")}
      [:h3 (categories category)]
      [:ul
       (map render-article-link articles)]]))

@@ -95,7 +95,7 @@ generated for every date, since the cronjob might be stopped due to deployment.
   </tr>
   <tr>
     <th><code>api_churned_subscriptions</code></th>
-    <td>Number of churned subscriptions through API (ie Ambassador)</td>
+    <td>Number of churned subscriptions through API (ie <a href="/ambassador/">Ambassador</a>)</td>
   </tr>
   <tr>
     <th><code>force_churned_subscriptions</code></th>

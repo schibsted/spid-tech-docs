@@ -1,6 +1,6 @@
 :title Customize CSS
 :frontpage
-:category api-integration
+:category self-service
 :body
 
 ![Input fields example](/images/customize_css/customized_example.png)
