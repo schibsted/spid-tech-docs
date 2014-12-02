@@ -46,7 +46,8 @@ with the appropriate values.
 under [hosting](/sdks/js/hosting/). When using the SDK live from SPiD, the URL typically
 looks like `https://payment.schibsted.(se|no)/js/spid-sdk-{version}.min.js`,
 e.g.
-[https://payment.schibsted.no/js/spid-sdk-1.7.1.min.js](https://payment.schibsted.no/js/spid-sdk-1.7.1.min.js).
+[https://payment.schibsted.no/js/spid-sdk-1.7.9.min.js](https://payment.schibsted.no/js/spid-sdk-1.7.9.min.js). 
+Go to [GitHub](https://github.com/schibsted/sdk-js/) to check what is the latest version. 
 
 ### Synchronously loading the JS SDK
 

@@ -16,15 +16,12 @@
 
 :body
 
-Include the javascript pulse sdk from SPiD. Copy the file to your local resource folder and 
-include it into the document header.
- 
-```html
-<script id="spid-jssdk" src="https://www.my-domain.no/js/spid-sdk-pulse-1.7.6.min.js"></script>
+Initialize the JavaScript SDK like explained [here](/sdks/javascript/). Remember to use the JavaScript Pulse SDK instead of the normal JavaScript SDK. For example:
 ```
-
-Initialize the spid-js-sdk in the regular way. Remember to add the options for pulse tracking.  
-Read more about this in our [tech docs](http://techdocs.spid.no/sdks/javascript/)
+<script src="https://payment.schibsted.no/js/spid-sdk-pulse-1.7.9.min.js"></script>
+```
+ 
+ Go to [GitHub](https://github.com/schibsted/sdk-js/) to check what is the latest version. 
 
 #### Example for staging:
 
@@ -53,43 +50,33 @@ VGS.init({
 });
 ```
 
-### SPiD pulse tracking options
+### SPiD Pulse tracking options
 
-##### track_anon_opt_out
+##### track_anon_opt_out (boolean)
 
 By default the SPiD pulse part of the sdk will track anonymous users as well as logged in users. If you want to disable tracking of anonymous users set this to true. This setting requires the pulse module.
 
-##### track_custom_data
+##### track_custom_data (string)
 
 The SPiD pulse accepts custom data as a stringified JSON object. This data is sent to the pulse server and stored into the database in raw format. Example value: '{ "articleId": 1234, "section": "sport/football" }' Default is null. This setting requires the pulse module.
 
 ### Manual event tracking
 
-To manually track events use the function getPulseTrack. This requires the pulse module and that you have initialized the spid-js-sdk. Use the below options to set up the tracking.
+Use the Event.track function to record your own user events, this is especially usable for one page applications. (Available only from version 1.7.9)
 
-##### name
+##### name (string)
 
 Unique name for the event, should say something about what the event is tracking.
 
-##### cust
+##### properties (object)
 
 Accepts a JSON object as custom data, works otherwise exactly the same as track_custom_data.
 
 ##### Example:
 
 ```js
-VGS.getPulseTrack({
-    cust: '{ "articleId" : 12345, "section" : "football" }',
-    name: 'viewed_comments'
+VGS.Event.track('mySuperEvent', {
+    section: 'football',
+    articleId: 12345
 });
-```
-
-
-### HOWTO setup developer environment
-```bash
-    # To watch files while developing.
-    $ grunt check
-
-    # To run the server in develop mode and automatically reload when files changes.
-    $ grunt run-local
 ```

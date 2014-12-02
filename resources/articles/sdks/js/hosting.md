@@ -28,7 +28,7 @@ This way, the SDK is cached across clients, meaning that users that have
 previously visited other clients may not need to download the SDK for your site.
 
 To use a local copy of the SDK, download the
-[latest version from GitHub](https://github.com/schibsted/sdk-js/tree/master/dist).
+[latest version from GitHub](https://github.com/schibsted/sdk-js/).
 Note that both the unminified and minified versions bundle the
 [JSON2.js](https://github.com/douglascrockford/JSON-js) script. If you do not
 need it (e.g., you don't need support for <= IE7), download the source code and
