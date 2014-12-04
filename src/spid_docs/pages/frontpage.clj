@@ -60,7 +60,7 @@
   [:li [:a {:href (article-path path)} (:title article)]])
 
 (defn render-article-list [num articles]
-  [:div {:class (if (= (inc num) frontpage-columns) "lastUnit" "unit s1of3")}
+  [:div {:class (if (= (inc num) frontpage-columns) "lastUnit" "unit s1of4")}
    [:ul
     (map render-article-link articles)]])
 

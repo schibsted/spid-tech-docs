@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------
 :title Android SDK
 :frontpage
-:category analytics
+:category
 :aside
 
 ## Native mobile development

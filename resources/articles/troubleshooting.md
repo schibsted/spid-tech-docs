@@ -1,7 +1,7 @@
 :title Troubleshooting
 
 :frontpage
-:category api-integration
+:category self-service
 :aside
 
 ## On this page

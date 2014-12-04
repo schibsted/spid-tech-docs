@@ -1,7 +1,7 @@
 --------------------------------------------------------------------------------
 :title iOS SDK
 :frontpage
-:category analytics
+:category
 :aside
 
 ## Native web development
