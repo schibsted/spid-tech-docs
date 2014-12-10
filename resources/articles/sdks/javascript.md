@@ -4,6 +4,10 @@
 :category
 :aside
 
+## Table of Contents
+
+<spid-toc></spid-toc>
+
 ## Read more about the JavaScript SDK
 
 - [Events](/sdks/js/events/)
@@ -108,7 +112,7 @@ window.vgsAsyncInit = function() {
 Since version 1.5.0, the SDK is loaded minified by default, for optimal network
 performance.
 
-### Checking and accepting agreements
+## Checking and accepting agreements
 
 The response session object contains a boolean field called `agreementAccepted`. If this field is false, you can make the user issue a request to `ajax/acceptAgreement` by pressing a button. If the `acceptAgreement` request is successful, the `auth.sessionChange` will fire, and the event response data will include the updated value for the `agreementAccepted` field.
 
@@ -138,7 +142,7 @@ VGS.init({
 </script>
 ```
 
-### Initialization options
+## Initialization options
 
 ##### client_id
 
