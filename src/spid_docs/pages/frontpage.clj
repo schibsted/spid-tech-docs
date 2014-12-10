@@ -71,7 +71,9 @@
      {:payment "Payment"
       :analytics "Analytics and Insight"
       :api-integration "API and Integration"
-      :self-service "Self service and support"})
+      :self-service "Self service and support"
+      :how-tos "FAQs and HOWTOs"
+      })
 
 (defn- frontpage-articles [articles]
   (into {} (filter #(:frontpage (second %)) articles)))
