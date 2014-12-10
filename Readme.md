@@ -35,7 +35,7 @@ Check out
 First time around? Start with the
 [general overview](https://github.com/schibsted/spid-tech-docs/wiki/general-overview).
 
-You might also want to check out [a summary of this wiki in presentation form](http://schibsted.github.io/spid-tech-docs/), or even [a video of that presentation](https://www.dropbox.com/s/emdevcfd7u79jae/tech-docs.mp4).
+You might also want to check out [a summary of this wiki in presentation form](http://schibsted.github.io/spid-tech-docs/), or even [a video of that presentation](https://docs.spid.no/display/GI/Tech+docs+intro).
 
 ## Exporting the site
 
