@@ -13,6 +13,10 @@ You should also have gone through the
 [Getting Started](/getting-started/) guide, in particular that you
 have downloaded and installed the appropriate SDK for your platform.
 
+## See also
+
+- [Explaining how login flows work](/login-flows/)
+
 :body
 
 When you have completed this guide, your users can log into your
@@ -26,6 +30,10 @@ This is the flow to log in a user:
 - The user is sent to the SPiD login page along with your client ID.
 - Once the user is logged in, they are sent back to your site with a code.
 - You use the code to fetch user information and set up a session.
+
+This is a simple overview explaining the complete process between the client
+service (yellow) and SPiD (blue):
+![Single Sign on using redirect flow](/images/simple-sso-redirect-usecase.png)
 
 We'll look at this in detail in the rest of the guide. If you prefer
 to just dive in, take a look at

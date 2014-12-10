@@ -242,3 +242,9 @@ Default is `null`.
 _This setting requires the pulse module._
 
 
+## Auto-login usecase
+
+This is a simple overview of Single Sign On using JS SDK, explaining the complete process between the client
+service (yellow) and SPiD (blue).
+
+![Single Sign On using JS SDK](/images/simple-sso-js-usecase.png)
