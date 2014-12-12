@@ -194,7 +194,8 @@
     (list [:h2 "Failure cases"]
           [:p "Some HTTP response codes are used for multiple error situations.
                There is no consistent way to tell these apart, but the error
-               object will contain a textual explanation of the reason for the error."]
+               object will contain a textual explanation of the reason for the error.
+               For explanation on OAuth related failures and errors see " [:a {:href "/authentication/#oauth-failures"} "OAuth authentication failures."]]
           [:ul (map render-response-failure failures)])))
 
 (defn- render-sample-response [format sample]

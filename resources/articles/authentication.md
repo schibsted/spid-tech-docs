@@ -3,6 +3,10 @@
 :frontpage
 :category api-integration
 :aside
+## Table of Contents
+
+<spid-toc></spid-toc>
+
 
 ## Prerequisites
 
@@ -130,7 +134,7 @@ error is going to be returned in the redirect, like token expiration).
 
 ### Official OAuth 2.0 errors
 
-Refer to the spec for details
+Refer to the spec for details on what these error codes mean.
 
 - `redirect_uri_mismatch`
 - `invalid_client_credentials`
@@ -151,6 +155,18 @@ Protected resource errors
 Error when using a grant type that is not implemented:
 
 - `unsupported_grant_type`
+
+When unsuccessful, the platform will return an error JSON object. Below is an example of
+what is returned when your application is using an invalid access token:
+
+```js
+{
+  "error":"invalid_token",
+  "error_code":401,
+  "type":"OAuthException",
+  "error_description":"401 Unauthorized access! Reason: \"invalid_token\" (OAuth realm: \"Service\", Scope: \"\")"
+}
+```
 
 Recommended reading on
 [OAuth protocol endpoints](http://tools.ietf.org/html/draft-ietf-oauth-v2-31#section-3).
