@@ -280,8 +280,8 @@ control paging:
 
 - `limit`: The maximum number of results to return. May not exceed 1000.
 - `offset`: How many results to skip over.
-- `until`: Entries older than this are excluded from the results.
-- `since`: Entries newer than this are excluded from the results.
+- `until`: Entries newer than this are excluded from the results.
+- `since`: Entries older than this are excluded from the results.
 
 There is a hard limit of 1000 results. Larger result sets will be truncated.
 
