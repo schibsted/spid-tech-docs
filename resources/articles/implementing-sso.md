@@ -15,6 +15,7 @@ have downloaded and installed the appropriate SDK for your platform.
 
 ## See also
 
+- [SPiD Authentication](/authentication/)
 - [Explaining how login flows work](/login-flows/)
 
 :body

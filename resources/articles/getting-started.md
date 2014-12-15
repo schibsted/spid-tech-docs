@@ -13,6 +13,7 @@ If you do not, [see the merchant setup page](https://docs.spid.no/display/MER/)
 
 ## See also
 
+- [SPiD Authentication](/authentication/)
 - [The JavaScript SDK](/sdks/javascript/)
 - [Native mobile development](/mobile/overview/)
 
