@@ -62,7 +62,8 @@ curl http://stage.payment.schibsted.no/api/2/users?oauth_token=TOKEN& \
 
 The endpoint supports many filters (see below). If no filters are provided,
 active users for the client is returned. Users with status 0 and 1 are
-considered active.
+considered active. If since and until parameter are provided but no updated filter,
+since and until will be used together with `published` field instead of `updated` field.
 
 :relevant-endpoints
 
