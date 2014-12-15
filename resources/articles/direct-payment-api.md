@@ -12,6 +12,9 @@ POST /order/{orderId}/cancel
 POST /paylink
 
 :aside
+## Table of Contents
+
+<spid-toc></spid-toc>
 
 ## See also
 

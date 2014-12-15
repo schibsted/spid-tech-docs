@@ -1,6 +1,9 @@
 :title Getting started with the server-side SPiD API
 
 :aside
+## Table of Contents
+
+<spid-toc></spid-toc>
 
 ## Prerequisites
 

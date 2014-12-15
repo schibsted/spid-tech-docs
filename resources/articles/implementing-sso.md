@@ -1,6 +1,9 @@
 :title Implementing Single Sign-On with the SPiD API
 
 :aside
+## Table of Contents
+
+<spid-toc></spid-toc>
 
 ## Prerequisites
 
