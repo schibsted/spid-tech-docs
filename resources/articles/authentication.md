@@ -136,27 +136,36 @@ error is going to be returned in the redirect, like token expiration).
 
 Refer to the spec for details on what these error codes mean.
 
-- `redirect_uri_mismatch`
-- `invalid_client_credentials`
-- `unauthorized_client`
-- `access_denied`
-- `invalid_request`
-- `invalid_client_id`
-- `unsupported_response_type`
-- `invalid_scope`
-- `invalid_grant`
+- **redirect_uri_mismatch**: The redirection URI provided does not match a pre-registered redirection URI stored in SPiD.
+- **unauthorized_client**: The client is not authorized to request an authorization code using this method or authorization grant type.
+- **access_denied**: The resource owner or authorization server denied the request.
+- **invalid_request**: The request is missing a required parameter, includes an invalid parameter value, 
+includes a parameter more than once, or is otherwise malformed.
+- **invalid_client_id**: Client authentication failed (e.g. unknown client, no client authentication included, or unsupported
+authentication method).
+- **unsupported_response_type**: The authorization server does not support obtaining an authorization code using this method.
+- **invalid_scope**: The requested scope is invalid, unknown, malformed, or exceeds the scope granted by the resource owner.
+- **invalid_grant**: The provided authorization grant (e.g. authorization code, resource owner credentials) or refresh token is
+invalid, expired, revoked, does not match the redirection URI used in the authorization request, or was issued to
+another client.
 
 Protected resource errors
 
-- `invalid_token`
-- `expired_token`
-- `insufficient_scope`
+- **invalid_token**:
+The access token provided is expired, revoked, malformed, or invalid for other reasons. The client MAY request a new 
+access token and retry the protected resource request.
+- **expired_token**:
+The access token provided has expired. The client is expected to be able to handle the response and request a new 
+access token using the refresh token issued with the expired access token
+- **insufficient_scope**:
+The request requires higher privileges than provided by the access token.
 
 Error when using a grant type that is not implemented:
 
-- `unsupported_grant_type`
+- **unsupported_grant_type**
 
-When unsuccessful, the platform will return an error JSON object. Below is an example of
+### Error response example
+When a request is unsuccessful, the platform will return an error JSON object. Below is an example of
 what is returned when your application is using an invalid access token:
 
 ```js
@@ -170,6 +179,11 @@ what is returned when your application is using an invalid access token:
 
 Recommended reading on
 [OAuth protocol endpoints](http://tools.ietf.org/html/draft-ietf-oauth-v2-31#section-3).
+
+## API access control flow explained
+This is a complete overview of how the platform processes an API request and when your client application may 
+expect to receive error responses and the reasons it happened:
+![API access control flow](/images/api-access-control-flow.png)
 
 ## SDK support for easier implementation
 
@@ -189,8 +203,17 @@ This section contains a list of best practices and requirements that will be per
 - Previously defined and stored as a valid redirect uri for your client application
 - Doesn't contain other internal or third party based redirect uris encoded in it
 - Doesn't contain invalid characters (\s`!()[]{};',<>«»“”‘’@")
-- Redirect endpoint is recommended to be behind SSL
+- Redirect endpoint is required to be behind SSL (https, not http)
 - No external Javascript running on redirect URIs that will receive the OAuth code parameter
+
+The client SHOULD NOT include any third-party scripts (e.g. third-
+   party analytics, social plug-ins, ad networks) in the redirection
+   endpoint response.  Instead, it SHOULD extract the credentials from
+   the URI and redirect the user-agent again to another endpoint without
+   exposing the credentials (in the URI or elsewhere).  If third-party
+   scripts are included, the client MUST ensure that its own scripts
+   (used to extract and remove the credentials from the URI) will
+   execute first.
 
 ### Protect your local session, SPiD code and token
 - SPiD code AND user token must NEVER be embedded in your application urls, passed beyond your application's redirect uri or stored in cookies.
