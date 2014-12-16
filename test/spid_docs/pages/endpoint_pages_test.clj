@@ -56,13 +56,13 @@
                  first)]
         (hiccup-text param-row) => "The pagination parameters <strong>offset</strong>, <strong>limit</strong>, <strong>since</strong>, and <strong>until</strong> are also supported."))
 
-(fact "Renders filter parameter"
+(fact "Renders filters parameter"
       (let [filter-row
             (->> (render-request-parameters [] [] [{:name "merchant", :description "merchant desc", :default? false}])
                  (hiccup-find [:.param])
                  first)]
         (second filter-row) => {:id "filter"}
-        (hiccup-text filter-row) => "filter\noptional\nmerchant\nmerchant desc"))
+        (hiccup-text filter-row) => "filters\noptional\nmerchant\nmerchant desc"))
 
 (fact "Highlights path parameters"
       (->> (render-request-parameters [(param "userId" {:required? true :type :path})])
