@@ -322,7 +322,7 @@ GET http://payment.schibsted.no/api/2/orders?sort[status]=desc&sort[updated]=asc
 
 ## Filters
 
-Many endpoints accept the `filter` request parameter. It can be used to provide
+Many endpoints accept the `filters` request parameter. It can be used to provide
 one or more filters, which will affect how the endpoint behaves. The two main
 types of filters are:
 
