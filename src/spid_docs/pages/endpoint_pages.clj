@@ -80,7 +80,7 @@
 
 (defn- render-filter-parameter [filters]
   [:tr.param {:id "filter"}
-   [:th [:h4.name [:a {:href "/endpoints/#filters"} "filter"]]]
+   [:th [:h4.name [:a {:href "/endpoints/#filters"} "filters"]]]
    [:td
     [:h5.required "optional"]
     [:dl.faded.desc
