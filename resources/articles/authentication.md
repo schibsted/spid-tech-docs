@@ -17,6 +17,11 @@ In order to make use of this information, you need to know your:
 
 You may also want to look into the [Getting Started](/getting-started/) guide.
 
+## See also
+
+- [Explaining how login flows work](/login-flows/)
+- [Explaining how logout flows work](/logout-flows/)
+
 :body
 
 SPiD uses

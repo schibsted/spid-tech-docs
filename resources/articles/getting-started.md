@@ -18,6 +18,7 @@ If you do not, [see the merchant setup page](https://docs.spid.no/display/MER/)
 
 - [SPiD Authentication](/authentication/)
 - [Explaining how login flows work](/login-flows/)
+- [Explaining how logout flows work](/logout-flows/)
 - [The JavaScript SDK](/sdks/javascript/)
 - [Native mobile development](/mobile/overview/)
 

@@ -20,6 +20,7 @@ have downloaded and installed the appropriate SDK for your platform.
 
 - [SPiD Authentication](/authentication/)
 - [Explaining how login flows work](/login-flows/)
+- [Explaining how logout flows work](/logout-flows/)
 
 :body
 

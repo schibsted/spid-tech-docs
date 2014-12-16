@@ -6,6 +6,7 @@
 ## See also
 
 - [JavaScript SDK](/sdks/javascript/)
+- [Explaining how logout flows work](/logout-flows/)
 
 :body
 
