@@ -122,3 +122,9 @@ th {padding-right: 10px;}
 .warning {background-color: #fcf7d5; border: 1px solid #eadbbc; color: #000;}
 
 .anchor-link, .anchor-link:visited, .anchor-link:active, .anchor-link:hover {color: #000; outline: none; text-decoration: none;}
+
+.types-list { margin-left: 0px; }
+.types-list li { display: inline-block; margin-right: 25px; }
+
+.type-radio { width: 20px; min-height: 20px; border: 1px solid #ddd; border-radius: 15px; float: left; margin-right: 5px; }
+.type-radio > .check { position: absolute; margin: -10px 0 0 2px; font-size: 25px; }

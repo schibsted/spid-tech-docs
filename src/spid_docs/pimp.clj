@@ -12,6 +12,7 @@
             [spid-docs.pimp.highlight :refer [highlight-code-blocks-in-page]]
             [spid-docs.pimp.seq-diagrams :refer [insert-svg]]
             [spid-docs.pimp.tabs :refer [transform-tabs]]
+            [spid-docs.pimp.types :refer [create-types]]
             [spid-docs.pimp.toc :refer [create-toc]]))
 
 (defn optify
@@ -55,6 +56,7 @@
                (optify-images request)
                (make-headings-clickable)
                (create-toc)
+               (create-types)
                (add-comments)
                (insert-svg)
                (maybe-highlight-code-blocks)))))
