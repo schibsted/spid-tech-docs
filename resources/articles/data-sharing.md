@@ -61,13 +61,8 @@ endpoint URL like:
 HTTP POST /user/100001/product/12345?contextClientId=4cf36ius78dywe8h0000
 ```
 
-```sequence-diagram
-  Client A->SPiD: Authenticates itself and ask for a server token
-  SPiD->Client A: Respond with an access token
-  Client A->SPiD: Do an API call on behalf of client B
-  Note right of Client A: Example GET /users?contextClientId=[Client B's client_id]
-  SPiD->Client A: Return Client B's data
-```
+![Performing API calls on behalf of another client](/images/data-sharing-between-clients.png)
+
 
 ### In order to create this setup for your clients you need to: 
 (Remember that this needs to be set up in our stage environment first!)
