@@ -33,4 +33,4 @@ A user access token represents a user, they are generated upon login. The user a
 
 ### Client token
 
-Client tokens represents a client. Mobile clients can never be client tokens.
+Client tokens represents a client. Mobile clients never have access to client tokens.

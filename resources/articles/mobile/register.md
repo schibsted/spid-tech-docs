@@ -23,7 +23,7 @@
 
 Before creating a user always check first to see if that user already exists. This is accomplished by checking to see whether the user's email address is already connected to a SPiD account using the  [/email/{email}/status](/endpoints/GET/email/{email}/status/) endpoint.
 
-A user can be registered with SPiD using either the [/signup](/endpoints/POST/signup/) or [/signup_jwt](/endpoints/POST/signup_jwt/) endpoints. When a user registers for a SPiD account the [terms](/endpoints/GET/terms/) must be clearly visible. If they are not the app will be rejected upon review.
+A user can be registered with SPiD using either the [/signup](/endpoints/POST/signup/) or [/signup_jwt](/endpoints/POST/signup_jwt/) endpoints. When a user registers for a SPiD account the [terms](/endpoints/GET/terms/) must be clearly visible. **If they are not the app will be rejected upon review.**
 
 #### Signup code example
 
@@ -32,6 +32,8 @@ A user can be registered with SPiD using either the [/signup](/endpoints/POST/si
 ## :tab Android
 
 Signing up is handled by the SPiDUserUtil utility class, using the signupWithCredentials method as shown below.
+
+	SPiDUserUtil.signupWithCredentials(final String email, final String password, final SPiDAuthorizationListener authorizationListener)
 
     SPiDUserUtil.signupWithCredentials("example.address@example.com", "MyPassword", new SPiDAuthenticationListener {    
     	@Override
@@ -45,11 +47,17 @@ Signing up is handled by the SPiDUserUtil utility class, using the signupWithCre
     	}
 	}
 	
-Note that the callback handler runs in a background process by default. If you need to do operations from the main thread you can use the SPiDUiThreadAuthenticationListener convenience class which is an empty implementation of the SPiDAuthenticationListener interface running the callbacks on the main thread on onCompleteAction() and onErrorAction().
+Note that the callback handler runs in a background process by default. If you need to do operations on the main thread you can use the SPiDUiThreadAuthenticationListener convenience class which is an empty implementation of the SPiDAuthenticationListener interface running the callbacks on the main thread on onCompleteAction() and onErrorAction().
 
 To sign up using a Google+ or Facebook account refer to the examples below.
 
 **Google**
+
+To use Google+ login you first need to [enable the Google+ API](https://developers.google.com/+/mobile/android/getting-started) in the Google Developer Console. 
+
+Once Google+ login is enabled for your app a new SPiD user can be registered using Google+ with the following code:
+
+	SPiDUserUtil.signupWithGooglePlus(final String appId, final String googlePlusToken, final SPiDAuthorizationListener authorizationListener)
 
 	SPiDUserUtil.signupWithGooglePlus(getPackageName(), token, new SPiDAuthenticationListener() {
     	@Override
@@ -65,6 +73,8 @@ To sign up using a Google+ or Facebook account refer to the examples below.
     
 If you have a user logged in to SPiD and want to associate that user's Google+ account to his/her SPiD account you can call the following method:
 
+	SPiDUserUtil.attachGooglePlusAccount(final String appId, final String googlePlusToken, final SPiDAuthorizationListener authorizationListener)
+
     SPiDUserUtil.attachGooglePlusAccount(getPackageName(), token, new SPiDAuthenticationListener() {
     	@Override
         public void onComplete() {
@@ -78,6 +88,10 @@ If you have a user logged in to SPiD and want to associate that user's Google+ a
     });
     
 **Facebook**
+
+To add Facebook login to your app first enable it on developers.facebook.com, a detailed tutorial can be found [here](https://developers.facebook.com/docs/android/login-with-facebook/v2.2).
+
+	SPiDUserUtil.signupWithFacebook(final String appId, final String facebookToken, final Date expirationDate, final SPiDAuthorizationListener authorizationListener)
 
     Session facebookSession = Session.getActiveSession();
     SPiDUserUtil.signupWithFacebook(facebookSession.getApplicationId(), facebookSession.getAccessToken(),
@@ -95,6 +109,8 @@ If you have a user logged in to SPiD and want to associate that user's Google+ a
     }
     
 To associate a logged in user's SPiD account to his/her Facebook account:
+
+	SPiDUserUtil.attachFacebookAccount(final String appId, final String facebookToken, final Date expirationDate, final SPiDAuthorizationListener authorizationListener)
 
     Session session = Session.getActiveSession();    
     SPiDUserUtil.attachFacebookAccount(session.getApplicationId(), session.getAccessToken(), session.getExpirationDate(),

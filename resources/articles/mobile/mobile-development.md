@@ -24,7 +24,7 @@
 ## Setup your environment
 
 To work with the SPiD APIs, it is recommended that you use one of the official
-SDKs. Currently there are SDKs for Android and iOS. The SDKs are thin wrappers 
+SDKs. Currently there are SDKs for Android and iOS. The SDKs are wrappers 
 that primarily spare you the details of working with OAuth and simplify working
 with the SPiD backend.
 
@@ -34,33 +34,11 @@ using the API, they are **not** examples of production code.
 
 # :tabs
 
-## :tab iOS
-
-Download the iOS SDK by cloning the GitHub repository:
-
-```sh
-git clone https://github.com/schibsted/sdk-ios.git
-```
-
-If you do not have Git installed, you can also
-[download it as a zip file](https://github.com/schibsted/sdk-ios/archive/master.zip).
-
-Linking the SDK into your project requires a few steps:
-
-- Find the `.xcodeproj` view. At the bottom of the *General- view,
-  under *Linked frameworks and Libraries*, click *+- and *Add
-  other*. Locate the SDK you downloaded, and add it.
-
-- Also link in `AdSupport.framework` as an Optional link. It is only
-  used during build.
-
-- Go to *Build Settings*, search for `linking` and add `-ObjC` to *Other Linker Flags*
-
 ## :tab Android
 
 In order to use the Android SPiD SDK, you must fist install the
 [Android SDK](http://developer.android.com/sdk/installing/studio.html). As the SPiD SDK is built using Gradle we recommend
-using Android Studio. Then run the Android SDK Manager (`./sdk/tools/android sdk`) and make sure you have installed at least
+using Android Studio. Then run the Android SDK Manager and make sure you have installed at least
 SDK versions 2.3, 4.0, 4.1 and 4.2.
 
 To run the examples, you will also need
@@ -122,74 +100,37 @@ mvn android:deploy
 
 This will install the app on the emulator/device. Once installed you have successfully setup your first SPiD app. Congratulations!
 
+## :tab iOS
+
+Download the iOS SDK by cloning the GitHub repository:
+
+```sh
+git clone https://github.com/schibsted/sdk-ios.git
+```
+
+If you do not have Git installed, you can also
+[download it as a zip file](https://github.com/schibsted/sdk-ios/archive/master.zip).
+
+Linking the SDK into your project requires a few steps:
+
+- Find the `.xcodeproj` view. At the bottom of the *General- view,
+  under *Linked frameworks and Libraries*, click *+- and *Add
+  other*. Locate the SDK you downloaded, and add it.
+
+- Also link in `AdSupport.framework` as an Optional link. It is only
+  used during build.
+
+- Go to *Build Settings*, search for `linking` and add `-ObjC` to *Other Linker Flags*
+
 # :/tabs
 
 ## Interacting with the API
 
 Now that you have installed a SDK/Client, you will use it to make first contact with
 the SPiD API. Don't worry, it will be quick and painless. When you've got
-everything set up, you might want to continue with configuring single sign-on.
+everything set up, you might want to continue with configuring [single sign-on](/implementing-sso/).
 
 # :tabs
-
-## :tab iOS
-
-The following is a minimal example of using the iOS SDK. It fetches the
-`/endpoints` endpoint, which returns a description of all available endpoints.
-
-Open your `*AppDelegate.m` file. In the example, this is `MyAppDelegate`.
-
-We set up the `SPiDClient` singleton, then we need to fetch a client
-token to make the `/endpoints` API call.
-
-```objc
-#import "MyAppDelegate.h"
-#import "SPiDClient.h"
-#import "SPiDResponse.h"
-#import "SPiDTokenRequest.h"
-
-static NSString *const ClientID = @"your-client-id";
-static NSString *const ClientSecret = @"your-client-secret";
-static NSString *const AppURLScheme = @"https";
-static NSString *const ServerURL = @"https://stage.payment.schibsted.no";
-
-@implementation MyAppDelegate
-
-- (void)getClientToken:(void (^)(SPiDError *response))completionHandler
-{
-    SPiDRequest *clientTokenRequest = [SPiDTokenRequest clientTokenRequestWithCompletionHandler:completionHandler];
-    [clientTokenRequest startRequest];
-}
-
-- (void)getEndpoints:(void (^)(SPiDResponse *response))completionHandler
-{
-    NSString *path = [NSString stringWithFormat:@"/endpoints"];
-    SPiDRequest *request = [SPiDRequest apiGetRequestWithPath:path completionHandler:completionHandler];
-    [request startRequestWithAccessToken];
-}
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    [SPiDClient setClientID:ClientID
-               clientSecret:ClientSecret
-               appURLScheme:AppURLScheme
-                  serverURL:[NSURL URLWithString:ServerURL]];
-
-    [self getClientToken:^(SPiDError *error) {
-        if (error) {
-            NSLog(@"Error: %@", error);
-        } else {
-            [self getEndpoints:^(SPiDResponse *response) {
-                NSLog(@"Endpoints: %@", [response message]);
-            }];
-        }
-    }];
-
-    return YES;
-}
-
-@end
-```
 
 ## :tab Android
 
@@ -273,5 +214,64 @@ request.execute();
 In practice, it is likely that you will start by logging in the user and then
 interacting with the API on their behalf. You will learn how to do this from the
 Single Sign-On guide.
+
+## :tab iOS
+
+The following is a minimal example of using the iOS SDK. It fetches the
+`/endpoints` endpoint, which returns a description of all available endpoints.
+
+Open your `*AppDelegate.m` file. In the example, this is `MyAppDelegate`.
+
+We set up the `SPiDClient` singleton, then we need to fetch a client
+token to make the `/endpoints` API call.
+
+```objc
+#import "MyAppDelegate.h"
+#import "SPiDClient.h"
+#import "SPiDResponse.h"
+#import "SPiDTokenRequest.h"
+
+static NSString *const ClientID = @"your-client-id";
+static NSString *const ClientSecret = @"your-client-secret";
+static NSString *const AppURLScheme = @"https";
+static NSString *const ServerURL = @"https://stage.payment.schibsted.no";
+
+@implementation MyAppDelegate
+
+- (void)getClientToken:(void (^)(SPiDError *response))completionHandler
+{
+    SPiDRequest *clientTokenRequest = [SPiDTokenRequest clientTokenRequestWithCompletionHandler:completionHandler];
+    [clientTokenRequest startRequest];
+}
+
+- (void)getEndpoints:(void (^)(SPiDResponse *response))completionHandler
+{
+    NSString *path = [NSString stringWithFormat:@"/endpoints"];
+    SPiDRequest *request = [SPiDRequest apiGetRequestWithPath:path completionHandler:completionHandler];
+    [request startRequestWithAccessToken];
+}
+
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
+    [SPiDClient setClientID:ClientID
+               clientSecret:ClientSecret
+               appURLScheme:AppURLScheme
+                  serverURL:[NSURL URLWithString:ServerURL]];
+
+    [self getClientToken:^(SPiDError *error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
+        } else {
+            [self getEndpoints:^(SPiDResponse *response) {
+                NSLog(@"Endpoints: %@", [response message]);
+            }];
+        }
+    }];
+
+    return YES;
+}
+
+@end
+```
 
 # :/tabs

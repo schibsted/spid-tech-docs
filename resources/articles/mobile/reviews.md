@@ -21,7 +21,7 @@
 
 :body
 
-Before you deploy your app to production you need to replace the credentials you initially used as they are only valid in the stage environment. You will receive your production credentials after you have submitted your app for review and it's been accepted.
+Before you deploy your app to production you need to replace the credentials you initially used as they are only valid in the stage environment. You will receive your production credentials after you have submitted your app for review and it has been accepted.
 
 The app review can take up to 3 weeks so be sure to submit it in ample time before your scheduled release.
 
@@ -31,25 +31,24 @@ To ensure that your app passes the review you need to pay special attention to t
 
 ### OAuth
 
-The access token is not used directly in requests other then to exchange it for a one time code using the [/oauth/exchange](http://localhost:3002/endpoints/POST/oauth/exchange/) end point. This code is then used when making requests.
+The access token should not be used directly when making requests other then to exchange it for a one time code using the [/oauth/exchange](http://localhost:3002/endpoints/POST/oauth/exchange/) end point.
 
 Don't print sensitive data such as passwords or access tokens in logs or save them on disk.
-
-### Terms and conditions
-
-Terms and conditions must be accessible for the user from the login page. The user does not have to accept them by forcing them to agree to them in a modal dialog, but they have to be available so the user can easily read through it at login.
 
 ### Credentials
 
 The client id and client secret is what identifies your app.
 
-The client id is fully public and does not need to be hidden or obfuscated in anyway. The client secret however should not be stored as a string in plain text but rather be hidden in some way.
+The client id is fully public and does not need to be hidden or obfuscated in anyway. The client secret however should not be stored as a string in plain text but rather be hidden in some way. TODO: Should we recommend in what way it should be hidden? It should be switched for a hash of the app in the future anyway
 
-### Obfuscation
+### Terms and conditions
 
-The app should be obfuscated, in Android this is done using [Proguard](http://developer.android.com/tools/help/proguard.html) TODO: how about for iOS?
+Terms and conditions must be accessible for the user from the login page. The user does not have to accept them by forcing them to agree to them in a modal dialog, but they have to be available so the user can easily read through it at login.
 
 ### Logo
 
 TODO: Link to our guidelines regarding logos
 
+### Obfuscation
+
+If developing for Android the app should be obfuscated, this is done using [Proguard](http://developer.android.com/tools/help/proguard.html).
