@@ -139,7 +139,7 @@ error is going to be returned in the redirect, like token expiration).
 
 ### Official OAuth 2.0 errors
 
-Refer to the spec for details on what these error codes mean.
+Refer to [the spec](http://tools.ietf.org/html/draft-ietf-oauth-v2-11) for details on what these error codes mean.
 
 - **redirect_uri_mismatch**: The redirection URI provided does not match a pre-registered redirection URI stored in SPiD.
 - **unauthorized_client**: The client is not authorized to request an authorization code using this method or authorization grant type.
@@ -193,8 +193,8 @@ expect to receive error responses and the reasons it happened:
 ## SDK support for easier implementation
 
 SPiD provides API clients/SDKs for a number of languages that mostly abstract
-away the OAuth details. The [getting started guide](/getting-started/) provides
-an introduction.
+away the OAuth details. See how to get started [server-side](/getting-started/) or for
+[mobile devices](/mobile/overview/).
 
 ## Best practices and security guidelines
 This section contains a list of best practices and requirements that will be performed on integration and security reviews by SPiD.
@@ -202,7 +202,7 @@ This section contains a list of best practices and requirements that will be per
 ### Client credentials handling
 - Client credentials and redirect URIs must NOT be hardcoded anywhere, but made configurable so the same code can be used for both STAGE and PROD environments.
 - Verify that the client configuration for the production environment doesn't use stage credentials or redirect URIs and vice versa. This is especially important before you perform a new release of your application.
-- Client secrets are confidential and must be treated as such. They should NOT be committed to version control systems or publicly transmitted in the client’s organization or between unsecured systems and communication channels.
+- Client secrets are confidential and must be treated as such. They should NOT be committed to version control systems or publicly transmitted in the client’s organization or between unsecured systems and communication channels such as instant messages or emails.
 
 ### Your application's Redirect URI must be valid and follow these security guidelines
 - Previously defined and stored as a valid redirect uri for your client application
@@ -223,3 +223,6 @@ The client SHOULD NOT include any third-party scripts (e.g. third-
 ### Protect your local session, SPiD code and token
 - SPiD code AND user token must NEVER be embedded in your application urls, passed beyond your application's redirect uri or stored in cookies.
 - Your session ID should never be visible in an URL.
+
+### Mobile development
+- For best practices specific to mobile development visit the [mobile development](/mobile/overview/) page.
