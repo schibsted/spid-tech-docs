@@ -40,19 +40,24 @@ Create a merchant for your company.
 
 Create the clients you need, configure them and request credentials. These credentials are valid only for the stage environment, before you receive credentials you can use in production you need to submit your app for review.
 
-### 4. Develop your app
+### 4. Review the default permissions
+
+Review the [default permissions](https://docs.google.com/a/schibstedpayment.no/spreadsheets/d/1EwEV0jg4SCeqyEST_Qf09D83XaUiHSveWVrr1G5WMcM/edit#gid=0) for mobile clients, these should be enough for most clients. If additional permissions are required email support@spid.no with the topic
+"Mobile permissions" stating what additional endpoints you need to access to and for what purpose.
+
+### 5. Develop your app
 
 Develop and test your app, following our [guidelines](/mobile/reviews/) and recommendations for [best practices](/mobile/best-practices/).
 
-### 5. Submit your app for review
+### 6. Submit your app for review
 
 Once your app is done and you are sure you follow the guidelines submit it for review.
 
-### 6. Replace stage credentials
+### 7. Replace stage credentials
 
 If your app passes the review you will receive credentials that you can use in production, replace your stage credentials with these when you are ready to deploy your app.
 
-### 7. Deploy
+### 8. Deploy
 
 Deploy your app.
 

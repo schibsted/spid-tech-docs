@@ -21,6 +21,10 @@
 
 :body
 
+## Permissions
+
+The [default permissions](https://docs.google.com/a/schibstedpayment.no/spreadsheets/d/1EwEV0jg4SCeqyEST_Qf09D83XaUiHSveWVrr1G5WMcM/edit#gid=0) for  mobile development should be enough for most clients, if additional permissions are required email support@spid.no with the topic "Mobile permissions" explaining what additional permissions you need and for what purpose.
+
 ## Setup your environment
 
 To work with the SPiD APIs, it is recommended that you use one of the official
