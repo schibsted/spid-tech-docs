@@ -12,7 +12,13 @@ Part I and Part II only need to be read and accepted once (and when changes are 
 
 An end user can create a SPiD account and accept Part I and Part II without connecting the SPiD account to a service. However, an end user may not access a service connected to SPiD without having a SPiD account and thus accepting the SPiD specific terms of use.
 
-The standard terms can be found here: [https://payment.schibsted.no/terms](https://payment.schibsted.no/terms).
+The standard terms can be found here:
+
+Norway: [https://payment.schibsted.no/terms](https://payment.schibsted.no/terms).
+
+Sweden: [https://payment.schibsted.se/terms](https://payment.schibsted.se/terms).
+
+If you append your client_id to the term urls above you will also see PART III, which contains the provided client's terms section.
 
 ## When implementing SPiD
 Each user facing API client must have terms of use in place before going into production. Here are the main steps you need to take into account when working with your SPiD implementation.
