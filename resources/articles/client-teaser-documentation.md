@@ -36,8 +36,7 @@ The description is shown in the summary of all your client teasers.
 
 The “Teaser CSS” input field is where all the CSS that is styling your HTML will go. We do not have any specific rules about this one except it is a good idea to style your elements with a thought about the teasers will be shown on different screen sizes and resolutions so you will have to abide to usual styling guidelines that works for different resolutions.
 
-The only specific thing SPiD do not want to see is any remote requests to resources, so if you want to display images or alike please make all images accessible as data-uris as displayed [here](http://css-tricks.com/data-uris/).
-
+Data-uris are currently not supported, so all images needs to be loaded for external sources via HTTPS.
 
 ## Active
 
