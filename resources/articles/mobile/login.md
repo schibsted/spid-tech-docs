@@ -21,9 +21,9 @@
 
 :body
 
-To login you first acquire an access token from the /oauth/token (TODO: Add link to endpoint) endpoint which is used to get a one time code from the [/oauth/exchange](/endpoints/POST/oauth/exchange/) endpoint.
+To login you first acquire an access token from the /oauth/token endpoint which is used to get a one time code from the [/oauth/exchange](/endpoints/POST/oauth/exchange/) endpoint.
 
-This code can be given to another client, who may use it to request an access token for the same user.
+This code can be given to another client, who may use it to request an access token for the same user. This is how you can give your backend server an access token which identifies your app and authorize to make requests on your behalf.
 
 The server needs to communicate with SPiD on behalf of the user, but the user
 authenticates on the app, not the server.
@@ -97,7 +97,7 @@ Note right of SPiD Web: SPiD generates a session based on\nthe user this code be
 SPiD Web->Webview: Returns a SPiD session cookie and redirects user to redirect uri provided
 ```
 
-How you authenticate your app in the login step to (TODO add link) /oauth/token as shown above depends on what grant type you use. The grant types supported by SPiD are:
+How you authenticate your app in the login step to /oauth/token as shown above depends on what grant type you use. The grant types supported by SPiD are:
 
 # :tabs
 

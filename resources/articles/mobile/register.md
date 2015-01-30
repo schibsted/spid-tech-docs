@@ -53,7 +53,13 @@ To sign up using a Google+ or Facebook account refer to the examples below.
 
 **Google**
 
-To use Google+ login you first need to [enable the Google+ API](https://developers.google.com/+/mobile/android/getting-started) in the Google Developer Console. 
+To use Google+ login you first need to [enable the Google+ API](https://developers.google.com/+/mobile/android/getting-started) in the Google Developer Console.
+
+Then register your usage of Google Play Services in your app by adding the following to your AndroidManifest.xml
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
 Once Google+ login is enabled for your app a new SPiD user can be registered using Google+ with the following code:
 
@@ -90,6 +96,14 @@ If you have a user logged in to SPiD and want to associate that user's Google+ a
 **Facebook**
 
 To add Facebook login to your app first enable it on developers.facebook.com, a detailed tutorial can be found [here](https://developers.facebook.com/docs/android/login-with-facebook/v2.2).
+
+Before adding code make sure you register your Facebook application id in your AndroidManifest.xml (with your facebook_app_id as a string your strings.xml file).
+
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
+The following code snippet shows an example of how to sign up a user to SPiD using Facebook
 
 	SPiDUserUtil.signupWithFacebook(final String appId, final String facebookToken, final Date expirationDate, final SPiDAuthorizationListener authorizationListener)
 

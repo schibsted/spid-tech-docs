@@ -64,8 +64,7 @@ it is discouraged for several reasons:
     
 ## App custom url scheme (iOS), redirect scheme (Android)
 
-The client's custom URI scheme must be spidmobile-<client_id>. For a client with client_id 123
-the login URL would be `spidmobile-123://login`.
+The custom url scheme of your app is configured in self service. We recommend having it on the format spidmobile-<clientId>. For a client with client_id 123 the login URL would be `spidmobile-123://login`.
 
 More about working with custom URL Schemes in [iOS](http://mobile.tutsplus.com/tutorials/iphone/ios-sdk-working-with-url-schemes/) or [Android](http://appurl.org/docs/android/).   
 
@@ -132,7 +131,7 @@ on the SPiD stage platform.
 
 ## Logging the user out of SPiD (and your app)
 
-You can programmatically log the user out of SPiD by redirecting the user to:
+You can programmatically log the user out of SPiD by sending a request to:
 
 ```text
 https://stage.payment.schibsted.no/logout?redirect_uri=YOUR_REDIRECT_URL&oauth_token=ACCESS_TOKEN

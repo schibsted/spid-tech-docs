@@ -30,28 +30,28 @@ To develop an app for SPiD the following needs to be done.
 
 ### 1. Create a user for your company
 
-Create an account [here](https://stage.payment.schibsted.se) **(update link when merchants can create their own users)** if you do not already have one. A schibsted.com address is needed to register an account.
+Create an account for either [Swedish](https://stage.payment.schibsted.se) or [Norwegian](https://stage.payment.schibsted.no) environment if you do not already have one. A schibsted.com address is needed to register an account. Keep in mind this is for the stage environment and you will need to replace these before deploying your app to production.
 
 ### 2. Create a merchant
 
-Create a merchant for your company.
+Create a merchant for your company if you do not already have one. This merchant can hold a number of clients so if you already have a merchant use that.
 
 ### 3. Create a client and request stage credentials
 
-Create the clients you need, configure them and request credentials. These credentials are valid only for the stage environment, before you receive credentials you can use in production you need to submit your app for review.
+Create the clients you need, configure them and request credentials. These credentials are valid only for the stage environment, before you receive credentials you can use in production you need to submit your app for [review](/mobile/reviews/).
 
 ### 4. Review the default permissions
 
 Review the [default permissions](https://docs.google.com/a/schibstedpayment.no/spreadsheets/d/1EwEV0jg4SCeqyEST_Qf09D83XaUiHSveWVrr1G5WMcM/edit#gid=0) for mobile clients, these should be enough for most clients. If additional permissions are required email support@spid.no with the topic
-"Mobile permissions" stating what additional endpoints you need to access to and for what purpose.
+"Mobile permissions" stating what additional endpoints you need access to and for what purpose.
 
 ### 5. Develop your app
 
-Develop and test your app, following our [guidelines](/mobile/reviews/) and recommendations for [best practices](/mobile/best-practices/).
+Develop and test your app, following our recommendations for [best practices](/mobile/best-practices/).
 
 ### 6. Submit your app for review
 
-Once your app is done and you are sure you follow the guidelines submit it for review.
+Once your app is done and you are sure you follow the guidelines submit it for review. Review of an app can take up to one month so be sure to submit your app for review in ample time before intended release.
 
 ### 7. Replace stage credentials
 

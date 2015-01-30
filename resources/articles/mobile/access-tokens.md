@@ -27,10 +27,14 @@ When a user connects with an app to SPiD they will obtain an access token which 
 
 There are two kinds of access tokens as described below.
 
-### User access token
+### User token
 
-A user access token represents a user, they are generated upon login. The user access token is used to call the [/oauth/exchange/ ](/endpoints/POST/oauth/exchange/) end point which returns a one time code that is used to authenticate the user when communicating with the API.
+A user token represents a user, they are generated upon login. 
 
 ### Client token
 
 Client tokens represents a client. Mobile clients never have access to client tokens.
+
+### Admin token
+
+Admin tokens are the tokens client admins use.

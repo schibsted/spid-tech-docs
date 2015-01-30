@@ -23,23 +23,19 @@
 
 Before you deploy your app to production you need to replace the credentials you initially used as they are only valid in the stage environment. You will receive your production credentials after you have submitted your app for review and it has been accepted.
 
-The app review can take up to 3 weeks so be sure to submit it in ample time before your scheduled release.
-
-TODO: What can we demand in the review? Access to code / repository?
+The app review can take up one month so be sure to submit it in ample time before your scheduled release.
 
 To ensure that your app passes the review you need to pay special attention to the following items:
 
 ### OAuth
 
-The access token should not be used directly when making requests other then to exchange it for a one time code using the [/oauth/exchange](http://localhost:3002/endpoints/POST/oauth/exchange/) end point.
+SPiD uses [OAuth draft 11](https://tools.ietf.org/html/draft-ietf-oauth-v2-11), make sure your implementation also follows the same specification. 
 
 Don't print sensitive data such as passwords or access tokens in logs or save them on disk.
 
 ### Credentials
 
-The client id and client secret is what identifies your app.
-
-The client id is fully public and does not need to be hidden or obfuscated in anyway. The client secret however should not be stored as a string in plain text but rather be hidden in some way. TODO: Should we recommend in what way it should be hidden? It should be switched for a hash of the app in the future anyway
+The client id is fully public and does not need to be hidden or obfuscated in anyway. The client secret however should not be stored as a string in plain text but rather be hidden in some way. Because of the nature of mobile apps it's hard to keep secrets confidential, as a minimal effort we require clients to obfuscate credentials. This will not deter determined attackers but is considered better then storing them in plain text.
 
 ### Terms and conditions
 
@@ -47,8 +43,8 @@ Terms and conditions must be accessible for the user from the login page. The us
 
 ### Logo
 
-TODO: Link to our guidelines regarding logos
+The SPiD logo should be visible and in its original colors. **Need a link to brand book or similar that is accessible, ie not on dropbox**
 
 ### Obfuscation
 
-If developing for Android the app should be obfuscated, this is done using [Proguard](http://developer.android.com/tools/help/proguard.html).
+If developing for Android the app should be obfuscated, this is done using [Proguard](http://developer.android.com/tools/help/proguard.html). For your own sake remember to store the mapping key so you can easily navigate stacktraces.
