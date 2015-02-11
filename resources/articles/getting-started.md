@@ -12,7 +12,7 @@ In order to complete this guide, you need to know your:
 - client ID
 - API secret
 
-If you do not, [see the merchant setup page](https://docs.spid.no/display/MER/)
+If you do not, [please set up your API client via our self service tool](/ss-access/)
 
 ## See also
 
