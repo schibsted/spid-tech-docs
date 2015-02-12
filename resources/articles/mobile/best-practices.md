@@ -12,10 +12,8 @@
     - [Android sample apps](/sdks/android/sample-apps/)
 - [iOS](/sdks/ios/)
     - [iOS sample apps](/sdks/ios/sample-apps/)
-- [Access tokens](/mobile/access-tokens/)
 - [Reviews](/mobile/reviews/)
 - [OAuth for mobile clients](/mobile/oauth-authentication-on-mobile-devices/)
-- [Migration](/mobile/migration/)
 - Best practices
 - [FAQ](/mobile/faq/)
 
