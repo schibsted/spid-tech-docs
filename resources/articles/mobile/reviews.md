@@ -21,28 +21,28 @@
 
 Before you deploy your app to production you need to replace the credentials you initially used as they are only valid in the stage environment. You will receive your production credentials after you have submitted your app for review and it has been accepted.
 
-The app review can take up one month so be sure to submit it in ample time before your scheduled release.
+The app review can take up to one month so be sure to submit it in ample time before your scheduled release.
 
 To ensure that your app passes the review you need to pay special attention to the following items:
 
 ### OAuth
 
-SPiD uses [OAuth draft 11](https://tools.ietf.org/html/draft-ietf-oauth-v2-11), make sure your implementation also follows the same specification. 
+SPiD uses [OAuth draft 11](https://tools.ietf.org/html/draft-ietf-oauth-v2-11), make sure your implementation also follows the same specification.
 
 Don't print sensitive data such as passwords or access tokens in logs or save them on disk.
 
 ### Credentials
 
-The client id is fully public and does not need to be hidden or obfuscated in anyway. The client secret however should not be stored as a string in plain text but rather be hidden in some way. Because of the nature of mobile apps it's hard to keep secrets confidential, as a minimal effort we require clients to obfuscate credentials. This will not deter determined attackers but is considered better then storing them in plain text.
+The client id is fully public and does not need to be hidden or obfuscated in anyway. The client secret however should not be stored as a string in plain text but rather be hidden in some way. Because of the nature of mobile apps it's hard to keep secrets confidential, as a minimal effort we require clients to obfuscate credentials. This will not deter determined attackers but is considered better than storing them in plain text.
 
 ### Terms and conditions
 
-Terms and conditions must be accessible for the user from the login page. The user does not have to accept them by forcing them to agree to them in a modal dialog, but they have to be available so the user can easily read through it at login.
+Terms and conditions must be accessible to the user from the login page. The user does not have to accept to the terms by using a modal dialog, but they have to be available so the user can easily read through it at login.
 
 ### Logo
 
-The SPiD logo should be visible and in its original colors. **Need a link to brand book or similar that is accessible, ie not on dropbox**
+Make sure you display the SPiD logo according to the guidelines as described in our brandbook.
 
 ### Obfuscation
 
-If developing for Android the app should be obfuscated, this is done using [Proguard](http://developer.android.com/tools/help/proguard.html). For your own sake remember to store the mapping key so you can easily navigate stacktraces.
+If developing for Android the app should be obfuscated, this is done using [Proguard](http://developer.android.com/tools/help/proguard.html). For your own sake remember to store the mapping key so you can easily debug stacktraces.
