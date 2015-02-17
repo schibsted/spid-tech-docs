@@ -37,7 +37,8 @@
      :valid-link
 
      ;; assets, we're currently not checking those
-     (.endsWith path ".png")
+    (or (.endsWith path ".png")
+		(.endsWith path ".pdf"))
      :valid-link
 
      ;; sequence diagrams are generated from the page contents, so they're there.
