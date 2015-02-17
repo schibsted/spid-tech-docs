@@ -207,4 +207,4 @@ Callbacks **will not** be made under the following conditions:
 
 This callback will inform the client when a user's status changes.
 
-![User status state machine](/images/user-status.png)
+![User status state machine](/images/user-status-callback.png)
