@@ -41,7 +41,7 @@ Terms and conditions must be accessible to the user from the login page. The use
 
 ### Logo
 
-Make sure you display the SPiD logo according to the guidelines as described in our brandbook.
+Make sure you display the SPiD logo according to the guidelines as described in our [brandbook](/images/brandbook.pdf).
 
 ### Obfuscation
 
