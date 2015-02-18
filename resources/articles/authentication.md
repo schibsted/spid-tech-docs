@@ -206,6 +206,7 @@ This section contains a list of best practices and requirements that will be per
 
 ### Your application's Redirect URI must be valid and follow these security guidelines
 - Previously defined and stored as a valid redirect uri for your client application
+- We don't recommend using IP addresses as these change all the time (unless they are static) 
 - Doesn't contain other internal or third party based redirect uris encoded in it
 - Doesn't contain invalid characters (\s`!()[]{};',<>«»“”‘’@")
 - Redirect endpoint is required to be behind SSL (https, not http)
