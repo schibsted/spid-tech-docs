@@ -6,9 +6,10 @@
 As a consumer of the SPiD API, you should subscribe to our announcement mailing
 lists to stay on top of important news. On these lists, we announce:
 
+- Product related news
 - Planned service windows
 - Planned upgrades
-- Content of upgrade (release notes)
+- Content of upgrades (release notes)
 - Reports on unscheduled downtime
 
 ## Channels
@@ -23,5 +24,5 @@ E-mails to these groups will come from:
 - Norway: spid-announce-no@schibstedpayment.no
 - Sweden: spid-announce-se@schibstedpayment.no
 
-We cannot add people to these lists. If you want announcements, go to the group
-and apply to be added and we will approve your request as soon as possible.
+If you want announcements, go to the group and apply to be added and we will approve 
+your request as soon as possible. Be on top of things, be informed!
