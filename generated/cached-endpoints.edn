@@ -189,9 +189,9 @@
   :parameterDescriptions
   {:clientId
    "The ID of a client belonging to the same merchant as the calling client.",
-   :type "The type of exchange. `code` is the only supported type.",
+   :type "The type of exchange, either `code` or `session`.",
    :redirectUri
-   "The redirect URI must be a registered redirectUri, otherwise the request will be rejected."},
+   "Used with type `session`. The redirect URI must be a registered redirectUri, otherwise the request will be rejected."},
   :method "POST",
   :name "Exchange",
   :httpMethods
@@ -725,7 +725,10 @@
     :responses
     [{:status 201,
       :description "Returns the newly created user object.",
-      :type "user"}]}},
+      :type "user"}
+     {:status 409,
+      :description "The email address is not available.",
+      :type "api-exception"}]}},
   :url "/api/2/user",
   :pathParameters [],
   :controller "Api/2/User.user",
@@ -749,9 +752,13 @@
     :filters [],
     :defaultFilters [],
     :responses
-    [{:status 201,
-      :description "Returns the new user",
-      :type "user"}]}},
+    [{:status 201, :description "Returns the new user", :type "user"}
+     {:status 302,
+      :description "The email address already exists.",
+      :type "api-exception"}
+     {:status 409,
+      :description "Users could not be created.",
+      :type "api-exception"}]}},
   :url "/api/2/signup",
   :pathParameters [],
   :controller "Api/2/User.user_signup",
@@ -830,7 +837,7 @@
    "New gender. Legal values and a localized description can be fetched from [/api/2/describe/User?property=gender](/endpoints/GET/describe/{object}/).",
    :userId
    "The user's `userId` (not to be mistaken with the deprecated `id`).",
-   :name "New full name",
+   :name "JSON object containing givenName and familyName",
    :photo "URL to a profile photo",
    :displayName "New preferred display name",
    :utcOffset
@@ -917,17 +924,22 @@
  {:path "user/{userId}/charge",
   :validOutputFormats ["json"],
   :parameterDescriptions
-  {:userId
-   "The user's `userId` (not to be mistaken with the deprecated `id`).",
+  {:sellerUserId "Deprecated, do not use.",
    :clientReference "Custom client reference",
+   :items "A JSON string of order items. See introduction.",
+   :userId
+   "The user's `userId` (not to be mistaken with the deprecated `id`).",
+   :hash
+   "A [verified request hash](/verified-hash/) signed with your client sign secret.",
+   :type "[Order type](/types/order-type/)",
    :paymentOptions
    "[Payment options](/types/payment-options/), as a bit mask",
    :purchaseFlow
-   "`\"DIRECT\"` or `\"AUTHORIZE\"`. Defaults to `\"DIRECT\"`",
-   :sellerUserId "Deprecated, do not use.",
+   "`\"DIRECT\"` or `\"AUTHORIZE\"`. Defaults to `\"DIRECT\"`. See [the paylink API](/paylink-api/#purchase-flows) for details.",
+   :requestReference
+   "A unique reference that identifies the request. Used to validate that each charge request is unique for the combination of clientId + requestReference + request status and ensure that duplicate requests are not processed more than once. Sending the same `requestReference` will always result in the same response.",
    :tag
-   "To be used for tracking. Will be returned in all order endpoints",
-   :type "[Order type](/types/order-type/)"},
+   "To be used for tracking. Will be returned in all order endpoints"},
   :method "POST",
   :name "Direct payment charge",
   :httpMethods
@@ -1476,7 +1488,7 @@
     :filters [],
     :defaultFilters [],
     :responses
-    [{:status 201,
+    [{:status 200,
       :description "Returns the newly created subscription object",
       :type "subscription"}]}},
   :url "/api/2/user/{id}/subscription",
@@ -2331,15 +2343,15 @@
    :status "The [product status](/types/product-status/)",
    :subscriptionAutoRenewLockPeriod
    "The duration of the initial period where auto renewal cannot be changed",
-   :vat "VAT, in cents",
+   :vat "VAT, fraction × 10000. For instance, 25% would be 2500",
    :currency "The price and VAT currency",
    :subscriptionFinalEndDate
    "A date from when this product is no longer for sale",
-   :name "The product name",
+   :name "The product name. Cannot be longer than 64 characters.",
    :parentProductId "ID of the parent product, if any",
    :saleStart "Provide if there is a sale of some sort",
    :subscriptionGracePeriod
-   "The duration after a failed charge attempt the subscription stays active",
+   "The duration after a failed charge attempt the subscription stays active. Must be at least 5 days if auto renew is enabled.",
    :subscriptionPeriod
    "The duration of a subscription period, as a timestamp in seconds",
    :availableStop
@@ -2347,11 +2359,12 @@
    :subscriptionAutoRenew
    "\"1\" if the subscription should automatically renew, \"0\" otherwise",
    :code
-   "Client-defined product code. More easily recognizable than the numeric ID.",
+   "Client-defined product code. More easily recognizable than the numeric ID. Must be between 3 and 20 characters long.",
    :saleStop "Provide if there is a sale of some sort",
    :bundle
    "If the product is of type bundle, this field decides what bundle type. Bundle type 0: Not a bundle, 1: Dynamic bundle, 2: One-off bundle",
-   :url "",
+   :url
+   "Link to the product. Must be between 3 and 1024 characters long.",
    :subscriptionEmailReceiptLimit
    "If set to anything not null, will prevent emails from being sent on purchase/renewal of this subscription",
    :subscriptionRenewPeriod "The duration of a renewal",
@@ -2366,7 +2379,8 @@
    :price "Price, in cents",
    :allowMultiSales
    "\"1\" if a user is allowed to purchase this product multiple times, \"0\" otherwise",
-   :description "",
+   :description
+   "Product description. Must be between 3 and 255 characters long.",
    :quantityLimit "If there is a limited supply for this product",
    :availableStart
    "The time from when the product is available for sale ([date time](/types/datetime/))"},
