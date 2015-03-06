@@ -1,10 +1,13 @@
 language: clojure
 lein: lein2
 env:
-  - JVM_OPTS="-Dspid.freeze.assets=true -Dspid.freeze.pages=true"
+- JVM_OPTS="-Dspid.freeze.assets=true -Dspid.freeze.pages=true"
 before_install: cp resources/config.sample.edn resources/config.edn
 script: lein2 with-profile test midje
 jdk:
-  - openjdk6
-  - openjdk7
-  - oraclejdk7
+- openjdk6
+- openjdk7
+- oraclejdk7
+notifications:
+  slack:
+    secure: D2oviFgzxvZKRWS5BLAh1UA+AJSvN1+BsXdOBb7hXZ/D1LXJf4zX3HSm59NCaRkGeYdcKT3c/Igk6qf8vRav5m7RgPB9zz8cFDg5owOQy2QHXVsZ/iojWEnZKt3LEFU2F6hYLoN0aKCsG1BBUNuPzODu/l3VCdQt50Zt1utFrvQ=
