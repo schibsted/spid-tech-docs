@@ -8,14 +8,14 @@ user to SPiD to log in/out, start a payment process, etc.
 
 #### tracking_ref
 
-A client-provided unique visitor reference. Used for tracking in third party
-analytics like Adobe Sitecatalyst. This is also saved to SPiD logins and events
-tables.
+Used as a grouping reference. For example a client-provided unique visitor reference used for tracking in third party
+analytics like Adobe Sitecatalyst. It may be anything you want to track across client domains and SPiD. 
+This is also saved to SPiD logins and events tables. 
 
 #### tag
 
-Custom client string used for custom order tracking. Available in order and
-events tables.
+Custom client string used for custom order tracking. It may be anything you want to track across client domains and SPiD. 
+Available in order and events tables.
 
 #### force
 
