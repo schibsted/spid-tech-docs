@@ -19,8 +19,6 @@
 
 :body
 
-iOS sample apps
-
 There are four different sample apps all available in the iOS-SDK repository that showcase the different ways to login to SPiD.
 
 The sample apps show how to login using username and password, browser, webview, or via a user's Facebook account. If the user is already authenticated when the app launches the user is sent to the redirect uri. This is especially useful if you use a browser to login as the cookie from another application using SPiD to login can be used by your application, simplifying the login process for the user and increasing the conversion rate in your app.

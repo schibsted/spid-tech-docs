@@ -19,7 +19,6 @@
 
 :body
 
-Android sample applications
 There are 5 different sample apps all available in the SPiD Android SDK repository that demonstrate the different ways to login to SPiD. Clone the repository in a directory of your choosing git clone https://github.com/schibsted/sdk-android.git <directory>
 
 Before using these samples you need to configure them to use your own client credentials. Do this by finding the following code statement, replacing the placeholder values with your own valid credentials.
