@@ -19,7 +19,7 @@
 
 :body
 
-There are 5 different sample apps all available in the SPiD Android SDK repository that demonstrate the different ways to login to SPiD. Clone the repository in a directory of your choosing git clone https://github.com/schibsted/sdk-android.git <directory>
+There are 5 different sample apps all available in the SPiD Android SDK repository that demonstrate the different ways to login to SPiD. Clone the repository in a directory of your choosing `git clone https://github.com/schibsted/sdk-android.git <directory>`
 
 Before using these samples you need to configure them to use your own client credentials. Do this by finding the following code statement, replacing the placeholder values with your own valid credentials.
 
@@ -33,7 +33,7 @@ Before using these samples you need to configure them to use your own client cre
     	.context(getApplicationContext())
     	.build();
     	
-In the AndroidManifest.xml file update the intent filter to use your own url scheme. This should be on the format <spid-clientId>, if your client id is 123 your url scheme would be spid-123. This is used to redirect http calls to your app
+In the AndroidManifest.xml file update the intent filter to use your own url scheme. This should be on the format `<spid-clientId>`, if your client id is 123 your url scheme would be spid-123. This is used to redirect http calls to your app
 
 	<data android:scheme="your-app-url-scheme" />
 
