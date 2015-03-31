@@ -12,7 +12,7 @@
     - [Android sample apps](/sdks/android/sample-apps/)
 - [iOS](/sdks/ios/)
     - iOS sample apps
-- [Reviews](/mobile/reviews/)
+- [Mobile review checklist](/mobile/reviews/)
 - [OAuth for mobile clients](/mobile/oauth-authentication-on-mobile-devices/)
 - [Best practices](/mobile/best-practices/)
 - [FAQ](/mobile/faq/)
