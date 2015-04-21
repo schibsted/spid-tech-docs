@@ -87,8 +87,8 @@ VGS.getSignupURI(redirectUri, clientId); //=> "https://stage.payment.schibsted.n
 Returns the logout URI.
 
 ```js
-VGS.getLogoutURI(); //=> "https://stage.payment.schibsted.no/logout?response_type=code&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
-VGS.getLogoutURI(redirectUri, clientId); //=> "https://stage.payment.schibsted.no/logout?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
+VGS.getLogoutURI(); //=> "https://stage.payment.schibsted.no/logout?client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
+VGS.getLogoutURI(redirectUri, clientId); //=> "https://stage.payment.schibsted.no/logout?client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
 ```
 
 <a id="get-account-uri"></a>
