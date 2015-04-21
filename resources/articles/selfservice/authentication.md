@@ -38,7 +38,7 @@ When we recieve the mail and handle your request you should be able to logon to 
 
 ### Help! I JUST started out and I don't know about environments?!
 
-Take a chill pill and relax. Do your company currently have clients in production that uses SPiD?
+Do your company currently have clients in production that uses SPiD?
 Ask your manager which environment they are under, or simply try to login to the clients then you will know what environment they should go under.
 
 If the answer to the question is "no" and you just started out, you should get access to SE Stage since there is no COM Stage (as of this writing).
@@ -47,7 +47,7 @@ If the answer to the question is "no" and you just started out, you should get a
 
 ## Becoming a "VIP" in SPiD
 
-Since you are now basically a VIP you will notice that you can't still access the SPiD self-service system from the links above. It tells you to enter some kind of weird code. This code is a two factor authentication and can be setup from you account pages.
+Since you are now basically a VIP you will notice that you can't still access the SPiD self-service system from the links above. It tells you to enter some kind of code. This code is a two factor authentication and can be setup from you account pages.
 
 In order to access self-service you will need an app for you mobile phone or desktop that can handle TOTP-codes (Timed-based One Time Passwords). Our suggestion is Google Authenticator but there is loads of other apps out there for free.
 
