@@ -63,3 +63,7 @@ a tutorial on building sites on the same basic principle.
 You can run all the tests with `./run-integration-tests.sh`, or you
 can start autotesting on a faster subset of the tests with
 `./autotest.sh`
+
+Note that nodejs is used to create SVG sequence diagrams. The latest compatible
+version of nodejs is `0.10.0`. Use `nvm` to manage different versions of nodejs locally 
+and make sure that you use version `0.10.0` when running the integration tests.

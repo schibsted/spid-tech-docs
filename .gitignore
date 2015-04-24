@@ -11,3 +11,4 @@ pom.xml.asc
 dist
 resources/config.edn
 doc
+.idea

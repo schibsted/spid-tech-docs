@@ -73,7 +73,7 @@ Note left of SPiD API: clientId=9876\ntype=session\noauth_token=94daab
 Note right of SPiD API: SPiD generates a onetime code\nthat expires within 1 minute
 SPiD API->Native App: Returns onetime code
 Native App->Webview: Sends onetime code to webview
-Webview->SPiD Web: Redirects user to /auth/session/{onetimecode}
+Webview->SPiD Web: Redirects user to /session/{onetimecode}
 Note right of SPiD Web: SPiD generates a session based on\nthe user this code belongs to
 SPiD Web->Webview: Returns a SPiD session cookie and redirects user to redirect uri provided
 ```
