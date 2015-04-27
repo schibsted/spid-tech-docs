@@ -14,14 +14,10 @@ var libs = [
 ];
 
 module.exports = function (input) {
-  var window = jsdom.createWindow(jsdom.dom);
-  var navigator = window.navigator;
 
   var document = jsdom.jsdom("<html><body><div id='diagram'></div></body></html>");
-  window.document = document;
-
-  document.implementation.addFeature(
-    "http://www.w3.org/TR/SVG11/feature#BasicStructure", "1.1");
+  var window = document.parentWindow;
+  var navigator = window.navigator;
 
   var escaped = input
         .replace(/\\/g, "\\\\")
