@@ -5,6 +5,7 @@ env:
 before_install:
 - cp resources/config.sample.edn resources/config.edn
 - nvm install 0.10
+- pushd seq-diagrams && npm install && popd
 script: lein2 with-profile test midje
 jdk:
 - openjdk6
