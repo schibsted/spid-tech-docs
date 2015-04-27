@@ -4,7 +4,8 @@
             [digest :refer [md5]]))
 
 (def npm-install
-  "Install npm dependencies" (delay
+  "Install npm dependencies"
+  (delay
     (let [result (sh "npm" "install"
                      :dir "seq-diagrams/")]
       (if (= 0 (:exit result))
