@@ -6,6 +6,7 @@ before_install: cp resources/config.sample.edn resources/config.edn
 before_script:
 - nvm install 0.10.0
 - nvm use 0.10.0
+- node --version
 script: lein2 with-profile test midje
 jdk:
 - openjdk6
