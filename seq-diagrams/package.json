@@ -2,7 +2,7 @@
   "name": "seq-diagrams",
   "version": "0.1.0",
   "dependencies": {
-    "jsdom": "0.11.1"
+    "jsdom": "3.1.2"
   },
   "main": "./index.js"
 }
