@@ -50,7 +50,7 @@ The Java API client library is deployed in Maven central, just add it to your pr
 <dependency>
   <groupId>no.spid</groupId>
   <artifactId>no.spid.api.client</artifactId>
-  <version>1.2</version>
+  <version>1.4</version>
 </dependency>
 ```
 
