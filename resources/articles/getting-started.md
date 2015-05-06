@@ -46,13 +46,7 @@ examples, see the example use-cases.
 
 The Java API client library is deployed in Maven central, just add it to your project's `pom.xml` file:
 
-```xml
-<dependency>
-  <groupId>no.spid</groupId>
-  <artifactId>no.spid.api.client</artifactId>
-  <version>1.4</version>
-</dependency>
-```
+<spid-example lang="html" src="/java/getting-started/pom.xml" title="Add SPiD client"/>
 
 ## :tab PHP
 
