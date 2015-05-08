@@ -1,6 +1,5 @@
 :title Digital Content as Guardian
 
-:category products
 :aside
 
 ##Guardian
