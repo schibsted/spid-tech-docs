@@ -1,7 +1,5 @@
 :title Digital Content as Guardian
-
-:aside
-
+:body
 ##Guardian
 
 When checking access on a product that is of the type "Digital Content", a user normally
