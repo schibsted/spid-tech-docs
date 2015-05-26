@@ -43,7 +43,7 @@ The review must be made using the stage credentials of the client to be reviewed
 
 ### Terms and conditions
 
-Terms and conditions must be accessible to the user from the login page. The user does not have to accept the terms by using a modal dialog, but they have to be available so the user can easily read through them at login.
+Terms and conditions must be accessible to the user from the login page, the terms are fetched from the [terms](/endpoints/GET/terms/) endpoint. The user does not have to accept the terms by using a modal dialog, but they have to be available so the user can easily read through them at login.
 
 ### Logo
 
