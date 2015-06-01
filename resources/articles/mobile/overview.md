@@ -28,7 +28,7 @@ To develop an app for SPiD the following needs to be done.
 
 ### 1. Request access to self service
 
-If you don't already have access to self service request access, see [self service access](http://techdocs.spid.no/ss-access/) for further details.
+If you don't already have access to self service request access, see [self service access](/selfservice/access/) for further details.
 
 ### 2. Create a client and request stage credentials
 
