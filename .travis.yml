@@ -8,7 +8,6 @@ before_install:
 - pushd seq-diagrams && npm install && popd
 script: lein2 with-profile test midje
 jdk:
-- openjdk6
 - openjdk7
 - oraclejdk7
 notifications:
