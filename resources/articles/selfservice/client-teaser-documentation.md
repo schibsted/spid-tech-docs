@@ -21,11 +21,6 @@ You may only have one teaser activated for each client and it’s only shown if 
 
 # Each input field explained
 
-## Client tag
-Client tags are for the moment names that seperates your client teasers. If you have several different teasers that should be activated at different times, a good idea could be to name it “*your_client_campaign*” for example if the teaser will be activated during campaigns.
-
-The tag is shown in the summary of all your client teasers.
-
 ## Teaser description
 
 The description field is a short text to explain what the teaser is about. Given the campaign example above, a good description could be “*Shows our special campaign prices for campaign y*”.

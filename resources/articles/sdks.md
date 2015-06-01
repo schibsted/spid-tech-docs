@@ -16,7 +16,7 @@
 - [Implementing single sign-on](/implementing-sso/)
 - [Endpoints](/endpoints/)
 
-:title SPiD API clients/Software development kits
+:title SPiD API clients/SDKs
 
 :body
 
