@@ -73,6 +73,7 @@
       :api-integration "API and Integration"
       :self-service "Self service and support"
       :how-tos "FAQs and HOWTOs"
+      :flows "Flows"
       })
 
 (defn- frontpage-articles [articles]
@@ -80,7 +81,7 @@
 
 (defn- render-category-with-articles [[category articles]]
   (if (categories category)
-    [:div {:class (if (= (last categories) category) "lastUnit" "unit s1of4")}
+    [:div {:class (if (= (last categories) category) "lastUnit" "unit s1of3")}
      [:h3 (categories category)]
      [:ul
       (map render-article-link articles)]]))
