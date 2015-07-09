@@ -55,15 +55,9 @@ When client services uses the redirect login flow and send the user to SPiD for 
 * If SPiD doesn't recognize the user (SPiD cookie not found):
     1. Ask the user to sign up (signup requires user to accept SPiDs and site B terms of use)
 
-This is a simple overview of Single Sign On using JS SDK, explaining the complete process between the client
-service (yellow) and SPiD (blue).
-
-![Single Sign On using JS SDK](/images/simple-sso-js-usecase.png)
-
-This is a simple overview of Single Sign On using the redirect flow, explaining the complete process between the client
-service (yellow) and SPiD (blue).
-
-![Single Sign on using redirect flow](/images/simple-sso-redirect-usecase.png)
+This is a complete overview of Single Sign On using JS SDK, explaining the complete process between the client
+service (orange), the JS SDK (white) and the SPiD platform (blue).
+![Single Sign On complete overview using JS SDK, cookies and redirects](/images/sso-usecases.png)
 
 Here is a complete overview of how SPiD handles the login/signup process internally using the redirect login flow:
 
