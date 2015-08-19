@@ -74,6 +74,7 @@
       :self-service "Self service and support"
       :how-tos "FAQs and HOWTOs"
       :flows "Flows"
+      :migration-service "Migration service"
       })
 
 (defn- frontpage-articles [articles]
