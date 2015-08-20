@@ -144,7 +144,7 @@ Migration specification:
 Request from migration client to migration service:
 
 ```
-GET /user.php?email=alex@dot.com HTTP/1.1
+GET /user.php?email=alex%40dot.com HTTP/1.1
 Host: migrate.example.com
 Content-Type: application/json
 X-Auth-Migrate: 2C749A8E-4D07-4586-B4D3-F75C02F81342
