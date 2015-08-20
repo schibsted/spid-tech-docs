@@ -1,6 +1,6 @@
 :title Migrating users to SPiD
 :frontpage
-:category migration-service
+:category self-service
 :aside
 
 ## Table of Contents
@@ -130,15 +130,6 @@ will be removed by the migration client.
 }
 
 ```
-
-## Repository
-
-The migration client lives in a service called SPiD UserData Service that is responsible for handling users. In order to 
-test out migrations before going live, you may wish to clone the SPiD UserData Service and simulate migrations directly 
-on your local computer. Take a look at the integration tests, or debug through a complete migration to gain 
-understanding for how the service works. Don’t forget to file an issue in case you find a bug.
-
-[Schibsted SPiD UserData Service Github Repository](https://github.schibsted.io/spt-identity/spid-userdata-service)
 
 ## Example
 Below is an example request / response for migrating the user `alex@dot.com` from your migration service endpoint 
