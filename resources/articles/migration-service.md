@@ -13,9 +13,9 @@ Congratulations on choosing to migrate users using the new SPiD Automated Migrat
 
 ## Summary
 
-What you need to understand is that it is you who will implement the migration service. This migration service is then 
-used by SPiD in order to import users to the SPiD platform. In other words, you build a service allowing SPiD access to 
-all users in your system. 
+By using these guidelines, you will be able to implement a migration service and thereby start migrating users to SPiD.
+This migration service is then used by SPiD in order to import users to the SPiD platform. In other words, you build a 
+service allowing SPiD access to all users in your system. 
 
 Every time a new user logs in through SPiD via your client Id, SPiD will make a request to your migration service to 
 import data you have for that user.
@@ -144,7 +144,7 @@ Migration specification:
 Request from migration client to migration service:
 
 ```
-GET /user.php?email=alex@dot.com HTTP/1.1  
+GET /user.php?email=alex%40dot.com HTTP/1.1  
 Host: migrate.example.com  
 Content-Type: application/json  
 X-Auth-Migrate: 2C749A8E-4D07-4586-B4D3-F75C02F81342  
