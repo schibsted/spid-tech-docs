@@ -39,7 +39,7 @@ this API.
 Billing requests will create an order with corresponding order lines. The order
 may be tagged in the same way as when using [paylinks](/paylink-api/): client
 references for the order and/or order lines, as well as the
-[tag parameter](http://localhost:3000/tracking-parameters/) used in regular SPiD
+[tag parameter](/tracking-parameters/) used in regular SPiD
 purchase flows.
 
 ## Preconditions and requirements
