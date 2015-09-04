@@ -20,8 +20,9 @@ It starts with the auth flow, and then appends the following steps.
 * Receipt, optional, default enabled
 
 Flow is initiated by path `/flow/checkout` and require query parameters `client_id`, `redirect_uri` and `response_type`.
-Optional query parameters include, among others, `campaign_id`, `product_id`, `cancel_redirect_uri`.
+Optional query parameters include, among others, `campaign_id`, `product_id`, `cancel_redirect_uri`, `signup`, `login`.
 
+The flow automatically use the login view. This can however be overridden by appending the parameter `signup=1` to the url, which will render the signup view instead.
 
 ## How it looks
 Client teaser and Custom CSS is applied to all of the steps. See [Flows](/flows/flows/) for more info.

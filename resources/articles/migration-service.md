@@ -168,3 +168,23 @@ Response body from migration service to migration client:
   "locale":         "sv_SE"
 }
 ```
+
+## Migration for the user
+The migration for the user is initiated from the login view of the [Auth flow](/flows/auth-flow/),
+forgot password view of the [Auth flow](/flows/auth-flow/), or the [Forgot password flow](/flows/password-flow/).
+
+The login flow migration is done in 4 steps in total.
+
+1.  The user logs in,
+2.  verifies her email address,
+3.  sets a new password and
+4.  accepts the agreement.
+
+The forgot password flow is the same flow as the common forgot password flow
+
+1.  The users enter her email,
+2.  clicks the link in the recieved mail,
+3.  sets a new password and verifies that email in one step,
+4.  logs in and accepts agreement.
+
+**Note:** The [Checkout flow](/flows/checkout-flow/) starts with the [Auth flow](/flows/auth-flow/) in is thus covered by migration.
