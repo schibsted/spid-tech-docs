@@ -64,7 +64,7 @@ If you do not have Git installed, you can also download a
 The Clojure client is deployed in Clojars, just put it in your `project.clj`:
 
 ```clojure
-[spid-client-clojure "1.0.0"]
+[spid-client-clojure "1.2.0"]
 ```
 
 ## :tab iOS
