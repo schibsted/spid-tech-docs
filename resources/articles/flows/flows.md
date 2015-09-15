@@ -1,13 +1,17 @@
 :title Flows
 :frontpage
 :category flows
-
 :aside
 ## Flows
-
+- [About flows](/flows/flows/)
 - [Auth/Login/Signup flow](/flows/auth-flow/)
 - [Checkout flow](/flows/checkout-flow/)
 - [Forgot password flow](/flows/password-flow/)
+- [Profile update flow](/flows/profile-update-flow/)
+- [P2P payment flow](/flows/p2p-checkout-flow/)
+- [Withdraw flow](/flows/withdraw-flow/)
+
+:body
 
 ### Customization
 

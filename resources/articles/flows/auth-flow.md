@@ -1,6 +1,16 @@
 :title Auth, Login and Signup flow
 :frontpage
 :category flows
+:aside
+## Flows
+- [About flows](/flows/flows/)
+- [Auth/Login/Signup flow](/flows/auth-flow/)
+- [Checkout flow](/flows/checkout-flow/)
+- [Forgot password flow](/flows/password-flow/)
+- [Profile update flow](/flows/profile-update-flow/)
+- [P2P payment flow](/flows/p2p-checkout-flow/)
+- [Withdraw flow](/flows/withdraw-flow/)
+
 :body
 
 The auth flow is used for login and signup. It has 3 different initiation urls, and contains several steps based on client configuration.
