@@ -1,4 +1,4 @@
-:title Flows
+:title About navigation flows
 :frontpage
 :category flows
 :aside

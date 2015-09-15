@@ -73,7 +73,7 @@
       :api-integration "API and Integration"
       :self-service "Self service and support"
       :how-tos "FAQs and HOWTOs"
-      :flows "Flows"
+      :flows "Navigation flows"
       })
 
 (defn- frontpage-articles [articles]
