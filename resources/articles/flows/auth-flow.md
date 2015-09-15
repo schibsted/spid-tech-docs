@@ -9,7 +9,7 @@
 - [Forgot password flow](/flows/password-flow/)
 - [Profile update flow](/flows/profile-update-flow/)
 - [P2P payment flow](/flows/p2p-checkout-flow/)
-- [Withdraw flow](/flows/withdraw-flow/)
+- [Withdraw flow](/flows/withdraw-checkout-flow/)
 
 :body
 
