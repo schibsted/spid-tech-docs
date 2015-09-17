@@ -67,8 +67,8 @@ var clientId = "4321abc0000";
 Returns the login URI.
 
 ```js
-VGS.getLoginURI(); //=> "https://stage.payment.schibsted.no/flow/login?response_type=code&flow=signup&client_id=4321abc0000&redirect_uri=http%3A%2F%2Flocalhost"
-VGS.getLoginURI(redirectUri, clientId); //=> "https://stage.payment.schibsted.no/flow/login?response_type=code&flow=signup&client_id=abcdef&redirect_uri=http%3A%2F%2Fexample.com"
+VGS.getLoginURI(); //=> "https://identity-pre.schibsted.com/flow/login?response_type=code&flow=signup&client_id=4321abc0000&redirect_uri=http%3A%2F%2Flocalhost"
+VGS.getLoginURI(redirectUri, clientId); //=> "https://identity-pre.schibsted.com/flow/login?response_type=code&flow=signup&client_id=abcdef&redirect_uri=http%3A%2F%2Fexample.com"
 ```
 
 <a id="get-signup-uri"></a>
@@ -77,8 +77,8 @@ VGS.getLoginURI(redirectUri, clientId); //=> "https://stage.payment.schibsted.no
 Returns the signup URI.
 
 ```js
-VGS.getSignupURI(); //=> "https://stage.payment.schibsted.no/flow/signup?response_type=code&flow=signup&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
-VGS.getSignupURI(redirectUri, clientId); //=> "https://stage.payment.schibsted.no/flow/signup?response_type=code&flow=signup&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
+VGS.getSignupURI(); //=> "https://identity-pre.schibsted.com/flow/signup?response_type=code&flow=signup&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
+VGS.getSignupURI(redirectUri, clientId); //=> "https://identity-pre.schibsted.com/flow/signup?response_type=code&flow=signup&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
 ```
 
 <a id="get-logout-uri"></a>
@@ -87,8 +87,8 @@ VGS.getSignupURI(redirectUri, clientId); //=> "https://stage.payment.schibsted.n
 Returns the logout URI.
 
 ```js
-VGS.getLogoutURI(); //=> "https://stage.payment.schibsted.no/logout?client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
-VGS.getLogoutURI(redirectUri, clientId); //=> "https://stage.payment.schibsted.no/logout?client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
+VGS.getLogoutURI(); //=> "https://identity-pre.schibsted.com/logout?client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
+VGS.getLogoutURI(redirectUri, clientId); //=> "https://identity-pre.schibsted.com/logout?client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
 ```
 
 <a id="get-account-uri"></a>
@@ -97,8 +97,8 @@ VGS.getLogoutURI(redirectUri, clientId); //=> "https://stage.payment.schibsted.n
 Returns the account summary page URI.
 
 ```js
-VGS.getAccountURI(); //=> "https://stage.payment.schibsted.no/account/summary?response_type=code&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
-VGS.getAccountURI(redirectUri, clientId); //=> "https://stage.payment.schibsted.no/account/summary?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
+VGS.getAccountURI(); //=> "https://identity-pre.schibsted.com/account/summary?response_type=code&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
+VGS.getAccountURI(redirectUri, clientId); //=> "https://identity-pre.schibsted.com/account/summary?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
 ```
 
 <a id="get-purchase-history-uri"></a>
@@ -107,8 +107,8 @@ VGS.getAccountURI(redirectUri, clientId); //=> "https://stage.payment.schibsted.
 Returns the purchase history page URI.
 
 ```js
-VGS.getPurchaseHistoryURI(); //=> "https://stage.payment.schibsted.no/account/purchasehistory?response_type=code&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
-VGS.getPurchaseHistoryURI(redirectUri, clientId); //=> "https://stage.payment.schibsted.no/account/purchasehistory?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
+VGS.getPurchaseHistoryURI(); //=> "https://identity-pre.schibsted.com/account/purchasehistory?response_type=code&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
+VGS.getPurchaseHistoryURI(redirectUri, clientId); //=> "https://identity-pre.schibsted.com/account/purchasehistory?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
 ```
 
 <a id="get-subscriptions-uri"></a>
@@ -117,8 +117,8 @@ VGS.getPurchaseHistoryURI(redirectUri, clientId); //=> "https://stage.payment.sc
 Returns the subscriptions page URI.
 
 ```js
-VGS.getSubscriptionsURI(); //=> "https://stage.payment.schibsted.no/account/subscriptions?response_type=code&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
-VGS.getSubscriptionsURI(redirectUri, clientId); //=> "https://stage.payment.schibsted.no/account/subscriptions?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
+VGS.getSubscriptionsURI(); //=> "https://identity-pre.schibsted.com/account/subscriptions?response_type=code&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
+VGS.getSubscriptionsURI(redirectUri, clientId); //=> "https://identity-pre.schibsted.com/account/subscriptions?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
 ```
 
 <a id="get-products-uri"></a>
@@ -127,8 +127,8 @@ VGS.getSubscriptionsURI(redirectUri, clientId); //=> "https://stage.payment.schi
 Returns the products page URI.
 
 ```js
-VGS.getProductsURI(); //=> "https://stage.payment.schibsted.no/account/products?response_type=code&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
-VGS.getProductsURI(redirectUri, clientId); //=> "https://stage.payment.schibsted.no/account/products?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
+VGS.getProductsURI(); //=> "https://identity-pre.schibsted.com/account/products?response_type=code&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
+VGS.getProductsURI(redirectUri, clientId); //=> "https://identity-pre.schibsted.com/account/products?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
 ```
 
 <a id="get-redeem-voucher-uri"></a>
@@ -139,11 +139,11 @@ will automatically be redeemed when the URI is visited.
 
 ```js
 VGS.getRedeemVoucherURI();
-//=> "https://stage.payment.schibsted.no/account/redeem?response_type=code&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
+//=> "https://identity-pre.schibsted.com/account/redeem?response_type=code&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
 
 var voucherCode = "12312314";
 VGS.getRedeemVoucherURI(voucherCode, redirectUri, clientId);
-//=> "https://stage.payment.schibsted.no/account/redeem?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com&voucher_code=12312314"
+//=> "https://identity-pre.schibsted.com/account/redeem?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com&voucher_code=12312314"
 ```
 
 <a id="get-purchase-product-uri"></a>
@@ -155,11 +155,11 @@ product" page.
 
 ```js
 VGS.getPurchaseProductURI();
-//=> "https://stage.payment.schibsted.no/flow/checkout?response_type=code&flow=payment&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
+//=> "https://identity-pre.schibsted.com/flow/checkout?response_type=code&flow=payment&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
 
 var productId = "12312314";
 VGS.getPurchaseProductURI(productId, redirectUri, clientId);
-//=> "https://stage.payment.schibsted.no/flow/checkout?response_type=code&flow=payment&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com&product_id=12312314"
+//=> "https://identity-pre.schibsted.com/flow/checkout?response_type=code&flow=payment&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com&product_id=12312314"
 ```
 
 <a id="get-purchase-campaign-uri"></a>
@@ -170,13 +170,13 @@ take the user to the products in the campaign.
 
 ```js
 VGS.getPurchaseCampaignURI();
-//=> "https://stage.payment.schibsted.no/flow/checkout?response_type=code&flow=payment&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
+//=> "https://identity-pre.schibsted.com/flow/checkout?response_type=code&flow=payment&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
 
 var campaignId = "39843984";
 var productId = "12312314";
 var voucherCode = "89878966";
 VGS.getPurchaseCampaignURI(campaignId, productId, voucherCode, redirectUri, clientId);
-//=> "https://stage.payment.schibsted.no/flow/checkout?response_type=code&flow=payment&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com&campaign_id=39843984&product_id=12312314&voucher_code=89878966"
+//=> "https://identity-pre.schibsted.com/flow/checkout?response_type=code&flow=payment&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com&campaign_id=39843984&product_id=12312314&voucher_code=89878966"
 ```
 
 <a id="get-login-status"></a>

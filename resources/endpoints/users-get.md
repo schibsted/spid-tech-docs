@@ -25,7 +25,7 @@ Get name, userId, email and gender from users where familyName starts with
 "Olsen" and gender is male, limit to 10 users:
 
 ```sh
-curl http://stage.payment.schibsted.no/api/2/users?oauth_token=TOKEN& \
+curl http://identity-pre.schibsted.com/api/2/users?oauth_token=TOKEN& \
   limit=10& \
   offset=0& \
   familyName=Olsen& \
@@ -37,7 +37,7 @@ Get the whole user object from users where email matches exactly
 "johndoe@example.com":
 
 ```sh
-curl http://stage.payment.schibsted.no/api/2/users?oauth_token=TOKEN& \
+curl http://identity-pre.schibsted.com/api/2/users?oauth_token=TOKEN& \
   email=johndoe@example.com
 ```
 
@@ -45,7 +45,7 @@ Get all users that where registered between 2011-01-20 (timestamp 1295478000)
 and 2011-01-21:
 
 ```sh
-curl http://stage.payment.schibsted.no/api/2/users?oauth_token=TOKEN& \
+curl http://identity-pre.schibsted.com/api/2/users?oauth_token=TOKEN& \
   since=1295478000& \
   until=2011-01-21
 ```
@@ -53,7 +53,7 @@ curl http://stage.payment.schibsted.no/api/2/users?oauth_token=TOKEN& \
 Get all users that where registered between yesterday and now:
 
 ```sh
-curl http://stage.payment.schibsted.no/api/2/users?oauth_token=TOKEN& \
+curl http://identity-pre.schibsted.com/api/2/users?oauth_token=TOKEN& \
   since=yesterday& \
   until=now
 ```

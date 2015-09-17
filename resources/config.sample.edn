@@ -1,7 +1,7 @@
 {:client-id "YOUR ID"
  :client-secret "YOUR SECRET"
  :client-sign-secret "YOUR SIGN SECRET"
- :spid-base-url "https://stage.payment.schibsted.no"
+ :spid-base-url "https://identity-pre.schibsted.com"
  :tech-docs-base-url "http://techdocs.spid.no"
  :demo-user {:email "DEMO USER EMAIL"
              :password "DEMO USER PASSWORD"}}

@@ -2,7 +2,7 @@
   {
     "subscriptionSurveyUrl": null,
     "status": "1",
-    "purchaseUri": "https://stage.payment.schibsted.no/auth/start?client_id\u003d52f8e3d9efd04bb749000000\u0026flow\u003dpayment\u0026product_id\u003d301696",
+    "purchaseUri": "https://identity-pre.schibsted.com/auth/start?client_id\u003d52f8e3d9efd04bb749000000\u0026flow\u003dpayment\u0026product_id\u003d301696",
     "changedBy": "52f8e3d9efd04bb749000000",
     "subscriptionAutoRenewLockPeriod": "0",
     "vat": "2500",

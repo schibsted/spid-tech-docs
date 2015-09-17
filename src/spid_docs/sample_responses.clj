@@ -175,7 +175,7 @@
 
 Beware! In order for this to work well, you need to add the username and
 password for a demo user in resources/config.edn, AND make sure this user
-is logged into https://stage.payment.schibsted.no/"
+is logged into https://identity-pre.schibsted.com/"
   [sample-defs endpoints mode]
   (if-not (config/config-exists?)
     (do
@@ -219,7 +219,7 @@ is logged into https://stage.payment.schibsted.no/"
           (println "-----------------------------------")
           (println "Beware! In order for this to work well, you need to add the username and
 password for a demo user in resources/config.edn, AND make sure this user
-is logged into https://stage.payment.schibsted.no/
+is logged into https://identity-pre.schibsted.com/
 
 Original error was
 ")

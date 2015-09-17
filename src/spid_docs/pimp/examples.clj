@@ -66,7 +66,7 @@
   (-> (with-missing-example-warning path title
         (find-example (format "### %s" title) "###" code))
       (str/replace #" --silent\b" "")
-      (str/replace #"\$server\b" "https://stage.payment.schibsted.no")))
+      (str/replace #"\$server\b" "https://identity-pre.schibsted.com")))
 
 (defn- read-example-file [lang repo path]
   (let [full-path (str examples-dir repo path)

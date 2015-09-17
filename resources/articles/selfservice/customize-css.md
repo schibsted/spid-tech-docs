@@ -9,7 +9,7 @@ Customize CSS is functionality in the self-service to change the background and 
 
 Just follow these few steps and you will be able to change the colors in an instant:
 
-1. Login to the self-service by visiting self-service at [Swedish production](https://payment.schibsted.se/)  or [Norwegian production](https://payment.schibsted.no/selfservice) (Note: if you are using stage, just put ```stage.``` before the rest of the domain).
+1. Login to the self-service by visiting self-service at [Swedish production](https://login.schibsted.com/)  or [Norwegian production](https://payment.schibsted.no/selfservice) (Note: if you are using stage, use [Stage environment](https://identity-pre.schibsted.com/)).
 2. Select the client you wish to change the colors of.
 3. Press the "Customize CSS" and enter either a hex-based value (e.g. ```#ffffff```) or a plain text value (e.g. ```pink```). The fields are explained and shown below.
 4. Press save. Now your users will be presented with the colors of your choosing!

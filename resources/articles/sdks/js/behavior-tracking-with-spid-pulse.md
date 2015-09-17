@@ -18,7 +18,7 @@
 
 Initialize the JavaScript SDK like explained [here](/sdks/javascript/). Remember to use the JavaScript Pulse SDK instead of the normal JavaScript SDK. For example:
 ```
-<script src="https://payment.schibsted.no/js/spid-sdk-pulse-1.7.9.min.js"></script>
+<script src="https://login.schibsted.com/js/spid-sdk-pulse-1.7.9.min.js"></script>
 ```
  
  Go to [GitHub](https://github.com/schibsted/sdk-js/) to check what is the latest version. 
@@ -28,7 +28,7 @@ Initialize the JavaScript SDK like explained [here](/sdks/javascript/). Remember
 ```js
 VGS.init({
     client_id : "your-spid-client-id",
-    server    : "stage.payment.schibsted.(no|se)",
+    server    : "identity-pre.schibsted.com",
     prod      : false,
     logging   : true,
     status    : true,
@@ -42,7 +42,7 @@ VGS.init({
 ```js
 VGS.init({
     client_id : "your-spid-client-id",
-    server    : "payment.schibsted.(no|se)",
+    server    : "login.schibsted.com",
     prod      : true,
     status    : true,
     track_anon_opt_out : true,

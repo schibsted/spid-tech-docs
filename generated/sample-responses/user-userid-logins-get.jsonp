@@ -1,7 +1,7 @@
 callback([
   {
     "status": "true",
-    "referer": "https://stage.payment.schibsted.no/auth/login?client_id\u003d52f8e3d9efd04bb749000000\u0026redirect_uri\u003d\u0026response_type\u003d0\u0026flow\u003dpayment\u0026product_id\u003d301691\u0026campaign_id\u003d0\u0026voucher_code\u003d0\u0026voucher_purchase_code\u003d0\u0026tag\u003d0\u0026webview\u003d0",
+    "referer": "https://identity-pre.schibsted.com/auth/login?client_id\u003d52f8e3d9efd04bb749000000\u0026redirect_uri\u003d\u0026response_type\u003d0\u0026flow\u003dpayment\u0026product_id\u003d301691\u0026campaign_id\u003d0\u0026voucher_code\u003d0\u0026voucher_purchase_code\u003d0\u0026tag\u003d0\u0026webview\u003d0",
     "clientId": "[Your client ID]",
     "trackingRef": false,
     "userId": "369662",
@@ -12,7 +12,7 @@ callback([
     "created": "2014-08-04 16:04:11",
     "email": "user@domain.tld",
     "type": "normal",
-    "initialReferer": "https://stage.payment.schibsted.no/auth/login?client_id\u003d52f8e3d9efd04bb749000000\u0026redirect_uri\u003d\u0026response_type\u003d0\u0026flow\u003dpayment\u0026product_id\u003d301691\u0026campaign_id\u003d0\u0026voucher_code\u003d0\u0026voucher_purchase_code\u003d0\u0026tag\u003d0\u0026webview\u003d0",
+    "initialReferer": "https://identity-pre.schibsted.com/auth/login?client_id\u003d52f8e3d9efd04bb749000000\u0026redirect_uri\u003d\u0026response_type\u003d0\u0026flow\u003dpayment\u0026product_id\u003d301691\u0026campaign_id\u003d0\u0026voucher_code\u003d0\u0026voucher_purchase_code\u003d0\u0026tag\u003d0\u0026webview\u003d0",
     "provider": "default",
     "id": "150032266",
     "ip": "127.0.0.1"

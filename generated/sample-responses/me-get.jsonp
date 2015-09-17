@@ -14,7 +14,7 @@ callback({
     "4d00e8d6bf92fc8648000000": {
       "id": "4d00e8d6bf92fc8648000000",
       "accountName": "SPiD",
-      "domain": "https://stage.payment.schibsted.no/"
+      "domain": "https://identity-pre.schibsted.com/"
     }
   },
   "locale": "nb_NO",
