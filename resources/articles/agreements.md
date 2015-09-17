@@ -16,7 +16,7 @@ The standard terms can be found here:
 
 Norway: [https://payment.schibsted.no/terms](https://payment.schibsted.no/terms).
 
-Sweden: [https://payment.schibsted.se/terms](https://payment.schibsted.se/terms).
+Sweden: [https://login.schibsted.com/terms](https://login.schibsted.com/terms).
 
 If you append your client_id to the term urls above you will also see PART III, which contains the provided client's terms section.
 

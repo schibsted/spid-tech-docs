@@ -243,7 +243,7 @@ token to make the `/endpoints` API call.
 static NSString *const ClientID = @"your-client-id";
 static NSString *const ClientSecret = @"your-client-secret";
 static NSString *const AppURLScheme = @"https";
-static NSString *const ServerURL = @"https://stage.payment.schibsted.no";
+static NSString *const ServerURL = @"https://identity-pre.schibsted.com";
 
 @implementation MyAppDelegate
 
@@ -308,7 +308,7 @@ public void onCreate(Bundle savedInstanceState) {
             .clientID("your-client-id")
             .clientSecret("your-client-secret")
             .appURLScheme("spid-example")
-            .serverURL("https://stage.payment.schibsted.no")
+            .serverURL("https://identity-pre.schibsted.com")
             .context(this)
             .debugMode(true)
             .build());

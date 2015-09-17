@@ -34,7 +34,7 @@ We recommend using the [Mixpanel JavaScript library](https://mixpanel.com/help/r
 Add the JavaScript SDK just before the `</head>` end tag of your page, for example (remember to use the latest version):
 
 ```html
-<script src="https://stage.payment.schibsted.no/js/spid-sdk-1.7.9.js"></script>
+<script src="https://identity-pre.schibsted.com/js/spid-sdk-1.7.9.js"></script>
 ```
 
 Read more [here](/sdks/javascript/).
@@ -64,7 +64,7 @@ VGS.Event.subscribe('auth.visitor', function(data) {
 
 VGS.init({
     client_id: '{YOUR STAGE CLIENT ID}',
-    server: 'stage.payment.schibsted.no',
+    server: 'identity-pre.schibsted.com',
     prod: false,
     logging: true,
     status:true

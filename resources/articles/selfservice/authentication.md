@@ -12,29 +12,25 @@ In order to access self-service. You will have to be an authenticated SPiD user.
 
 **COM PROD**: [http://login.schibsted.com/selfservice](http://login.schibsted.com/selfservice)
 
-**SE PROD**: [http://payment.schibsted.se/selfservice](http://payment.schibsted.se/selfservice)
-
 **NO PROD**: [http://payment.schibsted.no/selfservice](http://payment.schibsted.no/selfservice)
 
 #### Stage environments
-**SE STAGE**: [http://stage.payment.schibsted.se/selfservice](http://stage.payment.schibsted.se/selfservice)
-
-**NO STAGE**: [http://stage.payment.schibsted.no/selfservice](http://stage.payment.schibsted.no/selfservice)
+**STAGE**: [http://identity-pre.schibsted.com/selfservice](http://identity-pre.schibsted.com/selfservice)
 
 ## Gaining access to self-service
 
-As mentioned above you need to send an email to the SPiD support in order to gain access. Before the support personnel have recieved your request there are a few things you should think about.
+As mentioned above you need to send an email to the SPiD support in order to gain access. Before the support personnel have received your request there are a few things you should think about.
 
-Self-service is a very powerful tool that could potentially make the logins for all the companys clients to stop working so always be very selective in what and how many people gains access to the self-service system.
+Self-service is a very powerful tool that could potentially make the logins for all the company clients to stop working so always be very selective in what and how many people gains access to the self-service system.
 
 When you are ready to send the email, include the following:
 
 1. Your email address which is registered to your SPiD account, this **must** be an email from your workplace. We're not going to give you access with a gmail or hotmail address!
 2. CC your closest manager, boss or chief that can confirm that you should be given access to this system. The person giving consent should of course have some kind of responsibility for the technical aspects of your clients. Preferably a person that has used SPiD before.
 3. Specify which company / companies you should get access to.
-4. Specify which enviroments you should get access to.
+4. Specify which environments you should get access to.
 
-When we recieve the mail and handle your request you should be able to logon to self-service.
+When we receive the mail and handle your request you should be able to logon to self-service.
 
 ### Help! I JUST started out and I don't know about environments?!
 

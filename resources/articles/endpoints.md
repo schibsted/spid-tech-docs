@@ -69,7 +69,7 @@ SPiD. It is also the default format used by most endpoints. To force the use of
 JSON, use the `.json` suffix on URLs:
 
 ```text
-http://staging.payment.schibsted.no/api/2/user/42.json
+https://identity-pre.schibsted.com/api/2/user/42.json
 ```
 
 <h3 id="format-jsonp">JSONP</h3>
@@ -85,7 +85,7 @@ at the expense of higher security risk.
 To force the use of JSONP, use the `.jsonp` suffix on URLs:
 
 ```text
-http://staging.payment.schibsted.no/api/2/user/42.jsonp
+https://identity-pre.schibsted.com/api/2/user/42.jsonp
 ```
 
 The response will be executable JavaScript:
@@ -98,7 +98,7 @@ The callback function will be called `callback` by default. To change its name,
 use the `callback` query parameter:
 
 ```sh
-curl http://stage.payment.schibsted.no/api/2/users.jsonp?oauth_token=TOKEN&\
+curl https://identity-pre.schibsted.com/api/2/users.jsonp?oauth_token=TOKEN&\
      callback=doit
 ```
 
@@ -125,7 +125,7 @@ A few SPiD endpoints support other response types:
 To force their use, provide the lower case abbreviation as the URL suffix, e.g.:
 
 ```text
-http://staging.payment.schibsted.no/api/2/user/42.xml
+https://staging.payment.schibsted.no/api/2/user/42.xml
 ```
 
 ## Signed responses
@@ -317,7 +317,7 @@ properties, and for each one whether to sort ascending (`asc`) or descending
 Example:
 
 ```text
-GET http://payment.schibsted.no/api/2/orders?sort[status]=desc&sort[updated]=asc
+GET https://login.schibsted.com/api/2/orders?sort[status]=desc&sort[updated]=asc
 ```
 
 ## Filters

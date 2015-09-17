@@ -75,7 +75,7 @@ on the SPiD stage platform.
     Example on stage server:
 
     ```text
-    https://stage.payment.schibsted.no/login?client_id=4f6b7595efd04b2d5000000d&response_type=code&redirect_uri=fvnereader%3A%2F%2Flogin
+    https://identity-pre.schibsted.com/login?client_id=4f6b7595efd04b2d5000000d&response_type=code&redirect_uri=fvnereader%3A%2F%2Flogin
     ```
 
 2. After authentication, the server redirects the user back to the application with an OAuth code
@@ -90,7 +90,7 @@ on the SPiD stage platform.
     Example on stage server:
 
     ```text
-    POST https://stage.payment.schibsted.no/oauth/token
+    POST https://identity-pre.schibsted.com/oauth/token
         client_id=123
         client_secret=foobar
         redirect_uri=spidmobile-123%3A%2F%2Flogin
@@ -124,7 +124,7 @@ on the SPiD stage platform.
     Example on stage server:
 
     ```text
-    GET https://stage.payment.schibsted.no/api/2/me?oauth_token=de60c9b77cb2dfaec651ee8af0b55a27e483b172
+    GET https://identity-pre.schibsted.com/api/2/me?oauth_token=de60c9b77cb2dfaec651ee8af0b55a27e483b172
     ```
 
 ## Logging the user out of SPiD (and your app)
@@ -132,7 +132,7 @@ on the SPiD stage platform.
 You can programmatically log the user out of SPiD by sending a request to:
 
 ```text
-https://stage.payment.schibsted.no/logout?redirect_uri=YOUR_REDIRECT_URL&oauth_token=ACCESS_TOKEN
+https://identity-pre.schibsted.com/logout?redirect_uri=YOUR_REDIRECT_URL&oauth_token=ACCESS_TOKEN
 ```
 
 `redirect_uri` is optional, and tells SPiD where to redirect the user after

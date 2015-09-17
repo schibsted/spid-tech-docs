@@ -19,20 +19,16 @@ You will need to register your work e-mail as a SPiD user on the environment you
     <th>URL</th>
   </tr>
   <tr>
-    <td>Stage Norway</td>
-    <td><a href="https://stage.payment.schibsted.no/">https://stage.payment.schibsted.no/</a></td>
+    <td>Stage</td>
+    <td><a href="https://identity-pre.schibsted.com/">https://identity-pre.schibsted.com/</a></td>
   </tr>
   <tr>
     <td>Production Norway</td>
     <td><a href="https://payment.schibsted.no/">https://payment.schibsted.no/</a></td>
   </tr>
   <tr>
-    <td>Stage Sweden</td>
-    <td><a href="https://stage.payment.schibsted.se/">https://stage.payment.schibsted.se/</a></td>
-  </tr>
-  <tr>
     <td>Production Sweden</td>
-    <td><a href="https://payment.schibsted.se/">https://payment.schibsted.se/</a></td>
+    <td><a href="https://login.schibsted.com/">https://login.schibsted.com/</a></td>
   </tr>
 </table>
 
@@ -48,20 +44,16 @@ merchant/company access with the information stating which client/s you need acc
     <th>URL</th>
   </tr>
   <tr>
-    <td>Stage Norway</td>
-    <td><a href="https://stage.payment.schibsted.no/selfservice">https://stage.payment.schibsted.no/selfservice</a></td>
+    <td>Stage</td>
+    <td><a href="https://identity-pre.schibsted.com/selfservice">https://identity-pre.schibsted.com/selfservice</a></td>
   </tr>
   <tr>
     <td>Production Norway</td>
     <td><a href="https://payment.schibsted.no/selfservice">https://payment.schibsted.no/selfservice</a></td>
   </tr>
   <tr>
-    <td>Stage Sweden</td>
-    <td><a href="https://stage.payment.schibsted.se/selfservice">https://stage.payment.schibsted.se/selfservice</a></td>
-  </tr>
-  <tr>
     <td>Production Sweden</td>
-    <td><a href="https://payment.schibsted.se/selfservice">https://payment.schibsted.se/selfservice</a></td>
+    <td><a href="https://login.schibsted.com/selfservice">https://login.schibsted.com/selfservice</a></td>
   </tr>
 </table>
 

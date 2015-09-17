@@ -23,16 +23,12 @@ To access the ambassador web application use the following URLs
     <th>Ambassador URL</th>
   </tr>
   <tr>
-    <td>Stage Norway</td>
-    <td><a href="https://stage-ambassador.payment.schibsted.no">https://stage-ambassador.payment.schibsted.no</a></td>
+    <td>Stage</td>
+    <td><a href="https://ambassador.identity-pre.schibsted.com">https://ambassador.identity-pre.schibsted.com</a></td>
   </tr>
   <tr>
     <td>Production Norway</td>
     <td><a href="https://ambassador.payment.schibsted.no">https://ambassador.payment.schibsted.no</a></td>
-  </tr>
-  <tr>
-    <td>Stage Sweden</td>
-    <td><a href="https://stage-ambassador.payment.schibsted.se">https://stage-ambassador.payment.schibsted.se</a></td>
   </tr>
   <tr>
     <td>Production Sweden</td>

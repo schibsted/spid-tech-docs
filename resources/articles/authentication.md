@@ -64,7 +64,7 @@ curl -X POST -d grant_type=password&\
                 redirect_uri=http://localhost&\
                 username=<username>&\
                 password=<password>\
-            https://stage.payment.schibsted.no/oauth/token
+            https://identity-pre.schibsted.com/oauth/token
 ```
 
 You may have to quote the entire data string, depending on the user's email and
@@ -88,7 +88,7 @@ The `access_token` may be used to make API requests on behalf of this user.
 
 **NB!** This will only work if the user is already logged in. So, in order to
 make use of this, you have to
-[log in via SPiD the regular way](http://stage.payment.schibsted.no/login)
+[log in via SPiD the regular way](http://identity-pre.schibsted.com/login)
 first.
 
 ## Obtaining a server token
