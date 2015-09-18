@@ -144,7 +144,7 @@ Refer to [the spec](http://tools.ietf.org/html/draft-ietf-oauth-v2-11) for detai
 - **redirect_uri_mismatch**: The redirection URI provided does not match a pre-registered redirection URI stored in SPiD.
 - **unauthorized_client**: The client is not authorized to request an authorization code using this method or authorization grant type.
 - **access_denied**: The resource owner or authorization server denied the request.
-- **invalid_request**: The request is missing a required parameter, includes an invalid parameter value, 
+- **invalid_request**: The request is missing a required parameter, includes an invalid parameter value,
 includes a parameter more than once, or is otherwise malformed.
 - **invalid_client_id**: Client authentication failed (e.g. unknown client, no client authentication included, or unsupported
 authentication method).
@@ -157,10 +157,10 @@ another client.
 Protected resource errors
 
 - **invalid_token**:
-The access token provided is expired, revoked, malformed, or invalid for other reasons. The client MAY request a new 
+The access token provided is expired, revoked, malformed, or invalid for other reasons. The client MAY request a new
 access token and retry the protected resource request.
 - **expired_token**:
-The access token provided has expired. The client is expected to be able to handle the response and request a new 
+The access token provided has expired. The client is expected to be able to handle the response and request a new
 access token using the refresh token issued with the expired access token
 - **insufficient_scope**:
 The request requires higher privileges than provided by the access token.
@@ -186,7 +186,7 @@ Recommended reading on
 [OAuth protocol endpoints](http://tools.ietf.org/html/draft-ietf-oauth-v2-31#section-3).
 
 ## API access control flow explained
-This is a complete overview of how the platform processes an API request and when your client application may 
+This is a complete overview of how the platform processes an API request and when your client application may
 expect to receive error responses and the reasons it happened:
 ![API access control flow](/images/api-access-control-flow.png)
 
@@ -200,13 +200,13 @@ away the OAuth details. See how to get started [server-side](/getting-started/) 
 This section contains a list of best practices and requirements that will be performed on integration and security reviews by SPiD.
 
 ### Client credentials handling
-- Client credentials and redirect URIs must NOT be hardcoded anywhere, but made configurable so the same code can be used for both STAGE and PROD environments.
+- Client credentials and redirect URIs must NOT be hardcoded anywhere, but made configurable so the same code can be used for both STAGE/PRE and PROD environments.
 - Verify that the client configuration for the production environment doesn't use stage credentials or redirect URIs and vice versa. This is especially important before you perform a new release of your application.
 - Client secrets are confidential and must be treated as such. They should NOT be committed to version control systems or publicly transmitted in the client’s organization or between unsecured systems and communication channels such as instant messages or emails.
 
 ### Your application's Redirect URI must be valid and follow these security guidelines
 - Previously defined and stored as a valid redirect uri for your client application
-- We don't recommend using IP addresses as these change all the time (unless they are static) 
+- We don't recommend using IP addresses as these change all the time (unless they are static)
 - Doesn't contain other internal or third party based redirect uris encoded in it
 - Doesn't contain invalid characters (\s`!()[]{};',<>«»“”‘’@")
 - Redirect endpoint is required to be behind SSL (https, not http)

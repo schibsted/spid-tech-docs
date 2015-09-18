@@ -43,7 +43,7 @@ behalf of the signed-in user.
 While an embedded webview might appear to provide a more seamless integration,
 it is discouraged for several reasons:
 
-- **Security** - The webview layer is 100% controlled by the app, opening up a vulnerability for 
+- **Security** - The webview layer is 100% controlled by the app, opening up a vulnerability for
     [capturing user input](http://welcome.totheinter.net/2011/01/12/stealing-passwords-is-easy-in-native-mobile-apps-despite-oauth/) and thus their SPiD credentials.
 - **User convenience** - SPiD is used by many services and apps throughout
     Schibsted and SSO will only work on a mobile device if all these services
@@ -59,20 +59,20 @@ it is discouraged for several reasons:
     is signing into an app or service that uses SPiD, we assume the user will
     feel comfortable and secure that he is logging in with his SPiD account
     through a safe and recognizable manner.
-    
+
 ## App custom url scheme (iOS), redirect scheme (Android)
 
 The custom url scheme of your app is configured in self service. We recommend having it on the format spidmobile-<clientId>. For a client with client_id 123 the login URL would be `spidmobile-123://login`.
 
-More about working with custom URL Schemes in [iOS](http://mobile.tutsplus.com/tutorials/iphone/ios-sdk-working-with-url-schemes/) or [Android](http://appurl.org/docs/android/).   
+More about working with custom URL Schemes in [iOS](http://mobile.tutsplus.com/tutorials/iphone/ios-sdk-working-with-url-schemes/) or [Android](http://appurl.org/docs/android/).
 
 ## Example authentication flow
 
 The following example shows how the authentication flow works for an app with client_id 123
-on the SPiD stage platform.
+on the SPiD stage/pre platform.
 
 1. Direct user to authorize your app on SPiD
-    Example on stage server:
+    Example on stage/pre server:
 
     ```text
     https://identity-pre.schibsted.com/login?client_id=4f6b7595efd04b2d5000000d&response_type=code&redirect_uri=fvnereader%3A%2F%2Flogin
@@ -82,12 +82,12 @@ on the SPiD stage platform.
 
     ```text
     spidmobile-123://login?code=55d4f8e7fbd1bd4f3e0a312c7765cecfce37c7ec
-    ``` 
+    ```
 
 3. Use the OAuth code to get a permanent OAuth token by `POST`-ing the code
     along with your credentials.
 
-    Example on stage server:
+    Example on stage/pre server:
 
     ```text
     POST https://identity-pre.schibsted.com/oauth/token
@@ -121,7 +121,7 @@ on the SPiD stage platform.
 
 5. Make REST API calls with the oauth token.
 
-    Example on stage server:
+    Example on stage/pre server:
 
     ```text
     GET https://identity-pre.schibsted.com/api/2/me?oauth_token=de60c9b77cb2dfaec651ee8af0b55a27e483b172

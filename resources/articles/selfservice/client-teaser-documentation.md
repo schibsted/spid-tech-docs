@@ -53,7 +53,7 @@ For the markdown we use everything that is “common” to markdown documents wi
 
 You may want to write your markdown in a seperate editor and we can recommend [Mou](http://25.io/mou/) which is a native client for the OS X operating system. If you run Windows, Linux or other operating systems there most likely exist similar software for your platform or even web-based ones.
 
-You also have our stage environments and we recommend that you test all your teasers there first before deploying them in production.
+You also have our stage/pre environments and we recommend that you test all your teasers there first before deploying them in production.
 
 ### How do I style elements with CSS?
 

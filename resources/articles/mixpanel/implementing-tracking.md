@@ -51,7 +51,7 @@ current visitor by calling the SPiD JS SDK function
 Place the following code in a `script` block right before the closing `</body>`
 tag, or in a
 [DOMContentLoaded event handler](https://developer.mozilla.org/en-US/docs/Web/Reference/Events/DOMContentLoaded)
-(e.g. `$(document).ready(function () { /* Here */ })` if using jQuery). 
+(e.g. `$(document).ready(function () { /* Here */ })` if using jQuery).
 
 You can read more about signing your traits JSON object [here](/mixpanel/managing-properties-and-traits/#signing-your-traits-json-object).
 
@@ -63,7 +63,7 @@ VGS.Event.subscribe('auth.visitor', function(data) {
 });
 
 VGS.init({
-    client_id: '{YOUR STAGE CLIENT ID}',
+    client_id: '{YOUR STAGE/PRE CLIENT ID}',
     server: 'identity-pre.schibsted.com',
     prod: false,
     logging: true,

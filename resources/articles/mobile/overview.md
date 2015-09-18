@@ -30,7 +30,7 @@ To develop an app for SPiD the following needs to be done.
 
 If you don't already have access to self service request access, see [self service access](/selfservice/access/) for further details.
 
-### 2. Create a client and request stage credentials
+### 2. Create a client and request stage/pre credentials
 
 Create the clients you need, configure them and request credentials. These credentials are valid only for the stage environment, before you receive credentials you can use in production you need to submit your app for [review](/mobile/reviews/).
 

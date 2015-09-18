@@ -11,7 +11,7 @@ Login to ambassador assume the client-side user is registered with a SPiD accoun
 
 * Registered SPiD e-mail address
 * Role (product admin or support) per service
-* Environment (stage or production)
+* Environment (stage/pre or production)
 
 Make sure all persons in this list have registered and verified both e-mail and phone number on the relevant environments’ SPiD-account **prior** to handing this over to SP.
 
@@ -23,7 +23,7 @@ To access the ambassador web application use the following URLs
     <th>Ambassador URL</th>
   </tr>
   <tr>
-    <td>Stage</td>
+    <td>Stage/Pre</td>
     <td><a href="https://ambassador.identity-pre.schibsted.com">https://ambassador.identity-pre.schibsted.com</a></td>
   </tr>
   <tr>
@@ -31,7 +31,7 @@ To access the ambassador web application use the following URLs
     <td><a href="https://ambassador.payment.schibsted.no">https://ambassador.payment.schibsted.no</a></td>
   </tr>
   <tr>
-    <td>Production Sweden</td>
+    <td>Production Sweden/International</td>
     <td><a href="https://ambassador.payment.schibsted.se">https://ambassador.payment.schibsted.se</a></td>
   </tr>
 </table>
@@ -56,4 +56,4 @@ Additionally, Ambassador offer general administration of auto generated email to
 
 Zendesk is the customer support system used by SPiD. Client support center, requiring second- or third line support, logs their tickets here. Logging tickets can be done through the “contact support”-button when logged into Ambassador, or through login on http://support.schibstedpayment.no.  For ticket status or additional information on a ticket the webpage login must be used. A Zendesk user-profile is created the first time a ticket is registered.
 
-Clients’ support center will have to coordinate their support ticket in Zendesk with their internal support/help desk system. 
+Clients’ support center will have to coordinate their support ticket in Zendesk with their internal support/help desk system.

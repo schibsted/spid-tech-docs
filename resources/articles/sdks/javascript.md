@@ -42,15 +42,15 @@ with the appropriate values.
 - https://payment.schibsted.no for Norwegian clients
 - https://login.schibsted.com for Swedish/International clients
 
-#### Stage servers
-- https://identity-pre.schibsted.com for stage clients
+#### Stage/Pre servers
+- https://identity-pre.schibsted.com for stage/pre clients
 
 `SPID_JSSDK_URI` will normally point to SPiD's servers. Read more about this
 under [hosting](/sdks/js/hosting/). When using the SDK live from SPiD, the URL typically
 looks like `https://login.schibsted.com/js/spid-sdk-{version}.min.js`,
 e.g.
-[https://login.schibsted.com/js/spid-sdk-1.7.9.min.js](https://login.schibsted.com/js/spid-sdk-1.7.9.min.js). 
-Go to [GitHub](https://github.com/schibsted/sdk-js/) to check what is the latest version. 
+[https://login.schibsted.com/js/spid-sdk-1.7.9.min.js](https://login.schibsted.com/js/spid-sdk-1.7.9.min.js).
+Go to [GitHub](https://github.com/schibsted/sdk-js/) to check what is the latest version.
 
 ### Synchronously loading the JS SDK
 

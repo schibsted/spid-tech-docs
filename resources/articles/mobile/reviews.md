@@ -19,7 +19,7 @@
 
 :body
 
-Before you deploy your app to production you need to replace the credentials you initially used as they are only valid in the stage environment. You will receive your production credentials after you have submitted your app for review and it has been accepted.
+Before you deploy your app to production you need to replace the credentials you initially used as they are only valid in the stage/pre environment. You will receive your production credentials after you have submitted your app for review and it has been accepted.
 
 The app review can take up to one month so be sure to submit it in ample time before your scheduled release.
 
@@ -39,7 +39,7 @@ Use your oauth tokens until they expire, then either use your refresh token or a
 
 The client id is fully public and does not need to be hidden or obfuscated in anyway. The client secret however should not be stored as a string in plain text but rather be hidden in some way. Because of the nature of mobile apps it's hard to keep secrets confidential, as a minimal effort we require clients to obfuscate credentials. This will not deter determined attackers but is considered better than storing them in plain text.
 
-The review must be made using the stage credentials of the client to be reviewed.
+The review must be made using the stage/pre credentials of the client to be reviewed.
 
 ### Terms and conditions
 

@@ -14,8 +14,8 @@ In order to access self-service. You will have to be an authenticated SPiD user.
 
 **NO PROD**: [http://payment.schibsted.no/selfservice](http://payment.schibsted.no/selfservice)
 
-#### Stage environments
-**STAGE**: [http://identity-pre.schibsted.com/selfservice](http://identity-pre.schibsted.com/selfservice)
+#### Stage/Pre environment
+**STAGE/PRE**: [http://identity-pre.schibsted.com/selfservice](http://identity-pre.schibsted.com/selfservice)
 
 ## Gaining access to self-service
 
@@ -37,7 +37,7 @@ When we receive the mail and handle your request you should be able to logon to 
 Do your company currently have clients in production that uses SPiD?
 Ask your manager which environment they are under, or simply try to login to the clients then you will know what environment they should go under.
 
-If the answer to the question is "no" and you just started out, you should get access to SE Stage since there is no COM Stage (as of this writing).
+If the answer to the question is "no" and you just started out, you should get access to Stage/Pre.
 
 
 

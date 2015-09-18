@@ -73,6 +73,6 @@ redirect right after creating the paylink.
 
 ## Error code: invalid_client_id
 
-When logging in with a redirect_uri for the first time you may encounter an error message that say **invalid_client_id**.  If your client id is correct, your client is most likely missing a redirect_uri. Login to [Norwegian stage](https://identity-pre.schibsted.com) or [Swedish stage](https://identity-pre.schibsted.com) to access the self-service (if you want change a production client, please remove the "stage" sub-domain).
+When logging in with a redirect_uri for the first time you may encounter an error message that say **invalid_client_id**.  If your client id is correct, your client is most likely missing a redirect_uri. Login to [Stage/Pre](https://identity-pre.schibsted.com) to access the self-service.
 
 
