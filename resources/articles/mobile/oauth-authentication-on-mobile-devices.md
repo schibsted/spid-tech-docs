@@ -59,6 +59,10 @@ it is discouraged for several reasons:
     is signing into an app or service that uses SPiD, we assume the user will
     feel comfortable and secure that he is logging in with his SPiD account
     through a safe and recognizable manner.
+    
+**Update**
+
+The new [Chrome Custom Tabs](http://techdocs.spid.no/mobile/oauth-authentication-on-mobile-devices/) allows for Android apps to use a browser redirect without leaving the app, combining the best of both worlds of user friendly WebViews and secure browser redirects. This is now the recommended way to implement SPiD in Android, allowing the user to automatically sign in if they are already signed in in the browser without leaving the app.
 
 ## App custom url scheme (iOS), redirect scheme (Android)
 
