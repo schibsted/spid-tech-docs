@@ -22,7 +22,7 @@
 :body
 
 The Android SDK is built on top of the backend SDK to provide access to functions with minimal effort from 
-the developer. Connecting to the SPiD can be done either natively, using a webview, browser or connecting via
+the developer. Connecting to the SPiD can be done either natively, using a WebView, browser or connecting via
 Facebook or Google+.
 
 #### SPiDClient
@@ -41,22 +41,26 @@ The following fields in the configuration must be set:
 An example configuration how to configure the SPiDClient would be
 
 ```
-SPiDConfiguration config = new SPiDConfigurationBuilder()
-        .clientID("your-client-id")
-        .clientSecret("your-client-secret")
-        .appURLScheme("spidmobile_<your-client-id>")
-        .serverURL("your-spidserver-url")
-        .context(getApplicationContext())
-        .build();
+SPiDConfiguration config = new SPiDConfigurationBuilder(getApplicationContext(),
+	SPiDEnvironment.SWEDISH_STAGE,
+    "your-client-id",
+    "your-client-secret",
+    "app-url-scheme")
+    .debugMode(true)
+    .build();
 SPiDClient.getInstance().configure(config);
 ```
+
+Be sure to update your AndroidManifest.xml to set your url scheme as follows in the intent-filter where you wish your redirect to be caught
+
+	<data android:scheme="your-url-scheme" />
 
 ## Connecting to SPiD
 
 The recommended way to connect to SPiD is to use a browser, see explanation [why](/mobile/oauth-authentication-on-mobile-devices/).
 However it can be done a number of ways, which is explained in greater detail below.
 
-#### Connecting via browser
+#### Connecting via browser (add Custom Chrome tabs example)
 
 TODO: Add flow diagrams?
 
