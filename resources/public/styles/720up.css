@@ -1,6 +1,7 @@
 .line,
 .lastUnit {overflow:hidden; *overflow:visible; *zoom:1;}
 .unit {float:left;}
+.s1of2 {width: 50%;}
 .s1of3 {width: 33.33333%;}
 .s1of4 {width: 25%;}
 

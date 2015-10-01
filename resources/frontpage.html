@@ -1,12 +1,108 @@
 <div class="section">
-  <div class="wrap">
-    <h1>SPiD Documentation</h1>
-    <p class="wide-prose">
-      Learn how to integrate with the SPiD platform.
-    </p>
-  </div>
+    <div class="wrap">
+        <h1 id="guides">Important Ecosystem Guidelines</h1>
+        <p>
+            These guidelines must be followed by all clients in order for us to work towards a streamlined and efficient
+            login experience to all users. These guidelines will also help us reach a higher share of logged in users
+            throughout the ecosystem of products and services that has implemented SPiD. Everybody wins!
+        </p>
+        <h2>Web applications</h2>
+        <div class="line">
+            <div class="unit s1of4">
+                <div class="item">
+                    <h4>What:</h4>
+                    <p>Always implement the <a href="/sdks/javascript/">JavaScript SDK</a></p>
+                    <h4>Why:</h4>
+                    <p>
+                    <ul>
+                        <li>Ability to perform cross-site <a href="/autologin-experience/">autologin on returning visitors</a></li>
+                        <li>Answers if user need to accept your TOS or not</li>
+                        <li>Helps clients automatically retrieve tokens for API access for logged in users</li>
+                        <li>Tells client when a user is logged out centrally and/or if the logged in user has changed in SPiD</li>
+                    </ul>
+                    </p>
+                </div>
+            </div>
+            <div class="unit s1of4">
+                <div class="item">
+                    <h4>What:</h4>
+                    <p>Use the Javascript SDK provided by SPiD, do <strong>not</strong> develop your own</p>
+                    <h4>Why:</h4>
+                    <p>
+                    <ul>
+                        <li>The SDK will be actively maintained by SPiD together with the community</li>
+                        <li>You may contribute to it on <a href="https://github.com/schibsted/sdk-js/" target="_blank">Github</a></li>
+                    </ul>
+                    </p>
+                </div>
+            </div>
+            <div class="unit s1of4">
+                <div class="item">
+                    <h4>What:</h4>
+                    <p>Check that your implementation follows the <a href="/login-flows/">login flow</a></p>
+                    <h4>Why:</h4>
+                    <p>
+                        <ul>
+                            <li>This flow documents every state a user visiting your site might have</li>
+                            <li>It will improve the stability of your implementation and the user experience of your users</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+            <div class="lastUnit">
+                <div class="item">
+                    <h4>What:</h4>
+                    <p>Make sure that when user logs out, you trigger a <a href="/logout-flows/">logout from SPiD</a></p>
+                    <h4>Why:</h4>
+                    <p>
+                        <ul>
+                            <li>Respect the user’s choice when they choose to log out</li>
+                            <li>Consistency in the expected behaviour of a logout button/link</li>
+                            <li>To avoid confusing people and to protect personal security, we enforce this logout behavior</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<div class="separator"></div>
 
+<div class="section">
+    <div class="wrap">
+        <div class="line">
+            <div class="unit s1of2">
+                <div class="item">
+                    <h3>Mobile applications</h3>
+                    <h4>What:</h4>
+                    <p>Use the official SPiD SDKs, do <strong>not</strong> develop your own:
+                    <ul>
+                        <li><a href="/sdks/android/">Android SDK</a></li>
+                        <li><a href="/sdks/ios/">iOS SDK</a></li>
+                    </ul>
+                    </p>
+                    <h4>Why:</h4>
+                    <p>Native apps that don’t use our SDKs will:
+                    <ul>
+                        <li>not be offered technical support</li>
+                        <li>not have new introduced features like cross-app logins</li>
+                    </ul>
+                    </p>
+                </div>
+            </div>
+            <div class="lastUnit">
+                <div class="item">
+                    <h3>Branding of SPiD</h3>
+                    <h4>What:</h4>
+                    <p>Comply with the SPiD <a href="/images/brandbook.pdf" target="_blank">brandbook and guidelines</a></p>
+                    <h4>Why:</h4>
+                    <p>We need to offer a consistent and recognisable login experience across all products and services
+                        in the ecosystem</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 <div class="separator"></div>
 
 <div class="section">
@@ -18,7 +114,7 @@
     <div class="line">
       <div class="unit s1of4">
         <div class="item">
-          <h3><a href="/getting-started/">Getting started</a></h3>
+          <h3><a href="/getting-started/">Getting started with the API</a></h3>
           <p>Connect your application to the SPiD API and make your first call,
             verify that your client ID and secrets are correctly
             configured.</p>
