@@ -5,19 +5,22 @@
 
 ## Read more about the JavaScript SDK
 
-- [JavaScript SDK](/sdks/javascript/)
-- [Events](/sdks/js/events/)
-- [Response signature and validation](/sdks/js/response-signature-and-validation/)
-- [API Docs](/sdks/js/api-docs/)
-- [Best practices](/sdks/js/best-practices/)
+- [JavaScript SDK](/sdks/javascript-1.x/)
+- [Events](/sdks/js-1.x/events/)
+- [Response signature and validation](/sdks/js-1.x/response-signature-and-validation/)
+- [API Docs](/sdks/js-1.x/api-docs/)
+- [Best practices](/sdks/js-1.x/best-practices/)
 
 ## See also
 
-- [Behavior tracking with SPiD Pulse](/sdks/js/behavior-tracking-with-spid-pulse/)
+- [Behavior tracking with SPiD Pulse](/sdks/js-1.x/behavior-tracking-with-spid-pulse/)
 - [Getting started with the server-side API](/getting-started/)
 - [Mixpanel analytics](/mixpanel/analytics/)
 
 :body
+
+**Note: this documentation is for the 1.x versions of the Javascript SDK. The current version can be found
+[here](/sdks/javascript/).**
 
 By default, the SDK will be loaded from SPiD's servers. You may host it in your
 own environment during testing and by request when in production. If the cookie

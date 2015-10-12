@@ -16,6 +16,9 @@
 
 :body
 
+**Note: this documentation is for the 1.x versions of the Javascript SDK. The current version can be found
+[here](/sdks/javascript/).**
+
 Initialize the JavaScript SDK like explained [here](/sdks/javascript/). Remember to use the JavaScript Pulse SDK instead of the normal JavaScript SDK. For example:
 ```
 <script src="https://login.schibsted.com/js/spid-sdk-pulse-1.7.9.min.js"></script>

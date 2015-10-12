@@ -5,22 +5,19 @@
 
 ## Read more about the JavaScript SDK
 
-- [JavaScript SDK](/sdks/javascript-1.x/)
-- [Events](/sdks/js-1.x/events/)
-- [API Docs](/sdks/js-1.x/api-docs/)
-- [Hosting](/sdks/js-1.x/hosting/)
-- [Best practices](/sdks/js-1.x/best-practices/)
+- [JavaScript SDK](/sdks/javascript/)
+- [Events](/sdks/js/events/)
+- [API Docs](/sdks/js/api-docs/)
+- [Hosting](/sdks/js/hosting/)
+- [Best practices](/sdks/js/best-practices/)
 
 ## See also
 
-- [Behavior tracking with SPiD Pulse](/sdks/js-1.x/behavior-tracking-with-spid-pulse/)
+- [Behavior tracking with SPiD Pulse](/sdks/js/behavior-tracking-with-spid-pulse/)
 - [Getting started with the server-side API](/getting-started/)
 - [Mixpanel analytics](/mixpanel/analytics/)
 
 :body
-
-**Note: this documentation is for the 1.x versions of the Javascript SDK. The current version can be found
-[here](/sdks/javascript/).**
 
 The sig parameter can be used to verify that the response came from SPiD. This
 can be done serverside by the client, using the client signature secret. Without

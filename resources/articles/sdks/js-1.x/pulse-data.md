@@ -4,16 +4,19 @@
 
 ## Read more about the JavaScript SDK
 
-- [Behavior tracking with SPiD Pulse](/sdks/js/behavior-tracking-with-spid-pulse/)
+- [Behavior tracking with SPiD Pulse](/sdks/js-1.x/behavior-tracking-with-spid-pulse/)
 
 
 ## See also
 
-- [JavaScript SDK](/sdks/javascript/)
+- [JavaScript SDK](/sdks/javascript-1.x/)
 - [Getting started with the server-side API](/getting-started/)
 - [Mixpanel analytics](/mixpanel/analytics/)
 
 :body
+
+**Note: this documentation is for the 1.x versions of the Javascript SDK. The current version can be found
+[here](/sdks/javascript/).**
 
 These are the data fields sent to the server by the SPiD pulse tracking script. Data is sent on every page load and exit.
 
