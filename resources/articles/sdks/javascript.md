@@ -123,6 +123,37 @@ window.asyncSPiD = function() {
 Since version 1.5.0, the SDK is loaded minified by default, for optimal network
 performance.
 
+## Checking and accepting agreements
+
+The response session object contains a boolean field called `agreementAccepted`.
+If this field is false, you can have the SDK issue a call to the relevant endpoint (i.e. `ajax/acceptAgreement`) when,
+for example, the user presses a button. If the `acceptAgreement` request is successful, the `auth.sessionChange`
+will fire, and the event response data will include the updated value for the `agreementAccepted` field.
+
+```html
+<script type="text/javascript" src="SPID_JSSDK_URI"></script>
+<script type="text/javascript">
+ SPiD.event.subscribe('SPiD.sessionChange', function(data) {
+    var sess = data.session || {};
+    if (sess.defaultAgreementAccepted && sess.clientAgreementAccepted) {
+        return;
+    }
+    // show SPiD summary and/or client summary depending on booleans
+});
+
+$('.acceptButton').click(function() {
+    SPiD.acceptAgreement(function (){ alert('Agreement accepted'});
+});
+
+//Initiate SDK
+SPiD.init({
+    client_id: "YOUR_CLIENT_ID",
+    server: "SPID_SERVER_URI"
+    // Additional initialization (See below for a full list of available initialization options)
+});
+</script>
+```
+
 ## Initialization options
 
 ##### client_id

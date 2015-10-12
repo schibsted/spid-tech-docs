@@ -12,6 +12,7 @@
     - [`SPiD.hasSubscription`](#has-subscription)
     - [`SPiD.setTraits`](#set-traits)
     - [`SPiD.logout`](#logout)
+    - [`SPiD.acceptAgreement`](#acceptAgreement)
 - [`SPiD.event`](#event)
     - [`SPiD.event.subscribe`](#subscribe)
     - [`SPiD.event.unsubscribe`](#unsubscribe)
@@ -173,6 +174,17 @@ Logs the user out, and calls the callback when done.
 SPiD.logout(function (data) {
     alert("See ya next time!");
 });
+```
+
+
+<a id="acceptAgreement"></a>
+### SPiD.acceptAgreement
+
+Calls the acceptAgreement endpoint, and (if the acceptAgreement call was successful) re-calls hasSession,
+clearing any cached value before doing so.
+
+```js
+SPiD.acceptAgreement(callback)
 ```
 
 <a id="event"></a>
