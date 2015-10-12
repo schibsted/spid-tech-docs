@@ -27,7 +27,7 @@ response.
 
 ![Migration service](/images/migration-service.png)
 
-An sample migration service implementation can be found GitHub: https://github.schibsted.io/spt-identity/fake-migration-service
+A sample migration service implementation can be found on GitHub: https://github.schibsted.io/spt-identity/fake-migration-service
 
 ## Terminology
 
