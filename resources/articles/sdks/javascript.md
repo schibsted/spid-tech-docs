@@ -173,11 +173,6 @@ These responses rarely change.
 Set to ’cookie’ to store the session as a cookie. Set to ’localstorage’ to store the session in local storage.
 Set to `false` to disable session storage altogether. The default value is ’localstorage’.
 
-##### noGlobalExport
-
-When running the AMD or CommonJS version of the SDK, you may want to set this to `true` to avoid setting the
-global `SPiD` js variable. 
-
 ## Auto-login usecase
 
 This is a simple overview of Single Sign On using JS SDK, explaining the complete process between the client
