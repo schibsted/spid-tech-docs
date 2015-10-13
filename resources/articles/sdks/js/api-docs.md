@@ -17,6 +17,10 @@
     - [`SPiD.event.subscribe`](#subscribe)
     - [`SPiD.event.unsubscribe`](#unsubscribe)
     - [`SPiD.event.fire`](#fire)
+- [`SPiD.sessionCache`](#sessionCache)
+    - [`SPiD.sessionCache.get`](#sessionCacheGet)
+    - [`SPiD.sessionCache.set`](#sessionCacheSet)
+    - [`SPiD.sessionCache.clear`](#sessionCacheClear)
 - [`SPiD.Uri`](#spid_uri)
     - [`SPiD.Uri.login`](#get-login-uri)
     - [`SPiD.Uri.signup`](#get-signup-uri)
@@ -228,6 +232,36 @@ in the `subscribe` call when you want to later unsubscribe it.
 Fire an event. The first argument is the event name, additional arguments are
 passed to subscribers. This function is used by the JS SDK to propagate events
 to client subscribers, but is not recommended for external use.
+
+
+<a id="sessionCache"></a>
+
+<a id="sessionCacheGet"></a>
+### SPiD.sessionCache.get
+
+Gets the currently cached session object.
+
+```js
+SPiD.sessionCache.get();
+```
+
+<a id="sessionCacheSet"></a>
+### SPiD.sessionCache.set
+
+Sets the currently cached session object, with an optional expiration time.
+
+```js
+SPiD.sessionCache.set(value, exipresInMillis);
+```
+
+<a id="sessionCacheClear"></a>
+### SPiD.sessionCache.clear
+
+Clears the session cache. Use this when you want to force a request to the `hasSession` endpoint.
+
+```js
+SPiD.sessionCache.clear();
+```
 
 
 <a id="spid_uri"></a>
