@@ -27,6 +27,8 @@ response.
 
 ![Migration service](/images/migration-service.png)
 
+A sample migration service implementation can be found on GitHub: https://github.com/schibsted/fake-migration-service.git
+
 ## Terminology
 
 **Migration service**: What you implement in order to expose users to SPiD platform.
