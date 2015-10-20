@@ -18,7 +18,6 @@
 
 ## See also
 
-- [Behavior tracking with SPiD Pulse](/sdks/js/behavior-tracking-with-spid-pulse/)
 - [Getting started with the server-side API](/getting-started/)
 - [Mixpanel analytics](/mixpanel/analytics/)
 
@@ -221,25 +220,6 @@ is that when a user logs in, they will not get an updated session until the
 cookie expires, which is set to the `refresh_timeout` option. To use this
 option, you will need to manually call `VGS.getLoginStatus()` when the user
 comes back to your site after login.
-
-##### track_throttle
-
-For use with tracker. A float between 0 and 1. Default value is 1.
-
-##### track_anon_opt_out
-
-By default the SPiD pulse part of the sdk will track anonymous users as well as logged
-in users. If you want to disable tracking of anonymous users set this to `true`.
-_This setting requires the pulse module._
-
-##### track_custom_data
-
-The SPiD pulse accepts custom data as a stringified JSON object. This data is sent to
-the pulse server and stored into the database in raw format.
-Example value: '{ "articleId": 1234, "section": "sport/football" }'
-Default is `null`.
-_This setting requires the pulse module._
-
 
 ## Auto-login usecase
 
