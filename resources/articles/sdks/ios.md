@@ -8,6 +8,7 @@
 
 - [Overview](/mobile/overview/)
 - [Getting started](/mobile/mobile-development/)
+- [Self Service](/mobile/selfservice/)
 - [Register](/mobile/register/)
 - [Login](/mobile/login/)
 - [Android](/sdks/android/)
@@ -45,7 +46,6 @@ This must be done before the SDK can be used, and can only be called once. After
 Each supported grant type has its own method call in SPiDTokenRequest as shown below. Calling these methods creates a SPiDTokenRequest but does not execute it.
 
 Grant type **password**
-
 
         @param username The username
         @param password The password

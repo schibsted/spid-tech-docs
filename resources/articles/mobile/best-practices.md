@@ -6,6 +6,7 @@
 
 - [Overview](/mobile/overview/)
 - [Getting started](/mobile/mobile-development/)
+- [Self Service](/mobile/selfservice/)
 - [Register](/mobile/register/)
 - [Login](/mobile/login/)
 - [Android](/sdks/android/)

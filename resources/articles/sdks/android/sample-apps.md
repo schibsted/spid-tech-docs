@@ -7,6 +7,7 @@
 - [Overview](/mobile/overview/)
 - [Getting started](/mobile/mobile-development/)
 - [Register](/mobile/register/)
+- [Self Service](/mobile/selfservice/)
 - [Login](/mobile/login/)
 - [Android](/sdks/android/)
     - Android sample apps
