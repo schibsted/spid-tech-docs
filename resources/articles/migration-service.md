@@ -76,59 +76,127 @@ will be removed by the migration client.
 
 ```json
 {
-    "id": "urn:jsonschema:com:schibsted:spt:identity:userdataservice:models:MigrationUser",
-    "properties": {
-        "birthday": {
-            "type": "string",
-            "format": "DATE_TIME"
-        },
-        "displayName": {
-            "type": "string"
-        },
-        "sex": {
-            "type": "string",
-            "enum": [
-                "UNDISCLOSED",
-                "FEMALE",
-                "MALE"
-            ]
-        },
-        "homePhone": {
-            "type": "string",
-            "description": "Format: +46761234567"
-        },
-        "fullName": {
-            "type": "string"
-        },
-        "photo": {
-            "type": "string",
-            "description": "URL"
-        },
-        "timeZone": {
-            "type": "string",
-            "description": "Any accepted Java TimeZone ID"
-        },
-        "locale": {
-            "type": "string",
-            "description": "Any accepted Java Locale ID"
-        },
-        "userId": {
-            "type": "string",
-            "description": "The id of the user in your system",
-        },
-        "mobilePhone": {
-            "type": "string",
-            "description": "Format: +46761234567"
-        },
-        "createdTime": {
-            "type": "integer",
-            "format": "UTC_MILLISEC"
-        },
-        "email": {
-            "type": "string",
-            "required": true
-        }
-    }
+   "id": "urn:jsonschema:com:schibsted:spt:identity:userdataservice:models:MigrationUser",
+   "properties": {
+      "birthday": {
+         "type": "string",
+         "format": "DATE_TIME"
+      },
+      "addresses": {
+         "type": "array",
+	 "items": {		
+ 	    "type": "object",
+	    "id": "urn:jsonschema:com:schibsted:spt:identity:userdataservice:models:MigrationUserAddress",
+	    "properties": {
+	       "country": {
+	          "type": "string"
+	       },
+	       "streetAddress": {
+                  "type": "string"
+	       },
+	       "formatted": {
+   	          "type": "string"
+	       },
+	       "postalCode": {
+	          "type": "string"
+	       },
+	       "locality": {
+	          "type": "string"
+	       },
+	       "region": {
+	          "type": "string"
+	       },
+	       "type": {
+		  "type": "string",
+		  "enum": [
+		        "HOME",
+			"DELIVERY",
+			"INVOICE"
+			]
+	       }
+	    }
+         }
+      },
+      "displayName": {
+         "type": "string"
+      },
+      "sex": {
+	 "type": "string",
+	 "enum": [
+	 	"UNDISCLOSED",
+		"FEMALE",
+		"MALE"
+	       ]
+      },
+      "homePhone": {
+	 "type": "object",
+	 "$ref": "urn:jsonschema:com:google:i18n:phonenumbers:Phonenumber:PhoneNumber",
+	 "description": "Format: +46761234567"
+      },
+      "fullName": {
+         "type": "string"
+      },
+      "photo": {
+         "type": "string",
+         "description": "URL"
+      },
+      "timeZone": {
+	 "type": "string",
+	 "description": "Any accepted Java TimeZone ID"
+      },
+      "locale": {
+	 "type": "string",
+	 "description": "Any accepted Java Locale ID"
+      },
+      "userId": {
+         "type": "string"
+      },
+      "mobilePhone": {
+	 "type": "object",
+	 "id": "urn:jsonschema:com:google:i18n:phonenumbers:Phonenumber:PhoneNumber",
+	 "description": "Format: +46761234567",
+	 "properties": {
+	    "extension": {
+	       "type": "string"
+	    },
+	    "countryCodeSource": {
+	       "type": "string",
+	       "enum": [
+	             "FROM_NUMBER_WITH_PLUS_SIGN",
+		     "FROM_NUMBER_WITH_IDD",
+		     "FROM_NUMBER_WITHOUT_PLUS_SIGN",
+		     "FROM_DEFAULT_COUNTRY"
+	       ]
+	    },
+	    "nationalNumber": {
+	       "type": "integer"
+	    },
+	    "countryCode": {	
+	       "type": "integer"
+	    },
+	    "rawInput": {
+	       "type": "string"
+	    },
+	    "italianLeadingZero": {
+	       "type": "boolean"
+	    },
+	    "preferredDomesticCarrierCode": {
+	       "type": "string"
+	    },
+	    "numberOfLeadingZeros": {
+	       "type": "integer"
+	    }
+	 }
+      },
+      "createdTime": {
+         "type": "integer",
+	 "format": "UTC_MILLISEC"
+      },
+      "email": {
+	 "type": "string",
+	 "required": true
+      }
+   }
 }
 
 ```
@@ -167,7 +235,22 @@ Response body from migration service to migration client:
   "createdTime":    "2015-08-06T12:10:36.339Z",
   "timeZone":       "Europe/Stockholm",
   "sex":            "FEMALE",
-  "locale":         "sv_SE"
+  "locale":         "sv_SE",
+  "addresses": [{
+		"streetAddress":"Washington Walk 22",
+		"postalCode":"53923",			
+		"country":"USA",
+		"locality":"New York",
+		"region":"New York",
+		"type":"HOME"
+		},
+		{
+		"streetAddress":"Highland Place 0",
+		"postalCode":"49934",
+		"country":"USA",
+		"locality":"Miami",
+		"region":"Florida",
+		"type":"DELIVERY"}]
 }
 ```
 
