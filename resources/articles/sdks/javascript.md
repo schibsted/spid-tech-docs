@@ -17,12 +17,15 @@
 - [Best practices](/sdks/js/best-practices/)
 
 ## See also
-
+- [Documentation for the 1.x javascript SDK](/sdks/javascript-1.x/)
 - [Behavior tracking with SPiD Pulse](/sdks/js/behavior-tracking-with-spid-pulse/)
 - [Getting started with the server-side API](/getting-started/)
 - [Mixpanel analytics](/mixpanel/analytics/)
 
 :body
+
+**Note: this documentation is for the current version of the Javascript SDK. The old 1.x version can be found
+[here](/sdks/javascript-1.x/).**
 
 The JavaScript SDK is different from the other SDKs in that it only provides
 information about the user's authentication/authorization status. It is not a
@@ -52,6 +55,12 @@ e.g.
 [https://login.schibsted.com/js/spid-sdk-1.7.9.min.js](https://login.schibsted.com/js/spid-sdk-1.7.9.min.js).
 Go to [GitHub](https://github.com/schibsted/sdk-js/) to check what is the latest version.
 
+### SDK variants
+
+The SDK is currently built in three distribution variants: one for users using the *AMD* module format, one for
+*CommonJS* users, and one for vanilla JS users. The third SDK variant will set a global variable named `SPiD`
+(note the capitalisation).
+
 ### Synchronously loading the JS SDK
 
 Place the following code right before the closing `</body>` tag on your page:
@@ -60,37 +69,40 @@ Place the following code right before the closing `</body>` tag on your page:
 <script type="text/javascript" src="SPID_JSSDK_URI"></script>
 <script type="text/javascript">
 // Add event subscribers
-VGS.Event.subscribe('auth.login', function(data) { console.log(data); });
-VGS.Event.subscribe('auth.logout', function(data) { console.log(data); });
-VGS.Event.subscribe('auth.sessionChange', function(data) { console.log(data); });
+SPiD.event.subscribe('SPiD.login', function(data) { console.log(data); });
+SPiD.event.subscribe('SPiD.logout', function(data) { console.log(data); });
+SPiD.event.subscribe('SPiD.sessionChange', function(data) { console.log(data); });
 
 //Initiate SDK
-VGS.init({
+SPiD.init({
     client_id: "YOUR_CLIENT_ID",
     server: "SPID_SERVER_URI"
     // Additional initialization (See below for a full list of available initialization options)
 });
+// Check session
+SPiD.hasSession();
+
 </script>
 ```
 
 ### Asynchronously loading the JS SDK
 
 By loading the SPiD SDK asynchronously it will not block loading other elements
-on your page. The function assigned to window.vgsAsyncInit is run as soon as the
+on your page. The function assigned to `window.asyncSPiD` is run as soon as the
 SDK source has finished loading. Any code you want to run after the SDK is
 loaded should be placed within this function. Place the following code right
 before the closing `</body>` tag.
 
 ```html
 <script>
-window.vgsAsyncInit = function() {
+window.asyncSPiD = function() {
     // Add event subscribers
-    VGS.Event.subscribe('auth.login', function(data) { console.log(data); });
-    VGS.Event.subscribe('auth.logout', function(data) { console.log(data); });
-    VGS.Event.subscribe('auth.sessionChange', function(data) { console.log(data); });
+    SPiD.event.subscribe('SPiD.login', function(data) { console.log(data); });
+    SPiD.event.subscribe('SPiD.logout', function(data) { console.log(data); });
+    SPiD.event.subscribe('SPiD.sessionChange', function(data) { console.log(data); });
 
     //Initiate SDK
-    VGS.init({
+    SPiD.init({
         client_id: "YOUR_CLIENT_ID",
         server: "SPID_SERVER_URI"
         // Additional initialization (See below for a full list of available initialization options)
@@ -113,12 +125,15 @@ performance.
 
 ## Checking and accepting agreements
 
-The response session object contains a boolean field called `agreementAccepted`. If this field is false, you can make the user issue a request to `ajax/acceptAgreement` by pressing a button. If the `acceptAgreement` request is successful, the `auth.sessionChange` will fire, and the event response data will include the updated value for the `agreementAccepted` field.
+The response session object contains a boolean field called `agreementAccepted`.
+If this field is false, you can have the SDK issue a call to the relevant endpoint (i.e. `ajax/acceptAgreement`) when,
+for example, the user presses a button. If the `acceptAgreement` request is successful, the `auth.sessionChange`
+will fire, and the event response data will include the updated value for the `agreementAccepted` field.
 
 ```html
 <script type="text/javascript" src="SPID_JSSDK_URI"></script>
 <script type="text/javascript">
- VGS.Event.subscribe('auth.sessionChange', function(data) {
+ SPiD.event.subscribe('SPiD.sessionChange', function(data) {
     var sess = data.session || {};
     if (sess.defaultAgreementAccepted && sess.clientAgreementAccepted) {
         return;
@@ -127,13 +142,11 @@ The response session object contains a boolean field called `agreementAccepted`.
 });
 
 $('.acceptButton').click(function() {
-    var id = VGS.guid();
-    VGS.callbacks[id] = function(data) { VGS.getLoginStatus(null, true); };
-    VGS.Ajax.send('ajax/acceptAgreement.js?callback='+id);
+    SPiD.acceptAgreement(function (){ alert('Agreement accepted'});
 });
 
 //Initiate SDK
-VGS.init({
+SPiD.init({
     client_id: "YOUR_CLIENT_ID",
     server: "SPID_SERVER_URI"
     // Additional initialization (See below for a full list of available initialization options)
@@ -151,10 +164,6 @@ Your client ID. **Required**
 
 URL to the SPiD server. **Required**
 
-##### cookie
-
-Set to `true` to enable cookie support. Default value is `true`.
-
 ##### logging
 
 Set to `true` to enable logging. Default value is `false`. When logging is
@@ -162,84 +171,38 @@ enabled, the SDK will output debug information to the console. NOTE: it uses
 `console.log()` so your browser needs to support it, otherwise an error will be
 thrown.
 
-##### session
+##### useSessionCluster
 
-If you want to handle/save the session data on your own, the cookie option can
-be turned off and the session re-initialized by inserting a saved session into
-the session option. This way, you can cache and process the session in your
-preferred way. This is disabled by default.
-
-##### status
-
-Status is `false` by default, which means that the session is initialized only
-when necessary, otherwise cached by the cookie (if `true`) or session options.
-If status is `true`, a session check will be done every time the SDK is
-initialized, returning a fresh session state on each page request. Use with
-care.
-
-##### prod
-
-Set to `true` to fetch from the live production server. Defaults to `true`.
-During development you should set this to `false`, as it controls which session
-cluster to use. Remember to set to `true` or remove this flag before deploying
-to production.
+Controls which session endpoint to use. Defaults to true. During development you should consider setting this to false.
+Remember to set to true or remove this flag before deploying to production. This config option used to be called ”prod”. 
 
 ##### varnish_expiration
 
-Varnish cookie expiration, in seconds. Defaults to the same as the session
-expiration.
+Varnish cookie expiration, in seconds. Defaults to the same as the session expiration.
 
 ##### timeout
 
-This is the default connection timeout in milliseconds used when waiting for
-response by the SPiD servers. Defaults to 5 seconds (5000 milliseconds).
+This is the default connection timeout in milliseconds used when waiting for response by the SPiD servers.
+Defaults to 5 seconds (5000 milliseconds).
 
 ##### refresh_timeout
 
-This option specifies how often the session is refreshed and retrieved from
-SPiD, in milliseconds. Default is every 15 minutes (900000 milliseconds). This
-is configurable down to 1 minute (60000 milliseconds). We encourage clients to
-use the default unless it is necessary to change it, like in a single-page app
-where page refreshes are very infrequent. A fresh session can also be retrieved
-on demand by calling `VGS.getLoginStatus()` with the `forced` option set to
-`true`.
+This option specifies how often the session is refreshed and retrieved from SPiD, in milliseconds.
+Default is every 15 minutes (900000 milliseconds). This is configurable down to 1 minute (60000 milliseconds).
+We encourage clients to use the default unless it is necessary to change it, like in a single-page app
+where page refreshes are very infrequent.
 
 ##### cache
 
-By default the SDK will cache responses from SPiD for functions that check
-product and subscription access (`hasProduct`, `hasSubscription`). It uses the
-`refresh_timeout` value for invalidating the cache. This is default `true` and
-the purpose is to minimize requests to SPiD and performance gains. These
-responses rarely change.
+By default the SDK will cache responses from SPiD for functions that check product and subscription access
+(hasProduct, hasSubscription). It uses the refresh_timeout value for invalidating the cache.
+This is default true and the purpose is to minimize requests to SPiD and performance gains.
+These responses rarely change.
 
-##### cache_notloggedin
+##### storage
 
-By default the SDK will store the logged in user session in cookie. With this
-option set to `true`, it will also store the not logged in 'session', to avoid
-requests on every page load for non logged-in users. However, the effect of this
-is that when a user logs in, they will not get an updated session until the
-cookie expires, which is set to the `refresh_timeout` option. To use this
-option, you will need to manually call `VGS.getLoginStatus()` when the user
-comes back to your site after login.
-
-##### track_throttle
-
-For use with tracker. A float between 0 and 1. Default value is 1.
-
-##### track_anon_opt_out
-
-By default the SPiD pulse part of the sdk will track anonymous users as well as logged
-in users. If you want to disable tracking of anonymous users set this to `true`.
-_This setting requires the pulse module._
-
-##### track_custom_data
-
-The SPiD pulse accepts custom data as a stringified JSON object. This data is sent to
-the pulse server and stored into the database in raw format.
-Example value: '{ "articleId": 1234, "section": "sport/football" }'
-Default is `null`.
-_This setting requires the pulse module._
-
+Set to ’cookie’ to store the session as a cookie. Set to ’localstorage’ to store the session in local storage.
+Set to `false` to disable session storage altogether. The default value is ’localstorage’.
 
 ## Auto-login usecase
 

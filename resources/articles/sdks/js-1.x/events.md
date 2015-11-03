@@ -11,19 +11,22 @@
 
 ## Read more about the JavaScript SDK
 
-- [JavaScript SDK](/sdks/javascript/)
-- [Response signature and validation](/sdks/js/response-signature-and-validation/)
-- [API Docs](/sdks/js/api-docs/)
-- [Hosting](/sdks/js/hosting/)
-- [Best practices](/sdks/js/best-practices/)
+- [JavaScript SDK](/sdks/javascript-1.x/)
+- [Response signature and validation](/sdks/js-1.x/response-signature-and-validation/)
+- [API Docs](/sdks/js-1.x/api-docs/)
+- [Hosting](/sdks/js-1.x/hosting/)
+- [Best practices](/sdks/js-1.x/best-practices/)
 
 ## See also
 
-- [Behavior tracking with SPiD Pulse](/sdks/js/behavior-tracking-with-spid-pulse/)
+- [Behavior tracking with SPiD Pulse](/sdks/js-1.x/behavior-tracking-with-spid-pulse/)
 - [Getting started with the server-side API](/getting-started/)
 - [Mixpanel analytics](/mixpanel/analytics/)
 
 :body
+
+**Note: this documentation is for the 1.x versions of the Javascript SDK. The current version can be found
+[here](/sdks/javascript/).**
 
 Subscribing to the authentication events fired by the JS SDK means your
 application will be notified if the user's session state changes. This is
@@ -31,7 +34,7 @@ important because the session state may change due to user interactions beyond
 your application's control. The only way your application can be notified of
 these changes is through subscribing to these events.
 
-Using `SPiD.event.subscribe("event name", callback)` attaches an event handler
+Using `VGS.Event.subscribe("event name", callback)` attaches an event handler
 that will be invoked when the event fires. When an event is fired all
 subscribers to the event will be notified and given the response object.
 
@@ -41,31 +44,30 @@ reveal your own login status, and allow you to log in/out. The JavaScript
 powering this example looks like the following.
 
 ```javascript
-SPiD.event.subscribe("SPiD.login", function (data) { console.log("SPiD.login", data); });
-SPiD.event.subscribe("SPiD.logout", function (data) { console.log("SPiD.logout", data); });
+VGS.Event.subscribe("auth.login", function (data) { console.log("auth.login", data); });
+VGS.Event.subscribe("auth.logout", function (data) { console.log("auth.logout", data); });
 
-SPiD.event.subscribe("SPiD.sessionChange", function (data) {
-    console.log("SPiD.sessionChange", data);
+VGS.Event.subscribe("auth.sessionChange", function (data) {
+    console.log("auth.sessionChange", data);
     var output = document.getElementById("spid");
 
     if (!data.session) {
-        output.innerHTML = "Welcome. Please <a href=\"" + SPiD_Uri.login() + "\">log in</a>";
+        output.innerHTML = "Welcome. Please <a href=\"" + VGS.getLoginURI() + "\">log in</a>";
     } else {
-        output.innerHTML = "Welcome <a href=\"" + SPiD_Uri.account() + "\">" +
+        output.innerHTML = "Welcome <a href=\"" + VGS.getAccountURI() + "\">" +
             data.session.displayName + "</a>" +
-            " <a href=\"" + SPiD_Uri.logout() + "\">Log out</a>";
+            " <a href=\"" + VGS.getLogoutURI() + "\">Log out</a>";
     }
 });
-var config = { 
+
+VGS.init({
     client_id: "52f8e3d9efd04bb749000000",
     server: "identity-pre.schibsted.com",
-    useSessionCluster: false
- }
-SPiD.init(config);
-SPiD_Uri.init(config)
+    prod: false
+});
 ```
 
-The `useSessionCluster` property should be set to `true` (or omitted) when running against
+The `prod` property should be set to `true` (or omitted) when running against
 the production server.
 
 ## Available SDK events:
@@ -79,15 +81,15 @@ the production server.
   </thead>
   <tbody>
     <tr>
-      <td><code>SPiD.notLoggedin</code></td>
+      <td><code>auth.notLoggedin</code></td>
       <td>There is no session on page load, user is not logged in</td>
     </tr>
     <tr>
-      <td><code>SPiD.statusChange</code></td>
+      <td><code>auth.statusChange</code></td>
       <td>Page loads, status changes from unknown to Connected or notConnected</td>
     </tr>
     <tr>
-      <td><code>SPiD.login</code></td>
+      <td><code>auth.login</code></td>
       <td>
         <ul>
           <li>The user logs in somewhere else</li>
@@ -96,27 +98,27 @@ the production server.
       </td>
     </tr>
     <tr>
-      <td><code>SPiD.logout</code></td>
+      <td><code>auth.logout</code></td>
       <td>User logs out (either by you or another site (SPiD, other client).</td>
     </tr>
     <tr>
-      <td><code>SPiD.userChange</code></td>
+      <td><code>auth.userChange</code></td>
       <td>User in session has changed to another user</td>
     </tr>
     <tr>
-      <td><code>SPiD.sessionInit</code></td>
+      <td><code>auth.sessionInit</code></td>
       <td>Session is successfully initiated for the first time, on page load</td>
     </tr>
     <tr>
-      <td><code>SPiD.sessionChange</code></td>
+      <td><code>auth.sessionChange</code></td>
       <td>Always. This is a wrapping event, which is fired as a result of all other events that changes the session.</td>
     </tr>
     <tr>
-      <td><code>SPiD.visitor</code></td>
+      <td><code>auth.visitor</code></td>
       <td>SPiD identifies the current visitor. Yields a unique visitor id that can be used to track the user even when not logged in. Used in analytics (Mixpanel) tracking, etc</td>
     </tr>
     <tr>
-      <td><code>SPiD.error</code></td>
+      <td><code>VGS.error</code></td>
       <td>An error occurred. Like communication timeouts, invalid responses or abuse (too many requests in a short time period).</td>
     </tr>
   </tbody>
@@ -126,34 +128,34 @@ Depending on the user's actions, multiple events may be fired.
 
 #### Page loads, user logged in
 
-- `SPiD.login`
-- `SPiD.statusChange`
-- `SPiD.sessionInit`
-- `SPiD.sessionChange`
+- `auth.login`
+- `auth.statusChange`
+- `auth.sessionInit`
+- `auth.sessionChange`
 
 #### Page loads, user not logged in
-- `SPiD.notLoggedin`
-- `SPiD.sessionChange`
+- `auth.notLoggedin`
+- `auth.sessionChange`
 
 #### Polling, and there is no change
 
-- `SPiD.sessionChange`
+- `auth.sessionChange`
 
 The change in session are the fields `clientTime` and `serverTime` for
 synchronization between client and server.
 
 #### User logs out
 
-- `SPiD.logout`
-- `SPiD.statusChange`
-- `SPiD.sessionChange`
+- `auth.logout`
+- `auth.statusChange`
+- `auth.sessionChange`
 
 #### User logs out, and logs in with another user account
 
-- `SPiD.logout`
-- `SPiD.userChange`
-- `SPiD.login`
-- `SPiD.sessionChange`
+- `auth.logout`
+- `auth.userChange`
+- `auth.login`
+- `auth.sessionChange`
 
 ## Response Object
 

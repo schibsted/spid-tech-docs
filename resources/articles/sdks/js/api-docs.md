@@ -5,30 +5,33 @@
 
 ## At a glance
 
-- [`VGS`](#vgs)
-    - [`VGS.getLoginURI`](#get-login-uri)
-    - [`VGS.getSignupURI`](#get-signup-uri)
-    - [`VGS.getLogoutURI`](#get-logout-uri)
-    - [`VGS.getAccountURI`](#get-account-uri)
-    - [`VGS.getPurchaseHistoryURI`](#get-purchase-history-uri)
-    - [`VGS.getSubscriptionsURI`](#get-subscriptions-uri)
-    - [`VGS.getProductsURI`](#get-products-uri)
-    - [`VGS.getRedeemVoucherURI`](#get-redeem-voucher-uri)
-    - [`VGS.getPurchaseProductURI`](#get-purchase-product-uri)
-    - [`VGS.getPurchaseCampaignURI`](#get-purchase-campaign-uri)
-    - [`VGS.getLoginStatus`](#get-login-status)
-    - [`VGS.hasProduct`](#has-product)
-    - [`VGS.hasSubscription`](#has-subscription)
-- [`VGS.Auth`](#auth)
-    - [`VGS.Auth.logout`](#logout)
-- [`VGS.Event`](#event)
-    - [`VGS.Event.subscribers`](#subscribers)
-    - [`VGS.Event.subscribe`](#subscribe)
-    - [`VGS.Event.unsubscribe`](#unsubscribe)
-    - [`VGS.Event.monitor`](#monitor)
-    - [`VGS.Event.clear`](#clear)
-    - [`VGS.Event.fire`](#fire)
-
+- [`SPiD`](#sdk)
+    - [`SPiD.init`](#init)
+    - [`SPiD.hasSession`](#has-session)
+    - [`SPiD.hasProduct`](#has-product)
+    - [`SPiD.hasSubscription`](#has-subscription)
+    - [`SPiD.setTraits`](#set-traits)
+    - [`SPiD.logout`](#logout)
+    - [`SPiD.acceptAgreement`](#acceptAgreement)
+- [`SPiD.event`](#event)
+    - [`SPiD.event.subscribe`](#subscribe)
+    - [`SPiD.event.unsubscribe`](#unsubscribe)
+    - [`SPiD.event.fire`](#fire)
+- [`SPiD.sessionCache`](#sessionCache)
+    - [`SPiD.sessionCache.get`](#sessionCacheGet)
+    - [`SPiD.sessionCache.set`](#sessionCacheSet)
+    - [`SPiD.sessionCache.clear`](#sessionCacheClear)
+- [`SPiD.Uri`](#spid_uri)
+    - [`SPiD.Uri.login`](#get-login-uri)
+    - [`SPiD.Uri.signup`](#get-signup-uri)
+    - [`SPiD.Uri.logout`](#get-logout-uri)
+    - [`SPiD.Uri.account`](#get-account-uri)
+    - [`SPiD.Uri.purchaseHistory`](#get-purchase-history-uri)
+    - [`SPiD.Uri.subscriptions`](#get-subscriptions-uri)
+    - [`SPiD.Uri.products`](#get-products-uri)
+    - [`SPiD.Uri.redeem`](#get-redeem-voucher-uri)
+    - [`SPiD.Uri.purchaseProduct`](#get-purchase-product-uri)
+    - [`SPiD.Uri.purchaseCampaign`](#get-purchase-campaign-uri)
 
 ## Read more about the JavaScript SDK
 
@@ -49,10 +52,10 @@
 <a id="api-docs"></a>
 
 All arguments to the `*URI` functions are optional. When omitted, `client_id`
-defaults to the `client_id` used in `VGS.init`, and `redirect_uri` defaults to
+defaults to the `client_id` used in `SPiD.init`, and `redirect_uri` defaults to
 `window.location`.
 
-<a id="vgs"></a>
+<a id="sdk"></a>
 For the following examples, assume the following variable declarations are
 available:
 
@@ -61,172 +64,38 @@ var redirectUri = "http://example.com";
 var clientId = "4321abc0000";
 ```
 
-<a id="get-login-uri"></a>
-### VGS.getLoginURI
 
-Returns the login URI.
-
-```js
-VGS.getLoginURI(); //=> "https://identity-pre.schibsted.com/flow/login?response_type=code&flow=signup&client_id=4321abc0000&redirect_uri=http%3A%2F%2Flocalhost"
-VGS.getLoginURI(redirectUri, clientId); //=> "https://identity-pre.schibsted.com/flow/login?response_type=code&flow=signup&client_id=abcdef&redirect_uri=http%3A%2F%2Fexample.com"
-```
-
-<a id="get-signup-uri"></a>
-### VGS.getSignupURI
-
-Returns the signup URI.
+<a id="init"></a>
+### SPiD.init
 
 ```js
-VGS.getSignupURI(); //=> "https://identity-pre.schibsted.com/flow/signup?response_type=code&flow=signup&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
-VGS.getSignupURI(redirectUri, clientId); //=> "https://identity-pre.schibsted.com/flow/signup?response_type=code&flow=signup&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
+SPiD.init(options)
 ```
 
-<a id="get-logout-uri"></a>
-### VGS.getLogoutURI
+Initialises the SDK. The `options` parameter must contain the properties `server` and `client_id`.
 
-Returns the logout URI.
+<a id="has-session"></a>
+### SPiD.hasSession
 
 ```js
-VGS.getLogoutURI(); //=> "https://identity-pre.schibsted.com/logout?client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
-VGS.getLogoutURI(redirectUri, clientId); //=> "https://identity-pre.schibsted.com/logout?client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
+SPiD.hasSession(callback)
 ```
 
-<a id="get-account-uri"></a>
-### VGS.getAccountURI
-
-Returns the account summary page URI.
+Checks the current session status, and call the provided callback with the result. Calling `hasSession` will trigger 
+a number of events (depending on the user status et cetera), to `SPiD.event` subscribers,
+notably the `SPiD.sessionChange` event.
 
 ```js
-VGS.getAccountURI(); //=> "https://identity-pre.schibsted.com/account/summary?response_type=code&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
-VGS.getAccountURI(redirectUri, clientId); //=> "https://identity-pre.schibsted.com/account/summary?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
+SPiD.hasSession(, function (err, response) {
+    // do something with the response, if !err ...
+});
 ```
-
-<a id="get-purchase-history-uri"></a>
-### VGS.getPurchaseHistoryURI
-
-Returns the purchase history page URI.
-
-```js
-VGS.getPurchaseHistoryURI(); //=> "https://identity-pre.schibsted.com/account/purchasehistory?response_type=code&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
-VGS.getPurchaseHistoryURI(redirectUri, clientId); //=> "https://identity-pre.schibsted.com/account/purchasehistory?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
-```
-
-<a id="get-subscriptions-uri"></a>
-### VGS.getSubscriptionsURI
-
-Returns the subscriptions page URI.
-
-```js
-VGS.getSubscriptionsURI(); //=> "https://identity-pre.schibsted.com/account/subscriptions?response_type=code&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
-VGS.getSubscriptionsURI(redirectUri, clientId); //=> "https://identity-pre.schibsted.com/account/subscriptions?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
-```
-
-<a id="get-products-uri"></a>
-### VGS.getProductsURI
-
-Returns the products page URI.
-
-```js
-VGS.getProductsURI(); //=> "https://identity-pre.schibsted.com/account/products?response_type=code&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
-VGS.getProductsURI(redirectUri, clientId); //=> "https://identity-pre.schibsted.com/account/products?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
-```
-
-<a id="get-redeem-voucher-uri"></a>
-### VGS.getRedeemVoucherURI
-
-Returns the redeem voucher page URI. If `voucher_code` is supplied, the voucher
-will automatically be redeemed when the URI is visited.
-
-```js
-VGS.getRedeemVoucherURI();
-//=> "https://identity-pre.schibsted.com/account/redeem?response_type=code&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
-
-var voucherCode = "12312314";
-VGS.getRedeemVoucherURI(voucherCode, redirectUri, clientId);
-//=> "https://identity-pre.schibsted.com/account/redeem?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com&voucher_code=12312314"
-```
-
-<a id="get-purchase-product-uri"></a>
-### VGS.getPurchaseProductURI
-
-Returns the purchase product page URI. If `product_id` is supplied, the URI will
-lead to the "choose payment method" page, otherwise it will lead to the "choose
-product" page.
-
-```js
-VGS.getPurchaseProductURI();
-//=> "https://identity-pre.schibsted.com/flow/checkout?response_type=code&flow=payment&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
-
-var productId = "12312314";
-VGS.getPurchaseProductURI(productId, redirectUri, clientId);
-//=> "https://identity-pre.schibsted.com/flow/checkout?response_type=code&flow=payment&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com&product_id=12312314"
-```
-
-<a id="get-purchase-campaign-uri"></a>
-### VGS.getPurchaseCampaignURI(campaign_id, product_id, voucher_code redirect_uri, client_id)`
-
-Get URI for purchase campaign page. If `campaign_id` is supplied, the URI will
-take the user to the products in the campaign.
-
-```js
-VGS.getPurchaseCampaignURI();
-//=> "https://identity-pre.schibsted.com/flow/checkout?response_type=code&flow=payment&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
-
-var campaignId = "39843984";
-var productId = "12312314";
-var voucherCode = "89878966";
-VGS.getPurchaseCampaignURI(campaignId, productId, voucherCode, redirectUri, clientId);
-//=> "https://identity-pre.schibsted.com/flow/checkout?response_type=code&flow=payment&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com&campaign_id=39843984&product_id=12312314&voucher_code=89878966"
-```
-
-<a id="get-login-status"></a>
-### VGS.getLoginStatus
-
-```js
-VGS.getLoginStatus(callback, force)
-```
-
-The callback is called with the response object, just like event subscribers.
-
-To improve the performance of your application, not every call to check the
-status of the user will result in a request to SPiD's servers. Where possible,
-the response is cached. The first time in the current browser session that
-`VGS.getLoginStatus` is called, or the JS SDK is initialized with
-`status: true`, the response object will be cached by the SDK. Subsequent
-calls to `VGS.getLoginStatus` will return data from this cached response.
-
-This may cause problems if the user has logged in to (or out of) SPiD since the
-last full session lookup. To get around this, you call `VGS.getLoginStatus` with
-the second parameter set to `true` to force a roundtrip to SPiD - effectively
-refreshing the cache of the response object.
-
-```js
-VGS.getLoginStatus(function(response) {
-    // this will be called when the roundtrip to SPiD has completed
-}, true);
-```
-
-If you call `VGS.getLoginStatus` on every page load, be careful not to force
-every call, as it will significantly increase the number of requests to SPiD's
-servers, and thus decrease the performance of your application and potentially
-trigger rate limiting.
-
-While you can call `VGS.getLoginStatus` any time (for example, when the user
-tries to take an important action), most applications need to know the user's
-status as soon as possible after the page loads. In this case, rather than
-calling `VGS.getLoginStatus` explicitly, it is possible to check the user's
-status by setting `status: true` when you call `VGS.init`.
-
-If you check the user's status through `VGS.init`, you can subscribe to the
-`auth.login` event. The response object passed to subscribers of this event is
-identical to that which would be returned by calling `VGS.getLoginStatus`
-explicitly.
 
 <a id="has-product"></a>
-### VGS.hasProduct
+### SPiD.hasProduct
 
 ```js
-VGS.hasProduct(product_id, callback, force)
+SPiD.hasProduct(product_id, callback, force)
 ```
 
 Checks if user has access to a product. Set `force` to `true` to force a
@@ -235,7 +104,7 @@ whose `result` property will be `true` if the user has access to the product in
 question.
 
 ```js
-VGS.hasProduct(2134423, function (response) {
+SPiD.hasProduct(2134423, function (response) {
     response === {
         baseDomain: "sdk.dev"
         displayName: "Anna Andersson"
@@ -257,10 +126,10 @@ VGS.hasProduct(2134423, function (response) {
 ```
 
 <a id="has-subscription"></a>
-### VGS.hasSubscription
+### SPiD.hasSubscription
 
 ```js
-VGS.hasSubscription(product_id, callback, force)
+SPiD.hasSubscription(product_id, callback, force)
 ```
 
 Checks if user has access to a subscription. Set `force` to `true` to force a
@@ -269,7 +138,7 @@ whose `result` property will be `true` if the user has access to the product in
 question.
 
 ```js
-VGS.hasSubscription(324892374, function (response) {
+SPiD.hasSubscription(324892374, function (response) {
     response === {
         baseDomain: "sdk.dev"
         displayName: "Anna Andersson"
@@ -291,100 +160,246 @@ VGS.hasSubscription(324892374, function (response) {
 });
 ```
 
-<a id="auth"></a>
+<a id="set-traits"></a>
+### SPiD.setTraits
+
+Sets the given traits.
+
+```js
+SPiD.setTraits(traits, callback)
+```
+
 <a id="logout"></a>
-### VGS.Auth.logout
+### SPiD.logout
 
 Logs the user out, and calls the callback when done.
 
 ```js
-VGS.Auth.logout(function (data) {
+SPiD.logout(function (data) {
     alert("See ya next time!");
 });
 ```
 
-<a id="event"></a>
-<a id="subscribers"></a>
-### VGS.Event.subscribers
 
-Returns an object of all event subscribers, with event names as keys, and arrays
-of functions (e.g. event handlers) as values.
+<a id="acceptAgreement"></a>
+### SPiD.acceptAgreement
+
+Calls the acceptAgreement endpoint, and (if the acceptAgreement call was successful) re-calls hasSession,
+clearing any cached value before doing so.
 
 ```js
-VGS.Event.subscribers()
-// { auth.login: [function (data) {...}],
-//   auth.logout: [function (data) {...}],
-//   auth.sessionChange: [function (data) {...}],
-//   VGS.loginException: [function () {...}]
-// }
+SPiD.acceptAgreement(callback)
 ```
 
+<a id="event"></a>
+
 <a id="subscribe"></a>
-### VGS.Event.subscribe
+### SPiD.event.subscribe
 
 Register subscriber for event. The event handler function will be called
 whenever the named event occurs.
 
 ```js
-VGS.Event.subscribe("auth:login", function (data) {
+SPiD.event.subscribe("auth:login", function (data) {
     alert("Welcome!");
 });
 ```
 
 <a id="unsubscribe"></a>
-### VGS.Event.unsubscribe
+### SPiD.event.unsubscribe
 
 Remove previously subscribed function. Pass in the event name and the function
-originally passed to `VGS.Event.subscribe`.
+originally passed to `SPiD.event.subscribe`.
 
 ```js
 var callback = function (data) {
     alert("Welcome!");
 };
 
-VGS.Event.subscribe("auth:login", callback);
+SPiD.event.subscribe("auth:login", callback);
 
 // ...
 
-VGS.Event.unsubscribe("auth:login", callback);
+SPiD.event.unsubscribe("auth:login", callback);
 ```
 
 Note that it must be the same function reference, you cannot inline the function
 in the `subscribe` call when you want to later unsubscribe it.
 
-<a id="monitor"></a>
-### VGS.Event.monitor
-
-Monitor an event for some period of time. The callback is invoked immediately
-when `monitor` is called, and then every time the event fires. When the callback
-returns a truthy value, the monitor subscription is canceled. If the callback
-returns a truthy value on its first execution, it will never be subscribed to
-the event.
-
-```js
-// Listen to the initial monitor call and the following four events,
-// then stop listening
-
-var calls = 0;
-VGS.Event.monitor("auth:login", function (data) {
-    console.log(data);
-    calls++;
-    return calls === 5;
-});
-```
-
-<a id="clear"></a>
-### VGS.Event.clear
-
-Clear all subscribers for an event.
-
-```js
-VGS.Event.clear("auth:login");
-```
-
 <a id="fire"></a>
-### VGS.Event.fire
+### SPiD.event.fire
 
 Fire an event. The first argument is the event name, additional arguments are
 passed to subscribers. This function is used by the JS SDK to propagate events
 to client subscribers, but is not recommended for external use.
+
+
+<a id="sessionCache"></a>
+
+<a id="sessionCacheGet"></a>
+### SPiD.sessionCache.get
+
+Gets the currently cached session object.
+
+```js
+SPiD.sessionCache.get();
+```
+
+<a id="sessionCacheSet"></a>
+### SPiD.sessionCache.set
+
+Sets the currently cached session object, with an optional expiration time.
+
+```js
+SPiD.sessionCache.set(value, exipresInMillis);
+```
+
+<a id="sessionCacheClear"></a>
+### SPiD.sessionCache.clear
+
+Clears the session cache. Use this when you want to force a request to the `hasSession` endpoint.
+
+```js
+SPiD.sessionCache.clear();
+```
+
+
+<a id="spid_uri"></a>
+## SPiD.Uri
+The `SPiD.Uri` module is separated from the main JS SDK, and is optional. It's assigned to the global variable `SPiD_Uri`
+when using the vanilla JS variant. The `SPiD.Uri` module is also available as with AMD on CommonJS packaging.
+
+
+<a id="get-login-uri"></a>
+### SPiD.Uri.login
+
+Returns the login URI.
+
+```js
+SPiD_Uri.login(); //=> "https://identity-pre.schibsted.com/flow/login?response_type=code&flow=signup&client_id=4321abc0000&redirect_uri=http%3A%2F%2Flocalhost"
+SPiD_Uri.login(redirectUri, clientId); //=> "https://identity-pre.schibsted.com/flow/login?response_type=code&flow=signup&client_id=abcdef&redirect_uri=http%3A%2F%2Fexample.com"
+```
+
+<a id="get-signup-uri"></a>
+### SPiD.Uri.signup
+
+Returns the signup URI.
+
+```js
+SPiD_Uri.signup(); //=> "https://identity-pre.schibsted.com/flow/signup?response_type=code&flow=signup&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
+SPiD_Uri.signup(redirectUri, clientId); //=> "https://identity-pre.schibsted.com/flow/signup?response_type=code&flow=signup&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
+```
+
+<a id="get-logout-uri"></a>
+### SPiD.Uri.logout
+
+Returns the logout URI.
+
+```js
+SPiD_Uri.logout(); //=> "https://identity-pre.schibsted.com/logout?client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
+SPiD_Uri.logout(redirectUri, clientId); //=> "https://identity-pre.schibsted.com/logout?client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
+```
+
+<a id="get-account-uri"></a>
+### SPiD.Uri.account
+
+Returns the account summary page URI.
+
+```js
+SPiD_Uri.account(); //=> "https://identity-pre.schibsted.com/account/summary?response_type=code&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
+SPiD_Uri.account(redirectUri, clientId); //=> "https://identity-pre.schibsted.com/account/summary?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
+```
+
+<a id="get-purchase-history-uri"></a>
+### SPiD.Uri.purchaseHistory
+
+Returns the purchase history page URI.
+
+```js
+SPiD_Uri.purchaseHistory(); //=> "https://identity-pre.schibsted.com/account/purchasehistory?response_type=code&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
+SPiD_Uri.purchaseHistory(redirectUri, clientId); //=> "https://identity-pre.schibsted.com/account/purchasehistory?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
+```
+
+<a id="get-subscriptions-uri"></a>
+### SPiD.Uri.subscriptions
+
+Returns the subscriptions page URI.
+
+```js
+SPiD_Uri.subscriptions(); //=> "https://identity-pre.schibsted.com/account/subscriptions?response_type=code&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
+SPiD_Uri.subscriptions(redirectUri, clientId); //=> "https://identity-pre.schibsted.com/account/subscriptions?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
+```
+
+<a id="get-products-uri"></a>
+### SPiD.Uri.products
+
+Returns the products page URI.
+
+```js
+SPiD_Uri.products(); //=> "https://identity-pre.schibsted.com/account/products?response_type=code&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
+SPiD_Uri.products(redirectUri, clientId); //=> "https://identity-pre.schibsted.com/account/products?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com"
+```
+
+<a id="get-redeem-voucher-uri"></a>
+### SPiD.Uri.redeem
+
+Returns the redeem voucher page URI. If `voucher_code` is supplied, the voucher
+will automatically be redeemed when the URI is visited.
+
+```js
+SPiD_Uri.redeem();
+//=> "https://identity-pre.schibsted.com/account/redeem?response_type=code&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
+
+var voucherCode = "12312314";
+SPiD_Uri.redeem(voucherCode, redirectUri, clientId);
+//=> "https://identity-pre.schibsted.com/account/redeem?response_type=code&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com&voucher_code=12312314"
+```
+
+<a id="get-purchase-product-uri"></a>
+### SPiD.Uri.purchaseHistory
+
+Returns the purchase product page URI. If `product_id` is supplied, the URI will
+lead to the "choose payment method" page, otherwise it will lead to the "choose
+product" page.
+
+```js
+SPiD_Uri.purchaseHistory();
+//=> "https://identity-pre.schibsted.com/flow/checkout?response_type=code&flow=payment&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
+
+var productId = "12312314";
+SPiD_Uri.purchaseHistory(productId, redirectUri, clientId);
+//=> "https://identity-pre.schibsted.com/flow/checkout?response_type=code&flow=payment&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com&product_id=12312314"
+```
+
+<a id="get-purchase-product-uri"></a>
+### SPiD.Uri.purchaseProduct
+
+Returns the purchase product page URI. If `product_id` is supplied, the URI will
+lead to the "choose payment method" page, otherwise it will lead to the "choose
+product" page.
+
+```js
+SPiD_Uri.purchaseProduct();
+//=> "https://identity-pre.schibsted.com/flow/checkout?response_type=code&flow=payment&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
+
+var productId = "12312314";
+SPiD_Uri.purchaseProduct(productId, redirectUri, clientId);
+//=> "https://identity-pre.schibsted.com/flow/checkout?response_type=code&flow=payment&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com&product_id=12312314"
+```
+
+<a id="get-purchase-campaign-uri"></a>
+### SPiD.Uri.purchaseCampaign(campaign_id, product_id, voucher_code redirect_uri, client_id)`
+
+Get URI for purchase campaign page. If `campaign_id` is supplied, the URI will
+take the user to the products in the campaign.
+
+```js
+SPiD_Uri.purchaseCampaign();
+//=> "https://identity-pre.schibsted.com/flow/checkout?response_type=code&flow=payment&client_id=52f8e3d9efd04bb749000000&redirect_uri=http%3A%2F%2Flocalhost"
+
+var campaignId = "39843984";
+var productId = "12312314";
+var voucherCode = "89878966";
+SPiD_Uri.purchaseCampaign(campaignId, productId, voucherCode, redirectUri, clientId);
+//=> "https://identity-pre.schibsted.com/flow/checkout?response_type=code&flow=payment&client_id=4321abc0000&redirect_uri=http%3A%2F%2Fexample.com&campaign_id=39843984&product_id=12312314&voucher_code=89878966"
+```
