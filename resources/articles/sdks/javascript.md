@@ -17,8 +17,7 @@
 - [Best practices](/sdks/js/best-practices/)
 
 ## See also
-- [Documentation for the 1.x javascript SDK](/sdks/javascript-1.x/)
-- [Behavior tracking with SPiD Pulse](/sdks/js/behavior-tracking-with-spid-pulse/)
+- [Documentation for the 1.x javascript SDK](/sdks/javascript-1x/)
 - [Getting started with the server-side API](/getting-started/)
 - [Mixpanel analytics](/mixpanel/analytics/)
 
@@ -174,7 +173,7 @@ thrown.
 ##### useSessionCluster
 
 Controls which session endpoint to use. Defaults to true. During development you should consider setting this to false.
-Remember to set to true or remove this flag before deploying to production. This config option used to be called ”prod”. 
+Remember to set to true or remove this flag before deploying to production. This config option used to be called ”prod”.
 
 ##### varnish_expiration
 

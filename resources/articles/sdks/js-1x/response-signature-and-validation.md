@@ -5,15 +5,14 @@
 
 ## Read more about the JavaScript SDK
 
-- [JavaScript SDK](/sdks/javascript-1.x/)
-- [Events](/sdks/js-1.x/events/)
-- [API Docs](/sdks/js-1.x/api-docs/)
-- [Hosting](/sdks/js-1.x/hosting/)
-- [Best practices](/sdks/js-1.x/best-practices/)
+- [JavaScript SDK](/sdks/javascript-1x/)
+- [Events](/sdks/js-1x/events/)
+- [API Docs](/sdks/js-1x/api-docs/)
+- [Hosting](/sdks/js-1x/hosting/)
+- [Best practices](/sdks/js-1x/best-practices/)
 
 ## See also
 
-- [Behavior tracking with SPiD Pulse](/sdks/js-1.x/behavior-tracking-with-spid-pulse/)
 - [Getting started with the server-side API](/getting-started/)
 - [Mixpanel analytics](/mixpanel/analytics/)
 

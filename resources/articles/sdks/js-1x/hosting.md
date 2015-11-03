@@ -5,15 +5,14 @@
 
 ## Read more about the JavaScript SDK
 
-- [JavaScript SDK](/sdks/javascript-1.x/)
-- [Events](/sdks/js-1.x/events/)
-- [Response signature and validation](/sdks/js-1.x/response-signature-and-validation/)
-- [API Docs](/sdks/js-1.x/api-docs/)
-- [Best practices](/sdks/js-1.x/best-practices/)
+- [JavaScript SDK](/sdks/javascript-1x/)
+- [Events](/sdks/js-1x/events/)
+- [Response signature and validation](/sdks/js-1x/response-signature-and-validation/)
+- [API Docs](/sdks/js-1x/api-docs/)
+- [Best practices](/sdks/js-1x/best-practices/)
 
 ## See also
 
-- [Behavior tracking with SPiD Pulse](/sdks/js-1.x/behavior-tracking-with-spid-pulse/)
 - [Getting started with the server-side API](/getting-started/)
 - [Mixpanel analytics](/mixpanel/analytics/)
 

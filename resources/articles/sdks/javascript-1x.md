@@ -10,15 +10,14 @@
 
 ## Read more about the JavaScript SDK
 
-- [Events](/sdks/js-1.x/events/)
-- [Response signature and validation](/sdks/js-1.x/response-signature-and-validation/)
-- [API Docs](/sdks/js-1.x/api-docs/)
-- [Hosting](/sdks/js-1.x/hosting/)
-- [Best practices](/sdks/js-1.x/best-practices/)
+- [Events](/sdks/js-1x/events/)
+- [Response signature and validation](/sdks/js-1x/response-signature-and-validation/)
+- [API Docs](/sdks/js-1x/api-docs/)
+- [Hosting](/sdks/js-1x/hosting/)
+- [Best practices](/sdks/js-1x/best-practices/)
 
 ## See also
 - [Documentation for the current JavaScript SDK](/sdks/javascript/)
-- [Behavior tracking with SPiD Pulse](/sdks/js-1.x/behavior-tracking-with-spid-pulse/)
 - [Getting started with the server-side API](/getting-started/)
 - [Mixpanel analytics](/mixpanel/analytics/)
 
@@ -48,7 +47,7 @@ with the appropriate values.
 - https://identity-pre.schibsted.com for stage/pre clients
 
 `SPID_JSSDK_URI` will normally point to SPiD's servers. Read more about this
-under [hosting](/sdks/js-1.x/hosting/). When using the SDK live from SPiD, the URL typically
+under [hosting](/sdks/js-1x/hosting/). When using the SDK live from SPiD, the URL typically
 looks like `https://login.schibsted.com/js/spid-sdk-{version}.min.js`,
 e.g.
 [https://login.schibsted.com/js/spid-sdk-1.7.9.min.js](https://login.schibsted.com/js/spid-sdk-1.7.9.min.js).
