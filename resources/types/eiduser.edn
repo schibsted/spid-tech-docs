@@ -1,0 +1,8 @@
+{:id :eiduser
+ :name "Eiduser"
+ :description ""}
+
+;; consider adding
+;;  - :inline-types (other types to render along with this one)
+;;  - :values (see dump-status.edn)
+;;  - :fields (see email.edn)
