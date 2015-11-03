@@ -178,187 +178,12 @@
      {:status 404,
       :description "Product not found",
       :type "api-exception"}]}},
-  :deprecated "2.26.0",
   :url "/api/2/qrcode",
   :pathParameters [],
   :controller "Api/2/Utility.qrcode",
   :defaultOutputFormat "json",
   :description "",
   :category ["Utilities" "Platform API"]}
- {:path "token/{token}/authentication",
-  :validOutputFormats ["json"],
-  :parameterDescriptions
-  {:token
-   "Token provided by the API consumer to the API service, the token to check."},
-  :method "GET",
-  :name "Token authentication",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes [],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200, :description "Token is valid", :type "token"}
-     {:status 404,
-      :description "Token is invalid",
-      :type "api-exception"}]}},
-  :url "/api/2/token/{token}/authentication",
-  :pathParameters ["token"],
-  :controller "Api/2/Token.token_authentication",
-  :defaultOutputFormat "json",
-  :description
-  "Provides API services a means of validating and authenticating requests done to them by checking the token",
-  :category ["Token" "Api authentication"]}
- {:path "user/{id}/eid",
-  :validOutputFormats ["json"],
-  :parameterDescriptions {:id "User ID"},
-  :method "GET",
-  :name "Get user verification level",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes [],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description
-      "Returns a verification level and verified data of user",
-      :type "eiduser"}
-     {:status 410, :description "User banned", :type "api-exception"}
-     {:status 404,
-      :description "User not verified",
-      :type "api-exception"}
-     {:status 403,
-      :description "Token is not authorized to access this user",
-      :type "api-exception"}]}},
-  :url "/api/2/user/{id}/eid",
-  :pathParameters ["id"],
-  :controller "Api/2/Eid.eid",
-  :defaultOutputFormat "json",
-  :description
-  "Find out if a user has a verification level and the data he has through that",
-  :category ["eID" "eID Verification"]}
- {:path "eid/init",
-  :validOutputFormats ["json"],
-  :parameterDescriptions
-  {:hash
-   "A [verified request hash](/verified-hash/) signed with your client sign secret."},
-  :method "POST",
-  :name "Initialize a eID verification process",
-  :httpMethods
-  {:POST
-   {:name "POST",
-    :required ["ssn" "userId" "hash"],
-    :optional [],
-    :accessTokenTypes [],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "returns eID initialization object",
-      :type "eidinit"}
-     {:status 400,
-      :description "Only active users can have eID",
-      :type "api-exception"}
-     {:status 400,
-      :description "ssn is required",
-      :type "api-exception"}
-     {:status 400,
-      :description "userId is required",
-      :type "api-exception"}
-     {:status 400,
-      :description "User is already verified",
-      :type "api-exception"}
-     {:status 400,
-      :description "User is banned from eID",
-      :type "api-exception"}
-     {:status 400,
-      :description "User is blocked for verification",
-      :type "api-exception"}
-     {:status 400,
-      :description "SSN is blocked for verification",
-      :type "api-exception"}
-     {:status 400,
-      :description "SSN is taken by other user",
-      :type "api-exception"}
-     {:status 400,
-      :description
-      "User has been verified with another SSN in the past",
-      :type "api-exception"}
-     {:status 403,
-      :description "Invalid verification hash",
-      :type "api-exception"}
-     {:status 403,
-      :description "Token is not authorized to access this user",
-      :type "api-exception"}]}},
-  :url "/api/2/eid/init",
-  :pathParameters [],
-  :controller "Api/2/Eid.init_eid",
-  :defaultOutputFormat "json",
-  :description
-  "Start a verification process and get an eID initialization reference to use to complete the process",
-  :category ["eID" "eID Verification"]}
- {:path "eid/complete",
-  :validOutputFormats ["json"],
-  :parameterDescriptions
-  {:hash
-   "A [verified request hash](/verified-hash/) signed with your client sign secret.",
-   :initRef "The initRef returned from the eID init call",
-   :verifiedFields
-   "Valid JSON containing the verified fields you would like to store"},
-  :method "POST",
-  :name "Complete verification process",
-  :httpMethods
-  {:POST
-   {:name "POST",
-    :required ["userId" "ssn" "verifiedFields" "hash" "initRef"],
-    :optional [],
-    :accessTokenTypes [],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description
-      "Returns a verification level and verified data of user",
-      :type "eiduser"}
-     {:status 400,
-      :description "ssn is required",
-      :type "api-exception"}
-     {:status 400,
-      :description "userId is required",
-      :type "api-exception"}
-     {:status 400,
-      :description "verifiedFields is required",
-      :type "api-exception"}
-     {:status 400, :description "eID not valid", :type "api-exception"}
-     {:status 400,
-      :description "eID not initialized",
-      :type "api-exception"}
-     {:status 400,
-      :description "Failed to create eID",
-      :type "api-exception"}
-     {:status 400,
-      :description "User changed since init",
-      :type "api-exception"}
-     {:status 403,
-      :description "Invalid verification hash",
-      :type "api-exception"}
-     {:status 403,
-      :description "Token is not authorized to access this user",
-      :type "api-exception"}]}},
-  :url "/api/2/eid/complete",
-  :pathParameters [],
-  :controller "Api/2/Eid.complete_eid",
-  :defaultOutputFormat "json",
-  :description
-  "Provide the remaining lockable fields and the verification data (legal address)",
-  :category ["eID" "eID Verification"]}
  {:path "oauth/exchange",
   :validOutputFormats ["json"],
   :parameterDescriptions
@@ -385,11 +210,8 @@
       :description "Required client ID missing",
       :type "api-exception"}
      {:status 400,
-      :description "Type session: Missing redirect URI",
-      :type "api-exception"}
-     {:status 400,
       :description
-      "Type code: Client to exchange token with is missing a default redirect",
+      "Missing redirect URI, which is required when the type is set to \"session\"",
       :type "api-exception"}
      {:status 400,
       :description "Request must contain a valid exchange type",
@@ -428,7 +250,6 @@
      {:status 404,
       :description "URL not expanded",
       :type "api-exception"}]}},
-  :deprecated "2.26.0",
   :url "/api/2/url/{id}",
   :pathParameters ["action"],
   :controller "Api/2/Utility.url",
@@ -565,26 +386,6 @@
       :type "object"}
      {:status 304,
       :description "Object could not be stored",
-      :type "api-exception"}
-     {:status 400,
-      :description "Could not find any valid key",
-      :type "api-exception"}
-     {:status 400,
-      :description "Could not find key/value pair in posted data",
-      :type "api-exception"}]},
-   :DELETE
-   {:name "DELETE",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 202,
-      :description "String confirming deleted key",
-      :type "string"}
-     {:status 304,
-      :description "Object could not be deleted",
       :type "api-exception"}
      {:status 400,
       :description "Could not find any valid key",
@@ -1113,15 +914,7 @@
      {:status 403,
       :description
       "Client or merchant is not authorized to access this user",
-      :type "api-exception"}]},
-   :DELETE
-   {:name "DELETE",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses []}},
+      :type "api-exception"}]}},
   :url "/api/2/user/{id}",
   :pathParameters ["userId"],
   :controller "Api/2/User.user",
@@ -1254,6 +1047,46 @@
   :controller "Api/2/User.user_charge",
   :defaultOutputFormat "json",
   :description "Request a direct payment charge on a user.",
+  :category ["Payment Services" "Direct Payment API"]}
+ {:path "user/{userId}/balance",
+  :validOutputFormats ["json"],
+  :parameterDescriptions {:userId ""},
+  :method "GET",
+  :name "Account balance",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required [],
+    :optional [],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses [{:status 200, :description "", :type "object"}]}},
+  :url "/api/2/user/{id}/balance",
+  :pathParameters ["userId"],
+  :controller "Api/2/User.user_balance",
+  :defaultOutputFormat "json",
+  :description "Retrieve account balance for a user.",
+  :category ["Payment Services" "Direct Payment API"]}
+ {:path "user/{userId}/payment/settings",
+  :validOutputFormats ["json"],
+  :parameterDescriptions {:userId ""},
+  :method "GET",
+  :name "Payment settings",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required [],
+    :optional [],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses [{:status 200, :description "", :type "object"}]}},
+  :url "/api/2/user/{id}/payment/settings",
+  :pathParameters ["userId"],
+  :controller "Api/2/User.user_payment_settings",
+  :defaultOutputFormat "json",
+  :description "Request payment settings for a user.",
   :category ["Payment Services" "Direct Payment API"]}
  {:path "user/{userId}/preferences/payment",
   :validOutputFormats ["json"],
@@ -3389,101 +3222,6 @@
   :defaultOutputFormat "json",
   :description "Get a payment identifier by id",
   :category ["Payment Services" "Payment API"]}
- {:path "identifiers",
-  :validOutputFormats ["json"],
-  :parameterDescriptions {},
-  :method "GET",
-  :name "List identifiers",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required ["userId"],
-    :optional ["type" "status"],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200, :description "", :type "payment-identifier"}]}},
-  :url "/api/2/identifiers",
-  :pathParameters [],
-  :controller "Api/2/Identifier.identifiers",
-  :defaultOutputFormat "json",
-  :description "Get a list payment identifiers by user and type",
-  :category ["Payment Services" "Payment API"]}
- {:path "identifier",
-  :validOutputFormats ["json"],
-  :parameterDescriptions
-  {:identifier "The payment identifier",
-   :description "Identifier description",
-   :userId "The id of the user you are creating an identifier",
-   :type "The payment identifier type",
-   :paymentMethod "Text version of type, like VISA, MC, INVOICE",
-   :status "Is the identifier verified or deleted?",
-   :lastVerified "When was the identifier last verified to work"},
-  :method "POST",
-  :name "Create a payment identifier",
-  :httpMethods
-  {:POST
-   {:name "POST",
-    :required
-    ["identifier" "description" "userId" "type" "paymentMethod"],
-    :optional
-    ["is3dsecure"
-     "maxAmount"
-     "expirationDate"
-     "mediaDistribution"
-     "status"
-     "lastVerified"],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description
-      "Returns the newly created payment identifier object",
-      :type "identifier"}
-     {:status 400,
-      :description "Missing one or more required parameters",
-      :type "api-exception"}
-     {:status 400,
-      :description "Validation error(s)",
-      :type "api-exception"}]}},
-  :url "/api/2/identifier",
-  :pathParameters [],
-  :controller "Api/2/Identifier.identifier",
-  :alias {:paymentMethod "method", :is3dsecure "is_3dsecure"},
-  :defaultOutputFormat "json",
-  :description "Create a payment identifier",
-  :category ["Payment Services" "Payment API"]}
- {:path "identifier/{id}",
-  :validOutputFormats ["json"],
-  :parameterDescriptions
-  {:status "Is the identifier verified or deleted?",
-   :lastVerified "When was the identifier last verified to work"},
-  :method "POST",
-  :name "Update a payment identifier",
-  :httpMethods
-  {:POST
-   {:name "POST",
-    :required [],
-    :optional ["status" "lastVerified"],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Returns the update payment identifier object",
-      :type "identifier"}
-     {:status 400,
-      :description "Validation error(s)",
-      :type "api-exception"}]}},
-  :url "/api/2/identifier/{id}",
-  :pathParameters ["id"],
-  :controller "Api/2/Identifier.identifier",
-  :alias {:paymentMethod "method", :is3dsecure "is_3dsecure"},
-  :defaultOutputFormat "json",
-  :description "Update payment identifier",
-  :category ["Payment Services" "Payment API"]}
  {:path "payment",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
@@ -3729,7 +3467,9 @@
  {:path "paylink",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
-  {:clientReference
+  {:sellerUserId
+   "If set, this user is designated as the seller and will receive the payment.",
+   :clientReference
    "Your reference. Useful for tracking and processing the Order generated by this PayLink.",
    :items "The items to be sold. A list of PayLink Item objects.",
    :cancelUri
@@ -3758,6 +3498,7 @@
      "expires"
      "redirectUri"
      "cancelUri"
+     "sellerUserId"
      "buyerUserId"],
     :accessTokenTypes ["server"],
     :filters [],
@@ -3784,67 +3525,6 @@
   :defaultOutputFormat "json",
   :description "Create a PayLink object",
   :category ["Payment Services" "PayLink API"]}
- {:path "p2plink",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions
-  {:sellerUserId
-   "If set, this user is designated as the seller and will receive the payment.",
-   :clientReference
-   "Your reference. Useful for tracking and processing the Order generated by this PayLink.",
-   :items "The items to be sold. A list of PayLink Item objects.",
-   :cancelUri
-   "Redirect the user to this URL if login or payment is cancelled.",
-   :expires
-   "The date when the PayLink expires. A unix timestamp. Defaults to 24 hours from creation.",
-   :buyerUserId "If set, only this user has access to the PayLink.",
-   :title
-   "The PayLink title. Displayed to the user on the payment page, and shown on the New Credit Card page at Payex.",
-   :paymentOptions
-   "The allowed payment methods for this PayLink. An integer bitmask: Credit (1), Credit cards (2), SMS (4), Invoice (8). Defaults to 2.",
-   :purchaseFlow
-   "Defaults to `DIRECT`, which will process the payment straight away. Can also be `AUTHORIZE`, where the payment is on hold and must later be captured.",
-   :redirectUri
-   "Redirect the user to this URL after payment is complete."},
-  :method "POST",
-  :name "Create P2pLink",
-  :httpMethods
-  {:POST
-   {:name "POST",
-    :required ["title" "items" "hash"],
-    :optional
-    ["clientReference"
-     "purchaseFlow"
-     "paymentOptions"
-     "expires"
-     "redirectUri"
-     "cancelUri"
-     "sellerUserId"
-     "buyerUserId"],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Returns the newly created paylink object",
-      :type "paylink"}
-     {:status 400,
-      :description "Missing one or more required parameters",
-      :type "api-exception"}
-     {:status 400,
-      :description "Paylink items is not a list of items",
-      :type "api-exception"}
-     {:status 400,
-      :description "Validation error(s)",
-      :type "api-exception"}
-     {:status 404,
-      :description "Paylink not found",
-      :type "api-exception"}]}},
-  :url "/api/2/p2plink",
-  :pathParameters [],
-  :controller "Api/2/Paylink.p2plink",
-  :defaultOutputFormat "json",
-  :description "Create a PayLink object",
-  :category ["Payment Services" "P2pLink API"]}
  {:path "paylink/{paylinkId}",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions {:paylinkId "ID of the paylink to retrieve."},
@@ -3937,35 +3617,6 @@
   :defaultOutputFormat "json",
   :description "Invalidate the user's SPiD session.",
   :category ["Identity Management" "Login API"]}
- {:path "user/{id}/level",
-  :validOutputFormats ["json"],
-  :parameterDescriptions {:id "User ID"},
-  :method "GET",
-  :name "User verification level",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes [],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Returns a verification level and user_id",
-      :type "userlevel"}
-     {:status 404,
-      :description "User not verified",
-      :type "api-exception"}
-     {:status 403,
-      :description "Token is not authorized to access this user",
-      :type "api-exception"}]}},
-  :url "/api/2/user/{id}/level",
-  :pathParameters ["id"],
-  :controller "Api/2/User.user_level",
-  :defaultOutputFormat "json",
-  :description "Get the user verification level",
-  :category ["user" "verification level"]}
  {:path "api/2/*",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions {},
