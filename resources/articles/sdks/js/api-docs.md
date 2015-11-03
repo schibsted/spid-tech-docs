@@ -43,7 +43,6 @@
 
 ## See also
 
-- [Behavior tracking with SPiD Pulse](/sdks/js/behavior-tracking-with-spid-pulse/)
 - [Getting started with the server-side API](/getting-started/)
 - [Mixpanel analytics](/mixpanel/analytics/)
 
@@ -81,7 +80,7 @@ Initialises the SDK. The `options` parameter must contain the properties `server
 SPiD.hasSession(callback)
 ```
 
-Checks the current session status, and call the provided callback with the result. Calling `hasSession` will trigger 
+Checks the current session status, and call the provided callback with the result. Calling `hasSession` will trigger
 a number of events (depending on the user status et cetera), to `SPiD.event` subscribers,
 notably the `SPiD.sessionChange` event.
 

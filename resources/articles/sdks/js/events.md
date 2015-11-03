@@ -19,7 +19,6 @@
 
 ## See also
 
-- [Behavior tracking with SPiD Pulse](/sdks/js/behavior-tracking-with-spid-pulse/)
 - [Getting started with the server-side API](/getting-started/)
 - [Mixpanel analytics](/mixpanel/analytics/)
 
@@ -56,7 +55,7 @@ SPiD.event.subscribe("SPiD.sessionChange", function (data) {
             " <a href=\"" + SPiD_Uri.logout() + "\">Log out</a>";
     }
 });
-var config = { 
+var config = {
     client_id: "52f8e3d9efd04bb749000000",
     server: "identity-pre.schibsted.com",
     useSessionCluster: false

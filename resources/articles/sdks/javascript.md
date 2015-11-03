@@ -24,7 +24,7 @@
 :body
 
 **Note: this documentation is for the current version of the Javascript SDK. The old 1.x version can be found
-[here](/sdks/javascript-1.x/).**
+[here](/sdks/javascript-1x/).**
 
 The JavaScript SDK is different from the other SDKs in that it only provides
 information about the user's authentication/authorization status. It is not a
