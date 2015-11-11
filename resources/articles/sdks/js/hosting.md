@@ -18,13 +18,55 @@
 
 :body
 
-By default, the SDK will be loaded from SPiD's servers. You may host it in your
-own environment during testing and by request when in production. If the storage
-option is set to `cookie`, the cookies will be created for your own domain.
+The SDK can be retrieved from SPiD CDN servers or your own servers.
 
-Loading the JS SDK directly from SPiD is recommended for performance reasons.
-This way, the SDK is cached across clients, meaning that users that have
-previously visited other clients may not need to download the SDK for your site.
+## Local usage
+To use a local copy, you can
 
-To use a local copy of the SDK, download the
-[latest release from GitHub](https://github.com/schibsted/sdk-js/) or install it via NPM.
+* Download from [releases](https://github.com/schibsted/sdk-js/releases)
+* Clone [repository](https://github.com/schibsted/sdk-js/) and run `grunt`
+* Install the package [spid-sdk-js](https://www.npmjs.com/package/spid-sdk-js) via [npm](https://www.npmjs.com/)
+
+## CDN hosting
+All version of the SDK is available on our CDN servers.
+The 2.x.x version are available as AMD, CommonJs and regular global variable version.
+
+Files are available on http://cdn.spid.se/sdk/spid-sdk-{version_number}-{type}(.min).js
+or https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-sdk-{version_number}-{type}(.min).js.
+
+Examples
+
+* http://cdn.spid.se/sdk/spid-sdk-2.1.0-amd.js
+* http://cdn.spid.se/sdk/spid-sdk-2.1.0-amd.min.js
+* http://cdn.spid.se/sdk/spid-sdk-2.1.0-commonjs2.js
+* http://cdn.spid.se/sdk/spid-sdk-2.1.0-commonjs2.min.js
+* http://cdn.spid.se/sdk/spid-sdk-2.1.0-var.js
+* http://cdn.spid.se/sdk/spid-sdk-2.1.0-var.min.js
+
+or
+
+* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-sdk-2.1.0-amd.js
+* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-sdk-2.1.0-amd.min.js
+* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-sdk-2.1.0-commonjs2.js
+* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-sdk-2.1.0-commonjs2.min.js
+* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-sdk-2.1.0-var.js
+* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-sdk-2.1.0-var.min.js
+
+
+There also an additional file including URI generating functions that is optional to use.
+
+* http://cdn.spid.se/sdk/spid-uri-2.1.0-amd.js
+* http://cdn.spid.se/sdk/spid-uri-2.1.0-commonjs2.js
+* http://cdn.spid.se/sdk/spid-uri-2.1.0-var.js
+* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-uri-2.1.0-amd.js
+* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-uri-2.1.0-commonjs2.js
+* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-uri-2.1.0-var.js
+
+### Why https hosting is on cloudfront url
+
+cdn.spid.se is just a CNAME for that cloudfront distribution.
+You may use the same cloudfront url on http too.
+
+To use cdn.spid.se with https, we need to use SNI, which is not supported in some browsers (read XP).
+There are some alternative solutions, but for the time being the https hosting url are those.
+Any changes to this will be announced properly.
