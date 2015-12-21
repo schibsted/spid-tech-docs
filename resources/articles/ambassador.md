@@ -32,7 +32,7 @@ To access the ambassador web application use the following URLs
   </tr>
   <tr>
     <td>Production Sweden/International</td>
-    <td><a href="https://ambassador.payment.schibsted.se">https://ambassador.payment.schibsted.se</a></td>
+    <td><a href="https://ambassador.schibsted.com/">https://ambassador.schibsted.com/</a></td>
   </tr>
 </table>
 
