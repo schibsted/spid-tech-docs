@@ -80,8 +80,10 @@ Initialises the SDK. The `options` parameter must contain the properties `server
 SPiD.hasSession(callback)
 ```
 
-Checks the current session status, and call the provided callback with the result. Calling `hasSession` will trigger
-a number of events (depending on the user status et cetera), to `SPiD.event` subscribers,
+Checks the current session status, and call the provided callback with
+two arguments the first being error and the second being the result.
+Calling `hasSession` will trigger a number of events
+(depending on the user status et cetera), to `SPiD.event` subscribers,
 notably the `SPiD.sessionChange` event.
 
 ```js
@@ -98,9 +100,10 @@ SPiD.hasProduct(product_id, callback, force)
 ```
 
 Checks if user has access to a product. Set `force` to `true` to force a
-roundtrip (e.g., bypass the cache). The callback will be called with an object,
-whose `result` property will be `true` if the user has access to the product in
-question.
+roundtrip (e.g., bypass the cache).
+The callback will be called with two arguments the first being error
+and the second an object, whose `result` property will be `true`
+if the user has access to the product in question.
 
 ```js
 SPiD.hasProduct(2134423, function (response) {
@@ -132,9 +135,10 @@ SPiD.hasSubscription(product_id, callback, force)
 ```
 
 Checks if user has access to a subscription. Set `force` to `true` to force a
-roundtrip (e.g., bypass the cache). The callback will be called with an object,
-whose `result` property will be `true` if the user has access to the product in
-question.
+roundtrip (e.g., bypass the cache). 
+The callback will be called with two arguments the first being error
+and the second an object, whose `result` property will be `true`
+if the user has access to the product in question.
 
 ```js
 SPiD.hasSubscription(324892374, function (response) {
