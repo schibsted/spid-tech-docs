@@ -106,7 +106,7 @@ and the second an object, whose `result` property will be `true`
 if the user has access to the product in question.
 
 ```js
-SPiD.hasProduct(2134423, function (response) {
+SPiD.hasProduct(2134423, function (err, response) {
     response === {
         baseDomain: "sdk.dev"
         displayName: "Anna Andersson"
@@ -135,13 +135,13 @@ SPiD.hasSubscription(product_id, callback, force)
 ```
 
 Checks if user has access to a subscription. Set `force` to `true` to force a
-roundtrip (e.g., bypass the cache). 
+roundtrip (e.g., bypass the cache).
 The callback will be called with two arguments the first being error
 and the second an object, whose `result` property will be `true`
 if the user has access to the product in question.
 
 ```js
-SPiD.hasSubscription(324892374, function (response) {
+SPiD.hasSubscription(324892374, function (err, response) {
     response === {
         baseDomain: "sdk.dev"
         displayName: "Anna Andersson"
