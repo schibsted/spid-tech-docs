@@ -175,6 +175,10 @@ Remember to set to true or remove this flag before deploying to production. This
 
 Varnish cookie expiration, in seconds. Defaults to the same as the session expiration.
 
+##### setVarnishCookie
+
+Boolean flag to determine if a varnish cookie should be set. Varnish cookie will be set unless this is set to false.
+
 ##### timeout
 
 This is the default connection timeout in milliseconds used when waiting for response by the SPiD servers.
