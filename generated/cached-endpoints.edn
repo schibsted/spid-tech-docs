@@ -157,33 +157,6 @@
   :description
   "Returns the current user terms for the client and SPiD",
   :category ["Utilities" "Platform API"]}
- {:path "qrcode",
-  :validOutputFormats ["json" "png"],
-  :parameterDescriptions {:type "", :content "", :w "", :h ""},
-  :method "GET",
-  :name "Utility:qrcode",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional ["type" "content" "w" "h"],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200, :description "", :type ""}
-     {:status 400,
-      :description "Request must contain URL encoded content",
-      :type "api-exception"}
-     {:status 404,
-      :description "Product not found",
-      :type "api-exception"}]}},
-  :url "/api/2/qrcode",
-  :pathParameters [],
-  :controller "Api/2/Utility.qrcode",
-  :defaultOutputFormat "json",
-  :description "",
-  :category ["Utilities" "Platform API"]}
  {:path "oauth/exchange",
   :validOutputFormats ["json"],
   :parameterDescriptions
@@ -210,8 +183,11 @@
       :description "Required client ID missing",
       :type "api-exception"}
      {:status 400,
+      :description "Type session: Missing redirect URI",
+      :type "api-exception"}
+     {:status 400,
       :description
-      "Missing redirect URI, which is required when the type is set to \"session\"",
+      "Type code: Client to exchange token with is missing a default redirect",
       :type "api-exception"}
      {:status 400,
       :description "Request must contain a valid exchange type",
@@ -302,45 +278,6 @@
   :description
   "Specify a role (ie `watcher`, `admin`) and get acl list",
   :category ["Utilities" "Sysadmin API"]}
- {:path "email_templates",
-  :validOutputFormats ["json" "jsonp" "xml"],
-  :parameterDescriptions
-  {:locale "The email template [locale](/endpoints/#locales)",
-   :templates ""},
-  :method "*",
-  :name "Email templates",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional ["locale"],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description
-      "Returns all the email templates used by the system.",
-      :type "email-template-collection"}]},
-   :POST
-   {:name "POST",
-    :required ["templates"],
-    :optional ["locale"],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200, :description "", :type "email-template-collection"}
-     {:status 400,
-      :description "Invalid template JSON data",
-      :type "api-exception"}]}},
-  :deprecated "2.6",
-  :url "/api/2/email_templates",
-  :pathParameters [],
-  :controller "Api/2/Utility.email_templates",
-  :defaultOutputFormat "json",
-  :description "Get and Set email templates",
-  :category ["Identity Management" "Email API"]}
  {:path "{type}/{id}/do/{key}",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
@@ -1048,46 +985,6 @@
   :defaultOutputFormat "json",
   :description "Request a direct payment charge on a user.",
   :category ["Payment Services" "Direct Payment API"]}
- {:path "user/{userId}/balance",
-  :validOutputFormats ["json"],
-  :parameterDescriptions {:userId ""},
-  :method "GET",
-  :name "Account balance",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server" "user"],
-    :filters [],
-    :defaultFilters [],
-    :responses [{:status 200, :description "", :type "object"}]}},
-  :url "/api/2/user/{id}/balance",
-  :pathParameters ["userId"],
-  :controller "Api/2/User.user_balance",
-  :defaultOutputFormat "json",
-  :description "Retrieve account balance for a user.",
-  :category ["Payment Services" "Direct Payment API"]}
- {:path "user/{userId}/payment/settings",
-  :validOutputFormats ["json"],
-  :parameterDescriptions {:userId ""},
-  :method "GET",
-  :name "Payment settings",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server" "user"],
-    :filters [],
-    :defaultFilters [],
-    :responses [{:status 200, :description "", :type "object"}]}},
-  :url "/api/2/user/{id}/payment/settings",
-  :pathParameters ["userId"],
-  :controller "Api/2/User.user_payment_settings",
-  :defaultOutputFormat "json",
-  :description "Request payment settings for a user.",
-  :category ["Payment Services" "Direct Payment API"]}
  {:path "user/{userId}/preferences/payment",
   :validOutputFormats ["json"],
   :parameterDescriptions
@@ -1204,6 +1101,9 @@
       :type "[user]"}
      {:status 404,
       :description "No users found",
+      :type "api-exception"}
+     {:status 400,
+      :description "Invalid parameter value",
       :type "api-exception"}]}},
   :url "/api/2/users",
   :pathParameters [],
@@ -1416,31 +1316,6 @@
   :alias {:id "user_id"},
   :defaultOutputFormat "json",
   :description "List orders for a user (on client)",
-  :category ["Payment Services" "Order API"]}
- {:path "user/{userId}/order/{orderId}/credit",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions
-  {:userId
-   "Credit order for user with this `userId` (not to be mistaken with the deprecated `id`).",
-   :orderId ""},
-  :method "POST",
-  :name "Credit user order",
-  :httpMethods
-  {:POST
-   {:name "POST",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses [{:status 200, :description "", :type "object"}]}},
-  :deprecated "2.9",
-  :url "/api/2/user/{id}/order/{<\\d+>order_id}/credit",
-  :pathParameters ["userId" "orderId"],
-  :controller "Api/2/User.user_order_credit",
-  :defaultOutputFormat "json",
-  :description
-  "Credit order for user. Use /order/{orderId}/credit instead",
   :category ["Payment Services" "Order API"]}
  {:path "user/{userId}/transactions",
   :validOutputFormats ["json" "jsonp"],
@@ -3222,119 +3097,6 @@
   :defaultOutputFormat "json",
   :description "Get a payment identifier by id",
   :category ["Payment Services" "Payment API"]}
- {:path "payment",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions
-  {:action "",
-   :productId "",
-   :clientRef "",
-   :agreementRef "",
-   :hash "",
-   :price ""},
-  :method "POST",
-  :name "Trigger sale",
-  :httpMethods
-  {:POST
-   {:name "POST",
-    :required ["action" "productId" "clientRef" "agreementRef" "hash"],
-    :optional ["price"],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200, :description "", :type "object"}
-     {:status 400,
-      :description "Missing one or more required parameters",
-      :type "api-exception"}
-     {:status 400,
-      :description "Invalid verification hash",
-      :type "api-exception"}
-     {:status 400,
-      :description "The requested `action` is not supported",
-      :type "api-exception"}
-     {:status 999,
-      :description "Payment provider-specific error",
-      :type "api-exception"}]}},
-  :deprecated "2.13",
-  :url "/api/2/payment",
-  :pathParameters [],
-  :controller "Api/2/Payment.payment_create",
-  :defaultOutputFormat "json",
-  :description "Used by clients to trigger payment on user.",
-  :category ["Payment Services" "Payment API"]}
- {:path "payment/{id}",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions {:id ""},
-  :method "GET",
-  :name "Get payment",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200, :description "", :type "object"}
-     {:status 404,
-      :description "Payment not found",
-      :type "api-exception"}]}},
-  :deprecated "2.13",
-  :url "/api/2/payment/{id}",
-  :pathParameters ["id"],
-  :controller "Api/2/Payment.payment",
-  :defaultOutputFormat "json",
-  :description "Check status of a payment transaction.",
-  :category ["Payment Services" "Payment API"]}
- {:path "payments",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions
-  {:clientRef "", :userId "", :productId "", :status ""},
-  :method "GET",
-  :name "Search transactions",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional ["clientRef" "userId" "productId" "status"],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses [{:status 200, :description "", :type "object"}]}},
-  :deprecated "2.13",
-  :url "/api/2/payments",
-  :pathParameters [],
-  :controller "Api/2/Payment.payments",
-  :defaultOutputFormat "json",
-  :description "Search for payment transactions.",
-  :category ["Payment Services" "Payment API"]}
- {:path "agreements/{userId}/payment",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions
-  {:userId "`userId` of the user to list agreements for"},
-  :method "GET",
-  :name "Get agreements",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Returns agreements with SPiD/Payex",
-      :type "[object]"}]}},
-  :deprecated "2.13",
-  :url "/api/2/agreements/{id}/payment",
-  :pathParameters ["userId"],
-  :controller "Api/2/Payment.agreements",
-  :defaultOutputFormat "json",
-  :description
-  "Get the agreement(s) between the requesting client and a user",
-  :category ["Payment Services" "Payment API"]}
  {:path "logins/{userId}",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
@@ -3467,9 +3229,7 @@
  {:path "paylink",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
-  {:sellerUserId
-   "If set, this user is designated as the seller and will receive the payment.",
-   :clientReference
+  {:clientReference
    "Your reference. Useful for tracking and processing the Order generated by this PayLink.",
    :items "The items to be sold. A list of PayLink Item objects.",
    :cancelUri
@@ -3498,7 +3258,6 @@
      "expires"
      "redirectUri"
      "cancelUri"
-     "sellerUserId"
      "buyerUserId"],
     :accessTokenTypes ["server"],
     :filters [],
