@@ -19,6 +19,7 @@ Additionally, you may use the following optional fields:
 - `ogpUri`
 - `currency`
 - `quantity`
+- `name`
 
 See the [paylink item object specification](/types/paylink-item/) for further
 details on these fields.
@@ -32,4 +33,4 @@ DELETE /paylink/{paylinkId}
 
 :example-params
 
-items: [{\\"description\\":\\"Star Wars IV\\",\\"price\\":9900,\\"vat\\":2500},{\\"description\\":\\"Star Wars V\\",\\"price\\":9900,\\"vat\\":2500},{\\"description\\":\\"Star Wars VI\\",\\"price\\":9900,\\"vat\\":2500}]
+items: [{\\"name\\":\\"Episode\\",\\"description\\":\\"Star Wars IV\\",\\"price\\":9900,\\"vat\\":2500},{\\"description\\":\\"Star Wars V\\",\\"price\\":9900,\\"vat\\":2500},{\\"description\\":\\"Star Wars VI\\",\\"price\\":9900,\\"vat\\":2500}]
