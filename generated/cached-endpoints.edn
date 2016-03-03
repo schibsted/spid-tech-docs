@@ -3376,6 +3376,35 @@
   :defaultOutputFormat "json",
   :description "Invalidate the user's SPiD session.",
   :category ["Identity Management" "Login API"]}
+ {:path "user/{id}/level",
+  :validOutputFormats ["json"],
+  :parameterDescriptions {:id "User ID"},
+  :method "GET",
+  :name "User verification level",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required [],
+    :optional [],
+    :accessTokenTypes [],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Returns a verification level and user_id",
+      :type "userlevel"}
+     {:status 404,
+      :description "User not verified",
+      :type "api-exception"}
+     {:status 403,
+      :description "Token is not authorized to access this user",
+      :type "api-exception"}]}},
+  :url "/api/2/user/{id}/level",
+  :pathParameters ["id"],
+  :controller "Api/2/User.user_level",
+  :defaultOutputFormat "json",
+  :description "Get the user verification level",
+  :category ["user" "verification level"]}
  {:path "api/2/*",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions {},
