@@ -1003,6 +1003,9 @@
     :responses
     [{:status 200,
       :description "Retrieves the payment preference object.",
+      :type "payment-preference"}
+     {:status 404,
+      :description "User never had a payment method or preference.",
       :type "payment-preference"}]}},
   :url "/api/2/user/{id}/preferences/payment",
   :pathParameters ["userId"],
