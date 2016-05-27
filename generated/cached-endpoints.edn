@@ -1017,7 +1017,7 @@
  {:path "users",
   :validOutputFormats ["json" "jsonp" "png"],
   :parameterDescriptions
-  {:gender "Exact match (male, female, undisclosed)",
+  {:gender "Exact match (male, female, undisclosed, other, withheld)",
    :givenName "Sub-string match from the beginning of the given name",
    :userId "Exact match.",
    :emails_regex "Regexp search all emails.",

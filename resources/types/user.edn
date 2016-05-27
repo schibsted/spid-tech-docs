@@ -42,7 +42,7 @@ public profile data will be available:
           {:name "url"                 :type :string}
           {:name "photo"               :type :string         :description "URL to a photo of the user (GIF/JPG/PNG)"}
           {:name "preferredUsername"   :type :string}
-          {:name "gender"              :type :string         :description "One of undisclosed, female, male. Default is undisclosed. [Portable contacts](http://portablecontacts.net/draft-spec.html#anchor16)" :always-available? true}
+          {:name "gender"              :type :string         :description "One of undisclosed, female, male, other, withheld. Default is undisclosed. [Portable contacts](http://portablecontacts.net/draft-spec.html#anchor16)" :always-available? true}
           {:name "birthday"            :type :date           :description "Date of birth in YYYY-MM-DD format. Year will be 0000 if not provided. Defaults to 0000-00-00. [Portable contacts](http://portablecontacts.net/draft-spec.html#anchor16)" :always-available? true}
           {:name "locale"              :type :string         :description "The user's preferred locale. Locales follow ISO Language and country codes respectively, joined by an underscore." :always-available? true}
           {:name "utcOffset"           :type :string         :description "The user's timezone, given as offset from UTC." :always-available? true}
