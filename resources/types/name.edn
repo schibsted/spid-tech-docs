@@ -1,5 +1,5 @@
 {:id :name
  :name "Name"
- :fields [{:name "givenName"  :type :string}
-          {:name "familyName" :type :string}
-          {:name "formatted"  :type :string :description "Formatted full name, including all middle names, titles and suffixes as appropiate"}]}
+ :fields [{:name "givenName"  :type :string :description "By default set to an empty string"}
+          {:name "familyName" :type :string :description "By default set to an empty string"}
+          {:name "formatted"  :type :string :description "Formatted full name, including all middle names, titles and suffixes as appropriate. By default set to givenName and familyName combination with a space in between (if both present)"}]}
