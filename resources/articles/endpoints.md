@@ -236,7 +236,7 @@ class ResponseVerifier {
         return Base64.decodeBase64(str.replace("-", "+").replace("_", "/").trim());
     }
 
-    public static boolean verify(SpidApiResponse response, String signSecret) (
+    public static boolean verify(SpidApiResponse response, String signSecret) {
         byte[] signature = base64UrlDecode(response.getResponseSignature());
         byte[] payload = base64UrlDecode(response.getJsonValue("data"));
         byte[] generatedSignature = null;
@@ -245,7 +245,7 @@ class ResponseVerifier {
             SecretKeySpec sks = new SecretKeySpec(signSecret.getBytes("UTF-8"), "HmacSHA256");
             Mac mac = Mac.getInstance("HmacSHA256");
             mac.init(sks);
-            generatedSignature = mac.doFinal(payload.getBytes("UTF-8"));
+            generatedSignature = mac.doFinal(response.getJsonValue("data").getBytes("UTF-8"));
         } catch (NoSuchAlgorithmException | InvalidKeyException | UnsupportedEncodingException ex) {
             throw ex;
         }
@@ -261,6 +261,8 @@ class ResponseVerifier {
     }
 }
 ```
+
+You can also use provided ```SpidSecurityHelper.decryptAndValidateSignedRequest()``` method.
 
 # :/tabs
 
