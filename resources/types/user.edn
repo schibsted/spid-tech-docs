@@ -27,7 +27,7 @@ public profile data will be available:
 "
  :fields [{:name "id"                  :type :string         :description "Legacy `uuid`. Don't use. [Portable contacts](http://portablecontacts.net/draft-spec.html#anchor16)" :always-available? true}
           {:name "userId"              :type :integer-string :description "Unique user ID. Custom extension." :always-available? true}
-          {:name "name"                :type :name           :description "The user's full name" :always-available? true}
+          {:name "name"                :type :name           :description "A JSON string. See [the name type](/types/name/) for details" :always-available? true}
           {:name "displayName"         :type :string         :description "Name suitable for displaying to end-users." :always-available? true}
           {:name "published"           :type :date-time      :description "The date this user was first added" :always-available? true}
           {:name "updated"             :type :date-time      :description "The most recent date the details of this user were updated" :always-available? true}

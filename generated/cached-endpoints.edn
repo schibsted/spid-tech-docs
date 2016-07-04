@@ -776,7 +776,7 @@
    "New gender. Legal values and a localized description can be fetched from [/api/2/describe/User?property=gender](/endpoints/GET/describe/{object}/).",
    :userId
    "The user's `userId` (not to be mistaken with the deprecated `id`).",
-   :name "JSON object containing givenName and familyName",
+   :name "JSON object containing givenName and familyName. Please refer [the name type](/types/name/)",
    :photo "URL to a profile photo",
    :displayName "New preferred display name",
    :utcOffset
