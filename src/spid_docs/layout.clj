@@ -52,9 +52,9 @@
     [:div#footer
      [:div.center
       "You're reading the technical documentation for the "
-      [:a.nowrap {:href "http://www.schibstedpayment.no/spid/"} "SPiD platform"]
+      [:a.nowrap {:href "http://www.schibstedpayment.no/"} "SPiD platform"]
       " by "
-      [:a.nowrap {:href "http://www.schibstedpayment.no/about/"} "Schibsted Payment"]
+      [:a.nowrap {:href "http://www.schibsted.com/en/About-Schibsted/Schibsted-Products-and-Technology/"} "Schibsted Product & Technology"]
       ". "
       [:span.nowrap "Way to go!"]]]
     (optimus.hiccup/link-to-js-bundles request ["app.js"])]))
