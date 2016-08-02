@@ -1596,6 +1596,60 @@
   :description
   "List/Add/Update the currently saved traits added to the user by the asking client.",
   :category ["Data Storage" "Traits API"]}
+ {:path "user/{userId}/agreements",
+  :validOutputFormats ["json"],
+  :parameterDescriptions
+  {:userId
+   "The user's `userId` (not to be mistaken with the deprecated `id`)."},
+  :method "*",
+  :name "Has Access to User",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required [],
+    :optional [],
+    :accessTokenTypes ["server"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description
+      "Returns a list of agreements with a boolean value of wether user has agreed to the latest or not.",
+      :type "object"}]}},
+  :url "/api/2/user/{id}/agreements",
+  :pathParameters ["userId"],
+  :controller "Api/2/User.user_agreements",
+  :defaultOutputFormat "json",
+  :description
+  "Check if client behind token has access to user a and if the user has accepted relevant agreements",
+  :category ["Identity Management" "User agreements API"]}
+ {:path "user/{userId}/agreements/accept",
+  :validOutputFormats ["json"],
+  :parameterDescriptions
+  {:userId
+   "The user's `userId` (not to be mistaken with the deprecated `id`)."},
+  :method "POST",
+  :name "User agreements acceptation process",
+  :httpMethods
+  {:POST
+   {:name "POST",
+    :required [],
+    :optional [],
+    :accessTokenTypes ["server"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description
+      "Returns status of default and client agreements acceptance process.",
+      :type "object"}]}},
+  :url "/api/2/user/{id}/agreements/accept",
+  :pathParameters ["userId"],
+  :controller "Api/2/User.user_agreements_accept",
+  :defaultOutputFormat "json",
+  :description
+  "Check if client behind token has access to user and accepts agreements if it has not been done yet",
+  :category ["Identity Management" "User agreements API"]}
  {:path "reports/dumps",
   :validOutputFormats ["json" "jsonp" "xml"],
   :parameterDescriptions {},
