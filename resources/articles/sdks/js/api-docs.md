@@ -109,6 +109,8 @@ if the user has access to the product in question.
 SPiD.hasProduct(2134423, function (err, response) {
     response === {
         baseDomain: "sdk.dev"
+        defaultAgreementAccepted: true
+        clientAgreementAccepted: true
         displayName: "Anna Andersson"
         expiresIn: 6967
         familyName: "Andersson"
@@ -122,7 +124,6 @@ SPiD.hasProduct(2134423, function (err, response) {
         sig: "layQctw_mMOAM5RJnr9nr7RgPv_0lZqVAojXBVpQSBY.eyJyZXN1bHQiOnRydWUsInNlcnZlclRpbWUiOjEzNjAzNDIzNTMsInByb2R1Y3RJZCI6MTAwMTAsInVzZXJTdGF0dXMiOiJjb25uZWN0ZWQiLCJ1c2VySWQiOjIyMDAwMjEsImlkIjoiNGViYjdjZTU5Y2FmN2MxZjIyMDAwMDAxIiwiZGlzcGxheU5hbWUiOiJKb2FraW0gV1x1MDBlNW5nZ3JlbiIsImdpdmVuTmFtZSI6IkpvYWtpbSIsImZhbWlseU5hbWUiOiJXXHUwMGU1bmdncmVuIiwiZ2VuZGVyIjoibWFsZSIsInBob3RvIjoiaHR0cDpcL1wvd3d3LmdyYXZhdGFyLmNvbVwvYXZhdGFyXC9lYzMyOTM3YzIyZDFhNGIxNDc0NjU3Yjc3NmQwZjM5OD9zPTIwMCIsImV4cGlyZXNJbiI6Njk2NywiYmFzZURvbWFpbiI6InNkay5kZXYiLCJhbGdvcml0aG0iOiJITUFDLVNIQTI1NiJ9"
         userId: 2200021
         userStatus: "connected"
-        agreementAccepted: true
     };
 });
 ```
@@ -144,6 +145,8 @@ if the user has access to the product in question.
 SPiD.hasSubscription(324892374, function (err, response) {
     response === {
         baseDomain: "sdk.dev"
+        defaultAgreementAccepted: true
+        clientAgreementAccepted: true
         displayName: "Anna Andersson"
         expiresIn: 7173
         familyName: "Andersson"
@@ -158,7 +161,6 @@ SPiD.hasSubscription(324892374, function (err, response) {
         subscriptionId: 165572
         userId: 2200021
         userStatus: "connected"
-        agreementAccepted: true
     };
 });
 ```

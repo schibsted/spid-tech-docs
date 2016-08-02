@@ -120,10 +120,10 @@ performance.
 
 ## Checking and accepting agreements
 
-The response session object contains a boolean field called `agreementAccepted`.
-If this field is false, you can have the SDK issue a call to the relevant endpoint (i.e. `ajax/acceptAgreement`) when,
+The response session object contains two boolean fields called `defaultAgreementAccepted` and `clientAgreementAccepted`.
+If one of those fields is __false__, you can have the SDK issue a call to the relevant endpoint (i.e. `ajax/acceptAgreement`) when,
 for example, the user presses a button. If the `acceptAgreement` request is successful, the `auth.sessionChange`
-will fire, and the event response data will include the updated value for the `agreementAccepted` field.
+will fire, and the event response data will include the updated values for the `defaultAgreementAccepted` and `clientAgreementAccepted` fields.
 
 ```html
 <script type="text/javascript" src="SPID_JSSDK_URI"></script>
