@@ -157,6 +157,182 @@
   :description
   "Returns the current user terms for the client and SPiD",
   :category ["Utilities" "Platform API"]}
+ {:path "token/{token}/authentication",
+  :validOutputFormats ["json"],
+  :parameterDescriptions
+  {:token
+   "Token provided by the API consumer to the API service, the token to check."},
+  :method "GET",
+  :name "Token authentication",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required [],
+    :optional [],
+    :accessTokenTypes [],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Valid token informations",
+      :type "token"}
+     {:status 404,
+      :description "Token is invalid",
+      :type "api-exception"}]}},
+  :url "/api/2/token/{token}/authentication",
+  :pathParameters ["token"],
+  :controller "Api/2/Token.token_authentication",
+  :defaultOutputFormat "json",
+  :description
+  "Provides API services a means of validating and authenticating requests done to them by checking the token",
+  :category ["Token" "Api authentication"]}
+ {:path "user/{id}/eid",
+  :validOutputFormats ["json"],
+  :parameterDescriptions {:id "User ID"},
+  :method "GET",
+  :name "Get user verification level",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required [],
+    :optional [],
+    :accessTokenTypes [],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description
+      "Returns a verification level and verified data of user",
+      :type "eiduser"}
+     {:status 410, :description "User banned", :type "api-exception"}
+     {:status 404,
+      :description "User not verified",
+      :type "api-exception"}
+     {:status 403,
+      :description "Token is not authorized to access this user",
+      :type "api-exception"}]}},
+  :url "/api/2/user/{id}/eid",
+  :pathParameters ["id"],
+  :controller "Api/2/Eid.eid",
+  :defaultOutputFormat "json",
+  :description
+  "Find out if a user has a verification level and the data he has through that",
+  :category ["eID" "eID Verification"]}
+ {:path "eid/init",
+  :validOutputFormats ["json"],
+  :parameterDescriptions
+  {:hash
+   "A [verified request hash](/verified-hash/) signed with your client sign secret."},
+  :method "POST",
+  :name "Initialize a eID verification process",
+  :httpMethods
+  {:POST
+   {:name "POST",
+    :required ["ssn" "userId" "hash"],
+    :optional [],
+    :accessTokenTypes [],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "returns eID initialization object",
+      :type "eidinit"}
+     {:status 400,
+      :description "Only active users can have eID",
+      :type "api-exception"}
+     {:status 400,
+      :description "ssn is required",
+      :type "api-exception"}
+     {:status 400,
+      :description "userId is required",
+      :type "api-exception"}
+     {:status 400,
+      :description "User is already verified",
+      :type "api-exception"}
+     {:status 400,
+      :description "User is banned from eID",
+      :type "api-exception"}
+     {:status 400,
+      :description "User is blocked for verification",
+      :type "api-exception"}
+     {:status 400,
+      :description "SSN is blocked for verification",
+      :type "api-exception"}
+     {:status 400,
+      :description "SSN is taken by other user",
+      :type "api-exception"}
+     {:status 400,
+      :description
+      "User has been verified with another SSN in the past",
+      :type "api-exception"}
+     {:status 403,
+      :description "Invalid verification hash",
+      :type "api-exception"}
+     {:status 403,
+      :description "Token is not authorized to access this user",
+      :type "api-exception"}]}},
+  :url "/api/2/eid/init",
+  :pathParameters [],
+  :controller "Api/2/Eid.init_eid",
+  :defaultOutputFormat "json",
+  :description
+  "Start a verification process and get an eID initialization reference to use to complete the process",
+  :category ["eID" "eID Verification"]}
+ {:path "eid/complete",
+  :validOutputFormats ["json"],
+  :parameterDescriptions
+  {:hash
+   "A [verified request hash](/verified-hash/) signed with your client sign secret.",
+   :initRef "The initRef returned from the eID init call",
+   :verifiedFields
+   "Valid JSON containing the verified fields you would like to store"},
+  :method "POST",
+  :name "Complete verification process",
+  :httpMethods
+  {:POST
+   {:name "POST",
+    :required ["userId" "ssn" "verifiedFields" "hash" "initRef"],
+    :optional [],
+    :accessTokenTypes [],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description
+      "Returns a verification level and verified data of user",
+      :type "eiduser"}
+     {:status 400,
+      :description "ssn is required",
+      :type "api-exception"}
+     {:status 400,
+      :description "userId is required",
+      :type "api-exception"}
+     {:status 400,
+      :description "verifiedFields is required",
+      :type "api-exception"}
+     {:status 400, :description "eID not valid", :type "api-exception"}
+     {:status 400,
+      :description "eID not initialized",
+      :type "api-exception"}
+     {:status 400,
+      :description "Failed to create eID",
+      :type "api-exception"}
+     {:status 400,
+      :description "User changed since init",
+      :type "api-exception"}
+     {:status 403,
+      :description "Invalid verification hash",
+      :type "api-exception"}
+     {:status 403,
+      :description "Token is not authorized to access this user",
+      :type "api-exception"}]}},
+  :url "/api/2/eid/complete",
+  :pathParameters [],
+  :controller "Api/2/Eid.complete_eid",
+  :defaultOutputFormat "json",
+  :description
+  "Provide the remaining lockable fields and the verification data (legal address)",
+  :category ["eID" "eID Verification"]}
  {:path "oauth/exchange",
   :validOutputFormats ["json"],
   :parameterDescriptions
@@ -202,36 +378,6 @@
   :defaultOutputFormat "json",
   :description "Exchanges an authorization code",
   :category ["Authorization" "OAuth"]}
- {:path "url/{action}",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions {:action "id/action er det samme", :url ""},
-  :method "GET",
-  :name "Shorten or lengthen URL",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required ["url"],
-    :optional [],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200, :description "", :type ""}
-     {:status 400,
-      :description "Required parameter url is not a valid URL",
-      :type "api-exception"}
-     {:status 404,
-      :description "URL not shortened",
-      :type "api-exception"}
-     {:status 404,
-      :description "URL not expanded",
-      :type "api-exception"}]}},
-  :url "/api/2/url/{id}",
-  :pathParameters ["action"],
-  :controller "Api/2/Utility.url",
-  :defaultOutputFormat "json",
-  :description "Create, and expand, short version of URIs",
-  :category ["Utilities" "Platform API"]}
  {:path "admin/{section}",
   :validOutputFormats ["json" "jsonp" "png"],
   :parameterDescriptions {:section ""},
@@ -323,6 +469,26 @@
       :type "object"}
      {:status 304,
       :description "Object could not be stored",
+      :type "api-exception"}
+     {:status 400,
+      :description "Could not find any valid key",
+      :type "api-exception"}
+     {:status 400,
+      :description "Could not find key/value pair in posted data",
+      :type "api-exception"}]},
+   :DELETE
+   {:name "DELETE",
+    :required [],
+    :optional [],
+    :accessTokenTypes ["server"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 202,
+      :description "String confirming deleted key",
+      :type "string"}
+     {:status 304,
+      :description "Object could not be deleted",
       :type "api-exception"}
      {:status 400,
       :description "Could not find any valid key",
@@ -627,15 +793,13 @@
   :parameterDescriptions
   {:gender
    "Gender. Legal values and a localized description can be fetched from [/api/2/describe/User?property=gender](/endpoints/GET/describe/{object}/).",
-   :name
-   "A JSON string. See [the name type](/types/name/) for appropriate format",
+   :name "Full name",
    :photo "URL to a profile photo",
-   :displayName
-   "The user's preferred display name. By default set to formatted element of [the name type](/types/name/) or the local-part of the user's email (if name is missing)",
+   :displayName "The user's preferred display name",
    :utcOffset
    "The user's timezone, given as UTC offset (number of hours), e.g. \"+02:00\" etc",
    :url "An external URL related to the user",
-   :preferredUsername "The user's preferred user name. By default set to displayName without spaces",
+   :preferredUsername "The user's preferred user name",
    :addresses
    "A JSON string. A map of addresses, with the address type as keys and the address objects/maps as values. See [the address type](/types/address/) for appropriate types",
    :birthday "The date of birth, YYYY-MM-DD",
@@ -776,7 +940,7 @@
    "New gender. Legal values and a localized description can be fetched from [/api/2/describe/User?property=gender](/endpoints/GET/describe/{object}/).",
    :userId
    "The user's `userId` (not to be mistaken with the deprecated `id`).",
-   :name "JSON object containing givenName and familyName. Please refer [the name type](/types/name/)",
+   :name "JSON object containing givenName and familyName",
    :photo "URL to a profile photo",
    :displayName "New preferred display name",
    :utcOffset
@@ -1268,6 +1432,39 @@
   :description
   "Trigger a `newpassword` or `emailverification` for user",
   :category ["Identity Management" "User API"]}
+ {:path "mail",
+  :validOutputFormats ["json" "jsonp"],
+  :parameterDescriptions
+  {:id
+   "The user's userId (not to be mistaken with the deprecated `id`)",
+   :email "Email of the user. Must be unique across all of SPiD"},
+  :method "GET",
+  :name "List mail history",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required [],
+    :optional ["id" "email"],
+    :accessTokenTypes ["server"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Returns a list of mail objects",
+      :type "[mail]"}
+     {:status 400,
+      :description "No valid parameter provided",
+      :type "api-exception"}
+     {:status 400,
+      :description
+      "Email parameter did not properly base64 decode into a valid email",
+      :type "api-exception"}]}},
+  :url "/api/2/mail",
+  :pathParameters [],
+  :controller "Api/2/Mail.mail",
+  :defaultOutputFormat "json",
+  :description "List mail history and events for user",
+  :category ["Identity Management" "User API"]}
  {:path "user/{userId}/order/{orderId}",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
@@ -1615,7 +1812,7 @@
     [{:status 200,
       :description
       "Returns a list of agreements with a boolean value of wether user has agreed to the latest or not.",
-      :type "object"}]}},
+      :type "agreements"}]}},
   :url "/api/2/user/{id}/agreements",
   :pathParameters ["userId"],
   :controller "Api/2/User.user_agreements",
@@ -1642,7 +1839,7 @@
     [{:status 200,
       :description
       "Returns status of default and client agreements acceptance process.",
-      :type "object"}]}},
+      :type "agreements_accept"}]}},
   :url "/api/2/user/{id}/agreements/accept",
   :pathParameters ["userId"],
   :controller "Api/2/User.user_agreements_accept",
@@ -2284,8 +2481,6 @@
    :name "The product name. Cannot be longer than 64 characters.",
    :parentProductId "ID of the parent product, if any",
    :saleStart "Provide if there is a sale of some sort",
-   :subscriptionGracePeriod
-   "The duration after a failed charge attempt the subscription stays active. Must be at least 5 days if auto renew is enabled.",
    :subscriptionPeriod
    "The duration of a subscription period, as a timestamp in seconds",
    :availableStop
@@ -2344,7 +2539,6 @@
      "subscriptionAutoRenew"
      "subscriptionAutoRenewLockPeriod"
      "subscriptionAutoRenewDisabled"
-     "subscriptionGracePeriod"
      "subscriptionEmailReceiptLimit"
      "subscriptionFinalEndDate"
      "subscriptionSurveyUrl"],
@@ -3156,6 +3350,101 @@
   :defaultOutputFormat "json",
   :description "Get a payment identifier by id",
   :category ["Payment Services" "Payment API"]}
+ {:path "identifiers",
+  :validOutputFormats ["json"],
+  :parameterDescriptions {},
+  :method "GET",
+  :name "List identifiers",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required ["userId"],
+    :optional ["type" "status"],
+    :accessTokenTypes ["server"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200, :description "", :type "payment-identifier"}]}},
+  :url "/api/2/identifiers",
+  :pathParameters [],
+  :controller "Api/2/Identifier.identifiers",
+  :defaultOutputFormat "json",
+  :description "Get a list payment identifiers by user and type",
+  :category ["Payment Services" "Payment API"]}
+ {:path "identifier",
+  :validOutputFormats ["json"],
+  :parameterDescriptions
+  {:identifier "The payment identifier",
+   :description "Identifier description",
+   :userId "The id of the user you are creating an identifier",
+   :type "The payment identifier type",
+   :paymentMethod "Text version of type, like VISA, MC, INVOICE",
+   :status "Is the identifier verified or deleted?",
+   :lastVerified "When was the identifier last verified to work"},
+  :method "POST",
+  :name "Create a payment identifier",
+  :httpMethods
+  {:POST
+   {:name "POST",
+    :required
+    ["identifier" "description" "userId" "type" "paymentMethod"],
+    :optional
+    ["is3dsecure"
+     "maxAmount"
+     "expirationDate"
+     "mediaDistribution"
+     "status"
+     "lastVerified"],
+    :accessTokenTypes ["server"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description
+      "Returns the newly created payment identifier object",
+      :type "identifier"}
+     {:status 400,
+      :description "Missing one or more required parameters",
+      :type "api-exception"}
+     {:status 400,
+      :description "Validation error(s)",
+      :type "api-exception"}]}},
+  :url "/api/2/identifier",
+  :pathParameters [],
+  :controller "Api/2/Identifier.identifier",
+  :alias {:paymentMethod "method", :is3dsecure "is_3dsecure"},
+  :defaultOutputFormat "json",
+  :description "Create a payment identifier",
+  :category ["Payment Services" "Payment API"]}
+ {:path "identifier/{id}",
+  :validOutputFormats ["json"],
+  :parameterDescriptions
+  {:status "Is the identifier verified or deleted?",
+   :lastVerified "When was the identifier last verified to work"},
+  :method "POST",
+  :name "Update a payment identifier",
+  :httpMethods
+  {:POST
+   {:name "POST",
+    :required [],
+    :optional ["status" "lastVerified"],
+    :accessTokenTypes ["server"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Returns the update payment identifier object",
+      :type "identifier"}
+     {:status 400,
+      :description "Validation error(s)",
+      :type "api-exception"}]}},
+  :url "/api/2/identifier/{id}",
+  :pathParameters ["id"],
+  :controller "Api/2/Identifier.identifier",
+  :alias {:paymentMethod "method", :is3dsecure "is_3dsecure"},
+  :defaultOutputFormat "json",
+  :description "Update payment identifier",
+  :category ["Payment Services" "Payment API"]}
  {:path "logins/{userId}",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
@@ -3343,6 +3632,67 @@
   :defaultOutputFormat "json",
   :description "Create a PayLink object",
   :category ["Payment Services" "PayLink API"]}
+ {:path "p2plink",
+  :validOutputFormats ["json" "jsonp"],
+  :parameterDescriptions
+  {:sellerUserId
+   "If set, this user is designated as the seller and will receive the payment.",
+   :clientReference
+   "Your reference. Useful for tracking and processing the Order generated by this PayLink.",
+   :items "The items to be sold. A list of PayLink Item objects.",
+   :cancelUri
+   "Redirect the user to this URL if login or payment is cancelled.",
+   :expires
+   "The date when the PayLink expires. A unix timestamp. Defaults to 24 hours from creation.",
+   :buyerUserId "If set, only this user has access to the PayLink.",
+   :title
+   "The PayLink title. Displayed to the user on the payment page, and shown on the New Credit Card page at Payex.",
+   :paymentOptions
+   "The allowed payment methods for this PayLink. An integer bitmask: Credit (1), Credit cards (2), SMS (4), Invoice (8). Defaults to 2.",
+   :purchaseFlow
+   "Defaults to `DIRECT`, which will process the payment straight away. Can also be `AUTHORIZE`, where the payment is on hold and must later be captured.",
+   :redirectUri
+   "Redirect the user to this URL after payment is complete."},
+  :method "POST",
+  :name "Create P2pLink",
+  :httpMethods
+  {:POST
+   {:name "POST",
+    :required ["title" "items" "hash"],
+    :optional
+    ["clientReference"
+     "purchaseFlow"
+     "paymentOptions"
+     "expires"
+     "redirectUri"
+     "cancelUri"
+     "sellerUserId"
+     "buyerUserId"],
+    :accessTokenTypes ["server"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Returns the newly created paylink object",
+      :type "paylink"}
+     {:status 400,
+      :description "Missing one or more required parameters",
+      :type "api-exception"}
+     {:status 400,
+      :description "Paylink items is not a list of items",
+      :type "api-exception"}
+     {:status 400,
+      :description "Validation error(s)",
+      :type "api-exception"}
+     {:status 404,
+      :description "Paylink not found",
+      :type "api-exception"}]}},
+  :url "/api/2/p2plink",
+  :pathParameters [],
+  :controller "Api/2/Paylink.p2plink",
+  :defaultOutputFormat "json",
+  :description "Create a PayLink object",
+  :category ["Payment Services" "P2pLink API"]}
  {:path "paylink/{paylinkId}",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions {:paylinkId "ID of the paylink to retrieve."},

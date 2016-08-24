@@ -1,0 +1,10 @@
+{:id :mail
+ :name "Mail"
+ :fields [{:name "template"       :type :string         :description "Used template name"           :always-available? true}
+          {:name "senderName"     :type :string         :description "Sender name"                  :always-available? true}
+          {:name "senderEmail"    :type :string         :description "Sender e-mail address"        :always-available? true}
+          {:name "userName"       :type :string         :description "Recipient name"               :always-available? true}
+          {:name "userEmail"      :type :string         :description "Recipient e-mail address"     :always-available? true}
+          {:name "created"        :type :timestamp      :description "Created at timestamp"         :always-available? true}
+          {:name "token"          :type :string         :description "E-mail token"                 :always-available? true}
+          {:name "events"         :type [:mail-event]                                               :always-available? true}]}

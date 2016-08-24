@@ -6,7 +6,8 @@ SPiD profile UI.
 
 :relevant-endpoints
 
-POST /user
 GET /user/{userId}
+GET /users
+POST /user
 
 :relevant-types user

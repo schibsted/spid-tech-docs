@@ -1,0 +1,9 @@
+{:id :token
+ :name "Token"
+ :fields [{:name "id"            :type :string       :description "Token identifier"                            :always-available? true}
+          {:name "clientId"      :type :string       :description "Client identifier"                           :always-available? true}
+          {:name "userId"        :type :string       :description "User identifier"                             :always-available? true}
+          {:name "merchantId"    :type :integer      :description "Merchant identifier"                         :always-available? true}
+          {:name "isAdmin"       :type :boolean      :description "Whether current user has admin access?"      :always-available? true}
+          {:name "type"          :type :string       :description "Token type"                                  :always-available? true}
+          {:name "expiresIn"     :type :integer      :description "Expiration time"                             :always-available? true}]}

@@ -1,0 +1,17 @@
+[
+    {
+        "template": "confirm_account_notification",
+        "senderName": "E-mail sender",
+        "senderEmail": "noreply@schibsted.com",
+        "userName": "John",
+        "userEmail": "email@example.pl",
+        "created": 1472036646,
+        "token": "76c4f401-a2fe-45a5-bcce-e49656663e35",
+        "events": [
+            {
+                "event": "sent",
+                "timestamp": 1472036647
+            }
+        ]
+    }
+]
