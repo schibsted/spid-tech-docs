@@ -2,7 +2,7 @@
  :name "Transaction"
  :inline-types [:transaction-type]
  :fields [{:name "transactionId" :type :integer-string   :description "Unique ID of the transaction" :always-available? true}
-          {:name "masterId"      :type :integer-string   :description "" :always-available? true}
+          {:name "masterId"      :type :integer-string   :description "ID of master transaction" :always-available? true}
           {:name "clientId"      :type :string           :always-available? true}
           {:name "userId"        :type :integer-string   :description "ID of the user the transaction is for" :always-available? true}
           {:name "type"          :type :transaction-type :always-available? true}
