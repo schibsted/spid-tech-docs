@@ -1,0 +1,5 @@
+{:id :mail-event
+ :name "Mail event"
+ :description "Collection of mail events."
+ :fields [{:name "event"        :type :string       :description "Event name"                :always-available? true}
+          {:name "timestamp"    :type :timestamp    :description "Event occurs timestamp"    :always-available? true}]}

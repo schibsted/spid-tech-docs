@@ -1,0 +1,5 @@
+callback([
+    {
+        "result": true
+    }
+]);

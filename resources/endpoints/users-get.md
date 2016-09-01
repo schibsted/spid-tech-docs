@@ -2,6 +2,7 @@
 
 GET /user/{userId}
 POST /user
+POST /user/{userId}
 
 :relevant-types user
 

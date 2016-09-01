@@ -1,0 +1,8 @@
+callback([
+    {
+        "agreements": {
+            "platform": true,
+            "client": true
+        }
+    }
+]);
