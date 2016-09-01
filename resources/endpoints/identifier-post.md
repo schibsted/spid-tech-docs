@@ -1,5 +1,5 @@
 :introduction
 
-Create a payment identifier
+Create a payment identifier.
 
 :relevant-types order subscription
