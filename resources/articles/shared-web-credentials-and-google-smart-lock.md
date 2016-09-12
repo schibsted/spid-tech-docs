@@ -3,12 +3,15 @@
 :category api-integration
 :body
 
-Shared Web Credentials for iOS and Google Smart Lock for Android will simplify the login step for all users using native apps.
-User having enabled these features, will be prompted in enabled apps to choose which credentials to use, and they will be automatically filled in.
+Shared Web Credentials for iOS and Google Smart Lock for Android will simplify
+the login step for all users using native apps.
+User having enabled these features, will be prompted in enabled apps to choose
+which credentials to use, and they will be automatically filled in.
 
 ### Configuration
 
-Shared Web Credentials and Google Smart Lock can be configured in SelfService, under Basic settings.
+Shared Web Credentials and Google Smart Lock can be configured
+in [SelfService](/selfservice/access/), under Basic settings.
 
 ### Shared Web Credentials
 
