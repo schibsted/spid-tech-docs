@@ -145,4 +145,5 @@
  "token" "9f06789abcdef012345678123674501abcde2345"
  "maxAmount" "500000"
  "expirationDate" "2016-06-01"
- "lastVerified" "2016-06-01 12:00:00"}
+ "lastVerified" "2016-06-01 12:00:00"
+ "context" "Foo bar"}

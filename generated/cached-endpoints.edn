@@ -765,6 +765,55 @@
   :defaultOutputFormat "json",
   :description "Fetch the authorized requesting user.",
   :category ["Identity Management" "User API"]}
+ {:path "signin",
+  :validOutputFormats ["json"],
+  :parameterDescriptions
+  {:identifier "Email or verified phone number of the user",
+   :redirectUri
+   "Where to redirect the user after completing signin request"},
+  :method "POST",
+  :name "Signin",
+  :httpMethods
+  {:POST
+   {:name "POST",
+    :required ["identifier" "redirectUri"],
+    :optional ["context"],
+    :accessTokenTypes ["server"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 201,
+      :description "Created a new signin request",
+      :type "object"}
+     {:status 302,
+      :description "The email address is blocked",
+      :type "api-exception"}
+     {:status 400,
+      :description "Signin request could not be created",
+      :type "api-exception"}
+     {:status 400,
+      :description "Required identifier parameter is missing",
+      :type "api-exception"}
+     {:status 400,
+      :description "Required identifier parameter is invalid",
+      :type "api-exception"}
+     {:status 400,
+      :description "Required redirectUri parameter is missing",
+      :type "api-exception"}
+     {:status 400,
+      :description
+      "Required redirectUri parameter is invalid or not matching requesting client",
+      :type "api-exception"}
+     {:status 409,
+      :description "Signin request could not be created",
+      :type "api-exception"}]}},
+  :url "/api/2/signin",
+  :pathParameters [],
+  :controller "Api/2/User.user_signin",
+  :defaultOutputFormat "json",
+  :description
+  "Passwordless signin (login/signup user based on provided identifier)",
+  :category ["Identity Management" "User API"]}
  {:path "me/vouchers",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions {},
@@ -1793,6 +1842,32 @@
   :description
   "List/Add/Update the currently saved traits added to the user by the asking client.",
   :category ["Data Storage" "Traits API"]}
+ {:path "user/{userId}/connected",
+  :validOutputFormats ["json"],
+  :parameterDescriptions
+  {:userId
+   "The user's `userId` (not to be mistaken with the deprecated `id`)."},
+  :method "*",
+  :name "Has Access to User",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required [],
+    :optional [],
+    :accessTokenTypes ["server"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description
+      "Returns object with field \"connected\" set to true/false whether client is connected to given user.",
+      :type "object"}]}},
+  :url "/api/2/user/{id}/connected",
+  :pathParameters ["userId"],
+  :controller "Api/2/User.user_connected",
+  :defaultOutputFormat "json",
+  :description "Check if client behind token is connected to user",
+  :category ["Identity Management" "User connections API"]}
  {:path "user/{userId}/agreements",
   :validOutputFormats ["json"],
   :parameterDescriptions
