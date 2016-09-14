@@ -47,8 +47,8 @@ Sign-in flow is a slight exception. It lets user to log in without providing his
 * Step 4: Verify step, only shown if user is unverified
 * Step 5: Accept agreement, only shown if user has not accepted the latest agreement
 * Connect to client, an invisible step where user gets connected to client
-* Step 5: Required fields step, only shown if client require fields user have not filled
-* Step 6: Verify phone step, only shown if client configuration require it
+* Step 6: Required fields step, only shown if client require fields user have not filled
+* Step 7: Verify phone step, only shown if client configuration require it
 
 
 ## How it looks
