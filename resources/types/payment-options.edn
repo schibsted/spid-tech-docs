@@ -2,8 +2,11 @@
  :name "Payment options"
  :description "Payment options are provided as a [bit mask](http://en.wikipedia.org/wiki/Bitmask).
 Examples: `2` means credit card, `4` means SMS, while `6` means both credit card and SMS."
- :values [{:value "2" :description "Credit card"}
+ :values [{:value "1" :description "Masterpass"}
+          {:value "2" :description "Credit card"}
           {:value "4" :description "SMS"}
           {:value "8" :description "PayEx Invoice"}
           {:value "16" :description "Voucher"}
-          {:value "32" :description "Klarna Invoice"}]}
+          {:value "32" :description "Klarna Invoice"}
+          {:value "64" :description "Klarna Mobile"}
+          {:value "128" :description "Wallet"}]}
