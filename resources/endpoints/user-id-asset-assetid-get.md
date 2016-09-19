@@ -1,3 +1,3 @@
 :introduction
 
-Get asset access by user and assetId
+Get asset access by user and assetId. Will be available in version `2.71.1`.
