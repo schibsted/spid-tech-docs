@@ -146,4 +146,5 @@
  "maxAmount" "500000"
  "expirationDate" "2016-06-01"
  "lastVerified" "2016-06-01 12:00:00"
- "context" "Foo bar"}
+ "context" "Foo bar"
+ "stopAfterLock" "1"}
