@@ -674,7 +674,7 @@
       :type "api-exception"}]},
    :POST
    {:name "POST",
-    :required ["value"],
+    :required [],
     :optional ["accessUntil"],
     :accessTokenTypes ["server" "user"],
     :filters [],
