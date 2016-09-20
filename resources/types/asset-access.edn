@@ -7,7 +7,7 @@
           {:name "userId"      :type :integer-string :always-available? true :description "User identifier"}
           {:name "assetId"     :type :string :always-available? true :description "Asset identifier"}
           {:name "accessUntil" :type :date-time      :always-available? false :description "Access expiration date"}
-          {:name "status"      :type :integer-string :always-available? true :description "Asset access current status"}
+          {:name "status"      :type :asset-access-status :always-available? true :description "Asset access current status"}
           {:name "updated"     :type :date-time      :always-available? true :description "The time the access was last updated"}
           {:name "created"     :type :date-time      :always-available? true :description "The time the access was created"}
          ]
