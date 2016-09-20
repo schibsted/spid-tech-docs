@@ -1,0 +1,15 @@
+{:id :asset-access
+ :name "Asset Access"
+ :description "Defines user access to the asset."
+ :inline-types [:asset-access-status]
+ :fields [{:name "merchantId"   :type :integer-string :always-available? true :description "The ID of the merchant the client belongs to"}
+          {:name "uuid"        :type :string         :always-available? true :description "User identifier"}
+          {:name "userId"      :type :integer-string :always-available? true :description "User identifier"}
+          {:name "assetId"     :type :asset-id       :always-available? true :description "Asset identifier"}
+          {:name "accessUntil" :type :date-time      :always-available? false :description "Access expiration date"}
+          {:name "status"      :type :asset-access-status :always-available? true :description "Asset access current status"}
+          {:name "updated"     :type :date-time      :always-available? true :description "The time the access was last updated"}
+          {:name "created"     :type :date-time      :always-available? true :description "The time the access was created"}
+         ]
+}
+

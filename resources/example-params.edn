@@ -147,4 +147,8 @@
  "expirationDate" "2016-06-01"
  "lastVerified" "2016-06-01 12:00:00"
  "context" "Foo bar"
- "stopAfterLock" "1"}
+ "stopAfterLock" "1"
+ "accessUntil" "2017-12-01 13:37:00"
+ "assetId" "vg-pluss-slik-er-skam-stjernene"
+ "assetIds" "vg-pluss-william-slutter-i-skam,vg-pluss-martha-og-englene"
+ }

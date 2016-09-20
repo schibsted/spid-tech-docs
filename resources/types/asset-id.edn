@@ -1,0 +1,11 @@
+{:id :asset-id
+ :name "assetId"
+ :description "Non-numeric case-insensitive unique id set by client.
+
+ Can be combination of letters, digits and chars: _-
+
+ Should match to regex `^\\d*[\\-_]*[a-df-wy-z][a-z0-9\\-_]*$` eg company_x_article_y_29-09
+
+ Max length is 255 bytes"
+}
+
