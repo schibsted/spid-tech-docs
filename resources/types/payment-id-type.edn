@@ -1,7 +1,10 @@
 {:id :payment-id-type
  :name "Payment identifier type"
- :values [{:value "2" :description "Credit card"}
+ :values [{:value "1" :description "Masterpass"}
+          {:value "2" :description "Credit card"}
           {:value "4" :description "SMS"}
           {:value "8" :description "PayEx Invoice"}
           {:value "16" :description "Voucher"}
-          {:value "32" :description "Klarna Invoice"}]}
+          {:value "32" :description "Klarna Invoice"}
+          {:value "64" :description "Klarna Mobile"}
+          {:value "128" :description "Wallet"}]}

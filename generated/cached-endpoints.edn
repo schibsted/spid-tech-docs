@@ -1623,6 +1623,34 @@
   :defaultOutputFormat "json",
   :description "Create a new user subscription for a user",
   :category ["Payment Services" "Subscription API"]}
+ {:path "user/{userId}/subscription/{subscriptionId}/stop",
+  :validOutputFormats ["json" "jsonp"],
+  :parameterDescriptions
+  {:userId
+   "The user's `userId` (not to be mistaken with the deprecated `id`).",
+   :subscriptionId "",
+   :stopAfterLock
+   "\"1\", to set the subscription to stop renewal after the lock period is over, \"0\" means do not stop renewal after lock period"},
+  :method "*",
+  :name "Expire user subscription after lock",
+  :httpMethods
+  {:POST
+   {:name "POST",
+    :required ["stopAfterLock"],
+    :optional [],
+    :accessTokenTypes ["server"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Returns the updated subscription object",
+      :type "subscription"}]}},
+  :url "/api/2/user/{id}/subscription/{<\\d+>subscription_id}/stop",
+  :pathParameters ["userId" "subscriptionId"],
+  :controller "Api/2/User.user_subscription_stop_renewal_after_lock",
+  :defaultOutputFormat "json",
+  :description "Expire user subscription after lock period is over",
+  :category ["Payment Services" "Subscription API"]}
  {:path "user/{userId}/subscription/{subscriptionId}",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
