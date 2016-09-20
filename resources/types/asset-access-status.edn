@@ -1,0 +1,4 @@
+{:id :asset-access-status
+ :name "Asset Access status"
+ :values [{:value "0" :description "Deleted"}
+          {:value "1" :description "Active"}]}

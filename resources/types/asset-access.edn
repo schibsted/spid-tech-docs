@@ -1,6 +1,7 @@
 {:id :asset-access
  :name "Asset Access"
  :description "Defines user access to the asset."
+ :inline-types [:asset-access-status]
  :fields [{:name "merchantId"   :type :integer-string :always-available? true :description "The ID of the merchant the client belongs to"}
           {:name "uuid"        :type :string         :always-available? true :description "User identifier"}
           {:name "userId"      :type :integer-string :always-available? true :description "User identifier"}
