@@ -1,6 +1,6 @@
 :introduction
 
-Get asset access by user id and asset id.
+Get asset access by user id and asset id. Will be available in version `2.71.1`.
 
 :relevant-endpoints
 

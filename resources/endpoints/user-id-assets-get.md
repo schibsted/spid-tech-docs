@@ -1,6 +1,6 @@
 :introduction
 
-List all the user's assets by user id.
+List all the user's assets by user id. Will be available in version `2.71.1`.
 
 :relevant-endpoints
 

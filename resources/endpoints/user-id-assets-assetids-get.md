@@ -1,6 +1,6 @@
 :introduction
 
-Get asset-access objects by user id and list of asset ids.
+Get asset-access objects by user id and list of asset ids. Will be available in version `2.71.1`.
 
 :relevant-endpoints
 
