@@ -4,7 +4,7 @@
  :fields [{:name "merchantId"  :type :integer-string :always-available? true}
           {:name "uuid"        :type :string         :always-available? true}
           {:name "userId"      :type :integer-string :always-available? true}
-          {:name "assetId"     :type :integer-string :always-available? true}
+          {:name "assetId"     :type :string :description "Non-numeric unique id set by the client" :always-available? true}
           {:name "accessUntil" :type :date-time      :always-available? true}
           {:name "status"      :type :integer-string :always-available? true}
           {:name "updated"     :type :date-time      :always-available? true}
