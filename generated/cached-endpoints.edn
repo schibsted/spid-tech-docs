@@ -645,6 +645,159 @@
   :defaultOutputFormat "json",
   :description "User data storage.",
   :category ["Data Storage" "DataObjects API"]}
+ {:path "user/{id}/asset/{assetId}",
+  :validOutputFormats ["json"],
+  :parameterDescriptions
+  {:id "ID of the user to associate data with",
+   :assetId "The asset id. Max length is 255 bytes.",
+   :accessUntil
+   "If set, access will be denied after this date time. (\"Y-m-d H:i:s\")"},
+  :method "*",
+  :name "User access.",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required [],
+    :optional [],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Returns true if the user has access.",
+      :type "asset-access"}
+     {:status 400,
+      :description "Multiple ids provided",
+      :type "api-exception"}
+     {:status 403,
+      :description "User does not have access",
+      :type "api-exception"}]},
+   :POST
+   {:name "POST",
+    :required [],
+    :optional ["accessUntil"],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Returns the data inserted or updated.",
+      :type "asset-access"}
+     {:status 400,
+      :description
+      "Incorrect input data (date format or multiple ids)",
+      :type "api-exception"}
+     {:status 403,
+      :description "Access to the user data was denied",
+      :type "api-exception"}]},
+   :DELETE
+   {:name "DELETE",
+    :required [],
+    :optional [],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200, :description "Deleted asset", :type "asset-access"}
+     {:status 400,
+      :description "Multiple ids provided",
+      :type "api-exception"}
+     {:status 403,
+      :description "Access to the user data was denied",
+      :type "api-exception"}
+     {:status 404,
+      :description "User record not found",
+      :type "api-exception"}]}},
+  :url "/api/2/user/{id}/asset/{assetId}",
+  :pathParameters ["id" "assetId"],
+  :controller "Api/2/Assets.user_asset",
+  :defaultOutputFormat "json",
+  :description
+  "Get, update, and delete asset access by user. Post accepts accessUntil as part of body to reflect timed access.",
+  :category ["Asset ID" "Asset access check"]}
+ {:path "user/{id}/assets/{assetIds}",
+  :validOutputFormats ["json"],
+  :parameterDescriptions
+  {:id "ID of the user to associate data with",
+   :assetIds
+   "The comma-separated asset ids. Max length is 255 bytes."},
+  :method "*",
+  :name "Check if user has access to comma-separated values",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required [],
+    :optional [],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Returns array with assets user has access to",
+      :type "asset-access"}
+     {:status 403,
+      :description "User does not have access",
+      :type "api-exception"}]}},
+  :url "/api/2/user/{id}/assets/{assetIds}",
+  :pathParameters ["id" "assetIds"],
+  :controller "Api/2/Assets.user_assets",
+  :defaultOutputFormat "json",
+  :description "Check if user has access to comma-separated values",
+  :category ["Asset ID" "Asset access check"]}
+ {:path "user/{id}/assets",
+  :validOutputFormats ["json"],
+  :parameterDescriptions {:id "ID of the user to associate data with"},
+  :method "*",
+  :name "Get assets user has access to, access by user",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required [],
+    :optional [],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Returns array with assets user has access to",
+      :type "asset-access"}
+     {:status 403,
+      :description "User does not have any access to assets",
+      :type "api-exception"}]}},
+  :url "/api/2/user/{id}/assets",
+  :pathParameters ["id"],
+  :controller "Api/2/Assets.user_assets",
+  :defaultOutputFormat "json",
+  :description
+  "Get array of assets user has access to, access by user",
+  :category ["Asset ID" "Asset access check"]}
+ {:path "asset/{id}/users/count",
+  :validOutputFormats ["json"],
+  :parameterDescriptions
+  {:id "ID of the asset to associate data with"},
+  :method "*",
+  :name "Get count of users that have access to specific asset.",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required [],
+    :optional [],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Returns count of users with access to asset",
+      :type "asset-access"}
+     {:status 403,
+      :description "Asset is not accessed by any user",
+      :type "api-exception"}]}},
+  :url "/api/2/asset/{id}/users/count",
+  :pathParameters ["id"],
+  :controller "Api/2/Assets.asset_users_count",
+  :defaultOutputFormat "json",
+  :description "Count of user that have access to specific asset.",
+  :category ["Asset ID" "Asset access check"]}
  {:path "user/{id}/dataobjects",
   :validOutputFormats ["json"],
   :parameterDescriptions
