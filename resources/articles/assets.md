@@ -7,8 +7,13 @@ Will be available in version `2.71.1`
 
 In order to support a more flexible solution for identity based access management, not tied to complex product structures, Assets are new solution that will enable clients to specify what the user has access to themselves, without any explicit requirements from SPiD.
 
+Via `POST /user/{id}/asset/{assetId}` endpoint client is able to create (or modify) access to asset for user. 
 
-**Use cases**
+- {id} can be user_id or UUID
+- {assetId} must be non-numeric id
+
+
+## Use cases
 
 Use Cases for handling access checks for NON-SPiD assets are many:
 
