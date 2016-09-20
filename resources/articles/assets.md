@@ -21,4 +21,9 @@ Use Cases for handling access checks for NON-SPiD assets are many:
 
 :relevant-endpoints
 
-todo
+GET /user/{id}/asset/{assetId}
+POST /user/{id}/asset/{assetId}
+DELETE /user/{id}/asset/{assetId}
+GET /user/{id}/assets/{assetIds}
+GET /user/{id}/assets
+GET /asset/{id}/users/count
