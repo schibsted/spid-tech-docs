@@ -10,7 +10,7 @@ In order to support a more flexible solution for identity based access managemen
 Via `POST /user/{id}/asset/{assetId}` endpoint client is able to create (or modify) access to asset for user. 
 
 - {id} can be user_id or UUID
-- {assetId} must be non-numeric id
+- {assetId} must be non-numeric id see more [assetId type](/types/asset-id/)
 
 
 ## Use cases
