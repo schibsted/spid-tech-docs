@@ -2,6 +2,8 @@
  :name "assetId"
  :description "Non-numeric case-insensitive unique id set by client.
 
+ This identifier will be shared across all clients within one merchant. Merchants have to be aware of any non-intended conflicts within a merchant. It will not be possible to check the asset access of a user from the scope of a different merchant.
+
  Can be combination of letters, digits and chars: _-
 
  Should start with letter and match to regex `^[a-z][a-z\\-_0-9]+$` eg company_x_article_y_29-09
