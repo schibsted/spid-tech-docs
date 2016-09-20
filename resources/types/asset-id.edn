@@ -4,7 +4,7 @@
 
  Can be combination of letters, digits and chars: _-
 
- Should match to regex `^\\d*[\\-_]*[a-df-wy-z][a-z0-9\\-_]*$` eg company_x_article_y_29-09
+ Should start with letter and match to regex `^[a-z][a-z\\-_0-9]+$` eg company_x_article_y_29-09
 
  Max length is 255 bytes"
 }
