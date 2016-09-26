@@ -1,6 +1,17 @@
 :title Passwordless Login
 :frontpage
 :category api-integration
+
+:relevant-endpoints
+
+POST /signin
+
+:aside
+
+## See also
+
+- [Signin flow](/flows/auth-flow/)
+
 :body
 
 The basic idea is that instead of using a password to authenticate each user, a temporary secret code is sent to him/her over an e-mail.
