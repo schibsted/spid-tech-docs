@@ -13,6 +13,10 @@ which credentials to use, and they will be automatically filled in.
 Shared Web Credentials and Google Smart Lock can be configured
 in [SelfService](/selfservice/access/), under Basic settings.
 
+If you experience any issues configuring or storing your settings
+(i.e. getting a message like `Target site must match redirect URL domains!`),
+your client type might be wrong. Please contact support and they will help you change that.
+
 ### Shared Web Credentials
 
 #### Links
