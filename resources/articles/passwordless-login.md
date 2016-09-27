@@ -38,7 +38,7 @@ Here is a complete overview of Passwordless Login functionality:
 The Passwordless Login flow consists of these elements:
 
 * an API endpoint for triggering a passwordless login flow
-* user receives an email with a link (30 minutes expiration)
+* user receives an email with a link (5 minutes expiration)
 * once the user press the link: 
     * the user is logged in
     * if terms & agreements acceptance is needed, the user is presented with the acceptance step, otherwise this is skipped
