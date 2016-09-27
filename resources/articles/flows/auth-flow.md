@@ -40,7 +40,7 @@ Flow is initiated by path `/flow/auth`, `/flow/login` or `/flow/signup` and requ
 Optional query parameters include, among others, `cancel_redirect_uri`.
 
 ### Signin flow
-Sign-in flow is a slight exception. It lets user to log in without providing his/hers credentials by using an unique, one at a time, valid for 30 minutes token.
+Sign-in flow is a slight exception. It lets user to log in without providing his/hers credentials by using an unique, one at a time, valid for 5 minutes token.
 
 * Step 1: Signin view with e-mail input OR [correct API endpoint](/endpoints/POST/signin/)
 * Step 2: Receiving e-mail

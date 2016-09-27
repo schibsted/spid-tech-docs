@@ -1,6 +1,6 @@
 :introduction
 
-This endpoint generates an unique token (30 minutes of expiration time) sent to user's e-mail, that allows user to log-in to SPiD without providing his/hers credentials.
+This endpoint generates an unique token (5 minutes of expiration time) sent to user's e-mail, that allows user to log-in to SPiD without providing his/hers credentials.
  
 * Only one token per user can be active at one time.
 * User must be previously registered at SPiD.
