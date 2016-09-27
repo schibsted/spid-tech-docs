@@ -674,7 +674,7 @@
       :type "api-exception"}]},
    :POST
    {:name "POST",
-    :required [],
+    :required ["value"],
     :optional ["accessUntil"],
     :accessTokenTypes ["server" "user"],
     :filters [],
@@ -921,7 +921,7 @@
  {:path "signin",
   :validOutputFormats ["json"],
   :parameterDescriptions
-  {:identifier "Email or verified phone number of the user",
+  {:identifier "Email of the user",
    :redirectUri
    "Where to redirect the user after completing signin request"},
   :method "POST",
