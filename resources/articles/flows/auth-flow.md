@@ -44,12 +44,11 @@ Sign-in flow is a slight exception. It lets user to log in without providing his
 
 * Step 1: Signin view with e-mail input OR [correct API endpoint](/endpoints/POST/signin/)
 * Step 2: Receiving e-mail
-* Step 3: Accessing confirmation page
-* Step 4: Verify step, only shown if user is unverified
-* Step 5: Accept agreement, only shown if user has not accepted the latest agreement
+* Optional step: Error page if link is expired or invalid
+* Step 3: Accept agreement, only shown if user has not accepted the latest agreement
 * Connect to client, an invisible step where user gets connected to client
-* Step 6: Required fields step, only shown if client require fields user have not filled
-* Step 7: Verify phone step, only shown if client configuration require it
+* Step 4: Required fields step, only shown if client require fields user have not filled
+* Step 5: Verify phone step, only shown if client configuration requires it
 
 
 ## How it looks
