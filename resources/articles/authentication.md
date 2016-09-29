@@ -86,11 +86,6 @@ When successful, this request will return a JSON object:
 
 The `access_token` may be used to make API requests on behalf of this user.
 
-**NB!** This will only work if the user is already logged in. So, in order to
-make use of this, you have to
-[log in via SPiD the regular way](http://identity-pre.schibsted.com/login)
-first.
-
 ## Obtaining a server token
 
 `POST` your client credentials and a grant type of `client_credentials` to
