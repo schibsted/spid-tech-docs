@@ -15,9 +15,9 @@ Client Teasers is a simple way for clients to both style the page making it more
 
 When you create a new client teaser, you will write markdown and CSS. The markdown will be converted into HTML together with the CSS and some extra javascript that is required for cross-origin iframes to work.
 
-The HTML-page will then be uploaded to our CDN (Content Delivery Network) in order for us to serve your users in the most efficient way. Each upload will be an unique file so each change should be seen immediatly after the upload is complete and served at the very next request.
+The HTML-page will then be uploaded to our CDN (Content Delivery Network) in order for us to serve your users in the most efficient way. Each upload will be an unique file so each change should be seen immediately after the upload is complete and served at the very next request.
 
-You may only have one teaser activated for each client and it’s only shown if it is activated.
+You may have more than one teasers running at the same time, but only one can be default one. You can choose which teaser should be shown to user using `teaser` parameter. This parameter takes values from "*Teaser slug*" input field.
 
 # Each input field explained
 
@@ -27,17 +27,19 @@ The description field is a short text to explain what the teaser is about. Given
 
 The description is shown in the summary of all your client teasers.
 
+## Default
+
+Determines which teaser is the default one in case special URL parameter `teaser` is omitted. Only one teaser can be default one at given time. If you set teaser as default, current default one will be unset. 
+
+## Teaser slug
+
+This is URL-safe (basic characters a..z and "-") value which when used in URL will override default teaser. 
+
 ## Teaser CSS
 
 The “Teaser CSS” input field is where all the CSS that is styling your HTML will go. We do not have any specific rules about this one except it is a good idea to style your elements with a thought about the teasers will be shown on different screen sizes and resolutions so you will have to abide to usual styling guidelines that works for different resolutions.
 
 Data-uris are currently not supported, so all images needs to be loaded for external sources via HTTPS.
-
-## Active
-
-In order for you to activate your newly created teaser you must tick this box. If you have another teaser already activated, it will be deactivated and thus making the new one take it’s place. You do not need to deactivate other teasers in order to activate a new one.
-
-A ticked (checked) checkbox means it is activated and an unticked one means it’s deactivated.
 
 ## Teaser Markdown
 
