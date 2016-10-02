@@ -49,6 +49,8 @@ For the client teaser we use markdown that converts into HTML along with the CSS
 
 We chose markdown over HTML to solve issues that HTML has such as you can add or make mistakes and easily create incorrect documents. But most importantly we use markdown because of the security concerns that were raised with normal HTML input. Basically we use markdown to provide security for us and our users as we try to provide as much of freedom of expression to you, the clients, as possible.
 
+As such, HTML shouldn't be used.
+
 ### How do I use it?
 
 For the markdown we use everything that is “common” to markdown documents with our special sauce on top to add ids and classes to your elements. To try your markdown a good place could be [Parsedown demo page](http://parsedown.org/demo) since that is the library we made use of. Of course, as the CSS classes and ids are an extension of that library it will not work for their demo page.
