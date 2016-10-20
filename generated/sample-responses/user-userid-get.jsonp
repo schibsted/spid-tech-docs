@@ -38,7 +38,23 @@ callback({
   "emailVerified": false,
   "preferredUsername": "JohnDoe",
   "currentLocation": [],
-  "addresses": {},
+  "addresses": {
+    "home": {
+      "country": "Norway",
+      "streetNumber": "1",
+      "longitude": "",
+      "floor": "",
+      "locality": "",
+      "formatted": "STREET 1, 0123 OSLO, NORGE",
+      "streetEntrance": "",
+      "apartment": "",
+      "postalCode": "0123",
+      "latitude": "",
+      "type": "home",
+      "region": "",
+      "streetAddress": "STREET"
+    }
+  },
   "verified": "2014-04-15 19:43:29",
   "id": "534d6fc1efd04b7c3f000000",
   "phoneNumbers": [],

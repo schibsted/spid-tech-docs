@@ -46,12 +46,12 @@ public profile data will be available:
           {:name "birthday"            :type :date           :description "Date of birth in YYYY-MM-DD format. Year will be 0000 if not provided. Defaults to 0000-00-00. [Portable contacts](http://portablecontacts.net/draft-spec.html#anchor16)" :always-available? true}
           {:name "locale"              :type :string         :description "The user's preferred locale. Locales follow ISO Language and country codes respectively, joined by an underscore." :always-available? true}
           {:name "utcOffset"           :type :string         :description "The user's timezone, given as offset from UTC." :always-available? true}
-          {:name "lastLoggedIn"        :type :datetime       :always-available? true}
-          {:name "lastAuthenticated"   :type :datetime       :description "The last time the user authenticated with their password" :always-available? true}
+          {:name "lastLoggedIn"        :type :datetime       :description "Returns false if the user has not been logged in before." :always-available? true}
+          {:name "lastAuthenticated"   :type :datetime       :description "The last time the user authenticated with their password. Returns false if the user has not been authenticated before." :always-available? true}
           {:name "imported"            :type :datetime}
           {:name "migrated"            :type :datetime}
-          {:name "addresses"           :type {:type :address}}
+          {:name "addresses"           :type {:type :address}   :description "If user has no addresses returns empty array."}
           {:name "accounts"            :type [:account]      :description "Third-party accounts and other client services"}
           {:name "merchants"           :type :array          :description "List of SPiD merchants the user is connected to"}
-          {:name "currentLocation"     :type [:address]}
+          {:name "currentLocation"     :type [:address]      :description "If user has no current location returns empty array."}
           {:name "tracking"            :type :boolean        :description "If `true`, the user has behavioral tracking enabled (pilot feature, may not remain as-is)"}]}
