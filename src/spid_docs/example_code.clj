@@ -23,7 +23,7 @@
          (case method
            :GET " -G"
            :POST " \\\n   -X POST"
-           :DELETE " \\\n   -X DELETE")
+           :DELETE " -G \\\n   -X DELETE")
          (when (seq access-token-types) " \\\n   -d \"oauth_token=[access token]\"")
          (format-params (exemplify-params params example-params)
                         " \\\n   -d \":name=:value\"")))
