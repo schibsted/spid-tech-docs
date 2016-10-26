@@ -42,4 +42,5 @@ The Passwordless Login flow consists of these elements:
 * once the user press the link: 
     * the user is logged in
     * if terms & agreements acceptance is needed, the user is presented with the acceptance step, otherwise this is skipped
+    * if user is not registered, he has to fill in required fields
 * when logged in state is successful, the user is redirected back to the client provided and validated redirectUrl
