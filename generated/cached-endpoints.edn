@@ -708,7 +708,7 @@
      {:status 404,
       :description "User record not found",
       :type "api-exception"}]}},
-  :url "/api/2/user/{id}/asset/{assetId}",
+  :url "/api/2/user/{id}/asset/{asset_id}",
   :pathParameters ["id" "assetId"],
   :controller "Api/2/Assets.user_asset",
   :defaultOutputFormat "json",
@@ -738,7 +738,7 @@
      {:status 403,
       :description "User does not have access",
       :type "api-exception"}]}},
-  :url "/api/2/user/{id}/assets/{assetIds}",
+  :url "/api/2/user/{id}/assets/{asset_id}",
   :pathParameters ["id" "assetIds"],
   :controller "Api/2/Assets.user_assets",
   :defaultOutputFormat "json",
@@ -996,6 +996,8 @@
   {:gender
    "Gender. Legal values and a localized description can be fetched from [/api/2/describe/User?property=gender](/endpoints/GET/describe/{object}/).",
    :name "Full name",
+   :locale
+   "Preferred user language. By default it is nb_NO for Norway, and sv_SE for Sweden. You can also use en_US, es_ES, ca_ES and eu_ES.",
    :photo "URL to a profile photo",
    :displayName "The user's preferred display name",
    :utcOffset
@@ -1023,7 +1025,8 @@
      "preferredUsername"
      "url"
      "utcOffset"
-     "redirectUri"],
+     "redirectUri"
+     "locale"],
     :accessTokenTypes ["server"],
     :filters [],
     :defaultFilters [],
