@@ -1614,14 +1614,16 @@
   {:userId
    "The user's `userId` (not to be mistaken with the deprecated `id`).",
    :trigger
-   "What kind of email trigger to send. Currently only two options:\n\n* `emailverification` - Sends an email to the user, asking them to verify their email address.\n* `newpassword` - Sends an email to the user with a link to create a new password. The password reset link is valid for 24 hours."},
+   "What kind of email trigger to send. Currently only two options:\n\n* `emailverification` - Sends an email to the user, asking them to verify their email address.\n* `newpassword` - Sends an email to the user with a link to create a new password. The password reset link is valid for 24 hours.",
+   :redirectUri
+   "Where to redirect the user after completing triggered action."},
   :method "GET",
   :name "Trigger",
   :httpMethods
   {:GET
    {:name "GET",
     :required [],
-    :optional [],
+    :optional ["redirectUri"],
     :accessTokenTypes ["server"],
     :filters [],
     :defaultFilters [],
