@@ -10,7 +10,6 @@ before_install:
 script: lein2 with-profile test midje
 jdk:
 - openjdk7
-- oraclejdk7
 before_deploy:
 - lein build-site
 deploy:
