@@ -14,10 +14,10 @@ before_deploy:
 - lein build-site
 deploy:
   provider: s3
-  access_key_id: AKIAJ33M5YCAEKRIPS2A
+  access_key_id: AKIAJFTZ6R7MJFYJYVAQ
   secret_access_key:
-    secure: QPa+JDYpif9YlFWUUsk8SRe/shkrRZra33N5mcxXueqomrd8uhc/AahpuQMeay6/3MlZOVGaHoTMFkbqI3DTBuOshlihwmY8p2TTbvbctl9ng19qFqPpLXaED2UG94MjZhDP1ZTzLVlq1LMZKr53OfY4TIXZZ8EX01plN3J4EtQ=
-  bucket: spid-techdocs-355544364981
+    secure: OmL+a9e4Pujn7pvkpzTfAiJo3l9PG5U4sX8q01zae132dwnMgg4rjcR3/Hem7rkLaerkK3F/bgh6Xgsuauy7gzhpqD5jCbE1tBi4BRZ+883AKBLnbIlDd30g9Pl1CzSTIW1HD3pejnnTQlxs8ISZ27KjEiVcyRiYUCTAIPssCik=
+  bucket: spid-techdocs-283344284444
   cache_control: "no-transform,public,max-age=300"
   detect_encoding: true
   local-dir: dist
@@ -25,7 +25,7 @@ deploy:
   skip_cleanup: true
   on:
     repo: schibsted/spid-tech-docs
-    branch: s3-techdocs
+    branch: master
 notifications:
   slack:
     secure: D2oviFgzxvZKRWS5BLAh1UA+AJSvN1+BsXdOBb7hXZ/D1LXJf4zX3HSm59NCaRkGeYdcKT3c/Igk6qf8vRav5m7RgPB9zz8cFDg5owOQy2QHXVsZ/iojWEnZKt3LEFU2F6hYLoN0aKCsG1BBUNuPzODu/l3VCdQt50Zt1utFrvQ=
