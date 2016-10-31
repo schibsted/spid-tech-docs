@@ -10,7 +10,22 @@ before_install:
 script: lein2 with-profile test midje
 jdk:
 - openjdk7
-- oraclejdk7
+before_deploy:
+- lein build-site
+deploy:
+  provider: s3
+  access_key_id: AKIAJFTZ6R7MJFYJYVAQ
+  secret_access_key:
+    secure: OmL+a9e4Pujn7pvkpzTfAiJo3l9PG5U4sX8q01zae132dwnMgg4rjcR3/Hem7rkLaerkK3F/bgh6Xgsuauy7gzhpqD5jCbE1tBi4BRZ+883AKBLnbIlDd30g9Pl1CzSTIW1HD3pejnnTQlxs8ISZ27KjEiVcyRiYUCTAIPssCik=
+  bucket: spid-techdocs-283344284444
+  cache_control: "no-transform,public,max-age=300"
+  detect_encoding: true
+  local-dir: dist
+  acl: public_read
+  skip_cleanup: true
+  on:
+    repo: schibsted/spid-tech-docs
+    branch: master
 notifications:
   slack:
     secure: D2oviFgzxvZKRWS5BLAh1UA+AJSvN1+BsXdOBb7hXZ/D1LXJf4zX3HSm59NCaRkGeYdcKT3c/Igk6qf8vRav5m7RgPB9zz8cFDg5owOQy2QHXVsZ/iojWEnZKt3LEFU2F6hYLoN0aKCsG1BBUNuPzODu/l3VCdQt50Zt1utFrvQ=
