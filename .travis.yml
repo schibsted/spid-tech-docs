@@ -13,21 +13,19 @@ jdk:
 before_deploy:
 - lein build-site
 deploy:
-  - provider: s3
-    access_key_id: AKIAJ33M5YCAEKRIPS2A
-    secret_access_key:
-      secure: "hDXkXgEjFJq5sWY0paCzwotTd5WYNYxrL/MYgaS5GATnR8hxI/4W2VXymi7E3ggvR0duVI3571Zd59VeVMjbY/h9ZT6fN3TZrUsVrm3lqohObgiCWuUZa5cSmItSFH6IIflcu4azV5Sjjv/qS5z0DeifD52+Tqh37gQY5HyomUY="
-    bucket: spid-techdocs-355544364981
-    region: eu-west-1
-    detect_encoding: true
-    cache_control: "no-transform,public,max-age=300"
-    local-dir: dist
-    acl: public_read
-    skip_cleanup: true
-    on:
-      branch: s3-techdocs
-      repo: schibsted/spid-tech-docs
-
+  provider: s3
+  access_key_id: AKIAJ33M5YCAEKRIPS2A
+  secret_access_key:
+    secure: QPa+JDYpif9YlFWUUsk8SRe/shkrRZra33N5mcxXueqomrd8uhc/AahpuQMeay6/3MlZOVGaHoTMFkbqI3DTBuOshlihwmY8p2TTbvbctl9ng19qFqPpLXaED2UG94MjZhDP1ZTzLVlq1LMZKr53OfY4TIXZZ8EX01plN3J4EtQ=
+  bucket: spid-techdocs-355544364981
+  cache_control: "no-transform,public,max-age=300"
+  detect_encoding: true
+  local-dir: dist
+  acl: public_read
+  skip_cleanup: true
+  on:
+    repo: schibsted/spid-tech-docs
+    branch: s3-techdocs
 notifications:
   slack:
     secure: D2oviFgzxvZKRWS5BLAh1UA+AJSvN1+BsXdOBb7hXZ/D1LXJf4zX3HSm59NCaRkGeYdcKT3c/Igk6qf8vRav5m7RgPB9zz8cFDg5owOQy2QHXVsZ/iojWEnZKt3LEFU2F6hYLoN0aKCsG1BBUNuPzODu/l3VCdQt50Zt1utFrvQ=
