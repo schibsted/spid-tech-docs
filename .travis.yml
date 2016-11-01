@@ -18,6 +18,7 @@ deploy:
   secret_access_key:
     secure: OmL+a9e4Pujn7pvkpzTfAiJo3l9PG5U4sX8q01zae132dwnMgg4rjcR3/Hem7rkLaerkK3F/bgh6Xgsuauy7gzhpqD5jCbE1tBi4BRZ+883AKBLnbIlDd30g9Pl1CzSTIW1HD3pejnnTQlxs8ISZ27KjEiVcyRiYUCTAIPssCik=
   bucket: spid-techdocs-283344284444
+  region: eu-west-1
   cache_control: "no-transform,public,max-age=300"
   detect_encoding: true
   local-dir: dist
