@@ -1,24 +1,17 @@
 body {
     color: #333; font: 16px Helvetica, arial, freesans, clean, sans-serif; line-height: 1.5; margin: 0 10px; -webkit-text-size-adjust: 100%;
-    background: -webkit-linear-gradient(top,       #1c7bab 0%, #045c89 300px);
-    background:    -moz-linear-gradient(top,       #1c7bab 0%, #045c89 300px);
-    background:     -ms-linear-gradient(top,       #1c7bab 0%, #045c89 300px);
-    background:      -o-linear-gradient(top,       #1c7bab 0%, #045c89 300px);
-    background:         linear-gradient(to bottom, #1c7bab 0%, #045c89 300px);
-    background-repeat: repeat-x;
-    background-color: #045c89;
+    background-color: #fafafa;
 }
 
 #head {
     color: #fff; font-size: 14px; margin: 0 -40px; padding: 9px;
-    background: -webkit-linear-gradient(top,       #1c7bab 0%, #18658f 100%);
-    background:    -moz-linear-gradient(top,       #1c7bab 0%, #18658f 100%);
-    background:     -ms-linear-gradient(top,       #1c7bab 0%, #18658f 100%);
-    background:      -o-linear-gradient(top,       #1c7bab 0%, #18658f 100%);
-    background:         linear-gradient(to bottom, #1c7bab 0%, #18658f 100%);
+    background: -webkit-linear-gradient(#04519b, #044687 60%, #033769);
+    background:    -moz-linear-gradient(#04519b, #044687 60%, #033769);
+    background:     -ms-linear-gradient(#04519b, #044687 60%, #033769);
+    background:      -o-linear-gradient(#04519b, #044687 60%, #033769);
+    background:         linear-gradient(#04519b, #044687 60%, #033769);
 }
 
-#menu a,
 #head a {color: #fff;}
 
 a {text-decoration: none}
@@ -63,11 +56,10 @@ img {display: block; border: none; max-width: 100%; -ms-interpolation-mode: bicu
 .center {max-width: 1400px; margin: 0 auto;}
 
 #main {min-height: 400px; overflow: hidden; margin-bottom: 10px;}
-#body {background: #fdfdfd; border-radius: 10px; padding-bottom: 20px;}
+#body {background: #fafafa; border-radius: 10px; padding-bottom: 20px;}
 #logo {margin: 10px; float: left;}
 #logo img {height: 50px;}
-#footer {margin-bottom: 40px; text-align: center; font-size: 13px; color: #fff; opacity: 0.6;}
-#footer a {color: #ccf;}
+#footer {margin-bottom: 40px; text-align: center; font-size: 13px; color: #333; }
 
 #menu {margin-top: 5px;}
 #menu a {margin-left: 15px; display: block; font-size: 13px;}
