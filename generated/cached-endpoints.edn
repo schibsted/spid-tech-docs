@@ -674,7 +674,7 @@
       :type "api-exception"}]},
    :POST
    {:name "POST",
-    :required ["value"],
+    :required [],
     :optional ["accessUntil"],
     :accessTokenTypes ["server" "user"],
     :filters [],
@@ -1614,16 +1614,14 @@
   {:userId
    "The user's `userId` (not to be mistaken with the deprecated `id`).",
    :trigger
-   "What kind of email trigger to send. Currently only two options:\n\n* `emailverification` - Sends an email to the user, asking them to verify their email address.\n* `newpassword` - Sends an email to the user with a link to create a new password. The password reset link is valid for 24 hours.",
-   :redirectUri
-   "Where to redirect the user after completing triggered action."},
+   "What kind of email trigger to send. Currently only two options:\n\n* `emailverification` - Sends an email to the user, asking them to verify their email address.\n* `newpassword` - Sends an email to the user with a link to create a new password. The password reset link is valid for 24 hours."},
   :method "GET",
   :name "Trigger",
   :httpMethods
   {:GET
    {:name "GET",
     :required [],
-    :optional ["redirectUri"],
+    :optional [],
     :accessTokenTypes ["server"],
     :filters [],
     :defaultFilters [],
@@ -2333,6 +2331,30 @@
   :controller "Api/2/Client.clients",
   :defaultOutputFormat "json",
   :description "List all clients",
+  :category ["Utilities" "Platform API"]}
+ {:path "client/{client_id}",
+  :validOutputFormats ["json" "jsonp"],
+  :parameterDescriptions {},
+  :method "GET",
+  :name "Get client",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required [],
+    :optional [],
+    :accessTokenTypes ["server"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200, :description "", :type "client"}
+     {:status 404,
+      :description "No client found",
+      :type "api-exception"}]}},
+  :url "/api/2/client/{id}",
+  :pathParameters ["client_id"],
+  :controller "Api/2/Client.client",
+  :defaultOutputFormat "json",
+  :description "Get information about single client",
   :category ["Utilities" "Platform API"]}
  {:path "productsettings",
   :validOutputFormats ["json" "jsonp"],
