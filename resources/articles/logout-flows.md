@@ -33,13 +33,13 @@ from your application.
 
 ## Logging out of SPiD via the redirect flow
 Logging out via the redirect flow, by redirecting the user to /logout in SPiD, will delete the current session for the 
-logged in user based on the session cookie sent in the logout request. If you add the GET parameter **redirect_uri**
-to the request, SPiD will redirect the user to that url after performing the logout procedure. This parameter must be
-previously defined and stored as a valid redirect uri for your client application. It must also be url encoded.
+logged in user based on the session cookie sent in the logout request.
 
-It is also possible to attach the oauth token for the currently logged in user to the logout request via the GET parameter
-**oauth_token**. If this parameter is included, the SPiD platform will revoke the token, meaning no API requests will 
-be allowed using that same token afterwards. 
+You must provide the **client_id** as GET parameter, to make sure correct context is used.
+
+You may provide **redirect_uri** as GET parameter and SPiD will redirect the user to that url after performing the logout procedure. This parameter must be previously defined and stored as a valid redirect uri for your client application. It must also be url encoded. 
+
+You may also provide the **oauth_token** via GET parameter, owned the currently logged in user and SPiD will revoke the token, meaning no API requests will be allowed using that same token afterwards. 
 
 It is then up to your application to perform session cleaning and logout procedures needed to actively log out the user
 from your application.
