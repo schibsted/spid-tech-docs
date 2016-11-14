@@ -29,7 +29,7 @@ public profile data will be available:
           {:name "userId"              :type :integer-string :description "Unique user ID. Custom extension." :always-available? true}
           {:name "name"                :type :name           :description "A JSON string. See [the name type](/types/name/) for details" :always-available? true}
           {:name "displayName"         :type :string         :description "Name suitable for displaying to end-users." :always-available? true}
-          {:name "published"           :type :date-time      :description "The date this user was first added" :always-available? true}
+          {:name "published"           :type :date-time      :description "The date this user was first added. Can return false if the user account was deleted." :always-available? true}
           {:name "updated"             :type :date-time      :description "The most recent date the details of this user were updated" :always-available? true}
           {:name "status"              :type :user-status    :always-available? true}
           {:name "email"               :type :string         :description "Primary email" :always-available? true}
@@ -38,7 +38,7 @@ public profile data will be available:
           {:name "phoneNumber"         :type :string         :description "Primary phone number"}
           {:name "phoneNumberVerified" :type :string         :description "Date when the phone number was last verified."}
           {:name "phoneNumbers"        :type [:phone-number] :description "All user's registered phone numbers."}
-          {:name "verified"            :type :string         :description "Date when user last verified data (email, phone number)"}
+          {:name "verified"            :type :string         :description "Date when user last verified data (email, phone number). Returns false if user wasn't verified."}
           {:name "url"                 :type :string}
           {:name "photo"               :type :string         :description "URL to a photo of the user (GIF/JPG/PNG)"}
           {:name "preferredUsername"   :type :string}
