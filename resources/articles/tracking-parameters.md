@@ -32,7 +32,7 @@ SPiD to populate custom client-provided Xiti parameters for analytics in SPiD.
 ```php
 <?php
 public function encodeXitiVariable($var) {
-   return json_encode(urlencode($var));
+   return urlencode(json_encode($var));
 }    
 
 // Usage Example
