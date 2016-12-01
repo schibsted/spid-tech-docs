@@ -1,5 +1,9 @@
 :introduction
 
-Describe endpoint here. Preferably before pushing to the site. If you're reading
-this on the tech docs site, please have a good laugh at our expense, and then
-[give us some feedback](#disqus_thread).
+This endpoint is in closed BETA, and should not be used unless given explicit permission.
+
+This endpoint resends the sms or email to the user, given the corresponding passwordless token.
+
+:relevant-endpoints
+
+POST /passwordless/start

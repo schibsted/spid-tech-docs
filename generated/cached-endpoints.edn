@@ -4166,7 +4166,7 @@
   :defaultOutputFormat "json",
   :description
   "Trigger sending of SMS and/or email for passwordless authentication",
-  :category ["Passwordless" "Passwordless auth"]}
+  :category ["Identity Management" "Passwordless API"]}
  {:path "passwordless/resend",
   :validOutputFormats ["json"],
   :parameterDescriptions
@@ -4198,7 +4198,7 @@
   :defaultOutputFormat "json",
   :description
   "Trigger re-sending of SMS and/or email for passwordless authentication",
-  :category ["Passwordless" "Passwordless resend"]}
+  :category ["Identity Management" "Passwordless API"]}
  {:path "api/2/*",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions {},
