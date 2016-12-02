@@ -5,7 +5,7 @@ phone number should be base64 encoded.
 
 :example-params
 
-email: NjkwMDAwMDA=
+phone: KzQ2NzAxMTExMTEx
 
 :relevant-endpoints
 

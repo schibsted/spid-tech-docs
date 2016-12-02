@@ -20,6 +20,8 @@
 
 (defsample GET "/email/{email}/status" {:email (base64-encode "john@doe.com")})
 
+(defsample GET "/phone/{phone}/status" {:phone (base64-encode "+46701111111")})
+
 (defsample GET "/clients")
 
 (defsample GET "/productsettings")
@@ -233,9 +235,6 @@
 
 (defsample [vouchers some-vouchers]
   GET "/voucher/{voucherCode}" {:voucherCode (:voucherCode (first vouchers))})
-
-(defsample [user johndoe]
-  GET "/agreements/{userId}/payment" {:userId (:userId user)})
 
 (defsample [user johndoe]
   GET "/user/{userId}/logins" {:userId (:userId user)})

@@ -1,0 +1,5 @@
+callback({
+  "exists": false,
+  "available": true,
+  "verified": false
+});
