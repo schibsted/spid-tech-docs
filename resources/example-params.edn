@@ -74,8 +74,8 @@
  "paylinkId" "777"
  "paymentIdentifier" "2"
  "paymentOptions" "2"
- "phoneNumber" "69000000"
- "phoneNumbers" "69000000"
+ "phoneNumber" "+46701111111"
+ "phoneNumbers" "+46701111111"
  "photo" "http://gravatar.com/xyz"
  "preferredUsername" "johnd"
  "price" "400"
@@ -151,4 +151,7 @@
  "accessUntil" "2017-12-01 13:37:00"
  "assetId" "vg-pluss-slik-er-skam-stjernene"
  "assetIds" "vg-pluss-william-slutter-i-skam,vg-pluss-martha-og-englene"
+ "connection" "sms"
+ "passwordlessToken" "52b2c5e9-d11e-4bae-8b88-3f92cefc7f1d"
+ "phone" "KzQ2NzAxMTExMTEx"
  }

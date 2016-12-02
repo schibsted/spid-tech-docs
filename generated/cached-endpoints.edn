@@ -897,6 +897,38 @@
   :description
   "Get verification and availability status for an email address.",
   :category ["Identity Management" "Email API"]}
+ {:path "phone/{phone}/status",
+  :validOutputFormats ["json" "jsonp"],
+  :parameterDescriptions
+  {:phone "The phone number to query status for."},
+  :method "GET",
+  :name "Status",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required [],
+    :optional [],
+    :accessTokenTypes ["server"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Returns a status description.",
+      :type "phone-status"}
+     {:status 400,
+      :description "Missing parameter phone",
+      :type "api-exception"}
+     {:status 400,
+      :description
+      "Phone parameter did not properly base64 decode into a valid phone number",
+      :type "api-exception"}]}},
+  :url "/api/2/phone/{phone}/status",
+  :pathParameters ["phone"],
+  :controller "Api/2/Phone.phone_status",
+  :defaultOutputFormat "json",
+  :description
+  "Get verification and availability status for an phone address.",
+  :category ["Identity Management" "Phone API"]}
  {:path "me",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions {},
@@ -3004,7 +3036,7 @@
      {:status 404,
       :description "Product revision not found",
       :type "api-exception"}]}},
-  :url "/api/2/product/{id}/revisions",
+  :url "/api/2/product/{<\\d+>id}/revisions",
   :pathParameters ["productId"],
   :controller "Api/2/Product.product_revisions",
   :defaultOutputFormat "json",
@@ -4097,6 +4129,76 @@
   :defaultOutputFormat "json",
   :description "Get the user verification level",
   :category ["user" "verification level"]}
+ {:path "passwordless/start",
+  :validOutputFormats ["json"],
+  :parameterDescriptions
+  {:connection
+   "Either \"sms\" or \"email\" depending on what kind of passwordless auth is required",
+   :phoneNumber "Phone number if doing SMS auth",
+   :email "Email address if doing email auth",
+   :locale "Locale with which to send the message"},
+  :method "POST",
+  :name "Passwordless authentication",
+  :httpMethods
+  {:POST
+   {:name "POST",
+    :required ["connection"],
+    :optional ["phoneNumber" "email"],
+    :accessTokenTypes [],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Passwordless email or SMS sent",
+      :type "passwordlessToken"}
+     {:status 400,
+      :description "Missing connection",
+      :type "api-exception"}
+     {:status 400,
+      :description "Invalid/empty phone or email",
+      :type "api-exception"}
+     {:status 403,
+      :description "Token is not authorized to access this endpoint",
+      :type "api-exception"}]}},
+  :url "/api/2/passwordless/start",
+  :pathParameters [],
+  :controller "Api/2/Passwordless.passwordless_start",
+  :defaultOutputFormat "json",
+  :description
+  "Trigger sending of SMS and/or email for passwordless authentication",
+  :category ["Identity Management" "Passwordless API"]}
+ {:path "passwordless/resend",
+  :validOutputFormats ["json"],
+  :parameterDescriptions
+  {:passwordlessToken
+   "Original passwordless token from /passwordless/start"},
+  :method "POST",
+  :name "Passwordless code resend",
+  :httpMethods
+  {:POST
+   {:name "POST",
+    :required ["passwordlessToken"],
+    :optional [],
+    :accessTokenTypes [],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Passwordless email or SMS re-sent",
+      :type "passwordlessToken"}
+     {:status 400,
+      :description "Missing passwordlessToken",
+      :type "api-exception"}
+     {:status 403,
+      :description "Token is not authorized to access this endpoint",
+      :type "api-exception"}]}},
+  :url "/api/2/passwordless/resend",
+  :pathParameters [],
+  :controller "Api/2/Passwordless.passwordless_resend",
+  :defaultOutputFormat "json",
+  :description
+  "Trigger re-sending of SMS and/or email for passwordless authentication",
+  :category ["Identity Management" "Passwordless API"]}
  {:path "api/2/*",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions {},
