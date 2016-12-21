@@ -84,17 +84,6 @@
     :responses
     [{:status 200,
       :description "Returns the current status of the API. ",
-      :type "status"}]},
-   :POST
-   {:name "POST",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Returns the current status of the API.",
       :type "status"}]}},
   :url "/api/2/status",
   :pathParameters [],
@@ -378,195 +367,6 @@
   :defaultOutputFormat "json",
   :description "Exchanges an authorization code",
   :category ["Authorization" "OAuth"]}
- {:path "admin/{section}",
-  :validOutputFormats ["json" "jsonp" "png"],
-  :parameterDescriptions {:section ""},
-  :method "GET",
-  :name "Utility:adminBySection",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200, :description "", :type ""}
-     {:status 400,
-      :description "No valid endpoint found",
-      :type "api-exception"}]}},
-  :url "/api/2/admin/{section}",
-  :pathParameters ["section"],
-  :controller "Api/2/Utility.admin",
-  :defaultOutputFormat "json",
-  :description
-  "Get list of roles {section}=roles, or acl, {section}=acl",
-  :category ["Utilities" "Sysadmin API"]}
- {:path "admin/acl/{role}",
-  :validOutputFormats ["json" "jsonp" "png"],
-  :parameterDescriptions {:role ""},
-  :method "GET",
-  :name "Utility:aclForRole",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses [{:status 200, :description "", :type ""}]}},
-  :url "/api/2/admin/{section}/{id}",
-  :pathParameters ["role"],
-  :controller "Api/2/Utility.admin",
-  :defaultOutputFormat "json",
-  :description
-  "Specify a role (ie `watcher`, `admin`) and get acl list",
-  :category ["Utilities" "Sysadmin API"]}
- {:path "{type}/{id}/do/{key}",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions
-  {:type
-   "The base API type to associate data with. One of `user`, `product`, `order`, `discount` or `client`.",
-   :id "The ID of the object to associate data with.",
-   :key "The unique key of the data object."},
-  :method "*",
-  :name "Create, get or delete data objects by type, ID and key",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description
-      "Retrieves a previously stored data object. The data object structure is defined by the client who stored it.",
-      :type "object"}
-     {:status 400,
-      :description "The provided type is not valid",
-      :type "api-exception"}
-     {:status 400,
-      :description
-      "The provided ID does not exist for the provided type",
-      :type "api-exception"}
-     {:status 404,
-      :description "No object found for this key",
-      :type "api-exception"}]},
-   :POST
-   {:name "POST",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "The newly created data object",
-      :type "object"}
-     {:status 304,
-      :description "Object could not be stored",
-      :type "api-exception"}
-     {:status 400,
-      :description "Could not find any valid key",
-      :type "api-exception"}
-     {:status 400,
-      :description "Could not find key/value pair in posted data",
-      :type "api-exception"}]},
-   :DELETE
-   {:name "DELETE",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 202,
-      :description "String confirming deleted key",
-      :type "string"}
-     {:status 304,
-      :description "Object could not be deleted",
-      :type "api-exception"}
-     {:status 400,
-      :description "Could not find any valid key",
-      :type "api-exception"}
-     {:status 400,
-      :description "Could not find key/value pair in posted data",
-      :type "api-exception"}]}},
-  :deprecated "2.12",
-  :url "/api/2/{type}/{id}/do/{key}",
-  :pathParameters ["type" "id" "key"],
-  :controller "Api/2/Data.soda",
-  :defaultOutputFormat "json",
-  :description
-  "Data storage endpoint. NB! POST does not work with explorer.",
-  :category ["Data Storage" "SODA Endpoints"]}
- {:path "{type}/{id}/{subtype}/{subid}/do/{key}",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions
-  {:type
-   "The base API type to associate data with. One of `user`, `product`, `order`, `discount` or `client`.",
-   :id "The ID of the object to associate data with.",
-   :subtype
-   "When `type` is user, the `subtype` may be one of `product`, `order` or `subscription`, and attaches a data object to an object owned by the user.",
-   :subid "ID of the user owned sub-type",
-   :key "The unique key of the data object."},
-  :method "*",
-  :name "Get or create data objects by type, sub type, ID and key",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description
-      "Retrieves a previously stored data object. The data object structure is defined by the client who stored it.",
-      :type "object"}
-     {:status 400,
-      :description "The provided type is not valid",
-      :type "api-exception"}
-     {:status 400,
-      :description
-      "The provided ID does not exist for the provided type",
-      :type "api-exception"}
-     {:status 404,
-      :description "No object found for this key",
-      :type "api-exception"}]},
-   :POST
-   {:name "POST",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "The newly created data object.",
-      :type "object"}
-     {:status 304,
-      :description "Object could not be stored",
-      :type "api-exception"}
-     {:status 400,
-      :description "Could not find any valid key",
-      :type "api-exception"}
-     {:status 400,
-      :description "Could not find key/value pair in posted data",
-      :type "api-exception"}]}},
-  :deprecated "2.12",
-  :url "/api/2/{type}/{id}/{subtype}/{subid}/do/{key}",
-  :pathParameters ["type" "id" "subtype" "subid" "key"],
-  :controller "Api/2/Data.soda",
-  :defaultOutputFormat "json",
-  :description
-  "Data storage sub endpoint. NB POST does not work with explorer",
-  :category ["Data Storage" "SODA Endpoints"]}
  {:path "user/{id}/dataobject/{key}",
   :validOutputFormats ["json"],
   :parameterDescriptions
@@ -999,29 +799,6 @@
   :description
   "Passwordless signin (login/signup user based on provided identifier)",
   :category ["Identity Management" "User API"]}
- {:path "me/vouchers",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions {},
-  :method "GET",
-  :name "My vouchers",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["user"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Returns a list of vouchers",
-      :type "[voucher]"}]}},
-  :url "/api/2/me/vouchers",
-  :pathParameters [],
-  :controller "Api/2/User.my_vouchers",
-  :defaultOutputFormat "json",
-  :description "Get the vouchers for the requesting user ",
-  :category ["Payment Services" "Voucher API"]}
  {:path "user",
   :validOutputFormats ["json" "jsonp" "png"],
   :parameterDescriptions
@@ -1139,6 +916,7 @@
     :filters [],
     :defaultFilters [],
     :responses [{:status 200, :description "", :type "object"}]}},
+  :deprecated "2.84",
   :url "/api/2/user/attach_jwt",
   :pathParameters [],
   :controller "Api/2/User.user_attach_jwt",
@@ -1164,6 +942,7 @@
     [{:status 200,
       :description "Returns an object that contains the SP_ID.",
       :type "varnish-id"}]}},
+  :deprecated "2.84",
   :url "/api/2/user/{id}/varnishId",
   :pathParameters ["userId"],
   :controller "Api/2/User.user_varnish",
@@ -1382,6 +1161,7 @@
       :description
       "API error code 9900, The error could not be categorized.",
       :type "api-exception"}]}},
+  :deprecated "2.84",
   :url "/api/2/user/{id}/charge",
   :pathParameters ["userId"],
   :controller "Api/2/User.user_charge",
@@ -1410,6 +1190,7 @@
      {:status 404,
       :description "User never had a payment method or preference.",
       :type "payment-preference"}]}},
+  :deprecated "2.84",
   :url "/api/2/user/{id}/preferences/payment",
   :pathParameters ["userId"],
   :controller "Api/2/User.user_preferences_payment",
@@ -1646,14 +1427,16 @@
   {:userId
    "The user's `userId` (not to be mistaken with the deprecated `id`).",
    :trigger
-   "What kind of email trigger to send. Currently only two options:\n\n* `emailverification` - Sends an email to the user, asking them to verify their email address.\n* `newpassword` - Sends an email to the user with a link to create a new password. The password reset link is valid for 24 hours."},
+   "What kind of email trigger to send. Currently only two options:\n\n* `emailverification` - Sends an email to the user, asking them to verify their email address.\n* `newpassword` - Sends an email to the user with a link to create a new password. The password reset link is valid for 24 hours.",
+   :redirectUri
+   "Where to redirect the user after completing triggered action."},
   :method "GET",
   :name "Trigger",
   :httpMethods
   {:GET
    {:name "GET",
     :required [],
-    :optional [],
+    :optional ["redirectUri"],
     :accessTokenTypes ["server"],
     :filters [],
     :defaultFilters [],
@@ -1722,6 +1505,7 @@
     [{:status 200,
       :description "Returns an order object",
       :type "order"}]}},
+  :deprecated "2.84",
   :url "/api/2/user/{id}/order/{<\\d+>order_id}",
   :pathParameters ["userId" "orderId"],
   :controller "Api/2/User.user_order",
@@ -1749,6 +1533,7 @@
     [{:status 200,
       :description "Return a list of orders",
       :type "[order]"}]}},
+  :deprecated "2.84",
   :url "/api/2/user/{id}/orders",
   :pathParameters ["userId"],
   :controller "Api/2/User.user_orders",
@@ -1775,6 +1560,7 @@
     [{:status 200,
       :description "Returns a list of transactions.",
       :type "[transaction]"}]}},
+  :deprecated "2.84",
   :url "/api/2/user/{id}/transactions",
   :pathParameters ["userId"],
   :controller "Api/2/User.user_transactions",
@@ -1992,72 +1778,6 @@
   :description
   "List all contents (on client) that user has access to.",
   :category ["Payment Services" "Digital Contents API"]}
- {:path "user/{userId}/trait/{trait}",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions
-  {:userId
-   "The user's `userId` (not to be mistaken with the deprecated `id`).",
-   :trait "The key of the trait to delete"},
-  :method "*",
-  :name "Delete user trait",
-  :httpMethods
-  {:DELETE
-   {:name "DELETE",
-    :required ["trait"],
-    :optional [],
-    :accessTokenTypes ["server" "user"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 202,
-      :description "Returns the remaining traits for the user",
-      :type "object"}]}},
-  :url "/api/2/user/{id}/trait/{trait}",
-  :pathParameters ["userId" "trait"],
-  :controller "Api/2/User.user_trait",
-  :defaultOutputFormat "json",
-  :description "Delete current trait from user.",
-  :category ["Data Storage" "Traits API"]}
- {:path "user/{userId}/traits",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions
-  {:userId
-   "The user's `userId` (not to be mistaken with the deprecated `id`).",
-   :key "The trait key to set value for",
-   :traits "A JSON string of traits to add"},
-  :method "*",
-  :name "List and manage user traits",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional ["key"],
-    :accessTokenTypes ["user" "server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description
-      "Returns an object of traits. Traits are arbitrary key/value pairs.",
-      :type "object"}]},
-   :POST
-   {:name "POST",
-    :required ["traits"],
-    :optional [],
-    :accessTokenTypes ["server" "user"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Returns the updated traits",
-      :type "object"}]}},
-  :url "/api/2/user/{id}/traits",
-  :pathParameters ["userId"],
-  :controller "Api/2/User.user_traits",
-  :defaultOutputFormat "json",
-  :description
-  "List/Add/Update the currently saved traits added to the user by the asking client.",
-  :category ["Data Storage" "Traits API"]}
  {:path "user/{userId}/connected",
   :validOutputFormats ["json"],
   :parameterDescriptions
@@ -2138,76 +1858,6 @@
   :description
   "Check if client behind token has access to user and accepts agreements if it has not been done yet",
   :category ["Identity Management" "User agreements API"]}
- {:path "reports/dumps",
-  :validOutputFormats ["json" "jsonp" "xml"],
-  :parameterDescriptions {},
-  :method "GET",
-  :name "List dumps",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Returns a list of dump descriptions",
-      :type "[dump-description]"}]}},
-  :deprecated "2.15",
-  :url "/api/2/reports/dumps",
-  :pathParameters [],
-  :controller "Api/2/Reports.dumps",
-  :defaultOutputFormat "json",
-  :description
-  "Get a list of available dumps from the reports database.",
-  :category ["Insight" "Report Database API"]}
- {:path "reports/dump/{id}",
-  :validOutputFormats ["json" "tgz"],
-  :parameterDescriptions {:id ""},
-  :method "GET",
-  :name "Get dump",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses [{:status 200, :description "", :type "object"}]}},
-  :deprecated "2.15",
-  :url "/api/2/reports/dump/{id}",
-  :pathParameters ["id"],
-  :controller "Api/2/Reports.dump",
-  :defaultOutputFormat "tgz",
-  :description
-  "Gets the dump with the given ID in a tarball (a zipped tar).",
-  :category ["Insight" "Report Database API"]}
- {:path "reports/template/{template}",
-  :validOutputFormats ["json" "jsonp" "csv"],
-  :parameterDescriptions
-  {:template "", :from "", :to "", :products ""},
-  :method "GET",
-  :name "Get report",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required ["from" "to"],
-    :optional ["products"],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses [{:status 200, :description "", :type "object"}]}},
-  :deprecated "2.15",
-  :url "/api/2/reports/template/{template}",
-  :pathParameters ["template"],
-  :controller "Api/2/Reports.report_from_template",
-  :defaultOutputFormat "json",
-  :description
-  "Gets the report with the given id. Products is options and should be comma-separated.",
-  :category ["Insight" "Report Database API"]}
  {:path "anonymous/users",
   :validOutputFormats ["json"],
   :parameterDescriptions {},
@@ -2228,6 +1878,7 @@
      {:status 400,
       :description "Required client ID missing",
       :type "api-exception"}]}},
+  :deprecated "2.84",
   :url "/api/2/anonymous/users",
   :pathParameters [],
   :controller "Api/2/anonymous.anonymous_users",
@@ -2235,114 +1886,6 @@
   :description
   "Get all anonymous user objects changed in the given period",
   :category ["Identity Management" "User API"]}
- {:path "discount",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions
-  {:status "",
-   :currency "",
-   :name "",
-   :start_time "",
-   :end_time "",
-   :redeem_limit "",
-   :product_id "",
-   :type "",
-   :value "",
-   :description ""},
-  :method "POST",
-  :name "Add discount",
-  :httpMethods
-  {:POST
-   {:name "POST",
-    :required ["name" "description" "type" "value" "end_time"],
-    :optional
-    ["currency" "redeem_limit" "start_time" "status" "product_id"],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses [{:status 200, :description "", :type "object"}]}},
-  :url "/api/2/discount",
-  :pathParameters [],
-  :controller "Api/2/Discount.discount",
-  :defaultOutputFormat "json",
-  :description "Create a new discount",
-  :category ["Payment Services" "Discount API"]}
- {:path "discount/{id}",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions
-  {:status "",
-   :currency "",
-   :name "",
-   :start_time "",
-   :end_time "",
-   :redeem_limit "",
-   :product_id "",
-   :type "",
-   :id "",
-   :value "",
-   :description ""},
-  :method "*",
-  :name "Get discount",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200, :description "", :type "object"}
-     {:status 404,
-      :description "No discount found for this ID",
-      :type "api-exception"}]},
-   :POST
-   {:name "POST",
-    :required [],
-    :optional
-    ["product_id"
-     "name"
-     "description"
-     "type"
-     "value"
-     "currency"
-     "redeem_limit"
-     "start_time"
-     "end_time"
-     "status"],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200, :description "", :type "object"}
-     {:status 404,
-      :description "No discount found for this ID",
-      :type "api-exception"}]}},
-  :url "/api/2/discount/{id}",
-  :pathParameters ["id"],
-  :controller "Api/2/Discount.discount",
-  :defaultOutputFormat "json",
-  :description "Get a single discount and update",
-  :category ["Payment Services" "Discount API"]}
- {:path "discounts",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions {},
-  :method "GET",
-  :name "List discounts",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional ["filters"],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses [{:status 200, :description "", :type "object"}]}},
-  :url "/api/2/discounts",
-  :pathParameters [],
-  :controller "Api/2/Discount.discounts",
-  :defaultOutputFormat "json",
-  :description "List all discounts for client",
-  :category ["Payment Services" "Discount API"]}
  {:path "clients",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions {},
@@ -2388,32 +1931,6 @@
   :defaultOutputFormat "json",
   :description "Get information about single client",
   :category ["Utilities" "Platform API"]}
- {:path "productsettings",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions {},
-  :method "GET",
-  :name "Get product settings",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Retrieves the current product setting values.",
-      :type "product-settings"}
-     {:status 404,
-      :description "No product settings found",
-      :type "api-exception"}]}},
-  :url "/api/2/productsettings",
-  :pathParameters [],
-  :controller "Api/2/Client.productsettings",
-  :defaultOutputFormat "json",
-  :description "Get the client's product settings",
-  :category ["Payment Services" "Product API"]}
  {:path "orders",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
@@ -2470,6 +1987,7 @@
      {:status 404,
       :description "No order found",
       :type "api-exception"}]}},
+  :deprecated "2.84",
   :url "/api/2/orders",
   :pathParameters [],
   :controller "Api/2/Order.orders",
@@ -2497,6 +2015,7 @@
      {:status 400,
       :description "Missing required parameter orderId",
       :type "api-exception"}]}},
+  :deprecated "2.84",
   :url "/api/2/order/{id}",
   :pathParameters ["orderId"],
   :controller "Api/2/Order.order",
@@ -2525,6 +2044,7 @@
      {:status 400,
       :description "Missing required parameter orderId",
       :type "api-exception"}]}},
+  :deprecated "2.84",
   :url "/api/2/order/{id}/transactions",
   :pathParameters ["orderId"],
   :controller "Api/2/Order.order_transactions",
@@ -2553,6 +2073,7 @@
      {:status 400,
       :description "Missing required parameter orderId",
       :type "api-exception"}]}},
+  :deprecated "2.84",
   :url "/api/2/order/{id}/items",
   :pathParameters ["orderId"],
   :controller "Api/2/Order.order_items",
@@ -2586,6 +2107,7 @@
      {:status 999,
       :description "Payment provider-specific error",
       :type "api-exception"}]}},
+  :deprecated "2.84",
   :url "/api/2/order/{id}/status",
   :pathParameters ["orderId"],
   :controller "Api/2/Order.order_status",
@@ -2616,6 +2138,7 @@
      {:status 999,
       :description "Payment provider-specific error",
       :type "api-exception"}]}},
+  :deprecated "2.84",
   :url "/api/2/order/{id}/cancel",
   :pathParameters ["orderId"],
   :controller "Api/2/Order.order_cancel",
@@ -2654,6 +2177,7 @@
      {:status 999,
       :description "Payment provider-specific error",
       :type "api-exception"}]}},
+  :deprecated "2.84",
   :url "/api/2/order/{id}/credit",
   :pathParameters ["orderId"],
   :controller "Api/2/Order.order_credit",
@@ -2685,6 +2209,7 @@
      {:status 999,
       :description "Payment provider-specific error",
       :type "api-exception"}]}},
+  :deprecated "2.84",
   :url "/api/2/order/{id}/complete",
   :pathParameters ["orderId"],
   :controller "Api/2/Order.order_complete",
@@ -2723,6 +2248,7 @@
      {:status 999,
       :description "Payment provider-specific error",
       :type "api-exception"}]}},
+  :deprecated "2.84",
   :url "/api/2/order/{id}/capture",
   :pathParameters ["orderId"],
   :controller "Api/2/Order.order_capture",
@@ -2997,6 +2523,7 @@
      {:status 404,
       :description "No child products found",
       :type "api-exception"}]}},
+  :deprecated "2.84",
   :url "/api/2/product/{id}/children",
   :pathParameters ["productId"],
   :controller "Api/2/Product.product_children",
@@ -3036,6 +2563,7 @@
      {:status 404,
       :description "Product revision not found",
       :type "api-exception"}]}},
+  :deprecated "2.84",
   :url "/api/2/product/{<\\d+>id}/revisions",
   :pathParameters ["productId"],
   :controller "Api/2/Product.product_revisions",
@@ -3097,6 +2625,7 @@
      {:status 404,
       :description "Product not found",
       :type "api-exception"}]}},
+  :deprecated "2.84",
   :url "/api/2/product/{id}/campaigns",
   :pathParameters ["productId"],
   :controller "Api/2/Product.product_campaigns",
@@ -3659,6 +3188,7 @@
      {:status 404,
       :description "No identifier found for this ID",
       :type "api-exception"}]}},
+  :deprecated "2.84",
   :url "/api/2/identifier/{id}",
   :pathParameters ["identifierId"],
   :controller "Api/2/Identifier.identifier",
@@ -3680,6 +3210,7 @@
     :defaultFilters [],
     :responses
     [{:status 200, :description "", :type "payment-identifier"}]}},
+  :deprecated "2.84",
   :url "/api/2/identifiers",
   :pathParameters [],
   :controller "Api/2/Identifier.identifiers",
@@ -3724,6 +3255,7 @@
      {:status 400,
       :description "Validation error(s)",
       :type "api-exception"}]}},
+  :deprecated "2.84",
   :url "/api/2/identifier",
   :pathParameters [],
   :controller "Api/2/Identifier.identifier",
@@ -3753,6 +3285,7 @@
      {:status 400,
       :description "Validation error(s)",
       :type "api-exception"}]}},
+  :deprecated "2.84",
   :url "/api/2/identifier/{id}",
   :pathParameters ["id"],
   :controller "Api/2/Identifier.identifier",
@@ -3760,33 +3293,6 @@
   :defaultOutputFormat "json",
   :description "Update payment identifier",
   :category ["Payment Services" "Payment API"]}
- {:path "logins/{userId}",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions
-  {:userId
-   "The user's `userId` (not to be mistaken with the deprecated `id`).",
-   :ip "Filter results by this IP address",
-   :status "Filter results by this status"},
-  :method "GET",
-  :name "Logins per user",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional ["limit" "since" "offset" "until" "ip" "status"],
-    :accessTokenTypes ["server" "user"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Returns a list of login attempt objects",
-      :type "[login-attempt]"}]}},
-  :url "/api/2/logins/{id}",
-  :pathParameters ["userId"],
-  :controller "Api/2/User.user_logins",
-  :defaultOutputFormat "json",
-  :description "List all (or search for) logins for a user.",
-  :category ["Identity Management" "Login API"]}
  {:path "subscriptions",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
@@ -4191,6 +3697,9 @@
       :type "api-exception"}
      {:status 403,
       :description "Token is not authorized to access this endpoint",
+      :type "api-exception"}
+     {:status 429,
+      :description "Too many attempts made to resend code",
       :type "api-exception"}]}},
   :url "/api/2/passwordless/resend",
   :pathParameters [],
