@@ -6,7 +6,6 @@
 
 - [Mixpanel Analytics](/mixpanel/analytics/)
 - [Events tracked by SPiD](/mixpanel/events-tracked/)
-- [Managing User-Specific Properties and Traits](/mixpanel/managing-properties-and-traits/)
 - [Mixpanel Page Viewed Event](/mixpanel/page-viewed-event/)
 
 :body
@@ -44,22 +43,18 @@ Read more [here](/sdks/javascript/).
 When the page has loaded, subscribe to the "auth.visitor" event. This event is
 triggered when SPiD identifies the current visitor and the SDK is initialized.
 When the user is identified, you can identify the user with Mixpanel by calling
-`mixpanel.identify(SPID_VISITOR_ID)`, and optionally add custom traits to the
-current visitor by calling the SPiD JS SDK function
-`VGS.setTraits(SIGNED_JSON_OBJECT)`.
+`mixpanel.identify(SPID_VISITOR_ID)`.
 
 Place the following code in a `script` block right before the closing `</body>`
 tag, or in a
 [DOMContentLoaded event handler](https://developer.mozilla.org/en-US/docs/Web/Reference/Events/DOMContentLoaded)
 (e.g. `$(document).ready(function () { /* Here */ })` if using jQuery).
 
-You can read more about signing your traits JSON object [here](/mixpanel/managing-properties-and-traits/#signing-your-traits-json-object).
 
 ```js
 VGS.Event.subscribe('auth.visitor', function(data) {
     mixpanel.identify(data.uid);
     var signedData = '{YOUR SIGNED JSON OBJECT}';
-    VGS.setTraits(signedData, function(data) {});
 });
 
 VGS.init({

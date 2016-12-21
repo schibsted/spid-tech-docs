@@ -13,7 +13,6 @@ automatically giving a voucher to a user.
 
 :relevant-endpoints
 
-GET /me/vouchers
 POST /voucher_handout
 GET /voucher/{voucherCode}
 POST /vouchers/generate/{voucherGroupId}

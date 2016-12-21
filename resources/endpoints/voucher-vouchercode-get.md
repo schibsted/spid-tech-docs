@@ -6,7 +6,6 @@ Retrieve a specific voucher.
 
 :relevant-endpoints
 
-GET /me/vouchers
 POST /voucher_handout
 POST /vouchers/generate/{voucherGroupId}
 POST /vouchers/group

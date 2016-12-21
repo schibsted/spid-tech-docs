@@ -6,7 +6,6 @@
 
 ## Read more about Mixpanel
 
-- [Managing User-Specific Properties and Traits](/mixpanel/managing-properties-and-traits/)
 - [Events tracked by SPiD](/mixpanel/events-tracked/)
 - [Mixpanel Page Viewed Event](/mixpanel/page-viewed-event/)
 - [Implementing Mixpanel tracking](/mixpanel/implementing-tracking/)

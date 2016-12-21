@@ -24,11 +24,7 @@
 
 (defsample GET "/clients")
 
-(defsample GET "/productsettings")
-
 (defsample GET "/logins")
-
-(defsample GET "/reports/dumps")
 
 ;; Once the user is created, it must also be verified. Unfortunately, this
 ;; cannot be done through the API. If the user is not verified, certain API
@@ -44,17 +40,6 @@
 
 (defsample johndoe
   POST "/user" {:email "john@doe.com" :displayName "John Doe" :name "John Doe"})
-
-(defsample
-  POST "/{type}/{id}/do/{key}" {:type "client"
-                                :id (:client-id (config/get-config))
-                                :key "rating"
-                                :rating "{\"positive\": 10}"})
-
-(defsample
-  GET "/{type}/{id}/do/{key}" {:type "client"
-                               :id (:client-id (config/get-config))
-                               :key "rating"})
 
 (defsample dataobject [user johndoe]
   POST "/user/{id}/dataobject/{key}" {:id (:userId user)
@@ -106,17 +91,6 @@
 
 (defsample [user johndoe]
   GET "/user/{userId}/logins" {:userId (:userId user)})
-
-(defsample trait [user johndoe]
-  POST "/user/{userId}/traits" {:userId (:userId user)
-                                :traits "{\"key\":\"some-data\"}"})
-
-(defsample [user johndoe]
-  GET "/user/{userId}/traits" {:userId (:userId user)})
-
-(defsample [user johndoe]
-  DELETE "/user/{userId}/trait/{trait}" {:userId (:userId user)
-                                         :trait "key"})
 
 (defsample [user johndoe]
   POST "/user/{userId}" {:userId (:userId user)
@@ -412,5 +386,4 @@
 (defsample GET "/kpis")
 (defsample GET "/terms")
 (defsample GET "/me")
-(defsample GET "/me/vouchers")
 (defsample GET "/logout")

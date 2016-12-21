@@ -5,15 +5,12 @@
 ## Read more about Mixpanel
 
 - [Mixpanel Analytics](/mixpanel/analytics/)
-- [Managing User-Specific Properties and Traits](/mixpanel/managing-properties-and-traits/)
 - [Mixpanel Page Viewed Event](/mixpanel/page-viewed-event/)
 - [Implementing Mixpanel tracking](/mixpanel/implementing-tracking/)
 
 :body
 
-SPiD will automatically add some profile data to events. These properties should
-not be added as traits by the client, as they will be ignored (in favor of the
-user's actual profile data). This keeps profile data in events from going stale.
+SPiD will automatically add some profile data to events. This keeps profile data in events from going stale.
 
 Properties added by SPiD to all events:
 
