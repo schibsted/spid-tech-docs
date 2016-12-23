@@ -68,5 +68,6 @@ your client type might be wrong. Please contact support and they will help you c
 
 #### Read more
 
+* http://tech.vg.no/2016/12/21/making-login-easier-with-googles-smart-lock-and-apples-shared-web-credentials/
 * https://developers.google.com/identity/smartlock-passwords/android/
-* https://developers.google.com/identity/smartlock-passwords/android/associate-apps-and-sites
+* https://developers.google.com/identity/smartlock-passwords/android/associate-apps-and-sites/
