@@ -10,7 +10,7 @@
 In order to complete this guide, you need to know your:
 
 - client ID
-- API secret
+- client secret
 
 You should also have gone through the
 [Getting Started](/getting-started/) guide, in particular that you
