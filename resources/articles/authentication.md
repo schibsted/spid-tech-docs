@@ -28,12 +28,18 @@ SPiD uses
 [OAuth 2.0 (draft 11)](http://tools.ietf.org/html/draft-ietf-oauth-v2-11) for
 authentication and authorization. With OAuth 2.0, you obtain an access token for
 a user via a redirect to SPiD, then you use this token to perform authorized
-requests on behalf of that user by including the `oauth_token` request parameter
-with API requests:
-
-```text
-GET https://payment.schibsted.no/api/{version}/user/{userId}?oauth_token=...
-```
+requests on behalf of that user by including it with API requests in either
+ 
+- the HTTP Authorization Header (recommended):
+        
+        GET /api/{version}/user/{userId} HTTP/1.1
+        Host: identity-pre.schibsted.com
+        Authorization: Bearer <token>
+    
+- the `oauth_token` request parameter:
+    
+        GET /api/{version}/user/{userId}?oauth_token=<token> HTTP/1.1
+        Host: identity-pre.schibsted.com
 
 ## Token types
 
@@ -43,6 +49,30 @@ A user token can only be used with requests for a certain set of API endpoints,
 and will only be able to retrieve data related to a specific user. A server
 token can be used with requests to most endpoints, and will be able to access
 data for all users who have granted the client access to its data.
+
+## Client authentication
+
+SPiD allows clients to authenticate in two ways:
+
+- Using [HTTP basic authentication](https://tools.ietf.org/html/rfc2617#section-2) 
+  in the authorization request header field, `base64(<CLIENT_ID>:<CLIENT_SECRET>)`
+  (recommended):
+    
+        POST /oauth/token HTTP/1.1
+        Host: identity-pre.schibsted.com
+        Authorization: Basic czZCaGRSa3F0MzpnWDFmQmF0M2JW
+        Content-Type: application/x-www-form-urlencoded
+    
+        grant_type=client_credentials
+
+- Including the credentials in the request body parameters:
+
+        POST /oauth/token HTTP/1.1
+        Host: identity-pre.schibsted.com
+        Content-Type: application/x-www-form-urlencoded
+        
+        grant_type=client_credentials&client_id=s6BhdRkqt3&client_secret=gX1fBat3bV
+
 
 ## Obtaining a user token
 
@@ -58,9 +88,8 @@ testing purposes (e.g. programatically testing an endpoint like
 A user token is obtained by requesting the `password` grant type from `/oauth/token`:
 
 ```sh
-curl -X POST -d grant_type=password&\
-                client_id=<CLIENT_ID>&\
-                client_secret=<CLIENT_SECRET>&\
+curl -X POST -H "Authorization: Basic <client credentials>"\
+             -d grant_type=password&\
                 redirect_uri=http://localhost&\
                 username=<username>&\
                 password=<password>\
@@ -91,17 +120,16 @@ The `access_token` may be used to make API requests on behalf of this user.
 `POST` your client credentials and a grant type of `client_credentials` to
 obtain a server access token:
 
-```text
-POST https://payment.schibsted.no/oauth/token?\
-     client_id=CLIENT_ID&\
-     client_secret=CLIENT_SECRET&\
-     grant_type=client_credentials
+```sh
+curl -X POST -H "Authorization: Basic <client credentials>"\
+             -d grant_type=client_credentials
+            https://identity-pre.schibsted.com/oauth/token
 ```
 
 The returned access token can be used to make requests on behalf of your client:
 
-```
-GET https://schibsted.payment.no/api/2/users?oauth_token=...
+```sh
+curl -H "Authorization: Bearer <token>" https://identity-pre.schibsted.com/api/2/users
 ```
 
 For further details refer to
