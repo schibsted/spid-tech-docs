@@ -15,7 +15,7 @@ Each user facing API client must have terms of use in place before going into pr
 ## Schibsted Group Legal
 If you need help to formulate the terms of use and privacy-/cookie policy, you can send them to the Legal department. 
 - Norway: Andreas Ehrenclou (andreas.ehrenclou@schibsted.com). 
-- Sweden Sarah Wass(sarah.wass@schibsted.se) 
+- Sweden: Sarah Wass(sarah.wass@schibsted.se) 
 
 ## Updating terms
 You are obligated to notify the Schibsted Privacy Office of the changes made to your terms of agreement.
