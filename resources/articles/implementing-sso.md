@@ -153,7 +153,7 @@ client to communicate with the SPiD API on behalf of the user.
 
 The SPiD SDK for PHP needs a few config variables:
 
-<spid-example lang="php" src="/sso/config.php.sample" title="SDK variables"/>
+<spid-example lang="php" src="/config/config.php.sample" title="SDK variables"/>
 
 Create the client with the config:
 
