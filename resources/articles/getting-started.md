@@ -10,7 +10,7 @@
 In order to complete this guide, you need to know your:
 
 - client ID
-- API secret
+- client secret
 
 If you do not, [please set up your API client via our self service tool](/selfservice/access/)
 
@@ -35,7 +35,7 @@ SDKs. The SDKs are thin wrappers that primarily spare you the details of working
 with OAuth. If an SDK is not available for your language, skip this section and
 refer to the cURL examples below.
 
-**NB!** Your API secret is highly sensitive. Do not hard-code it, and be careful
+**NB!** Your client secret is highly sensitive. Do not hard-code it, and be careful
 who you share it with. The examples below are meant to illustrate the basics of
 using the API, they are *not* examples of production code. For more complete
 examples, see the example use-cases.

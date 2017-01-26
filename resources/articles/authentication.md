@@ -13,7 +13,7 @@
 In order to make use of this information, you need to know your:
 
 - client ID
-- API secret
+- client secret
 
 You may also want to look into the [Getting Started](/getting-started/) guide.
 
@@ -51,7 +51,7 @@ depth in the [Implementing SSO guide](/implementing-sso/).
 
 While it is not recommended, or even feasible, to manually handle user
 passwords, it is possible to programatically obtain a user token given your
-client id, API secret and a user's credentials. You may want to do this for
+client id, client secret and a user's credentials. You may want to do this for
 testing purposes (e.g. programatically testing an endpoint like
 [/me](/endpoints/GET/me/) that only works with a user token).
 

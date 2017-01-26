@@ -27,7 +27,7 @@ SDKs. Currently there are SDKs for Android and iOS. The SDKs are wrappers
 that primarily spare you the details of working with OAuth and simplify working
 with the SPiD backend.
 
-**NB** Your API secret is highly sensitive. Do not hard-code it, and be careful
+**NB** Your client secret is highly sensitive. Do not hard-code it, and be careful
 who you share it with. The examples below are meant to illustrate the basics of
 using the API, they are **not** examples of production code.
 
