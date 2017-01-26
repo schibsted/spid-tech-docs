@@ -17,7 +17,7 @@ public profile data will be available:
 * `displayName`
 * `name`
 * `gender`
-* `preferred_username`
+* `preferredUsername`
 * `utcOffset`
 * `published`
 * `updated`
