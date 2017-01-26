@@ -44,7 +44,7 @@ requests on behalf of that user by including it with API requests in either
 ## Token types
 
 SPiD clients will typically use two kinds of tokens: user and server (see
-[OAuth client credentials](http://tools.ietf.org/html/draft-ietf-oauth-v2-11#section-1.4.3).
+[OAuth client credentials](http://tools.ietf.org/html/draft-ietf-oauth-v2-11#section-1.4.3)).
 A user token can only be used with requests for a certain set of API endpoints,
 and will only be able to retrieve data related to a specific user. A server
 token can be used with requests to most endpoints, and will be able to access
@@ -85,7 +85,8 @@ client id, client secret and a user's credentials. You may want to do this for
 testing purposes (e.g. programatically testing an endpoint like
 [/me](/endpoints/GET/me/) that only works with a user token).
 
-A user token is obtained by requesting the `password` grant type from `/oauth/token`:
+A user token is obtained by using the `password` grant type at the token endpoint
+`/oauth/token`:
 
 ```sh
 curl -X POST -H "Authorization: Basic <client credentials>"\
@@ -96,16 +97,16 @@ curl -X POST -H "Authorization: Basic <client credentials>"\
             https://identity-pre.schibsted.com/oauth/token
 ```
 
-You may have to quote the entire data string, depending on the user's email and
+You may have to quote the entire data string, depending on the username and
 password.
 
 When successful, this request will return a JSON object:
 
-```js
+```json
 {
   "access_token": "322c4c33a0bb327ea6a06d05fa37bf3613190499",
   "expires_in": 604800,
-  "scope": null,
+  "scope": "profile email",
   "user_id": "938029",
   "is_admin": false,
   "refresh_token": "818518449498eb3e5d228e016461f1f148e91002",
@@ -155,10 +156,9 @@ is and how to handle it. The redirect will contain an error code:
 http://YOUR_REDIRECT_URL?error=invalid_client_id
 ```
 
-All endpoints, except for the OAuth ones, return error responses as a JSON
-object. The format is described in the OAuth2.0 spec. The spec describes a list
-of errors that can occur and that the client may take into account (not every
-error is going to be returned in the redirect, like token expiration).
+Other errors, not from the authorization endpoint, are returned as a JSON object in the response. 
+The format is described in the OAuth2.0 spec. The spec describes a list
+of errors that can occur and that the client may take into account.
 
 ### Official OAuth 2.0 errors
 
@@ -196,12 +196,12 @@ Error when using a grant type that is not implemented:
 When a request is unsuccessful, the platform will return an error JSON object. Below is an example of
 what is returned when your application is using an invalid access token:
 
-```js
+```json
 {
-  "error":"invalid_token",
-  "error_code":401,
-  "type":"OAuthException",
-  "error_description":"401 Unauthorized access! Reason: \"invalid_token\" (OAuth realm: \"Service\", Scope: \"\")"
+  "error": "invalid_token",
+  "error_code": 401,
+  "type": "OAuthException",
+  "error_description": "401 Unauthorized access! Reason: \"invalid_token\" (OAuth realm: \"Service\", Scope: \"\")"
 }
 ```
 
@@ -209,7 +209,7 @@ Recommended reading on
 [OAuth protocol endpoints](http://tools.ietf.org/html/draft-ietf-oauth-v2-31#section-3).
 
 ## API access control flow explained
-This is a complete overview of how the platform processes an API request and when your client application may
+This is a complete overview of how SPiD processes an API request and when your client application may
 expect to receive error responses and the reasons it happened:
 ![API access control flow](/images/api-access-control-flow.png)
 
