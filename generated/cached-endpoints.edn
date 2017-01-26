@@ -3649,7 +3649,7 @@
   {:POST
    {:name "POST",
     :required ["connection"],
-    :optional ["phoneNumber" "email"],
+    :optional ["phoneNumber" "email" "locale"],
     :accessTokenTypes [],
     :filters [],
     :defaultFilters [],
