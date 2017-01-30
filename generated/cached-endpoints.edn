@@ -174,7 +174,7 @@
   :defaultOutputFormat "json",
   :description
   "Provides API services a means of validating and authenticating requests done to them by checking the token",
-  :category ["Token" "Api authentication"]}
+  :category ["Token" "Token API"]}
  {:path "user/{id}/eid",
   :validOutputFormats ["json"],
   :parameterDescriptions {:id "User ID"},
@@ -206,7 +206,7 @@
   :defaultOutputFormat "json",
   :description
   "Find out if a user has a verification level and the data he has through that",
-  :category ["eID" "eID Verification"]}
+  :category ["eID" "eID Verification API"]}
  {:path "eid/init",
   :validOutputFormats ["json"],
   :parameterDescriptions
@@ -266,7 +266,7 @@
   :defaultOutputFormat "json",
   :description
   "Start a verification process and get an eID initialization reference to use to complete the process",
-  :category ["eID" "eID Verification"]}
+  :category ["eID" "eID Verification API"]}
  {:path "eid/complete",
   :validOutputFormats ["json"],
   :parameterDescriptions
@@ -321,7 +321,7 @@
   :defaultOutputFormat "json",
   :description
   "Provide the remaining lockable fields and the verification data (legal address)",
-  :category ["eID" "eID Verification"]}
+  :category ["eID" "eID Verification API"]}
  {:path "oauth/exchange",
   :validOutputFormats ["json"],
   :parameterDescriptions
@@ -366,7 +366,7 @@
   :controller "Api/2/Authorization.exchange",
   :defaultOutputFormat "json",
   :description "Exchanges an authorization code",
-  :category ["Authorization" "OAuth"]}
+  :category ["Authorization" "Token API"]}
  {:path "user/{id}/dataobject/{key}",
   :validOutputFormats ["json"],
   :parameterDescriptions
@@ -1816,13 +1816,13 @@
    {:name "GET",
     :required [],
     :optional [],
-    :accessTokenTypes ["server"],
+    :accessTokenTypes ["server" "user"],
     :filters [],
     :defaultFilters [],
     :responses
     [{:status 200,
       :description
-      "Returns a list of agreements with a boolean value of wether user has agreed to the latest or not.",
+      "Returns agreements object, containing boolean values whether latest agreements are accepted",
       :type "agreements"}]}},
   :url "/api/2/user/{id}/agreements",
   :pathParameters ["userId"],
@@ -1843,7 +1843,7 @@
    {:name "POST",
     :required [],
     :optional [],
-    :accessTokenTypes ["server"],
+    :accessTokenTypes ["server" "user"],
     :filters [],
     :defaultFilters [],
     :responses
@@ -3634,7 +3634,7 @@
   :controller "Api/2/User.user_level",
   :defaultOutputFormat "json",
   :description "Get the user verification level",
-  :category ["user" "verification level"]}
+  :category ["Identity Management" "User API"]}
  {:path "passwordless/start",
   :validOutputFormats ["json"],
   :parameterDescriptions
