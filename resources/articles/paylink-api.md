@@ -10,6 +10,10 @@ DELETE /paylink/{paylinkId}
 
 :aside
 
+## Payment Platform API docs
+
+- [Is hosted at Confluence](https://confluence.schibsted.io/display/SPDEV/)
+
 ## Relevant type definitions
 
 - [Paylink](/types/paylink/)
@@ -75,6 +79,7 @@ SPiD API->Client: Return order and transaction objects
 Note left of Client: Validate order status and\ninforms user that purchase\nis pending review
 Client->Customer: Show confirmation
 ```
+([Payment Platform now hosts order APIs](https://confluence.schibsted.io/display/SPDEV/The+Order+object) )
 
 ### Paylink authorize/capture flow
 
@@ -103,3 +108,5 @@ Client->SPiD API: (optional) POST /order/123/cancel
 Note right of Client: Used when Client wants to cancel\na previous authorized order
 SPiD API->Client: Respond with order and transaction objects
 ```
+([Payment Platform now hosts order APIs](https://confluence.schibsted.io/display/SPDEV/The+Order+object#TheOrderobject-Authorize) )
+

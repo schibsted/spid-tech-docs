@@ -1,7 +1,6 @@
 :introduction
 
-Charge or authorize a payment onto an end-user's SPiD account. Refer to
-[the direct payment API introduction](/direct-payment-api/) for details.
+Charge or authorize a payment onto an end-user's SPiD account. 
 
 The `items` parameter should be a JSON array of objects. There is two basic ways
 of providing order items: by referencing a product stored in SPiD, or by

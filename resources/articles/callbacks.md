@@ -9,7 +9,6 @@
 
 ## Relevant type definitions
 
-- [Order](/types/order/)
 - [User](/types/user/)
 
 :body
@@ -38,7 +37,6 @@ receive notification of the change within a couple of minutes of its occurrence.
 
 The SPiD platform currently supports two kinds of callbacks:
 
-* Order status changes
 * User status changes
 
 ## Callback requests
@@ -66,16 +64,16 @@ The decoded data is a JSON object:
 
 ```js
 {
-  "object": "order",
+  "object": "user",
   "algorithm": "HMAC-SHA256",
   "entry": [
       {
-          "orderId": 123,
+          "userId": 123,
           "changedFields": "status",
           "time": "2012-10-19 10:10:15"
       },
       {
-          "orderId": 456,
+          "userId": 456,
           "changedFields": "status",
           "time": "2012-10-19 10:10:19"
       }
@@ -187,21 +185,6 @@ Retries occur after five minutes, fifteen minutes, one hour, twelve hours and
 again twelve hours. There is a thirty second timeout before SPiD quits the
 connection and considers the request failed. *Do not synchronously process
 callback data before responding to the callback request.*
-
-## Order status callback
-
-This callback will inform the client when an order status changes.
-
-![Order status state machine](/images/order-status.png)
-
-Callbacks **will not** be made under the following conditions:
-
-* The order status does not change (partial captures change the order, but does
-  not update the status unless the whole order is captured)
-* The client has requested its status through the
-  [`/order/{orderId}/status`](/endpoints/GET/order/{orderId}/status/) after
-  creating the order (thus, there are no further updates to relay). All clients
-  should always request the order status as part of the normal payment flow.
 
 ## User status callback
 
