@@ -44,10 +44,6 @@ A complete overview of the SPiD triggered core events follows below:
                 <td>When the user accepts the user agreement with SPiD and with clients.</td>
             </tr>
             <tr>
-                <td>Back to client</td>
-                <td>When the user clicks the navigation-text in the bottom of a SPiD page that takes the user back to whichever client the user came from.</td>
-            </tr>
-            <tr>
                 <td>Change password notification email sent</td>
                 <td>When an email is sent to the user informing of a password change by the user.</td>
             </tr>
@@ -129,10 +125,6 @@ A complete overview of the SPiD triggered core events follows below:
             <tr>
                 <td>Order complete</td>
                 <td>When the order completion is done, the value of the order has been captured and the order status is then "Complete"</td>
-            </tr>
-            <tr>
-                <td>Order credited</td>
-                <td>When an order is manually credited by SPiD or the client, or automatically by SPiD if there was a problem with the payment transaction (e.g. over-charges).</td>
             </tr>
             <tr>
                 <td>Page viewed</td>
