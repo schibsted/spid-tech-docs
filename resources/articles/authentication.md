@@ -136,6 +136,29 @@ curl -H "Authorization: Bearer <token>" https://identity-pre.schibsted.com/api/2
 For further details refer to
 [OAuth 2.0 client credentials](http://tools.ietf.org/html/draft-ietf-oauth-v2-11#section-1.4.3).
 
+### Specifying a resource indicator
+
+To use a token with a resource server when doing server-to-server authentication it might be
+necessary to explicitly indicate the resource server as the intended audience of the token.
+This allows the resource server to properly introspect the token.
+
+To indicate which resource server a token is intended to be used at, include a "resource indicator"
+via the `resource` request parameter:
+
+```sh
+curl -X POST -H "Authorization: Basic <client credentials>"\
+             -d grant_type=client_credentials&\
+                resource=<resource indicator>
+            https://identity-pre.schibsted.com/oauth/token
+```
+
+The value of the resource indicator must be the domain registered with SPiD for the resource server to make sure
+the token can be introspected by that resource server.
+Support for this parameter is limited to server tokens issued to JWT enabled clients.
+
+For further details refer to 
+[Resource Indicators for OAuth 2.0, draft 2](https://tools.ietf.org/html/draft-campbell-oauth-resource-indicators-02).
+
 ## OAuth failures
 
 In accordance with
