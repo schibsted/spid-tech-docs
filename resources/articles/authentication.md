@@ -21,6 +21,7 @@ You may also want to look into the [Getting Started](/getting-started/) guide.
 
 - [Explaining how login flows work](/login-flows/)
 - [Explaining how logout flows work](/logout-flows/)
+- [Token introspection](/token-introspection/)
 
 :body
 
