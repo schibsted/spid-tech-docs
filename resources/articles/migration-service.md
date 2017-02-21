@@ -68,8 +68,7 @@ in the example below.
 Please note that:
 
 * only the email field is required, all other fields can be omitted.
-* invalid enum values will cause the migration to fail, while invalid locale, timezone, phone numbers and photo
-will be removed by the migration client.
+* invalid locale, timezone, phone numbers and photo will be removed by the migration client.
 * all times, except birthday, are in ISO8601 RFC3339 UTC format.
 * should a field not be available, please omit it from the JSON response.
 * all data should be UTF-8 encoded.
