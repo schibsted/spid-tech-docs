@@ -873,8 +873,14 @@
      {:status 302,
       :description "The email address already exists.",
       :type "api-exception"}
+     {:status 400,
+      :description "Required email parameter is missing.",
+      :type "api-exception"}
      {:status 409,
       :description "Users could not be created.",
+      :type "api-exception"}
+     {:status 451,
+      :description "Domain of email is blocked due to legal reasons.",
       :type "api-exception"}]}},
   :url "/api/2/signup",
   :pathParameters [],
@@ -927,7 +933,7 @@
   :validOutputFormats ["json"],
   :parameterDescriptions
   {:userId
-   "The user's `userId` (not to be mistaken with the deprecated `id`)."},
+   "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`)."},
   :method "GET",
   :name "Get Varnish id",
   :httpMethods
@@ -955,7 +961,7 @@
   {:gender
    "New gender. Legal values and a localized description can be fetched from [/api/2/describe/User?property=gender](/endpoints/GET/describe/{object}/).",
    :userId
-   "The user's `userId` (not to be mistaken with the deprecated `id`).",
+   "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`).",
    :name "JSON object containing givenName and familyName",
    :photo "URL to a profile photo",
    :displayName "New preferred display name",
@@ -1047,7 +1053,7 @@
    :clientReference "Custom client reference",
    :items "A JSON string of order items. See introduction.",
    :userId
-   "The user's `userId` (not to be mistaken with the deprecated `id`).",
+   "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`).",
    :hash
    "A [verified request hash](/verified-hash/) signed with your client sign secret.",
    :type "[Order type](/types/order-type/)",
@@ -1172,7 +1178,7 @@
   :validOutputFormats ["json"],
   :parameterDescriptions
   {:userId
-   "The user's `userId` (not to be mistaken with the deprecated `id`)."},
+   "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`)."},
   :method "GET",
   :name "Payment preference",
   :httpMethods
@@ -1398,7 +1404,7 @@
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
   {:userId
-   "The user's userId (not to be mistaken with the deprecated `id`)",
+   "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`)",
    :ip "Filter by login attempts from this IP address",
    :status "Filter by successful (`true`) or failed (`false`) logins"},
   :method "GET",
@@ -1425,7 +1431,7 @@
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
   {:userId
-   "The user's `userId` (not to be mistaken with the deprecated `id`).",
+   "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`).",
    :trigger
    "What kind of email trigger to send. Currently only two options:\n\n* `emailverification` - Sends an email to the user, asking them to verify their email address.\n* `newpassword` - Sends an email to the user with a link to create a new password. The password reset link is valid for 24 hours.",
    :redirectUri
@@ -1456,7 +1462,7 @@
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
   {:id
-   "The user's userId (not to be mistaken with the deprecated `id`)",
+   "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`)",
    :email "Email of the user. Must be unique across all of SPiD"},
   :method "GET",
   :name "List mail history",
@@ -1489,7 +1495,7 @@
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
   {:userId
-   "Find the user with this `userId` (not to be mistaken with the deprecated `id`).",
+   "Find the user with this `uuid` or `userId` (not to be mistaken with the deprecated `id`).",
    :orderId "ID of the order to retrieve"},
   :method "GET",
   :name "Get order",
@@ -1516,7 +1522,7 @@
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
   {:userId
-   "List orders for the user with this `userId` (not to be mistaken with the deprecated `id`).",
+   "List orders for the user with this `uuid` or `userId` (not to be mistaken with the deprecated `id`).",
    :status "Filter results by this status",
    :filters ""},
   :method "GET",
@@ -1545,7 +1551,7 @@
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
   {:userId
-   "The user's `userId` (not to be mistaken with the deprecated `id`)."},
+   "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`)."},
   :method "GET",
   :name "List user transactions",
   :httpMethods
@@ -1571,7 +1577,7 @@
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
   {:userId
-   "Create subscription for the user with this `userId` (not to be mistaken with the deprecated `id`).",
+   "Create subscription for the user with this `uuid` or `userId` (not to be mistaken with the deprecated `id`).",
    :productId "The product to subscribe the user to",
    :startDate "The date from when the subscription is valid",
    :orderId "OrderId of the order used to create the subscription.",
@@ -1601,7 +1607,7 @@
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
   {:userId
-   "The user's `userId` (not to be mistaken with the deprecated `id`).",
+   "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`).",
    :subscriptionId "",
    :stopAfterLock
    "\"1\", to set the subscription to stop renewal after the lock period is over, \"0\" means do not stop renewal after lock period"},
@@ -1629,7 +1635,7 @@
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
   {:userId
-   "The user's `userId` (not to be mistaken with the deprecated `id`).",
+   "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`).",
    :subscriptionId "",
    :autoRenew "\"1\", to enable auto-renewal, \"0\" to disable"},
   :method "*",
@@ -1681,7 +1687,7 @@
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
   {:userId
-   "The user's `userId` (not to be mistaken with the deprecated `id`)."},
+   "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`)."},
   :method "GET",
   :name "List subscriptions",
   :httpMethods
@@ -1706,7 +1712,7 @@
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
   {:userId
-   "The user's `userId` (not to be mistaken with the deprecated `id`).",
+   "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`).",
    :productId
    "ID of a product or subscription. Since version 2.9, this may also be a product alias, in which case you should also use the `merchant` filter."},
   :method "*",
@@ -1756,7 +1762,7 @@
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
   {:userId
-   "The user's `userId` (not to be mistaken with the deprecated `id`)."},
+   "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`)."},
   :method "*",
   :name "List contents",
   :httpMethods
@@ -1782,7 +1788,7 @@
   :validOutputFormats ["json"],
   :parameterDescriptions
   {:userId
-   "The user's `userId` (not to be mistaken with the deprecated `id`)."},
+   "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`)."},
   :method "*",
   :name "Has Access to User",
   :httpMethods
@@ -1808,7 +1814,7 @@
   :validOutputFormats ["json"],
   :parameterDescriptions
   {:userId
-   "The user's `userId` (not to be mistaken with the deprecated `id`)."},
+   "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`)."},
   :method "*",
   :name "Has Access to User",
   :httpMethods
@@ -1835,7 +1841,7 @@
   :validOutputFormats ["json"],
   :parameterDescriptions
   {:userId
-   "The user's `userId` (not to be mistaken with the deprecated `id`)."},
+   "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`)."},
   :method "POST",
   :name "User agreements acceptation process",
   :httpMethods
@@ -1935,7 +1941,7 @@
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
   {:userId
-   "The user's `userId` (not to be mistaken with the deprecated `id`).",
+   "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`).",
    :status
    "[One or more](/endpoints/#parameters) [statuses](/types/order-status/) to filter results by",
    :ocr "Filter results by OCR/KID number",
@@ -3297,7 +3303,7 @@
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
   {:userId
-   "Limit results by the user's `userId` (not to be mistaken with the deprecated `id`).",
+   "Limit results by the user's `uuid` or `userId` (not to be mistaken with the deprecated `id`).",
    :status "Limit results to subscriptions with this status."},
   :method "GET",
   :name "Search subscriptions",
