@@ -24,7 +24,7 @@ In self service you create and manage the client you use for SPiD. Creating a cl
 
 You should already have a backend client before you create your mobile client, but the mobile client has its own credentials and different API access compared to backend clients. If you create both an Android and an iOS app you should have at least 3 clients created in SPiD.
 
-To create a client in self service login to SPiD, go to https://identity-pre.schibsted.com/selfservice, choose your merchant and click "Create a new client"
+To create a client in self service login to SPiD, go to https://selfservice.identity-pre.schibsted.com, choose your merchant and click "Create a new client"
 
 ![Google pic](/images/mobile/create_client.png)
 
