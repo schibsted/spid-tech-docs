@@ -35,7 +35,7 @@ To allow a resource server to introspect a token issued to a client not belongin
 server, the client must make sure to [specify a "resource indicator" in the token request](/authentication/).
 
 ```sh
-curl -X POST -X POST -H "Authorization: Basic NGU4NDYzNTY5Y2FmN2NhMDE5MDAwMDA3OmZvb2Jhcg"\
+curl -X POST -H "Authorization: Basic NGU4NDYzNTY5Y2FmN2NhMDE5MDAwMDA3OmZvb2Jhcg"\
                      -d token=<access token>
                      https://identity-pre.schibsted.com/oauth/introspect
 ```
