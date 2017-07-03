@@ -1,6 +1,6 @@
 {:id :paylink
  :name "Paylink"
- :inline-types [:purchase-flow :paylink-status :payment-options :paylink-item]
+ :inline-types [:purchase-flow :paylink-status :payment-options :payment-options-array :paylink-item]
  :fields [{:name "paylinkId"       :type :integer-string  :description "Paylink ID"}
           {:name "clientId"        :type :string          :description "ID of the client that gets paid (seller client ID). Defaults to the authenticated client"}
           {:name "code"            :type :string          :description "Paylink code"}
@@ -10,7 +10,7 @@
           {:name "clientReference" :type :string          :description "Client's custom reference"}
           {:name "title"           :type :string          :description "The title shown to the user in the payment flow. Will also be shown on Payex' \"new credit card\" page"}
           {:name "purchaseFlow"    :type :purchase-flow   :description "Defaults to DIRECT (1 phase payment, no authorization)"}
-          {:name "paymentOptions"  :type :payment-options :description "Derfault is 2."}
+          {:name "paymentOptions"  :type :payment-options :description "Payment options can be returned in two formats (depending on format provided in Paylink create request): as a [bit mask](http://en.wikipedia.org/wiki/Bitmask) or as a JSON array of objects (this format allows providing data for external payment methods)."}
           {:name "redirectUri"     :type :string          :description "The URL the user is redirected to after payment. Can also be overridden by the client in the payment flow"}
           {:name "cancelUri"       :type :string          :description "The URL the user is redirected to if the user aborts the payment or login flow. Can also be overridden by the client in payment flow"}
           {:name "expires"         :type :string          :description "When the paylink will expire. A unix timestamp or a datetime. Defaults to 24 hours from creation"}

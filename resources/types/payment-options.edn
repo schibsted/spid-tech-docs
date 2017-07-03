@@ -1,7 +1,11 @@
 {:id :payment-options
  :name "Payment options"
- :description "Payment options are provided as a [bit mask](http://en.wikipedia.org/wiki/Bitmask).
+ :description "Payment options can be provided as a [bit mask](http://en.wikipedia.org/wiki/Bitmask).
+
+Bitmask format is the default format. If payment options are not provided, the default value is 2 (bank card with PayEx).
+
 Examples: `2` means credit card, `4` means SMS, while `6` means both credit card and SMS."
+
  :values [{:value "1" :description "Masterpass"}
           {:value "2" :description "Credit card"}
           {:value "4" :description "SMS"}

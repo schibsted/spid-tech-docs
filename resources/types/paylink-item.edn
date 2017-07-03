@@ -5,7 +5,7 @@
           {:name "clientId"            :type :string         :description "ID of the client that gets paid (seller client_id)"}
           {:name "productId"           :type :integer-string :description "ID of an existing product in SPiD"}
           {:name "clientItemReference" :type :string         :description "Client's custom reference for this item"}
-          {:name "type"                :type :paylink-type}
+          {:name "type"                :type :paylink-item-type}
           {:name "name"                :type :string         :description "Control receipt item name, optional, uses Paylink title if not set"}
           {:name "description"         :type :string         :description "Control cart item description"}
           {:name "ogpUri"              :type :string         :description "Open Graph Protocol enabled URI representing the product being purchased"}
