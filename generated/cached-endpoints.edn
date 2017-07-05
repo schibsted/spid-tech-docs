@@ -3415,7 +3415,7 @@
    :title
    "The PayLink title. Displayed to the user on the payment page, and shown on the New Credit Card page at Payex.",
    :paymentOptions
-   "The allowed payment methods for this PayLink. An integer bitmask: Credit (1), Credit cards (2), SMS (4), Invoice (8). Defaults to 2.",
+   "The allowed payment methods for this PayLink. Payment options can be provided in two formats: as an integer bit mask or as a JSON array of objects (this format allows providing data for external payment methods). Defaults to integer bitmask, 2 (bank card with PayEx).",
    :purchaseFlow
    "Defaults to `DIRECT`, which will process the payment straight away. Can also be `AUTHORIZE`, where the payment is on hold and must later be captured.",
    :redirectUri
