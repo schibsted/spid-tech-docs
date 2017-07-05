@@ -1,7 +1,8 @@
 {:id :payment-option-type
  :name "Payment option type"
  :values [{:value "PAYEX_MASTERPASS"    :description "Masterpass"}
-          {:value "PAYEX_CC"            :description "Payex Credit Card"}
+          {:value "PAYEX_CC"            :description "Payex Card"}
+          {:value "ADYEN_CARD"          :description "Adyen Card"}
           {:value "WYWALLET"            :description "WyWallet phone payment"}
           {:value "STREX"               :description "Strex phone payment"}
           {:value "KLARNA"              :description "Klarna payment"}

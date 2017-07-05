@@ -21,7 +21,7 @@ In case when Client wants to give the user the possibility to pay with payment m
 that is not supported in SPiD (Payment Platform), Client is able to provide all 
 new payment method details via Paylink.
 
-If user choose this payment method, SPiD redirects him to URL provided by Client in Paylink details.
+If user chooses this payment method, SPiD redirects him to URL provided by Client in Paylink details.
 
 Such payment methods are called external.
 
