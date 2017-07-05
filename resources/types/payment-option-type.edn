@@ -1,0 +1,10 @@
+{:id :payment-option-type
+ :name "Payment option type"
+ :values [{:value "PAYEX_MASTERPASS"    :description "Masterpass"}
+          {:value "PAYEX_CC"            :description "Payex Credit Card"}
+          {:value "WYWALLET"            :description "WyWallet phone payment"}
+          {:value "STREX"               :description "Strex phone payment"}
+          {:value "KLARNA"              :description "Klarna payment"}
+          {:value "VOUCHERS"            :description "Payment with SPiD Voucher code"}
+          {:value "EXTERNAL"            :description "External payment method"}
+          ]}

@@ -24,6 +24,12 @@ Additionally, you may use the following optional fields:
 See the [paylink item object specification](/types/paylink-item/) for further
 details on these fields.
 
+The `paymentOptions` parameter defines allowed payment methods for Paylink. It can be provided in two formats - as:
+
+- integer bitmask ([bitmask format specification](/types/payment-options/))
+- JSON array of objects ([array format specification](/types/payment-options-array/)) `available since SPiD version 2.111.0`
+
+
 :relevant-types paylink-item
 
 :relevant-endpoints
@@ -34,3 +40,4 @@ DELETE /paylink/{paylinkId}
 :example-params
 
 items: [{\\"name\\":\\"Episode\\",\\"description\\":\\"Star Wars IV\\",\\"price\\":9900,\\"vat\\":2500},{\\"description\\":\\"Star Wars V\\",\\"price\\":9900,\\"vat\\":2500},{\\"description\\":\\"Star Wars VI\\",\\"price\\":9900,\\"vat\\":2500}]
+paymentOptions: [{\\"type\\":\\"PAYEX_CC\\"},{\\"type\\":\\"KLARNA\\"},{\\"type\\":\\"EXTERNAL\\",\\"externalType\\":\\"Vouchers\\",\\"url\\":\\"https://external-url.com\\",\\"name\\":\\"Vouchers\\",\\"imageUrl\\":\\"https://external-url.com/vouchers-icon.jpeg\\",\\"description\\":\\"Vouchers allow you to pay with voucher code.\\"}]
