@@ -15,6 +15,8 @@ DELETE /paylink/{paylinkId}
 
 :body
 
+`Available since SPiD version 2.111.0`
+
 In case when Client wants to give the user the possibility to pay with payment method 
 that is not supported in SPiD (Payment Platform), Client is able to provide all 
 new payment method details via Paylink.
