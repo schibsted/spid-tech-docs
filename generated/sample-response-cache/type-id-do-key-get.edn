@@ -1,1 +1,0 @@
-{:cached? true, :id nil, :method :GET, :path "/client/52f8e3d9efd04bb749000000/do/rating", :route "/{type}/{id}/do/{key}", :response {:status 200, :error nil, :data "{\"positive\": 10}", :success? true}}

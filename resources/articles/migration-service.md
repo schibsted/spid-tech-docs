@@ -68,137 +68,131 @@ in the example below.
 Please note that:
 
 * only the email field is required, all other fields can be omitted.
-* invalid enum values will cause the migration to fail, while invalid locale, timezone, phone numbers and photo
-will be removed by the migration client.
+* invalid locale, timezone, phone numbers and photo will be removed by the migration client.
 * all times, except birthday, are in ISO8601 RFC3339 UTC format.
 * should a field not be available, please omit it from the JSON response.
 * all data should be UTF-8 encoded.
 
 ```json
 {
-   "id": "urn:jsonschema:com:schibsted:spt:identity:userdataservice:models:MigrationUser",
-   "properties": {
-      "birthday": {
-         "type": "string",
-         "format": "DATE_TIME"
-      },
-      "addresses": {
-         "type": "array",
-	 "items": {		
- 	    "type": "object",
-	    "id": "urn:jsonschema:com:schibsted:spt:identity:userdataservice:models:MigrationUserAddress",
-	    "properties": {
-	       "country": {
-	          "type": "string"
-	       },
-	       "streetAddress": {
-                  "type": "string"
-	       },
-	       "formatted": {
-   	          "type": "string"
-	       },
-	       "postalCode": {
-	          "type": "string"
-	       },
-	       "locality": {
-	          "type": "string"
-	       },
-	       "region": {
-	          "type": "string"
-	       },
-	       "type": {
-		  "type": "string",
-		  "enum": [
-		        "HOME",
-			"DELIVERY",
-			"INVOICE"
-			]
-	       }
-	    }
-         }
-      },
-      "displayName": {
-         "type": "string"
-      },
-      "sex": {
-	 "type": "string",
-	 "enum": [
-	 	"UNDISCLOSED",
-		"FEMALE",
-		"MALE"
-	       ]
-      },
-      "homePhone": {
-	 "type": "object",
-	 "$ref": "urn:jsonschema:com:google:i18n:phonenumbers:Phonenumber:PhoneNumber",
-	 "description": "Format: +46761234567"
-      },
-      "fullName": {
-         "type": "string"
-      },
-      "photo": {
-         "type": "string",
-         "description": "URL"
-      },
-      "timeZone": {
-	 "type": "string",
-	 "description": "Any accepted Java TimeZone ID"
-      },
-      "locale": {
-	 "type": "string",
-	 "description": "Any accepted Java Locale ID"
-      },
-      "userId": {
-         "type": "string"
-      },
-      "mobilePhone": {
-	 "type": "object",
-	 "id": "urn:jsonschema:com:google:i18n:phonenumbers:Phonenumber:PhoneNumber",
-	 "description": "Format: +46761234567",
-	 "properties": {
-	    "extension": {
-	       "type": "string"
-	    },
-	    "countryCodeSource": {
-	       "type": "string",
-	       "enum": [
-	             "FROM_NUMBER_WITH_PLUS_SIGN",
-		     "FROM_NUMBER_WITH_IDD",
-		     "FROM_NUMBER_WITHOUT_PLUS_SIGN",
-		     "FROM_DEFAULT_COUNTRY"
-	       ]
-	    },
-	    "nationalNumber": {
-	       "type": "integer"
-	    },
-	    "countryCode": {	
-	       "type": "integer"
-	    },
-	    "rawInput": {
-	       "type": "string"
-	    },
-	    "italianLeadingZero": {
-	       "type": "boolean"
-	    },
-	    "preferredDomesticCarrierCode": {
-	       "type": "string"
-	    },
-	    "numberOfLeadingZeros": {
-	       "type": "integer"
-	    }
-	 }
-      },
-      "createdTime": {
-         "type": "integer",
-	 "format": "UTC_MILLISEC"
-      },
-      "email": {
-	 "type": "string",
-	 "required": true
-      }
-   }
+    "id":"urn:jsonschema:com:schibsted:spt:identity:userdataservice:models:MigrationUser",
+    "properties":{
+        "birthday":{
+            "type":"string",
+            "format":"DATE_TIME"
+        },
+        "addresses":{
+            "type":"object",
+            "id":"urn:jsonschema:com:schibsted:spt:identity:userdataservice:models:MigrationUserAddress",
+            "properties":{
+                "country":{
+                    "type":"string"
+                },
+                "streetAddress":{
+                    "type":"string"
+                },
+                "postalCode":{
+                    "type":"string"
+                },
+                "locality":{
+                    "type":"string"
+                },
+                "region":{
+                    "type":"string"
+                }
+            }
+        },
+        "displayName":{
+            "type":"string"
+        },
+        "sex":{
+            "type":"string",
+            "enum":[
+                "UNDISCLOSED",
+                "FEMALE",
+                "MALE"
+            ]
+        },
+        "homePhone":{
+            "type":"object",
+            "$ref":"urn:jsonschema:com:google:i18n:phonenumbers:Phonenumber:PhoneNumber",
+            "description":"Format: +46761234567"
+        },
+        "fullName":{
+            "type":"string"
+        },
+        "photo":{
+            "type":"string",
+            "description":"URL"
+        },
+        "timeZone":{
+            "type":"string",
+            "description":"Any accepted Java TimeZone ID"
+        },
+        "locale":{
+            "type":"string",
+            "description":"Any accepted Java Locale ID"
+        },
+        "userId":{
+            "type":"string"
+        },
+        "mobilePhone":{
+            "type":"object",
+            "id":"urn:jsonschema:com:google:i18n:phonenumbers:Phonenumber:PhoneNumber",
+            "description":"Format: +46761234567",
+            "properties":{
+                "extension":{
+                    "type":"string"
+                },
+                "countryCodeSource":{
+                    "type":"string",
+                    "enum":[
+                        "FROM_NUMBER_WITH_PLUS_SIGN",
+                        "FROM_NUMBER_WITH_IDD",
+                        "FROM_NUMBER_WITHOUT_PLUS_SIGN",
+                        "FROM_DEFAULT_COUNTRY"
+                    ]
+                },
+                "nationalNumber":{
+                    "type":"integer"
+                },
+                "countryCode":{
+                    "type":"integer"
+                },
+                "rawInput":{
+                    "type":"string"
+                },
+                "italianLeadingZero":{
+                    "type":"boolean"
+                },
+                "preferredDomesticCarrierCode":{
+                    "type":"string"
+                },
+                "numberOfLeadingZeros":{
+                    "type":"integer"
+                }
+            }
+        },
+        "createdTime":{
+            "type":"integer",
+            "format":"UTC_MILLISEC"
+        },
+        "email":{
+            "type":"string",
+            "required":true
+        },
+        "status":{
+            "type":"string",
+            "enum":[
+                "DELETED",
+                "BLOCKED",
+                "DISABLED",
+                "UNVERIFIED",
+                "VERIFIED"
+            ]   
+        }
+    }
 }
-
 ```
 
 ## Example

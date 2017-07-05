@@ -20,13 +20,11 @@
 
 (defsample GET "/email/{email}/status" {:email (base64-encode "john@doe.com")})
 
+(defsample GET "/phone/{phone}/status" {:phone (base64-encode "+46701111111")})
+
 (defsample GET "/clients")
 
-(defsample GET "/productsettings")
-
 (defsample GET "/logins")
-
-(defsample GET "/reports/dumps")
 
 ;; Once the user is created, it must also be verified. Unfortunately, this
 ;; cannot be done through the API. If the user is not verified, certain API
@@ -42,17 +40,6 @@
 
 (defsample johndoe
   POST "/user" {:email "john@doe.com" :displayName "John Doe" :name "John Doe"})
-
-(defsample
-  POST "/{type}/{id}/do/{key}" {:type "client"
-                                :id (:client-id (config/get-config))
-                                :key "rating"
-                                :rating "{\"positive\": 10}"})
-
-(defsample
-  GET "/{type}/{id}/do/{key}" {:type "client"
-                               :id (:client-id (config/get-config))
-                               :key "rating"})
 
 (defsample dataobject [user johndoe]
   POST "/user/{id}/dataobject/{key}" {:id (:userId user)
@@ -104,17 +91,6 @@
 
 (defsample [user johndoe]
   GET "/user/{userId}/logins" {:userId (:userId user)})
-
-(defsample trait [user johndoe]
-  POST "/user/{userId}/traits" {:userId (:userId user)
-                                :traits "{\"key\":\"some-data\"}"})
-
-(defsample [user johndoe]
-  GET "/user/{userId}/traits" {:userId (:userId user)})
-
-(defsample [user johndoe]
-  DELETE "/user/{userId}/trait/{trait}" {:userId (:userId user)
-                                         :trait "key"})
 
 (defsample [user johndoe]
   POST "/user/{userId}" {:userId (:userId user)
@@ -235,9 +211,6 @@
   GET "/voucher/{voucherCode}" {:voucherCode (:voucherCode (first vouchers))})
 
 (defsample [user johndoe]
-  GET "/agreements/{userId}/payment" {:userId (:userId user)})
-
-(defsample [user johndoe]
   GET "/user/{userId}/logins" {:userId (:userId user)})
 
 (defsample buy-star-wars-link
@@ -263,67 +236,6 @@
 
 (defsample [paylink buy-star-wars-link]
   DELETE "/paylink/{paylinkId}" {:paylinkId (:paylinkId paylink)})
-
-(defsample [user johndoe]
-  GET "/user/{userId}/preferences/payment" {:userId (:userId user)})
-
-;; The params to the direct charge API call was generated with:
-(comment
-  (spid/sign-params {:requestReference "Order #4354"
-                     :items (json/write-str [{:name "Star Wars IV"
-                                              :price 7983
-                                              :vat 1917
-                                              :quantity 1}
-                                             {:name "Star Wars V"
-                                              :price 7983
-                                              :vat 1917
-                                              :quantity 1}
-                                             {:name "Star Wars VI"
-                                              :price 7983
-                                              :vat 1917
-                                              :quantity 1}])}
-                    (:client-sign-secret (config/get-config))))
-
-;; The user needs to have added a credit card for this to work.
-
-(defsample [user johndoe]
-  POST "/user/{userId}/charge"
-  {:userId (:userId user)
-   :requestReference "Order #4354"
-   :hash "qsB0xVTuGkzMIh9NLPGLSmQ33NQ0KxEHFQELLScY1zU"
-   :items "[{\"vat\":1917,\"quantity\":1,\"name\":\"Star Wars IV\",\"price\":7983},{\"vat\":1917,\"quantity\":1,\"name\":\"Star Wars V\",\"price\":7983},{\"vat\":1917,\"quantity\":1,\"name\":\"Star Wars VI\",\"price\":7983}]"})
-
-;; Order endpoint sample respones rely on orders having been created outside
-;; this script on the client being used
-
-(defsample all-orders GET "/orders")
-
-(defsample first-order [orders all-orders]
-  GET "/order/{orderId}" {:orderId (:orderId (first (vals orders)))})
-
-(defsample [order first-order]
-  GET "/order/{orderId}/transactions" {:orderId (:orderId order)})
-
-(defsample johndoes-orders [user johndoe]
-  GET "/user/{userId}/orders" {:userId (:userId user)})
-
-(defsample [user johndoe
-            orders johndoes-orders]
-  GET "/user/{userId}/order/{orderId}" {:userId (:userId user)
-                                        :orderId (:orderId (first (vals orders)))})
-
-(defsample [user johndoe]
-  GET "/user/{userId}/transactions" {:userId (:userId user)})
-
-(defsample [order first-order]
-  GET "/order/{orderId}/items" {:orderId (:orderId order)})
-
-(defsample [order first-order]
-  GET "/order/{orderId}/status" {:orderId (:orderId order)})
-
-(defsample [order first-order]
-  POST "/order/{orderId}/credit" {:orderId (:orderId order)
-                                  :description "Credit order"})
 
 (defsample [user johndoe
             product themovie]
@@ -369,49 +281,8 @@
   DELETE "/user/{userId}/subscription/{subscriptionId}" {:userId (:userId user)
                                                          :subscriptionId (:subscriptionId (first (vals subscriptions)))})
 
-(defsample order-to-capture [user johndoe]
-  POST "/user/{userId}/charge"
-  {:userId (:userId user)
-   :requestReference "Order #1111"
-   :hash "n6aIU6IMIIItkmHQPQaBKQMKmd8xcoytZwv9rDp6g0M"
-   :items "[{\"vat\":1917,\"quantity\":1,\"name\":\"Star Wars IV\",\"price\":7983}]"
-   :purchaseFlow "AUTHORIZE"})
-
-(defsample [order order-to-capture]
-  POST "/order/{orderId}/capture" {:orderId (:orderId order)})
-
-(defsample [order order-to-capture]
-  POST "/order/{orderId}/credit" {:orderId (:orderId order)
-                                  :description "Getting the money"})
-
-(defsample order-to-complete [user johndoe]
-  POST "/user/{userId}/charge"
-  {:userId (:userId user)
-   :requestReference "Order #2222"
-   :hash "19O-jAErcrmbs7D8yx6cse-V8czPIOUUL1_jdccCTbo"
-   :items "[{\"vat\":1917,\"quantity\":1,\"name\":\"Star Wars IV\",\"price\":7983}]"
-   :purchaseFlow "AUTHORIZE"})
-
-(defsample [order order-to-complete]
-  POST "/order/{orderId}/complete" {:orderId (:orderId order)})
-
-(defsample order-to-cancel [user johndoe]
-  POST "/user/{userId}/charge"
-  {:userId (:userId user)
-   :requestReference "Order #3333"
-   :hash "C8h2Dk9GfGpN3TLrbeOufzK2J4zWCRWYBVBny-iLKcA"
-   :items "[{\"vat\":1917,\"quantity\":1,\"name\":\"Star Wars IV\",\"price\":7983}]"
-   :purchaseFlow "AUTHORIZE"})
-
-(defsample [order order-to-cancel]
-  POST "/order/{orderId}/cancel" {:orderId (:orderId order)})
-
-(defsample [order first-order]
-  GET "/identifier/{identifierId}" {:identifierId (:identifierId order)})
-
 (defsample GET "/digitalcontents")
 (defsample GET "/kpis")
 (defsample GET "/terms")
 (defsample GET "/me")
-(defsample GET "/me/vouchers")
 (defsample GET "/logout")

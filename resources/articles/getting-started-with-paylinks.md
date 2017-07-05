@@ -7,7 +7,7 @@
 In order to complete this guide, you need to know your:
 
 - client ID
-- API secret
+- client secret
 
 You should also have gone through the [Getting Started](/getting-started/)
 guide. In particular, you should have downloaded and installed the appropriate
@@ -240,6 +240,3 @@ out these working examples:
 ## Further reading
 
 - [Callbacks](/callbacks/) notifies you about changes to your orders.
-- Check out the [Direct payment guide](/getting-started-with-direct-payment/) to
-  sell products by providing your own customized check-out experience, or charge
-  users in the background for recurring payments.

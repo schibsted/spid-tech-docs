@@ -10,7 +10,6 @@
     - [`SPiD.hasSession`](#has-session)
     - [`SPiD.hasProduct`](#has-product)
     - [`SPiD.hasSubscription`](#has-subscription)
-    - [`SPiD.setTraits`](#set-traits)
     - [`SPiD.logout`](#logout)
     - [`SPiD.acceptAgreement`](#acceptAgreement)
 - [`SPiD.event`](#event)
@@ -163,15 +162,6 @@ SPiD.hasSubscription(324892374, function (err, response) {
         userStatus: "connected"
     };
 });
-```
-
-<a id="set-traits"></a>
-### SPiD.setTraits
-
-Sets the given traits.
-
-```js
-SPiD.setTraits(traits, callback)
 ```
 
 <a id="logout"></a>

@@ -72,3 +72,8 @@ access to anything.
 
 The `SP_ID` cookie value may be retrieved from the API through the
 [/user/{userId}/varnishId endpoint](/endpoints/GET/user/{userId}/varnishId/).
+
+## Enabling Varnish
+
+Varnish support is not enabled by default. It needs to be enable per client.
+This setting can be enabled in Selfservice.

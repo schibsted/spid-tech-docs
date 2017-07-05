@@ -10,12 +10,12 @@ In order to access self-service. You will have to be an authenticated SPiD user.
 
 #### Prod environments
 
-**COM PROD**: [http://login.schibsted.com/selfservice](http://login.schibsted.com/selfservice)
+**COM PROD**: [https://selfservice.login.schibsted.com](https://selfservice.login.schibsted.com)
 
-**NO PROD**: [http://payment.schibsted.no/selfservice](http://payment.schibsted.no/selfservice)
+**NO PROD**: [https://selfservice.payment.schibsted.no](https://selfservice.payment.schibsted.no)
 
 #### Stage/Pre environment
-**STAGE/PRE**: [http://identity-pre.schibsted.com/selfservice](http://identity-pre.schibsted.com/selfservice)
+**STAGE/PRE**: [https://selfservice.identity-pre.schibsted.com](https://selfservice.identity-pre.schibsted.com)
 
 ## Gaining access to self-service
 

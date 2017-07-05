@@ -6,7 +6,6 @@ List/search for voucher groups.
 
 :relevant-endpoints
 
-GET /me/vouchers
 POST /voucher_handout
 GET /voucher/{voucherCode}
 POST /vouchers/generate/{voucherGroupId}

@@ -45,15 +45,15 @@ merchant/company access with the information stating which client/s you need acc
   </tr>
   <tr>
     <td>Stage/Pre</td>
-    <td><a href="https://identity-pre.schibsted.com/selfservice">https://identity-pre.schibsted.com/selfservice</a></td>
+    <td><a href="https://selfservice.identity-pre.schibsted.com">https://selfservice.identity-pre.schibsted.com</a></td>
   </tr>
   <tr>
     <td>Production Norway</td>
-    <td><a href="https://payment.schibsted.no/selfservice">https://payment.schibsted.no/selfservice</a></td>
+    <td><a href="https://selfservice.payment.schibsted.no">https://selfservice.payment.schibsted.no</a></td>
   </tr>
   <tr>
     <td>Production Sweden/International</td>
-    <td><a href="https://login.schibsted.com/selfservice">https://login.schibsted.com/selfservice</a></td>
+    <td><a href="https://selfservice.login.schibsted.com">https://selfservice.login.schibsted.com</a></td>
   </tr>
 </table>
 

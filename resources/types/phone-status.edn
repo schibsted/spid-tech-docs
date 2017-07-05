@@ -1,0 +1,5 @@
+{:id :phone-status
+ :name "Phone Status"
+ :fields [{:name "exists"    :type :boolean :description "If `true`, this phone number exists in some form in SPiD" :always-available? true}
+          {:name "available" :type :boolean :description "If `true`, this phone number address may be used to register a new account" :always-available? true}
+          {:name "verified"  :type :boolean :description "If `true`, the owner has verified this phone number in SPiD." :always-available? true}]}

@@ -56,4 +56,8 @@ If developing for Android the app should be obfuscated, this is done using [Prog
 
 ### Submit for review
 
-When you have confirmed you follow these guidelines and your app is ready for review send an email to support@spid.no with the topic "App review" including the name and email of the tech lead of your client.
+When you have confirmed you follow these guidelines and your app is ready for review send an email to support@spid.no with the topic "App review" including following info:  
+
+- Name and the clientid of the app and where we can find it 
+- Given access through TestFlight/Catchlyist(for iPhone) or links we need(for Android) to be able to review the app
+- Name and email of the tech lead of your client

@@ -12,7 +12,6 @@ the error value of the [container](/endpoints/#response-container).
 
 :relevant-endpoints
 
-GET /me/vouchers
 GET /voucher/{voucherCode}
 POST /vouchers/generate/{voucherGroupId}
 POST /vouchers/group

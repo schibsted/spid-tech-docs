@@ -6,7 +6,6 @@
 
 - [Mixpanel Analytics](/mixpanel/analytics/)
 - [Events tracked by SPiD](/mixpanel/events-tracked/)
-- [Managing User-Specific Properties and Traits](/mixpanel/managing-properties-and-traits/)
 - [Implementing Mixpanel tracking](/mixpanel/implementing-tracking/)
 
 

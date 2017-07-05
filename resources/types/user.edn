@@ -2,9 +2,10 @@
  :name "User"
  :description "The user object is based on the [portable contacts
 specification](https://tools.ietf.org/html/draft-smarr-vcarddav-portable-contacts-00). It is extended with
-some custom fields. `userId` is an integer and represents the unique user ID.
-`id` is a legacy uuid and should be ignored in new integrations. The `email` and
-`phoneNumber` fields will always contain the primary used for both if available.
+some custom fields. `userId` is an integer and represents the unique user ID, while
+`id` is a legacy uuid and should be ignored in new integrations. The `uuid` is also a user identifier,
+which is is globally unique and should therefore be the preferred identifier for a user.
+The `email` and `phoneNumber` fields will always contain the primary used for both if available.
 The corresponding *Verified fields are the date of the last time those were
 verified.
 
@@ -13,11 +14,12 @@ public profile data will be available:
 
 * `id`
 * `userId`
+* `uuid`
 * `status`
 * `displayName`
 * `name`
 * `gender`
-* `preferred_username`
+* `preferredUsername`
 * `utcOffset`
 * `published`
 * `updated`
@@ -27,6 +29,7 @@ public profile data will be available:
 "
  :fields [{:name "id"                  :type :string         :description "Legacy `uuid`. Don't use. [Portable contacts](https://tools.ietf.org/html/draft-smarr-vcarddav-portable-contacts-00#section-7.2.1)" :always-available? true}
           {:name "userId"              :type :integer-string :description "Unique user ID. Custom extension." :always-available? true}
+          {:name "uuid"                :type :string         :description "Unique user UUID. Custom extension. Should be preferred as the user identifier." :always-available? true}
           {:name "name"                :type :name           :description "A JSON string. See [the name type](/types/name/) for details" :always-available? true}
           {:name "displayName"         :type :string         :description "Name suitable for displaying to end-users." :always-available? true}
           {:name "published"           :type :date-time      :description "The date this user was first added. Can return false if the user account was deleted." :always-available? true}

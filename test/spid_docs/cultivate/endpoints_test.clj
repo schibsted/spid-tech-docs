@@ -349,14 +349,6 @@ POST /path/to/other/page
  => ["user" "order"])
 
 (fact
- "Relevant articles are found based on category."
-
- (-> (cultivate :category ["Payment Services" "Direct Payment API"])
-     first :relevant-articles)
- => [{:title "Docs for the Direct Payment API"
-      :path "/direct-payment-api/"}])
-
-(fact
  "example-params are added to each endpoint"
 
  (-> (cultivate) first :example-params) => {"userId" "42"
