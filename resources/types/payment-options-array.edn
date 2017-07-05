@@ -1,6 +1,6 @@
 {:id :payment-options-array
  :name "Payment options - array format"
- :description "This format allows providing data for external payment methods. See the [external payment methods specification](http://fbdjhf.com) for further details."
+ :description "This format allows providing data for external payment methods. See the [external payment methods specification](/external-payment-methods/) for further details."
  :fields [{:name "type"             :type :payment-option-type  :description "Required. Example: PAYEX_CC, STREX, EXTERNAL"}
            {:name "externalType"    :type :string               :description "Required when type is EXTERNAL. A subtype used to distinguish between various types of external payment methods."}
            {:name "url"             :type :string               :description "Required when type is EXTERNAL. User is redirected to this URL after choosing payment with external payment method."}
