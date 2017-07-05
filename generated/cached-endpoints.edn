@@ -3522,7 +3522,7 @@
   :category ["Payment Services" "P2pLink API"]}
  {:path "paylink/{paylinkId}",
   :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions {:paylinkId "ID of the paylink to retrieve."},
+  :parameterDescriptions {:paylinkId "ID or UUID of the paylink to retrieve. UUID will be introduced on first week of September."},
   :method "*",
   :name "Get or delete a paylink",
   :httpMethods

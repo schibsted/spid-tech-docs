@@ -2,6 +2,7 @@
  :name "Paylink"
  :inline-types [:purchase-flow :paylink-status :payment-options :paylink-item]
  :fields [{:name "paylinkId"       :type :integer-string  :description "Paylink ID"}
+          {:name "* uuid"            :type :string          :description "Paylink UUID, 36 chars length string. *Will be introduced on first week of September"}
           {:name "clientId"        :type :string          :description "ID of the client that gets paid (seller client ID). Defaults to the authenticated client"}
           {:name "code"            :type :string          :description "Paylink code"}
           {:name "shortUrl"        :type :string          :description "Paylink short URL"}
