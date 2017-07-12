@@ -1837,6 +1837,33 @@
   :description
   "Check if client behind token has access to user a and if the user has accepted relevant agreements",
   :category ["Identity Management" "User agreements API"]}
+ {:path "user/{userId}/required_fields",
+  :validOutputFormats ["json"],
+  :parameterDescriptions
+  {:userId
+   "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`)."},
+  :method "*",
+  :name "Has Access to User",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required [],
+    :optional [],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description
+      "Returns required fields object, containing array with unfilled required fields",
+      :type "required_fields"}]}},
+  :url "/api/2/user/{id}/required_fields",
+  :pathParameters ["userId"],
+  :controller "Api/2/User.user_required_fields",
+  :defaultOutputFormat "json",
+  :description
+  "Check if client behind token has access to user, and returns user unfilled required fields",
+  :category ["Identity Management" "User required fields API"]}
  {:path "user/{userId}/agreements/accept",
   :validOutputFormats ["json"],
   :parameterDescriptions
