@@ -43,7 +43,7 @@ With PHP SDK, you can validate `sig` with:
 // $sign_secret = "a274de";
 $expected_sig = hash_hmac('sha256', $container['data'], $sign_secret, true);
 
-if ($sig === $expected_sig) {
+if (hash_equals($sig, $expected_sig)) {
     echo "Authenticity of data verified\n";
 } else {
     echo "Authenticity of data cannot be verified. Someone is doing something naughty!\n";
