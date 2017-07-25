@@ -116,7 +116,7 @@ function parse_signed_request($signed_request, $secret) {
   $sig = base64_url_decode($encoded_sig);
   $data = base64_url_decode($payload);
   $expected_sig = hash_hmac('sha256', $payload, $secret, $raw = true);
-  if ($sig !== $expected_sig) {
+  if (!hash_equals($sig, $expected_sig)) {
     return null;
   }
   return $data;
@@ -153,7 +153,7 @@ try {
     throw ex;
 }
 
-if (!Arrays.equals(expectedSignature, signature)) {
+if (!MessageDigest.isEqual(expectedSignature, signature)) {
     throw new SpidApiException("Signature is not valid!");
 }
 ```
