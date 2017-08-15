@@ -20,7 +20,6 @@ deploy:
   bucket: spid-techdocs-283344284444
   region: eu-west-1
   cache_control: "no-transform,public,max-age=300"
-  detect_encoding: true
   local-dir: dist
   acl: public_read
   skip_cleanup: true
