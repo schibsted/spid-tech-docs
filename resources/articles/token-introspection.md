@@ -27,7 +27,7 @@ received from clients. For JWT access tokens issued by SPiD, this can be done in
 1. By a request to SPiD's introspection endpoint `/oauth/introspect`.
 1. By verifying the token signature and content locally.
 
-Non-JWT access tokens can only be introspected by sending a request to SPiD.
+**Note:** Non-JWT tokens can not be introspected. Make sure JWT tokens are enabled for the client in Self Service.
 
 ## Token introspection request
 
@@ -64,7 +64,7 @@ For further details refer to
 ## Local token introspection
 
 The JWT access token is signed asymmetrically, and SPiD publishes the set of valid public keys at the
-endpoint `/oauth/jwks`.
+endpoint `/oauth/jwks`, e.g. https://identity-pre.schibsted.com/oauth/jwks.
 
 To verify the token locally, follow these steps:
 
