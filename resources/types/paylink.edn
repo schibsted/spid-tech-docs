@@ -1,8 +1,7 @@
 {:id :paylink
  :name "Paylink"
  :inline-types [:purchase-flow :paylink-status :payment-options :payment-options-array :paylink-item]
- :fields [{:name "paylinkId"       :type :integer-string  :description "Paylink ID"}
-          {:name "uuid"            :type :string          :description "<span style=\"color: red\">Will be introduced on 1st of September 2017.</span><br>Paylink UUID, 36 chars length string. This can be used in GET /api/2/paylink/{paylinkId} request to retrieve paylink's data. The old way of retrieving paylink's data (i.e. by numerical paylinkId or code) works as it used to."}
+ :fields [{:name "paylinkId"       :type :integer-string  :description "Paylink ID Although the typical format is as an integer we recommend using 36 character length string so the client ensures to be compatible for future possible changes"}
           {:name "clientId"        :type :string          :description "ID of the client that gets paid (seller client ID). Defaults to the authenticated client"}
           {:name "code"            :type :string          :description "Paylink code"}
           {:name "shortUrl"        :type :string          :description "Paylink short URL"}
