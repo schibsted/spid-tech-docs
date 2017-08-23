@@ -36,6 +36,5 @@
   "shortUrl": "https://identity-pre.schibsted.com/auth/start?paylink\u003d4638",
   "paymentOptions": "2",
   "purchaseFlow": "DIRECT",
-  "redirectUri": "http://localhost:8000/callback",
-  "uuid": "e27efd41-cf1b-4137-8e24-1a2d52fc1f6a"
+  "redirectUri": "http://localhost:8000/callback"
 }
