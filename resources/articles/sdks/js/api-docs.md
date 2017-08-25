@@ -86,10 +86,17 @@ Calling `hasSession` will trigger a number of events
 notably the `SPiD.sessionChange` event.
 
 ```js
-SPiD.hasSession(, function (err, response) {
+SPiD.hasSession(function (err, response) {
     // do something with the response, if !err ...
 });
 ```
+
+If the user is not signed-on to SPiD the callback will be called with `err` set to:
+```js
+{ code: 401, type: "UserException", description: "No session found" }
+```
+**Note: this will happen also if third-party cookies are blocked, regardless of the user state**
+
 
 <a id="has-product"></a>
 ### SPiD.hasProduct
