@@ -1,0 +1,14 @@
+{:id :teaser
+ :name "Teaser"
+ :description "Teaser object"
+  :fields [{:name "id"     :type :string :description "Teaser ID"}
+          {:name "client_id"          :type :string :description "Client ID"}
+          {:name "description"     :type :string :description "Description of teaser"}
+          {:name "markdown" :type :string :description "Teaser content in Markdown format"}
+          {:name "html"    :type :string :description "Teaser content in HTML format"}
+          {:name "css"        :type :string :description "Teaser css"}
+          {:name "filename"      :type :string :description "Filename of teaser"}
+          {:name "active"      :type :string :description "Flag if teaser is active or not"}
+          {:name "slug"      :type :string :description "Slug for teaser"}
+          {:name "updated"      :type :string :description "Time of last update"}
+          {:name "created"      :type :string :description "Time of creation"}]}

@@ -19,7 +19,7 @@
                                   (str/replace #":value" (second %))) params)))
 
 (defn curl-example-code [{:keys [api-path method access-token-types example-params]} params]
-  (apply str "curl https://payment.schibsted.no" (replace-path-parameters api-path example-params)
+  (apply str "curl https://login.schibsted.com" (replace-path-parameters api-path example-params)
          (case method
            :GET " -G"
            :POST " \\\n   -X POST"

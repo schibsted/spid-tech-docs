@@ -696,7 +696,7 @@
   :defaultOutputFormat "json",
   :description
   "Get verification and availability status for an email address.",
-  :category ["Identity Management" "Email API"]}
+  :category ["Identity Management" "Identifier Status API"]}
  {:path "phone/{phone}/status",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
@@ -728,7 +728,7 @@
   :defaultOutputFormat "json",
   :description
   "Get verification and availability status for an phone address.",
-  :category ["Identity Management" "Phone API"]}
+  :category ["Identity Management" "Identifier Status API"]}
  {:path "me",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions {},
@@ -798,7 +798,7 @@
   :defaultOutputFormat "json",
   :description
   "Passwordless signin (login/signup user based on provided identifier)",
-  :category ["Identity Management" "User API"]}
+  :category ["Identity Management" "Authentication API"]}
  {:path "user",
   :validOutputFormats ["json" "jsonp" "png"],
   :parameterDescriptions
@@ -843,6 +843,12 @@
     [{:status 201,
       :description "Returns the newly created user object.",
       :type "user"}
+     {:status 302,
+      :description "Verified user already present.",
+      :type "user"}
+     {:status 401,
+      :description "Users cannot be create using an user token.",
+      :type "api-exception"}
      {:status 409,
       :description "The email address is not available.",
       :type "api-exception"}]}},
@@ -851,6 +857,37 @@
   :controller "Api/2/User.user",
   :defaultOutputFormat "json",
   :description "Create a new user",
+  :category ["Identity Management" "User API"]}
+ {:path "userbatch",
+  :validOutputFormats ["json"],
+  :parameterDescriptions
+  {:data
+   "Array of user objects with required 'email' property (rest just like for POST /api/2/user) plus the optional but nice to have external user id under 'userId'"},
+  :method "POST",
+  :name "Batch user create",
+  :httpMethods
+  {:POST
+   {:name "POST",
+    :required ["data"],
+    :optional [],
+    :accessTokenTypes ["server"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Batch was executed - please review the response.",
+      :type "user"}
+     {:status 400,
+      :description "Something's wrong with provided data.",
+      :type "user"}
+     {:status 406,
+      :description "Too much data in the batch.",
+      :type "api-exception"}]}},
+  :url "/api/2/userbatch",
+  :pathParameters [],
+  :controller "Api/2/User.userbatch",
+  :defaultOutputFormat "json",
+  :description "Push new users in batch and get UUID in the response",
   :category ["Identity Management" "User API"]}
  {:path "signup",
   :validOutputFormats ["json"],
@@ -887,7 +924,7 @@
   :controller "Api/2/User.user_signup",
   :defaultOutputFormat "json",
   :description "Create a new user (no update)",
-  :category ["Identity Management" "User API"]}
+  :category ["Identity Management" "Authentication API"]}
  {:path "signup_jwt",
   :validOutputFormats ["json"],
   :parameterDescriptions {:jwt ""},
@@ -907,7 +944,7 @@
   :controller "Api/2/User.user_signup_jwt",
   :defaultOutputFormat "json",
   :description "Create a new user (no update) from a JWT",
-  :category ["Identity Management" "User API"]}
+  :category ["Identity Management" "Authentication API"]}
  {:path "attach_jwt",
   :validOutputFormats ["json"],
   :parameterDescriptions {:jwt ""},
@@ -928,7 +965,7 @@
   :controller "Api/2/User.user_attach_jwt",
   :defaultOutputFormat "json",
   :description "Attaches a thirdparty account from a JWT to a user",
-  :category ["Identity Management" "User API"]}
+  :category ["Identity Management" "Authentication API"]}
  {:path "user/{userId}/varnishId",
   :validOutputFormats ["json"],
   :parameterDescriptions
@@ -1046,164 +1083,6 @@
   :defaultOutputFormat "json",
   :description "Get a user data object or post changes to one.",
   :category ["Identity Management" "User API"]}
- {:path "user/{userId}/charge",
-  :validOutputFormats ["json"],
-  :parameterDescriptions
-  {:sellerUserId "Deprecated, do not use.",
-   :clientReference "Custom client reference",
-   :items "A JSON string of order items. See introduction.",
-   :userId
-   "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`).",
-   :hash
-   "A [verified request hash](/verified-hash/) signed with your client sign secret.",
-   :type "[Order type](/types/order-type/)",
-   :paymentOptions
-   "[Payment options](/types/payment-options/), as a bit mask",
-   :purchaseFlow
-   "`\"DIRECT\"` or `\"AUTHORIZE\"`. Defaults to `\"DIRECT\"`. See [the paylink API](/paylink-api/#purchase-flows) for details.",
-   :requestReference
-   "A unique reference that identifies the request. Used to validate that each charge request is unique for the combination of clientId + requestReference + request status and ensure that duplicate requests are not processed more than once. Sending the same `requestReference` will always result in the same response.",
-   :tag
-   "To be used for tracking. Will be returned in all order endpoints"},
-  :method "POST",
-  :name "Direct payment charge",
-  :httpMethods
-  {:POST
-   {:name "POST",
-    :required ["hash" "requestReference" "items"],
-    :optional
-    ["clientReference"
-     "paymentOptions"
-     "purchaseFlow"
-     "sellerUserId"
-     "tag"
-     "type"],
-    :accessTokenTypes ["server" "user"],
-    :filters ["identifier" "items" "transactions"],
-    :defaultFilters [],
-    :responses
-    [{:status 201,
-      :description "Returns the order object",
-      :type "order"}
-     {:status 304,
-      :description
-      "API error code 2000, The user cancelled the request.",
-      :type "api-exception"}
-     {:status 400,
-      :description
-      "API error code 1800, The request is invalid and can not be completed.",
-      :type "api-exception"}
-     {:status 400,
-      :description
-      "API error code 1810, The request parameters are invalid.",
-      :type "api-exception"}
-     {:status 403,
-      :description
-      "API error code 1100, The account or card is blocked in the provider.",
-      :type "api-exception"}
-     {:status 403,
-      :description "API error code 1200, The user is blacklisted.",
-      :type "api-exception"}
-     {:status 403,
-      :description
-      "API error code 1300, The method (card) is not eligible for this purchase.",
-      :type "api-exception"}
-     {:status 403,
-      :description
-      "API error code 1400, The method (card) is blacklisted.",
-      :type "api-exception"}
-     {:status 406,
-      :description
-      "API error code 2100, The payment request was flagged by automatic fraud detection.",
-      :type "api-exception"}
-     {:status 412,
-      :description
-      "API error code 1700, The payment request does not conform to the prerequisites (i.e. wrong order status)",
-      :type "api-exception"}
-     {:status 412,
-      :description
-      "API error code 110, Payment method missing. The method (card) is not eligible for payment because it is missing, i.e., the user has not entered a payment method into their SPiD account.",
-      :type "api-exception"}
-     {:status 412,
-      :description
-      "API error code 120, Payment method expired. The method (card) is not eligible for payment because it is expired.",
-      :type "api-exception"}
-     {:status 412,
-      :description
-      "API error code 210, Direct payment disabled. Direct payment is disabled for the client or the SPiD service as a whole.",
-      :type "api-exception"}
-     {:status 416,
-      :description
-      "API error code 1900, The payment request failed due to insufficient funds on account.",
-      :type "api-exception"}
-     {:status 420,
-      :description
-      "API error code 2200, The payment request was flagged by automatic API abuse detection.",
-      :type "api-exception"}
-     {:status 420,
-      :description
-      "API error code 310, Transaction amount limit exceeded.",
-      :type "api-exception"}
-     {:status 420,
-      :description
-      "API error code 320, Transaction count limit exceeded.",
-      :type "api-exception"}
-     {:status 420,
-      :description
-      "API error code 330, Time since last transaction is too short.",
-      :type "api-exception"}
-     {:status 420,
-      :description "API error code 340, Too many failures.",
-      :type "api-exception"}
-     {:status 503,
-      :description
-      "API error code 1500, SPiD/Payment provider is currently experiencing problems.",
-      :type "api-exception"}
-     {:status 503,
-      :description
-      "API error code 1600, Payment provider is unavailable to SPiD.",
-      :type "api-exception"}
-     {:status 503,
-      :description
-      "API error code 9900, The error could not be categorized.",
-      :type "api-exception"}]}},
-  :deprecated "2.84",
-  :url "/api/2/user/{id}/charge",
-  :pathParameters ["userId"],
-  :controller "Api/2/User.user_charge",
-  :defaultOutputFormat "json",
-  :description "Request a direct payment charge on a user.",
-  :category ["Payment Services" "Direct Payment API"]}
- {:path "user/{userId}/preferences/payment",
-  :validOutputFormats ["json"],
-  :parameterDescriptions
-  {:userId
-   "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`)."},
-  :method "GET",
-  :name "Payment preference",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server" "user"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Retrieves the payment preference object.",
-      :type "payment-preference"}
-     {:status 404,
-      :description "User never had a payment method or preference.",
-      :type "payment-preference"}]}},
-  :deprecated "2.84",
-  :url "/api/2/user/{id}/preferences/payment",
-  :pathParameters ["userId"],
-  :controller "Api/2/User.user_preferences_payment",
-  :defaultOutputFormat "json",
-  :description
-  "Request the payment preferences for direct payment charges on a user.",
-  :category ["Payment Services" "Direct Payment API"]}
  {:path "users",
   :validOutputFormats ["json" "jsonp" "png"],
   :parameterDescriptions
@@ -1547,32 +1426,6 @@
   :defaultOutputFormat "json",
   :description "List orders for a user (on client)",
   :category ["Payment Services" "Order API"]}
- {:path "user/{userId}/transactions",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions
-  {:userId
-   "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`)."},
-  :method "GET",
-  :name "List user transactions",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server" "user"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Returns a list of transactions.",
-      :type "[transaction]"}]}},
-  :deprecated "2.84",
-  :url "/api/2/user/{id}/transactions",
-  :pathParameters ["userId"],
-  :controller "Api/2/User.user_transactions",
-  :defaultOutputFormat "json",
-  :description "List all money transactions related to a user",
-  :category ["Payment Services" "Order API"]}
  {:path "user/{userId}/subscription",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
@@ -1863,7 +1716,7 @@
   :defaultOutputFormat "json",
   :description
   "Check if client behind token has access to user, and returns user unfilled required fields",
-  :category ["Identity Management" "User required fields API"]}
+  :category ["Identity Management" "User API"]}
  {:path "user/{userId}/agreements/accept",
   :validOutputFormats ["json"],
   :parameterDescriptions
@@ -1964,6 +1817,152 @@
   :defaultOutputFormat "json",
   :description "Get information about single client",
   :category ["Utilities" "Platform API"]}
+ {:path "client/{client_id}/acl",
+  :validOutputFormats ["json"],
+  :parameterDescriptions {:client_id "Client ID"},
+  :method "GET",
+  :name "Get client acl ",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required [],
+    :optional [],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200, :description "", :type "client"}
+     {:status 403,
+      :description "Token does not have access to this client",
+      :type "api-exception"}
+     {:status 404,
+      :description "No client found",
+      :type "api-exception"}]}},
+  :url "/api/2/client/{id}/acl",
+  :pathParameters ["client_id"],
+  :controller "Api/2/Client.client_acl",
+  :defaultOutputFormat "json",
+  :description "Get client acl",
+  :category ["Utilities" "Platform API"]}
+ {:path "client/{client_id}/teasers",
+  :validOutputFormats ["json"],
+  :parameterDescriptions {:client_id "Client ID"},
+  :method "*",
+  :name "Client teaser list",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required [],
+    :optional [],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Returns a list of client teasers",
+      :type "[teaser]"}
+     {:status 403,
+      :description "Token does not have access to this client",
+      :type "api-exception"}
+     {:status 404,
+      :description "Client not found",
+      :type "api-exception"}]},
+   :POST
+   {:name "POST",
+    :required ["markdown"],
+    :optional ["description" "css" "active" "slug"],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 201,
+      :description "Returns the newly created teaser object",
+      :type "teaser"}
+     {:status 202,
+      :description "Teaser was created but not uploaded to CDN",
+      :type "teaser"}
+     {:status 400,
+      :description "Missing required parameters or similar error",
+      :type "api-exception"}
+     {:status 403,
+      :description "Token does not have access to this client",
+      :type "api-exception"}]}},
+  :url "/api/2/client/{id}/teasers",
+  :pathParameters ["client_id"],
+  :controller "Api/2/Client.client_teasers",
+  :defaultOutputFormat "json",
+  :description "Get client teasers or create new one",
+  :category ["Self Service" "Self Service API"]}
+ {:path "client/{client_id}/teasers/{teaser_id}",
+  :validOutputFormats ["json"],
+  :parameterDescriptions
+  {:client_id "Client ID", :teaser_id "Client Teaser ID"},
+  :method "*",
+  :name "Client teaser get or update",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required [],
+    :optional [],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Returns a teaser object",
+      :type "teaser"}
+     {:status 403,
+      :description "Token does not have access to this client",
+      :type "api-exception"}
+     {:status 404,
+      :description "Client not found",
+      :type "api-exception"}]},
+   :POST
+   {:name "POST",
+    :required [],
+    :optional ["description" "markdown" "css" "active" "slug"],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Returns the updated teaser object",
+      :type "teaser"}
+     {:status 400,
+      :description "Missing required parameters, or teaser not found",
+      :type "api-exception"}
+     {:status 403,
+      :description "Token does not have access to this teaser",
+      :type "api-exception"}
+     {:status 404,
+      :description "Client not found",
+      :type "api-exception"}]},
+   :DELETE
+   {:name "DELETE",
+    :required [],
+    :optional [],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Returns the deleted teaser object",
+      :type "teaser"}
+     {:status 400,
+      :description "Teaser not found or unable to delete",
+      :type "api-exception"}
+     {:status 403,
+      :description "Token does not have access to this client",
+      :type "api-exception"}
+     {:status 404,
+      :description "Client not found",
+      :type "api-exception"}]}},
+  :url "/api/2/client/{id}/teasers/{teaser_id}",
+  :pathParameters ["client_id" "teaser_id"],
+  :controller "Api/2/Client.client_teaser",
+  :defaultOutputFormat "json",
+  :description "Get or update one client teaser",
+  :category ["Self Service" "Self Service API"]}
  {:path "orders",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
@@ -2056,130 +2055,6 @@
   :defaultOutputFormat "json",
   :description "Get a single order record",
   :category ["Payment Services" "Order API"]}
- {:path "order/{orderId}/transactions",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions
-  {:orderId "ID of the order to retrieve transactions for"},
-  :method "GET",
-  :name "Get order transactions",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Returns a list of order items",
-      :type "[transaction]"}
-     {:status 400,
-      :description "Missing required parameter orderId",
-      :type "api-exception"}]}},
-  :deprecated "2.84",
-  :url "/api/2/order/{id}/transactions",
-  :pathParameters ["orderId"],
-  :controller "Api/2/Order.order_transactions",
-  :alias {:id "order_id"},
-  :defaultOutputFormat "json",
-  :description "Get all transactions for one order",
-  :category ["Payment Services" "Order API"]}
- {:path "order/{orderId}/items",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions
-  {:orderId "ID of the order to retrieve order items for"},
-  :method "GET",
-  :name "Get order items",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Returns a list of order items",
-      :type "[order-item]"}
-     {:status 400,
-      :description "Missing required parameter orderId",
-      :type "api-exception"}]}},
-  :deprecated "2.84",
-  :url "/api/2/order/{id}/items",
-  :pathParameters ["orderId"],
-  :controller "Api/2/Order.order_items",
-  :alias {:id "order_id"},
-  :defaultOutputFormat "json",
-  :description "Get all items (bought products) on one order",
-  :category ["Payment Services" "Order API"]}
- {:path "order/{orderId}/status",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions {:orderId "ID of the order to retrieve"},
-  :method "GET",
-  :name "Order status",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Returns the updated order object",
-      :type "order"}
-     {:status 400,
-      :description "Missing required parameter orderId",
-      :type "api-exception"}
-     {:status 404,
-      :description "Order not found",
-      :type "api-exception"}
-     {:status 999,
-      :description "Payment provider-specific error",
-      :type "api-exception"}]}},
-  :deprecated "2.84",
-  :url "/api/2/order/{id}/status",
-  :pathParameters ["orderId"],
-  :controller "Api/2/Order.order_status",
-  :alias {:id "order_id"},
-  :defaultOutputFormat "json",
-  :description "Check the status of an order",
-  :category ["Payment Services" "Order API"]}
- {:path "order/{orderId}/cancel",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions {:orderId "The order to cancel"},
-  :method "POST",
-  :name "Cancel order",
-  :httpMethods
-  {:POST
-   {:name "POST",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Returns the cancelled order object",
-      :type "order"}
-     {:status 404,
-      :description "Order not found",
-      :type "api-exception"}
-     {:status 999,
-      :description "Payment provider-specific error",
-      :type "api-exception"}]}},
-  :deprecated "2.84",
-  :url "/api/2/order/{id}/cancel",
-  :pathParameters ["orderId"],
-  :controller "Api/2/Order.order_cancel",
-  :alias {:id "order_id"},
-  :defaultOutputFormat "json",
-  :description
-  "Cancel an order (for use with paylinks and multistep payment flow)",
-  :category ["Payment Services" "Order API"]}
  {:path "order/{orderId}/credit",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
@@ -2218,77 +2093,6 @@
   :defaultOutputFormat "json",
   :description
   "Credit an order (for use with paylinks and multistep payment flow)",
-  :category ["Payment Services" "Order API"]}
- {:path "order/{orderId}/complete",
-  :validOutputFormats ["json"],
-  :parameterDescriptions {:orderId "ID of the order to complete"},
-  :method "POST",
-  :name "Complete order",
-  :httpMethods
-  {:POST
-   {:name "POST",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Returns the completed order",
-      :type "order"}
-     {:status 404,
-      :description "Order not found",
-      :type "api-exception"}
-     {:status 999,
-      :description "Payment provider-specific error",
-      :type "api-exception"}]}},
-  :deprecated "2.84",
-  :url "/api/2/order/{id}/complete",
-  :pathParameters ["orderId"],
-  :controller "Api/2/Order.order_complete",
-  :alias {:id "order_id"},
-  :defaultOutputFormat "json",
-  :description
-  "Complete an order (for use with multistep payment flow, requires captures)",
-  :category ["Payment Services" "Order API"]}
- {:path "order/{orderId}/capture",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions
-  {:orderId "ID of the order to capture",
-   :amount "The amount to capture, in cents",
-   :orderItemId "The order item to capture",
-   :description "A description of the transaction"},
-  :method "POST",
-  :name "Capture order",
-  :httpMethods
-  {:POST
-   {:name "POST",
-    :required [],
-    :optional ["amount" "orderItemId" "description"],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Returns the order object, with transactions",
-      :type "order"}
-     {:status 400,
-      :description "Missing one or more required parameters",
-      :type "api-exception"}
-     {:status 404,
-      :description "Order not found",
-      :type "api-exception"}
-     {:status 999,
-      :description "Payment provider-specific error",
-      :type "api-exception"}]}},
-  :deprecated "2.84",
-  :url "/api/2/order/{id}/capture",
-  :pathParameters ["orderId"],
-  :controller "Api/2/Order.order_capture",
-  :alias {:id "order_id"},
-  :defaultOutputFormat "json",
-  :description
-  "Capture part or whole of an authorized amount from an order (for use with multistep payment flow)",
   :category ["Payment Services" "Order API"]}
  {:path "products",
   :validOutputFormats ["json" "jsonp"],
@@ -2524,85 +2328,6 @@
   :defaultOutputFormat "json",
   :description "Get a single product template",
   :category ["Payment Services" "Product API"]}
- {:path "product/{productId}/children",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions
-  {:productId "The product whose children to list"},
-  :method "GET",
-  :name "Product children",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server" "user"],
-    :filters
-    ["content"
-     "subscriptions"
-     "deleted"
-     "unavailable"
-     "invisible"
-     "unselectable"
-     "available"
-     "bundle"],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Returns a list of products",
-      :type "[product]"}
-     {:status 400,
-      :description "Missing required parameter productId",
-      :type "api-exception"}
-     {:status 404,
-      :description "No child products found",
-      :type "api-exception"}]}},
-  :deprecated "2.84",
-  :url "/api/2/product/{id}/children",
-  :pathParameters ["productId"],
-  :controller "Api/2/Product.product_children",
-  :defaultOutputFormat "json",
-  :description "Get all product \"children\" of a product template",
-  :category ["Payment Services" "Product API"]}
- {:path "product/{productId}/revisions",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions
-  {:productId "The product to list revisions of"},
-  :method "GET",
-  :name "Product revisions",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server"],
-    :filters
-    ["content"
-     "subscriptions"
-     "deleted"
-     "unavailable"
-     "invisible"
-     "unselectable"
-     "available"
-     "bundle"],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description
-      "Returns a list of product objects, representing previous states of this product.",
-      :type "[product]"}
-     {:status 400,
-      :description "Missing required parameter productId",
-      :type "api-exception"}
-     {:status 404,
-      :description "Product revision not found",
-      :type "api-exception"}]}},
-  :deprecated "2.84",
-  :url "/api/2/product/{<\\d+>id}/revisions",
-  :pathParameters ["productId"],
-  :controller "Api/2/Product.product_revisions",
-  :defaultOutputFormat "json",
-  :description "Get older versions of a product template",
-  :category ["Payment Services" "Product API"]}
  {:path "products/parents",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions {},
@@ -2636,34 +2361,6 @@
   :controller "Api/2/Product.products_parents",
   :defaultOutputFormat "json",
   :description "Get all \"parent\" products for the client",
-  :category ["Payment Services" "Product API"]}
- {:path "product/{productId}/campaigns",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions
-  {:productId "Unique ID of the product to find campaigns for"},
-  :method "GET",
-  :name "Product campaigns",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Returns a list of campaigns",
-      :type "[campaign]"}
-     {:status 404,
-      :description "Product not found",
-      :type "api-exception"}]}},
-  :deprecated "2.84",
-  :url "/api/2/product/{id}/campaigns",
-  :pathParameters ["productId"],
-  :controller "Api/2/Product.product_campaigns",
-  :defaultOutputFormat "json",
-  :description "Get a list of all campaigns a product is included in",
   :category ["Payment Services" "Product API"]}
  {:path "bundle/{bundleId}/product/{productId}",
   :validOutputFormats ["json" "jsonp"],
@@ -3202,130 +2899,6 @@
   :defaultOutputFormat "json",
   :description "List all campaigns for client",
   :category ["Payment Services" "Campaign API"]}
- {:path "identifier/{identifierId}",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions
-  {:identifierId "ID of the payment identifier to retrieve"},
-  :method "GET",
-  :name "Get payment identifier",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200, :description "", :type "payment-identifier"}
-     {:status 404,
-      :description "No identifier found for this ID",
-      :type "api-exception"}]}},
-  :deprecated "2.84",
-  :url "/api/2/identifier/{id}",
-  :pathParameters ["identifierId"],
-  :controller "Api/2/Identifier.identifier",
-  :defaultOutputFormat "json",
-  :description "Get a payment identifier by id",
-  :category ["Payment Services" "Payment API"]}
- {:path "identifiers",
-  :validOutputFormats ["json"],
-  :parameterDescriptions {},
-  :method "GET",
-  :name "List identifiers",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required ["userId"],
-    :optional ["type" "status"],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200, :description "", :type "payment-identifier"}]}},
-  :deprecated "2.84",
-  :url "/api/2/identifiers",
-  :pathParameters [],
-  :controller "Api/2/Identifier.identifiers",
-  :defaultOutputFormat "json",
-  :description "Get a list payment identifiers by user and type",
-  :category ["Payment Services" "Payment API"]}
- {:path "identifier",
-  :validOutputFormats ["json"],
-  :parameterDescriptions
-  {:identifier "The payment identifier",
-   :description "Identifier description",
-   :userId "The id of the user you are creating an identifier",
-   :type "The payment identifier type",
-   :paymentMethod "Text version of type, like VISA, MC, INVOICE",
-   :status "Is the identifier verified or deleted?",
-   :lastVerified "When was the identifier last verified to work"},
-  :method "POST",
-  :name "Create a payment identifier",
-  :httpMethods
-  {:POST
-   {:name "POST",
-    :required
-    ["identifier" "description" "userId" "type" "paymentMethod"],
-    :optional
-    ["is3dsecure"
-     "maxAmount"
-     "expirationDate"
-     "mediaDistribution"
-     "status"
-     "lastVerified"],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description
-      "Returns the newly created payment identifier object",
-      :type "identifier"}
-     {:status 400,
-      :description "Missing one or more required parameters",
-      :type "api-exception"}
-     {:status 400,
-      :description "Validation error(s)",
-      :type "api-exception"}]}},
-  :deprecated "2.84",
-  :url "/api/2/identifier",
-  :pathParameters [],
-  :controller "Api/2/Identifier.identifier",
-  :alias {:paymentMethod "method", :is3dsecure "is_3dsecure"},
-  :defaultOutputFormat "json",
-  :description "Create a payment identifier",
-  :category ["Payment Services" "Payment API"]}
- {:path "identifier/{id}",
-  :validOutputFormats ["json"],
-  :parameterDescriptions
-  {:status "Is the identifier verified or deleted?",
-   :lastVerified "When was the identifier last verified to work"},
-  :method "POST",
-  :name "Update a payment identifier",
-  :httpMethods
-  {:POST
-   {:name "POST",
-    :required [],
-    :optional ["status" "lastVerified"],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Returns the update payment identifier object",
-      :type "identifier"}
-     {:status 400,
-      :description "Validation error(s)",
-      :type "api-exception"}]}},
-  :deprecated "2.84",
-  :url "/api/2/identifier/{id}",
-  :pathParameters ["id"],
-  :controller "Api/2/Identifier.identifier",
-  :alias {:paymentMethod "method", :is3dsecure "is_3dsecure"},
-  :defaultOutputFormat "json",
-  :description "Update payment identifier",
-  :category ["Payment Services" "Payment API"]}
  {:path "subscriptions",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
@@ -3442,7 +3015,7 @@
    :title
    "The PayLink title. Displayed to the user on the payment page, and shown on the New Credit Card page at Payex.",
    :paymentOptions
-   "The allowed payment methods for this PayLink. Payment options can be provided in two formats: as an integer bit mask or as a JSON array of objects (this format allows providing data for external payment methods). Defaults to integer bitmask, 2 (bank card with PayEx).",
+   "The allowed payment methods for this PayLink. Payment options can be provided in two formats: as an integer bit mask or as a JSON array of objects (this format allows supplying data for provided payment methods). Defaults to integer bitmask, 2 (bank card with PayEx).",
    :purchaseFlow
    "Defaults to `DIRECT`, which will process the payment straight away. Can also be `AUTHORIZE`, where the payment is on hold and must later be captured.",
    :redirectUri
@@ -3549,7 +3122,9 @@
   :category ["Payment Services" "P2pLink API"]}
  {:path "paylink/{paylinkId}",
   :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions {:paylinkId "ID of the paylink to retrieve."},
+  :parameterDescriptions
+  {:paylinkId
+   "ID or UUID of the paylink to retrieve. UUID will be introduced on 1st of September 2017."},
   :method "*",
   :name "Get or delete a paylink",
   :httpMethods
@@ -3705,7 +3280,7 @@
   :defaultOutputFormat "json",
   :description
   "Trigger sending of SMS and/or email for passwordless authentication",
-  :category ["Identity Management" "Passwordless API"]}
+  :category ["Identity Management" "Authentication API"]}
  {:path "passwordless/resend",
   :validOutputFormats ["json"],
   :parameterDescriptions
@@ -3734,13 +3309,349 @@
      {:status 429,
       :description "Too many attempts made to resend code",
       :type "api-exception"}]}},
+  :deprecated "2.108",
   :url "/api/2/passwordless/resend",
   :pathParameters [],
   :controller "Api/2/Passwordless.passwordless_resend",
   :defaultOutputFormat "json",
   :description
   "Trigger re-sending of SMS and/or email for passwordless authentication",
-  :category ["Identity Management" "Passwordless API"]}
+  :category ["Identity Management" "Authentication API"]}
+ {:path "merchant/{merchant_id}/agreements",
+  :validOutputFormats ["json"],
+  :parameterDescriptions {:merchant_id "Merchant ID"},
+  :method "*",
+  :name "Agreements list",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required [],
+    :optional [],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Returns a list of agreement objects",
+      :type "[agreement]"}
+     {:status 403,
+      :description "Token does not have access to this merchant",
+      :type "api-exception"}]},
+   :POST
+   {:name "POST",
+    :required ["markdown"],
+    :optional ["date" "markdown_summary" "title" "privacy_url"],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 201,
+      :description "Returns the newly created agreenebt object",
+      :type "agreement"}
+     {:status 400,
+      :description "Missing required parameters or similar error",
+      :type "api-exception"}
+     {:status 403,
+      :description "Token does not have access to this merchant",
+      :type "api-exception"}]}},
+  :url "/api/2/merchant/{<\\d+>merchant_id}/agreements",
+  :pathParameters ["merchant_id"],
+  :controller "Api/2/Agreement.agreements",
+  :defaultOutputFormat "json",
+  :description "Get agreements or create new one",
+  :category ["Self Service" "Self Service API"]}
+ {:path "merchant/{merchant_id}/agreements/assign",
+  :validOutputFormats ["json"],
+  :parameterDescriptions {:merchant_id "Merchant ID"},
+  :method "POST",
+  :name "Agreement assignment",
+  :httpMethods
+  {:POST
+   {:name "POST",
+    :required ["term_id" "client_id"],
+    :optional [],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 201,
+      :description "Assignment created successfully",
+      :type "agreement"}
+     {:status 400,
+      :description "Missing required parameters or similar error",
+      :type "api-exception"}
+     {:status 404,
+      :description "The client or agreement not found",
+      :type "api-exception"}
+     {:status 403,
+      :description "Token does not have access to this merchant",
+      :type "api-exception"}]}},
+  :url "/api/2/merchant/{<\\d+>merchant_id}/agreements/assign",
+  :pathParameters ["merchant_id"],
+  :controller "Api/2/Agreement.assign_agreement",
+  :defaultOutputFormat "json",
+  :description "Assign agreement to client",
+  :category ["Self Service" "Self Service API"]}
+ {:path "merchant/{merchant_id}/agreements/{id}",
+  :validOutputFormats ["json"],
+  :parameterDescriptions
+  {:merchant_id "Merchant ID", :id "Agreement ID"},
+  :method "*",
+  :name "Agreement get or update",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required [],
+    :optional [],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Returns an agreement object",
+      :type "agreement"}
+     {:status 403,
+      :description "Token does not have access to this merchant",
+      :type "api-exception"}]},
+   :POST
+   {:name "POST",
+    :required [],
+    :optional
+    ["markdown" "markdown_summary" "date" "title" "privacy_url"],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Returns the updated agreement object",
+      :type "agreement"}
+     {:status 400,
+      :description
+      "Missing required parameters, or agreement not found",
+      :type "api-exception"}
+     {:status 403,
+      :description "Token does not have access to this merchant",
+      :type "api-exception"}]}},
+  :url "/api/2/merchant/{<\\d+>merchant_id}/agreements/{id}",
+  :pathParameters ["merchant_id" "id"],
+  :controller "Api/2/Agreement.agreement",
+  :defaultOutputFormat "json",
+  :description "Get or update an agreement",
+  :category ["Self Service" "Self Service API"]}
+ {:path "merchant/{merchant_id}/trackergroups",
+  :validOutputFormats ["json"],
+  :parameterDescriptions {:merchant_id "Merchant ID"},
+  :method "*",
+  :name "Tracker groups list",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required [],
+    :optional [],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Returns a list of tracker group objects",
+      :type "[trackergroup]"}
+     {:status 403,
+      :description "Token does not have access to this merchant",
+      :type "api-exception"}]},
+   :POST
+   {:name "POST",
+    :required ["name"],
+    :optional [],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 201,
+      :description "Returns the newly created tracker group object",
+      :type "trackergroup"}
+     {:status 400,
+      :description "Missing required parameters or similar error",
+      :type "api-exception"}
+     {:status 403,
+      :description "Token does not have access to this merchant",
+      :type "api-exception"}]}},
+  :url "/api/2/merchant/{<\\d+>merchant_id}/trackergroups",
+  :pathParameters ["merchant_id"],
+  :controller "Api/2/TrackerGroup.trackergroups",
+  :defaultOutputFormat "json",
+  :description "Get tracker groups or create new one",
+  :category ["Self Service" "Self Service API"]}
+ {:path "merchant/{merchant_id}/admins",
+  :validOutputFormats ["json"],
+  :parameterDescriptions
+  {:merchant_id "Merchant ID",
+   :type "Type of Admin",
+   :email "E-mail addresses, comma separated",
+   :services "Array of services"},
+  :method "*",
+  :name "Get or Create admins of merchant",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required [],
+    :optional ["type"],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Returns a list of admins for merchant",
+      :type "[admin]"}
+     {:status 403,
+      :description "Token does not have access to this merchant",
+      :type "api-exception"}]},
+   :POST
+   {:name "POST",
+    :required ["email" "services" "type"],
+    :optional [],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 201,
+      :description "Creates and returns a newly created admin",
+      :type "admin"}
+     {:status 400,
+      :description "Missing required parameters or similar error",
+      :type "api-exception"}
+     {:status 403,
+      :description "Token does not have access to this merchant",
+      :type "api-exception"}]}},
+  :url "/api/2/merchant/{<\\d+>merchant_id}/admins",
+  :pathParameters ["merchant_id"],
+  :controller "Api/2/MerchantAdmin.merchant_admins",
+  :defaultOutputFormat "json",
+  :description "Get or Create admins of merchant",
+  :category ["Self Service" "Self Service API"]}
+ {:path "merchant/{merchant_id}/admin/{admin_id}",
+  :validOutputFormats ["json"],
+  :parameterDescriptions
+  {:merchant_id "Merchant ID", :admin_id "Admin ID"},
+  :method "*",
+  :name "Update or Delete admin of merchant",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required [],
+    :optional [],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200, :description "Returns an admin", :type "admin"}
+     {:status 403,
+      :description "Token does not have access to this merchant",
+      :type "api-exception"}]},
+   :POST
+   {:name "POST",
+    :required ["services"],
+    :optional [],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200, :description "Updates an admin", :type "admin"}
+     {:status 403,
+      :description "Token does not have access to this merchant",
+      :type "api-exception"}]},
+   :DELETE
+   {:name "DELETE",
+    :required [],
+    :optional [],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Deletes an admin access to service",
+      :type "admin"}
+     {:status 403,
+      :description "Token does not have access to this merchant",
+      :type "api-exception"}]}},
+  :url "/api/2/merchant/{<\\d+>merchant_id}/admin/{<\\d+>admin_id}",
+  :pathParameters ["merchant_id" "admin_id"],
+  :controller "Api/2/MerchantAdmin.merchant_admin",
+  :defaultOutputFormat "json",
+  :description "Update or Delete admin of merchant",
+  :category ["Self Service" "Self Service API"]}
+ {:path "merchant/{merchant_id}/trackergroups/{id}",
+  :validOutputFormats ["json"],
+  :parameterDescriptions
+  {:merchant_id "Merchant ID", :id "Tracker group ID"},
+  :method "*",
+  :name "Tracker group get",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required [],
+    :optional [],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Returns a tracker group object",
+      :type "trackergroup"}
+     {:status 403,
+      :description "Token does not have access to this merchant",
+      :type "api-exception"}]},
+   :POST
+   {:name "POST",
+    :required ["name"],
+    :optional [],
+    :accessTokenTypes ["server" "user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "Returns the updated tracker group object",
+      :type "trackergroup"}
+     {:status 400,
+      :description "Missing required parameters, or group not found",
+      :type "api-exception"}
+     {:status 403,
+      :description "Token does not have access to this merchant",
+      :type "api-exception"}]}},
+  :url "/api/2/merchant/{<\\d+>merchant_id}/trackergroups/{<\\d+>id}",
+  :pathParameters ["merchant_id" "id"],
+  :controller "Api/2/TrackerGroup.trackergroup",
+  :defaultOutputFormat "json",
+  :description "Get or update one tracker group",
+  :category ["Self Service" "Self Service API"]}
+ {:path "settings",
+  :validOutputFormats ["json"],
+  :parameterDescriptions {},
+  :method "GET",
+  :name "Platform settings",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required [],
+    :optional [],
+    :accessTokenTypes ["server"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200,
+      :description "A list of platform settings",
+      :type "object"}
+     {:status 401,
+      :description "No token passed or invalid token",
+      :type "api-exception"}
+     {:status 403,
+      :description "Not authorized to access",
+      :type "api-exception"}]}},
+  :url "/api/2/settings",
+  :pathParameters [],
+  :controller "Api/2/Platform.settings",
+  :defaultOutputFormat "json",
+  :description "Platform settings endpoint for external services.",
+  :category ["Utilities" "Platform API"]}
  {:path "api/2/*",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions {},

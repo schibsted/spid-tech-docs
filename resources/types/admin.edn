@@ -1,0 +1,16 @@
+{:id :admin
+ :name "Admin"
+ :description "Admin object"
+ :fields [{:name "_id"     :type :string :description "Admin ID"}
+          {:name "user_id"          :type :string :description "User ID"}
+          {:name "email"     :type :string :description "Email of admin"}
+          {:name "active" :type :string :description "Admin active flag"}
+          {:name "ips"    :type :string :description "Allowed IPs for admin"}
+          {:name "merchants"        :type :string :description "Array of merchants for admin"}
+          {:name "services"      :type :string :description "Array of clients for admin"}
+          {:name "pages"      :type :string :description "Array of allowed pages for admin"}
+          {:name "time_limit"      :type :string :description "Last allowed time for admin"}
+          {:name "last_edited_by"      :type :string :description "User who last updated admin"}
+          {:name "created_by"      :type :string :description "User who created admin"}
+          {:name "updated"      :type :string :description "Time of last update"}
+          {:name "created"      :type :string :description "Time of creation"}]}

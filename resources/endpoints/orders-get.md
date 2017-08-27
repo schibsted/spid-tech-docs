@@ -43,5 +43,3 @@ curl http://identity-pre.schibsted.com/api/2/users?oauth_token=TOKEN&\
 :relevant-endpoints
 
 GET /order/{orderId}
-GET /order/{orderId}/items
-GET /order/{orderId}/transactions

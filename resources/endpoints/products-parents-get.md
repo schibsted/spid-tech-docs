@@ -7,4 +7,3 @@ Fetch all products that have children.
 POST /product
 GET /products
 GET /product/{id}
-GET /product/{productId}/children

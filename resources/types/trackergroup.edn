@@ -1,0 +1,8 @@
+{:id :trackergroup
+ :name "Trackergroup"
+ :description "Tracker group object"
+ :fields [{:name "trackergroup_id"     :type :string :description "Tracker group ID"}
+          {:name "merchant_id"          :type :string :description "Merchant ID"}
+          {:name "name"     :type :string :description "Name of tracker group"}
+          {:name "updated"      :type :string :description "Time of last update"}
+          {:name "created"      :type :string :description "Time of creation"}]}

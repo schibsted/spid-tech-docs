@@ -2,11 +2,8 @@
 
 Update the product by `POST`-ing the fields to edit. Refer to
 [`GET /product/{id}`](/endpoints/GET/product/{id}/) for details on the
-supported query parameters. Updating a product transparently creates a new
-revision. Previous revisions can be accessed through the
-[product revisions endpoint](/endpoints/GET/product/{productId}/revisions/).
+supported query parameters.
 
 :relevant-endpoints
 
 GET /product/{id}
-GET /product/{productId}/revisions

@@ -1,0 +1,3 @@
+:introduction
+
+Update admin rights.

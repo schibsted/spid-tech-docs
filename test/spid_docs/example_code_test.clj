@@ -52,23 +52,23 @@
                             :example-params example-params})]
 
    (-> get-example :curl :minimal)
-   => "curl https://payment.schibsted.no/api/2/status -G"
+   => "curl https://login.schibsted.com/api/2/status -G"
 
    (-> get-example :curl :maximal)
    => nil
 
    (-> param-example :curl :minimal)
-   => "curl https://payment.schibsted.no/api/2/describe/User -G \\
+   => "curl https://login.schibsted.com/api/2/describe/User -G \\
    -d \"oauth_token=[access token]\""
 
    (-> post-example :curl :minimal)
-   => "curl https://payment.schibsted.no/api/2/user \\
+   => "curl https://login.schibsted.com/api/2/user \\
    -X POST \\
    -d \"oauth_token=[access token]\" \\
    -d \"email=johnd@example.com\""
 
    (-> post-example :curl :maximal)
-   => "curl https://payment.schibsted.no/api/2/user \\
+   => "curl https://login.schibsted.com/api/2/user \\
    -X POST \\
    -d \"oauth_token=[access token]\" \\
    -d \"email=johnd@example.com\" \\
