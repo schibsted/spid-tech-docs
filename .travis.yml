@@ -1,13 +1,12 @@
 sudo: false
 language: clojure
-lein: lein2
 env:
 - JVM_OPTS="-Dspid.freeze.assets=true -Dspid.freeze.pages=true"
 before_install:
 - cp resources/config.sample.edn resources/config.edn
 - nvm install 0.10
 - pushd seq-diagrams && npm install && popd
-script: lein2 with-profile test midje
+script: lein with-profile test midje
 jdk:
 - openjdk7
 before_deploy:
