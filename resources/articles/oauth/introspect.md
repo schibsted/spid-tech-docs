@@ -4,12 +4,12 @@
 
 ## See also
 
-* [POST /oauth/token](/oauth/token)
-* [POST /oauth/ro](/oauth/ro)
-* [GET /oauth/userinfo](/oauth/userinfo)
-* [GET /oauth/jwks](/oauth/jwks)
-* [GET /oauth/authorize](/oauth/authorize)
-* [Server to Server Auth](server-to-server-authentication/)
+* [POST /oauth/token](/oauth/token/)
+* [POST /oauth/ro](/oauth/ro/)
+* [GET /oauth/userinfo](/oauth/userinfo/)
+* [GET /oauth/jwks](/oauth/jwks/)
+* [GET /oauth/authorize](/oauth/authorize/)
+* [Server to Server Auth](/server-to-server-authentication/)
 * [Token introspection](/token-introspection/)
 
 :body

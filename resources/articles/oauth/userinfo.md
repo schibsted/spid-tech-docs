@@ -4,11 +4,11 @@
 
 ## See also
 
-* [POST /oauth/token](/oauth/token)
-* [POST /oauth/ro](/oauth/ro)
-* [POST /oauth/introspect](/oauth/introspect)
-* [GET /oauth/jwks](/oauth/jwks)
-* [GET /oauth/authorize](/oauth/authorize)
+* [POST /oauth/token](/oauth/token/)
+* [POST /oauth/ro](/oauth/ro/)
+* [POST /oauth/introspect](/oauth/introspect/)
+* [GET /oauth/jwks](/oauth/jwks/)
+* [GET /oauth/authorize](/oauth/authorize/)
 
 :body
 

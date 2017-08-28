@@ -4,17 +4,17 @@
 
 ## See also
 
-* [POST /oauth/token](/oauth/token)
-* [POST /oauth/ro](/oauth/ro)
-* [POST /oauth/introspect](/oauth/introspect)
-* [GET /oauth/userinfo](/oauth/userinfo)
-* [GET /oauth/authorize](/oauth/authorize)
+* [POST /oauth/token](/oauth/token/)
+* [POST /oauth/ro](/oauth/ro/)
+* [POST /oauth/introspect](/oauth/introspect/)
+* [GET /oauth/userinfo](/oauth/userinfo/)
+* [GET /oauth/authorize](/oauth/authorize/)
 
 :body
 
 SPiD publish the public RSA keys as a JSON Web Key (JWK) set. These web keys are
 used to sign tokens, to enable applications to verify the signature and validity
-of token without making a request to [/oauth/introspect](/oauth/introspect).
+of token without making a request to [/oauth/introspect](/oauth/introspect/).
 
 The JWK and JWKS formats are defined by [RFC 7517](https://tools.ietf.org/html/rfc7517).
 
