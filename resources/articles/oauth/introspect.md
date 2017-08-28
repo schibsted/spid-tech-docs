@@ -26,7 +26,7 @@ see [Specifying a resource indicator](http://techdocs.spid.no/authentication/).
 
 ```
 POST /oauth/introspect
-Authorization: Basic NGU4NDYzNTY5Y2FmN2NhMDE5MDAwMDA3OmZvb2Jhcg==
+Authorization: Basic NGU4NDYz...OmZvb2Jhcg==
 Content-Type: application/x-www-form-urlencoded
 
 token=eyJ0eXAiOiJK...jUaR-nZOx5MGg
