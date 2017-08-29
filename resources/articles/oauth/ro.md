@@ -9,14 +9,17 @@
 * [GET /oauth/userinfo](/oauth/userinfo/)
 * [GET /oauth/jwks](/oauth/jwks/)
 * [GET /oauth/authorize](/oauth/authorize/)
-* [POST /passwordless/start](/endpoints/passwordless/start/)
+* [POST /passwordless/start](/endpoints/POST/passwordless/start/)
 
 :body
 
 The `/oauth/ro` endpoint is used to authenticate a user via a challange code.
-The flow is started by calling the [/passwordless/start](/endpoints/passwordless/start/)
+The flow is started by calling the [/passwordless/start](/endpoints/POST/passwordless/start/)
 endpoint and then calling the `/oauth/ro` endpoint with `passwordless_token` received from
-[/passwordless/start](/endpoints/passwordless/start/) and challenge `code` entered by user.
+[/passwordless/start](/endpoints/POST/passwordless/start/) and challenge `code` entered by user.
+
+This endpoint is considered a beta feature, and will most likely be transform into a
+grant_type in [/oauth/token](/oauth/token/). Have that in mind if implementing this.
 
 ## Request
 
