@@ -22,8 +22,8 @@ SelfService.
 SPiD currently supports 5 grant_types:
 
 * **client_credentials** to fetch a client/server token
-* **authorization_code** to exchange a one time code for a user token
 * **password** to fetch a user token, given username and password
+* **authorization_code** to exchange a one time code for a user token
 * **refresh_token** to exchange a refresh token for a new user access token
 * **urn:ietf:params:oauth:grant-type:jwt-bearer** to login with Facebook and Google+
 
