@@ -16,10 +16,12 @@
 The `/oauth/ro` endpoint is used to authenticate a user via a challange code.
 The flow is started by calling the [/passwordless/start](/endpoints/POST/passwordless/start/)
 endpoint and then calling the `/oauth/ro` endpoint with `passwordless_token` received from
-[/passwordless/start](/endpoints/POST/passwordless/start/) and challenge `code` entered by user.
+[/passwordless/start](/endpoints/POST/passwordless/start/) and challenge `code`
+entered by the user.
 
-This endpoint is considered a beta feature, and will most likely be transform into a
-grant_type in [/oauth/token](/oauth/token/). Have that in mind if implementing this.
+This endpoint is considered a beta feature, and will most likely be transformed
+into a grant type in [/oauth/token](/oauth/token/). Have that in mind if
+implementing this.
 
 ## Request
 

@@ -16,9 +16,10 @@ The `/oauth/userinfo` endpoint allows an application to fetch user data in
 OpenID [Standard Claims](http://openid.net/specs/openid-connect-core-1_0.html#StandardClaims)
 format, as defined by the [OpenID Connect specification](http://openid.net/specs/openid-connect-core-1_0.html).
 
-The endpoint relies on token having scopes. If no scopes are given, only the `sub` claim is return.
-There are 4 scopes that you may request for when getting a token. These are passed in the authorization code flow,
-the password grant flow, or the `oauth/ro` flow.
+The endpoint relies on token having scopes. If no scopes are given, only the
+`sub` claim is returned. There are 4 scopes that you may request for when
+getting a token. The scopes are requested as part of the authorization code
+flow, the password grant flow, or the `oauth/ro` flow.
 
 ## Request
 

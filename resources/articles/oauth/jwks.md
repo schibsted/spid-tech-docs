@@ -12,14 +12,14 @@
 
 :body
 
-SPiD publish the public RSA keys as a JSON Web Key (JWK) set. These web keys are
-used to sign tokens, to enable applications to verify the signature and validity
-of token without making a request to [/oauth/introspect](/oauth/introspect/).
+SPiD publishes the public part of the RSA keys used to sign tokens on the
+`/oauth/jwks` endpoint. This enables applications to verify the validity of
+tokens without making a request to [/oauth/introspect](/oauth/introspect/).
 
 The JWK and JWKS formats are defined by [RFC 7517](https://tools.ietf.org/html/rfc7517).
 
-A list of libraries in different programming languages that implements
-JWS can be found on [https://jwt.io](https://jwt.io).
+A list of libraries in different programming languages that supports verifying
+the signature of JWS can be found on [https://jwt.io](https://jwt.io).
 
 ## Request
 

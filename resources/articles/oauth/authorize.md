@@ -14,6 +14,7 @@
 
 The `/oauth/authorize` is used to start an authentication flow in SPiD.
 There currently is an authorize implementation in SPiD that redirects to the
-regular login flow. This will be changed during the H2 2017. More info will come.
+regular login flow. This will be changed during the second half of 2017.
+More info will come.
 
 For now, see [Auth, Login, Signup and Signin flow](/flows/auth-flow/).

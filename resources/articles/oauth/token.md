@@ -13,25 +13,31 @@
 
 :body
 
-The `/oauth/token` endpoint is used to issue tokens to users and services.
-Users are given user tokens and services are given client/server tokens. In SPiD
-there also is 2 more token variants called admin tokens and admin client tokens,
-but these tokens are only used by internal applications like Ambassador or
-SelfService.
+The `/oauth/token` endpoint is used to issue tokens for users and services.
+"User tokens" are issued for users, while "client tokens" are issued
+for services. In SPiD there is also 2 more token variants called admin tokens
+and admin client tokens, but these tokens are only used by internal
+applications like Ambassador or SelfService.
 
 SPiD currently supports 5 grant_types:
 
-* **client_credentials** to fetch a client/server token
+* **client_credentials** to fetch a client token
 * **password** to fetch a user token, given username and password
 * **authorization_code** to exchange a one time code for a user token
 * **refresh_token** to exchange a refresh token for a new user access token
 * **urn:ietf:params:oauth:grant-type:jwt-bearer** to login with Facebook and Google+
 
+All supported grant types require [client authentication](/authentication/).
+Client authentication methods supported are via the `authorization` header in the form of
+Basic Auth, and via `client_id` and `client_secret` as part of the POST body.
+The recommended method is via the `authorization` header.
+
 ## Grant type Client credentials, for server tokens
 
-Server tokens are generally more powerful and should be kept secret. When
-fetching a token, a third parameter called `resource` is allowed, to support
-cross merchant introspection and set the intended audience of the token. 
+Server tokens are generally more powerful and should be kept secret. In addition
+to the parameters `grant_type` and `scope`, a third parameter called `resource`
+is allowed, to support cross merchant introspection and set the intended
+audience of the token. See [Specifying a resource indicator](http://techdocs.spid.no/authentication/).
 
 ### Request
 
@@ -62,7 +68,7 @@ Date: Mon, 29 Feb 2016 13:37:00 GMT
 ## Grant type Password, for user tokens
 
 This grant is mainly only used from native mobile apps, and is not permitted
-in any other application.
+by any other application.
 
 ### Request
 
@@ -95,7 +101,7 @@ Date: Mon, 29 Feb 2016 13:37:00 GMT
 ## Grant type Authorization code, for user tokens
 
 The authorization code grant is the second step in the authorization flow for user.
-A user logs in to SPiD, and SPiD will return user to site with a code.
+A user logs in to SPiD, and SPiD will return the user to site with a code.
 That code is then exchanged in backend for a user token.
 
 ### Request
@@ -163,8 +169,8 @@ Date: Mon, 29 Feb 2016 13:37:00 GMT
 ## Grant type JWT Bearer, for user tokens via Facebook and Google+
 
 The JWT Bearer grant is used to fetch a user access token, by first logging
-the user in via a third party, and then sending third party token to SPiD,
-bake into a signed JWT.
+the user in via a third party, and then sending the third party token to SPiD,
+baked into a signed JWT.
 
 ### Request
 
@@ -192,7 +198,7 @@ Date: Mon, 29 Feb 2016 13:37:00 GMT
 }
 ```
 
-### Failure cases
+## Failure cases
 
 * **400 Bad Request** <span class="faded">Malformed request, missing parameter,
 or unsupported grant type, invalid client credentials, etc. See error response

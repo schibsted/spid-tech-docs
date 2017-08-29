@@ -14,8 +14,8 @@
 
 :body
 
-The `/oauth/introspect` endpoint is used to verify token and to translate it into claims.
-Introspection is defined in [RFC-7662](https://tools.ietf.org/html/rfc7662).
+The `/oauth/introspect` endpoint is used to verify a token and to translate it into claims.
+Introspection is defined in [RFC 7662](https://tools.ietf.org/html/rfc7662).
 
 A token can only be introspected by a client within the same merchant, or by a client
 who is the intended audience, meaning the service domain of the introspecting client
@@ -60,7 +60,8 @@ Date: Mon, 29 Feb 2016 13:37:00 GMT
 
 ### Request with invalid token
 
-Invalid token can be an expired token, token of which client is not intended audience, or a non JWT token.
+Invalid token can be an expired token, a token not intended for the introspecting
+client, or a non JWT token.
 
 ```js
 HTTP/1.1 200 OK
