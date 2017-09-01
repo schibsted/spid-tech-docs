@@ -7,5 +7,5 @@
           {:value "STREX"               :description "Strex phone payment"}
           {:value "KLARNA"              :description "Klarna payment"}
           {:value "VOUCHERS"            :description "Payment with SPiD Voucher code"}
-          {:value "EXTERNAL"            :description "External payment method"}
+          {:value "PROVIDED"            :description "Provided payment method"}
           ]}
