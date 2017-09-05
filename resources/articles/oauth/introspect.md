@@ -9,7 +9,7 @@
 * [GET /oauth/userinfo](/oauth/userinfo/)
 * [GET /oauth/jwks](/oauth/jwks/)
 * [GET /oauth/authorize](/oauth/authorize/)
-* [Server to Server Auth](/server-to-server-authentication/)
+* [Server to Server Auth](/s2s-auth/)
 * [Token introspection](/token-introspection/)
 
 :body
