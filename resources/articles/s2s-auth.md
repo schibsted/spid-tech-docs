@@ -22,14 +22,15 @@ In order to make use of this information, you need to know your:
 :body
 
 In addition to the user auth facilities provided by the platform, SPiD also provides a mechanism for
-when two services need to communicate directly without a user present. In these situations, a service
+when two services want to communicate directly with each other. In these situations, a service
 needs to authenticate and authorize the other services which access its protected resources. We refer
 to this as service-to-service (henceforth S2S) auth.
 
 S2S auth in SPiD is made up of three basic steps:
-1. A client [obtains a client (a.k.a. server) token](/oauth/token/) via
+
+1. A client [obtains a client token](/oauth/token/) via
 a `client_credentials` grant.
-1. The client makes a request to the resource server passing the newly acquired token as a
+1. The client makes a request to the server hosting the protected resource, known as the "resource server", passing the newly acquired token as a
 [bearer token](https://tools.ietf.org/html/rfc6750).
 1. The resource server [introspects](/token-introspection/) the token it receives and validates the properties
 in the introspected token. If it is valid, the request is allowed to proceed. If it is not, the
@@ -43,7 +44,7 @@ The following sections break down these high-level steps in more detail.
 
 Before making a call to a resource server, the calling client first needs to [obtain a token](/oauth/token/).
 For this, a `client_credentials` grant is made using the caller's client ID and secret. Additionally,
-the caller should specify the resource (a.k.a. audience) trying to be accessed via the `resource`
+the caller should specify the resource trying to be accessed via the `resource`
 parameter and any scopes required via the `scope` parameter:
 
 ```sh
@@ -58,7 +59,7 @@ For further details on resource indicators, please refer to
 ***Note:*** currently the value passed as the resource needs to match the domain registered in SPiD's
 [self service](/mobile/selfservice/) tool for the resource server.
 
-The scopes passed will help the receiving service authorize the call, and can be thought of a set of
+The scopes passed will help the receiving service authorize the call, and can be thought of as a set of
 permissions or policies that the service will allow. Thus, the scopes present in the token help the
 called service determine if the request actions should be permitted. The exact scopes required is
 determined by the resource server and is outside the scope of this document.
@@ -95,7 +96,8 @@ to the following:
 }
 ```
 
-One the resource server has introspected the token, it's important to validate the claims as follows:
+Once the resource server has introspected the token, it's important to validate the claims as follows:
+
 1. Has the token expired? This is determined by checking the `exp` claim of the token. When performing
 remote introspection this is handled automatically as the introspection request will return `false`
 as the value of the `active` property.
@@ -108,11 +110,11 @@ the scopes carried by the token. For each resource/action provided by the servic
 should decide on a set of scopes that are required to perform that action and ensure that the token
 carries those scopes.
 
-If all of the above checks pass, the resource server should let the call through. If the token has expired,
-the service should return a status of `401 Unauthorized` to indicate to the calling service that it's
-time to fetch a new token. If the issuer, audience or scopes are incorrect/insufficient, the service
-should return a `403 Forbidden` to indicate that the token was understood, but the permissions are not
-sufficient to complete the call.
+If all of the above checks pass, the resource server should let the call through. If the `Authorization`
+header is missing or incorrect, or if the token has expired, the service should return a status of 
+`401 Unauthorized` to indicate to the calling service that it's time to fetch a new token. If the issuer,
+audience or scopes are incorrect/insufficient, the service should return a `403 Forbidden` to indicate
+that the token was understood, but the permissions are not sufficient to complete the call.
 
 Often services support multiple clients/tenants, and the `client_id` parameter can be used to determine
 which one is calling the service. It is a recommended best practice for services to maintain their
