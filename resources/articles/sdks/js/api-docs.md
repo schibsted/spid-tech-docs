@@ -107,22 +107,15 @@ if the user has access to the product in question.
 ```js
 SPiD.hasProduct(2134423, function (err, response) {
     response === {
-        baseDomain: "sdk.dev"
-        defaultAgreementAccepted: true
-        clientAgreementAccepted: true
-        displayName: "Anna Andersson"
-        expiresIn: 6967
-        familyName: "Andersson"
-        gender: "male"
-        givenName: "Anna"
-        id: "4ebb7ce59caf7c1f22000001"
-        photo: "http://www.gravatar.com/avatar/ec32937c22d1a4b1474657b776d0f398?s=200"
-        productId: 10010
-        result: true
-        serverTime: 1360342353
+        baseDomain: "sdk.dev",
+        expiresIn: 6967,
+        id: "4ebb7ce59caf7c1f22000001",
+        userId: 2200021,
+        uuid: "7c4d3f05-0829-42c4-a6e4-202ea91012f5,
+        productId: 10010,
+        result: true,
+        serverTime: 1360342353,
         sig: "layQctw_mMOAM5RJnr9nr7RgPv_0lZqVAojXBVpQSBY.eyJyZXN1bHQiOnRydWUsInNlcnZlclRpbWUiOjEzNjAzNDIzNTMsInByb2R1Y3RJZCI6MTAwMTAsInVzZXJTdGF0dXMiOiJjb25uZWN0ZWQiLCJ1c2VySWQiOjIyMDAwMjEsImlkIjoiNGViYjdjZTU5Y2FmN2MxZjIyMDAwMDAxIiwiZGlzcGxheU5hbWUiOiJKb2FraW0gV1x1MDBlNW5nZ3JlbiIsImdpdmVuTmFtZSI6IkpvYWtpbSIsImZhbWlseU5hbWUiOiJXXHUwMGU1bmdncmVuIiwiZ2VuZGVyIjoibWFsZSIsInBob3RvIjoiaHR0cDpcL1wvd3d3LmdyYXZhdGFyLmNvbVwvYXZhdGFyXC9lYzMyOTM3YzIyZDFhNGIxNDc0NjU3Yjc3NmQwZjM5OD9zPTIwMCIsImV4cGlyZXNJbiI6Njk2NywiYmFzZURvbWFpbiI6InNkay5kZXYiLCJhbGdvcml0aG0iOiJITUFDLVNIQTI1NiJ9"
-        userId: 2200021
-        userStatus: "connected"
     };
 });
 ```
@@ -143,23 +136,16 @@ if the user has access to the product in question.
 ```js
 SPiD.hasSubscription(324892374, function (err, response) {
     response === {
-        baseDomain: "sdk.dev"
-        defaultAgreementAccepted: true
-        clientAgreementAccepted: true
-        displayName: "Anna Andersson"
-        expiresIn: 7173
-        familyName: "Andersson"
-        gender: "male"
-        givenName: "Anna"
-        id: "4ebb7ce59caf7c1f22000001"
-        photo: "http://www.gravatar.com/avatar/ec32937c22d1a4b1474657b776d0f398?s=200"
-        productId: 10010
-        result: true
-        serverTime: 1360342380
+        baseDomain: "sdk.dev",
+        expiresIn: 7173,
+        id: "4ebb7ce59caf7c1f22000001",
+        uuid: "7c4d3f05-0829-42c4-a6e4-202ea91012f5",
+        userId: 2200021,
+        productId: 10010,
+        subscriptionId: 165572,
+        result: true,
+        serverTime: 1360342380,
         sig: "ynj1V3nZhRa3JBw9_Up97e5yX0PLkWM0bc6M2EcHmLs.eyJyZXN1bHQiOnRydWUsInNlcnZlclRpbWUiOjEzNjAzNDIzODAsInByb2R1Y3RJZCI6MTAwMTAsInVzZXJTdGF0dXMiOiJjb25uZWN0ZWQiLCJ1c2VySWQiOjIyMDAwMjEsImlkIjoiNGViYjdjZTU5Y2FmN2MxZjIyMDAwMDAxIiwic3Vic2NyaXB0aW9uSWQiOjE2NTU3MiwiZGlzcGxheU5hbWUiOiJKb2FraW0gV1x1MDBlNW5nZ3JlbiIsImdpdmVuTmFtZSI6IkpvYWtpbSIsImZhbWlseU5hbWUiOiJXXHUwMGU1bmdncmVuIiwiZ2VuZGVyIjoibWFsZSIsInBob3RvIjoiaHR0cDpcL1wvd3d3LmdyYXZhdGFyLmNvbVwvYXZhdGFyXC9lYzMyOTM3YzIyZDFhNGIxNDc0NjU3Yjc3NmQwZjM5OD9zPTIwMCIsImV4cGlyZXNJbiI6NzE3MywiYmFzZURvbWFpbiI6InNkay5kZXYiLCJhbGdvcml0aG0iOiJITUFDLVNIQTI1NiJ9"
-        subscriptionId: 165572
-        userId: 2200021
-        userStatus: "connected"
     };
 });
 ```
