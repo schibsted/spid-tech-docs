@@ -149,6 +149,18 @@ SPiD.init({
 </script>
 ```
 
+## Logout
+
+When using the Javascript SDK, a local cache is used to cache the logged in state
+of the user. When user clicks logout, this local cache needs to be cleared. That
+is done by calling `SPiD.logout()` in the Javascript SDK.
+
+Calling `SPiD.logout()` will try to invalidate the remote logged in state too, but
+will not succeed in Safari when there has been more than 24 hours since the last
+active user login. To properly log the user out, you should also redirect the
+browser to the logout page. The URL can be built by calling `SPiD_Uri.logout()`.
+
+
 ## Initialization options
 
 ##### client_id
@@ -186,22 +198,14 @@ Defaults to 5 seconds (5000 milliseconds).
 
 ##### refresh_timeout
 
-This option specifies how often the session is refreshed and retrieved from SPiD, in milliseconds.
-Default is every 15 minutes (900000 milliseconds). This is configurable down to 1 minute (60000 milliseconds).
-We encourage clients to use the default unless it is necessary to change it, like in a single-page app
-where page refreshes are very infrequent.
-
-##### cache
-
-By default the SDK will cache responses from SPiD for functions that check product and subscription access
-(hasProduct, hasSubscription). It uses the refresh_timeout value for invalidating the cache.
-This is default true and the purpose is to minimize requests to SPiD and performance gains.
-These responses rarely change.
+This option specifies the cache time of successful hasProduct and hasSubscription calls.
+This is configurable down to 1 minute (60000 milliseconds).
+We encourage clients to use the default unless it is necessary to change it.
 
 ##### storage
 
 Set to ’cookie’ to store the session as a cookie. Set to ’localstorage’ to store the session in local storage.
-Set to `false` to disable session storage altogether. The default value is ’localstorage’.
+The default value is ’localstorage’.
 
 ## Auto-login usecase
 
