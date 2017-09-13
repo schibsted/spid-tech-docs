@@ -181,7 +181,7 @@ Register subscriber for event. The event handler function will be called
 whenever the named event occurs.
 
 ```js
-SPiD.event.subscribe("auth:login", function (data) {
+SPiD.event.subscribe("SPiD:login", function (data) {
     alert("Welcome!");
 });
 ```
@@ -197,11 +197,11 @@ var callback = function (data) {
     alert("Welcome!");
 };
 
-SPiD.event.subscribe("auth:login", callback);
+SPiD.event.subscribe("SPiD:login", callback);
 
 // ...
 
-SPiD.event.unsubscribe("auth:login", callback);
+SPiD.event.unsubscribe("SPiD:login", callback);
 ```
 
 Note that it must be the same function reference, you cannot inline the function

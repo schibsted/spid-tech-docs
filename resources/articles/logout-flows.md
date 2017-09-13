@@ -24,12 +24,14 @@ in the logout request. After the logout is performed on SPiD the SDK will trigge
 telling your application that the user has been logged out:
 #### User logs out
 
-- `auth.logout`
-- `auth.statusChange`
-- `auth.sessionChange`
+- `SPiD.logout`
+- `SPiD.statusChange`
+- `SPiD.sessionChange`
 
 It is then up to your application to perform session cleaning and logout procedures needed to actively log out the user
 from your application.
+
+It is also recommended to send user through logout redirect flow, as Safari users might not be fully logged out.
 
 ## Logging out of SPiD via the redirect flow
 Logging out via the redirect flow, by redirecting the user to /logout in SPiD, will delete the current session for the 
