@@ -17,7 +17,8 @@ In order to make use of this information, you need to know your:
 
 ## See also
 
-- [Obtaining tokens](/authentication/#obtaining-a-server-token)
+- [Obtaining server tokens](/authentication/#obtaining-a-server-token)
+- [Obtaining user tokens](/authentication/#obtaining-a-user-token)
 
 :body
 
@@ -28,6 +29,9 @@ received from clients. For JWT access tokens issued by SPiD, this can be done in
 1. By verifying the token signature and content locally.
 
 **Note:** Non-JWT tokens can not be introspected. Make sure JWT tokens are enabled for the client in Self Service.
+
+**Note:** User tokens can not be introspected locally. Only remote introspection via a token introspection request
+to SPiD is currently supported.
 
 ## Token introspection request
 
