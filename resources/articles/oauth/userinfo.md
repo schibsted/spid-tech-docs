@@ -16,9 +16,15 @@ The `/oauth/userinfo` endpoint allows an application to fetch user data in
 OpenID [Standard Claims](http://openid.net/specs/openid-connect-core-1_0.html#StandardClaims)
 format, as defined by the [OpenID Connect specification](http://openid.net/specs/openid-connect-core-1_0.html).
 
-The endpoint relies on token having scopes. If no scopes are given, only the
-`sub` claim is returned. There are 4 scopes that you may request for when
-getting a token. The scopes are requested as part of the authorization code
+What data is returned depends on the scopes in the token. There are 4 scopes that you may request, in addition to the
+required `openid` scope, when getting a token:
+
+* `profile`
+* `email`
+* `phone`
+* `address`
+ 
+The scopes are requested as part of the authorization code
 flow, the password grant flow, or the `oauth/ro` flow.
 
 ## Request
@@ -63,15 +69,15 @@ Date: Mon, 29 Feb 2016 13:37:00 GMT
 
 ### Failure cases
 
-* **401 Unauthorized** <span class="faded">Invalid token</span>
-* **401 Unauthorized** <span class="faded">Expired token</span>
-* **401 Unauthorized** <span class="faded">Not a JWT</span>
+* **401 Unauthorized** <span class="faded">Invalid, expired or malformed token</span>
+* **403 Forbidden** <span class="faded">Missing 'openid' scope in token</span>
 
 ### Scopes
 
-Scopes can be combined into space separated strings. To get all fields, you need to ask for `profile email phone address`.
+Scopes can be combined into space separated strings. To get all fields, you need to ask for
+`openid profile email phone address`.
 
-**Scope: none**
+**Scope: openid**
 
 ```js
 {
