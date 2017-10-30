@@ -1,9 +1,9 @@
 {:id :payment-options-array
  :name "Payment options - array format"
- :description "This format allows providing data for external payment methods. See the [external payment methods specification](/external-payment-methods/) for further details."
- :fields [{:name "type"             :type :payment-option-type  :description "Required. Example: PAYEX_CC, STREX, EXTERNAL"}
-           {:name "externalType"    :type :string               :description "Required when type is EXTERNAL. A subtype used to distinguish between various types of external payment methods."}
-           {:name "url"             :type :string               :description "Required when type is EXTERNAL. User is redirected to this URL after choosing payment with external payment method."}
-           {:name "name"            :type :string               :description "Required when type is EXTERNAL. External payment method name."}
-           {:name "imageUrl"        :type :string               :description "Required when type is EXTERNAL. External payment method image url."}
-           {:name "description"     :type :string               :description "Required when type is EXTERNAL. External payment method description."}]}
+ :description "This format allows providing data for provided payment methods. See the [provided payment methods specification](/external-payment-methods/) for further details."
+ :fields [{:name "type"             :type :payment-option-type  :description "Required. Example: PAYEX_CC, STREX, PROVIDED"}
+           {:name "subType"         :type :string               :description "Required when type is PROVIDED. A subtype used to distinguish between various types of provided payment methods."}
+           {:name "url"             :type :string               :description "Required when type is PROVIDED. User is redirected to this URL after choosing payment with provided payment method."}
+           {:name "name"            :type :string               :description "Required when type is PROVIDED. Provided payment method name."}
+           {:name "imageUrl"        :type :string               :description "Required when type is PROVIDED. Provided payment method image url."}
+           {:name "description"     :type :string               :description "Required when type is PROVIDED. Provided payment method description."}]}

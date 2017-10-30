@@ -40,4 +40,4 @@ DELETE /paylink/{paylinkId}
 :example-params
 
 items: [{\\"name\\":\\"Episode\\",\\"description\\":\\"Star Wars IV\\",\\"price\\":9900,\\"vat\\":2500},{\\"description\\":\\"Star Wars V\\",\\"price\\":9900,\\"vat\\":2500},{\\"description\\":\\"Star Wars VI\\",\\"price\\":9900,\\"vat\\":2500}]
-paymentOptions: [{\\"type\\":\\"PAYEX_CC\\"},{\\"type\\":\\"KLARNA\\"},{\\"type\\":\\"EXTERNAL\\",\\"externalType\\":\\"Vouchers\\",\\"url\\":\\"https://external-url.com\\",\\"name\\":\\"Vouchers\\",\\"imageUrl\\":\\"https://external-url.com/vouchers-icon.jpeg\\",\\"description\\":\\"Vouchers allow you to pay with voucher code.\\"}]
+paymentOptions: [{\\"type\\":\\"PAYEX_CC\\"},{\\"type\\":\\"KLARNA\\"},{\\"type\\":\\"PROVIDED\\",\\"subType\\":\\"Vouchers\\",\\"url\\":\\"https://external-url.com\\",\\"name\\":\\"Vouchers\\",\\"imageUrl\\":\\"https://external-url.com/vouchers-icon.jpeg\\",\\"description\\":\\"Vouchers allow you to pay with voucher code.\\"}]
