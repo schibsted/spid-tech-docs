@@ -213,3 +213,7 @@ This is a simple overview of Single Sign On using JS SDK, explaining the complet
 service (yellow) and SPiD (blue).
 
 ![Single Sign On using JS SDK](/images/simple-sso-js-usecase.png)
+
+## Third-Party Cookies
+The SPiD js SDK depends heavily on the possibility to access third party cookies. If a user blocks this feature in the browser or it's blocked by default, this SDK won't be able to retrieve session information from SPiD.
+**Note: this means that methods like `.hasSession()` will report "session not found" even after a successful login**
