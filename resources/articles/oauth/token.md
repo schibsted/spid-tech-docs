@@ -4,6 +4,7 @@
 
 ## See also
 
+* [POST /oauth/register](/oauth/register/)
 * [POST /oauth/ro](/oauth/ro/)
 * [POST /oauth/introspect](/oauth/introspect/)
 * [GET /oauth/userinfo](/oauth/userinfo/)
