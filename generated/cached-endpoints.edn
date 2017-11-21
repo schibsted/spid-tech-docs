@@ -3015,7 +3015,7 @@
    :title
    "The PayLink title. Displayed to the user on the payment page, and shown on the New Credit Card page at Payex.",
    :paymentOptions
-   "The allowed payment methods for this PayLink. Payment options can be provided in two formats: as an integer bit mask or as a JSON array of objects (this format allows supplying data for provided payment methods). Defaults to integer bitmask, 2 (bank card with PayEx).",
+   "The allowed payment methods for this PayLink. Payment options can be provided in two formats: as an integer bit mask or as a JSON array of objects (this format allows providing data for external payment methods). Defaults to integer bitmask, 2 (bank card with PayEx).",
    :purchaseFlow
    "Defaults to `DIRECT`, which will process the payment straight away. Can also be `AUTHORIZE`, where the payment is on hold and must later be captured.",
    :redirectUri
@@ -3120,6 +3120,67 @@
   :defaultOutputFormat "json",
   :description "Create a PayLink object",
   :category ["Payment Services" "P2pLink API"]}
+ {:path "paylink/{paylinkId}/use",
+  :validOutputFormats ["json" "jsonp"],
+  :parameterDescriptions {:paylinkId "ID of the paylink"},
+  :method "POST",
+  :name "Use Paylink",
+  :httpMethods
+  {:POST
+   {:name "POST",
+    :required ["paylinkId"],
+    :optional [],
+    :accessTokenTypes ["server"],
+    :filters [],
+    :defaultFilters [],
+    :responses []}},
+  :url "/api/2/paylink/{id}/use",
+  :pathParameters ["paylinkId"],
+  :controller "Api/2/Paylink.paylink_use",
+  :defaultOutputFormat "json",
+  :description "Set \"used\" status to Paylink",
+  :category ["Payment Services" "PayLink API"]}
+ {:path "paylink/{paylinkId}/unlock",
+  :validOutputFormats ["json" "jsonp"],
+  :parameterDescriptions {:paylinkId "ID of the paylink"},
+  :method "POST",
+  :name "Unlock Paylink",
+  :httpMethods
+  {:POST
+   {:name "POST",
+    :required ["paylinkId"],
+    :optional [],
+    :accessTokenTypes ["server"],
+    :filters [],
+    :defaultFilters [],
+    :responses []}},
+  :url "/api/2/paylink/{id}/unlock",
+  :pathParameters ["paylinkId"],
+  :controller "Api/2/Paylink.paylink_unlock",
+  :defaultOutputFormat "json",
+  :description
+  "Set \"available\" status to Paylink only if It's already locked",
+  :category ["Payment Services" "PayLink API"]}
+ {:path "paylink/{paylinkId}/lock",
+  :validOutputFormats ["json" "jsonp"],
+  :parameterDescriptions {:paylinkId "ID of the paylink"},
+  :method "POST",
+  :name "Lock Paylink",
+  :httpMethods
+  {:POST
+   {:name "POST",
+    :required ["paylinkId"],
+    :optional [],
+    :accessTokenTypes ["server"],
+    :filters [],
+    :defaultFilters [],
+    :responses []}},
+  :url "/api/2/paylink/{id}/lock",
+  :pathParameters ["paylinkId"],
+  :controller "Api/2/Paylink.paylink_lock",
+  :defaultOutputFormat "json",
+  :description "Set \"lock\" status to Paylink",
+  :category ["Payment Services" "PayLink API"]}
  {:path "paylink/{paylinkId}",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions

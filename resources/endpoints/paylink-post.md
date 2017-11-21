@@ -35,6 +35,10 @@ The `paymentOptions` parameter defines allowed payment methods for Paylink. It c
 :relevant-endpoints
 
 GET /paylink/{paylinkId}
+POST /paylink/{paylinkId}/lock
+POST /paylink/{paylinkId}/unlock
+POST /paylink/{paylinkId}/use
+POST /paylink
 DELETE /paylink/{paylinkId}
 
 :example-params

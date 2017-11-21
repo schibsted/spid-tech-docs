@@ -1,7 +1,6 @@
 :introduction
 
-Mark [paylink](/paylink-api/) as deleted. This will effectively disable the
-paylink, but it will not be physically deleted from SPiD.
+Mark [paylink](/paylink-api/) as used by ID.
 
 :relevant-endpoints
 
@@ -11,4 +10,3 @@ POST /paylink/{paylinkId}/unlock
 POST /paylink/{paylinkId}/use
 POST /paylink
 DELETE /paylink/{paylinkId}
-
