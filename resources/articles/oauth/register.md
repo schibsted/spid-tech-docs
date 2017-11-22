@@ -1,4 +1,4 @@
-:title POST /oauth/introspect
+:title POST /oauth/register
 
 :aside
 
@@ -14,11 +14,13 @@
 
 :body
 
-The `/oauth/register` endpoint is used to register a new client under a merchant. The use case
-for this endpoint is mainly dynamically registered clients for s2s auth.
+The `/oauth/register` endpoint is used to register a new client under a merchant.
+The use case for this endpoint is to allow merchants to dynamically register
+clients for [server-to-server auth](/s2s-auth/).
 Dynamic client registration is defined in [RFC7591](https://tools.ietf.org/html/rfc7591).
 
-The bearer token in the request must have scope `spid:merchants/<merchant>|write` and token `client_id` must belong to that `<merchant>`.
+The bearer token in the request must contain scope `spid:merchants/<merchant>|write`
+and be issued to a client belonging to `<merchant>`.
 
 ## Request
 
