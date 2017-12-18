@@ -252,6 +252,8 @@ Response body from migration service to migration client:
 The migration for the user is initiated from the login view of the [Auth flow](/flows/auth-flow/),
 forgot password view of the [Auth flow](/flows/auth-flow/), or the [Forgot password flow](/flows/password-flow/).
 
+**Note:** Users are not migrated on signup to allow for a way to create a user account without importing old data.
+
 The login flow migration is done in 4 steps in total.
 
 1.  The user logs in,
