@@ -118,7 +118,7 @@ SPiD.hasProduct(2134423, function (err, response) {
         expiresIn: 6967,
         id: "4ebb7ce59caf7c1f22000001",
         userId: 2200021,
-        uuid: "7c4d3f05-0829-42c4-a6e4-202ea91012f5,
+        uuid: "7c4d3f05-0829-42c4-a6e4-202ea91012f5",
         productId: 10010,
         result: true,
         serverTime: 1360342353,
