@@ -12,78 +12,57 @@
 - [Register](/mobile/register/)
 - [Login](/mobile/login/)
 - [Android](/sdks/android/)
-    - [Android sample apps](/sdks/android/sample-apps/)
 - iOS
-    - [iOS sample apps](/sdks/ios/sample-apps/)
-- [Mobile review checklist](/mobile/reviews/)
-- [OAuth for mobile clients](/mobile/oauth-authentication-on-mobile-devices/)
 - [Best practices](/mobile/best-practices/)
-- [FAQ](/mobile/faq/)
 
 :body
 
-The iOS SPiD SDK is built on top of the backend SDK to provide access to functions with minimal effort from 
-the developer. Connecting to the SPiD can be done either natively, using a WebView, browser redirect or connecting via
-Facebook.
+The SchibstedID iOS SDK provides you access to SPT identity user objects and gives you the tools to manage your users and make authenticated requests
 
-#### SPiDClient
+To learn more about the SDK, the full documentation can be found in the GitHub repo at [github.schibsted.io/spt-identity/identity-sdk-ios](https://github.schibsted.io/spt-identity/identity-sdk-ios).
 
-SPiDClient is a singleton used in the SDK to store information about the client using the SDK. Credentials such as client id, client secret as well as the app's url scheme and which server is being used is stored in the SPiDClient. After a user logs in the access token is also accessible in the SPiDClient, stored encrypted in the keychain and loaded automatically on app start if there is one available.
+For support, please contact [support@spid.no](mailto:support@spid.no)
 
-To initialize and setup the SPiDClient singleton call
+## Setup
 
-	SPiDClient.setClientID:(NSString *)clientID
-    	clientSecret:(NSString *)clientSecret
-    	appURLScheme:(NSString *)appURLSchema
-    	serverURL:(NSURL *)serverURL
+## Reference the pod
 
-Your client id and app url scheme can be found after creating your client in [self service](http://techdocs.spid.no/selfservice/access/). After creating your client you can set your client secret. Be sure to treat this secret securely and do not send it in plain text on insecure channels such as e-mails.
+You will need to add the following sources to your podfile to include the pod `SchibstedID`
+- `source "git@github.schibsted.io:CocoaPods/Specs.git,"`: for SchibstedID
 
-This must be done before the SDK can be used, and can only be called once. After the SPiDClient has been configured you can use the SPiDTokenRequest class to send login requests to SPiD.
+The SDK is divided in to different subspecs:
 
-#### SPiDTokenRequest
+- `pod 'SchibstedID'`: this is the default
+- `pod 'SchibstedID/UI'`: will add the UI component
 
-Each supported grant type has its own method call in SPiDTokenRequest as shown below. Calling these methods creates a SPiDTokenRequest but does not execute it.
+### You must include a tracking subspec as well
 
-Grant type **password**
+The UI does some internal tracking, and requires a `TrackingEventsHandler` be set in the UI's configuration.
+To fulfill this, you must either implement it yourself or use one which is already implemented.
 
-        @param username The username
-        @param password The password
-        @param completionHandler Called on token request completion or error
-        @return The SPiDTokenRequest, call startRequest to execute
+To use the SchibstedIDTracking implementation, you may include the following in your podfile
 
-        + (instancetype)userTokenRequestWithUsername:(NSString *)username password:(NSString *)password completionHandler:(void (^)(SPiDError *error))completionHandler;
+- `pod 'SchibstedID/Tracking/Pulse'`: Adds dependency to the [new](https://github.schibsted.io/spt-dataanalytics/pulse-tracker-ios) pulse SDK
 
-Grant type **authorization_code**
+### Get some client credentials
 
-
-        @param code The authorization code
-        @param completionHandler Called on token request completion or error
-        @return The SPiDTokenRequest, call startRequest to execute
-
-        + (instancetype)userTokenRequestWithCode:(NSString *)code completionHandler:(void (^)(SPiDError *))completionHandler;
-    
-Grant type **urn:ietf:params:oauth:grant-type:jwt-bearer**
-
-   
-        @param appId Facebook appID
-        @param facebookToken Facebook access token
-        @param expirationDate Expiration date for the facebook token
-        @param completionHandler Called on token request completion or error
-        @return The SPiDTokenRequest, call startRequest to execute
-
-        + (instancetype)userTokenRequestWithFacebookAppID:(NSString *)appId facebookToken:(NSString *)facebookToken expirationDate:(NSDate *)expirationDate completionHandler:(void (^)(SPiDError *))completionHandler;
-    
-Grant type **refresh_token**
+The SDK works by giving you access to Schibsted users. And what kind of access is allowed is determined by a set
+of client credentials. The first thing you must do is get some credentials, which can be done through
+[self service](http://techdocs.spid.no/selfservice/access/). Learn about environments and merchants. The SDK will not work accross environments or merchants.
 
 
-        @param completionHandler Called on token request completion or error
-        @return The SPiDTokenRequest, call startRequest to execute
+## Building the example application(s)
 
-        + (instancetype)refreshTokenRequestWithCompletionHandler:(void (^)(SPiDError *))completionHandler;
-        
-The supplied completion handler is called when the request completes. If the request was successful the SPiDError used as parameter is nil, if an error occurred the SPiDError includes information on what went wrong. Always check if the request was successful or not before proceeding. When the user successfully logs in the access token is available in SPiDClient and stored in the keychain automatically.
+In CocoaPods-based projects you work within the project of the example application, which is inside "Example" folder.
+At first the workspace needs to be created by running `pod install` in the terminal, this has been wrapped in a script:
 
-To execute a SPiDTokenRequest call ```startRequest```.
+    ./pod_install.sh
+    open Example/SchibstedID.xcworkspace
 
-For detailed examples with source check the [example apps](/sdks/ios/sample-apps/).
+The last command will open "SchibstedID.xcworkspace" file in Xcode.
+Run the application using &#8984;R (Product - Run).
+Make sure that the "SchibstedID-Example" scheme is selected.
+
+There's an example UI application as well that you can open at:
+
+    open ExampleUI/ExampleUI.xcworkspace
