@@ -18,7 +18,7 @@
 
 Using SPiD you will gain access to a single sign-on system consisting of users from all Schibsted subsidiaries connected to SPiD as well as simplifying the user experience and increasing your conversion rate.
 
-The SPiD mobile SDKs provides components that simplify integrating SPiD into your app. Login is handled using [OAuth 2.0](/mobile/oauth-authentication-on-mobile-devices/) and a number of different login methods are supported; natively, using an external browser, webview, Facebook or Google+.
+The SPiD mobile SDKs provides components that simplify integrating SPiD into your app. Login is handled using [OAuth 2.0](https://oauth.net/2/) and a number of different login methods are supported; natively, using an external browser, webview, Facebook or Google+.
 
 To develop an app for SPiD the following needs to be done.
 
@@ -28,7 +28,7 @@ If you don't already have access to self service request access, see [self servi
 
 ### 2. Create a client and request stage/pre credentials
 
-Create the clients you need, configure them and request credentials. These credentials are valid only for the stage environment, before you receive credentials you can use in production you need to submit your app for [review](/mobile/reviews/).
+Create the clients you need, configure them and request credentials. These credentials are valid only for the stage environment. To request credentials for production, please contact support.
 
 ### 3. Review the default permissions
 
