@@ -1,7 +1,7 @@
 :introduction
 
 Get verification and availability status for an email address. Note that the
-email should be base64 encoded.
+email should be base64 url encoded.
 
 :example-params
 
