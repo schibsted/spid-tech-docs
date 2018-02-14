@@ -9,7 +9,7 @@
 ## See also
 
 - [GET /logout](/endpoints/GET/logout/)
-- [Logging out via the JavaScript SDK](/sdks/js/api-docs/#logout)
+- [Logging out via the JavaScript SDK](/sdks/js-2x/api-docs/#logout)
 - [Explaining how login flows work](/login-flows/)
 
 :body
@@ -20,7 +20,7 @@ type.
 
 ## Logging out of SPiD via the Javascript SDK
 Logging out via the Javascript SDK deletes the current session for the logged in user based on the session cookie sent
-in the logout request. After the logout is performed on SPiD the SDK will trigger 3 [events](/sdks/js/events/#available-sdk-events) 
+in the logout request. After the logout is performed on SPiD the SDK will trigger 3 [events](/sdks/js-2x/events/#available-sdk-events) 
 telling your application that the user has been logged out:
 #### User logs out
 

@@ -12,10 +12,10 @@
 ## Read more about the JavaScript SDK
 
 - [JavaScript SDK](/sdks/javascript/)
-- [Response signature and validation](/sdks/js/response-signature-and-validation/)
-- [API Docs](/sdks/js/api-docs/)
-- [Hosting](/sdks/js/hosting/)
-- [Best practices](/sdks/js/best-practices/)
+- [Response signature and validation](/sdks/js-2x/response-signature-and-validation/)
+- [API Docs](/sdks/js-2x/api-docs/)
+- [Hosting](/sdks/js-2x/hosting/)
+- [Best practices](/sdks/js-2x/best-practices/)
 
 ## See also
 

@@ -6,10 +6,10 @@
 ## Read more about the JavaScript SDK
 
 - [JavaScript SDK](/sdks/javascript/)
-- [Events](/sdks/js/events/)
-- [Response signature and validation](/sdks/js/response-signature-and-validation/)
-- [API Docs](/sdks/js/api-docs/)
-- [Hosting](/sdks/js/hosting/)
+- [Events](/sdks/js-2x/events/)
+- [Response signature and validation](/sdks/js-2x/response-signature-and-validation/)
+- [API Docs](/sdks/js-2x/api-docs/)
+- [Hosting](/sdks/js-2x/hosting/)
 
 ## See also
 

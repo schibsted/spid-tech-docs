@@ -10,11 +10,11 @@
 
 ## Read more about the JavaScript SDK
 
-- [Events](/sdks/js/events/)
-- [Response signature and validation](/sdks/js/response-signature-and-validation/)
-- [API Docs](/sdks/js/api-docs/)
-- [Hosting](/sdks/js/hosting/)
-- [Best practices](/sdks/js/best-practices/)
+- [Events](/sdks/js-2x/events/)
+- [Response signature and validation](/sdks/js-2x/response-signature-and-validation/)
+- [API Docs](/sdks/js-2x/api-docs/)
+- [Hosting](/sdks/js-2x/hosting/)
+- [Best practices](/sdks/js-2x/best-practices/)
 
 ## See also
 - [Documentation for the 1.x javascript SDK](/sdks/javascript-1x/)
@@ -48,7 +48,7 @@ with the appropriate values.
 - https://identity-pre.schibsted.com for stage/pre clients
 
 `SPID_JSSDK_URI` will normally point to SPiD's CDN or your own hosting. Read more about this
-under [hosting](/sdks/js/hosting/).
+under [hosting](/sdks/js-2x/hosting/).
 
 ### SDK variants
 
