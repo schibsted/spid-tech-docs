@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
-:title JavaScript SDK
+:title JavaScript version 2.x SDK
 :frontpage
 :category
 :aside

@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
-:title JavaScript SDK
+:title JavaScript version 1.x SDK (Deprecated)
 :frontpage
 :category
 :aside
