@@ -14,12 +14,12 @@
 - [API/Getting started docs](https://pages.github.schibsted.io/spt-identity/spid-sdk-browser)
 
 ## See also
-- [Documentation for the 2.x javascript SDK](/sdks/javascript-2x/)
-- [Documentation for the 1.x javascript SDK](/sdks/javascript-1x/)
+- [Documentation for the 2.x JavaScript SDK](/sdks/javascript-2x/)
+- [Documentation for the 1.x JavaScript SDK](/sdks/javascript-1x/)
 
 :body
 
-**Note: this documentation is for the upcoming version 3.x of the Javascript SDK. The old 2.x
+**Note: this documentation is for the upcoming version 3.x of the JavaScript SDK. The old 2.x
 version can be found [here](/sdks/javascript-2x/).**
 
 The JavaScript SDK is different from the other SDKs in that it only provides information about the

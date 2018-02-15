@@ -45,7 +45,7 @@
 
 :body
 
-**Note: this documentation is for the 1.x versions of the Javascript SDK. The current version can be found
+**Note: this documentation is for the 1.x versions of the JavaScript SDK. The current version can be found
 [here](/sdks/javascript/).**
 
 <a id="api-docs"></a>

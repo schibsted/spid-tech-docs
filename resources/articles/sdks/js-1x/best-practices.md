@@ -18,13 +18,13 @@
 
 :body
 
-**Note: this documentation is for the 1.x versions of the Javascript SDK. The current version can be found
+**Note: this documentation is for the 1.x versions of the JavaScript SDK. The current version can be found
 [here](/sdks/javascript/).**
 
-#### Loading the Javascript SDK
-You can load the SDK either synchronously or asynchronously. Depending on your use case, page size and functionality requirements, how you load the SDK may affect how the user perceives their logged in state. Pages with a lot of elements and external javascript may cause the loading and initiation of the SDK to be slow and the user may perceive himself as NOT logged in during that period. We suggest that, if you are experiencing this, to load the SDK synchronously and before all other unnecessary requests for page resources.
+#### Loading the JavaScript SDK
+You can load the SDK either synchronously or asynchronously. Depending on your use case, page size and functionality requirements, how you load the SDK may affect how the user perceives their logged in state. Pages with a lot of elements and external JavaScript may cause the loading and initiation of the SDK to be slow and the user may perceive himself as NOT logged in during that period. We suggest that, if you are experiencing this, to load the SDK synchronously and before all other unnecessary requests for page resources.
 
-#### Initializing the Javascript SDK
+#### Initializing the JavaScript SDK
 The SDK has many initialization options that directly affect how the SDK behaves in regards to cookies, caching, timeouts and session state handling. Deciding on the correct options and values is extremely important given the use cases you are trying to solve for your application.
 
 There are some best practices and gotchas in regards to these use cases:

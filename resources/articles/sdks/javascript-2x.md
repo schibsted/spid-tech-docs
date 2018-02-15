@@ -17,13 +17,13 @@
 - [Best practices](/sdks/js-2x/best-practices/)
 
 ## See also
-- [Documentation for the 1.x javascript SDK](/sdks/javascript-1x/)
+- [Documentation for the 1.x JavaScript SDK](/sdks/javascript-1x/)
 - [Getting started with the server-side API](/getting-started/)
 - [Mixpanel analytics](/mixpanel/analytics/)
 
 :body
 
-**Note: this documentation is for version 2.x of the Javascript SDK. The old 1.x version can be
+**Note: this documentation is for version 2.x of the JavaScript SDK. The old 1.x version can be
 found [here](/sdks/javascript-1x/).**
 
 The JavaScript SDK is different from the other SDKs in that it only provides
@@ -151,9 +151,9 @@ SPiD.init({
 
 ## Logout
 
-When using the Javascript SDK, a local cache is used to cache the logged in state
+When using the JavaScript SDK, a local cache is used to cache the logged in state
 of the user. When user clicks logout, this local cache needs to be cleared. That
-is done by calling `SPiD.logout()` in the Javascript SDK.
+is done by calling `SPiD.logout()` in the JavaScript SDK.
 
 Calling `SPiD.logout()` will try to invalidate the remote logged in state too, but
 will not succeed in Safari when there has been more than 24 hours since the last

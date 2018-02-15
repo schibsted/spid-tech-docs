@@ -40,7 +40,7 @@ user's information.
 * Users may not be auto-logged in if they explicitly log out from SPiD **OR** if they uncheck the "remember me"
 checkbox when logging into SPiD. This is by design.
 
-There are two kinds of integration between SPiD and client services. One uses the Javascript SDK, which has
+There are two kinds of integration between SPiD and client services. One uses the JavaScript SDK, which has
 the auto-login functionality required to identify and show who is logged in. The other depends on the redirect
 login flow, where the user needs to click a login button in order to be logged in.
 

@@ -36,7 +36,10 @@ Please note:
 - The code expires after 30 seconds.
 
 
-To acquire the access token you can use one of two OAuth flows; authorization code grant or implicit grant. Authorization code grant is used to obtain both access tokens and refresh tokens. Implicit grant is used to obtain access tokens (it does not support refresh tokens) and is typically implemented in a browser or webview using a scripting language such as Javascript.
+To acquire the access token you can use one of two OAuth flows; authorization code grant or implicit
+grant. Authorization code grant is used to obtain both access tokens and refresh tokens. Implicit
+grant is used to obtain access tokens (it does not support refresh tokens) and is typically
+implemented in a browser or webview using a scripting language such as JavaScript.
 
 For authorization code grant there are several different ways to authenticate the client. The different grant types used in SPiD are
 

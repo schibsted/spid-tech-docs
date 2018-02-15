@@ -10,9 +10,9 @@
 
 :body
 
-If you’ve integrated the Javascript SDK on your website, you can give returning users a streamlined login experience. 
+If you’ve integrated the JavaScript SDK on your website, you can give returning users a streamlined login experience. 
 People won’t have to see the logged-out version of your site and won’t waste time signing-in. By automatically 
-determining if a user is signed-in to SPiD via the Javascript SDK, you can let returning users immediately start 
+determining if a user is signed-in to SPiD via the JavaScript SDK, you can let returning users immediately start 
 engaging with your site.
 
 One of the easiest ways to do this is to use the JavaScript SDK to detect whether a visitor is signed-in to SPiD. 

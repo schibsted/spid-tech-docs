@@ -18,8 +18,8 @@ There are 3 different types of logout functionality available in the platform. D
 type and integration with SPiD, you may need to use one or several approaches. Below is an explanation of each logout 
 type.
 
-## Logging out of SPiD via the Javascript SDK
-Logging out via the Javascript SDK deletes the current session for the logged in user based on the session cookie sent
+## Logging out of SPiD via the JavaScript SDK
+Logging out via the JavaScript SDK deletes the current session for the logged in user based on the session cookie sent
 in the logout request. After the logout is performed on SPiD the SDK will trigger 3 [events](/sdks/js-2x/events/#available-sdk-events) 
 telling your application that the user has been logged out:
 #### User logs out
@@ -61,7 +61,7 @@ Mobile applications or other applications that explicitly login the user via log
 These types of applications should use the [logout endpoint](/endpoints/GET/logout/).
 
 Applications that use the redirect login flow should use the redirect logout flow in order to actively logout the 
-current user session. If your application also uses the Javascript SDK, it is optional to use the logout functionality 
+current user session. If your application also uses the JavaScript SDK, it is optional to use the logout functionality 
 in the SDK in order to make the logout experience smoother by not requiring the user agent to perform redirects.
  
 Providing the logged in user's oauth token to logout is recommended, but not required, as your application may want to
