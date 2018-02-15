@@ -257,7 +257,7 @@ This section contains a list of best practices and requirements that will be per
 - Doesn't contain other internal or third party based redirect uris encoded in it
 - Doesn't contain invalid characters (\s`!()[]{};',<>«»“”‘’@")
 - Redirect endpoint is required to be behind SSL (https, not http)
-- No external Javascript running on redirect URIs that will receive the OAuth code parameter
+- No external JavaScript running on redirect URIs that will receive the OAuth code parameter
 
 The client SHOULD NOT include any third-party scripts (e.g. third-
    party analytics, social plug-ins, ad networks) in the redirection

@@ -13,7 +13,9 @@ Client Teasers is a simple way for clients to both style the page making it more
 
 # How it works
 
-When you create a new client teaser, you will write markdown and CSS. The markdown will be converted into HTML together with the CSS and some extra javascript that is required for cross-origin iframes to work.
+When you create a new client teaser, you will write markdown and CSS. The markdown will be converted
+into HTML together with the CSS and some extra JavaScript that is required for cross-origin iframes
+to work.
 
 The HTML-page will then be uploaded to our CDN (Content Delivery Network) in order for us to serve your users in the most efficient way. Each upload will be an unique file so each change should be seen immediately after the upload is complete and served at the very next request.
 

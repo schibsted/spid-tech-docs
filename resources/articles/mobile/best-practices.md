@@ -35,7 +35,7 @@ As mobile apps can easily be decompiled it's hard to protect the integrity of th
 
 ### Webview vulnerabilities
 
-Don't enable Javascript unless you must as it can create security issues that can be exploited. If you do make sure you do not navigate to other websites other then your own or SPiD's.
+Don't enable JavaScript unless you must as it can create security issues that can be exploited. If you do make sure you do not navigate to other websites other then your own or SPiD's.
 
 ### OWASP Mobile
 
