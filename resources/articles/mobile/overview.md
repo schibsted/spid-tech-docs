@@ -33,7 +33,7 @@ Review the default permissions for mobile clients, these should be enough for mo
 
 ### 4. Develop your app
 
-Develop and test your app, following our recommendations for [best practices](/mobile/best-practices/).
+Develop and test your app.
 
 ### 5. Submit your app for review
 
