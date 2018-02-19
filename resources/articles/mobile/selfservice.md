@@ -5,13 +5,9 @@
 ## Native mobile development
 
 - [Overview](/mobile/overview/)
-- [Getting started](/mobile/mobile-development/)
 - Self Service
-- [Register](/mobile/register/)
-- [Login](/mobile/login/)
 - [Android](/sdks/android/)
 - [iOS](/sdks/ios/)
-- [Best practices](/mobile/best-practices/)
 
 :body
 

@@ -6,13 +6,9 @@
 
 
 - Overview
-- [Getting started](/mobile/mobile-development/)
 - [Self Service](/mobile/selfservice/)
-- [Register](/mobile/register/)
-- [Login](/mobile/login/)
 - [Android](/sdks/android/)
 - [iOS](/sdks/ios/)
-- [Best practices](/mobile/best-practices/)
 
 :body
 
@@ -37,7 +33,7 @@ Review the default permissions for mobile clients, these should be enough for mo
 
 ### 4. Develop your app
 
-Develop and test your app, following our recommendations for [best practices](/mobile/best-practices/).
+Develop and test your app.
 
 ### 5. Submit your app for review
 
@@ -50,5 +46,3 @@ If your app passes the review you will receive credentials that you can use in p
 ### 7. Deploy
 
 Deploy your app.
-
-[Get started](/mobile/mobile-development/) right now!

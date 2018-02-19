@@ -7,13 +7,9 @@
 ## Native mobile development
 
 - [Overview](/mobile/overview/)
-- [Getting started](/mobile/mobile-development/)
 - [Self Service](/mobile/selfservice/)
-- [Register](/mobile/register/)
-- [Login](/mobile/login/)
 - Android
 - [iOS](/sdks/ios/)
-- [Best practices](/mobile/best-practices/)
 
 :body
 
@@ -29,9 +25,3 @@ For support, please contact [support@spid.no](mailto:support@spid.no)
 
 ## Getting started
 To get started with either SDK, you'll need to request access to SPiD before you can start using them. This process is documented on the [SPiD Techdocs](https://techdocs.spid.no/selfservice/access/) site. Once you have access and have created your client so that you have access to your client ID and secret, you should head over to read up on the documentation.
-
-
-
-The Android SDK is built on top of the backend SDK to provide access to functions with minimal effort from 
-the developer. Connecting to the SPiD can be done either natively, using a WebView, browser or connecting via
-Facebook or Google+.
