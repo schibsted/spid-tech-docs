@@ -46,5 +46,3 @@ If your app passes the review you will receive credentials that you can use in p
 ### 7. Deploy
 
 Deploy your app.
-
-[Get started](/mobile/mobile-development/) right now!
