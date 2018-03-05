@@ -36,31 +36,31 @@ or https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-sdk-{version_number}-{type}(.m
 
 Examples
 
-* http://cdn.spid.se/sdk/spid-sdk-2.1.0-amd.js
-* http://cdn.spid.se/sdk/spid-sdk-2.1.0-amd.min.js
-* http://cdn.spid.se/sdk/spid-sdk-2.1.0-commonjs2.js
-* http://cdn.spid.se/sdk/spid-sdk-2.1.0-commonjs2.min.js
-* http://cdn.spid.se/sdk/spid-sdk-2.1.0-var.js
-* http://cdn.spid.se/sdk/spid-sdk-2.1.0-var.min.js
+* http://cdn.spid.se/sdk/spid-sdk-2.6.0-amd.js
+* http://cdn.spid.se/sdk/spid-sdk-2.6.0-amd.min.js
+* http://cdn.spid.se/sdk/spid-sdk-2.6.0-commonjs2.js
+* http://cdn.spid.se/sdk/spid-sdk-2.6.0-commonjs2.min.js
+* http://cdn.spid.se/sdk/spid-sdk-2.6.0-var.js
+* http://cdn.spid.se/sdk/spid-sdk-2.6.0-var.min.js
 
 or
 
-* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-sdk-2.1.0-amd.js
-* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-sdk-2.1.0-amd.min.js
-* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-sdk-2.1.0-commonjs2.js
-* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-sdk-2.1.0-commonjs2.min.js
-* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-sdk-2.1.0-var.js
-* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-sdk-2.1.0-var.min.js
+* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-sdk-2.6.0-amd.js
+* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-sdk-2.6.0-amd.min.js
+* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-sdk-2.6.0-commonjs2.js
+* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-sdk-2.6.0-commonjs2.min.js
+* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-sdk-2.6.0-var.js
+* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-sdk-2.6.0-var.min.js
 
 
 There also an additional file including URI generating functions that is optional to use.
 
-* http://cdn.spid.se/sdk/spid-uri-2.1.0-amd.js
-* http://cdn.spid.se/sdk/spid-uri-2.1.0-commonjs2.js
-* http://cdn.spid.se/sdk/spid-uri-2.1.0-var.js
-* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-uri-2.1.0-amd.js
-* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-uri-2.1.0-commonjs2.js
-* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-uri-2.1.0-var.js
+* http://cdn.spid.se/sdk/spid-uri-2.6.0-amd.js
+* http://cdn.spid.se/sdk/spid-uri-2.6.0-commonjs2.js
+* http://cdn.spid.se/sdk/spid-uri-2.6.0-var.js
+* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-uri-2.6.0-amd.js
+* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-uri-2.6.0-commonjs2.js
+* https://d3iwtia3ndepsv.cloudfront.net/sdk/spid-uri-2.6.0-var.js
 
 ### Why https hosting is on cloudfront url
 
