@@ -11,7 +11,7 @@
 ## Read more about the JavaScript SDK for browsers
 
 - [Check out the Github repo](https://github.schibsted.io/spt-identity/spid-sdk-browser)
-- [API/Getting started docs](https://pages.github.schibsted.io/spt-identity/spid-sdk-browser)
+- [API/Getting started docs](https://schibsted.github.io/account-sdk-browser)
 
 ## See also
 - [Documentation for the 2.x JavaScript SDK](/sdks/javascript-2x/)
@@ -28,4 +28,4 @@ requests against the API. A [Node SDK](https://github.schibsted.io/spt-identity/
 being developed to fill this role for server-side JavaScript.
 
 To get started implementing this SDK, please visit our [documentation on
-Github](https://pages.github.schibsted.io/spt-identity/spid-sdk-browser)
+Github](https://schibsted.github.io/account-sdk-browser)
