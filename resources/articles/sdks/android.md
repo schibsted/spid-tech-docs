@@ -15,10 +15,7 @@
 
 The Android SDK simplifies connecting to SPiD and comes in two variants. The core part of the SDK contains the login engine and APIs needed to connect to SPiD. You can use this to do your custom UI implementation. While the networking APIs are exposed, you use these at your own peril as no support will be given to this.
 
-The recommended way to use these SDKs is to implement the UI module. This is highly customizable and will give you complete UIs out of the box. To learn more about the SDKs, please refer to these links:
-
-- [Core SDK](https://github.schibsted.io/spt-identity/identity-sdk-android/blob/master/core/README.md)
-- [UI SDK](https://github.schibsted.io/spt-identity/identity-sdk-android/blob/master/ui/README.md)
+The recommended way to use these SDKs is to implement the UI module. This is highly customizable and will give you complete UIs out of the box. To learn more about the SDKs, please refer to the docs at [schibsted.github.io/account-sdk-android](https://schibsted.github.io/account-sdk-android/)
 
 For support, please contact [support@spid.no](mailto:support@spid.no)
 
