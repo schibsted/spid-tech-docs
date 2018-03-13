@@ -3,13 +3,11 @@
 :category self-service
 :body
 
-![Client teaser example](/images/client_teaser/client_teaser_example.png)
+![Client teaser example](/images/client_teaser/client_teaser_example_old.png)
 
 # Introduction
 
-During the creation of the new design one of the most requested features was for you, the clients, to be able to style the SPiD pages more and in that step we introduce what we call “*Client Teasers*”.
-
-Client Teasers is a simple way for clients to both style the page making it more relevant for your customers and also creating reasons why users should create an account / sign in to purchase or access your products.
+Client Teasers is a simple way for clients to both style the page, making it more relevant for your customers, and also presenting reasons why users should create an account / sign in to purchase or access your products.
 
 # How it works
 
@@ -17,15 +15,17 @@ When you create a new client teaser, you will write markdown and CSS. The markdo
 into HTML together with the CSS and some extra JavaScript that is required for cross-origin iframes
 to work.
 
-The HTML-page will then be uploaded to our CDN (Content Delivery Network) in order for us to serve your users in the most efficient way. Each upload will be an unique file so each change should be seen immediately after the upload is complete and served at the very next request.
+The HTML-page will then be uploaded to our CDN (Content Delivery Network) in order for us to serve your users in the most efficient way.
+Each upload will be an unique file so each change should be seen immediately after the upload is complete and served at the very next request.
+When starting the login/signup flow, the teaser will be loaded inside an iframe element.
 
-You may have more than one teasers running at the same time, but only one can be default one. You can choose which teaser should be shown to user using `teaser` parameter. This parameter takes values from "*Teaser slug*" input field.
+You may have more than one teasers running at the same time, but only one can be default one. You can choose which teaser should be shown to user using `teaser` parameter. This parameter takes values from *"Teaser slug"* input field.
 
 # Each input field explained
 
 ## Teaser description
 
-The description field is a short text to explain what the teaser is about. Given the campaign example above, a good description could be “*Shows our special campaign prices for campaign y*”.
+The description field is a short text to explain what the teaser is about. Given the campaign example above, a good description could be *“Shows our special campaign prices for campaign y”*.
 
 The description is shown in the summary of all your client teasers.
 
@@ -116,3 +116,97 @@ Now, all you need to do is fill in the fields as described above in “Each inpu
 As you may see on the figure above the summary of client teasers are quite simple. You may edit an existing client teaser that will create and upload a new file on our CDN so any previous cached version will hence be refreshed with a new page.
 
 If you have a lot of teasers you also have the ability to simply delete a client teaser, note that if you delete a client teaser it is a **hard deletion** and there is no way for us to get it back. Once deleted, it stays deleted and you will have to create a complete new one if you wish to get it back as it was.
+
+
+# New flow style
+
+![Client teaser example](/images/client_teaser/client_teaser_example.png)
+
+If you are using the new login flow the teaser should not be taller than the login form to the right. 
+You can prevent the teaser from becoming scrollable by adding:
+
+```css
+ body {
+     max-width: 100%;
+     max-height: 100%;
+     overflow: hidden;
+ }
+```
+
+
+# Example
+
+In this example we show how to use a background image with a title and some text on top.
+
+Feel free to use this markdown and CSS as a starting point for your new teaser.
+
+#### Teaser markdown:
+
+```
+{.img-bg}
+
+# This is the header {.title}
+
+This is a paragraph. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur feugiat nibh at aliquam tristique. Sed euismod lacus at risus fermentum varius. Sed suscipit, sem vel finibus aliquet, libero nibh efficitur orci, a placerat elit neque a elit.  {.description}
+
+```
+
+#### Teaser CSS:
+
+Notes (see the numbered comments in the CSS below):
+
+1. For teasers using the new login flow, when backwards compatibility is needed.
+The old style teaser needs actual content to render full height, a background image is not detected as actual content, 
+it can be fixed by setting a min height.
+2. To prevent scrolling inside the teaser's iframe.
+
+```css
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,900);
+
+html {
+    width: 100%; // 1.
+    height: 100%; // 1.
+    min-height: 390px; // 1.
+}
+
+body {
+    max-width: 100%; // 2.
+    max-height: 100%; // 2.
+    overflow: hidden; // 2.
+    margin: 0;
+    padding: 0;
+
+    font-family: "Roboto Slab", "Helvetica", sans-serif;
+    color: #fff;
+}
+
+.title {
+    font-size: 28px;
+    line-height: 1.29;
+    font-weight: 900;
+
+    margin: 58px 24px 34px 24px;
+}
+
+.description {
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 400;
+
+    margin: 0px 24px;
+}
+
+.img-bg {
+    margin: 0;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(https://mir-s3-cdn-cf.behance.net/project_modules/1400/10c3b345009807.5824a9200dbbd.jpg) no-repeat left top;
+    background-size: cover;
+    z-index: -1;
+}
+
+```
