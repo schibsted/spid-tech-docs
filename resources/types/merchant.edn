@@ -1,0 +1,10 @@
+{:id :merchant
+ :name "Merchant"
+ :description "Merchant obejct"
+ :fields [{:name "merchantId"        :type :integer        :always-available? true}
+       {:name "name"                 :type :string         :always-available? true}
+       {:name "locale"               :type :string         :always-available? false}
+       {:name "currency"             :type :string         :always-available? false}
+       {:name "providerId"           :type :string         :always-available? false}
+       {:name "updated"              :type :string         :always-available? false}
+       {:name "created"              :type :string         :always-available? false}]}
