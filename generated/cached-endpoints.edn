@@ -36,7 +36,7 @@
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
   {:object
-   "The object to describe. Possible values:\n\n* `User`\n* `Address`\n* `Email`\n* `Phone`\n* `Product`\n* `BundleItem`\n* `Subscription`\n* `Content`\n* `Discount`\n* `Order`\n* `OrderItem`\n* `Identifier`\n* `Transaction`\n* `Campaign`\n* `Utilities`\n* `Voucher`",
+   "The object to describe. Possible values:\n\n* `User`\n* `Address`\n* `Email`\n* `Phone`\n* `Product`\n* `BundleItem`\n* `Subscription`\n* `Content`\n* `Discount`\n* `Identifier`\n* `Campaign`\n* `Utilities`\n* `Voucher`",
    :property
    "The property to describe. To get a list of possible values, get the full description of an object.",
    :locale "One of the supported [locales](/endpoints/#locales)"},
@@ -357,7 +357,7 @@
      {:status 400,
       :description "Request must contain a valid exchange type",
       :type "api-exception"}
-     {:status 401,
+     {:status 403,
       :description
       "Provided client ID does not belong to the current merchant",
       :type "api-exception"}]}},
@@ -892,8 +892,17 @@
  {:path "signup",
   :validOutputFormats ["json"],
   :parameterDescriptions
-  {:email "Email of the user. Must be unique across all of SPiD",
+  {:gender
+   "New gender. Legal values and a localized description can be fetched from [/api/2/describe/User?property=gender](/endpoints/GET/describe/{object}/).",
+   :acceptTerms
+   "Create the user with terms & conditions and privacy policy pre-accepted",
+   :name "JSON object containing familyName, givenName and formatted",
+   :displayName "New preferred display name",
+   :email "Email of the user. Must be unique across all of SPiD",
+   :addresses
+   "A JSON string. A map of addresses, with the address type as keys and the address objects/maps as values. See [the address type](/types/address/) for appropriate types",
    :password "Desired password",
+   :birthday "New date of birth, YYYY-MM-DD",
    :redirectUri "Where to redirect the user after completing signup"},
   :method "POST",
   :name "Signup",
@@ -901,7 +910,15 @@
   {:POST
    {:name "POST",
     :required ["email"],
-    :optional ["password" "redirectUri"],
+    :optional
+    ["password"
+     "redirectUri"
+     "displayName"
+     "name"
+     "birthday"
+     "addresses"
+     "gender"
+     "acceptTerms"],
     :accessTokenTypes ["server"],
     :filters [],
     :defaultFilters [],
@@ -999,7 +1016,7 @@
    "New gender. Legal values and a localized description can be fetched from [/api/2/describe/User?property=gender](/endpoints/GET/describe/{object}/).",
    :userId
    "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`).",
-   :name "JSON object containing givenName and familyName",
+   :name "JSON object containing familyName, givenName and formatted",
    :photo "URL to a profile photo",
    :displayName "New preferred display name",
    :utcOffset
@@ -1090,8 +1107,6 @@
    :givenName "Sub-string match from the beginning of the given name",
    :userId "Exact match.",
    :emails_regex "Regexp search all emails.",
-   :orderId
-   "Search by orderId, if provided will return the user that owns the order.",
    :familyName
    "Sub-string match from the beginning of the family name",
    :address_streetAddress "Regex search.",
@@ -1113,7 +1128,6 @@
    :preferredUsername
    "Sub-string match from the beginning of the preferred user name",
    :address_locality "Regex search.",
-   :paymentIdentifier "Search by payment identifier.",
    :id "Exact match.",
    :phoneNumbers
    "Sub-string match from the beginning of any phone number",
@@ -1151,9 +1165,7 @@
      "address_country"
      "address_region"
      "address_locality"
-     "address_streetAddress"
-     "orderId"
-     "paymentIdentifier"],
+     "address_streetAddress"],
     :accessTokenTypes ["server"],
     :filters
     ["updated"
@@ -1370,62 +1382,6 @@
   :defaultOutputFormat "json",
   :description "List mail history and events for user",
   :category ["Identity Management" "User API"]}
- {:path "user/{userId}/order/{orderId}",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions
-  {:userId
-   "Find the user with this `uuid` or `userId` (not to be mistaken with the deprecated `id`).",
-   :orderId "ID of the order to retrieve"},
-  :method "GET",
-  :name "Get order",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional ["filters"],
-    :accessTokenTypes ["server" "user"],
-    :filters ["items" "identifier"],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Returns an order object",
-      :type "order"}]}},
-  :deprecated "2.84",
-  :url "/api/2/user/{id}/order/{<\\d+>order_id}",
-  :pathParameters ["userId" "orderId"],
-  :controller "Api/2/User.user_order",
-  :defaultOutputFormat "json",
-  :description "Get a single order for user.",
-  :category ["Payment Services" "Order API"]}
- {:path "user/{userId}/orders",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions
-  {:userId
-   "List orders for the user with this `uuid` or `userId` (not to be mistaken with the deprecated `id`).",
-   :status "Filter results by this status",
-   :filters ""},
-  :method "GET",
-  :name "List orders",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional ["status" "filters"],
-    :accessTokenTypes ["server" "user"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Return a list of orders",
-      :type "[order]"}]}},
-  :deprecated "2.84",
-  :url "/api/2/user/{id}/orders",
-  :pathParameters ["userId"],
-  :controller "Api/2/User.user_orders",
-  :alias {:id "user_id"},
-  :defaultOutputFormat "json",
-  :description "List orders for a user (on client)",
-  :category ["Payment Services" "Order API"]}
  {:path "user/{userId}/subscription",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
@@ -1582,7 +1538,10 @@
     [{:status 200,
       :description
       "Returns a description of the user's access. Crucially, the `result` property will be `true` if the user has access.",
-      :type "user-product-access"}]},
+      :type "user-product-access"}
+     {:status 404,
+      :description "No access to that product.",
+      :type "api-exception"}]},
    :POST
    {:name "POST",
     :required [],
@@ -1772,6 +1731,30 @@
   :description
   "Get all anonymous user objects changed in the given period",
   :category ["Identity Management" "User API"]}
+ {:path "merchant/{merchant_id}",
+  :validOutputFormats ["json"],
+  :parameterDescriptions {},
+  :method "GET",
+  :name "Get merchant",
+  :httpMethods
+  {:GET
+   {:name "GET",
+    :required [],
+    :optional [],
+    :accessTokenTypes ["server"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 200, :description "Merchant object", :type "merchant"}
+     {:status 404,
+      :description "No merchant found",
+      :type "api-exception"}]}},
+  :url "/api/2/merchant/{id}",
+  :pathParameters ["merchant_id"],
+  :controller "Api/2/Merchant.merchant",
+  :defaultOutputFormat "json",
+  :description "Get information about merchant",
+  :category ["Utilities" "Platform API"]}
  {:path "clients",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions {},
@@ -1963,137 +1946,6 @@
   :defaultOutputFormat "json",
   :description "Get or update one client teaser",
   :category ["Self Service" "Self Service API"]}
- {:path "orders",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions
-  {:userId
-   "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`).",
-   :status
-   "[One or more](/endpoints/#parameters) [statuses](/types/order-status/) to filter results by",
-   :ocr "Filter results by OCR/KID number",
-   :orderId "Show this specific order",
-   :clientReference "Filter by custom client reference"},
-  :method "GET",
-  :name "Search orders",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional
-    ["limit"
-     "offset"
-     "sort"
-     "filters"
-     "since"
-     "until"
-     "userId"
-     "status"
-     "ocr"
-     "orderId"
-     "clientReference"],
-    :accessTokenTypes ["server"],
-    :filters
-    ["all"
-     "none"
-     "purchases"
-     "renews"
-     "transfers"
-     "repurchases"
-     "expired"
-     "cancelled"
-     "failed"
-     "created"
-     "pending"
-     "completed"
-     "credited"
-     "authorized"
-     "merchant"
-     "transactions"
-     "items"
-     "identifier"],
-    :defaultFilters ["completed" "credited"],
-    :responses
-    [{:status 200,
-      :description "Returns a list of order objects",
-      :type "[order]"}
-     {:status 404,
-      :description "No order found",
-      :type "api-exception"}]}},
-  :deprecated "2.84",
-  :url "/api/2/orders",
-  :pathParameters [],
-  :controller "Api/2/Order.orders",
-  :defaultOutputFormat "json",
-  :description "Search for orders",
-  :category ["Payment Services" "Order API"]}
- {:path "order/{orderId}",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions {:orderId "ID of order to show"},
-  :method "GET",
-  :name "Get order",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional ["filters"],
-    :accessTokenTypes ["server"],
-    :filters ["items" "transactions" "identifier"],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description
-      "Returns the order object. Depending on the filters used, order items, transactions and payment identifier may also be included in the response object.",
-      :type "order"}
-     {:status 400,
-      :description "Missing required parameter orderId",
-      :type "api-exception"}]}},
-  :deprecated "2.84",
-  :url "/api/2/order/{id}",
-  :pathParameters ["orderId"],
-  :controller "Api/2/Order.order",
-  :alias {:id "order_id"},
-  :defaultOutputFormat "json",
-  :description "Get a single order record",
-  :category ["Payment Services" "Order API"]}
- {:path "order/{orderId}/credit",
-  :validOutputFormats ["json" "jsonp"],
-  :parameterDescriptions
-  {:orderId "ID of the order to credit",
-   :description "A description of the credit transaction",
-   :amount "The amount to credit, in cents",
-   :orderItemId "The single order item to credit, if any",
-   :notifyUser
-   "If 1, the user will be notified, otherwise they will not be notified"},
-  :method "POST",
-  :name "Credit order",
-  :httpMethods
-  {:POST
-   {:name "POST",
-    :required ["description"],
-    :optional ["amount" "orderItemId" "notifyUser"],
-    :accessTokenTypes ["server"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Returns the order object with its transactions",
-      :type "order"}
-     {:status 400,
-      :description "Missing one or more required parameters",
-      :type "api-exception"}
-     {:status 404, :description "No such order", :type "api-exception"}
-     {:status 999,
-      :description "Payment provider-specific error",
-      :type "api-exception"}]}},
-  :deprecated "2.84",
-  :url "/api/2/order/{id}/credit",
-  :pathParameters ["orderId"],
-  :controller "Api/2/Order.order_credit",
-  :alias {:id "order_id"},
-  :defaultOutputFormat "json",
-  :description
-  "Credit an order (for use with paylinks and multistep payment flow)",
-  :category ["Payment Services" "Order API"]}
  {:path "products",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions
@@ -2940,8 +2792,7 @@
    :status "Limit results to digital content with this status.",
    :productId "Limit results to digital content for this product.",
    :parentProductId
-   "Limit results to digital content for this product and its child products.",
-   :orderId "Limit results to digital content in this order."},
+   "Limit results to digital content for this product and its child products."},
   :method "GET",
   :name "Search digital content",
   :httpMethods
@@ -2958,8 +2809,7 @@
      "userId"
      "status"
      "productId"
-     "parentProductId"
-     "orderId"],
+     "parentProductId"],
     :accessTokenTypes ["server"],
     :filters ["updated" "expired" "active" "all" "none"],
     :defaultFilters [],
@@ -3133,7 +2983,25 @@
     :accessTokenTypes ["server"],
     :filters [],
     :defaultFilters [],
-    :responses []}},
+    :responses
+    [{:status 200,
+      :description "Paylink is unlocked",
+      :type "api-exception"}
+     {:status 400,
+      :description "Bad request. 'paylinkId' is not a valid integer",
+      :type "api-exception"}
+     {:status 400,
+      :description "Paylink is already locked",
+      :type "api-exception"}
+     {:status 404,
+      :description "Paylink not found",
+      :type "api-exception"}
+     {:status 404,
+      :description "Paylink is expired",
+      :type "api-exception"}
+     {:status 404,
+      :description "Paylink is used or deleted",
+      :type "api-exception"}]}},
   :url "/api/2/paylink/{id}/use",
   :pathParameters ["paylinkId"],
   :controller "Api/2/Paylink.paylink_use",
@@ -3153,7 +3021,25 @@
     :accessTokenTypes ["server"],
     :filters [],
     :defaultFilters [],
-    :responses []}},
+    :responses
+    [{:status 200,
+      :description "Paylink is unlocked",
+      :type "api-exception"}
+     {:status 400,
+      :description "Bad request. 'paylinkId' is not a valid integer",
+      :type "api-exception"}
+     {:status 400,
+      :description "Paylink isn't locked",
+      :type "api-exception"}
+     {:status 404,
+      :description "Paylink not found",
+      :type "api-exception"}
+     {:status 404,
+      :description "Paylink is expired",
+      :type "api-exception"}
+     {:status 404,
+      :description "Paylink is used or deleted",
+      :type "api-exception"}]}},
   :url "/api/2/paylink/{id}/unlock",
   :pathParameters ["paylinkId"],
   :controller "Api/2/Paylink.paylink_unlock",
@@ -3174,7 +3060,25 @@
     :accessTokenTypes ["server"],
     :filters [],
     :defaultFilters [],
-    :responses []}},
+    :responses
+    [{:status 200,
+      :description "Paylink is unlocked",
+      :type "api-exception"}
+     {:status 400,
+      :description "Bad request. 'paylinkId' is not a valid integer",
+      :type "api-exception"}
+     {:status 400,
+      :description "Paylink is already locked",
+      :type "api-exception"}
+     {:status 404,
+      :description "Paylink not found",
+      :type "api-exception"}
+     {:status 404,
+      :description "Paylink is expired",
+      :type "api-exception"}
+     {:status 404,
+      :description "Paylink is used or deleted",
+      :type "api-exception"}]}},
   :url "/api/2/paylink/{id}/lock",
   :pathParameters ["paylinkId"],
   :controller "Api/2/Paylink.paylink_lock",

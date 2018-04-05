@@ -36,7 +36,6 @@ Here are some of the APIs with merchant filter support:
 * [GET /users](/endpoints/GET/users/)
 * [GET /user/{userId}/logins](/endpoints/GET/user/{userId}/logins/)
 * [GET /logins](/endpoints/GET/logins/)
-* [GET /orders](/endpoints/GET/orders/)
 * [GET /user/{userId}/product/{productId}](/endpoints/GET/user/{userId}/product/{productId}/)
 * [GET /dataobjects](/endpoints/GET/dataobjects/)
 
@@ -52,7 +51,7 @@ with the parameter **contextClientId** in all API calls.
 
 SPiD will verify that both clients has access to call the endpoint and also validate that the token used is valid for
 the endpoint in question. The contextClientId needs to have access to the resources reflected by the endpoint as well,
-meaning that you can't access users, orders or other data that is NOT accessible by the client used as context.
+meaning that you can't access users or other data that is NOT accessible by the client used as context.
 
 Getting data is simple, but POSTING data can be a little troublesome in the current version of the platform since you
 actually have to pass the contextClientId variable as a GET parameter. Meaning you have to append the parameter to the
