@@ -37,7 +37,9 @@ The login flow can be just one step, or it can be more. It depends on the curren
 * Step 7: Notifications step, not currently in use
 
 Flow is initiated by path `/flow/auth`, `/flow/login` or `/flow/signup` and require query parameters `client_id`, `redirect_uri` and `response_type`.
-Optional query parameters include, among others, `cancel_redirect_uri`.
+Optional query parameters include, among others, `cancel_redirect_uri` and `locale`.
+
+The `locale` parameter may include any of the [supported locales](https://login.schibsted.com/api/2/settings) in the SPiD Platform.
 
 ### Signin flow
 Sign-in flow is a slight exception. It lets user to log in without providing his/hers credentials by using an unique, one at a time, valid for 5 minutes token.
