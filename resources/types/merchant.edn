@@ -6,5 +6,7 @@
        {:name "locale"               :type :string         :always-available? false}
        {:name "currency"             :type :string         :always-available? false}
        {:name "providerId"           :type :string         :always-available? false}
+       {:name "logo"           		 :type :string         :always-available? false}
+       {:name "type"           		 :type :string         :always-available? false}
        {:name "updated"              :type :string         :always-available? false}
        {:name "created"              :type :string         :always-available? false}]}

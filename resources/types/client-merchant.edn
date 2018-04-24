@@ -1,0 +1,12 @@
+{:id :client-merchant
+ :name "Client with merchant"
+ :fields [{:name "id"                   :type :string         :always-available? true}
+          {:name "name"                 :type :string         :always-available? true}
+          {:name "alias"                :type :string         :always-available? true}
+          {:name "domain"               :type :string         :always-available? true}
+          {:name "fields"               :type [:string]         :always-available? true}
+          {:name "merchantId"           :type :integer         :always-available? true}
+          {:name "css"                  :type :object         :always-available? true}
+          {:name "termsCss"             :type :object         :always-available? true}
+          {:name "logo"             	:type :object         :always-available? true}
+          {:name "merchant"             :type :merchant         :always-available? true}]}

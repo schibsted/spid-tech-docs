@@ -1790,9 +1790,12 @@
     :filters [],
     :defaultFilters [],
     :responses
-    [{:status 200, :description "", :type "client"}
+    [{:status 200, :description "", :type "client-merchant"}
      {:status 404,
       :description "No client found",
+      :type "api-exception"}
+     {:status 400,
+      :description "Merchant owning client cannot be found",
       :type "api-exception"}]}},
   :url "/api/2/client/{id}",
   :pathParameters ["client_id"],
