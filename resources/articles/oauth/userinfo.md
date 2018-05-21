@@ -45,6 +45,7 @@ Date: Mon, 29 Feb 2016 13:37:00 GMT
 
 {
     "sub": "5d75167d-8841-5072-89cb-985915e2dbb3",
+    "legacy_user_id": "1234567",
     "name": "John Doe",
     "given_name": "John",
     "family_name": "Doe",
@@ -82,7 +83,8 @@ Scopes can be combined into space separated strings. To get all fields, you need
 
 ```js
 {
-    "sub": "5d75167d-8841-5072-89cb-985915e2dbb3"
+    "sub": "5d75167d-8841-5072-89cb-985915e2dbb3",
+    "legacy_user_id": "1234567"
 }
 ```
 
@@ -91,6 +93,7 @@ Scopes can be combined into space separated strings. To get all fields, you need
 ```js
 {
     "sub": "5d75167d-8841-5072-89cb-985915e2dbb3",
+    "legacy_user_id": "1234567",
     "name": "John Doe",
     "given_name": "John",
     "family_name": "Doe",
@@ -108,6 +111,7 @@ Scopes can be combined into space separated strings. To get all fields, you need
 ```js
 {
     "sub": "5d75167d-8841-5072-89cb-985915e2dbb3",
+    "legacy_user_id": "1234567",
     "email": "john.doe@example.com",
     "email_verified": true
 }
@@ -118,6 +122,7 @@ Scopes can be combined into space separated strings. To get all fields, you need
 ```js
 {
     "sub": "5d75167d-8841-5072-89cb-985915e2dbb3",
+    "legacy_user_id": "1234567",
     "phone_number": "+155555555",
     "phone_number_verified": false
 }
@@ -128,6 +133,7 @@ Scopes can be combined into space separated strings. To get all fields, you need
 ```js
 {
     "sub": "5d75167d-8841-5072-89cb-985915e2dbb3",
+    "legacy_user_id": "1234567",
     "address": {
         "formatted": "1 Roadster st.",
         "street_address": "1 Roadster st., 1111, The Moon, US",
