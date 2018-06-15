@@ -17,7 +17,7 @@ The Android SDK simplifies connecting to SPiD and comes in two variants. The cor
 
 The recommended way to use these SDKs is to implement the UI module. This is highly customizable and will give you complete UIs out of the box. To learn more about the SDKs, please refer to the docs at [schibsted.github.io/account-sdk-android](https://schibsted.github.io/account-sdk-android/)
 
-For support, please contact [support@spid.no](mailto:support@spid.no)
+For support, please contact [schibstedaccount@schibsted.com](mailto:schibstedaccount@schibsted.com)
 
 
 ## Getting started

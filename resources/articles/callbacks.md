@@ -51,7 +51,7 @@ signed with your signature secret.
 **NOTE**: Your signature secret is **not** the same as your client secret (which
 is used for authentication). It is a different secret specifically used for
 signing requests and decoding signed responses. If you do not have a signing
-secret, [contact SPiD](mailto:support@spid.no).
+secret, [contact SPiD](mailto:schibstedaccount@schibsted.com).
 
 The response body contains an encoded signature and encoded data, separated by a
 dot, e.g. `"<signature>.<data>"`. Here is an example:

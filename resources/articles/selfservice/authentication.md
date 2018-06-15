@@ -4,7 +4,7 @@
 :body
 
 
-In order to access self-service. You will have to be an authenticated SPiD user. You will also need to be added to the self-service access control list for your company. This is nothing you as a user currently can achieve by yourself and you will have to turn to SPiD support (support@spid.no) in order to gain access.
+In order to access self-service. You will have to be an authenticated SPiD user. You will also need to be added to the self-service access control list for your company. This is nothing you as a user currently can achieve by yourself and you will have to turn to SPiD support (schibstedaccount@schibsted.com) in order to gain access.
 
 ### Quick facts
 
