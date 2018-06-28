@@ -68,9 +68,9 @@ HTTP POST /user/100001/product/12345?contextClientId=4cf36ius78dywe8h0000
 
 1. Request a backend API client via Selfservice - make sure to choose which endpoint groups you want this client to
 be able to access.
-2. Send an e-mail to support@spid.no stating:
+2. Send an e-mail to schibstedaccount@schibsted.com stating:
 Which end points your main client (client id needed) will enable for data sharing and the client name and client_id
 of the backend client that has been created and needs access.
 Which endpoints the backend client will need access to.
-3. Implement the functions, and when you are ready with it contact support@spid.no to access the implementation checklist.
+3. Implement the functions, and when you are ready with it contact schibstedaccount@schibsted.com to access the implementation checklist.
 4. If everything is fine - request the backend client in the production environment.

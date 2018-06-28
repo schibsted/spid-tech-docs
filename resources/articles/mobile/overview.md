@@ -28,7 +28,7 @@ Create the clients you need, configure them and request credentials. These crede
 
 ### 3. Review the default permissions
 
-Review the default permissions for mobile clients, these should be enough for most clients. If additional permissions are required email support@spid.no with the topic
+Review the default permissions for mobile clients, these should be enough for most clients. If additional permissions are required email schibstedaccount@schibsted.com with the topic
 "Mobile permissions" stating what additional endpoints you need access to and for what purpose.
 
 ### 4. Develop your app

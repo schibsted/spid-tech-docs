@@ -17,7 +17,7 @@ The SchibstedID iOS SDK provides you access to SPT identity user objects and giv
 
 To learn more about the SDK, the full documentation can be found in the GitHub repo at [schibsted.github.io/account-sdk-ios](https://schibsted.github.io/account-sdk-ios/).
 
-For support, please contact [support@spid.no](mailto:support@spid.no)
+For support, please contact [schibstedaccount@schibsted.com](mailto:schibstedaccount@schibsted.com)
 
 ## Setup
 

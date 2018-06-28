@@ -13,7 +13,7 @@ JavaScript on the frontend.
 
 This page describes a custom module built by Varnish Software for SPiD, and is a
 paid product. If you are interested in this product,
-[contact support](mailto:support@spid.no).
+[contact support](mailto:schibstedaccount@schibsted.com).
 
 When using the Varnish SPiD payment wall, the high-level flow is as follows:
 
