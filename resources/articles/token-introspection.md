@@ -36,11 +36,7 @@ to SPiD is currently supported.
 ## Token introspection request
 
 The introspection endpoint is protected by the same [client authentication](/authentication/#client-authentication) as
-the token endpoint. A resource server is only allowed to introspect tokens which are intended for itself, or for another
-client belonging to the same merchant.
-
-To allow a resource server to introspect a token issued to a client not belonging to the same merchant as the resource
-server, the client must make sure to [specify a "resource indicator" in the token request](/authentication/).
+the token endpoint.
 
 ```sh
 curl -X POST -H "Authorization: Basic NGU4NDYzNTY5Y2FmN2NhMDE5MDAwMDA3OmZvb2Jhcg"\

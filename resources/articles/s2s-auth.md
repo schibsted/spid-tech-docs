@@ -44,20 +44,17 @@ The following sections break down these high-level steps in more detail.
 
 Before making a call to a resource server, the calling client first needs to [obtain a token](/oauth/token/).
 For this, a `client_credentials` grant is made using the caller's client ID and secret. Additionally,
-the caller should specify the resource trying to be accessed via the `resource`
-parameter and any scopes required via the `scope` parameter:
+the caller should specify any scopes required via the `scope` parameter:
 
 ```sh
 curl -X POST -H "Authorization: Basic NGU4NDYzNTY5Y2FmN2NhMDE5MDAwMDA3OmZvb2Jhcg" \
--d 'resource=https://service.schibsted.com/messages' -d 'scope=read:messages write:messages' \
--d 'grant_type=client_credentials' https://login.schibsted.com/oauth/token
+-d 'scope=read:messages write:messages' \
+-d 'grant_type=client_credentials' \
+https://login.schibsted.com/oauth/token
 ```
 
-For further details on resource indicators, please refer to
-[Resource Indicators for OAuth 2.0, draft 2](https://tools.ietf.org/html/draft-campbell-oauth-resource-indicators-02).
-
-***Note:*** currently the value passed as the resource needs to match the domain registered in SPiD's
-[self service](/mobile/selfservice/) tool for the resource server.
+Optionally the 'resource' parameter can be used to set the intended audience of the token, see
+[Specifying a resource indicator](http://techdocs.spid.no/authentication/).
 
 The scopes passed will help the receiving service authorize the call, and can be thought of as a set of
 permissions or policies that the service will allow. Thus, the scopes present in the token help the
