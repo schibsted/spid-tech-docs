@@ -19,13 +19,12 @@
 
 :body
 
-**Note: this documentation is for the upcoming version 3.x of the JavaScript SDK. The old 2.x
+**Note: this documentation is for the current version 3.x of the JavaScript SDK. The old 2.x
 version can be found [here](/sdks/javascript-2x/).**
 
 The JavaScript SDK is different from the other SDKs in that it only provides information about the
 user's authentication/authorization status. It is not a general purpose SDK to make arbitrary
-requests against the API. A [Node SDK](https://github.schibsted.io/spt-identity/spid-sdk-node) is
-being developed to fill this role for server-side JavaScript.
+requests against the API.
 
 To get started implementing this SDK, please visit our [documentation on
 Github](https://schibsted.github.io/account-sdk-browser)
