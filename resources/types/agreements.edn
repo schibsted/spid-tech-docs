@@ -1,3 +1,0 @@
-{:id :agreements
- :name "Agreements"
- :fields [{:name "agreements"    :type :agreements-item    :always-available? true}]}

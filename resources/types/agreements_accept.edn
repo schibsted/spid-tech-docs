@@ -1,3 +1,0 @@
-{:id :agreements_accept
- :name "Agreements_accept"
- :fields [{:name "result"    :type :boolean    :description "Result of proceeded action"    :always-available? true}]}

@@ -1,4 +1,0 @@
-{:id :agreements-item
- :name "Agreements item"
- :fields [{:name "platform"   :type :boolean    :description "Whether accepts platform Terms & Conditions"    :always-available? true}
-          {:name "client"     :type :boolean    :description "Whether accepts client Terms & Conditions"    :always-available? true}]}
