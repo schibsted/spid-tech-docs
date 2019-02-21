@@ -30,7 +30,7 @@ public profile data will be available:
  :fields [{:name "id"                  :type :string         :description "Legacy `uuid`. Don't use. [Portable contacts](https://tools.ietf.org/html/draft-smarr-vcarddav-portable-contacts-00#section-7.2.1)" :always-available? true}
           {:name "userId"              :type :integer-string :description "Unique user ID. Custom extension." :always-available? true}
           {:name "uuid"                :type :string         :description "Unique user UUID. Custom extension. Should be preferred as the user identifier." :always-available? true}
-          {:name "name"                :type :name           :description "A JSON string. See [the name type](/types/name/) for details" :always-available? true}
+          {:name "name"                :type :name           :description "JSON object containing `familyName`, `givenName` and `formatted` properties. See [the name type](/types/name/) for details" :always-available? true}
           {:name "displayName"         :type :string         :description "Name suitable for displaying to end-users." :always-available? true}
           {:name "published"           :type :date-time      :description "The date this user was first added. Can return false if the user account was deleted." :always-available? true}
           {:name "updated"             :type :date-time      :description "The most recent date the details of this user were updated" :always-available? true}
