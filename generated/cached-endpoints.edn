@@ -210,7 +210,8 @@
  {:path "eid/init",
   :validOutputFormats ["json"],
   :parameterDescriptions
-  {:hash
+  {:signicatUniqueId "Signicat BankID",
+   :hash
    "A [verified request hash](/verified-hash/) signed with your client sign secret."},
   :method "POST",
   :name "Initialize a eID verification process",
@@ -270,7 +271,8 @@
  {:path "eid/complete",
   :validOutputFormats ["json"],
   :parameterDescriptions
-  {:hash
+  {:signicatUniqueId "Signicat BankID",
+   :hash
    "A [verified request hash](/verified-hash/) signed with your client sign secret.",
    :initRef "The initRef returned from the eID init call",
    :verifiedFields
@@ -1412,7 +1414,8 @@
   {:userId
    "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`).",
    :subscriptionId "",
-   :autoRenew "\"1\", to enable auto-renewal, \"0\" to disable"},
+   :autoRenew "\"1\", to enable auto-renewal, \"0\" to disable",
+   :reason "Reason of deletion"},
   :method "*",
   :name "Manage user subscription",
   :httpMethods

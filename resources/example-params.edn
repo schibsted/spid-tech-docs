@@ -132,4 +132,6 @@
  "services" "[{}]"
  "acceptTerms" "true"
  "reason" "Example deletion reason"
+ "signicatUniqueId" "123456789"
+ "remember" "1"
  }
