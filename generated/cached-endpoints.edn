@@ -217,7 +217,7 @@
   :httpMethods
   {:POST
    {:name "POST",
-    :required ["ssn" "userId" "hash"],
+    :required ["signicatUniqueId" "userId" "hash"],
     :optional [],
     :accessTokenTypes [],
     :filters [],
@@ -280,7 +280,8 @@
   :httpMethods
   {:POST
    {:name "POST",
-    :required ["userId" "ssn" "verifiedFields" "hash" "initRef"],
+    :required
+    ["userId" "signicatUniqueId" "verifiedFields" "hash" "initRef"],
     :optional [],
     :accessTokenTypes [],
     :filters [],
@@ -755,14 +756,16 @@
   :parameterDescriptions
   {:identifier "Email of the user",
    :redirectUri
-   "Where to redirect the user after completing signin request"},
+   "Where to redirect the user after completing signin request",
+   :remember
+   "Remember user on this device. 0 or 1, defaults to 1 which is remember"},
   :method "POST",
   :name "Signin",
   :httpMethods
   {:POST
    {:name "POST",
     :required ["identifier" "redirectUri"],
-    :optional ["context"],
+    :optional ["remember" "context"],
     :accessTokenTypes ["server"],
     :filters [],
     :defaultFilters [],
@@ -804,7 +807,8 @@
   :parameterDescriptions
   {:gender
    "Gender. Legal values and a localized description can be fetched from [/api/2/describe/User?property=gender](/endpoints/GET/describe/{object}/).",
-   :name "Full name",
+   :name
+   "JSON object containing `familyName`, `givenName` and `formatted` properties. See [the name type](/types/name/) for details",
    :locale
    "Preferred user language. By default it is nb_NO for Norway, and sv_SE for Sweden. You can also use en_US, es_ES, ca_ES and eu_ES.",
    :photo "URL to a profile photo",
@@ -896,7 +900,8 @@
    "New gender. Legal values and a localized description can be fetched from [/api/2/describe/User?property=gender](/endpoints/GET/describe/{object}/).",
    :acceptTerms
    "Create the user with terms & conditions and privacy policy pre-accepted",
-   :name "JSON object containing familyName, givenName and formatted",
+   :name
+   "JSON object containing `familyName`, `givenName` and `formatted` properties. See [the name type](/types/name/) for details",
    :displayName "New preferred display name",
    :email "Email of the user. Must be unique across all of SPiD",
    :addresses
@@ -1016,7 +1021,8 @@
    "New gender. Legal values and a localized description can be fetched from [/api/2/describe/User?property=gender](/endpoints/GET/describe/{object}/).",
    :userId
    "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`).",
-   :name "JSON object containing familyName, givenName and formatted",
+   :name
+   "JSON object containing `familyName`, `givenName` and `formatted` properties. See [the name type](/types/name/) for details",
    :photo "URL to a profile photo",
    :displayName "New preferred display name",
    :utcOffset
@@ -1103,35 +1109,13 @@
  {:path "users",
   :validOutputFormats ["json" "jsonp" "png"],
   :parameterDescriptions
-  {:gender "Exact match (male, female, undisclosed, other, withheld)",
-   :givenName "Sub-string match from the beginning of the given name",
-   :userId "Exact match.",
-   :emails_regex "Regexp search all emails.",
-   :familyName
-   "Sub-string match from the beginning of the family name",
-   :address_streetAddress "Regex search.",
-   :address_formatted "Regex search.",
-   :phoneNumber
-   "Sub-string match from the beginning of the primary phone number",
-   :displayName
-   "Sub-string match from the beginning of the displayName",
-   :emails
-   "Exact match for either the primary or one of the secondary emails.",
-   :address_postalCode "Exact match.",
-   :email "Exact match for the primary email.",
-   :fullName
-   "Sub-string match from the beginning of the given name and family name combined",
-   :fields
+  {:fields
    "A [list of fields](/endpoints/#parameters) to select, makes for a slimmer response.",
-   :address_region "Regex search.",
-   :address_country "Exact match.",
-   :preferredUsername
-   "Sub-string match from the beginning of the preferred user name",
-   :address_locality "Regex search.",
    :id "Exact match.",
-   :phoneNumbers
-   "Sub-string match from the beginning of any phone number",
-   :birthday "Regex search."},
+   :userId "Exact match.",
+   :email "Exact match for the primary email.",
+   :emails
+   "Exact match for either the primary or one of the secondary emails."},
   :method "GET",
   :name "List users",
   :httpMethods
@@ -1149,34 +1133,15 @@
      "id"
      "userId"
      "email"
-     "emails"
-     "emails_regex"
-     "displayName"
-     "givenName"
-     "familyName"
-     "fullName"
-     "preferredUsername"
-     "phoneNumber"
-     "phoneNumbers"
-     "gender"
-     "birthday"
-     "address_formatted"
-     "address_postalCode"
-     "address_country"
-     "address_region"
-     "address_locality"
-     "address_streetAddress"],
+     "emails"],
     :accessTokenTypes ["server"],
     :filters
     ["updated"
      "verified"
      "unverified"
-     "inactive blocked"
+     "inactive"
+     "blocked"
      "deleted"
-     "facebook"
-     "google"
-     "live"
-     "imported"
      "merchant"],
     :defaultFilters ["verified" "unverified"],
     :responses
@@ -1408,7 +1373,7 @@
       :type "subscription"}]}},
   :url "/api/2/user/{id}/subscription",
   :pathParameters ["userId"],
-  :controller "Api/2/User.user_subscription",
+  :controller "Api/2/Subscriptions.user_subscription",
   :defaultOutputFormat "json",
   :description "Create a new user subscription for a user",
   :category ["Payment Services" "Subscription API"]}
@@ -1436,7 +1401,8 @@
       :type "subscription"}]}},
   :url "/api/2/user/{id}/subscription/{<\\d+>subscription_id}/stop",
   :pathParameters ["userId" "subscriptionId"],
-  :controller "Api/2/User.user_subscription_stop_renewal_after_lock",
+  :controller
+  "Api/2/Subscriptions.user_subscription_stop_renewal_after_lock",
   :defaultOutputFormat "json",
   :description "Expire user subscription after lock period is over",
   :category ["Payment Services" "Subscription API"]}
@@ -1478,7 +1444,7 @@
    :DELETE
    {:name "DELETE",
     :required [],
-    :optional [],
+    :optional ["reason"],
     :accessTokenTypes ["server"],
     :filters [],
     :defaultFilters [],
@@ -1488,7 +1454,7 @@
       :type "subscription"}]}},
   :url "/api/2/user/{id}/subscription/{<\\d+>subscription_id}",
   :pathParameters ["userId" "subscriptionId"],
-  :controller "Api/2/User.user_subscription",
+  :controller "Api/2/Subscriptions.user_subscription",
   :defaultOutputFormat "json",
   :description "Get, Update or (soft)delete a User subscription.",
   :category ["Payment Services" "Subscription API"]}
@@ -1513,7 +1479,7 @@
       :type "{subscriptionId subscription}"}]}},
   :url "/api/2/user/{id}/subscriptions",
   :pathParameters ["userId"],
-  :controller "Api/2/User.user_subscriptions",
+  :controller "Api/2/Subscriptions.user_subscriptions",
   :defaultOutputFormat "json",
   :description "List all subscriptions (on client) for user",
   :category ["Payment Services" "Subscription API"]}
@@ -1552,7 +1518,13 @@
     :responses
     [{:status 200,
       :description "Grant a user access to a product",
-      :type "user-product-access"}]},
+      :type "user-product-access"}
+     {:status 400,
+      :description "Was not able to grant access",
+      :type "api-exception"}
+     {:status 404,
+      :description "Product not found",
+      :type "api-exception"}]},
    :DELETE
    {:name "DELETE",
     :required [],
@@ -1563,10 +1535,16 @@
     :responses
     [{:status 200,
       :description "Revoke a user's access to a product",
-      :type "success-indicator"}]}},
+      :type "success-indicator"}
+     {:status 400,
+      :description "Was not able to remove access",
+      :type "api-exception"}
+     {:status 404,
+      :description "Product not found",
+      :type "api-exception"}]}},
   :url "/api/2/user/{id}/product/{product_id}",
   :pathParameters ["userId" "productId"],
-  :controller "Api/2/User.user_product",
+  :controller "Api/2/Digitalcontents.user_product",
   :defaultOutputFormat "json",
   :description "Manage user access to a product.",
   :category ["Payment Services" "Digital Contents API"]}
@@ -1591,7 +1569,7 @@
       :type "{productId digital-content}"}]}},
   :url "/api/2/user/{id}/products",
   :pathParameters ["userId"],
-  :controller "Api/2/User.user_products",
+  :controller "Api/2/Digitalcontents.user_products",
   :defaultOutputFormat "json",
   :description
   "List all contents (on client) that user has access to.",
@@ -1600,14 +1578,15 @@
   :validOutputFormats ["json"],
   :parameterDescriptions
   {:userId
-   "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`)."},
+   "The user's `uuid` or `userId` (not to be mistaken with the deprecated `id`).",
+   :clientId "The custom clientId to check (requires scope)."},
   :method "*",
   :name "Has Access to User",
   :httpMethods
   {:GET
    {:name "GET",
     :required [],
-    :optional [],
+    :optional ["clientId"],
     :accessTokenTypes ["server"],
     :filters [],
     :defaultFilters [],
@@ -1615,7 +1594,11 @@
     [{:status 200,
       :description
       "Returns object with field \"connected\" set to true/false whether client is connected to given user.",
-      :type "object"}]}},
+      :type "object"}
+     {:status 403,
+      :description
+      "Not authorized to obtain information about the connection to specified clientId",
+      :type "api-exception"}]}},
   :url "/api/2/user/{id}/connected",
   :pathParameters ["userId"],
   :controller "Api/2/User.user_connected",
@@ -1978,13 +1961,13 @@
     :accessTokenTypes ["server" "user"],
     :filters
     ["content"
-     "subscriptions"
+     "subscription"
      "deleted"
      "unavailable"
      "invisible"
      "unselectable"
      "available"
-     "bundle"],
+     "updated"],
     :defaultFilters [],
     :responses
     [{:status 200,
@@ -3285,127 +3268,6 @@
   :description
   "Trigger re-sending of SMS and/or email for passwordless authentication",
   :category ["Identity Management" "Authentication API"]}
- {:path "merchant/{merchant_id}/agreements",
-  :validOutputFormats ["json"],
-  :parameterDescriptions {:merchant_id "Merchant ID"},
-  :method "*",
-  :name "Agreements list",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server" "user"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Returns a list of agreement objects",
-      :type "[agreement]"}
-     {:status 403,
-      :description "Token does not have access to this merchant",
-      :type "api-exception"}]},
-   :POST
-   {:name "POST",
-    :required ["markdown"],
-    :optional ["date" "markdown_summary" "title" "privacy_url"],
-    :accessTokenTypes ["server" "user"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 201,
-      :description "Returns the newly created agreenebt object",
-      :type "agreement"}
-     {:status 400,
-      :description "Missing required parameters or similar error",
-      :type "api-exception"}
-     {:status 403,
-      :description "Token does not have access to this merchant",
-      :type "api-exception"}]}},
-  :url "/api/2/merchant/{<\\d+>merchant_id}/agreements",
-  :pathParameters ["merchant_id"],
-  :controller "Api/2/Agreement.agreements",
-  :defaultOutputFormat "json",
-  :description "Get agreements or create new one",
-  :category ["Self Service" "Self Service API"]}
- {:path "merchant/{merchant_id}/agreements/assign",
-  :validOutputFormats ["json"],
-  :parameterDescriptions {:merchant_id "Merchant ID"},
-  :method "POST",
-  :name "Agreement assignment",
-  :httpMethods
-  {:POST
-   {:name "POST",
-    :required ["term_id" "client_id"],
-    :optional [],
-    :accessTokenTypes ["server" "user"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 201,
-      :description "Assignment created successfully",
-      :type "agreement"}
-     {:status 400,
-      :description "Missing required parameters or similar error",
-      :type "api-exception"}
-     {:status 404,
-      :description "The client or agreement not found",
-      :type "api-exception"}
-     {:status 403,
-      :description "Token does not have access to this merchant",
-      :type "api-exception"}]}},
-  :url "/api/2/merchant/{<\\d+>merchant_id}/agreements/assign",
-  :pathParameters ["merchant_id"],
-  :controller "Api/2/Agreement.assign_agreement",
-  :defaultOutputFormat "json",
-  :description "Assign agreement to client",
-  :category ["Self Service" "Self Service API"]}
- {:path "merchant/{merchant_id}/agreements/{id}",
-  :validOutputFormats ["json"],
-  :parameterDescriptions
-  {:merchant_id "Merchant ID", :id "Agreement ID"},
-  :method "*",
-  :name "Agreement get or update",
-  :httpMethods
-  {:GET
-   {:name "GET",
-    :required [],
-    :optional [],
-    :accessTokenTypes ["server" "user"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Returns an agreement object",
-      :type "agreement"}
-     {:status 403,
-      :description "Token does not have access to this merchant",
-      :type "api-exception"}]},
-   :POST
-   {:name "POST",
-    :required [],
-    :optional
-    ["markdown" "markdown_summary" "date" "title" "privacy_url"],
-    :accessTokenTypes ["server" "user"],
-    :filters [],
-    :defaultFilters [],
-    :responses
-    [{:status 200,
-      :description "Returns the updated agreement object",
-      :type "agreement"}
-     {:status 400,
-      :description
-      "Missing required parameters, or agreement not found",
-      :type "api-exception"}
-     {:status 403,
-      :description "Token does not have access to this merchant",
-      :type "api-exception"}]}},
-  :url "/api/2/merchant/{<\\d+>merchant_id}/agreements/{id}",
-  :pathParameters ["merchant_id" "id"],
-  :controller "Api/2/Agreement.agreement",
-  :defaultOutputFormat "json",
-  :description "Get or update an agreement",
-  :category ["Self Service" "Self Service API"]}
  {:path "merchant/{merchant_id}/trackergroups",
   :validOutputFormats ["json"],
   :parameterDescriptions {:merchant_id "Merchant ID"},
