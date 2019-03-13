@@ -21,11 +21,11 @@
 **Note: this documentation is for the 1.x versions of the JavaScript SDK. The current version can be found
 [here](/sdks/javascript/).**
 
-By default, the SDK will be loaded from SPiD's servers. You may host it in your
+By default, the SDK will be loaded from SchAcc's servers. You may host it in your
 own environment during testing and by request when in production. If the cookie
 option is set to `true`, the cookies will be created for your own domain.
 
-Loading the JS SDK directly from SPiD is recommended for performance reasons.
+Loading the JS SDK directly from SchAcc is recommended for performance reasons.
 This way, the SDK is cached across clients, meaning that users that have
 previously visited other clients may not need to download the SDK for your site.
 

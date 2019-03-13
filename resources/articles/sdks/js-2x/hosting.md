@@ -18,7 +18,7 @@
 
 :body
 
-The SDK can be retrieved from SPiD CDN servers or your own servers.
+The SDK can be retrieved from SchAcc CDN servers or your own servers.
 
 ## Local usage
 To use a local copy, you can

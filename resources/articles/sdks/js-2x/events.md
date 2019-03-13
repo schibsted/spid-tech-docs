@@ -112,7 +112,7 @@ the production server.
     </tr>
     <tr>
       <td><code>SPiD.visitor</code></td>
-      <td>SPiD identifies the current visitor. Yields a unique visitor id that can be used to track the user even when not logged in. Used in analytics (Mixpanel) tracking, etc</td>
+      <td>SchAcc identifies the current visitor. Yields a unique visitor id that can be used to track the user even when not logged in. Used in analytics (Mixpanel) tracking, etc</td>
     </tr>
     <tr>
       <td><code>SPiD.error</code></td>
