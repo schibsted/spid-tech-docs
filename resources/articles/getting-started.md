@@ -46,7 +46,7 @@ examples, see the example use-cases.
 
 The Java API client library is deployed in Maven central, just add it to your project's `pom.xml` file:
 
-<spid-example lang="html" src="/java/getting-started/pom.xml" title="Add SchAcc client"/>
+<spid-example lang="html" src="/java/getting-started/pom.xml" title="Add SPiD client"/>
 
 ## :tab PHP
 

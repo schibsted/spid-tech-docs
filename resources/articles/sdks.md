@@ -51,7 +51,7 @@ flying start. The source code repository also has
 The [Java API client](https://github.com/schibsted/spid-client-java/) is
 available from Maven Central. Add the following to your `pom.xml`:
 
-<spid-example lang="html" src="/java/getting-started/pom.xml" title="Add SchAcc client"/>
+<spid-example lang="html" src="/java/getting-started/pom.xml" title="Add SPiD client"/>
 
 In lieu of API docs, please refer to the [Getting started](/getting-started/) and
 [Implementing Single Sign-On](/implementing-sso/) guides for a flying start.

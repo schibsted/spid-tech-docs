@@ -116,19 +116,19 @@ With our data in hand, we can create the Paylink by POSTing to
 
 ## :tab Java
 
-<spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Create SchAcc client"/>
+<spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Create SPiD client"/>
 
 <spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Create Paylink"/>
 
 ## :tab PHP
 
-<spid-example lang="php" src="/paylinks/checkout.php" title="Create SchAcc client"/>
+<spid-example lang="php" src="/paylinks/checkout.php" title="Create SPiD client"/>
 
 <spid-example lang="php" src="/paylinks/checkout.php" title="Create Paylink"/>
 
 ## :tab Clojure
 
-<spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Create SchAcc client"/>
+<spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Create SPiD client"/>
 
 <spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Create Paylink"/>
 
@@ -144,15 +144,15 @@ payment.
 
 ## :tab Java
 
-<spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Create Paylink and redirect to SchAcc"/>
+<spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Create Paylink and redirect to SPiD"/>
 
 ## :tab PHP
 
-<spid-example lang="php" src="/paylinks/checkout.php" title="Redirect to SchAcc"/>
+<spid-example lang="php" src="/paylinks/checkout.php" title="Redirect to SPiD"/>
 
 ## :tab Clojure
 
-<spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Create Paylink and redirect to SchAcc"/>
+<spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Create Paylink and redirect to SPiD"/>
 
 # :/tabs
 
@@ -176,15 +176,15 @@ create a session for the user with information from SchAcc:
 
 ## :tab Java
 
-<spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Handle callback from SchAcc, make sure we've got the right user"/>
+<spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Handle callback from SPiD, make sure we've got the right user"/>
 
 ## :tab PHP
 
-<spid-example lang="php" src="/paylinks/callback.php" title="Handle callback from SchAcc, make sure we've got the right user"/>
+<spid-example lang="php" src="/paylinks/callback.php" title="Handle callback from SPiD, make sure we've got the right user"/>
 
 ## :tab Clojure
 
-<spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Handle callback from SchAcc, make sure we've got the right user"/>
+<spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Handle callback from SPiD, make sure we've got the right user"/>
 
 # :/tabs
 
