@@ -27,7 +27,7 @@ details on these fields.
 The `paymentOptions` parameter defines allowed payment methods for Paylink. It can be provided in two formats - as:
 
 - integer bitmask ([bitmask format specification](/types/payment-options/))
-- JSON array of objects ([array format specification](/types/payment-options-array/)) `available since SPiD version 2.111.0`
+- JSON array of objects ([array format specification](/types/payment-options-array/)) `available since SchAcc version 2.111.0`
 
 
 :relevant-types paylink-item

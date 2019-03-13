@@ -1,4 +1,4 @@
 :introduction
 
-Get information about the platform and its status. Useful to check if the SPiD
+Get information about the platform and its status. Useful to check if the SchAcc
 API is up and running.

@@ -9,7 +9,7 @@ the native/Facebook login for mobile apps. Use the
 cases.
 
 This means that you can also use `/me` to check if the user has logged in
-through the SPiD web site.
+through the SchAcc web site.
 
 :relevant-endpoints
 

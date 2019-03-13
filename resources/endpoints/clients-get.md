@@ -1,3 +1,3 @@
 :introduction
 
-List all clients in SPiD.
+List all clients in SchAcc.
