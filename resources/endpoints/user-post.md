@@ -3,7 +3,7 @@
 Create a new user. Not available for mobile clients, for historical reasons.
 See the [signup endpoint](/endpoints/POST/signup/).
 
-The email is globally unique in SPiD, and there can only be
+The email is globally unique in SchAcc, and there can only be
 one account associated with any given email address. To query for the
 availability of an email address, see the
 [email status endpoint](/endpoints/GET/email/{email}/status/).

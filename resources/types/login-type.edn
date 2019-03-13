@@ -3,4 +3,4 @@
  :values [{:value "normal"     :description "User provided email and password to log in."}
           {:value "auto"       :description "Caused by an active 'remember me' cookie."}
           {:value "thirdparty" :description "Logged in via third-party provider, such as Facebook, Google, etc."}
-          {:value "api"        :description "Logged in via the SPiD API (used by native mobile apps)."}]}
+          {:value "api"        :description "Logged in via the SchAcc API (used by native mobile apps)."}]}

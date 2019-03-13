@@ -5,7 +5,7 @@
   :description "Your client doesn't have administration rights for this client."
   :type "api-exception"}
  {:status 403
-  :description "Client is not authorized to access this API endpoint. Contact SPiD to request access."
+  :description "Client is not authorized to access this API endpoint. Contact SchAcc to request access."
   :type "api-exception"}
  {:status 403
   :description "Requesting IP is not whitelisted"

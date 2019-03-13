@@ -3,6 +3,6 @@
  :fields [{:name "value"        :type :string   :description "The email address" :always-available? true}
           {:name "type"         :type :string   :description "The type of email. Defaults to 'other'." :always-available? true}
           {:name "primary"      :type :boolean  :description "If `true`, this is the user's primary email address." :always-available? false}
-          {:name "verified"     :type :boolean  :description "If `true`, the email is verified in SPiD by the user." :always-available? false}
-          {:name "verifiedTime" :type :datetime :description "When the user last verifided this email address." :always-available? false}
+          {:name "verified"     :type :boolean  :description "If `true`, the email is verified in SchAcc by the user." :always-available? false}
+          {:name "verifiedTime" :type :datetime :description "When the user last verified this email address." :always-available? false}
           {:name "hidden"       :type :boolean  :description "Do not display email address publicly or to other users" :always-available? false}]}
