@@ -5,19 +5,19 @@
 ## Read more about Mixpanel
 
 - [Mixpanel Analytics](/mixpanel/analytics/)
-- [Events tracked by SPiD](/mixpanel/events-tracked/)
+- [Events tracked by SchAcc](/mixpanel/events-tracked/)
 - [Mixpanel Page Viewed Event](/mixpanel/page-viewed-event/)
 
 :body
 
 To implement Mixpanel tracking, you need a token, an API key and a secret. These
-are provided by SPiD when new clients are created. There are four steps to
+are provided by SchAcc when new clients are created. There are four steps to
 enable Mixpanel tracking for your site:
 
 1. Install the Mixpanel library
 2. Include the JavaScript SDK
-3. Identify the visitor via the SPiD SDK
-4. Track events using the provided SPiD visitor unique id
+3. Identify the visitor via the SchAcc SDK
+4. Track events using the provided SchAcc visitor unique id
 
 It is recommended to read through the
 [Mixpanel documentation](https://mixpanel.com/docs/) and research which events
@@ -38,10 +38,10 @@ Add the JavaScript SDK just before the `</head>` end tag of your page, for examp
 
 Read more [here](/sdks/javascript/).
 
-### 3. Identify the visitor via the SPiD SDK
+### 3. Identify the visitor via the SchAcc SDK
 
 When the page has loaded, subscribe to the "auth.visitor" event. This event is
-triggered when SPiD identifies the current visitor and the SDK is initialized.
+triggered when SchAcc identifies the current visitor and the SDK is initialized.
 When the user is identified, you can identify the user with Mixpanel by calling
 `mixpanel.identify(SPID_VISITOR_ID)`.
 
@@ -66,7 +66,7 @@ VGS.init({
 });
 ```
 
-### 4. Track events using the provided SPiD unique visitor id
+### 4. Track events using the provided SchAcc unique visitor id
 
 ```js
 // your own tracking

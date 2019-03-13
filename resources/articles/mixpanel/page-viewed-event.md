@@ -5,7 +5,7 @@
 ## Read more about Mixpanel
 
 - [Mixpanel Analytics](/mixpanel/analytics/)
-- [Events tracked by SPiD](/mixpanel/events-tracked/)
+- [Events tracked by SchAcc](/mixpanel/events-tracked/)
 - [Implementing Mixpanel tracking](/mixpanel/implementing-tracking/)
 
 

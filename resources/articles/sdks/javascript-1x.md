@@ -36,7 +36,7 @@ The following code will load and initialize the JavaScript SDK with the most
 common options. Replace `YOUR_CLIENT_ID`, `SPID_JSSDK_URI` and `SPID_SERVER_URI`
 with the appropriate values.
 
-`SPID_SERVER_URI` is dependent on the SPiD server you will be using.
+`SPID_SERVER_URI` is dependent on the SchAcc server you will be using.
 
 #### Production servers
 
@@ -46,8 +46,8 @@ with the appropriate values.
 #### Stage/Pre servers
 - https://identity-pre.schibsted.com for stage/pre clients
 
-`SPID_JSSDK_URI` will normally point to SPiD's servers. Read more about this
-under [hosting](/sdks/js-1x/hosting/). When using the SDK live from SPiD, the URL typically
+`SPID_JSSDK_URI` will normally point to SchAcc's servers. Read more about this
+under [hosting](/sdks/js-1x/hosting/). When using the SDK live from SchAcc, the URL typically
 looks like `https://login.schibsted.com/js/spid-sdk-{version}.min.js`,
 e.g.
 [https://login.schibsted.com/js/spid-sdk-1.7.9.min.js](https://login.schibsted.com/js/spid-sdk-1.7.9.min.js).
@@ -76,7 +76,7 @@ VGS.init({
 
 ### Asynchronously loading the JS SDK
 
-By loading the SPiD SDK asynchronously it will not block loading other elements
+By loading the SchAcc SDK asynchronously it will not block loading other elements
 on your page. The function assigned to window.vgsAsyncInit is run as soon as the
 SDK source has finished loading. Any code you want to run after the SDK is
 loaded should be placed within this function. Place the following code right
@@ -124,7 +124,7 @@ The response session object contains a boolean field called `agreementAccepted`.
     if (sess.defaultAgreementAccepted && sess.clientAgreementAccepted) {
         return;
     }
-    // show SPiD summary and/or client summary depending on booleans
+    // show SchAcc summary and/or client summary depending on booleans
 });
 
 $('.acceptButton').click(function() {
@@ -150,7 +150,7 @@ Your client ID. **Required**
 
 ##### server
 
-URL to the SPiD server. **Required**
+URL to the SchAcc server. **Required**
 
 ##### cookie
 
@@ -193,12 +193,12 @@ expiration.
 ##### timeout
 
 This is the default connection timeout in milliseconds used when waiting for
-response by the SPiD servers. Defaults to 5 seconds (5000 milliseconds).
+response by the SchAcc servers. Defaults to 5 seconds (5000 milliseconds).
 
 ##### refresh_timeout
 
 This option specifies how often the session is refreshed and retrieved from
-SPiD, in milliseconds. Default is every 15 minutes (900000 milliseconds). This
+SchAcc, in milliseconds. Default is every 15 minutes (900000 milliseconds). This
 is configurable down to 1 minute (60000 milliseconds). We encourage clients to
 use the default unless it is necessary to change it, like in a single-page app
 where page refreshes are very infrequent. A fresh session can also be retrieved
@@ -207,10 +207,10 @@ on demand by calling `VGS.getLoginStatus()` with the `forced` option set to
 
 ##### cache
 
-By default the SDK will cache responses from SPiD for functions that check
+By default the SDK will cache responses from SchAcc for functions that check
 product and subscription access (`hasProduct`, `hasSubscription`). It uses the
 `refresh_timeout` value for invalidating the cache. This is default `true` and
-the purpose is to minimize requests to SPiD and performance gains. These
+the purpose is to minimize requests to SchAcc and performance gains. These
 responses rarely change.
 
 ##### cache_notloggedin
@@ -229,13 +229,13 @@ For use with tracker. A float between 0 and 1. Default value is 1.
 
 ##### track_anon_opt_out
 
-By default the SPiD pulse part of the sdk will track anonymous users as well as logged
+By default the SchAcc pulse part of the sdk will track anonymous users as well as logged
 in users. If you want to disable tracking of anonymous users set this to `true`.
 _This setting requires the pulse module._
 
 ##### track_custom_data
 
-The SPiD pulse accepts custom data as a stringified JSON object. This data is sent to
+The SchAcc pulse accepts custom data as a stringified JSON object. This data is sent to
 the pulse server and stored into the database in raw format.
 Example value: '{ "articleId": 1234, "section": "sport/football" }'
 Default is `null`.
@@ -245,6 +245,6 @@ _This setting requires the pulse module._
 ## Auto-login usecase
 
 This is a simple overview of Single Sign On using JS SDK, explaining the complete process between the client
-service (yellow) and SPiD (blue).
+service (yellow) and SchAcc (blue).
 
 ![Single Sign On using JS SDK](/images/simple-sso-js-usecase.png)

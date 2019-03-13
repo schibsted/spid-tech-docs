@@ -1,4 +1,4 @@
-:title Events tracked by SPiD
+:title Events tracked by SchAcc
 
 :aside
 
@@ -10,13 +10,13 @@
 
 :body
 
-SPiD will automatically add some profile data to events. This keeps profile data in events from going stale.
+SchAcc will automatically add some profile data to events. This keeps profile data in events from going stale.
 
-Properties added by SPiD to all events:
+Properties added by SchAcc to all events:
 
 - Version (Platform version)
 - Revision (Platform revision)
-- SPiD ID (The SPiD user id)
+- SchAcc ID (The SchAcc user id)
 - Client (Client alias/name, not client id)
 - ip (User's ip in order for Mixpanel to derive country, city, etc)
 - User agent (Not used by Mixpanel on server side requests, but we send it anyway)
@@ -30,7 +30,7 @@ Properties added by SPiD to all events:
 
 In addition we will save specific data on each event based on the event type.
 
-A complete overview of the SPiD triggered core events follows below:
+A complete overview of the SchAcc triggered core events follows below:
 <table class="table table-hover">
         <thead>
             <tr>
@@ -41,7 +41,7 @@ A complete overview of the SPiD triggered core events follows below:
         <tbody>
             <tr>
                 <td>Accept agreement</td>
-                <td>When the user accepts the user agreement with SPiD and with clients.</td>
+                <td>When the user accepts the user agreement with SchAcc and with clients.</td>
             </tr>
             <tr>
                 <td>Change password notification email sent</td>
@@ -55,14 +55,14 @@ A complete overview of the SPiD triggered core events follows below:
                 <td>Choose product</td>
                 <td>When the user proceeds from the choose product page with a chosen product.
                     <ul>
-                        <li>If product is pre-selected by the client as an url-parameter, the event is sent because technically the product selection is done when the user enters SPiD.</li>
-                        <li>If a paylink is used, no event is triggered because technically the product selection is done by the client before the user enters SPiD.</li>
+                        <li>If product is pre-selected by the client as an url-parameter, the event is sent because technically the product selection is done when the user enters SchAcc.</li>
+                        <li>If a paylink is used, no event is triggered because technically the product selection is done by the client before the user enters SchAcc.</li>
 					</ul>
                 </td>
             </tr>
             <tr>
                 <td>Click to view agreement</td>
-                <td>When on the SPiD signup page, the user clicks the button to view the entire user agreement with SPiD.</td>
+                <td>When on the SchAcc signup page, the user clicks the button to view the entire user agreement with SchAcc.</td>
             </tr>
             <tr>
                 <td>Confirm cc payment identifier</td>
@@ -82,7 +82,7 @@ A complete overview of the SPiD triggered core events follows below:
             </tr>
             <tr>
                 <td>Login</td>
-                <td>When a user logs in to the SPiD platform.
+                <td>When a user logs in to the SchAcc platform.
 					<ul>
                         <li><strong>PS!</strong> Not the same as a login to the client</li>
 					</ul>
@@ -94,31 +94,31 @@ A complete overview of the SPiD triggered core events follows below:
             </tr>
             <tr>
                 <td>Logout</td>
-                <td>When the user manually logs out from SPiD.</td>
+                <td>When the user manually logs out from SchAcc.</td>
             </tr>
             <tr>
                 <td>Migration completed</td>
-                <td>When users who have been imported with unverfied emails to the SPiD database verify their email address.
+                <td>When users who have been imported with unverfied emails to the SchAcc database verify their email address.
 					<ul>
-                        <li><strong>PS!</strong> In this case, the event "Signup completed" is not triggered, because the user is not creating a SPiD profile; it already exists from the import.</li>
+                        <li><strong>PS!</strong> In this case, the event "Signup completed" is not triggered, because the user is not creating a SchAcc profile; it already exists from the import.</li>
 					</ul>
 				</td>
             </tr>
             <tr>
                 <td>Migration started</td>
-                <td>When users who have been imported with unverfied emails to the SPiD database attempt to log in for the first time. 
+                <td>When users who have been imported with unverfied emails to the SchAcc database attempt to log in for the first time. 
 					<ul>
-                        <li><strong>PS!</strong> In this case, the event "Signup started" is not triggered, because the user is not creating a SPiD profile; it already exists from the
+                        <li><strong>PS!</strong> In this case, the event "Signup started" is not triggered, because the user is not creating a SchAcc profile; it already exists from the
                         import.</li>
 					</ul>
 				</td>
             </tr>
             <tr>
                 <td>Order authorized</td>
-                <td>When the order status is set to "Authorized" in a 2-phase payment processes, which happens when SPiD has completed initial order processing and is awaiting feedback before proceeding to order completion and capture processing.
+                <td>When the order status is set to "Authorized" in a 2-phase payment processes, which happens when SchAcc has completed initial order processing and is awaiting feedback before proceeding to order completion and capture processing.
                     <ul>
-                        <li>For credit card payments, 2-phase payment is determined by the client. In such cases, SPiD will await order completion processing until notified by client.</li>
-                        <li>For sms-payments, 2-phase payment is forced by SPiD, as required handshaking steps with mobile payment service providers must take place before order can be moved to completion processing. Notification from client is not necessary in this case.</li>
+                        <li>For credit card payments, 2-phase payment is determined by the client. In such cases, SchAcc will await order completion processing until notified by client.</li>
+                        <li>For sms-payments, 2-phase payment is forced by SchAcc, as required handshaking steps with mobile payment service providers must take place before order can be moved to completion processing. Notification from client is not necessary in this case.</li>
                     </ul>
                 </td>
             </tr>
@@ -128,7 +128,7 @@ A complete overview of the SPiD triggered core events follows below:
             </tr>
             <tr>
                 <td>Page viewed</td>
-                <td>Whenever the user loads a SPiD page. The event contains a page id that explains which page the user is seeing.</td>
+                <td>Whenever the user loads a SchAcc page. The event contains a page id that explains which page the user is seeing.</td>
             </tr>
             <tr>
                 <td>Prior access to product</td>
@@ -145,7 +145,7 @@ A complete overview of the SPiD triggered core events follows below:
             </tr>
             <tr>
                 <td>Signup completed</td>
-                <td>When the completes the process of signing up for a new SPiD account after having clicked the email verification link and the status of the email changes to verified. The event will be attributed to whichever client the signup process was initiated.
+                <td>When the completes the process of signing up for a new SchAcc account after having clicked the email verification link and the status of the email changes to verified. The event will be attributed to whichever client the signup process was initiated.
                     <ul>
                         <li><strong>PS!</strong> This is not the same as signing up to a client.</li>
                         <li><strong>PS2!</strong> For imported users, this event is not triggered. Please see event "Migration completed".</li>
@@ -158,7 +158,7 @@ A complete overview of the SPiD triggered core events follows below:
             </tr>
             <tr>
                 <td>Signup started</td>
-                <td>When the user starts signing up for a new SPiD account. The event will be attributed to whichever client the signup process was initiated.
+                <td>When the user starts signing up for a new SchAcc account. The event will be attributed to whichever client the signup process was initiated.
                     <ul>
                         <li><strong>PS!</strong> This is not the same as signing up to a new client.</li>
                         <li><strong>PS2!</strong> For imported users, this event is not triggered. Please see event "Migration started".</li>

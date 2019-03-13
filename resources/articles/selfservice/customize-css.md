@@ -5,7 +5,7 @@
 
 ![Input fields example](/images/customize_css/customized_example.png)
 
-Customize CSS is functionality in the self-service to change the background and text colors on the non-authorized pages at SPiD. Together with the client teaser functionality we provide this can be a powerful combination to make the authorization have the look-and-feel as you please.
+Customize CSS is functionality in the self-service to change the background and text colors on the non-authorized pages at SchAcc. Together with the client teaser functionality we provide this can be a powerful combination to make the authorization have the look-and-feel as you please.
 
 Just follow these few steps and you will be able to change the colors in an instant:
 

@@ -13,8 +13,8 @@
 
 :body
 
-The `/oauth/authorize` is used to start an authentication flow in SPiD.
-There currently is an authorize implementation in SPiD that redirects to the
+The `/oauth/authorize` is used to start an authentication flow in SchAcc.
+There currently is an authorize implementation in SchAcc that redirects to the
 regular login flow. This will be changed during the second half of 2017.
 More info will come.
 
