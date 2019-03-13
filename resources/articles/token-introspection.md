@@ -23,15 +23,15 @@ In order to make use of this information, you need to know your:
 :body
 
 As a resource server publishing APIs protected by OAuth, you need to verify the tokens
-received from clients. For JWT access tokens issued by SPiD, this can be done in two ways:
+received from clients. For JWT access tokens issued by SchAcc, this can be done in two ways:
 
-1. By a request to SPiD's introspection endpoint `/oauth/introspect`.
+1. By a request to SchAcc's introspection endpoint `/oauth/introspect`.
 1. By verifying the token signature and content locally.
 
 **Note:** Non-JWT tokens can not be introspected. Make sure JWT tokens are enabled for the client in Self Service.
 
 **Note:** User tokens can not be introspected locally. Only remote introspection via a token introspection request
-to SPiD is currently supported.
+to SchAcc is currently supported.
 
 ## Token introspection request
 
@@ -67,13 +67,13 @@ For further details refer to
 
 ## Local token introspection
 
-The JWT access token is signed asymmetrically, and SPiD publishes the set of valid public keys at the
+The JWT access token is signed asymmetrically, and SchAcc publishes the set of valid public keys at the
 endpoint `/oauth/jwks`, e.g. https://identity-pre.schibsted.com/oauth/jwks.
 
 To verify the token locally, follow these steps:
 
 1. Fetch the [JSON Web Key Set (JWKS)](https://tools.ietf.org/html/rfc7517#section-5) containing all valid keys from 
-   SPiD `/oauth/jwks`.
+   SchAcc `/oauth/jwks`.
 1. Look at the JWS header to find the key id in the [`kid` parameter](https://tools.ietf.org/html/rfc7515#section-4.1.4).
 1. Find the key with the matching key id in the JWKS, and use it to 
    [verify the signature of the JWT token](https://tools.ietf.org/html/rfc7515#section-5.2).

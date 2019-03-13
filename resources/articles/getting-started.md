@@ -1,4 +1,4 @@
-:title Getting started with the server-side SPiD API
+:title Getting started with the server-side SchAcc API
 
 :aside
 ## Table of Contents
@@ -16,7 +16,7 @@ If you do not, [please set up your API client via our self service tool](/selfse
 
 ## See also
 
-- [SPiD Authentication](/authentication/)
+- [SchAcc Authentication](/authentication/)
 - [Explaining how login flows work](/login-flows/)
 - [Explaining how logout flows work](/logout-flows/)
 - [The JavaScript SDK](/sdks/javascript/)
@@ -25,12 +25,12 @@ If you do not, [please set up your API client via our self service tool](/selfse
 :body
 
 When you have completed this guide, you will have connected your application to
-the SPiD API and made your first call, verifying that your client ID and secrets
-are correctly configured. You will then be ready to implement login with SPiD.
+the SchAcc API and made your first call, verifying that your client ID and secrets
+are correctly configured. You will then be ready to implement login with SchAcc.
 
 ## Downloading the appropriate SDK/Client
 
-To work with the SPiD APIs, it is recommended that you use one of the official
+To work with the SchAcc APIs, it is recommended that you use one of the official
 SDKs. The SDKs are thin wrappers that primarily spare you the details of working
 with OAuth. If an SDK is not available for your language, skip this section and
 refer to the cURL examples below.
@@ -46,7 +46,7 @@ examples, see the example use-cases.
 
 The Java API client library is deployed in Maven central, just add it to your project's `pom.xml` file:
 
-<spid-example lang="html" src="/java/getting-started/pom.xml" title="Add SPiD client"/>
+<spid-example lang="html" src="/java/getting-started/pom.xml" title="Add SchAcc client"/>
 
 ## :tab PHP
 
@@ -91,7 +91,7 @@ Linking the SDK into your project requires a few steps:
 
 ## :tab Android
 
-In order to use the Android SPiD SDK, you must fist install the
+In order to use the Android SchAcc SDK, you must fist install the
 [Android SDK](http://developer.android.com/sdk/index.html). Run the Android SDK
 Manager (`./sdk/tools/android sdk`) and make sure you have installed at least
 SDK versions 2.2, 4.0, 4.1 and 4.2.
@@ -108,7 +108,7 @@ Because the Android libraries are not available from any central Maven
 repository, you also need to use the
 [Maven Android SDK Deployer](https://github.com/mosabua/maven-android-sdk-deployer)
 in order to install the Android libraries to your ~/.m2 directory in order to
-build the SPiD Android SDK.
+build the SchAcc Android SDK.
 
 ```sh
 git clone https://github.com/mosabua/maven-android-sdk-deployer.git
@@ -145,7 +145,7 @@ Select the device from the list and click "Start" to launch it. This will take a
 while. Maybe 10-15 minutes. Or it might just hang there for an unreasonable long
 time. We've had luck with deleting the device and starting over.
 
-When the emulator is running, run the SPiD example app:
+When the emulator is running, run the SchAcc example app ('SPiDExampleApp'):
 
 ```sh
 cd SPiDExampleApp
@@ -160,7 +160,7 @@ successfully set up the SDK for development. Great success!
 ## Interacting with the API
 
 Now that you have installed a SDK/Client, you will use it to make first contact with
-the SPiD API. Don't worry, it will be quick and painless. When you've got
+the SchAcc API. Don't worry, it will be quick and painless. When you've got
 everything set up, you might want to continue with configuring single sign-on.
 
 # :tabs
@@ -285,8 +285,8 @@ static NSString *const ServerURL = @"https://identity-pre.schibsted.com";
 
 ## :tab Android
 
-To use the SPiD Android SDK you must first make the library available to your
-application. Add the SPiD SDK as a dependency to your pom.xml:
+To use the SchAcc Android SDK you must first make the library available to your
+application. Add the SchAcc SDK as a dependency to your pom.xml:
 
 ```xml
 <dependency>

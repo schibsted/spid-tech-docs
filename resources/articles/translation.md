@@ -3,6 +3,6 @@
 :category api-integration
 :body
 
-Schibsted enables the translation of the whole SPiD service (payment.schibsted.no, login.schibsted.com), including the login, payment and account pages.
+Schibsted enables the translation of the whole SchAcc service (payment.schibsted.no, login.schibsted.com), including the login, payment and account pages.
 
-To translate SPiD to your own language, [contact support](mailto:schibstedaccount@schibsted.com).
+To translate SchAcc to your own language, [contact support](mailto:schibstedaccount@schibsted.com).

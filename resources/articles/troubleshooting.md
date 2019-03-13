@@ -29,7 +29,7 @@ endpoint returns this:
 }
 ```
 
-The `addresses` property uses a common SPiD data structure, the "object of
+The `addresses` property uses a common SchAcc data structure, the "object of
 things". This is really a list of items represented as an object with special
 keys (typically one of the properties from the nested object, in the above case
 `type`) instead of an array with numeric indices.
@@ -58,7 +58,7 @@ states.
 
 When attempting to obtain a user token by `POST`-ing to `/oauth/token`, email
 addresses using an alias (e.g. the username part has a `+` in it) will result in
-a failure. SPiD is generally email address aliases (e.g.
+a failure. SchAcc is generally email address aliases (e.g.
 `myaddress+myalias@domain.tld`) aware, and this will be fixed in the future.
 
 ## Paylinks in forms
@@ -66,7 +66,7 @@ a failure. SPiD is generally email address aliases (e.g.
 When using [paylinks](/paylink-api/) to sell products, you should **not** use
 the paylink as the `action` in an HTML form. The HTML5 spec specifies that the
 URL in `action` will not preserve it's query string, thus rendering the paylink
-broken. To send the user to SPiD to pay through a paylink, either use a regular
+broken. To send the user to SchAcc to pay through a paylink, either use a regular
 `<a href="...">...</a>` element (style as a button if desired), or simply use a
 redirect right after creating the paylink.
 

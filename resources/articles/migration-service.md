@@ -1,4 +1,4 @@
-:title Migrating users to SPiD
+:title Migrating users to SchAcc
 :frontpage
 :category self-service
 :aside
@@ -9,20 +9,20 @@
 
 :body
 
-Congratulations on choosing to migrate users using the new SPiD Automated Migration Procedure (AMP).
+Congratulations on choosing to migrate users using the new SchAcc Automated Migration Procedure (AMP).
 
 ## Summary
 
-By using these guidelines, you will be able to implement a migration service and thereby start migrating users to SPiD.
-This migration service is then used by SPiD in order to import users to the SPiD platform. In other words, you build a
-service allowing SPiD access to all users in your system.
+By using these guidelines, you will be able to implement a migration service and thereby start migrating users to SchAcc.
+This migration service is then used by SchAcc in order to import users to the SchAcc platform. In other words, you build a
+service allowing SchAcc access to all users in your system.
 
-Every time a new user logs in through SPiD via your client Id, SPiD will make a request to your migration service to
+Every time a new user logs in through SchAcc via your client Id, SchAcc will make a request to your migration service to
 import data you have for that user.
 
 Below you will find documentation on how your migration service should work.
 
-An illustration of how your migration service will be used by the SPiD platform, showing an example request and
+An illustration of how your migration service will be used by the SchAcc platform, showing an example request and
 response.
 
 ![Migration service](/images/migration-service.png)
@@ -31,11 +31,11 @@ A sample migration service implementation can be found on GitHub: https://github
 
 ## Terminology
 
-**Migration service**: What you implement in order to expose users to SPiD platform.
-**Migration client**: The HTTP client used by SPiD platform to make requests to migration service.
+**Migration service**: What you implement in order to expose users to SchAcc platform.
+**Migration client**: The HTTP client used by SchAcc platform to make requests to migration service.
 **Migration user**: The JSON object sent in the response from migration service.
 **Migration specification**: An object used by the migration client to make requests.
-**UserData service**: A part of the SPiD platform where the Migration client lives.
+**UserData service**: A part of the SchAcc platform where the Migration client lives.
 
 ## Migration service specification
 
@@ -56,7 +56,7 @@ A migration specification is a set of values that tells the migration client:
 * what endpoint to make the request to.
 * what header key value to include in the request to your migration service.
 
-You will tell us what endpoint and header key value to use by using the SPiD Self-Serve page and defining a migration
+You will tell us what endpoint and header key value to use by using the SchAcc Self-Service page and defining a migration
 specification for your client Id. You can define the same migration for several client Ids.
 The header key value will be included in every request to the migration service and can be used for authentication.
 

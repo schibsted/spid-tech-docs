@@ -3,7 +3,7 @@
 :category self-service
 :body
 
-As a consumer of the SPiD API, you should subscribe to our announcement mailing
+As a consumer of the SchAcc API, you should subscribe to our announcement mailing
 lists to stay on top of important news. On these lists, we announce:
 
 - Product related news

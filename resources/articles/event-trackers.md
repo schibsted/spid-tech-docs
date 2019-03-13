@@ -3,8 +3,8 @@
 :category analytics
 :body
 
-SPiD supports several event trackers. In order to use them, you must provide
-SPiD with some configuration, listed below. Event trackers are configurable for
+SchAcc supports several event trackers. In order to use them, you must provide
+SchAcc with some configuration, listed below. Event trackers are configurable for
 individual clients, i.e., different tracking can be set up for your individual
 services.
 

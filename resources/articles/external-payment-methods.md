@@ -15,13 +15,13 @@ DELETE /paylink/{paylinkId}
 
 :body
 
-`Available since SPiD version 2.111.0`
+`Available since SchAcc version 2.111.0`
 
 In case when Client wants to give the user the possibility to pay with payment method 
-that is not supported in SPiD (Payment Platform), Client is able to provide all 
+that is not supported in SchAcc (Payment Platform), Client is able to provide all 
 new payment method details via Paylink.
 
-If user chooses this payment method, SPiD redirects him to URL provided by Client in Paylink details.
+If user chooses this payment method, SchAcc redirects him to URL provided by Client in Paylink details.
 
 Such payment methods are called provided (external).
 
@@ -35,15 +35,15 @@ provided in create Paylink request, in `paymentOptions` field, as a JSON [array 
 
 There is a possibility to setup the Paylink to be paid:
 
-- only with payment methods supported in SPiD
-- both with payment methods supported in SPiD and with provided payment methods
+- only with payment methods supported in SchAcc
+- both with payment methods supported in SchAcc and with provided payment methods
 - only with provided payment methods
 
 ***
 
-#### Payment with payment methods supported in SPiD
+#### Payment with payment methods supported in SchAcc
 
-In order to give the user the possibility to pay with payment methods supported in SPiD,
+In order to give the user the possibility to pay with payment methods supported in SchAcc,
 the only required parameter in Payment Option object is `type`. Other parameters are ignored.
 
 See the [Payment Option type specification](/types/payment-option-type/) for further details on `type` field.
@@ -65,13 +65,13 @@ curl https://payment.schibsted.no/api/2/paylink \
 In order to give the user the possibility to pay with provided payment methods,
 additional parameters defining Payment Option have to be provided - `subType`, `url`, `name`, `imageUrl` and `description`. 
 
-Parameter `subType` is used by SPiD to distinguish between all provided payment 
-methods. It is important to agree this value with SPiD support before use.
+Parameter `subType` is used by SchAcc to distinguish between all provided payment 
+methods. It is important to agree this value with SchAcc support before use.
 
-After user chooses to pay with provided payment method, SPiD redirects him 
+After user chooses to pay with provided payment method, SchAcc redirects him 
 to `url`.
 
-Parameters `name`, `imageUrl` and `description` are used to display provided payment method in SPiD checkout.
+Parameters `name`, `imageUrl` and `description` are used to display provided payment method in SchAcc checkout.
 
 <img alt="Choose payment provided details" style="display: block; max-width: 100%; height: auto; margin: auto; float: none!important;" src="/images/choose-payment-external-details.png">
 
@@ -92,7 +92,7 @@ curl https://payment.schibsted.no/api/2/paylink \
 
 ***
 
-#### Payment with payment methods supported in SPiD and with provided payment methods
+#### Payment with payment methods supported in SchAcc and with provided payment methods
 
 ```
 curl https://payment.schibsted.no/api/2/paylink \
@@ -107,7 +107,7 @@ curl https://payment.schibsted.no/api/2/paylink \
 ## Preconditions and requirements
 
 * Access to the paylink endpoints. Only given to vetted implementations and use cases.
-* Provided payment method type (`subType`, see [Payment Option object specification](/types/payment-options-array/)) has to be determined in cooperation with SPiD support.
+* Provided payment method type (`subType`, see [Payment Option object specification](/types/payment-options-array/)) has to be determined in cooperation with SchAcc support.
 * Provided payment methods URLs have to be whitelisted in client configuration.
 
 
