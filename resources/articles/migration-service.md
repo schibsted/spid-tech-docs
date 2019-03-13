@@ -14,7 +14,7 @@ Congratulations on choosing to migrate users using the new SchAcc Automated Migr
 ## Summary
 
 By using these guidelines, you will be able to implement a migration service and thereby start migrating users to SchAcc.
-This migration service is then used by SchAcc in order to import users to the SchAcc platform. In other words, you build a
+This migration service is then used by SchAcc in order to import users to the Schibsted Account. In other words, you build a
 service allowing SchAcc access to all users in your system.
 
 Every time a new user logs in through SchAcc via your client Id, SchAcc will make a request to your migration service to
@@ -22,7 +22,7 @@ import data you have for that user.
 
 Below you will find documentation on how your migration service should work.
 
-An illustration of how your migration service will be used by the SchAcc platform, showing an example request and
+An illustration of how your migration service will be used by the Schibsted Account, showing an example request and
 response.
 
 ![Migration service](/images/migration-service.png)
@@ -31,11 +31,11 @@ A sample migration service implementation can be found on GitHub: https://github
 
 ## Terminology
 
-**Migration service**: What you implement in order to expose users to SchAcc platform.
-**Migration client**: The HTTP client used by SchAcc platform to make requests to migration service.
+**Migration service**: What you implement in order to expose users to Schibsted Account.
+**Migration client**: The HTTP client used by Schibsted Account to make requests to migration service.
 **Migration user**: The JSON object sent in the response from migration service.
 **Migration specification**: An object used by the migration client to make requests.
-**UserData service**: A part of the SchAcc platform where the Migration client lives.
+**UserData service**: A part of the Schibsted Account where the Migration client lives.
 
 ## Migration service specification
 

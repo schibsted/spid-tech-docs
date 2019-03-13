@@ -13,7 +13,7 @@
 
 :body
 
-The SchAcc platform supports server-side callbacks that enable your service to
+The Schibsted Account supports server-side callbacks that enable your service to
 subscribe to changes in data. Your service can then cache data and receive
 updates, rather than continuously poll SchAcc's servers. Caching data and using
 this API can improve the reliability of your app or service and decrease its
@@ -35,7 +35,7 @@ receive notification of the change within a couple of minutes of its occurrence.
 
 ## Types of callbacks
 
-The SchAcc platform currently supports two kinds of callbacks:
+The Schibsted Account currently supports two kinds of callbacks:
 
 * User status changes
 

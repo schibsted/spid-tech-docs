@@ -18,5 +18,5 @@ engaging with your site.
 One of the easiest ways to do this is to use the JavaScript SDK to detect whether a visitor is signed-in to SchAcc. 
 
 This is a complete overview of this process between your service (orange), the SchAcc JS SDK (white) and the 
-SchAcc platform (blue):
+Schibsted Account (blue):
 ![Single Sign On complete overview using JS SDK, cookies and redirects](/images/sso-usecases.png)

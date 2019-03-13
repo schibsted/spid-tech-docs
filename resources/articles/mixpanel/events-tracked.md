@@ -82,7 +82,7 @@ A complete overview of the SchAcc triggered core events follows below:
             </tr>
             <tr>
                 <td>Login</td>
-                <td>When a user logs in to the SchAcc platform.
+                <td>When a user logs in to the Schibsted Account.
 					<ul>
                         <li><strong>PS!</strong> Not the same as a login to the client</li>
 					</ul>

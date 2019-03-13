@@ -41,7 +41,7 @@ Here are some of the APIs with merchant filter support:
 
 ## Performing API calls on behalf of another client
 Some endpoints don't support merchant level access and some use cases require that a client may perform some API
-calls on behalf of another client within the same merchant. The SchAcc platform supports this by enabling data sharing
+calls on behalf of another client within the same merchant. The Schibsted Account supports this by enabling data sharing
 between clients. This has to be configured by SchAcc. See detailed information on how to enable it below.
 
 ### How to perform API calls on behalf of another client

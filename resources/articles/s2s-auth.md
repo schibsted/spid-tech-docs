@@ -65,7 +65,7 @@ called service determine if the request actions should be permitted. The exact s
 determined by the resource server and is outside the scope of this document.
 
 **Note:** currently the scopes that a client may request may only be managed by the administrators of
-the SchAcc platform. In order to have scopes added to your client [contact support](mailto:schibstedaccount@schibsted.com).
+the Schibsted Account. In order to have scopes added to your client [contact support](mailto:schibstedaccount@schibsted.com).
 In the future, management of scopes will be possible via the [self service](/mobile/selfservice/) tool.
 
 ## Send the token in the request

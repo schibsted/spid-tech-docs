@@ -50,7 +50,7 @@ from your application.
 Logging out via the API doesn't delete any sessions on any devices used by the user, except the applications used by
 the user utilising the provided oauth token sent to the [logout endpoint](/endpoints/GET/logout/). 
 The API is meant to invalidate the current user token used by your application, thus effectively logging the user out 
-from your application. The SchAcc platform will revoke the token, meaning no API requests will be allowed using that 
+from your application. The Schibsted Account will revoke the token, meaning no API requests will be allowed using that 
 same token afterwards.
 
 It is then up to your application to perform session cleaning and logout procedures needed to actively log out the user
