@@ -1,0 +1,9 @@
+{:id :deviceData
+ :name "Device data"
+ :fields [{:name "platform"  :type :string :always-available? true :description "Simplified operating system or platform name (like for example Windows, Linux or Mac)"}
+          {:name "userAgent" :type :string :always-available? true :description "User agent simplified name (like for example Firefox, Chrome or Safari)"}
+          {:name "userAgentVersion" :type :string :description "User agent version"}
+          {:name "hasLiedOs" :type :boolean :description "Boolean flag specifying whether there is a suspicion of deceiving the platform name"}
+          {:name "hasLiedBrowser" :type :boolean :description "Boolean flag specifying whether there is a suspicion of deceiving the user agen name"}
+          {:name "fonts" :type :list :description "List of device fonts used to increase the uniqueness level"}
+          {:name "plugins" :type :list :description "List of user agent plugins used to increase uniqueness level"}]}

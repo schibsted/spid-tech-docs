@@ -134,4 +134,5 @@
  "reason" "Example deletion reason"
  "signicatUniqueId" "123456789"
  "remember" "1"
+ "deviceData" "{\"platform\":\"Mac\",\"userAgent\":\"Chrome\",\"userAgentVersion\":\"73.0.3683.75\",\"hasLiedOs\":false,\"hasLiedBrowser\":false,\"fonts\":[\"Example font\"],\"plugins\":[\"Example plugin\"]}"
  }
