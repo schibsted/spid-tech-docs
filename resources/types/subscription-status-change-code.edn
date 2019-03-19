@@ -9,4 +9,7 @@
           {:value "160" :description "Subscription expired because the user deleted their account"}
           {:value "170" :description "Subscription was paused"}
           {:value "180" :description "Expiry date was changed"}
-          {:value "190" :description "Subscription expired because the user disabled auto renewal"}]}
+          {:value "190" :description "Subscription expired because the user disabled auto renewal"}
+          {:value "191" :description "Subscription expired because auto renewal was turned off when migrated to Zuora"}
+          {:value "200" :description "Subscription migrated to Siebel"}
+          {:value "201" :description "Subscription migrated to Zuora"}]}
