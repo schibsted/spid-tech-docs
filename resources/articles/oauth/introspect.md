@@ -18,11 +18,6 @@
 The `/oauth/introspect` endpoint is used to verify a token and to translate it into claims.
 Introspection is defined in [RFC 7662](https://tools.ietf.org/html/rfc7662).
 
-A token can only be introspected by a client within the same merchant, or by a client
-who is the intended audience, meaning the service domain of the introspecting client
-must be in the `aud` claim array. For further information on cross merchant introspection,
-see [Specifying a resource indicator](http://techdocs.spid.no/authentication/).
-
 ## Request
 
 ```

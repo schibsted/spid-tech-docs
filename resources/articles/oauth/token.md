@@ -37,8 +37,8 @@ The recommended method is via the `authorization` header.
 
 Server tokens are generally more powerful and should be kept secret. In addition
 to the parameters `grant_type` and `scope`, a third parameter called `resource`
-is allowed, to support cross merchant introspection and set the intended
-audience of the token. See [Specifying a resource indicator](http://techdocs.spid.no/authentication/).
+is allowed to set the intended audience of the token.
+See [Specifying a resource indicator](http://techdocs.spid.no/authentication/).
 
 ### Request
 
