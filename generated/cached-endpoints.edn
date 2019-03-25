@@ -3514,8 +3514,9 @@
      {:status 400,
       :description "Invalid payload data",
       :type "api-exception"}
-     {:status 401,
-      :description "Invalid token",
+     {:status 401, :description "Invalid token", :type "api-exception"}
+     {:status 403,
+      :description "Unauthorised access",
       :type "api-exception"}]}},
   :url "/api/2/devices",
   :pathParameters [],
