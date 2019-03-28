@@ -134,4 +134,8 @@
  "reason" "Example deletion reason"
  "signicatUniqueId" "123456789"
  "remember" "1"
+ "deviceId" "392a0a88-a1ab-4832-b092-5269c8722328"
+ "platform" "iPhone"
+ "applicationName" "Sample app"
+ "applicationVersion" "139.83.13"
  }

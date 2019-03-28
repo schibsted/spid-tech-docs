@@ -1372,6 +1372,10 @@
     :responses
     [{:status 200,
       :description "Returns the newly created subscription object",
+      :type "subscription"}
+     {:status 403,
+      :description
+      "Forbidden to update migrated read-only subscription",
       :type "subscription"}]}},
   :url "/api/2/user/{id}/subscription",
   :pathParameters ["userId"],
@@ -3485,6 +3489,42 @@
   :defaultOutputFormat "json",
   :description "Platform settings endpoint for external services.",
   :category ["Utilities" "Platform API"]}
+ {:path "devices",
+  :validOutputFormats ["json"],
+  :parameterDescriptions
+  {:deviceId "Unique ID of mobile device",
+   :platform
+   "Mobile platform name (one of `iPad`, `iPhone` or `Android`)",
+   :applicationName "Name of client application",
+   :applicationVersion "Version of client application"},
+  :method "*",
+  :name "Device fingerprint",
+  :httpMethods
+  {:POST
+   {:name "POST",
+    :required ["deviceId" "platform" "applicationName"],
+    :optional ["applicationVersion"],
+    :accessTokenTypes ["user"],
+    :filters [],
+    :defaultFilters [],
+    :responses
+    [{:status 201,
+      :description "Device fingerprint created successfully",
+      :type "device-fingerprint"}
+     {:status 400,
+      :description "Invalid payload data",
+      :type "api-exception"}
+     {:status 401, :description "Invalid token", :type "api-exception"}
+     {:status 403,
+      :description "Unauthorised access",
+      :type "api-exception"}]}},
+  :url "/api/2/devices",
+  :pathParameters [],
+  :controller "Api/2/DeviceFingerprint.user_devices",
+  :defaultOutputFormat "json",
+  :description
+  "Endpoint is responsible for storing device fingerprint hashes for successful user logins",
+  :category ["Identity Management" "User devices"]}
  {:path "api/2/*",
   :validOutputFormats ["json" "jsonp"],
   :parameterDescriptions {},
