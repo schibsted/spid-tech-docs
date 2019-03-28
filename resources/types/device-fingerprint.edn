@@ -1,0 +1,3 @@
+{:id :device-fingerprint
+ :name "Device Fingerprint"
+ :fields [{:name "hash" :type :string :always-available? true :description "Generated device fingerprint hash"}]}
