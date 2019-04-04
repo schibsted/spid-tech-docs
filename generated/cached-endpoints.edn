@@ -906,6 +906,8 @@
    "JSON object containing `familyName`, `givenName` and `formatted` properties. See [the name type](/types/name/) for details",
    :displayName "New preferred display name",
    :email "Email of the user. Must be unique across all of SPiD",
+   :deviceData
+   "JSON object containing [user agent and device data](/types/deviceData/)",
    :addresses
    "A JSON string. A map of addresses, with the address type as keys and the address objects/maps as values. See [the address type](/types/address/) for appropriate types",
    :password "Desired password",
@@ -925,7 +927,8 @@
      "birthday"
      "addresses"
      "gender"
-     "acceptTerms"],
+     "acceptTerms"
+     "deviceData"],
     :accessTokenTypes ["server"],
     :filters [],
     :defaultFilters [],
