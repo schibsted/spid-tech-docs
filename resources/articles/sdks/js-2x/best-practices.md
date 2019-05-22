@@ -14,7 +14,6 @@
 ## See also
 
 - [Getting started with the server-side API](/getting-started/)
-- [Mixpanel analytics](/mixpanel/analytics/)
 
 :body
 

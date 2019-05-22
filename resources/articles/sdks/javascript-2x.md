@@ -19,7 +19,6 @@
 ## See also
 - [Documentation for the 1.x JavaScript SDK](/sdks/javascript-1x/)
 - [Getting started with the server-side API](/getting-started/)
-- [Mixpanel analytics](/mixpanel/analytics/)
 
 :body
 
