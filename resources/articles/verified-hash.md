@@ -36,7 +36,7 @@ Should give the following string after concat:
 # :tabs
 
 The following are examples of how to hash the `POST` body data so its
-authenticity can be validated by SchAcc.
+authenticity can be validated by Schibsted account.
 
 ## :tab PHP
 

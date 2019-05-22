@@ -16,11 +16,11 @@ if the product price is updated."
           {:name "clientId"              :type :string             :description "ID of the client that owns this campaign" :always-available? true}
           {:name "title"                 :type :string             :description "Campaign title" :always-available? true}
           {:name "description"           :type :string             :description "Additional campaign description" :always-available? true}
-          {:name "metaData"              :type :string             :description "Not used by SchAcc, for client-specific meta-data" :always-available? false}
+          {:name "metaData"              :type :string             :description "Not used by Schibsted account, for client-specific meta-data" :always-available? false}
           {:name "startDate"             :type :datetime           :description "When the campaign starts/becomes active" :always-available? true}
           {:name "stopDate"              :type :datetime           :description "When the campaign stops/ceases to be active" :always-available? true}
           {:name "additionalReceiptInfo" :type :string             :description "Additional text to include in purchase receipts for this campaign" :always-available? false}
-          {:name "requireAddress"        :type :boolnum            :description "If `\"1\"`, access to the campaign requires users to have a delivery address on their SchAcc profile" :always-available? true}
+          {:name "requireAddress"        :type :boolnum            :description "If `\"1\"`, access to the campaign requires users to have a delivery address on their Schibsted account profile" :always-available? true}
           {:name "requireVoucher"        :type :boolnum            :description "If `\"1\"`, access to the campaign requires an available voucher code that belongs to a voucher group connected to this campaign" :always-available? true}
           {:name "status"                :type :campaign-status    :always-available? true}
           {:name "limit"                 :type :integer-string     :description "Maximum number of purchases allowed for this campaign" :always-available? true}

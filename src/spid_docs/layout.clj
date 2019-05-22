@@ -22,7 +22,7 @@
             :content "width=device-width, initial-scale=1.0"}]
     [:meta {:name "google-site-verification"
             :content "HfI9gGISsXq8iZodM_2z24acelhEpi-0LumjeYrebu4"}]
-    [:title (str title " | SchAcc API Documentation")]
+    [:title (str title " | Schibsted account API Documentation")]
     [:link {:rel "shortcut icon" :href (link/file-path request "/favicon.ico")}]
     (serve-to-media-query-capable-browsers
      [:link {:rel "stylesheet" :href (link/file-path request "/styles/responsive.css")}])
@@ -32,7 +32,7 @@
     [:script "document.body.className = 'js';"]
     [:div#head
      [:div.center.pll
-      [:a {:href "http://techdocs.spid.no/"} "SchAcc" [:span.frill " Documentation"]] " > "
+      [:a {:href "http://techdocs.spid.no/"} "Schibsted account" [:span.frill " Documentation"]] " > "
       [:a {:href "/"} "API"]
       [:form.right.prl {:action "https://www.google.com/search"}
          [:input {:type "search", :name "q", :placeholder "Search"}]

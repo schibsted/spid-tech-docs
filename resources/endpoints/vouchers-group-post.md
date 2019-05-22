@@ -9,7 +9,7 @@ Once a voucher group is created, you must
 to hand out.
 
 In order to use this endpoint, your client must have a `voucher_prefix`. This
-field is set by SchAcc administrators, if it is not set, you will get an error
+field is set by Schibsted account administrators, if it is not set, you will get an error
 like "Set generator used, but no client voucher prefix set". If this happens,
 contact support.
 

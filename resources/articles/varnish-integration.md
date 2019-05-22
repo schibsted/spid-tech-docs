@@ -4,33 +4,33 @@
 :body
 
 Using Varnish and the [JavaScript SDK](/sdks/javascript/), clients can implement
-paywalls with SchAcc with relative ease and little custom server-side logic -
-Varnish will handle the negotiation and make the authorization requests to SchAcc.
+paywalls with Schibsted account with relative ease and little custom server-side logic -
+Varnish will handle the negotiation and make the authorization requests to Schibsted account.
 Defering the authorization to Varnish means your server only needs to generate
 any page once and can cache it until it is changed. There's no need to
 regenerate pages for every unique user, as long as personalization is done with
 JavaScript on the frontend.
 
-This page describes a custom module built by Varnish Software for SchAcc, and is a
+This page describes a custom module built by Varnish Software for Schibsted account, and is a
 paid product. If you are interested in this product,
 [contact support](mailto:schibstedaccount@schibsted.com).
 
-When using the Varnish SchAcc payment wall, the high-level flow is as follows:
+When using the Varnish Schibsted account payment wall, the high-level flow is as follows:
 
 - A user visits your site
 - The JavaScript SDK sets a cookie in the user's browser, linking them to their
-  SchAcc user account (provided that they are logged in)
+  Schibsted account user account (provided that they are logged in)
 - The user tries to access content behind a paywall
-- Varnish uses the cookie to ask SchAcc if the user has access to the content
+- Varnish uses the cookie to ask Schibsted account if the user has access to the content
 - Varnish caches the response and allows/denies access (current and future ones)
   until the cache expires
 
 Note that Varnish also has a
 [generic paywall module](https://www.varnish-software.com/product/varnish-paywall)
-that may be used with SchAcc as well. This document **only** describes the
-SchAcc-specific paywall module.
+that may be used with Schibsted account as well. This document **only** describes the
+Schibsted account-specific paywall module.
 
-## Implementing the Varnish SchAcc paywall
+## Implementing the Varnish Schibsted account paywall
 
 Varnish Software will assist you with installing the Varnish module. The only
 action required on your end to implement this feature is to make sure that
@@ -64,7 +64,7 @@ subscription giving them access to the full article.
 
 ## Authorization cookie
 
-When using the Varnish SchAcc paywall, authorization requests are made by the
+When using the Varnish Schibsted account paywall, authorization requests are made by the
 paywall module. Varnish uses the `SP_ID` cookie, which is encrypted and set by
 the JavaScript SDK. When using the paywall module, you must also use the
 JavaScript SDK, otherwise, users will not be recognized, and thus not given

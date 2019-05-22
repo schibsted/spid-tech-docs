@@ -1,5 +1,5 @@
 {:id :email-status
  :name "Email status"
- :fields [{:name "exists"    :type :boolean :description "If `true`, this email address exists in some form in SchAcc"}
+ :fields [{:name "exists"    :type :boolean :description "If `true`, this email address exists in some form in Schibsted account"}
           {:name "available" :type :boolean :description "If `true`, this email address may be used to register a new account"}
-          {:name "verified"  :type :boolean :description "If `true`, the owner has verified this address in SchAcc."}]}
+          {:name "verified"  :type :boolean :description "If `true`, the owner has verified this address in Schibsted account."}]}

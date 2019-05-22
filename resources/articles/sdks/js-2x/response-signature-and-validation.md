@@ -18,7 +18,7 @@
 
 :body
 
-The sig parameter can be used to verify that the response came from SchAcc. This
+The sig parameter can be used to verify that the response came from Schibsted account. This
 can be done serverside by the client, using the client signature secret. Without
 this secret, third parties cannot modify the `signed_request` string without
 also invalidating its contents.

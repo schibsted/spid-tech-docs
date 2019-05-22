@@ -1,4 +1,4 @@
-:title Outgoing IPs SchAcc uses
+:title Outgoing IPs Schibsted account uses
 :frontpage
 :category api-integration
 :body

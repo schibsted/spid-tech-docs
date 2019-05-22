@@ -1,7 +1,7 @@
 :introduction
 
 Mark [paylink](/paylink-api/) as deleted. This will effectively disable the
-paylink, but it will not be physically deleted from SchAcc.
+paylink, but it will not be physically deleted from Schibsted account.
 
 :relevant-endpoints
 

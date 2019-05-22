@@ -30,12 +30,12 @@ The SDK has many initialization options that directly affect how the SDK behaves
 There are some best practices and gotchas in regards to these use cases:
 
 ### Hybrid mobile apps
-Hybrid mobile apps are native mobile applications that have implemented the native SchAcc login API for authentication and serves authenticated content that uses the JS SDK. This solution requires the backend solution that serves this content to know who is logged in. It also implements product access checks that use the JS SDK.
+Hybrid mobile apps are native mobile applications that have implemented the native Schibsted account login API for authentication and serves authenticated content that uses the JS SDK. This solution requires the backend solution that serves this content to know who is logged in. It also implements product access checks that use the JS SDK.
 
-This implementation doesn't support the auto-logged-in functionality built-in by SchAcc in the SDK between each time the user start the app, meaning that after each application start, the application must exchange a session token via the authentication API and then initiate a session for that user in SchAcc. Suggested JS SDK initialization for this type of applications are:
+This implementation doesn't support the auto-logged-in functionality built-in by Schibsted account in the SDK between each time the user start the app, meaning that after each application start, the application must exchange a session token via the authentication API and then initiate a session for that user in Schibsted account. Suggested JS SDK initialization for this type of applications are:
 ##### cache_notloggedin should be set to FALSE
 Because the user wont be served this content without having a session, there is no need to cache the logged out state.
 ### Apps with Varnish support
-Apps that have implemented the varnish product access check functionality. This feature uses the JS SDK to set a custom Varnish cookie for the logged in user in the client's domain. This cookie is then sent on every request and intercepted by Varnish, which in turn performs product access checks for the user through a custom SchAcc API endpoint. Suggested JS SDK initialization for this type of applications are:
+Apps that have implemented the varnish product access check functionality. This feature uses the JS SDK to set a custom Varnish cookie for the logged in user in the client's domain. This cookie is then sent on every request and intercepted by Varnish, which in turn performs product access checks for the user through a custom Schibsted account API endpoint. Suggested JS SDK initialization for this type of applications are:
 ##### cookie: TRUE & varnish_expiration: 28800
 This settings enables cookie support and sets the varnish cookie expiration to around 8 hours, which supports basic usage of a paywall enabled application.

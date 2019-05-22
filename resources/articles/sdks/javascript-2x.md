@@ -37,7 +37,7 @@ The following code will load and initialize the JavaScript SDK with the most
 common options. Replace `YOUR_CLIENT_ID`, `SPID_JSSDK_URI` and `SPID_SERVER_URI`
 with the appropriate values.
 
-`SPID_SERVER_URI` is dependent on the SchAcc server you will be using.
+`SPID_SERVER_URI` is dependent on the Schibsted account server you will be using.
 
 #### Production servers
 
@@ -47,7 +47,7 @@ with the appropriate values.
 #### Stage/Pre servers
 - https://identity-pre.schibsted.com for stage/pre clients
 
-`SPID_JSSDK_URI` will normally point to SchAcc's CDN or your own hosting. Read more about this
+`SPID_JSSDK_URI` will normally point to Schibsted account's CDN or your own hosting. Read more about this
 under [hosting](/sdks/js-2x/hosting/).
 
 ### SDK variants
@@ -82,7 +82,7 @@ SPiD.hasSession();
 
 ### Asynchronously loading the JS SDK
 
-By loading the SchAcc SDK asynchronously it will not block loading other elements
+By loading the Schibsted account SDK asynchronously it will not block loading other elements
 on your page. The function assigned to `window.asyncSPiD` is run as soon as the
 SDK source has finished loading. Any code you want to run after the SDK is
 loaded should be placed within this function. Place the following code right
@@ -169,7 +169,7 @@ Your client ID. **Required**
 
 ##### server
 
-URL to the SchAcc server. **Required**
+URL to the Schibsted account server. **Required**
 
 ##### logging
 
@@ -193,7 +193,7 @@ Boolean flag to determine if a varnish cookie should be set. Varnish cookie will
 
 ##### timeout
 
-This is the default connection timeout in milliseconds used when waiting for response by the SchAcc servers.
+This is the default connection timeout in milliseconds used when waiting for response by the Schibsted account servers.
 Defaults to 5 seconds (5000 milliseconds).
 
 ##### refresh_timeout
@@ -210,10 +210,10 @@ The default value is ’localstorage’.
 ## Auto-login usecase
 
 This is a simple overview of Single Sign On using JS SDK, explaining the complete process between the client
-service (yellow) and SchAcc (blue).
+service (yellow) and Schibsted account (blue).
 
 ![Single Sign On using JS SDK](/images/simple-sso-js-usecase.png)
 
 ## Third-Party Cookies
-The SchAcc js SDK depends heavily on the possibility to access third party cookies. If a user blocks this feature in the browser or it's blocked by default, this SDK won't be able to retrieve session information from SPiD.
+The Schibsted account js SDK depends heavily on the possibility to access third party cookies. If a user blocks this feature in the browser or it's blocked by default, this SDK won't be able to retrieve session information from SPiD.
 **Note: this means that methods like `.hasSession()` will report "session not found" even after a successful login**

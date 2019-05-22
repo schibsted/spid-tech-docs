@@ -1,3 +1,3 @@
 :introduction
 
-List all clients in SchAcc.
+List all clients in Schibsted account.

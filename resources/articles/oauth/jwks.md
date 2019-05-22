@@ -13,7 +13,7 @@
 
 :body
 
-SchAcc publishes the public part of the RSA keys used to sign tokens on the
+Schibsted account publishes the public part of the RSA keys used to sign tokens on the
 `/oauth/jwks` endpoint. This enables applications to verify the validity of
 tokens without making a request to [/oauth/introspect](/oauth/introspect/).
 

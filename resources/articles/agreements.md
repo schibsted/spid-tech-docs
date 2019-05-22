@@ -3,11 +3,11 @@
 :category self-service
 :body
 
-## Here we explain the usage and creation of agreements in SchAcc.
+## Here we explain the usage and creation of agreements in Schibsted account.
 Terms of Use allows cross-site autologin and a better governance enabling users to accept Terms of Use only once across all devices. The Terms of Use are set on a merchant level in Self Service.
 
 ## When implementing Schibsted Account
-Each user facing API client must have Terms of Use in place before going into production. Here are the most important steps you need to take into account when working with your SchAcc implementation.
+Each user facing API client must have Terms of Use in place before going into production. Here are the most important steps you need to take into account when working with your Schibsted account implementation.
 
 1. Draft your terms of use. 
 2. Privacy office must approve Terms of Use and privacy-/cookie policy before publishing. Send them to privacy@schibsted.com for approval.

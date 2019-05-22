@@ -6,7 +6,7 @@
           {:name "client_id"                           :type :string          :description "Client ID" :always-available? true}
           {:name "type"                                :type :product-type    :always-available? true}
           {:name "bundle"                              :type :bundle-type     :always-available? true}
-          {:name "code"                                :type :string          :description "Client-specified identifier that may be more memorable than SchAcc's generated ID numbers" :always-available? true}
+          {:name "code"                                :type :string          :description "Client-specified identifier that may be more memorable than Schibsted account's generated ID numbers" :always-available? true}
           {:name "name"                                :type :string          :description "The bundle name" :always-available? true}
           {:name "description"                         :type :string          :description "A description of the bundle" :always-available? true}
           {:name "url"                                 :type :string          :description "A URL that contains more information about the bundle" :always-available? false}

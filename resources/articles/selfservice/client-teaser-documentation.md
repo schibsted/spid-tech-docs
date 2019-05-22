@@ -92,7 +92,7 @@ As you may see from the example given above, we tried to make it as straight for
 
 # How to add a new teaser for your client
 
-To begin creating your first client teaser you have to access the self-service. For Norwegian clients go to https://selfservice.payment.schibsted.no and for Swedish clients it is https://selfservice.login.schibsted.com. There you will have to make sure you are given the correct access before you can start, if you do not have access to self-service, but should have, you will need to contact SchAcc support at schibstedaccount@schibsted.com.
+To begin creating your first client teaser you have to access the self-service. For Norwegian clients go to https://selfservice.payment.schibsted.no and for Swedish clients it is https://selfservice.login.schibsted.com. There you will have to make sure you are given the correct access before you can start, if you do not have access to self-service, but should have, you will need to contact Schibsted account support at schibstedaccount@schibsted.com.
 
 When you have access, follow these steps to begin to create a client teaser:
 

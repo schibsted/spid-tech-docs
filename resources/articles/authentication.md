@@ -28,7 +28,7 @@ You may also want to look into the [Getting Started](/getting-started/) guide.
 Schibsted Account uses
 [OAuth 2.0 (draft 11)](http://tools.ietf.org/html/draft-ietf-oauth-v2-11) for
 authentication and authorization. With OAuth 2.0, you obtain an access token for
-a user via a redirect to SchAcc, then you use this token to perform authorized
+a user via a redirect to Schibsted account, then you use this token to perform authorized
 requests on behalf of that user by including it with API requests in either
  
 - the HTTP Authorization Header (recommended):
@@ -77,7 +77,7 @@ Schibsted Account allows clients to authenticate in two ways:
 
 ## Obtaining a user token
 
-Obtaining user tokens by redirecting the user to SchAcc to log in is covered in
+Obtaining user tokens by redirecting the user to Schibsted account to log in is covered in
 depth in the [Implementing SSO guide](/implementing-sso/).
 
 While it is not recommended, or even feasible, to manually handle user
@@ -153,7 +153,7 @@ curl -X POST -H "Authorization: Basic <client credentials>"\
             https://identity-pre.schibsted.com/oauth/token
 ```
 
-The value of the resource indicator must be the domain registered with SchAcc for the resource server to make sure
+The value of the resource indicator must be the domain registered with Schibsted account for the resource server to make sure
 the token can be introspected by that resource server.
 Support for this parameter is limited to server tokens issued to JWT enabled clients.
 
@@ -164,15 +164,15 @@ For further details refer to
 
 In accordance with
 [the OAuth specification](http://tools.ietf.org/html/draft-ietf-oauth-v2-31#section-3.1.2),
-SchAcc redirects the user back to the client. When an authentication error occurs,
-SchAcc redirect the user to a specific, client-provided, OAuth failure redirect
+Schibsted account redirects the user back to the client. When an authentication error occurs,
+Schibsted account redirect the user to a specific, client-provided, OAuth failure redirect
 url. This is an optional feature, which means that if no special failure
 redirect URI is provided, we will redirect failures to the same redirect URI
 used in the Oauth flow, unless the failure is due to an invalid redirect uri
 provided. If an invalid redirect is URI provided, we will default to the
 client's default redirect URI.
 
-SchAcc's redirect scheme ensures that the user always has a way to return to the
+Schibsted account's redirect scheme ensures that the user always has a way to return to the
 client. Upon the user's return it is up to the client to decide what the error
 is and how to handle it. The redirect will contain an error code:
 
@@ -188,7 +188,7 @@ of errors that can occur and that the client may take into account.
 
 Refer to [the spec](http://tools.ietf.org/html/draft-ietf-oauth-v2-11) for details on what these error codes mean.
 
-- **redirect_uri_mismatch**: The redirection URI provided does not match a pre-registered redirection URI stored in SchAcc.
+- **redirect_uri_mismatch**: The redirection URI provided does not match a pre-registered redirection URI stored in Schibsted account.
 - **unauthorized_client**: The client is not authorized to request an authorization code using this method or authorization grant type.
 - **access_denied**: The resource owner or authorization server denied the request.
 - **invalid_request**: The request is missing a required parameter, includes an invalid parameter value,
@@ -233,18 +233,18 @@ Recommended reading on
 [OAuth protocol endpoints](http://tools.ietf.org/html/draft-ietf-oauth-v2-31#section-3).
 
 ## API access control flow explained
-This is a complete overview of how SchAcc processes an API request and when your client application may
+This is a complete overview of how Schibsted account processes an API request and when your client application may
 expect to receive error responses and the reasons it happened:
 ![API access control flow](/images/api-access-control-flow.png)
 
 ## SDK support for easier implementation
 
-SchAcc provides API clients/SDKs for a number of languages that mostly abstract
+Schibsted account provides API clients/SDKs for a number of languages that mostly abstract
 away the OAuth details. See how to get started [server-side](/getting-started/) or for
 [mobile devices](/mobile/overview/).
 
 ## Best practices and security guidelines
-This section contains a list of best practices and requirements that will be performed on integration and security reviews by SchAcc.
+This section contains a list of best practices and requirements that will be performed on integration and security reviews by Schibsted account.
 
 ### Client credentials handling
 - Client credentials and redirect URIs must NOT be hardcoded anywhere, but made configurable so the same code can be used for both STAGE/PRE and PROD environments.
@@ -268,8 +268,8 @@ The client SHOULD NOT include any third-party scripts (e.g. third-
    (used to extract and remove the credentials from the URI) will
    execute first.
 
-### Protect your local session, SchAcc code and token
-- SchAcc code AND user token must NEVER be embedded in your application urls, passed beyond your application's redirect uri or stored in cookies.
+### Protect your local session, Schibsted account code and token
+- Schibsted account code AND user token must NEVER be embedded in your application urls, passed beyond your application's redirect uri or stored in cookies.
 - Your session ID should never be visible in an URL.
 
 ### Mobile development

@@ -112,7 +112,7 @@ the production server.
     </tr>
     <tr>
       <td><code>auth.visitor</code></td>
-      <td>SchAcc identifies the current visitor. Yields a unique visitor id that can be used to track the user even when not logged in. Used in analytics tracking, etc.</td>
+      <td>Schibsted account identifies the current visitor. Yields a unique visitor id that can be used to track the user even when not logged in. Used in analytics tracking, etc.</td>
     </tr>
     <tr>
       <td><code>VGS.error</code></td>

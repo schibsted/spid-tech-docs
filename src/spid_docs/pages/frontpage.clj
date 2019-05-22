@@ -90,7 +90,7 @@
   (map render-category-with-articles (group-by (fn [[path article]] (:category article)) articles)))
 
 (defn create-page [apis articles]
-  {:title "SchAcc API Documentation"
+  {:title "Schibsted account API Documentation"
    :body (let [apis-by-category (->> apis vals
                                      (keep remove-deprecated-endpoints)
                                      (map collapse-other-categories)

@@ -1,4 +1,4 @@
-:title Events tracked by SchAcc
+:title Events tracked by Schibsted account
 
 :aside
 
@@ -8,13 +8,13 @@
 
 :body
 
-SchAcc will automatically add some profile data to events. This keeps profile data in events from going stale.
+Schibsted account will automatically add some profile data to events. This keeps profile data in events from going stale.
 
-Properties added by SchAcc to all events:
+Properties added by Schibsted account to all events:
 
 - Version (Platform version)
 - Revision (Platform revision)
-- SchAcc ID (The SchAcc user id)
+- Schibsted account ID (The Schibsted account user id)
 - Client (Client alias/name, not client id)
 - ip (User's ip in order to derive country, city, etc)
 - User agent
@@ -28,7 +28,7 @@ Properties added by SchAcc to all events:
 
 In addition we will save specific data on each event based on the event type.
 
-A complete overview of the SchAcc triggered core events follows below:
+A complete overview of the Schibsted account triggered core events follows below:
 <table class="table table-hover">
         <thead>
             <tr>
@@ -39,7 +39,7 @@ A complete overview of the SchAcc triggered core events follows below:
         <tbody>
             <tr>
                 <td>Accept agreement</td>
-                <td>When the user accepts the user agreement with SchAcc and with clients.</td>
+                <td>When the user accepts the user agreement with Schibsted account and with clients.</td>
             </tr>
             <tr>
                 <td>Change password notification email sent</td>
@@ -53,14 +53,14 @@ A complete overview of the SchAcc triggered core events follows below:
                 <td>Choose product</td>
                 <td>When the user proceeds from the choose product page with a chosen product.
                     <ul>
-                        <li>If product is pre-selected by the client as an url-parameter, the event is sent because technically the product selection is done when the user enters SchAcc.</li>
-                        <li>If a paylink is used, no event is triggered because technically the product selection is done by the client before the user enters SchAcc.</li>
+                        <li>If product is pre-selected by the client as an url-parameter, the event is sent because technically the product selection is done when the user enters Schibsted account.</li>
+                        <li>If a paylink is used, no event is triggered because technically the product selection is done by the client before the user enters Schibsted account.</li>
 					</ul>
                 </td>
             </tr>
             <tr>
                 <td>Click to view agreement</td>
-                <td>When on the SchAcc signup page, the user clicks the button to view the entire user agreement with SchAcc.</td>
+                <td>When on the Schibsted account signup page, the user clicks the button to view the entire user agreement with Schibsted account.</td>
             </tr>
             <tr>
                 <td>Confirm cc payment identifier</td>
@@ -92,31 +92,31 @@ A complete overview of the SchAcc triggered core events follows below:
             </tr>
             <tr>
                 <td>Logout</td>
-                <td>When the user manually logs out from SchAcc.</td>
+                <td>When the user manually logs out from Schibsted account.</td>
             </tr>
             <tr>
                 <td>Migration completed</td>
-                <td>When users who have been imported with unverfied emails to the SchAcc database verify their email address.
+                <td>When users who have been imported with unverfied emails to the Schibsted account database verify their email address.
 					<ul>
-                        <li><strong>PS!</strong> In this case, the event "Signup completed" is not triggered, because the user is not creating a SchAcc profile; it already exists from the import.</li>
+                        <li><strong>PS!</strong> In this case, the event "Signup completed" is not triggered, because the user is not creating a Schibsted account profile; it already exists from the import.</li>
 					</ul>
 				</td>
             </tr>
             <tr>
                 <td>Migration started</td>
-                <td>When users who have been imported with unverfied emails to the SchAcc database attempt to log in for the first time. 
+                <td>When users who have been imported with unverfied emails to the Schibsted account database attempt to log in for the first time. 
 					<ul>
-                        <li><strong>PS!</strong> In this case, the event "Signup started" is not triggered, because the user is not creating a SchAcc profile; it already exists from the
+                        <li><strong>PS!</strong> In this case, the event "Signup started" is not triggered, because the user is not creating a Schibsted account profile; it already exists from the
                         import.</li>
 					</ul>
 				</td>
             </tr>
             <tr>
                 <td>Order authorized</td>
-                <td>When the order status is set to "Authorized" in a 2-phase payment processes, which happens when SchAcc has completed initial order processing and is awaiting feedback before proceeding to order completion and capture processing.
+                <td>When the order status is set to "Authorized" in a 2-phase payment processes, which happens when Schibsted account has completed initial order processing and is awaiting feedback before proceeding to order completion and capture processing.
                     <ul>
-                        <li>For credit card payments, 2-phase payment is determined by the client. In such cases, SchAcc will await order completion processing until notified by client.</li>
-                        <li>For sms-payments, 2-phase payment is forced by SchAcc, as required handshaking steps with mobile payment service providers must take place before order can be moved to completion processing. Notification from client is not necessary in this case.</li>
+                        <li>For credit card payments, 2-phase payment is determined by the client. In such cases, Schibsted account will await order completion processing until notified by client.</li>
+                        <li>For sms-payments, 2-phase payment is forced by Schibsted account, as required handshaking steps with mobile payment service providers must take place before order can be moved to completion processing. Notification from client is not necessary in this case.</li>
                     </ul>
                 </td>
             </tr>
@@ -126,7 +126,7 @@ A complete overview of the SchAcc triggered core events follows below:
             </tr>
             <tr>
                 <td>Page viewed</td>
-                <td>Whenever the user loads a SchAcc page. The event contains a page id that explains which page the user is seeing.</td>
+                <td>Whenever the user loads a Schibsted account page. The event contains a page id that explains which page the user is seeing.</td>
             </tr>
             <tr>
                 <td>Prior access to product</td>
@@ -143,7 +143,7 @@ A complete overview of the SchAcc triggered core events follows below:
             </tr>
             <tr>
                 <td>Signup completed</td>
-                <td>When the completes the process of signing up for a new SchAcc account after having clicked the email verification link and the status of the email changes to verified. The event will be attributed to whichever client the signup process was initiated.
+                <td>When the completes the process of signing up for a new Schibsted account account after having clicked the email verification link and the status of the email changes to verified. The event will be attributed to whichever client the signup process was initiated.
                     <ul>
                         <li><strong>PS!</strong> This is not the same as signing up to a client.</li>
                         <li><strong>PS2!</strong> For imported users, this event is not triggered. Please see event "Migration completed".</li>
@@ -156,7 +156,7 @@ A complete overview of the SchAcc triggered core events follows below:
             </tr>
             <tr>
                 <td>Signup started</td>
-                <td>When the user starts signing up for a new SchAcc account. The event will be attributed to whichever client the signup process was initiated.
+                <td>When the user starts signing up for a new Schibsted account account. The event will be attributed to whichever client the signup process was initiated.
                     <ul>
                         <li><strong>PS!</strong> This is not the same as signing up to a new client.</li>
                         <li><strong>PS2!</strong> For imported users, this event is not triggered. Please see event "Migration started".</li>

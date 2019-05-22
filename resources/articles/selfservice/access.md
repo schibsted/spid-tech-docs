@@ -3,7 +3,7 @@
 :category self-service
 :body
 
-Our self service tool gives developers control over their SchAcc API client implementation.
+Our self service tool gives developers control over their Schibsted account API client implementation.
 
 ## In Self Service you will be able to manage your client settings such as:
 - Create API clients
@@ -12,7 +12,7 @@ Our self service tool gives developers control over their SchAcc API client impl
 
 ## In order to access Self Service
 
-You will need to register your work e-mail as a SchAcc user on the environment you will work on:
+You will need to register your work e-mail as a Schibsted account user on the environment you will work on:
 <table class="sectioned mbl" width="100%">
   <tr>
     <th>Environment</th>
@@ -33,7 +33,7 @@ You will need to register your work e-mail as a SchAcc user on the environment y
 </table>
 
 ## If your company is new to Schibsted Account (does not have a Merchant/Company registered)
-Your project tech lead will need to send an e-mail to schibstedaccount@schibsted.com and request a that SchAcc enables
+Your project tech lead will need to send an e-mail to schibstedaccount@schibsted.com and request a that Schibsted account enables
 merchant/company access with the information stating which client/s you need access to and the e-mail address registered.
 
 ## Links to Self Service:

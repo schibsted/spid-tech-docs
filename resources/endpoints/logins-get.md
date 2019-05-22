@@ -2,7 +2,7 @@
 
 Query the platform for login attempts.
 
-Every login attempt against your SchAcc client(s), successful or not, is
+Every login attempt against your Schibsted account client(s), successful or not, is
 logged.
 
 :relevant-endpoints

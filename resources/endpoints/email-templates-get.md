@@ -1,6 +1,6 @@
 :introduction
 
-Get the list of email templates used by SchAcc.
+Get the list of email templates used by Schibsted account.
 
 :relevant-endpoints
 

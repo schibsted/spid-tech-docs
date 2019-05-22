@@ -21,10 +21,10 @@ DELETE /paylink/{paylinkId}
 :body
 
 Paylinks allow clients to charge a customer for products without storing them in
-SchAcc's product database. A paylink contains products, their prices and other
-metadata. It comes with a URL that takes the user to SchAcc checkout where they
+Schibsted account's product database. A paylink contains products, their prices and other
+metadata. It comes with a URL that takes the user to Schibsted account checkout where they
 can pay for the products. Upon completion, the user is sent back to the client
-with a confirmation from SchAcc. A paylink object represents a single purchase,
+with a confirmation from Schibsted account. A paylink object represents a single purchase,
 and may only be used once.
 
 Paylink items are what end-users actually pay for. Each item has a price (which

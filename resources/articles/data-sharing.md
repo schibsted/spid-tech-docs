@@ -8,12 +8,12 @@
 
 ## See also
 
-- [SchAcc Authentication](/authentication/)
+- [Schibsted account Authentication](/authentication/)
 - [The Filters parameter](/endpoints/#filters)
 
 :body
 
-SchAcc supports data sharing between API clients in SchAcc in two ways:
+Schibsted account supports data sharing between API clients in Schibsted account in two ways:
 
 * sharing data by applying the merchant filter when retrieving data
 * sharing data by allowing a client to perform API calls on behalf of another client
@@ -22,7 +22,7 @@ Below is a detailed description of these two approaches and a description of use
 
 ## Applying the merchant filter
 Many API endpoints have support for the [filters parameter](/endpoints/#filters). By applying the **merchant** filter
-to these endpoints SchAcc will return data in a merchant context instead of a client context. This means that we will
+to these endpoints Schibsted account will return data in a merchant context instead of a client context. This means that we will
 return all data that belongs the to the merchant the calling client belongs to, and not only data belonging to the
 calling client.
 
@@ -42,14 +42,14 @@ Here are some of the APIs with merchant filter support:
 ## Performing API calls on behalf of another client
 Some endpoints don't support merchant level access and some use cases require that a client may perform some API
 calls on behalf of another client within the same merchant. Schibsted Account supports this by enabling data sharing
-between clients. This has to be configured by SchAcc. See detailed information on how to enable it below.
+between clients. This has to be configured by Schibsted account. See detailed information on how to enable it below.
 
 ### How to perform API calls on behalf of another client
 The client performing the API calls need to authenticate itself as usual. The only difference is that this client
 needs to pass the actual client_id of the client they are retrieving data from, or performing API calls on behalf of,
 with the parameter **contextClientId** in all API calls.
 
-SchAcc will verify that both clients has access to call the endpoint and also validate that the token used is valid for
+Schibsted account will verify that both clients has access to call the endpoint and also validate that the token used is valid for
 the endpoint in question. The contextClientId needs to have access to the resources reflected by the endpoint as well,
 meaning that you can't access users or other data that is NOT accessible by the client used as context.
 

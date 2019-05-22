@@ -4,7 +4,7 @@
 
 ## Read more about event tracking
 
-- [Events tracked by SchAcc](/event-tracking/events-tracked/)
+- [Events tracked by Schibsted account](/event-tracking/events-tracked/)
 
 
 :body
