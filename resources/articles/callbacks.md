@@ -35,7 +35,7 @@ receive notification of the change within a couple of minutes of its occurrence.
 
 ## Types of callbacks
 
-The Schibsted account currently supports two kinds of callbacks:
+Schibsted account currently supports two kinds of callbacks:
 
 * User status changes
 
