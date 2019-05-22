@@ -7,13 +7,13 @@ Ambassador is a web based tool that has two different fields of use. It intends 
 
 ### Login
 
-Login to ambassador assume the client-side user is registered with a Schibsted account account. Ambassador requires two-step-authentication with password and a SMS token. Hence, the user must have a registered mobile number on the Schibsted account account prior to logging in to Ambassador. SP must also register these users manually in Schibsted account. The client will need to supply SP with a full list of persons requiring Ambassador access. This list must contain:
+Login to ambassador assume the client-side user is registered with a Schibsted account. Ambassador requires two-step-authentication with password and a SMS token. Hence, the user must have a registered mobile number on the Schibsted account prior to logging in to Ambassador. SP must also register these users manually in Schibsted account. The client will need to supply SP with a full list of persons requiring Ambassador access. This list must contain:
 
 * Registered Schibsted account e-mail address
 * Role (product admin or support) per service
 * Environment (stage/pre or production)
 
-Make sure all persons in this list have registered and verified both e-mail and phone number on the relevant environments’ Schibsted account account **prior** to handing this over to SP.
+Make sure all persons in this list have registered and verified both e-mail and phone number on the relevant environments’ Schibsted account **prior** to handing this over to SP.
 
 To access the ambassador web application use the following URLs
 

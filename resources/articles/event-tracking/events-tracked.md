@@ -143,7 +143,7 @@ A complete overview of the Schibsted account triggered core events follows below
             </tr>
             <tr>
                 <td>Signup completed</td>
-                <td>When the completes the process of signing up for a new Schibsted account account after having clicked the email verification link and the status of the email changes to verified. The event will be attributed to whichever client the signup process was initiated.
+                <td>When the completes the process of signing up for a new Schibsted account after having clicked the email verification link and the status of the email changes to verified. The event will be attributed to whichever client the signup process was initiated.
                     <ul>
                         <li><strong>PS!</strong> This is not the same as signing up to a client.</li>
                         <li><strong>PS2!</strong> For imported users, this event is not triggered. Please see event "Migration completed".</li>
@@ -156,7 +156,7 @@ A complete overview of the Schibsted account triggered core events follows below
             </tr>
             <tr>
                 <td>Signup started</td>
-                <td>When the user starts signing up for a new Schibsted account account. The event will be attributed to whichever client the signup process was initiated.
+                <td>When the user starts signing up for a new Schibsted account. The event will be attributed to whichever client the signup process was initiated.
                     <ul>
                         <li><strong>PS!</strong> This is not the same as signing up to a new client.</li>
                         <li><strong>PS2!</strong> For imported users, this event is not triggered. Please see event "Migration started".</li>

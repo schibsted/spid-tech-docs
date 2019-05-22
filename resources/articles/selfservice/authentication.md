@@ -25,7 +25,7 @@ Self-service is a very powerful tool that could potentially make the logins for 
 
 When you are ready to send the email, include the following:
 
-1. Your email address which is registered to your Schibsted account account, this **must** be an email from your workplace. We're not going to give you access with a gmail or hotmail address!
+1. Your email address which is registered to your Schibsted account, this **must** be an email from your workplace. We're not going to give you access with a gmail or hotmail address!
 2. CC your closest manager, boss or chief that can confirm that you should be given access to this system. The person giving consent should of course have some kind of responsibility for the technical aspects of your clients. Preferably a person that has used Schibsted account before.
 3. Specify which company / companies you should get access to.
 4. Specify which environments you should get access to.

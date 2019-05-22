@@ -18,7 +18,7 @@ As an example:
 <div class="mod warning">
   <div class="bd">
     <p class="mhm">
-      I have a Schibsted account account and visit Finn.no, I am automatically logged in to Schibsted account and since I have
+      I have a Schibsted account and visit Finn.no, I am automatically logged in to Schibsted account and since I have
       accepted the terms of Finn before, I automatically get a session on Finn and can access my Finn account.
     </p>
     <p class="mhm">
