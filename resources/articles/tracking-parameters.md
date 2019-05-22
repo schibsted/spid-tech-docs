@@ -4,7 +4,7 @@
 SchAcc URLs accept some query parameters that can be used to track and or tag
 login sessions, users or orders. Some may also be used in third party analytics
 systems as well. You can add these query parameters to URLs when linking the
-user to SchAccSchAcc to log in/out, start a payment process, etc.
+user to SchAcc to log in/out, start a payment process, etc.
 
 #### tracking_ref
 

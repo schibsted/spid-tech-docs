@@ -14,7 +14,7 @@
 
 :body
 
-This flow lets the user communicate a payment method id to you for such purposes as direct charge (where you create the orders). The user will be asked to add a new payment method or select on they have already stored in SchAcc, and the ID will returned to you as part of the redirect uri.
+This flow lets the user communicate a payment method id to you for such purposes as direct charge (where you create the orders). The user will be asked to add a new payment method or select on they have already stored in SchAcc, and the ID will be returned to you as part of the redirect uri.
 
 It requires a logged in user, so it will start of in the [auth flow](/flows/auth-flow/).
 

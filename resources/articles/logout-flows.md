@@ -15,7 +15,7 @@
 :body
 
 There are 3 different types of logout functionality available in the platform. Depending on your client application 
-type and integration with SchAcc, you ay need to use one or several approaches. Below is an explanation of each logout 
+type and integration with SchAcc, you may need to use one or several approaches. Below is an explanation of each logout 
 type.
 
 ## Logging out of SchAcc via the JavaScript SDK
@@ -40,18 +40,6 @@ logged in user based on the session cookie sent in the logout request.
 You must provide the **client_id** as GET parameter, to make sure correct context is used.
 
 You may provide **redirect_uri** as GET parameter and SchAcc will redirect the user to that url after performing the logout procedure. This parameter must be previously defined and stored as a valid redirect uri for your client application. It must also be url encoded. 
-
-You may also provide the **oauth_token** via GET parameter, owned the currently logged in user and SchAcc will revoke the token, meaning no API requests will be allowed using that same token afterwards. 
-
-It is then up to your application to perform session cleaning and logout procedures needed to actively log out the user
-from your application.
-
-## Logging out of SchAcc via the API
-Logging out via the API doesn't delete any sessions on any devices used by the user, except the applications used by
-the user utilising the provided oauth token sent to the [logout endpoint](/endpoints/GET/logout/). 
-The API is meant to invalidate the current user token used by your application, thus effectively logging the user out 
-from your application. The Schibsted Account will revoke the token, meaning no API requests will be allowed using that 
-same token afterwards.
 
 It is then up to your application to perform session cleaning and logout procedures needed to actively log out the user
 from your application.

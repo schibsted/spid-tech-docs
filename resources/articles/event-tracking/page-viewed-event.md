@@ -1,12 +1,10 @@
-:title Mixpanel Page Viewed Event
+:title Page Viewed Event
 
 :aside
 
-## Read more about Mixpanel
+## Read more about event tracking
 
-- [Mixpanel Analytics](/mixpanel/analytics/)
-- [Events tracked by SchAcc](/mixpanel/events-tracked/)
-- [Implementing Mixpanel tracking](/mixpanel/implementing-tracking/)
+- [Events tracked by SchAcc](/event-tracking/events-tracked/)
 
 
 :body

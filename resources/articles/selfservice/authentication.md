@@ -43,7 +43,7 @@ If the answer to the question is "no" and you just started out, you should get a
 
 ## Becoming a "VIP" in Schibsted Account
 
-Since you are now basically a VIP you will notice that you can't still access the SchAcc self-service system from the links above. It tells you to enter some kind of code. This code is a two factor authentication and can be setup from you account pages.
+Since you are now basically a VIP you will notice that you still can't access the SchAcc self-service system from the links above. It tells you to enter some kind of code. This code is a two factor authentication and can be setup from you account pages.
 
 In order to access self-service you will need an app for you mobile phone or desktop that can handle TOTP-codes (Timed-based One Time Passwords). Our suggestion is Google Authenticator but there is loads of other apps out there for free.
 

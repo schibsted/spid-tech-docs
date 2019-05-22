@@ -2,11 +2,9 @@
 
 :aside
 
-## Read more about Mixpanel
+## Read more about event tracking
 
-- [Mixpanel Analytics](/mixpanel/analytics/)
-- [Mixpanel Page Viewed Event](/mixpanel/page-viewed-event/)
-- [Implementing Mixpanel tracking](/mixpanel/implementing-tracking/)
+- [Page Viewed Event](/event-tracking/page-viewed-event/)
 
 :body
 
@@ -18,8 +16,8 @@ Properties added by SchAcc to all events:
 - Revision (Platform revision)
 - SchAcc ID (The SchAcc user id)
 - Client (Client alias/name, not client id)
-- ip (User's ip in order for Mixpanel to derive country, city, etc)
-- User agent (Not used by Mixpanel on server side requests, but we send it anyway)
+- ip (User's ip in order to derive country, city, etc)
+- User agent
 - Age
 - Gender
 - User status
