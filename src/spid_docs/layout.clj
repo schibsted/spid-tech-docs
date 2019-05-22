@@ -51,8 +51,8 @@
        [:div.bd body]]]]
     [:div#footer
      [:div.center
-      "You're reading the technical documentation for the "
-      [:a.nowrap {:href "http://www.schibstedpayment.no/"} "Schibsted Account"]
+      "You're reading the technical documentation for "
+      [:a.nowrap {:href "http://www.schibstedpayment.no/"} "Schibsted account"]
       " by "
       [:a.nowrap {:href "https://schibsted.com/about/"} "Schibsted"]
       ". "

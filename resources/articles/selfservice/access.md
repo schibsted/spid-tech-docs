@@ -32,7 +32,7 @@ You will need to register your work e-mail as a Schibsted account user on the en
   </tr>
 </table>
 
-## If your company is new to Schibsted Account (does not have a Merchant/Company registered)
+## If your company is new to Schibsted account (does not have a Merchant/Company registered)
 Your project tech lead will need to send an e-mail to schibstedaccount@schibsted.com and request a that Schibsted account enables
 merchant/company access with the information stating which client/s you need access to and the e-mail address registered.
 
@@ -57,7 +57,7 @@ merchant/company access with the information stating which client/s you need acc
   </tr>
 </table>
 
-## If your company already has Schibsted Account implemented
+## If your company already has Schibsted account implemented
 Ask your tech lead (or the person in your company with Admin responsibility in Self Service) to send an
 e-mail to: schibstedaccount@schibsted.com stating which client/s you need access to and the e-mail address registered.
 

@@ -1,4 +1,4 @@
-:title Schibsted Account Authentication
+:title Schibsted account Authentication
 
 :frontpage
 :category api-integration
@@ -25,7 +25,7 @@ You may also want to look into the [Getting Started](/getting-started/) guide.
 
 :body
 
-Schibsted Account uses
+Schibsted account uses
 [OAuth 2.0 (draft 11)](http://tools.ietf.org/html/draft-ietf-oauth-v2-11) for
 authentication and authorization. With OAuth 2.0, you obtain an access token for
 a user via a redirect to Schibsted account, then you use this token to perform authorized
@@ -44,7 +44,7 @@ requests on behalf of that user by including it with API requests in either
 
 ## Token types
 
-Schibsted Account clients will typically use two kinds of tokens: user and server (see
+Schibsted account clients will typically use two kinds of tokens: user and server (see
 [OAuth client credentials](http://tools.ietf.org/html/draft-ietf-oauth-v2-11#section-1.4.3)).
 A user token can only be used with requests for a certain set of API endpoints,
 and will only be able to retrieve data related to a specific user. A server
@@ -53,7 +53,7 @@ data for all users who have granted the client access to its data.
 
 ## Client authentication
 
-Schibsted Account allows clients to authenticate in two ways:
+Schibsted account allows clients to authenticate in two ways:
 
 - Using [HTTP basic authentication](https://tools.ietf.org/html/rfc2617#section-2) 
   in the authorization request header field, `base64(<CLIENT_ID>:<CLIENT_SECRET>)`

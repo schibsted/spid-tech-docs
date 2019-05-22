@@ -3,7 +3,7 @@
 :category api-integration
 :body
 
-The Schibsted Account does, in most cases, use a proxy setup the communicate with the
+The Schibsted account does, in most cases, use a proxy setup the communicate with the
 outside world. It is done to support IP white listings on clients and external
 parties end.
 

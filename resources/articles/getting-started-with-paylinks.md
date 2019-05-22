@@ -16,7 +16,7 @@ SDK for your platform.
 :body
 
 When you have completed this guide, you can sell products by allowing users to
-check out and pay via Schibsted Account.
+check out and pay via Schibsted account.
 
 ## Overview
 
@@ -60,7 +60,7 @@ field to specify quantity:
 
 <spid-example lang="html" repo="clj" src="/paylinks/resources/index.html" title="Keeping product choices simple"/>
 
-## Send the list of items to Schibsted Account
+## Send the list of items to Schibsted account
 
 We prepare the purchase by creating a Paylink - which has a URL to which we can
 redirect the user for payment.
@@ -134,7 +134,7 @@ With our data in hand, we can create the Paylink by POSTing to
 
 # :/tabs
 
-## Redirect the user to Schibsted Account for payment
+## Redirect the user to Schibsted account for payment
 
 Our new Paylink has [quite a few fields](/types/paylink/), but the one we're
 interested in is the `shortUrl`. We'll use this to send the user to Schibsted account for

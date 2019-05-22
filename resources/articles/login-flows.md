@@ -12,7 +12,7 @@
 
 The auto-login works from ANY site in the Schibsted account ecosystem. Meaning that the user is logged in to Schibsted account,
 not a specific site. If the user has a connection to that site upon visiting it, and have accepted the
-terms of use for that site, then the Schibsted Account responds with who is logged in.
+terms of use for that site, then the Schibsted account responds with who is logged in.
 
 As an example:
 <div class="mod warning">
@@ -24,7 +24,7 @@ As an example:
     <p class="mhm">
       I then visit VG.no. Upon which I haven't used before or still haven't accepted their terms of use.
       I am still logged in on Schibsted account (or auto-logged-in if my session has timed out), but this time the
-      Schibsted Account doesn't say who is logged in.
+      Schibsted account doesn't say who is logged in.
     </p>
   </div>
 </div>
@@ -56,7 +56,7 @@ When client services uses the redirect login flow and send the user to Schibsted
     1. Ask the user to sign up (signup requires user to accept Schibsted account and site B terms of use)
 
 This is a complete overview of Single Sign On using JS SDK, explaining the complete process between the client
-service (orange), the JS SDK (white) and the Schibsted Account (blue).
+service (orange), the JS SDK (white) and the Schibsted account (blue).
 ![Single Sign On complete overview using JS SDK, cookies and redirects](/images/sso-usecases.png)
 
 Here is a complete overview of how Schibsted account handles the login/signup process internally using the redirect login flow:

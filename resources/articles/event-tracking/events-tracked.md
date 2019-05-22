@@ -80,7 +80,7 @@ A complete overview of the Schibsted account triggered core events follows below
             </tr>
             <tr>
                 <td>Login</td>
-                <td>When a user logs in to the Schibsted Account.
+                <td>When a user logs in to the Schibsted account.
 					<ul>
                         <li><strong>PS!</strong> Not the same as a login to the client</li>
 					</ul>

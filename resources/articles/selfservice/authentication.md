@@ -41,7 +41,7 @@ If the answer to the question is "no" and you just started out, you should get a
 
 
 
-## Becoming a "VIP" in Schibsted Account
+## Becoming a "VIP" in Schibsted account
 
 Since you are now basically a VIP you will notice that you still can't access the Schibsted account self-service system from the links above. It tells you to enter some kind of code. This code is a two factor authentication and can be setup from you account pages.
 

@@ -18,5 +18,5 @@ engaging with your site.
 One of the easiest ways to do this is to use the JavaScript SDK to detect whether a visitor is signed-in to Schibsted account. 
 
 This is a complete overview of this process between your service (orange), the Schibsted account JS SDK (white) and 
-Schibsted Account (blue):
+Schibsted account (blue):
 ![Single Sign On complete overview using JS SDK, cookies and redirects](/images/sso-usecases.png)
