@@ -75,16 +75,12 @@ rudimentary usage information. There is also a separate
 
 ## JavaScript
 
-The JavaScript SDK is different from the PHP, Java and Clojure ones in that it
-is read-only, does not use OAuth, and is designed to be used in the browser to
-query the user's authentication/authorization status.
+The JavaScript SDK is designed to be used in the browser to
+query the user's authentication/authorization status and more.
 
-Source code and distribution files are on
-[Github](https://github.com/schibsted/sdk-js), refer to the
-[JavaScript SDK](/sdks/javascript/) page for full API documentation and usage
-examples.
-
-[Documentation and examples &raquo;](/sdks/javascript/)
+Source code is published on
+[Github](https://github.com/schibsted/account-sdk-browser). Refer to the
+[JavaScript SDK page](/sdks/javascript/) for more information.
 
 ## Android
 

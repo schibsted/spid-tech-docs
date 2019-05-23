@@ -1,5 +1,5 @@
 --------------------------------------------------------------------------------
-:title JavaScript version 2.x SDK
+:title JavaScript version 2.x SDK (Deprecated)
 :frontpage
 :category
 :aside
@@ -17,13 +17,9 @@
 - [Best practices](/sdks/js-2x/best-practices/)
 
 ## See also
-- [Documentation for the 1.x JavaScript SDK](/sdks/javascript-1x/)
 - [Getting started with the server-side API](/getting-started/)
 
 :body
-
-**Note: this documentation is for version 2.x of the JavaScript SDK. The old 1.x version can be
-found [here](/sdks/javascript-1x/).**
 
 The JavaScript SDK is different from the other SDKs in that it only provides
 information about the user's authentication/authorization status. It is not a
