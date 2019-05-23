@@ -84,16 +84,12 @@ Source code is published on
 
 ## Android
 
-Enables easy Schibsted account login from Android applications. Supported for Android version
-2.2 (API level 8) or greater.
-[Check out the code](http://schibsted.github.io/sdk-android/) and include it in
+Supports Android version 4.0 (API level 14) or greater.
+[Check out the code](https://github.com/schibsted/account-sdk-android) and include it in
 your project, then refer to the SDK documentation on
-[getting started](http://schibsted.github.io/sdk-android/setting-up-spid.html),
+[getting started](https://schibsted.github.io/account-sdk-android/#getting-started),
 or see the
-[included sample applications](https://github.com/schibsted/sdk-android).
-
-API documentation and more information is available from the
-[project's wiki](http://schibsted.github.io/sdk-android/).
+[included example application](https://github.com/schibsted/account-sdk-android/tree/master/example).
 
 ## iOS
 
