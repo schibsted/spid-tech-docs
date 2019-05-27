@@ -69,25 +69,7 @@ The Clojure client is deployed in Clojars, just put it in your `project.clj`:
 
 ## :tab iOS
 
-Download the iOS SDK by cloning the GitHub repository:
-
-```sh
-git clone https://github.com/schibsted/sdk-ios.git
-```
-
-If you do not have Git installed, you can also
-[download it as a zip file](https://github.com/schibsted/sdk-ios/archive/master.zip).
-
-Linking the SDK into your project requires a few steps:
-
-- Find the `.xcodeproj` view. At the bottom of the *General* view,
-  under *Linked frameworks and Libraries*, click *+* and *Add
-  other*. Locate the SDK you downloaded, and add it.
-
-- Also link in `AdSupport.framework` as an Optional link. It is only
-  used during build.
-
-- Go to *Build Settings*, search for `linking` and add `-ObjC` to *Other Linker Flags*
+In order to use the Schibsted account iOS SDK, see the [getting started documentation](https://schibsted.github.io/account-sdk-ios/#setup).
 
 ## :tab Android
 
@@ -164,62 +146,7 @@ all available endpoints along with details on how to interact with them.
 
 ## :tab iOS
 
-The following is a minimal example of using the iOS SDK. It fetches the
-`/endpoints` endpoint, which returns a description of all available endpoints.
-
-Open your `*AppDelegate.m` file. In the example, this is `MyAppDelegate`.
-
-We set up the `SPiDClient` singleton, then we need to fetch a client
-token to make the `/endpoints` API call.
-
-```objc
-#import "MyAppDelegate.h"
-#import "SPiDClient.h"
-#import "SPiDResponse.h"
-#import "SPiDTokenRequest.h"
-
-static NSString *const ClientID = @"your-client-id";
-static NSString *const ClientSecret = @"your-client-secret";
-static NSString *const AppURLScheme = @"https";
-static NSString *const ServerURL = @"https://identity-pre.schibsted.com";
-
-@implementation MyAppDelegate
-
-- (void)getClientToken:(void (^)(SPiDError *response))completionHandler
-{
-    SPiDRequest *clientTokenRequest = [SPiDTokenRequest clientTokenRequestWithCompletionHandler:completionHandler];
-    [clientTokenRequest startRequest];
-}
-
-- (void)getEndpoints:(void (^)(SPiDResponse *response))completionHandler
-{
-    NSString *path = [NSString stringWithFormat:@"/endpoints"];
-    SPiDRequest *request = [SPiDRequest apiGetRequestWithPath:path completionHandler:completionHandler];
-    [request startRequestWithAccessToken];
-}
-
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-    [SPiDClient setClientID:ClientID
-               clientSecret:ClientSecret
-               appURLScheme:AppURLScheme
-                  serverURL:[NSURL URLWithString:ServerURL]];
-
-    [self getClientToken:^(SPiDError *error) {
-        if (error) {
-            NSLog(@"Error: %@", error);
-        } else {
-            [self getEndpoints:^(SPiDResponse *response) {
-                NSLog(@"Endpoints: %@", [response message]);
-            }];
-        }
-    }];
-
-    return YES;
-}
-
-@end
-```
+See the [published documentation](https://schibsted.github.io/account-sdk-ios/#usage).
 
 ## :tab Android
 

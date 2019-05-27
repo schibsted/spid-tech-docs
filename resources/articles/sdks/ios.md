@@ -13,15 +13,14 @@
 
 :body
 
-The SchibstedID iOS SDK provides you access to SPT identity user objects and gives you the tools to manage your users and make authenticated requests
-
-To learn more about the SDK, the full documentation can be found in the GitHub repo at [schibsted.github.io/account-sdk-ios](https://schibsted.github.io/account-sdk-ios/).
+The iOS SDK simplifies connecting to Schibsted Account. To learn more about the SDK, the full documentation can be found
+[here](https://schibsted.github.io/account-sdk-ios/).
 
 For support, please contact [schibstedaccount@schibsted.com](mailto:schibstedaccount@schibsted.com)
 
-## Setup
+## Getting started
 
-## Reference the pod
+### Reference the pod
 
 You will need to add the following sources to your podfile to include the pod `SchibstedID`
 - `source "git@github.schibsted.io:CocoaPods/Specs.git,"`: for SchibstedID
@@ -38,27 +37,24 @@ To fulfill this, you must either implement it yourself or use one which is alrea
 
 To use the SchibstedIDTracking implementation, you may include the following in your podfile
 
-- `pod 'SchibstedID/Tracking/Pulse'`: Adds dependency to the [new](https://github.schibsted.io/spt-dataanalytics/pulse-tracker-ios) pulse SDK
+- `pod 'SchibstedID/Tracking/Pulse'`: Adds dependency to the [new Pulse SDK](https://github.schibsted.io/spt-dataanalytics/pulse-tracker-ios).
 
 ### Get some client credentials
 
-The SDK works by giving you access to Schibsted users. And what kind of access is allowed is determined by a set
+The SDK works by giving you access to Schibsted account users. What kind of access is allowed is determined by a set
 of client credentials. The first thing you must do is get some credentials, which can be done through
-[self service](http://techdocs.spid.no/selfservice/access/). Learn about environments and merchants. The SDK will not work accross environments or merchants.
+[Self Service](http://techdocs.spid.no/selfservice/access/). Learn about environments and merchants. The SDK will not work accross environments or merchants.
 
 
-## Building the example application(s)
+## Building the example application
 
-In CocoaPods-based projects you work within the project of the example application, which is inside "Example" folder.
-At first the workspace needs to be created by running `pod install` in the terminal, this has been wrapped in a script:
+In CocoaPods-based projects you work within the project of the example application, which is located in the
+[`Example` directory](https://github.com/schibsted/account-sdk-ios/tree/master/Example).
+
+To install the necessary dependencies and open the project in Xcode:
 
     ./pod_install.sh
     open Example/SchibstedID.xcworkspace
 
-The last command will open "SchibstedID.xcworkspace" file in Xcode.
-Run the application using &#8984;R (Product - Run).
-Make sure that the "SchibstedID-Example" scheme is selected.
-
-There's an example UI application as well that you can open at:
-
-    open ExampleUI/ExampleUI.xcworkspace
+In Xcode, run the application using &#8984;R (Product - Run).
+Make sure that the `SchibstedID-Example` scheme is selected.

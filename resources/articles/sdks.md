@@ -93,11 +93,9 @@ or see the
 
 ## iOS
 
-Enables easy Schibsted account login from iOS applications.
-[Check out the code](http://schibsted.github.io/sdk-ios/) and include it in you
+Supports iOS 9 and above.
+[Check out the code](https://github.com/schibsted/account-sdk-ios) and include it in your
 project, then refer to the SDK documentation on
-[getting started](http://schibsted.github.io/sdk-ios/setting-up-spid.html), or
-see the [included sample applications](https://github.com/schibsted/sdk-iOS).
+[getting started](https://schibsted.github.io/account-sdk-ios/#setup), or
+see the [included example application](https://github.com/schibsted/account-sdk-ios/tree/master/Example).
 
-API documentation and more information is available from the
-[project's wiki](http://schibsted.github.io/sdk-ios/).
