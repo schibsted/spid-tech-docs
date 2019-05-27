@@ -81,7 +81,6 @@
 
 (def example-dir-folders
   {:java "java"
-   :php "php"
    :clj "clj"
    :sh "curl"})
 

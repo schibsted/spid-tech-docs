@@ -77,13 +77,6 @@ String createSession(@RequestParam String code) {
 }
 ```
 
-## :tab PHP
-
-```php
-<?php // createSession.php
-header("Location: /");
-```
-
 ## :tab Clojure
 
 ```clj
@@ -122,10 +115,6 @@ the Schibsted account login page.
 
 <spid-example lang="java" src="/sso/src/main/java/no/spid/examples/LoginController.java" title="Build login URL"/>
 
-## :tab PHP
-
-<spid-example lang="php" src="/sso/index.php" title="Build login URL"/>
-
 ## :tab Clojure
 
 <spid-example lang="clj" src="/sso/src/spid_clojure_sso_example/core.clj" title="Build login URL"/>
@@ -149,16 +138,6 @@ client to communicate with the Schibsted account API on behalf of the user.
 
 <spid-example lang="java" src="/sso/src/main/java/no/spid/examples/LoginController.java" title="Create user client"/>
 
-## :tab PHP
-
-The Schibsted account SDK for PHP needs a few config variables:
-
-<spid-example lang="php" src="/config/config.php.sample" title="SDK variables"/>
-
-Create the client with the config:
-
-<spid-example lang="php" src="/sso/createSession.php" title="Create user client"/>
-
 ## :tab Clojure
 
 <spid-example lang="clj" src="/sso/src/spid_clojure_sso_example/core.clj" title="Create user client"/>
@@ -176,10 +155,6 @@ on to the client. You'll need it later.
 ## :tab Java
 
 <spid-example lang="java" src="/sso/src/main/java/no/spid/examples/LoginController.java" title="Fetch user information and add to session"/>
-
-## :tab PHP
-
-<spid-example lang="php" src="/sso/createSession.php" title="Fetch user information and add to session"/>
 
 ## :tab Clojure
 
@@ -209,10 +184,6 @@ logging out of Schibsted account.
 
 <spid-example lang="java" src="/sso/src/main/java/no/spid/examples/LoginController.java" title="Log user out"/>
 
-## :tab PHP
-
-<spid-example lang="php" src="/sso/logout.php" title="Log user out"/>
-
 ## :tab Clojure
 
 <spid-example lang="clj" src="/sso/src/spid_clojure_sso_example/core.clj" title="Log user out"/>
@@ -230,6 +201,5 @@ logging out of Schibsted account.
 If you're unsure on certain details after reading this guide, do check
 out these working examples:
 
-- [SSO example for PHP](https://github.com/schibsted/spid-php-examples/tree/master/sso)
 - [SSO example for Java](https://github.com/schibsted/spid-java-examples/tree/master/sso)
 - [SSO example for Clojure](https://github.com/schibsted/spid-clj-examples/tree/master/sso)

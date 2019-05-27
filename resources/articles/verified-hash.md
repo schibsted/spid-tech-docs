@@ -83,32 +83,6 @@ $data['hash'] = createHash($data, $sign_secret);
 $client->api('/user/123/charge', 'POST', $data);
 ```
 
-## :tab PHP SDK
-
-```php
-<?php
-$sign_secret = 'foobar';
-
-$path = "/payment":
-$method = "POST";
-
-$data = [
-    'action' => 'sale',
-    'productId' => 10001,
-    'userId' => 123,
-    'price' => 9900
-];
-
-$data['hash'] = $client->createHash($data);
-
-try {
-    $result = $client->api($path, $method, $data);
-} catch (VGS_Client_Exception $e) {
-    echo $e->getMessage();
-    var_dump($client->container);
-}
-```
-
 ## :tab Java SDK
 
 ```java

@@ -48,17 +48,6 @@ The Java API client library is deployed in Maven central, just add it to your pr
 
 <spid-example lang="html" src="/java/getting-started/pom.xml" title="Add SPiD client"/>
 
-## :tab PHP
-
-Download the PHP SDK by cloning the GitHub repository:
-
-```sh
-git clone https://github.com/schibsted/sdk-php.git
-```
-
-If you do not have Git installed, you can also download a
-[zip file](https://github.com/schibsted/sdk-php/archive/master.zip).
-
 ## :tab Clojure
 
 The Clojure client is deployed in Clojars, just put it in your `project.clj`:
@@ -109,23 +98,6 @@ mvn install -q exec:java -Dexec.mainClass="no.spid.examples.GettingStarted" -Dex
 
 When working with the Java client, you might be more interested in
 `SpidApiResponse`'s `getJSONData()` method.
-
-## :tab PHP
-
-The following is a minimal example of using the PHP SDK. It fetches the
-/endpoints endpoint, which returns a description of all available endpoints.
-
-<spid-example lang="php" src="/getting-started/getting-started.php" title="Getting started"/>
-
-You can run this code from the example repository, filling in your actual
-client-id, secret and signing secret:
-
-```sh
-php getting-started.php client-id secret sign-secret
-```
-
-This will print the JSON-decoded response from the server, which shows all
-available endpoints along with details on how to interact with them.
 
 ## :tab Clojure
 

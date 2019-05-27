@@ -39,10 +39,3 @@ else
     cd ../../..
 fi
 
-if [ ! -d "resources/example-repos/php" ]; then
-    git clone -b $BRANCH https://github.com/spid-tech-docs/spid-php-examples resources/example-repos/php
-else
-    cd resources/example-repos/php
-    git pull --rebase
-    cd ../../..
-fi

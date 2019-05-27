@@ -3,7 +3,6 @@
 :aside
 ## SDKS
 
-- [PHP](#php)
 - [Java](#java)
 - [Clojure](#clojure)
 - [JavaScript](#javascript)
@@ -25,26 +24,11 @@ supported API clients/SDKs. The SDKs implement the OAuth communication and token
 exchanges (including renewing expired tokens etc), as well as automating part of
 the API call workflow.
 
-There are standard server-side SDKs for PHP, Java and Clojure. Additionally,
+There are standard server-side SDKs for Java and Clojure. Additionally,
 there is a simpler JavaScript client that is read-only (no OAuth support) and
 may be used client-side. There are also Android and iOS SDKs.
 
 All SDKs are available on [Schibsted's GitHub account](https://github.com/schibsted/).
-
-## PHP
-
-To use the PHP SDK, you need to fetch the
-[source code](https://github.com/schibsted/sdk-php) from GitHub:
-
-```sh
-git clone git://github.com/schibsted/sdk-php.git spid-sdk
-```
-
-There are currently no API docs for the PHP SDK. The
-[Getting started](/getting-started/) and
-[Implementing Single Sign-On](/implementing-sso/) guides will get you off on a
-flying start. The source code repository also has
-[multiple examples](https://github.com/schibsted/sdk-php/tree/master/examples).
 
 ## Java
 

@@ -35,14 +35,14 @@ With Java SDK, you can validate `sig` with:
 SpidSecurityHelper.decryptAndValidateSignedRequest()
 ```
 
-With PHP SDK, you can validate `sig` with:
+In PHP, you can validate `sig` with:
 
 ```php
 <?php
 // $sign_secret = "a274de";
-$expected_sig = hash_hmac('sha256', $container['data'], $sign_secret, true);
+$expected_sig = hash_hmac('sha256', $container['data'], $client_sign_secret, true);
 
-if (hash_equals($sig, $expected_sig)) {
+if (hash_equals($signature, $expected_sig)) {
     echo "Authenticity of data verified\n";
 } else {
     echo "Authenticity of data cannot be verified. Someone is doing something naughty!\n";

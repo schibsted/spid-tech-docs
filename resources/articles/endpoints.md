@@ -388,11 +388,3 @@ wading through repeated boilerplate. To put it all in context, the following is
 a full example, including import statements.
 
 <spid-example lang="java" src="/getting-started/src/main/java/no/spid/examples/GettingStarted.java" title="Getting started"/>
-
-## PHP request example
-
-PHP examples throughout the endpoint API docs are excerpts, to spare you from
-wading through repeated boilerplate. To put it all in context, the following is
-a full example.
-
-<spid-example lang="php" src="/getting-started/getting-started.php" title="Getting started"/>

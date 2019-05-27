@@ -87,30 +87,10 @@ The decoded data is a JSON object:
 
 ## :tab PHP
 
-The following example manually achieves the same effect as the PHP SDK function
-`Client::parseSignedRequest($signed)` (see [callback.php](https://github.com/schibsted/sdk-php/blob/4e40c580561fc1d0187dbac0383e8ba0e50de1e3/examples/callback/index.php)
-in the [PHP SDK](https://github.com/schibsted/sdk-php) for a full example).
+The following example manually parses and verifies the signature of the request:
 
 ```php
 <?php
-require_once('src/Client.php');
-
-$SPID_CREDENTIALS = array(
-      VGS_Client::CLIENT_ID       => '4cf36fakdk2sj17e030000',
-      VGS_Client::CLIENT_SECRET   => 'lsh4nf82f',
-      VGS_Client::STAGING_DOMAIN  => 'payment.schibsted.no',
-      VGS_Client::HTTPS           => true,
-      VGS_Client::REDIRECT_URI    => "http://myapp.example.org",
-      VGS_Client::DOMAIN          => 'myapp.example.org',
-      VGS_Client::COOKIE          => true,
-      VGS_Client::API_VERSION     => 2,
-      VGS_Client::PRODUCTION      => true,
-      VGS_Client::CLIENT_SIGN_SECRET => 'jsu3f6',
-);
-
-$client = new VGS_Client($SPID_CREDENTIALS);
-$client->auth();
-
 function parse_signed_request($signed_request, $secret) {
   list($encoded_sig, $payload) = explode('.', $signed_request, 2);
   $sig = base64_url_decode($encoded_sig);
@@ -127,7 +107,7 @@ function base64_url_decode($input) {
 }
 
 $payload = file_get_contents("php://input");
-$parsed = parse_signed_request($payload, $SPID_CREDENTIALS[VGS_Client::CLIENT_SIGN_SECRET]);
+$parsed = parse_signed_request($payload, $client_sign_secret);
 $data = json_decode($parsed, true);
 ```
 
