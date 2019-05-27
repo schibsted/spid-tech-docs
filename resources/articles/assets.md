@@ -20,7 +20,7 @@ Use Cases for handling access checks for NON-Schibsted account assets are many:
 - check if you have access to a specific purchased e-book
 - check if you have purchased a Finn-ad addon
 - check if you have paid for an account upgrade 
-- check if you have access to a restricted feature (like p2p enabling or disabling users on the client)
+- check if you have access to a restricted feature (like disabling users on the client)
 - check if you have access to some product not currently defined in the Schibsted account product structure because the product structure doesn’t match the client’s product structure requirements
 - check if you have access to a specific news article
 
