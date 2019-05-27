@@ -12,7 +12,7 @@
 
 :body
 
-This flow lets the user communicate a payment method id to you for such purposes as direct charge (where you create the orders). The user will be asked to add a new payment method or select on they have already stored in SPiD, and the ID will retrurned to you as part of the redirect uri.
+This flow lets the user communicate a payment method id to you for such purposes as direct charge (where you create the orders). The user will be asked to add a new payment method or select on they have already stored in Schibsted account, and the ID will be returned to you as part of the redirect uri.
 
 It requires a logged in user, so it will start of in the [auth flow](/flows/auth-flow/).
 
@@ -33,9 +33,9 @@ The `methods` parameter determines which payment methods that should be availabl
 `https://login.schibsted.com/flow/payment?methods=6&client_id=[...]&redirect_uri=[...]&response_type=code`
 
 
-### Updating SPiD subscriptions
+### Updating Schibsted account subscriptions
 
-This flow can also be used to manage the payment method of SPiD subscriptions. In this case there is no need to act on the outgoing payment method id, but the subscription id (preferrably the "original subscription id") must be added as a flow start parameter (so SPiD will know which subscription to update) as a `subscription_id` parameter.
+This flow can also be used to manage the payment method of Schibsted account subscriptions. In this case there is no need to act on the outgoing payment method id, but the subscription id (preferrably the "original subscription id") must be added as a flow start parameter (so Schibsted account will know which subscription to update) as a `subscription_id` parameter.
 
 ### Example
 
@@ -43,5 +43,5 @@ This flow can also be used to manage the payment method of SPiD subscriptions. I
 
 ## Results
 
-Like all SPiD flows, the user will, upon successful completion of the flow, be sent to the `redirect_uri` along with a `code` parameter (that must be consumed as per all flows to identify the returning user), but also with an added parameter `payment_id` which is id of the payment method the user selected.
+Like all Schibsted account flows, the user will, upon successful completion of the flow, be sent to the `redirect_uri` along with a `code` parameter (that must be consumed as per all flows to identify the returning user), but also with an added parameter `payment_id` which is id of the payment method the user selected.
 

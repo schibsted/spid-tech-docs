@@ -1,9 +1,9 @@
-:title Outgoing IPs SPiD uses
+:title Outgoing IPs Schibsted account uses
 :frontpage
 :category api-integration
 :body
 
-The SPiD platform does, in most cases, use a proxy setup the communicate with the
+Schibsted account does, in most cases, use a proxy setup the communicate with the
 outside world. It is done to support IP white listings on clients and external
 parties end.
 

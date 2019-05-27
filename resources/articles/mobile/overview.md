@@ -12,11 +12,11 @@
 
 :body
 
-Using SPiD you will gain access to a single sign-on system consisting of users from all Schibsted subsidiaries connected to SPiD as well as simplifying the user experience and increasing your conversion rate.
+Using Schibsted account you will gain access to a single sign-on system consisting of users from all Schibsted subsidiaries connected to Schibsted account as well as simplifying the user experience and increasing your conversion rate.
 
-The SPiD mobile SDKs provides components that simplify integrating SPiD into your app. Login is handled using [OAuth 2.0](https://oauth.net/2/) and a number of different login methods are supported; natively, using an external browser, webview, Facebook or Google+.
+The Schibsted account mobile SDKs provides components that simplify integrating Schibsted account into your app. Login is handled using [OAuth 2.0](https://oauth.net/2/) and a number of different login methods are supported; natively, using an external browser, webview, Facebook or Google+.
 
-To develop an app for SPiD the following needs to be done.
+To develop an app for Schibsted account the following needs to be done.
 
 ### 1. Request access to self service
 

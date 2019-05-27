@@ -16,11 +16,11 @@
 - [Implementing single sign-on](/implementing-sso/)
 - [Endpoints](/endpoints/)
 
-:title SPiD API clients/SDKs
+:title Schibsted account API clients/SDKs
 
 :body
 
-To assist you in integrating with the platform, SPiD provides officially
+To assist you in integrating with the platform, Schibsted account provides officially
 supported API clients/SDKs. The SDKs implement the OAuth communication and token
 exchanges (including renewing expired tokens etc), as well as automating part of
 the API call workflow.
@@ -88,7 +88,7 @@ examples.
 
 ## Android
 
-Enables easy SPiD login from Android applications. Supported for Android version
+Enables easy Schibsted account login from Android applications. Supported for Android version
 2.2 (API level 8) or greater.
 [Check out the code](http://schibsted.github.io/sdk-android/) and include it in
 your project, then refer to the SDK documentation on
@@ -101,7 +101,7 @@ API documentation and more information is available from the
 
 ## iOS
 
-Enables easy SPiD login from iOS applications.
+Enables easy Schibsted account login from iOS applications.
 [Check out the code](http://schibsted.github.io/sdk-ios/) and include it in you
 project, then refer to the SDK documentation on
 [getting started](http://schibsted.github.io/sdk-ios/setting-up-spid.html), or

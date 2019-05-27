@@ -10,17 +10,17 @@
 * [GET /oauth/userinfo](/oauth/userinfo/)
 * [GET /oauth/jwks](/oauth/jwks/)
 * [GET /oauth/authorize](/oauth/authorize/)
-* [SPiD Authentication](/authentication/)
+* [Schibsted account Authentication](/authentication/)
 
 :body
 
 The `/oauth/token` endpoint is used to issue tokens for users and services.
 "User tokens" are issued for users, while "client tokens" are issued
-for services. In SPiD there is also 2 more token variants called admin tokens
+for services. In Schibsted account there is also 2 more token variants called admin tokens
 and admin client tokens, but these tokens are only used by internal
 applications like Ambassador or SelfService.
 
-SPiD currently supports 5 grant_types:
+Schibsted account currently supports 5 grant_types:
 
 * **client_credentials** to fetch a client token
 * **password** to fetch a user token, given username and password
@@ -102,7 +102,7 @@ Date: Mon, 29 Feb 2016 13:37:00 GMT
 ## Grant type Authorization code, for user tokens
 
 The authorization code grant is the second step in the authorization flow for user.
-A user logs in to SPiD, and SPiD will return the user to site with a code.
+A user logs in to Schibsted account, and Schibsted account will return the user to site with a code.
 That code is then exchanged in backend for a user token.
 
 ### Request
@@ -170,7 +170,7 @@ Date: Mon, 29 Feb 2016 13:37:00 GMT
 ## Grant type JWT Bearer, for user tokens via Facebook and Google+
 
 The JWT Bearer grant is used to fetch a user access token, by first logging
-the user in via a third party, and then sending the third party token to SPiD,
+the user in via a third party, and then sending the third party token to Schibsted account,
 baked into a signed JWT.
 
 ### Request

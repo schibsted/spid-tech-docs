@@ -21,12 +21,12 @@ In order to make use of this information, you need to know your:
 
 :body
 
-In addition to the user auth facilities provided by the platform, SPiD also provides a mechanism for
+In addition to the user auth facilities provided by the platform, Schibsted account also provides a mechanism for
 when two services want to communicate directly with each other. In these situations, a service
 needs to authenticate and authorize the other services which access its protected resources. We refer
 to this as service-to-service (henceforth S2S) auth.
 
-S2S auth in SPiD is made up of three basic steps:
+S2S auth in Schibsted account is made up of three basic steps:
 
 1. A client [obtains a client token](/oauth/token/) via
 a `client_credentials` grant.
@@ -56,7 +56,7 @@ curl -X POST -H "Authorization: Basic NGU4NDYzNTY5Y2FmN2NhMDE5MDAwMDA3OmZvb2Jhcg
 For further details on resource indicators, please refer to
 [Resource Indicators for OAuth 2.0, draft 2](https://tools.ietf.org/html/draft-campbell-oauth-resource-indicators-02).
 
-***Note:*** currently the value passed as the resource needs to match the domain registered in SPiD's
+***Note:*** currently the value passed as the resource needs to match the domain registered in Schibsted account's
 [self service](/mobile/selfservice/) tool for the resource server.
 
 The scopes passed will help the receiving service authorize the call, and can be thought of as a set of
@@ -65,8 +65,7 @@ called service determine if the request actions should be permitted. The exact s
 determined by the resource server and is outside the scope of this document.
 
 **Note:** currently the scopes that a client may request may only be managed by the administrators of
-the SPiD platform. In order to have scopes added to your client [contact support](mailto:schibstedaccount@schibsted.com).
-In the future, management of scopes will be possible via the [self service](/mobile/selfservice/) tool.
+Schibsted account. In order to have scopes added to your client [contact support](mailto:schibstedaccount@schibsted.com).
 
 ## Send the token in the request
 
@@ -118,6 +117,6 @@ that the token was understood, but the permissions are not sufficient to complet
 
 Often services support multiple clients/tenants, and the `client_id` parameter can be used to determine
 which one is calling the service. It is a recommended best practice for services to maintain their
-own IDs for their tenants (for use in DB tables, etc.) and simply map from the SPiD `client_id` to their
+own IDs for their tenants (for use in DB tables, etc.) and simply map from the Schibsted account `client_id` to their
 own IDs. This adds a layer of insulation in case a tenant's `client_id` changes (e.g. if they delete
-their SPiD client and create a new one).
+their Schibsted account client and create a new one).

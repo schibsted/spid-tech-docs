@@ -14,11 +14,10 @@
 ## See also
 
 - [Getting started with the server-side API](/getting-started/)
-- [Mixpanel analytics](/mixpanel/analytics/)
 
 :body
 
-The SDK can be retrieved from SPiD CDN servers or your own servers.
+The SDK can be retrieved from Schibsted account CDN servers or your own servers.
 
 ## Local usage
 To use a local copy, you can

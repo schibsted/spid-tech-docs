@@ -6,6 +6,6 @@
           {:value "WYWALLET"            :description "WyWallet phone payment"}
           {:value "STREX"               :description "Strex phone payment"}
           {:value "KLARNA"              :description "Klarna payment"}
-          {:value "VOUCHERS"            :description "Payment with SPiD Voucher code"}
+          {:value "VOUCHERS"            :description "Payment with Schibsted account Voucher code"}
           {:value "PROVIDED"            :description "Provided payment method"}
           ]}

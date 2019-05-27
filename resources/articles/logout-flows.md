@@ -15,12 +15,12 @@
 :body
 
 There are 3 different types of logout functionality available in the platform. Depending on your client application 
-type and integration with SPiD, you may need to use one or several approaches. Below is an explanation of each logout 
+type and integration with Schibsted account, you may need to use one or several approaches. Below is an explanation of each logout 
 type.
 
-## Logging out of SPiD via the JavaScript SDK
+## Logging out of Schibsted account via the JavaScript SDK
 Logging out via the JavaScript SDK deletes the current session for the logged in user based on the session cookie sent
-in the logout request. After the logout is performed on SPiD the SDK will trigger 3 [events](/sdks/js-2x/events/#available-sdk-events) 
+in the logout request. After the logout is performed on Schibsted account the SDK will trigger 3 [events](/sdks/js-2x/events/#available-sdk-events) 
 telling your application that the user has been logged out:
 #### User logs out
 
@@ -33,31 +33,19 @@ from your application.
 
 It is also recommended to send user through logout redirect flow, as Safari users might not be fully logged out.
 
-## Logging out of SPiD via the redirect flow
-Logging out via the redirect flow, by redirecting the user to /logout in SPiD, will delete the current session for the 
+## Logging out of Schibsted account via the redirect flow
+Logging out via the redirect flow, by redirecting the user to /logout in Schibsted account, will delete the current session for the 
 logged in user based on the session cookie sent in the logout request.
 
 You must provide the **client_id** as GET parameter, to make sure correct context is used.
 
-You may provide **redirect_uri** as GET parameter and SPiD will redirect the user to that url after performing the logout procedure. This parameter must be previously defined and stored as a valid redirect uri for your client application. It must also be url encoded. 
-
-You may also provide the **oauth_token** via GET parameter, owned the currently logged in user and SPiD will revoke the token, meaning no API requests will be allowed using that same token afterwards. 
-
-It is then up to your application to perform session cleaning and logout procedures needed to actively log out the user
-from your application.
-
-## Logging out of SPiD via the API
-Logging out via the API doesn't delete any sessions on any devices used by the user, except the applications used by
-the user utilising the provided oauth token sent to the [logout endpoint](/endpoints/GET/logout/). 
-The API is meant to invalidate the current user token used by your application, thus effectively logging the user out 
-from your application. The SPiD platform will revoke the token, meaning no API requests will be allowed using that 
-same token afterwards.
+You may provide **redirect_uri** as GET parameter and Schibsted account will redirect the user to that url after performing the logout procedure. This parameter must be previously defined and stored as a valid redirect uri for your client application. It must also be url encoded. 
 
 It is then up to your application to perform session cleaning and logout procedures needed to actively log out the user
 from your application.
 
 ## Use cases
-Mobile applications or other applications that explicitly login the user via login APIs will not create a session in SPiD.
+Mobile applications or other applications that explicitly login the user via login APIs will not create a session in Schibsted account.
 These types of applications should use the [logout endpoint](/endpoints/GET/logout/).
 
 Applications that use the redirect login flow should use the redirect logout flow in order to actively logout the 

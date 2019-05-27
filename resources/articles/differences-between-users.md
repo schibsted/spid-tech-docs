@@ -11,15 +11,15 @@
 :body
 
 ## Registered users
-Registered users means users that were imported or signed up via the SPiD signup page or were created via our APIs 
+Registered users means users that were imported or signed up via the Schibsted account signup page or were created via our APIs 
 by a client.
 
 ## Verified users
 Verified users means users that have verified their email by going through the email verification process. 
-This process is required by both users that have signed up or have been imported to SPiD.
+This process is required by both users that have signed up or have been imported to Schibsted account.
 
 ## What does it mean when a user has accepted a client's agreement?
-When signing up via the signup page in SPiD, it is required that user's actively accept the terms of use of SPiD 
+When signing up via the signup page in Schibsted account, it is required that user's actively accept the terms of use of Schibsted account 
 and the client they are signing into. This is done by checking a checkbox. All registered users that signs up through 
 this process have accepted an agreement. It doesn't mean they are verified yet. To become verified they must go through 
 the email verification process.

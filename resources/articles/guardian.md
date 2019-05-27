@@ -11,4 +11,4 @@ If access is checked on a product that is of the type "Digital Content" and is f
 a "Guardian", then the user has access if they own that product, or any of it's children.
 
 There is currently no API or Ambassador access to this feature, it has to be directly ordered
-from SPiD by clients that whish to take advantage of it.
+from Schibsted account by clients that whish to take advantage of it.

@@ -1,5 +1,5 @@
 {:id :userlevel
  :name "User Level"
  :description "What does this describe"
- :fields [{:name "userId"        :type :integer   :description "SPiD User Id" :always-available? true}
+ :fields [{:name "userId"        :type :integer   :description "Schibsted account User Id" :always-available? true}
           {:name "levle"         :type :integer   :description "Level informs about what level of verifiecation we have on the user. A value of 5 means that the user has an active eID (Bank ID) verification." :always-available? true}]}

@@ -41,7 +41,6 @@
 ## See also
 
 - [Getting started with the server-side API](/getting-started/)
-- [Mixpanel analytics](/mixpanel/analytics/)
 
 :body
 
@@ -191,25 +190,25 @@ VGS.getLoginStatus(callback, force)
 The callback is called with the response object, just like event subscribers.
 
 To improve the performance of your application, not every call to check the
-status of the user will result in a request to SPiD's servers. Where possible,
+status of the user will result in a request to Schibsted account's servers. Where possible,
 the response is cached. The first time in the current browser session that
 `VGS.getLoginStatus` is called, or the JS SDK is initialized with
 `status: true`, the response object will be cached by the SDK. Subsequent
 calls to `VGS.getLoginStatus` will return data from this cached response.
 
-This may cause problems if the user has logged in to (or out of) SPiD since the
+This may cause problems if the user has logged in to (or out of) Schibsted account since the
 last full session lookup. To get around this, you call `VGS.getLoginStatus` with
-the second parameter set to `true` to force a roundtrip to SPiD - effectively
+the second parameter set to `true` to force a roundtrip to Schibsted account - effectively
 refreshing the cache of the response object.
 
 ```js
 VGS.getLoginStatus(function(response) {
-    // this will be called when the roundtrip to SPiD has completed
+    // this will be called when the roundtrip to Schibsted account has completed
 }, true);
 ```
 
 If you call `VGS.getLoginStatus` on every page load, be careful not to force
-every call, as it will significantly increase the number of requests to SPiD's
+every call, as it will significantly increase the number of requests to Schibsted account's
 servers, and thus decrease the performance of your application and potentially
 trigger rate limiting.
 

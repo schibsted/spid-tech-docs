@@ -20,7 +20,6 @@
 ## See also
 
 - [Getting started with the server-side API](/getting-started/)
-- [Mixpanel analytics](/mixpanel/analytics/)
 
 :body
 
@@ -112,7 +111,7 @@ the production server.
     </tr>
     <tr>
       <td><code>SPiD.visitor</code></td>
-      <td>SPiD identifies the current visitor. Yields a unique visitor id that can be used to track the user even when not logged in. Used in analytics (Mixpanel) tracking, etc</td>
+      <td>Schibsted account identifies the current visitor. Yields a unique visitor id that can be used to track the user even when not logged in. Used in analytics, tracking, etc</td>
     </tr>
     <tr>
       <td><code>SPiD.error</code></td>

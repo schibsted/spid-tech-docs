@@ -12,7 +12,7 @@ Looking for the list of all endpoints? See the [API reference](/#api-reference).
 
 :body
 
-This page collects some general workings of endpoints in SPiD.
+This page collects some general workings of endpoints in Schibsted account.
 
 ## Response container
 
@@ -58,14 +58,14 @@ sample output:
 
 ## Response formats
 
-Many SPiD endpoints can respond with various response formats. The format used
+Many Schibsted account endpoints can respond with various response formats. The format used
 is determined by the URL suffix/file name extension used. Refer to individual
 endpoint API docs for information on supported formats.
 
 <h3 id="format-json">JSON</h3>
 
 [JSON](http://json.org/) is the most commonly supported response type used in
-SPiD. It is also the default format used by most endpoints. To force the use of
+Schibsted account. It is also the default format used by most endpoints. To force the use of
 JSON, use the `.json` suffix on URLs:
 
 ```text
@@ -115,7 +115,7 @@ doit([...]);
 
 ### Other formats
 
-A few SPiD endpoints support other response types:
+A few Schibsted account endpoints support other response types:
 
 - **XML**: The extensible markup language with pointy brackets
 - **TGZ**: Packaged and compressed files
@@ -137,8 +137,8 @@ There are 2 fields in the API container that indicate a signed response. The
 `sig` parameter is a signature string, while `algorithm` is the algorithm used
 to encrypt the signature string.
 
-The signature ensures that the data you are receiving is actually sent by SPiD.
-It is signed using your signature secret which is only known to you and SPiD.
+The signature ensures that the data you are receiving is actually sent by Schibsted account.
+It is signed using your signature secret which is only known to you and Schibsted account.
 Without this secret, third parties cannot modify the `sig` parameter without
 also invalidating the data in the provided response.
 
@@ -268,7 +268,7 @@ You can also use provided ```SpidSecurityHelper.decryptAndValidateSignedRequest(
 
 ## Encoding
 
-**The SPiD API expects all data to be [UTF-8](http://www.utf-8.com/) encoded.**
+**The Schibsted account API expects all data to be [UTF-8](http://www.utf-8.com/) encoded.**
 
 All incoming data is actively checked for valid UTF-8 sequences. For
 historical reasons, if an invalid sequence is found, the data is
@@ -277,7 +277,7 @@ should not rely on this feature, but instead always use UTF-8.
 
 ## Pagination
 
-Pagination is supported in many SPiD endpoints. There are four parameters that
+Pagination is supported in many Schibsted account endpoints. There are four parameters that
 control paging:
 
 - `limit`: The maximum number of results to return. May not exceed 1000.
@@ -346,7 +346,7 @@ See individual endpoints for supported filters.
 
 ## Locales
 
-SPiD supports localized content for some endpoints. Whenever that is the case,
+Schibsted account supports localized content for some endpoints. Whenever that is the case,
 the available locales are:
 
 - `nb_NO` - For Norwegian Bokmål

@@ -1,4 +1,4 @@
 {:id :payment-type
  :name "Payment type"
- :values [{:value "0" :description "SPiD Platform"}
+ :values [{:value "0" :description "Schibsted account"}
           {:value "1" :description "Payment Platform"}]}

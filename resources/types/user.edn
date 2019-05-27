@@ -55,6 +55,6 @@ public profile data will be available:
           {:name "migrated"            :type :datetime}
           {:name "addresses"           :type {:type :address}   :description "If user has no addresses returns empty array."}
           {:name "accounts"            :type [:account]      :description "Third-party accounts and other client services"}
-          {:name "merchants"           :type :array          :description "List of SPiD merchants the user is connected to"}
+          {:name "merchants"           :type :array          :description "List of Schibsted account merchants the user is connected to"}
           {:name "currentLocation"     :type [:address]      :description "If user has no current location returns empty array."}
           {:name "tracking"            :type :boolean        :description "If `true`, the user has behavioral tracking enabled (pilot feature, may not remain as-is)"}]}

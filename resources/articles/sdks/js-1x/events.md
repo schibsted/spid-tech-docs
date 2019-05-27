@@ -19,7 +19,6 @@
 ## See also
 
 - [Getting started with the server-side API](/getting-started/)
-- [Mixpanel analytics](/mixpanel/analytics/)
 
 :body
 
@@ -97,7 +96,7 @@ the production server.
     </tr>
     <tr>
       <td><code>auth.logout</code></td>
-      <td>User logs out (either by you or another site (SPiD, other client).</td>
+      <td>User logs out (either by you or another site).</td>
     </tr>
     <tr>
       <td><code>auth.userChange</code></td>
@@ -113,7 +112,7 @@ the production server.
     </tr>
     <tr>
       <td><code>auth.visitor</code></td>
-      <td>SPiD identifies the current visitor. Yields a unique visitor id that can be used to track the user even when not logged in. Used in analytics (Mixpanel) tracking, etc</td>
+      <td>Schibsted account identifies the current visitor. Yields a unique visitor id that can be used to track the user even when not logged in. Used in analytics tracking, etc.</td>
     </tr>
     <tr>
       <td><code>VGS.error</code></td>

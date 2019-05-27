@@ -3,7 +3,7 @@
  :fields [{:name "paylinkItemId"       :type :integer-string}
           {:name "paylinkId"           :type :integer-string}
           {:name "clientId"            :type :string         :description "ID of the client that gets paid (seller client_id)"}
-          {:name "productId"           :type :integer-string :description "ID of an existing product in SPiD"}
+          {:name "productId"           :type :integer-string :description "ID of an existing product in Schibsted account"}
           {:name "clientItemReference" :type :string         :description "Client's custom reference for this item"}
           {:name "type"                :type :paylink-item-type}
           {:name "name"                :type :string         :description "Control receipt item name, optional, uses Paylink title if not set"}

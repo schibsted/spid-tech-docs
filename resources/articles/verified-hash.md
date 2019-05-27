@@ -36,13 +36,14 @@ Should give the following string after concat:
 # :tabs
 
 The following are examples of how to hash the `POST` body data so its
-authenticity can be validated by SPiD.
+authenticity can be validated by Schibsted account.
 
 ## :tab PHP
 
 ```php
 <?php
-function recursiveArrayToString($data) {
+function recursiveArrayToString($data)
+{
     if (!is_array($data)) {
         return "$data";
     }
@@ -54,27 +55,29 @@ function recursiveArrayToString($data) {
     return $ret;
 }
 
-function base64UrlEncode($input) {
+function base64UrlEncode($input)
+{
     return rtrim(strtr(base64_encode($input), '+/', '-_'), '=');
 }
 
-function createHash($data, $secret) {
+function createHash($data, $secret)
+{
     $string = recursiveArrayToString($data);
     return base64UrlEncode(hash_hmac("sha256", $string, $secret, true));
 }
 
 $sign_secret = 'foobar';
 
-$data = array(
+$data = [
     'requestReference' => $ref, // unique to reqest
     'clientReference' => $localOrderId, // freely useable by client
     'paymentOptions' => 2,
-    'items' => array(
-        array('productId' => 100002, 'clientItemReference' => 'first item'),
-        array('name' => 'A magazine', 'description' => 'It is really great', 'price' => 2000, 'vat' => 2500),
-        array('productId' => 100002, 'name' => 'Banana',  'description' => 'One', 'price' => 1500, 'vat' => 2500, 'quantity' => 1, 'clientItemReference' => 'itemRef4'),
-    )
-);
+    'items' => [
+        ['productId' => 100002, 'clientItemReference' => 'first item'],
+        ['name' => 'A magazine', 'description' => 'It is really great', 'price' => 2000, 'vat' => 2500],
+        ['productId' => 100002, 'name' => 'Banana',  'description' => 'One', 'price' => 1500, 'vat' => 2500, 'quantity' => 1, 'clientItemReference' => 'itemRef4'],
+    ]
+];
 
 $data['hash'] = createHash($data, $sign_secret);
 $client->api('/user/123/charge', 'POST', $data);
@@ -89,12 +92,12 @@ $sign_secret = 'foobar';
 $path = "/payment":
 $method = "POST";
 
-$data = array(
+$data = [
     'action' => 'sale',
     'productId' => 10001,
     'userId' => 123,
     'price' => 9900
-);
+];
 
 $data['hash'] = $client->createHash($data);
 

@@ -7,13 +7,13 @@ Ambassador is a web based tool that has two different fields of use. It intends 
 
 ### Login
 
-Login to ambassador assume the client-side user is registered with a SPiD account. Ambassador requires two-step-authentication with password and a SMS token. Hence, the user must have a registered mobile number on the SPiD account prior to logging in to Ambassador. SP must also register these users manually in SPiD. The client will need to supply SP with a full list of persons requiring Ambassador access. This list must contain:
+Login to ambassador assume the client-side user is registered with a Schibsted account. Ambassador requires two-step-authentication with password and a SMS token. Hence, the user must have a registered mobile number on the Schibsted account prior to logging in to Ambassador. SP must also register these users manually in Schibsted account. The client will need to supply SP with a full list of persons requiring Ambassador access. This list must contain:
 
-* Registered SPiD e-mail address
+* Registered Schibsted account e-mail address
 * Role (product admin or support) per service
 * Environment (stage/pre or production)
 
-Make sure all persons in this list have registered and verified both e-mail and phone number on the relevant environments’ SPiD-account **prior** to handing this over to SP.
+Make sure all persons in this list have registered and verified both e-mail and phone number on the relevant environments’ Schibsted account **prior** to handing this over to SP.
 
 To access the ambassador web application use the following URLs
 
@@ -54,6 +54,6 @@ Additionally, Ambassador offer general administration of auto generated email to
 
 ##Zendesk
 
-Zendesk is the customer support system used by SPiD. Client support center, requiring second- or third line support, logs their tickets here. Logging tickets can be done through the “contact support”-button when logged into Ambassador, or through login on http://support.schibstedpayment.no.  For ticket status or additional information on a ticket the webpage login must be used. A Zendesk user-profile is created the first time a ticket is registered.
+Zendesk is the customer support system used by Schibsted account. Client support center, requiring second- or third line support, logs their tickets here. Logging tickets can be done through the “contact support”-button when logged into Ambassador, or through login on http://support.schibstedpayment.no.  For ticket status or additional information on a ticket the webpage login must be used. A Zendesk user-profile is created the first time a ticket is registered.
 
 Clients’ support center will have to coordinate their support ticket in Zendesk with their internal support/help desk system.

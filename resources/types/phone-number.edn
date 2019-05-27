@@ -3,5 +3,5 @@
  :fields [{:name "value"        :type :string   :description "The phone nuber" :always-available? true}
           {:name "type"         :type :string   :description "The type of phone number. Defaults to 'other'." :always-available? true}
           {:name "primary"      :type :boolean  :description "If `true`, this is the user's primary phone number." :always-available? false}
-          {:name "verified"     :type :boolean  :description "If `true`, the phone number is verified in SPiD by the user." :always-available? false}
-          {:name "verifiedTime" :type :datetime :description "When the user last verifided this phone number." :always-available? false}]}
+          {:name "verified"     :type :boolean  :description "If `true`, the phone number is verified in Schibsted account by the user." :always-available? false}
+          {:name "verifiedTime" :type :datetime :description "When the user last verified this phone number." :always-available? false}]}

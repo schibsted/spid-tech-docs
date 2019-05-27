@@ -22,7 +22,7 @@
             :content "width=device-width, initial-scale=1.0"}]
     [:meta {:name "google-site-verification"
             :content "HfI9gGISsXq8iZodM_2z24acelhEpi-0LumjeYrebu4"}]
-    [:title (str title " | SPiD API Documentation")]
+    [:title (str title " | Schibsted account API Documentation")]
     [:link {:rel "shortcut icon" :href (link/file-path request "/favicon.ico")}]
     (serve-to-media-query-capable-browsers
      [:link {:rel "stylesheet" :href (link/file-path request "/styles/responsive.css")}])
@@ -32,7 +32,7 @@
     [:script "document.body.className = 'js';"]
     [:div#head
      [:div.center.pll
-      [:a {:href "http://techdocs.spid.no/"} "SPiD" [:span.frill " Documentation"]] " > "
+      [:a {:href "http://techdocs.spid.no/"} "Schibsted account" [:span.frill " Documentation"]] " > "
       [:a {:href "/"} "API"]
       [:form.right.prl {:action "https://www.google.com/search"}
          [:input {:type "search", :name "q", :placeholder "Search"}]
@@ -41,7 +41,7 @@
      [:div.center
       [:div.bd
        [:div#logo
-        [:a {:href "/"} [:img {:src (link/file-path request "/images/spid.png")}]]]
+        [:a {:href "/"} [:img {:src (link/file-path request "/images/schibsted-account.png")}]]]
        [:div#menu
         [:a {:href "/#guides"} "Guides"] " "
         [:a.nowrap {:href "/#working-examples"} "Working examples"] " "
@@ -51,10 +51,10 @@
        [:div.bd body]]]]
     [:div#footer
      [:div.center
-      "You're reading the technical documentation for the "
-      [:a.nowrap {:href "http://www.schibstedpayment.no/"} "SPiD platform"]
+      "You're reading the technical documentation for "
+      [:a.nowrap {:href "http://www.schibstedpayment.no/"} "Schibsted account"]
       " by "
-      [:a.nowrap {:href "http://www.schibsted.com/en/About-Schibsted/Schibsted-Products-and-Technology/"} "Schibsted Product & Technology"]
+      [:a.nowrap {:href "https://schibsted.com/about/"} "Schibsted"]
       ". "
       [:span.nowrap "Way to go!"]]]
     (optimus.hiccup/link-to-js-bundles request ["app.js"])]))
