@@ -9,7 +9,7 @@
 ## See also
 
 - [GET /logout](/endpoints/GET/logout/)
-- [Logging out via the JavaScript SDK](/sdks/js-2x/api-docs/#logout)
+- [Logging out via the JavaScript SDK](https://github.com/schibsted/account-sdk-browser#logging-out)
 - [Explaining how login flows work](/login-flows/)
 
 :body
@@ -19,14 +19,11 @@ type and integration with Schibsted account, you may need to use one or several 
 type.
 
 ## Logging out of Schibsted account via the JavaScript SDK
-Logging out via the JavaScript SDK deletes the current session for the logged in user based on the session cookie sent
-in the logout request. After the logout is performed on Schibsted account the SDK will trigger 3 [events](/sdks/js-2x/events/#available-sdk-events) 
-telling your application that the user has been logged out:
-#### User logs out
-
-- `SPiD.logout`
-- `SPiD.statusChange`
-- `SPiD.sessionChange`
+[Logging out via the JavaScript SDK](https://schibsted.github.io/account-sdk-browser/Identity.html#logout)
+deletes the current session for the logged in user based on the session cookie sent
+in the logout request. After the logout is performed on Schibsted account the SDK will trigger a number of
+[events](https://schibsted.github.io/account-sdk-browser/Identity.html#event:logout) 
+telling your application that the user has been logged out.
 
 It is then up to your application to perform session cleaning and logout procedures needed to actively log out the user
 from your application.

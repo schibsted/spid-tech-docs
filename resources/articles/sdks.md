@@ -52,7 +52,7 @@ In lieu of API docs, please refer to the [Getting started](/getting-started/) an
 ## JavaScript
 
 The JavaScript SDK is designed to be used in the browser to
-query the user's authentication/authorization status and more.
+seamlessly manage the user's login state and more.
 
 Source code is published on
 [Github](https://github.com/schibsted/account-sdk-browser). Refer to the

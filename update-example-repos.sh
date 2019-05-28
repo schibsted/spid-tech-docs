@@ -14,12 +14,3 @@ else
     git pull --rebase
     cd ../../..
 fi
-
-if [ ! -d "resources/example-repos/js" ]; then
-    git clone -b $BRANCH https://github.com/spid-tech-docs/spid-js-examples resources/example-repos/js
-else
-    cd resources/example-repos/js
-    git pull --rebase
-    cd ../../..
-fi
-
