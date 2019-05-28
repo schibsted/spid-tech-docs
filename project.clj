@@ -24,7 +24,6 @@
                  [org.clojure/data.xml "0.0.8"]
                  [digest "1.4.4"]]
   :plugins [[lein-shell "0.3.0"]]
-  :prep-tasks [["shell" "./update-example-repos.sh"]]
   :jvm-opts ["-Djava.awt.headless=true"
              "-Xmx1024M"]
   :test2junit-output-dir "target/test2junit"
