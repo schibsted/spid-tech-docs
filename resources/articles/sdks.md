@@ -30,7 +30,7 @@ All SDKs are available on [Schibsted's GitHub account](https://github.com/schibs
 ## Java
 
 The [Java SDK](https://github.schibsted.io/spt-identity/identity-sdk-java) is
-available from [Schibsted Artifactory](). Add the following to your `build.gradle`:
+available from [Schibsted Artifactory](https://artifacts.schibsted.io). Add the following to your `build.gradle`:
 
 ```groovy
 repositories {
