@@ -1,6 +1,6 @@
-# SPiD API Documentation [![Build Status](https://travis-ci.org/schibsted/spid-tech-docs.svg?branch=master)](https://travis-ci.org/schibsted/spid-tech-docs)
+# Schibsted account API Documentation [![Build Status](https://travis-ci.org/schibsted/spid-tech-docs.svg?branch=master)](https://travis-ci.org/schibsted/spid-tech-docs)
 
-The SPiD API Documentation is a Clojure app that pulls information
+The Schibsted account API Documentation is a Clojure app that pulls information
 from the API itself and merges it with examples and meta-data stored
 in this repository. The site can be browsed/developed live, or
 exported to static files.

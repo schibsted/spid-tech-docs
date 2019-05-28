@@ -58,7 +58,14 @@ Here are some things to keep in mind when implementing paylinks on your site:
 In the example, we're keeping it simple with three products - each with an input
 field to specify quantity:
 
-<spid-example lang="html" repo="clj" src="/paylinks/resources/index.html" title="Keeping product choices simple"/>
+```html
+<form action="/checkout" method="post">
+ <div><input class="amount" type="number" name="sw4" value="1"> Star Wars IV</div>
+ <div><input class="amount" type="number" name="sw5" value="1"> Star Wars V</div>
+ <div><input class="amount" type="number" name="sw6" value="1"> Star Wars VI</div>
+ <input type="submit" value="Buy these excellent movies">
+</form>
+```
 
 ## Send the list of items to Schibsted account
 
@@ -89,14 +96,6 @@ all options.
 
 Note that the items are encoded as a JSON string.
 
-## :tab Clojure
-
-<spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="The entirety of our product catalog right here"/>
-
-<spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Create data to POST to /paylink"/>
-
-Note that the items are encoded as a JSON string.
-
 # :/tabs
 
 #### Create paylink
@@ -112,12 +111,6 @@ With our data in hand, we can create the Paylink by POSTing to
 
 <spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Create Paylink"/>
 
-## :tab Clojure
-
-<spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Create SPiD client"/>
-
-<spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Create Paylink"/>
-
 # :/tabs
 
 ## Redirect the user to Schibsted account for payment
@@ -131,10 +124,6 @@ payment.
 ## :tab Java
 
 <spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Create Paylink and redirect to SPiD"/>
-
-## :tab Clojure
-
-<spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Create Paylink and redirect to SPiD"/>
 
 # :/tabs
 
@@ -160,10 +149,6 @@ create a session for the user with information from Schibsted account:
 
 <spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Handle callback from SPiD, make sure we've got the right user"/>
 
-## :tab Clojure
-
-<spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Handle callback from SPiD, make sure we've got the right user"/>
-
 # :/tabs
 
 Note that the code has a short lifespan, so it is prudent to create the user
@@ -183,12 +168,6 @@ about the order.
 
 <spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Fetch order info"/>
 
-## :tab Clojure
-
-<spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Order status codes"/>
-
-<spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Fetch order info"/>
-
 # :/tabs
 
 The order status is likely **Complete** (status `"2"`), meaning everything is
@@ -206,7 +185,6 @@ If you're unsure on certain details after reading this guide, do check
 out these working examples:
 
 - [Paylinks example for Java](https://github.com/schibsted/spid-java-examples/tree/master/paylinks)
-- [Paylinks example for Clojure](https://github.com/schibsted/spid-clj-examples/tree/master/paylinks)
 
 ## Further reading
 

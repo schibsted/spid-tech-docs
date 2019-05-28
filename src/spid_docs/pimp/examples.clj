@@ -81,7 +81,6 @@
 
 (def example-dir-folders
   {:java "java"
-   :clj "clj"
    :sh "curl"})
 
 (defn- inline-example [node]

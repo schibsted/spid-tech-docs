@@ -48,14 +48,6 @@ The Java API client library is deployed in Maven central, just add it to your pr
 
 <spid-example lang="html" src="/java/getting-started/pom.xml" title="Add SPiD client"/>
 
-## :tab Clojure
-
-The Clojure client is deployed in Clojars, just put it in your `project.clj`:
-
-```clojure
-[spid-client-clojure "1.2.0"]
-```
-
 ## :tab iOS
 
 In order to use the Schibsted account iOS SDK, see the [getting started documentation](https://schibsted.github.io/account-sdk-ios/#setup).
@@ -98,23 +90,6 @@ mvn install -q exec:java -Dexec.mainClass="no.spid.examples.GettingStarted" -Dex
 
 When working with the Java client, you might be more interested in
 `SpidApiResponse`'s `getJSONData()` method.
-
-## :tab Clojure
-
-The following is a minimal example of using the Clojure client. It fetches the
-/endpoints endpoint, which returns a description of all available endpoints.
-
-<spid-example lang="clj" src="/getting-started/src/getting_started/core.clj" title="Getting started"/>
-
-You can run this code from the example repository, filling in your actual
-client-id and secret:
-
-```sh
-lein run client-id secret
-```
-
-This will pretty-print the JSON-decoded response from the server, which shows
-all available endpoints along with details on how to interact with them.
 
 ## :tab iOS
 

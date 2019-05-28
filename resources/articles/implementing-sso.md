@@ -77,17 +77,6 @@ String createSession(@RequestParam String code) {
 }
 ```
 
-## :tab Clojure
-
-```clj
-(defn create-session [code]
-  {:status 302
-   :headers {"Location" "/"}})
-
-(defroutes routes
-  (GET "/create-session" [code] (create-session code)))
-```
-
 # :/tabs
 
 ## Send the user to the Schibsted account login page
@@ -115,10 +104,6 @@ the Schibsted account login page.
 
 <spid-example lang="java" src="/sso/src/main/java/no/spid/examples/LoginController.java" title="Build login URL"/>
 
-## :tab Clojure
-
-<spid-example lang="clj" src="/sso/src/spid_clojure_sso_example/core.clj" title="Build login URL"/>
-
 # :/tabs
 
 The login URL can be served directly to your end users for logging in. As
@@ -138,10 +123,6 @@ client to communicate with the Schibsted account API on behalf of the user.
 
 <spid-example lang="java" src="/sso/src/main/java/no/spid/examples/LoginController.java" title="Create user client"/>
 
-## :tab Clojure
-
-<spid-example lang="clj" src="/sso/src/spid_clojure_sso_example/core.clj" title="Create user client"/>
-
 # :/tabs
 
 ## Fetch user information and create a session
@@ -155,10 +136,6 @@ on to the client. You'll need it later.
 ## :tab Java
 
 <spid-example lang="java" src="/sso/src/main/java/no/spid/examples/LoginController.java" title="Fetch user information and add to session"/>
-
-## :tab Clojure
-
-<spid-example lang="clj" src="/sso/src/spid_clojure_sso_example/core.clj" title="Fetch user information and add to session"/>
 
 # :/tabs
 
@@ -184,16 +161,6 @@ logging out of Schibsted account.
 
 <spid-example lang="java" src="/sso/src/main/java/no/spid/examples/LoginController.java" title="Log user out"/>
 
-## :tab Clojure
-
-<spid-example lang="clj" src="/sso/src/spid_clojure_sso_example/core.clj" title="Log user out"/>
-
-```clj
-(defroutes routes
-  ;; ...
-  (GET "/logout" request (log-user-out request)))
-```
-
 # :/tabs
 
 ## Working examples
@@ -202,4 +169,3 @@ If you're unsure on certain details after reading this guide, do check
 out these working examples:
 
 - [SSO example for Java](https://github.com/schibsted/spid-java-examples/tree/master/sso)
-- [SSO example for Clojure](https://github.com/schibsted/spid-clj-examples/tree/master/sso)

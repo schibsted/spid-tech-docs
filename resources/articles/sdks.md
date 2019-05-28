@@ -4,7 +4,6 @@
 ## SDKS
 
 - [Java](#java)
-- [Clojure](#clojure)
 - [JavaScript](#javascript)
 - [Android](#android)
 - [iOS](#ios)
@@ -24,9 +23,7 @@ supported API clients/SDKs. The SDKs implement the OAuth communication and token
 exchanges (including renewing expired tokens etc), as well as automating part of
 the API call workflow.
 
-There are standard server-side SDKs for Java and Clojure. Additionally,
-there is a simpler JavaScript client that is read-only (no OAuth support) and
-may be used client-side. There are also Android and iOS SDKs.
+There are SDKs for Java, Android, iOS and client-side JavaScript.
 
 All SDKs are available on [Schibsted's GitHub account](https://github.com/schibsted/).
 
@@ -41,21 +38,6 @@ In lieu of API docs, please refer to the [Getting started](/getting-started/) an
 [Implementing Single Sign-On](/implementing-sso/) guides for a flying start.
 There is also a separate
 [repository of examples](https://github.com/schibsted/spid-java-examples).
-
-## Clojure
-
-The [Clojure API client](https://github.com/schibsted/spid-client-clojure) can
-be installed via Clojars. Add to your `project.clj` `:dependencies`:
-
-```clj
-[spid-client-clojure "1.0.0"]
-```
-
-In lieu of API docs, please refer to the [Getting started](/getting-started/) and
-[Implementing Single Sign-On](/implementing-sso/) guides for a flying start. The
-[project Readme](https://github.com/schibsted/spid-client-clojure) has some
-rudimentary usage information. There is also a separate
-[repository of examples](https://github.com/schibsted/spid-clj-examples).
 
 ## JavaScript
 
