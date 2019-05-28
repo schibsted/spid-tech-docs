@@ -33,7 +33,7 @@ are correctly configured. You will then be ready to implement login with Schibst
 To work with the Schibsted account APIs, it is recommended that you use one of the official
 SDKs. The SDKs are thin wrappers that primarily spare you the details of working
 with OAuth. If an SDK is not available for your language, skip this section and
-refer to the cURL examples below.
+refer to the curl examples below.
 
 **NB!** Your client secret is highly sensitive. Do not hard-code it, and be careful
 who you share it with. The examples below are meant to illustrate the basics of
@@ -108,16 +108,21 @@ See the [published documentation](https://schibsted.github.io/account-sdk-ios/#u
 
 See the [published documentation](https://schibsted.github.io/account-sdk-android/ui/).
 
-## :tab cURL
+## :tab curl
 
-Using [cURL](http://curl.haxx.se/dlwiz/) to interact with the API is a good way
+Using [curl](http://curl.haxx.se/dlwiz/) to interact with the API is a good way
 to gain insight into how it works at the networking level. It is also the most
 direct way to ensure your credentials are correct as there are fewer layers of
 abstraction that might fail/be used wrongly.
 
 Start by requesting an OAuth token:
 
-<spid-example lang="sh" src="/getting-started.sh" title="Request an OAuth token"/>
+```bash
+response=$(curl --silent -X POST \
+    -H 'Authorization: Basic <base64(client_id:client_secret)>' \
+    -d "grant_type=client_credentials" \
+    https://identity-pre.schibsted.com/oauth/token)
+```
 
 If all goes well, you should get a response like this back:
 
@@ -133,9 +138,9 @@ If all goes well, you should get a response like this back:
 
 Using the provided `access_token`, you may now browse the API endpoints:
 
-<spid-example lang="sh" src="/getting-started.sh" title="Fetch API endpoints"/>
-
-The pipe into python makes the JSON document nice and readable. You can of
-course skip that part if you don't have python installed.
+```bash
+access_token=$(echo $response | jq -r '.access_token')
+curl --silent -H "Authorization: Bearer $access_token" https://identity-pre.schibsted.com/api/2/endpoints
+```
 
 # :/tabs
