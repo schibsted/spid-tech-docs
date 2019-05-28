@@ -34,17 +34,6 @@
          (format-params (exemplify-params params example-params) "put(\":name\", \":value\");" ",\n    ")
          "\n}};\n\n")))
 
-(defn java-example-code [{:keys [method path example-params access-token-types]} params]
-  (let [has-params (seq params)
-        params-hash-map (create-params-hash-map params example-params)
-        api-invocation (str (name method) "(token, \"" (replace-path-parameters path example-params) "\""
-                            (if has-params (str ", params") "") ")")]
-    (str params-hash-map
-         (if (contains? access-token-types :user)
-           "SpidOAuthToken token = spidClient.getUserToken(code);\n"
-           "SpidOAuthToken token = spidClient.getServerToken();\n")
-         "String responseJSON = spidClient.\n    " api-invocation ".\n    getResponseBody();")))
-
 (defn- create-params-node-map [params example-params]
   (when (seq params)
     (str "  var params = {\n"
@@ -67,6 +56,5 @@
         all-params (filter #(= (:type %) :query) params)
         req-params (filter :required? all-params)
         optional-params (difference (set all-params) (set req-params))]
-    (-> {:curl curl-example-code
-         :java java-example-code}
+    (-> {:curl curl-example-code}
         (update-vals #(create-examples-with % endpoint req-params optional-params all-params)))))
