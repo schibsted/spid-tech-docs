@@ -24,7 +24,7 @@
            :GET " -G"
            :POST " \\\n   -X POST"
            :DELETE " -G \\\n   -X DELETE")
-         (when (seq access-token-types) " \\\n   -d \"oauth_token=[access token]\"")
+         (when (seq access-token-types) " \\\n   -H \"Authorization: Bearer [access token]\"")
          (format-params (exemplify-params params example-params)
                         " \\\n   -d \":name=:value\"")))
 
