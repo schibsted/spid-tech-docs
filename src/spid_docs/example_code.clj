@@ -58,17 +58,6 @@
          (format-params (exemplify-params params example-params) "    \":name\" => \":value\"" ",\n")
          "\n);\n\n")))
 
-(defn php-example-code [{:keys [method path example-params]} params]
-  (let [has-params (seq params)
-        params-assoc-array (create-params-assoc-array params example-params)
-        api-invocation (str "(\"" (replace-path-parameters path example-params) "\""
-                            (when (= :POST method) ", \"POST\"")
-                            (when (= :DELETE method) ", \"DELETE\"")
-                            (when has-params (str ", $params")) ")")]
-    (str "<?php\n"
-         params-assoc-array
-         "$client->auth();\necho var_dump($client->api" api-invocation ");")))
-
 (defn- create-examples-with [ex-fn endpoint req-params optional-params all-params]
   {:minimal (ex-fn endpoint req-params)
    :maximal (when (seq optional-params) (ex-fn endpoint all-params))})
@@ -79,6 +68,5 @@
         req-params (filter :required? all-params)
         optional-params (difference (set all-params) (set req-params))]
     (-> {:curl curl-example-code
-         :java java-example-code
-         :php php-example-code}
+         :java java-example-code}
         (update-vals #(create-examples-with % endpoint req-params optional-params all-params)))))
