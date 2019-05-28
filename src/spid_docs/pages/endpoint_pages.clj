@@ -16,11 +16,11 @@
 
 (def lang-names
   "Human-readable language names"
-  {:curl "cURL" :clojure "Clojure" :java "Java" :php "PHP", :node "Node.JS"})
+  {:curl "curl"})
 
 (def lang-classes
   "Classes to use for syntax highlighting, should be a valid Pygments lexer"
-  {:curl "sh" :clojure "clj" :node "js"})
+  {:curl "sh"})
 
 (def format-names
   "Human-readable names for response formats"
