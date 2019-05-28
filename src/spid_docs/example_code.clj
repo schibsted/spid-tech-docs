@@ -28,26 +28,6 @@
          (format-params (exemplify-params params example-params)
                         " \\\n   -d \":name=:value\"")))
 
-(defn clojure-example-code [{:keys [method path example-params access-token-types]} params]
-  (let [sdk-invocation (str "  (spid/" (name method) " client token \"" (replace-path-parameters path example-params) "\"")
-        param-map-indentation (apply str (repeat (count sdk-invocation) " "))
-        token (if (contains? access-token-types :user)
-                "create-user-token client \"[code]\""
-                "create-server-token client")]
-    (str "(ns example
-  (:require [spid-client-clojure.core :as spid]))
-
-(let [client (spid/create-client \"[client-id]\" \"[secret]\")
-      token (spid/" token ")]\n"
-      sdk-invocation
-      (when (seq params)
-        (str " {"
-             (format-params (exemplify-params params example-params)
-                            "\":name\" \":value\""
-                            (str "\n  " param-map-indentation)) ; Two additional spaces to account or " {"
-             "}"))
-      "))")))
-
 (defn- create-params-hash-map [params example-params]
   (when (seq params)
     (str "Map<String, String> params = new HashMap<>() {{\n    "
@@ -100,6 +80,5 @@
         optional-params (difference (set all-params) (set req-params))]
     (-> {:curl curl-example-code
          :java java-example-code
-         :php php-example-code
-         :clojure clojure-example-code}
+         :php php-example-code}
         (update-vals #(create-examples-with % endpoint req-params optional-params all-params)))))
