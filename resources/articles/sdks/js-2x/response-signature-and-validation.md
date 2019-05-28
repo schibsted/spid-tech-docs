@@ -29,12 +29,6 @@ The `sig` parameter is a concatenation of an HMAC SHA-256 signature string, a do
 vlXgu64BQGFSQrY0ZcJBZASMvYvTHu9GQ0YM9rjPSso.eyJhbGdvcml0aG0iOiJITUFDLVNIQTI1NiIsIjAiOiJwYXlsb2FkIn0
 ```
 
-With Java SDK, you can validate `sig` with:
-
-```java
-SpidSecurityHelper.decryptAndValidateSignedRequest()
-```
-
 In PHP, you can validate `sig` with:
 
 ```php

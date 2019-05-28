@@ -113,11 +113,7 @@ $data = json_decode($parsed, true);
 
 ## :tab Java
 
-The following example manually achieves the same effect as the Java API client
-method `SpidSecurityHelper.decryptAndValidateSignedRequest(String request)` (see
-[SpidSecurityHelper.java](https://github.com/schibsted/spid-client-java/blob/master/src/main/java/no/spid/api/security/SpidSecurityHelper.java#L32)
-in the [Java API client](https://github.com/schibsted/spid-client-java) for a
-full example).
+The following example manually parses and verifies the signature of the request:
 
 ```java
 byte[] signature = base64UrlDecode(request.split("\\.")[0]);

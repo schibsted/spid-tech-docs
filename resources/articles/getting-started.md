@@ -44,9 +44,21 @@ examples, see the example use-cases.
 
 ## :tab Java
 
-The Java API client library is deployed in Maven central, just add it to your project's `pom.xml` file:
+The Java SDK is available via [Schibsted Artifactory](https://artifacts.schibsted.io). To add it using Gradle:
 
-<spid-example lang="html" src="/java/getting-started/pom.xml" title="Add SPiD client"/>
+```groovy
+repositories {
+  maven {
+    url "https://artifacts.schibsted.io/artifactory/libs-release-local"
+    credentials {
+      username = "${artifactory_user}"
+      password = "${artifactory_pwd}"
+    }
+  }
+}
+
+compile 'com.schibsted.identity:identity-sdk-java-core:<version>'
+```
 
 ## :tab iOS
 
@@ -68,28 +80,25 @@ everything set up, you might want to continue with configuring single sign-on.
 
 ## :tab Java
 
-The following is a minimal example of using the Java API client. It fetches the
+The following is a minimal example of using the Java SDK. It fetches the
 /endpoints endpoint, which returns a description of all available endpoints.
 
-<spid-example lang="java" src="/getting-started/src/main/java/no/spid/examples/GettingStarted.java" title="Getting started"/>
+```java
+import com.schibsted.identity.AuthClient;
+import com.schibsted.identity.ClientCredentials;
+import com.schibsted.identity.introspection.IntrospectionResult;
+import com.schibsted.identity.token.AccessToken;
 
-You can run this code from the example repository, filling in your actual
-client-id and secret:
-
-```sh
-mvn install -q exec:java -Dexec.mainClass="no.spid.examples.GettingStarted" -Dexec.args="<client-id> <secret>" -e
+AuthClient tokenRequestClient = new AuthClient.Builder(
+            new ClientCredentials(clientId, clientSecret),
+            AuthClient.Environment.PRE)
+            .build()
+            
+AccessToken accessToken = tokenRequestClient.clientCredentialsGrant();
+Map<String, String> headers = new HashMap<>();
+headers.put("Authorization", "Bearer " + accessToken.getToken());
+httpClient.GET("https://identity-pre.schibsted.com/api/2/endpoints", headers);
 ```
-
-This returns about 40K of compressed, highly unreadable JSON data. If you have
-Python installed (most *nixes have, including OSX), you can improve the output
-by piping to python while including the `json.tool` library:
-
-```sh
-mvn install -q exec:java -Dexec.mainClass="no.spid.examples.GettingStarted" -Dexec.args="<client-id> <secret>" -e | python -m json.tool
-```
-
-When working with the Java client, you might be more interested in
-`SpidApiResponse`'s `getJSONData()` method.
 
 ## :tab iOS
 

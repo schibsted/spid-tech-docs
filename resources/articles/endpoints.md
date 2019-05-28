@@ -224,8 +224,6 @@ if (hash_equals($sig, $expected_sig) {
 ## :tab Java
 
 ```java
-import no.spid.api.client.SpidApiResponse;
-
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -236,8 +234,8 @@ class ResponseVerifier {
         return Base64.decodeBase64(str.replace("-", "+").replace("_", "/").trim());
     }
 
-    public static boolean verify(SpidApiResponse response, String signSecret) {
-        byte[] signature = base64UrlDecode(response.getResponseSignature());
+    public static boolean verify(Response response, String signSecret) {
+        byte[] signature = base64UrlDecode(response.getJsonValue("sig"));
         byte[] payload = base64UrlDecode(response.getJsonValue("data"));
         byte[] generatedSignature = null;
 
@@ -261,8 +259,6 @@ class ResponseVerifier {
     }
 }
 ```
-
-You can also use provided ```SpidSecurityHelper.decryptAndValidateSignedRequest()``` method.
 
 # :/tabs
 
@@ -380,11 +376,3 @@ server-side environments (PHP, Rails, others):
 ```text
 key[]=one-value&key[]=other-value
 ```
-
-## Java request example
-
-Java examples throughout the endpoint API docs are excerpts, to spare you from
-wading through repeated boilerplate. To put it all in context, the following is
-a full example, including import statements.
-
-<spid-example lang="java" src="/getting-started/src/main/java/no/spid/examples/GettingStarted.java" title="Getting started"/>

@@ -80,8 +80,7 @@
                   (read-example-file lang repo path)))
 
 (def example-dir-folders
-  {:java "java"
-   :sh "curl"})
+  {:sh "curl"})
 
 (defn- inline-example [node]
   (let [attrs (:attrs node)

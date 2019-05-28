@@ -15,14 +15,6 @@ else
     cd ../../..
 fi
 
-if [ ! -d "resources/example-repos/java" ]; then
-    git clone -b $BRANCH https://github.com/schibsted/spid-java-examples resources/example-repos/java
-else
-    cd resources/example-repos/java
-    git pull --rebase
-    cd ../../..
-fi
-
 if [ ! -d "resources/example-repos/js" ]; then
     git clone -b $BRANCH https://github.com/spid-tech-docs/spid-js-examples resources/example-repos/js
 else

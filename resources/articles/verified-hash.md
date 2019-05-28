@@ -83,22 +83,4 @@ $data['hash'] = createHash($data, $sign_secret);
 $client->api('/user/123/charge', 'POST', $data);
 ```
 
-## :tab Java SDK
-
-```java
-// no.spid.api.security.SpidSecurityHelper
-String signatureSecret = "your secret here";
-SpidSecurityHelper securityHelper = new SpidSecurityHelper(signatureSecret);
-
-HashMap<String,String> params = new HashMap<String, String>();
-params.put("action", "sale");
-params.put("productId", "10001");
-params.put("userId", "123");
-params.put("price", "9900");
-
-securityHelper.addHash(params);
-
-// Now use params to make a request
-```
-
 # :/tabs

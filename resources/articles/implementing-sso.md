@@ -40,10 +40,6 @@ This is a simple overview explaining the complete process between the client
 service (yellow) and Schibsted account (blue):
 ![Single Sign on using redirect flow](/images/simple-sso-redirect-usecase.png)
 
-We'll look at this in detail in the rest of the guide. If you prefer
-to just dive in, take a look at
-[these working examples](#working-examples).
-
 ## Configure your application
 
 These variables change between production and staging environments:
@@ -102,7 +98,12 @@ the Schibsted account login page.
 
 ## :tab Java
 
-<spid-example lang="java" src="/sso/src/main/java/no/spid/examples/LoginController.java" title="Build login URL"/>
+```java
+@RequestMapping("/create-session")
+String createSession(@RequestParam String code) {
+    return "redirect:/";
+}
+```
 
 # :/tabs
 
@@ -121,7 +122,11 @@ client to communicate with the Schibsted account API on behalf of the user.
 
 ## :tab Java
 
-<spid-example lang="java" src="/sso/src/main/java/no/spid/examples/LoginController.java" title="Create user client"/>
+```java
+String redirectURL = appBaseUrl + "/create-session";
+String loginUrl = "https://<schibsted account>/flow/login?response_type=code&" + 
+    "client_id=<client id>&state=<app state>&redirect_uri=" + redirectURL;
+```
 
 # :/tabs
 
@@ -135,7 +140,24 @@ on to the client. You'll need it later.
 
 ## :tab Java
 
-<spid-example lang="java" src="/sso/src/main/java/no/spid/examples/LoginController.java" title="Fetch user information and add to session"/>
+```java
+@RequestMapping("/create-session")
+String createSession( @RequestParam String code, HttpServletRequest request) {
+    // Retrieve this user's access token
+    String token = getUserToken(clientId, clientSecret, code);
+    // Use the access token to get info about the user
+    Map<String, String> headers = new HashMap<>();
+    headers.put("Authorization", "Bearer " + userAccessToken);
+    Response response = spidClient.GET("/oauth/userinfo", headers);
+    JSONObject userData = response.getJsonData();
+
+    // Save token and info in session
+    request.getSession().setAttribute("userToken", token);
+    request.getSession().setAttribute("userInfo", user);
+
+    return "redirect:/";
+}
+```
 
 # :/tabs
 
@@ -159,13 +181,13 @@ logging out of Schibsted account.
 
 ## :tab Java
 
-<spid-example lang="java" src="/sso/src/main/java/no/spid/examples/LoginController.java" title="Log user out"/>
+```java
+@RequestMapping("/logout")
+String logout( HttpServletRequest request) throws SpidOAuthException {
+    request.getSession().removeAttribute("userToken");
+    request.getSession().removeAttribute("userInfo");
+    return "redirect:https://<schibsted account>/logout";
+}
+```
 
 # :/tabs
-
-## Working examples
-
-If you're unsure on certain details after reading this guide, do check
-out these working examples:
-
-- [SSO example for Java](https://github.com/schibsted/spid-java-examples/tree/master/sso)

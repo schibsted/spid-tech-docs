@@ -29,15 +29,25 @@ All SDKs are available on [Schibsted's GitHub account](https://github.com/schibs
 
 ## Java
 
-The [Java API client](https://github.com/schibsted/spid-client-java/) is
-available from Maven Central. Add the following to your `pom.xml`:
+The [Java SDK](https://github.schibsted.io/spt-identity/identity-sdk-java) is
+available from [Schibsted Artifactory](). Add the following to your `build.gradle`:
 
-<spid-example lang="html" src="/java/getting-started/pom.xml" title="Add SPiD client"/>
+```groovy
+repositories {
+  maven {
+    url "https://artifacts.schibsted.io/artifactory/libs-release-local"
+    credentials {
+      username = "${artifactory_user}"
+      password = "${artifactory_pwd}"
+    }
+  }
+}
+
+compile 'com.schibsted.identity:identity-sdk-java-core:<version>'
+```
 
 In lieu of API docs, please refer to the [Getting started](/getting-started/) and
 [Implementing Single Sign-On](/implementing-sso/) guides for a flying start.
-There is also a separate
-[repository of examples](https://github.com/schibsted/spid-java-examples).
 
 ## JavaScript
 
