@@ -24,46 +24,15 @@
            :GET " -G"
            :POST " \\\n   -X POST"
            :DELETE " -G \\\n   -X DELETE")
-         (when (seq access-token-types) " \\\n   -d \"oauth_token=[access token]\"")
+         (when (seq access-token-types) " \\\n   -H \"Authorization: Bearer [access token]\"")
          (format-params (exemplify-params params example-params)
                         " \\\n   -d \":name=:value\"")))
-
-(defn clojure-example-code [{:keys [method path example-params access-token-types]} params]
-  (let [sdk-invocation (str "  (spid/" (name method) " client token \"" (replace-path-parameters path example-params) "\"")
-        param-map-indentation (apply str (repeat (count sdk-invocation) " "))
-        token (if (contains? access-token-types :user)
-                "create-user-token client \"[code]\""
-                "create-server-token client")]
-    (str "(ns example
-  (:require [spid-client-clojure.core :as spid]))
-
-(let [client (spid/create-client \"[client-id]\" \"[secret]\")
-      token (spid/" token ")]\n"
-      sdk-invocation
-      (when (seq params)
-        (str " {"
-             (format-params (exemplify-params params example-params)
-                            "\":name\" \":value\""
-                            (str "\n  " param-map-indentation)) ; Two additional spaces to account or " {"
-             "}"))
-      "))")))
 
 (defn- create-params-hash-map [params example-params]
   (when (seq params)
     (str "Map<String, String> params = new HashMap<>() {{\n    "
          (format-params (exemplify-params params example-params) "put(\":name\", \":value\");" ",\n    ")
          "\n}};\n\n")))
-
-(defn java-example-code [{:keys [method path example-params access-token-types]} params]
-  (let [has-params (seq params)
-        params-hash-map (create-params-hash-map params example-params)
-        api-invocation (str (name method) "(token, \"" (replace-path-parameters path example-params) "\""
-                            (if has-params (str ", params") "") ")")]
-    (str params-hash-map
-         (if (contains? access-token-types :user)
-           "SpidOAuthToken token = spidClient.getUserToken(code);\n"
-           "SpidOAuthToken token = spidClient.getServerToken();\n")
-         "String responseJSON = spidClient.\n    " api-invocation ".\n    getResponseBody();")))
 
 (defn- create-params-node-map [params example-params]
   (when (seq params)
@@ -72,41 +41,11 @@
              (str/replace #",\n$" ""))
          "\n  };\n")))
 
-(defn node-example-code [{:keys [method path example-params access-token-types]} params]
-  (let [token-fn (if (contains? access-token-types :user)
-                   "getUserToken(code, "
-                   "getServerToken(")
-        params-hash-map (create-params-node-map params example-params)]
-    (str
-     "var spidClient = require('spid-client');
-
-spidClient." token-fn "function (err, token) {
-  if (err) { throw err; }
-" params-hash-map "  spidClient."
-(name method) "(token, '"
-(replace-path-parameters path example-params)
-"', " (when params-hash-map "params, ") "function (err, response) {
-    if (err) { throw err; }
-    console.log(response.getResponseBody());
-  });
-});")))
-
 (defn- create-params-assoc-array [params example-params]
   (when (seq params)
     (str "$params = array(\n"
          (format-params (exemplify-params params example-params) "    \":name\" => \":value\"" ",\n")
          "\n);\n\n")))
-
-(defn php-example-code [{:keys [method path example-params]} params]
-  (let [has-params (seq params)
-        params-assoc-array (create-params-assoc-array params example-params)
-        api-invocation (str "(\"" (replace-path-parameters path example-params) "\""
-                            (when (= :POST method) ", \"POST\"")
-                            (when (= :DELETE method) ", \"DELETE\"")
-                            (when has-params (str ", $params")) ")")]
-    (str "<?php\n"
-         params-assoc-array
-         "$client->auth();\necho var_dump($client->api" api-invocation ");")))
 
 (defn- create-examples-with [ex-fn endpoint req-params optional-params all-params]
   {:minimal (ex-fn endpoint req-params)
@@ -117,13 +56,5 @@ spidClient." token-fn "function (err, token) {
         all-params (filter #(= (:type %) :query) params)
         req-params (filter :required? all-params)
         optional-params (difference (set all-params) (set req-params))]
-    (-> {:curl curl-example-code
-         :java java-example-code
-         :php php-example-code
-         ;; :node node-example-code ; -- waiting for Node SDK to be ready
-         :clojure clojure-example-code}
-        (update-vals #(create-examples-with % endpoint req-params optional-params all-params))
-        (assoc-in [:java :footnote]
-                  "This example is an excerpt, see <a href=\"/endpoints/#java-request-example\">a full example</a>")
-        (assoc-in [:php :footnote]
-                  "This example is an excerpt, see <a href=\"/endpoints/#php-request-example\">a full example</a>"))))
+    (-> {:curl curl-example-code}
+        (update-vals #(create-examples-with % endpoint req-params optional-params all-params)))))

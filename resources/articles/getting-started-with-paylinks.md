@@ -30,8 +30,7 @@ This is the flow:
 
 It's illustrated in [this sequence diagram](/paylink-api/#purchase-flows).
 
-We'll look at these steps in detail in the rest of the guide. If you prefer to just
-dive in, take a look at [these working examples](#working-examples).
+We'll look at these steps in detail in the rest of the guide.
 
 ## Configure your application
 
@@ -58,7 +57,14 @@ Here are some things to keep in mind when implementing paylinks on your site:
 In the example, we're keeping it simple with three products - each with an input
 field to specify quantity:
 
-<spid-example lang="html" repo="clj" src="/paylinks/resources/index.html" title="Keeping product choices simple"/>
+```html
+<form action="/checkout" method="post">
+ <div><input class="amount" type="number" name="sw4" value="1"> Star Wars IV</div>
+ <div><input class="amount" type="number" name="sw5" value="1"> Star Wars V</div>
+ <div><input class="amount" type="number" name="sw6" value="1"> Star Wars VI</div>
+ <input type="submit" value="Buy these excellent movies">
+</form>
+```
 
 ## Send the list of items to Schibsted account
 
@@ -79,60 +85,76 @@ We'll take the quantities posted by the user, and create the data.
 paylinks. Refer to the [reference documentation](/endpoints/POST/paylink/) for
 all options.
 
-# :tabs
+```java
+public class Product {
+    final String description;
+    final int price;
+    final int vat;
 
-## :tab Java
+    public Product(String description, int price, int vat) {
+        this.description = description;
+        this.price = price;
+        this.vat = vat;
+    }
+}
 
-<spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="The entirety of our product catalog right here"/>
+public class PaylinkItem {
+    final String description;
+    final int price;
+    final int vat;
+    final int quantity;
 
-<spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Create data to POST to /paylink"/>
+    public PaylinkItem(Product product, int quantity) {
+        this.description = product.getDescription();
+        this.price = product.getPrice();
+        this.vat = product.getVat();
+        this.quantity = quantity;
+    }
+}
+```
 
-Note that the items are encoded as a JSON string.
-
-## :tab PHP
-
-<spid-example lang="php" src="/paylinks/checkout.php" title="The entirety of our product catalog right here"/>
-
-<spid-example lang="php" src="/paylinks/checkout.php" title="Create data to POST to /paylink"/>
-
-Note that the Schibsted account SDK will turn `items` into a JSON string for you.
-
-## :tab Clojure
-
-<spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="The entirety of our product catalog right here"/>
-
-<spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Create data to POST to /paylink"/>
-
-Note that the items are encoded as a JSON string.
-
-# :/tabs
-
-#### Create paylink
+### Create paylink
 
 With our data in hand, we can create the Paylink by POSTing to
 [the /paylinks endpoint](/endpoints/POST/paylink/).
 
-# :tabs
+```java
+private static Map<String, Product> products = new HashMap<String, Product>(){{
+        put("sw4", new Product("Star Wars IV", 9900, 2400));
+        put("sw5", new Product("Star Wars V", 9900, 2400));
+        put("sw6", new Product("Star Wars VI", 9900, 2400));
+    }};
 
-## :tab Java
+private JSONObject createPaylink(List<PaylinkItem> items) {
+    String serverAccessToken = getServerAccessToken(clientId, clientSecret);
+    Map<String, String> headers = new HashMap<>();
+    headers.put("Authorization", "Bearer " + serverAccessToken);
+    Response response = httpClient.POST("/paylink", createPaylinkData(items), headers);
+    return response.getJsonData();
+}
 
-<spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Create SPiD client"/>
+private Map<String, String> createPaylinkData(List<PaylinkItem> items) {
+    Map<String, String> data = new HashMap<>();
+    data.put("title", "Quality movies");
+    data.put("redirectUri", appBaseUrl + "/callback");
+    data.put("cancelUri", appBaseUrl + "/cancel");
+    data.put("clientReference", "Order number " + System.currentTimeMillis());
+    data.put("items", gson.toJson(items));
+    return data;
+}
 
-<spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Create Paylink"/>
-
-## :tab PHP
-
-<spid-example lang="php" src="/paylinks/checkout.php" title="Create SPiD client"/>
-
-<spid-example lang="php" src="/paylinks/checkout.php" title="Create Paylink"/>
-
-## :tab Clojure
-
-<spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Create SPiD client"/>
-
-<spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Create Paylink"/>
-
-# :/tabs
+private List<PaylinkItem> getPaylinkItems(Map<String, String> params) {
+    List<PaylinkItem> items = new ArrayList<PaylinkItem>();
+    for (Map.Entry<String, String> entry : params.entrySet()) {
+        int quantity = Integer.parseInt(entry.getValue());
+        Product p = products.get(entry.getKey());
+        if (quantity > 0 && p != null) {
+            items.add(new PaylinkItem(p, quantity));
+        }
+    }
+    return items;
+}
+```
 
 ## Redirect the user to Schibsted account for payment
 
@@ -140,21 +162,13 @@ Our new Paylink has [quite a few fields](/types/paylink/), but the one we're
 interested in is the `shortUrl`. We'll use this to send the user to Schibsted account for
 payment.
 
-# :tabs
-
-## :tab Java
-
-<spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Create Paylink and redirect to SPiD"/>
-
-## :tab PHP
-
-<spid-example lang="php" src="/paylinks/checkout.php" title="Redirect to SPiD"/>
-
-## :tab Clojure
-
-<spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Create Paylink and redirect to SPiD"/>
-
-# :/tabs
+```java
+@RequestMapping("/checkout")
+String checkout(@RequestParam Map<String, String> params) {
+    JSONObject paylink = createPaylink(getPaylinkItems(params));
+    return "redirect:" + paylink.get("shortUrl");
+}
+```
 
 The user will be presented with a summary of the order, along with payment options.
 
@@ -172,21 +186,27 @@ product to the right user.
 So, like in [the Implementing Single Sign-On guide](/implementing-sso/), we
 create a session for the user with information from Schibsted account:
 
-# :tabs
+```java
+@RequestMapping("/callback")
+String callback(@RequestParam String code,
+                @RequestParam String order_id,
+                HttpServletRequest request) {
+    // Retrieve this user's access token
+    String userAccessToken = getUserAccessToken(clientId, clientSecret, code);
+    
+    // Use the access token to get info about the user
+    Map<String, String> headers = new HashMap<>();
+    headers.put("Authorization", "Bearer " + userAccessToken);
+    Response response = spidClient.GET("/oauth/userinfo", headers);
+    JSONObject userData = response.getJsonData();
 
-## :tab Java
+    // Save token and info in session
+    request.getSession().setAttribute("userToken", token);
+    request.getSession().setAttribute("userInfo", user);
 
-<spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Handle callback from SPiD, make sure we've got the right user"/>
-
-## :tab PHP
-
-<spid-example lang="php" src="/paylinks/callback.php" title="Handle callback from SPiD, make sure we've got the right user"/>
-
-## :tab Clojure
-
-<spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Handle callback from SPiD, make sure we've got the right user"/>
-
-# :/tabs
+    return "redirect:/success?orderId=" + order_id;
+}
+```
 
 Note that the code has a short lifespan, so it is prudent to create the user
 token with the code first, and then 302 redirect to another success landing page
@@ -197,27 +217,26 @@ with the code removed from the URL.
 Once we've got the right user, we can use the `order_id` to look up information
 about the order.
 
-# :tabs
+```java
+private static Map<String, String> orderStatus = new HashMap<String, String>(){{
+    put("-3", "Expired");
+    put("-2", "Cancelled");
+    put("-1", "Failed");
+    put("0", "Created");
+    put("1", "Pending");
+    put("2", "Complete");
+    put("3", "Credited");
+    put("4", "Authorized");
+}};
 
-## :tab Java
-
-<spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Order status codes"/>
-
-<spid-example lang="java" src="/paylinks/src/main/java/no/spid/examples/PaylinksController.java" title="Fetch order info"/>
-
-## :tab PHP
-
-<spid-example lang="php" src="/paylinks/success.php" title="Order status codes"/>
-
-<spid-example lang="php" src="/paylinks/success.php" title="Fetch order info"/>
-
-## :tab Clojure
-
-<spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Order status codes"/>
-
-<spid-example lang="clj" src="/paylinks/src/spid_clojure_paylinks_example/core.clj" title="Fetch order info"/>
-
-# :/tabs
+private JSONObject getOrder(String orderId) {
+    String serverAccessToken = getServerAccessToken(clientId, clientSecret);
+    Map<String, String> headers = new HashMap<>();
+    headers.put("Authorization", "Bearer " + serverAccessToken);
+    Response response = httpClient.GET("/order/" + orderId + "/status", headers);
+    return response.getJsonData();
+}
+```
 
 The order status is likely **Complete** (status `"2"`), meaning everything is
 proceeding according to our plans. Time to give the user what they payed for.
@@ -227,15 +246,6 @@ proceeding according to our plans. Time to give the user what they payed for.
 The user might also cancel the purchase, in which case they'll be redirected to
 your given `cancelUri`. It will include a `spid_page` query parameter that
 describes where in the process the user left.
-
-## Working examples
-
-If you're unsure on certain details after reading this guide, do check
-out these working examples:
-
-- [Paylinks example for PHP](https://github.com/schibsted/spid-php-examples/tree/master/paylinks)
-- [Paylinks example for Java](https://github.com/schibsted/spid-java-examples/tree/master/paylinks)
-- [Paylinks example for Clojure](https://github.com/schibsted/spid-clj-examples/tree/master/paylinks)
 
 ## Further reading
 

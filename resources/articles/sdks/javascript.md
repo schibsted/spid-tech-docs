@@ -2,11 +2,8 @@
 :title JavaScript SDK for browsers
 :frontpage
 :category
+
 :aside
-
-## Table of Contents
-
-<spid-toc></spid-toc>
 
 ## Read more about the JavaScript SDK for browsers
 
@@ -15,12 +12,11 @@
 
 ## See also
 - [Documentation for the 2.x JavaScript SDK](/sdks/javascript-2x/)
-- [Documentation for the 1.x JavaScript SDK](/sdks/javascript-1x/)
 
 :body
 
-**Note: this documentation is for the current version 3.x of the JavaScript SDK. The old 2.x
-version can be found [here](/sdks/javascript-2x/).**
+*Note: this documentation is for the current version 3.x of the JavaScript SDK. The old 2.x
+version can be found [here](/sdks/javascript-2x/).*
 
 The JavaScript SDK is different from the other SDKs in that it only provides information about the
 user's authentication/authorization status. It is not a general purpose SDK to make arbitrary

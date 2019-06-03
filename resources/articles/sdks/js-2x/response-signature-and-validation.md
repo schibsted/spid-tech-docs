@@ -29,20 +29,14 @@ The `sig` parameter is a concatenation of an HMAC SHA-256 signature string, a do
 vlXgu64BQGFSQrY0ZcJBZASMvYvTHu9GQ0YM9rjPSso.eyJhbGdvcml0aG0iOiJITUFDLVNIQTI1NiIsIjAiOiJwYXlsb2FkIn0
 ```
 
-With Java SDK, you can validate `sig` with:
-
-```java
-SpidSecurityHelper.decryptAndValidateSignedRequest()
-```
-
-With PHP SDK, you can validate `sig` with:
+In PHP, you can validate `sig` with:
 
 ```php
 <?php
 // $sign_secret = "a274de";
-$expected_sig = hash_hmac('sha256', $container['data'], $sign_secret, true);
+$expected_sig = hash_hmac('sha256', $container['data'], $client_sign_secret, true);
 
-if (hash_equals($sig, $expected_sig)) {
+if (hash_equals($signature, $expected_sig)) {
     echo "Authenticity of data verified\n";
 } else {
     echo "Authenticity of data cannot be verified. Someone is doing something naughty!\n";

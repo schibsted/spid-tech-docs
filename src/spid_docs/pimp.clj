@@ -8,7 +8,6 @@
             [spid-docs.layout :refer [layout-page]]
             [spid-docs.pimp.clickable-headings :refer [make-headings-clickable]]
             [spid-docs.pimp.comments :refer [add-comments]]
-            [spid-docs.pimp.examples :refer [inline-examples]]
             [spid-docs.pimp.highlight :refer [highlight-code-blocks-in-page]]
             [spid-docs.pimp.seq-diagrams :refer [insert-svg]]
             [spid-docs.pimp.tabs :refer [transform-tabs]]
@@ -51,7 +50,6 @@
         (if (string? page) page
             (->> page
                (layout-page request)
-               (inline-examples)
                (transform-tabs)
                (optify-images request)
                (make-headings-clickable)

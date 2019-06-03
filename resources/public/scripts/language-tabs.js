@@ -6,7 +6,6 @@
   var eventHub = bane.createEventEmitter();
 
   function setLang(lang) {
-    lang = lang.toLowerCase() === "clj" ? "clojure" : lang;
     eventHub.emit("language:" + lang.toLowerCase());
     document.cookie = "language=" + lang.toLowerCase() + "; path=/";
   }
