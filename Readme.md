@@ -22,7 +22,7 @@ exported to static files.
    lein ring server
    ```
 
-   That should pop up a browser with the SPiD API documentation.
+   That should pop up a browser with the Schibsted account API documentation.
    Replace `server` with `server-headless` if you would prefer to open
    your own browser window.
 
