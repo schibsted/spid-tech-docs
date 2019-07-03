@@ -8,9 +8,9 @@
                             :content "Do you have questions, or just
                                    want to contribute some newly gained insight?
                                    Want to share an example? Please leave a
-                                   comment. SPiD reads and responds to every
+                                   comment. Our team reads and responds to every
                                    question. Additionally, your experience can help
-                                   others using SPiD, and it can help us
+                                   others using Schibsted account, and it can help us
                                    continuously improve our documentation."}
                            {:tag :div
                             :attrs {:id "disqus_thread"}}
