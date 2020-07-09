@@ -25,5 +25,5 @@ flow."
           {:name "description"    :type :string         :description "A description of the intention of the voucher group" :always-available? true}
           {:name "createdBy"      :type :integer-string :description "The `userId` of the user that created the voucher group" :always-available? true}
           {:name "updated"        :type :datetime       :description "When the voucher group was last modified" :always-available? true}
-          {:name "created"        :type :dateime        :description "When the voucher group was created" :always-available? true}]}
+          {:name "created"        :type :datetime        :description "When the voucher group was created" :always-available? true}]}
 

@@ -1,0 +1,5 @@
+{:id :mfa-entry
+ :name "MFA entry"
+ :fields [{:name "id" :type :string :always-available? true :description "MFA id"}
+          {:name "type" :type :mfa-type :always-available? true :description "Type of second factor"}
+          {:name "label" :type :string :always-available? true :description "Human readable description for presentation to end-user"}]}

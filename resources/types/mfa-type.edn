@@ -1,0 +1,4 @@
+{:id :mfa-type
+ :name "Second factor type"
+ :values [{:value "sms" :description "Code via SMS"}
+          {:value "totp" :description "Time-based one time code (TOTP)"}]}

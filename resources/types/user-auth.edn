@@ -1,0 +1,4 @@
+{:id :user-auth
+ :name "Identifiers for user"
+ :fields [{:name "userSDRN" :type :string :always-available? true}
+          {:name "userUUID" :type :string :always-available? true}]}

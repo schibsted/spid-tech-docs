@@ -32,8 +32,8 @@ public profile data will be available:
           {:name "uuid"                :type :string         :description "Unique user UUID. Custom extension. Should be preferred as the user identifier." :always-available? true}
           {:name "name"                :type :name           :description "JSON object containing `familyName`, `givenName` and `formatted` properties. See [the name type](/types/name/) for details" :always-available? true}
           {:name "displayName"         :type :string         :description "Name suitable for displaying to end-users." :always-available? true}
-          {:name "published"           :type :date-time      :description "The date this user was first added. Can return false if the user account was deleted." :always-available? true}
-          {:name "updated"             :type :date-time      :description "The most recent date the details of this user were updated" :always-available? true}
+          {:name "published"           :type :datetime      :description "The date this user was first added. Can return false if the user account was deleted." :always-available? true}
+          {:name "updated"             :type :datetime      :description "The most recent date the details of this user were updated" :always-available? true}
           {:name "status"              :type :user-status    :always-available? true}
           {:name "email"               :type :string         :description "Primary email" :always-available? true}
           {:name "emailVerified"       :type :string         :description "Date when the email was last verified."}
@@ -55,6 +55,6 @@ public profile data will be available:
           {:name "migrated"            :type :datetime}
           {:name "addresses"           :type {:type :address}   :description "If user has no addresses returns empty array."}
           {:name "accounts"            :type [:account]      :description "Third-party accounts and other client services"}
-          {:name "merchants"           :type :array          :description "List of Schibsted account merchants the user is connected to"}
+          {:name "merchants"           :type [:integer]          :description "List of Schibsted account merchants the user is connected to"}
           {:name "currentLocation"     :type [:address]      :description "If user has no current location returns empty array."}
           {:name "tracking"            :type :boolean        :description "If `true`, the user has behavioral tracking enabled (pilot feature, may not remain as-is)"}]}

@@ -1,0 +1,4 @@
+{:id :mfa-confirm-sms
+ :name "Initiate/confirm SMS MFA via code challenge"
+ :fields [{:name "nonce" :type :string :always-available? true}
+          {:name "phoneNumber" :type :string :always-available? true}]}

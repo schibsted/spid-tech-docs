@@ -8,6 +8,6 @@
           {:name "identifierId"        :type :integer-string            :description "ID of the payment identifier/means" :always-available? true}
           {:name "identifierType"      :type :payment-options           :always-available? true}
           {:name "alias"               :type :string                    :always-available? true}
-          {:name "status"              :type :payment-preference-status :description "" :always-available? true}
+          {:name "status"              :type :payment-preference-status :always-available? true}
           {:name "updated"             :type :datetime                  :always-available? true}
           {:name "created"             :type :datetime                  :always-available? true}]}

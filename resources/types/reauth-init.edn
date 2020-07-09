@@ -1,0 +1,3 @@
+{:id :reauth-init
+ :name "Re-auth/step-up auth init"
+ :fields [{:name "authHandle" :type :string :always-available? true :description "Handle to use when confirming user input"}]}

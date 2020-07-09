@@ -1,0 +1,5 @@
+{:id :mfa-initiate-totp
+ :name "Initiate TOTP MFA via secret or QR code"
+ :fields [{:name "nonce" :type :string :always-available? true}
+          {:name "secret" :type :string :always-available? true}
+          {:name "QRImageData" :type :string :always-available? true :description "QR image as data uri"}]}

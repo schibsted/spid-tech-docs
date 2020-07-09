@@ -1,0 +1,4 @@
+{:id :user-identifier-type
+ :name "User Identifier type"
+ :values [{:value "email" :description "Email"}
+          {:value "phone_number" :description "Phone number"}]}

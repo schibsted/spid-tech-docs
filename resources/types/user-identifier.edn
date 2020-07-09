@@ -1,0 +1,6 @@
+{:id :user-identifier
+ :name "User identifier"
+ :fields [{:name "value" :type :string :always-available? true :description "Identifier value"}
+          {:name "type" :type :user-identifier-type :always-available? true :description "Type of identifier"}
+          {:name "verified" :type :boolean :always-available? true :description "Whether the identifier is verified by the user"}
+          {:name "primary" :type :boolean :always-available? true :description "Whether the identifier is primary"}]}

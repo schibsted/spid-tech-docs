@@ -1,0 +1,4 @@
+{:id :reauth-completed
+ :name "Re-auth/step-up auth completed"
+ :fields [{:name "authToken" :type :string :always-available? true :description "User token with additional permissions"}
+          {:name "expiresIn" :type :integer :always-available? true :description "Token expiration in seconds"}]}

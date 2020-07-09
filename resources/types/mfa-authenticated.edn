@@ -1,0 +1,3 @@
+{:id :mfa-authenticated
+ :name "Result after MFA authentication"
+ :fields [{:name "assertion" :type :string :always-available? true :description "Signed JWT assertion about the authentication"}]}
